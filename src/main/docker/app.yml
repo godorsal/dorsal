@@ -1,0 +1,15 @@
+version: '2'
+services:
+    dorsal-app:
+        image: dorsal
+        external_links:
+            - dorsal-postgresql:postgresql
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod
+            - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/dorsal
+        ports:
+            - 8080:8080
+    dorsal-postgresql:
+        extends:
+            file: postgresql.yml
+            service: dorsal-postgresql
