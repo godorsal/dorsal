@@ -8,33 +8,12 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand logo" href="#/" ng-click="vm.collapseNavbar()">
-                <img class="logo-img" src="content/images/logo-jhipster.png"/>
-                <span translate="global.title">Dorsal</span> <span class="navbar-version">v{{VERSION}}</span>
+                <img class="logo-img" src="content/images/global/logo.png"/>
+                <span class="navbar-version">v{{VERSION}}</span>
             </a>
         </div>
         <div class="navbar-collapse" uib-collapse="vm.isNavbarCollapsed" ng-switch="vm.isAuthenticated()">
             <ul class="nav navbar-nav navbar-right">
-                <li ui-sref-active="active">
-                    <a ui-sref="home" ng-click="vm.collapseNavbar()">
-                        <span class="glyphicon glyphicon-home"></span>
-                        <span class="hidden-sm" translate="global.menu.home">Home</span>
-                    </a>
-                </li>
-                <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
-                <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown class="dropdown pointer">
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="entity-menu">
-                        <span>
-                            <span class="glyphicon glyphicon-th-list"></span>
-                            <span class="hidden-sm" translate="global.menu.entities.main">
-                                Entities
-                            </span>
-                            <b class="caret"></b>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu>
-                        <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
-                    </ul>
-                </li>
                 <li ng-class="{active: vm.$state.includes('account')}" uib-dropdown class="dropdown pointer">
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="account-menu">
                         <span>
@@ -56,6 +35,12 @@
                             <a ui-sref="password" ng-click="vm.collapseNavbar()">
                                 <span class="glyphicon glyphicon-lock"></span>
                                 <span translate="global.menu.account.password">Password</span>
+                            </a>
+                        </li>
+                        <li ui-sref-active="active" ng-switch-when="true">
+                            <a ui-sref="sessions" ng-click="vm.collapseNavbar()">
+                                <span class="glyphicon glyphicon-cloud"></span>&nbsp;
+                                <span translate="global.menu.account.sessions">Sessions</span>
                             </a>
                         </li>
                         <li ui-sref-active="active" ng-switch-when="true">
