@@ -33,6 +33,20 @@
                     name: 'MySQL',
                     incidentTypes: [
                         {
+                            description: 'Which version?',
+                            types: [
+                                {
+                                    label: '',
+                                    value: '',
+                                    type: 'field'
+                                },
+                                {
+                                    label: 'No version',
+                                    value: ''
+                                }
+                            ]
+                        },
+                        {
                             description: 'Performance Problems?',
                             types: [
                                 {
@@ -83,6 +97,20 @@
                 {
                     name: 'postgreSQL',
                     incidentTypes: [
+                        {
+                            description: 'Which version?',
+                            types: [
+                                {
+                                    label: '',
+                                    value: '',
+                                    type: 'field'
+                                },
+                                {
+                                    label: 'No version',
+                                    value: ''
+                                }
+                            ]
+                        },
                         {
                             description: 'Performance Problems (postgreSQL)?',
                             types: [
