@@ -34,6 +34,14 @@
     color: $nav-text-active-color;
 }
 
+.navbar > .container .navbar-brand {
+    margin-left: 85px;
+}
+.navbar-right {
+    margin-right: 85px;
+    margin-top: 17px;
+}
+
 .container {
     @media (min-width: 1200px) {
         width: $site-max-width;
