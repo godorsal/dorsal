@@ -6,16 +6,16 @@
                 <div class="badge-wrapper">
                     <div class="drsl-badge"><img src="content/images/landing-page/on-demand-badge.png" /></div>
                     <div class="drsl-connect-now">
-                        <div class="drsl-custom-button"><span>connect<br/>now</span></div>
+                        <div class="drsl-custom-button" ng-click="vm.concierge()"><span>connect<br/>nows</span></div>
                     </div>
                 </div>
                 <div class="drsl-sections-wrapper">
                     <div class="drsl-sections">
                         <div class="drsl-section" ng-repeat="index in [1, 2, 3]">
                             <div class="drsl-section-icon-wrapper">
-                                <div><img ng-src="content/images/landing-page/section{{index}}-icon.png" /></div>
+                                <div ng-click="vm.concierge()"><img ng-src="content/images/landing-page/section{{index}}-icon.png" /></div>
                             </div>
-                            <div class="drsl-section-text"><img ng-src="content/images/landing-page/section{{index}}-text.png" /></div>
+                            <div class="drsl-section-text" ng-click="vm.concierge()"><img ng-src="content/images/landing-page/section{{index}}-text.png" /></div>
                         </div>
                     </div>
                 </div>

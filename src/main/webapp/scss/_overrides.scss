@@ -1,10 +1,10 @@
 // Bootstrap Overrides
 
 .navbar {
-    min-height: 84px;
+    min-height: $nav-height;
 
     .container {
-        min-height: 84px;
+        min-height: $nav-height;
     }
 }
 

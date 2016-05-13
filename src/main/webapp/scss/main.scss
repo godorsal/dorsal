@@ -16,10 +16,16 @@
         background: $background-color url("../images/global/nv-bkg.jpg") repeat-x;
         opacity: 0.9;
         width: 100%;
-        height: 84px;
+        height: $nav-height;
         z-index: 1;
-
     }
+}
+
+.drsl-content-container {
+    padding: ($nav-height + $content-padding-top) $content-padding-side $content-padding-side $content-padding-side;
+    background-color: $content-container-color;
+    margin-left: -15px;
+    margin-right: -15px;
 }
 
 .drsl-no-padding {
@@ -125,8 +131,4 @@
     top: -5px;
     left: 0px;
 }
-
-
-
-
 
