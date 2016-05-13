@@ -3,16 +3,37 @@
 @import "components";
 @import "overrides";
 
+// Global
+.drsl-main-content {
+    position: relative;
+
+    &:after {
+        content: ' ';
+        display: block;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        background: $background-color url("../images/global/nv-bkg.jpg") repeat-x;
+        opacity: 0.9;
+        width: 100%;
+        height: 84px;
+        z-index: 1;
+
+    }
+}
+
+.drsl-no-padding {
+    padding: 0;
+}
+
 // Landing Page
 .drsl-landing-wrapper {
-    position: absolute;
-    top: -72px;
-    left: -15.6%;
+    position: relative;
     z-index: 0;
 
     .badge-wrapper {
         position: absolute;
-        top: 32.40%;
+        top: 41.80%;
         width: 100%;
         height: 150px;
     }
@@ -31,10 +52,11 @@
 
     .drsl-sections-wrapper {
         position: absolute;
-        bottom: 7%;
+        bottom: -80px;
         left: 0;
         width: 100%;
         text-align: center;
+        margin-bottom: 20px;
     }
 
     .drsl-sections {
@@ -53,12 +75,6 @@
         display: inline-block;
         position: relative;
         cursor: pointer;
-    }
-
-    .drsl-section-icon {
-        position: absolute;
-        top: 17%;
-        left: 16.75%;
     }
 
     .drsl-section-text {
@@ -110,7 +126,6 @@
     left: 0px;
 }
 
-//test 5
 
 
 

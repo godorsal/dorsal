@@ -1,6 +1,6 @@
 <div ng-cloak>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 drsl-no-padding">
             <div class="drsl-landing-wrapper">
                 <div><img src="content/images/landing-page/hero.jpg" /></div>
                 <div class="badge-wrapper">
@@ -11,26 +11,11 @@
                 </div>
                 <div class="drsl-sections-wrapper">
                     <div class="drsl-sections">
-                        <div class="drsl-section">
+                        <div class="drsl-section" ng-repeat="index in [1, 2, 3]">
                             <div class="drsl-section-icon-wrapper">
-                                <div><img src="content/images/global/empty-circle.png" /></div>
-                                <div class="drsl-section-icon"><img src="content/images/global/incident-support-icon.png" /></div>
+                                <div><img ng-src="content/images/landing-page/section{{index}}-icon.png" /></div>
                             </div>
-                            <div class="drsl-section-text"><img src="content/images/global/incident-support.png" /></div>
-                        </div>
-                        <div class="drsl-section">
-                            <div class="drsl-section-icon-wrapper">
-                                <div><img src="content/images/global/empty-circle.png" /></div>
-                                <div class="drsl-section-icon"><img src="content/images/global/micro-tasks-icon.png" /></div>
-                            </div>
-                            <div class="drsl-section-text"><img src="content/images/global/micro-tasks.png" /></div>
-                        </div>
-                        <div class="drsl-section">
-                            <div class="drsl-section-icon-wrapper">
-                                <div><img src="content/images/global/empty-circle.png" /></div>
-                                <div class="drsl-section-icon"><img src="content/images/global/on-demand-expert-icon.png" /></div>
-                            </div>
-                            <div class="drsl-section-text"><img src="content/images/global/on-demand-expert.png" /></div>
+                            <div class="drsl-section-text"><img ng-src="content/images/landing-page/section{{index}}-text.png" /></div>
                         </div>
                     </div>
                 </div>

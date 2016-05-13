@@ -1,10 +1,26 @@
 // Bootstrap Overrides
 
+.navbar {
+    min-height: 84px;
+
+    .container {
+        min-height: 84px;
+    }
+}
+
 .navbar-default {
     background-color: transparent;
     border-color: transparent;
     z-index: 2;
     color: $nav-text-color;
+
+    .navbar-brand.logo .logo-img {
+        height: inherit;
+    }
+}
+
+.navbar-fixed-top {
+    position: absolute;
 }
 
 .navbar-default .navbar-nav > li > a {
@@ -26,7 +42,7 @@
 
 .container .navbar-header {
     @media (min-width: 768px) {
-        margin-left: 40px;
+        //margin-left: 40px;
     }
 }
 
