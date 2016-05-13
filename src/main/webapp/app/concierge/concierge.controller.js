@@ -15,229 +15,277 @@
         vm.login = LoginService.open;
         vm.register = register;
         vm.getProducts = getProducts;
-        vm.setProduct = setProduct;
         vm.getIncidentTypes = getIncidentTypes;
         vm.removeIncidentType = removeIncidentType;
 
-        vm.incidentDataSelections = {
-            product: '',
-            urgency: '',
-            problem: '',
+        vm.caseDetails = {
             description: '',
-            incidentTypes: []
-        };
+            radios: [
+                {
+                    id: 'urgency',
+                    label: 'Urgency',
+                    values: [
+                        {
+                            label: 'Immediate',
+                            value: 'Immediate',
+                        },
+                        {
+                            label: '4 hours',
+                            value: '4 hrs',
+                        },
+                        {
+                            label: '1 day',
+                            value: '1 day',
+                        },
+                        {
+                            label: 'this week',
+                            value: 'this week',
+                        }
+                    ],
+                    selectedValue: ''
+                },
+                {
+                    id: 'problem',
+                    label: 'Problem Type',
+                    values: [
+                        {
+                            label: 'Performance',
+                            value: 'Performance',
+                        },
+                        {
+                            label: 'Availability',
+                            value: 'Availability',
+                        },
+                        {
+                            label: 'Security',
+                            value: 'Security',
+                        }
+                    ],
+                    selectedValue: ''
+                },
+                {
+                    id: 'product',
+                    label: 'Database Type',
+                    values: [
+                        {
+                            label: 'MySQL',
+                            value: 'MySQL',
+                            incidentTypes: [
+                                {
+                                    description: 'Which version?',
+                                    types: [
+                                        {
+                                            label: '',
+                                            value: '',
+                                            type: 'field'
+                                        },
+                                        {
+                                            label: 'No version',
+                                            value: ''
+                                        }
+                                    ]
+                                },
+                                {
+                                    description: 'Performance Problems?',
+                                    types: [
+                                        {
+                                            label: 'System crash',
+                                            value: 'SC'
+                                        },
+                                        {
+                                            label: 'Slow queries',
+                                            value: 'SQ'
+                                        },
+                                        {
+                                            label: 'High CPU/mem',
+                                            value: 'HC'
+                                        },
+                                        {
+                                            label: 'Temporal paradox',
+                                            value: 'TP'
+                                        },
+                                        {
+                                            label: 'Not performance related',
+                                            value: ''
+                                        }
+                                    ]
+                                },
+                                {
+                                    description: 'Hardware Related?',
+                                    types: [
+                                        {
+                                            label: 'Things are broken',
+                                            value: 'TB'
+                                        },
+                                        {
+                                            label: 'There was smoke',
+                                            value: 'SQ'
+                                        },
+                                        {
+                                            label: 'There was fire',
+                                            value: 'HC'
+                                        },
+                                        {
+                                            label: 'Not hardware related',
+                                            value: ''
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            label: 'PostgreSQL',
+                            value: 'PostgreSQL',
+                            incidentTypes: [
+                                {
+                                    description: 'Which version?',
+                                    types: [
+                                        {
+                                            label: '',
+                                            value: '',
+                                            type: 'field'
+                                        },
+                                        {
+                                            label: 'No version',
+                                            value: ''
+                                        }
+                                    ]
+                                },
+                                {
+                                    description: 'Performance Problems (postgreSQL)?',
+                                    types: [
+                                        {
+                                            label: 'Performance thing one',
+                                            value: 'pt1'
+                                        },
+                                        {
+                                            label: 'Performance thing two',
+                                            value: 'pt2'
+                                        },
+                                        {
+                                            label: 'Performance thing three',
+                                            value: 'pt3'
+                                        },
+                                        {
+                                            label: 'Not performance related',
+                                            value: ''
+                                        }
+                                    ]
+                                },
+                                {
+                                    description: 'Hardware Related (postgreSQL)?',
+                                    types: [
+                                        {
+                                            label: 'Hardware thing one',
+                                            value: 'ht1'
+                                        },
+                                        {
+                                            label: 'Hardware thing two',
+                                            value: 'ht2'
+                                        },
+                                        {
+                                            label: 'Hardware thing three',
+                                            value: 'ht3'
+                                        },
+                                        {
+                                            label: 'Hardware thing four',
+                                            value: 'ht4'
+                                        },
+                                        {
+                                            label: 'Not hardware related',
+                                            value: ''
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            label: 'MongoDB',
+                            value: 'MongoDB',
+                            incidentTypes: [
+                                {
+                                    description: 'Which version?',
+                                    types: [
+                                        {
+                                            label: '',
+                                            value: '',
+                                            type: 'field'
+                                        },
+                                        {
+                                            label: 'No version',
+                                            value: ''
+                                        }
+                                    ]
+                                },
+                                {
+                                    description: 'Performance Problems (MongoDB)?',
+                                    types: [
+                                        {
+                                            label: 'Performance thing one',
+                                            value: 'pt1'
+                                        },
+                                        {
+                                            label: 'Performance thing two',
+                                            value: 'pt2'
+                                        },
+                                        {
+                                            label: 'Performance thing three',
+                                            value: 'pt3'
+                                        },
+                                        {
+                                            label: 'Not performance related',
+                                            value: ''
+                                        }
+                                    ]
+                                },
+                                {
+                                    description: 'Hardware Related (MongoDB)?',
+                                    types: [
+                                        {
+                                            label: 'Hardware thing one',
+                                            value: 'ht1'
+                                        },
+                                        {
+                                            label: 'Hardware thing two',
+                                            value: 'ht2'
+                                        },
+                                        {
+                                            label: 'Hardware thing three',
+                                            value: 'ht3'
+                                        },
+                                        {
+                                            label: 'Hardware thing four',
+                                            value: 'ht4'
+                                        },
+                                        {
+                                            label: 'Not hardware related',
+                                            value: ''
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
 
-        vm.incidentData = {
-            label: 'Products',
-            description: 'For which product would you like support?',
-            selectedDescription: 'Incident Summary',
-            products: [
-                {
-                    name: 'MySQL',
-                    incidentTypes: [
-                        {
-                            description: 'Which version?',
-                            types: [
-                                {
-                                    label: '',
-                                    value: '',
-                                    type: 'field'
-                                },
-                                {
-                                    label: 'No version',
-                                    value: ''
-                                }
-                            ]
-                        },
-                        {
-                            description: 'Performance Problems?',
-                            types: [
-                                {
-                                    label: 'System crash',
-                                    value: 'SC'
-                                },
-                                {
-                                    label: 'Slow queries',
-                                    value: 'SQ'
-                                },
-                                {
-                                    label: 'High CPU/mem',
-                                    value: 'HC'
-                                },
-                                {
-                                    label: 'Temporal paradox',
-                                    value: 'TP'
-                                },
-                                {
-                                    label: 'Not performance related',
-                                    value: ''
-                                }
-                            ]
-                        },
-                        {
-                            description: 'Hardware Related?',
-                            types: [
-                                {
-                                    label: 'Things are broken',
-                                    value: 'TB'
-                                },
-                                {
-                                    label: 'There was smoke',
-                                    value: 'SQ'
-                                },
-                                {
-                                    label: 'There was fire',
-                                    value: 'HC'
-                                },
-                                {
-                                    label: 'Not hardware related',
-                                    value: ''
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    name: 'PostgreSQL',
-                    incidentTypes: [
-                        {
-                            description: 'Which version?',
-                            types: [
-                                {
-                                    label: '',
-                                    value: '',
-                                    type: 'field'
-                                },
-                                {
-                                    label: 'No version',
-                                    value: ''
-                                }
-                            ]
-                        },
-                        {
-                            description: 'Performance Problems (postgreSQL)?',
-                            types: [
-                                {
-                                    label: 'Performance thing one',
-                                    value: 'pt1'
-                                },
-                                {
-                                    label: 'Performance thing two',
-                                    value: 'pt2'
-                                },
-                                {
-                                    label: 'Performance thing three',
-                                    value: 'pt3'
-                                },
-                                {
-                                    label: 'Not performance related',
-                                    value: ''
-                                }
-                            ]
-                        },
-                        {
-                            description: 'Hardware Related (postgreSQL)?',
-                            types: [
-                                {
-                                    label: 'Hardware thing one',
-                                    value: 'ht1'
-                                },
-                                {
-                                    label: 'Hardware thing two',
-                                    value: 'ht2'
-                                },
-                                {
-                                    label: 'Hardware thing three',
-                                    value: 'ht3'
-                                },
-                                {
-                                    label: 'Hardware thing four',
-                                    value: 'ht4'
-                                },
-                                {
-                                    label: 'Not hardware related',
-                                    value: ''
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    name: 'MongoDB',
-                    incidentTypes: [
-                        {
-                            description: 'Which version?',
-                            types: [
-                                {
-                                    label: '',
-                                    value: '',
-                                    type: 'field'
-                                },
-                                {
-                                    label: 'No version',
-                                    value: ''
-                                }
-                            ]
-                        },
-                        {
-                            description: 'Performance Problems (MongoDB)?',
-                            types: [
-                                {
-                                    label: 'Performance thing one',
-                                    value: 'pt1'
-                                },
-                                {
-                                    label: 'Performance thing two',
-                                    value: 'pt2'
-                                },
-                                {
-                                    label: 'Performance thing three',
-                                    value: 'pt3'
-                                },
-                                {
-                                    label: 'Not performance related',
-                                    value: ''
-                                }
-                            ]
-                        },
-                        {
-                            description: 'Hardware Related (MongoDB)?',
-                            types: [
-                                {
-                                    label: 'Hardware thing one',
-                                    value: 'ht1'
-                                },
-                                {
-                                    label: 'Hardware thing two',
-                                    value: 'ht2'
-                                },
-                                {
-                                    label: 'Hardware thing three',
-                                    value: 'ht3'
-                                },
-                                {
-                                    label: 'Hardware thing four',
-                                    value: 'ht4'
-                                },
-                                {
-                                    label: 'Not hardware related',
-                                    value: ''
-                                }
-                            ]
-                        }
-                    ]
+                    selectedValue: '',
+                    incidentTypeSelections: []
                 }
             ]
         };
+
+        vm.product = vm.caseDetails.radios.filter(function (o) {
+            return o.id === 'product';
+        })[0];
 
 
         $scope.$on('authenticationSuccess', function () {
             getAccount();
         });
 
-        $scope.$watch('vm.incidentDataSelections.product', function(newValue, oldValue){
+        $scope.$watch('vm.product.selectedValue', function(newValue, oldValue){
             if (oldValue && oldValue !== newValue) {
-                vm.incidentDataSelections.incidentTypes = [];
+                console.log(newValue);
+                vm.product.incidentTypeSelections = [];
             }
         });
 
@@ -255,36 +303,28 @@
         }
 
         function getProducts() {
-            if (vm.incidentDataSelections.product) {
-                return vm.incidentData.products.filter(function (o) {
-                    return o.name === vm.incidentDataSelections.product
+            if (vm.product.selectedValue) {
+                return vm.product.values.filter(function (o) {
+                    return o.value === vm.product.selectedValue
                 });
             }
 
-            return vm.incidentData.products;
+            return vm.product.values;
         }
 
-        function setProduct(product) {
-            if (vm.incidentDataSelections.product !== product.name) {
-                vm.incidentDataSelections.product = product.name;
-            } else {
-                vm.incidentDataSelections.product = '';
-                vm.incidentDataSelections.incidentTypes = [];
-            }
-        }
 
         function getIncidentTypes() {
             var incidentTypes = [];
             var incidentType;
 
-            if (vm.incidentDataSelections.product) {
-                incidentTypes = vm.incidentData.products.filter(function (o) {
-                    return o.name === vm.incidentDataSelections.product
+            if (vm.product.selectedValue) {
+                incidentTypes = vm.product.values.filter(function (o) {
+                    return o.value === vm.product.selectedValue
                 });
             }
 
             if (incidentTypes.length) {
-                incidentType = incidentTypes[0].incidentTypes[vm.incidentDataSelections.incidentTypes.length];
+                incidentType = incidentTypes[0].incidentTypes[vm.product.incidentTypeSelections.length];
             }
 
 
@@ -292,11 +332,11 @@
         }
 
         function removeIncidentType(type) {
-            var incidentTypesLength = vm.incidentDataSelections.incidentTypes.length,
-                index = vm.incidentDataSelections.incidentTypes.indexOf(type);
+            var incidentTypesLength = vm.product.incidentTypeSelections.length,
+                index = vm.product.incidentTypeSelections.indexOf(type);
 
             if (index !== -1) {
-                vm.incidentDataSelections.incidentTypes.splice(index, incidentTypesLength);
+                vm.product.incidentTypeSelections.splice(index, incidentTypesLength);
             }
         }
     }

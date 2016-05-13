@@ -1,3 +1,5 @@
+<!-- ToDo: Cleanup HTML (create new component directives) move inline styles to SCSS -->
+
 <div class="drsl-content-container" ng-cloak>
     <div class="row">
         <div class="col-md-12">
@@ -17,88 +19,13 @@
                         style="display:flex; align-items:center; height:70px;background-color: #8C7161;padding-left:20px;text-transform: uppercase; color: #F5F1EE; font-size: 20px;font-weight: bold;">
                         case details
                     </div>
-                    <div style="background-color: #E5E5E5; padding: 10px 20px 10px 20px;">
-                        <div>
-                            <span>Summary: </span>
-                            <span ng-show="vm.incidentDataSelections.urgency || vm.incidentDataSelections.problem || vm.incidentDataSelections.product">
-                                <span>Support</span>
-                                <span ng-show="vm.incidentDataSelections.urgency">required <strong>{{vm.incidentDataSelections.urgency}}</strong></span>
-                                <span ng-show="vm.incidentDataSelections.problem">related to &quot;<strong>{{vm.incidentDataSelections.problem}}</strong>&quot;</span>
-                                <span ng-show="vm.incidentDataSelections.product">using <strong>{{vm.incidentDataSelections.product}}</strong></span>
-                                <span ng-show="vm.incidentDataSelections.incidentTypes.length > 0">
-                                    (<span
-                                    ng-repeat="selectedincidentType in vm.incidentDataSelections.incidentTypes">
-                                        <span ng-show="selectedincidentType.type && selectedincidentType.type === 'field'">v. </span>
-                                        {{selectedincidentType.label}}<span ng-show="!$last">,</span>
-                                    </span>)
-                                </span>
-                            </span>
-                        </div>
-                    </div>
                     <div style="padding:20px 20px 20px 20px;">
+                        <incident-radio target-data="radio.selectedValue" radio-data="radio" ng-repeat="radio in vm.caseDetails.radios"></incident-radio>
 
-                        <div style="display:flex; flex-flow: row;align-items: center;text-align: center;margin-bottom: 30px;">
-                            <div style="flex: 1;margin-right:10px;text-align: left;">Urgency</div>
-                            <div style="position:relative;top:-5px;flex: 3;">
-                                <div style="position:relative;display:flex;flex-flow: row;z-index: 1;">
-                                    <div style="flex: 1;font-size:11px;">
-                                        <div>Immediate<br/><input name="urgency" type="radio" ng-model="vm.incidentDataSelections.urgency" value="immediately"></div>
-                                    </div>
-                                    <div style="flex: 1;font-size:11px;">
-                                        <div>4 hours<br/><input name="urgency" type="radio" ng-model="vm.incidentDataSelections.urgency" value="within 4 hrs"></div>
-                                    </div>
-                                    <div style="flex: 1;font-size:11px;">
-                                        <div>1 day<br/><input name="urgency" type="radio" ng-model="vm.incidentDataSelections.urgency" value="within 1 day"></div>
-                                    </div>
-                                    <div style="flex: 1;font-size:11px;">
-                                        <div>this week<br/><input name="urgency" type="radio" ng-model="vm.incidentDataSelections.urgency" value="this Week"></div>
-                                    </div>
-                                </div>
-                                <hr style="position:absolute;top:75%;left:0;width:100%;margin: 0px;z-index: 0;" />
-                            </div>
-                        </div>
-
-                        <div style="display:flex; flex-flow: row;align-items: center;text-align: center;margin-bottom: 30px;">
-                            <div style="flex: 1;margin-right:10px;text-align: left;">Problem Type</div>
-                            <div style="position:relative;top:-5px;flex: 3;">
-                                <div style="position:relative;display:flex;flex-flow: row;z-index: 1;">
-                                    <div style="flex: 1;font-size:11px;">
-                                        <div>Performance<br/><input name="problem" type="radio" ng-model="vm.incidentDataSelections.problem" value="performance"></div>
-                                    </div>
-                                    <div style="flex: 1;font-size:11px;">
-                                        <div>Availability<br/><input name="problem" type="radio" ng-model="vm.incidentDataSelections.problem" value="availability"></div>
-                                    </div>
-                                    <div style="flex: 1;font-size:11px;">
-                                        <div>Security<br/><input name="problem" type="radio" ng-model="vm.incidentDataSelections.problem" value="security"></div>
-                                    </div>
-                                </div>
-                                <hr style="position:absolute;top:75%;left:0;width:100%;margin: 0px;z-index: 0;" />
-                            </div>
-                        </div>
-
-                        <div style="display:flex; flex-flow: row;align-items: center;text-align: center;margin-bottom: 30px;">
-                            <div style="flex: 1;margin-right:10px;text-align: left;">Database Type</div>
-                            <div style="position:relative;top:-5px;flex: 3;">
-                                <div style="position:relative;display:flex;flex-flow: row;z-index: 1;">
-                                    <div style="flex: 1;font-size:11px;">
-                                        <div style="">MySQL<br/><input name="product" type="radio" value="MySQL" ng-model="vm.incidentDataSelections.product"></div>
-                                    </div>
-                                    <div style="flex: 1;font-size:11px;">
-                                        <div>PostgreSQL<br/><input name="product" type="radio" value="PostgreSQL" ng-model="vm.incidentDataSelections.product"></div>
-                                    </div>
-                                    <div style="flex: 1;font-size:11px;">
-                                        <div>MongoDB<br/><input name="product" type="radio" value="MongoDB" ng-model="vm.incidentDataSelections.product"></div>
-                                    </div>
-                                </div>
-                                <hr style="position:absolute;top:75%;left:0;width:100%;margin: 0px;z-index: 0;" />
-
-                            </div>
-                        </div>
-
-                        <div class="well" ng-show="vm.incidentDataSelections.product" style="margin-bottom: 40px;">
-                            <h4 style="margin-top: 0;">{{vm.incidentDataSelections.product}}</h4>
+                        <div class="well" ng-show="vm.product.selectedValue" style="margin-bottom: 40px;">
+                            <h4 style="margin-top: 0;">{{vm.product.selectedValue}}</h4>
                             <div style="margin-left:20px;margin-bottom:4px;"
-                                 ng-repeat="selectedincidentType in vm.incidentDataSelections.incidentTypes">
+                                 ng-repeat="selectedincidentType in vm.product.incidentTypeSelections">
                                 <button type="button"
                                         class="btn btn-success"
                                         ng-click="vm.removeIncidentType(selectedincidentType)">
@@ -108,32 +35,30 @@
                                 </button>
                             </div>
 
-
                             <div class="well" ng-show="vm.getIncidentTypes()">
                                 <h4>{{vm.getIncidentTypes().description}}</h4>
                                 <div style="margin-bottom:4px;" ng-repeat="incidentType in vm.getIncidentTypes().types">
                                     <button ng-hide="incidentType.type" type="button"
                                             class="btn btn-primary"
-                                            ng-click="vm.incidentDataSelections.incidentTypes.push(incidentType)">
+                                            ng-click="vm.product.incidentTypeSelections.push(incidentType)">
                                         {{incidentType.label}}
                                     </button>
                                     <div ng-show="incidentType.type && incidentType.type === 'field'">
                                         <input type="text" ng-model="incidentType.label">
                                         <button  type="button"
                                                 class="btn btn-primary"
-                                                ng-click="vm.incidentDataSelections.incidentTypes.push(incidentType)">
+                                                ng-click="vm.product.incidentTypeSelections.push(incidentType)">
                                             add
                                         </button>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
 
                         <div style="display:flex; flex-flow: row;align-items: center;text-align: center;margin-bottom: 30px;">
                             <div style="flex: 1;margin-right:10px;text-align: left;">Description</div>
-                            <div style="position:relative;top:-5px;flex: 3;">
-                                <input type="text" ng-model="vm.incidentDataSelections.description" style="width: 100%;">
+                            <div style="position:relative;flex: 3;">
+                                <textarea ng-model="vm.caseDetails.description" style="width: 100%;"></textarea>
                             </div>
                         </div>
 
