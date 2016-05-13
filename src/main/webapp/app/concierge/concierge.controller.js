@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -7,7 +7,7 @@
 
     HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state'];
 
-    function HomeController ($scope, Principal, LoginService, $state) {
+    function HomeController($scope, Principal, LoginService, $state) {
         var vm = this;
 
         vm.account = null;
@@ -15,12 +15,19 @@
         vm.login = LoginService.open;
         vm.register = register;
         vm.getProducts = getProducts;
+        vm.setProduct = setProduct;
+        vm.getIncidentTypes = getIncidentTypes;
+        vm.removeIncidentType = removeIncidentType;
 
         vm.incidentDataSelections = {
-            product: ''
+            product: '',
+            incidentTypes: []
         };
 
         vm.incidentData = {
+            label: 'Products',
+            description: 'For which product would you like support?',
+            selectedDescription: 'Incident Summary',
             products: [
                 {
                     name: 'MySQL',
@@ -43,6 +50,10 @@
                                 {
                                     label: 'Temporal paradox',
                                     value: 'TP'
+                                },
+                                {
+                                    label: 'Not performance related',
+                                    value: ''
                                 }
                             ]
                         },
@@ -60,9 +71,13 @@
                                 {
                                     label: 'There was fire',
                                     value: 'HC'
+                                },
+                                {
+                                    label: 'Not hardware related',
+                                    value: ''
                                 }
                             ]
-                        },
+                        }
                     ]
                 },
                 {
@@ -82,6 +97,10 @@
                                 {
                                     label: 'Performance thing three',
                                     value: 'pt3'
+                                },
+                                {
+                                    label: 'Not performance related',
+                                    value: ''
                                 }
                             ]
                         },
@@ -103,37 +122,80 @@
                                 {
                                     label: 'Hardware thing four',
                                     value: 'ht4'
+                                },
+                                {
+                                    label: 'Not hardware related',
+                                    value: ''
                                 }
                             ]
-                        },
+                        }
                     ]
                 }
             ]
         };
 
 
-        $scope.$on('authenticationSuccess', function() {
+        $scope.$on('authenticationSuccess', function () {
             getAccount();
         });
 
         getAccount();
 
         function getAccount() {
-            Principal.identity().then(function(account) {
+            Principal.identity().then(function (account) {
                 vm.account = account;
                 vm.isAuthenticated = Principal.isAuthenticated;
             });
         }
-        function register () {
+
+        function register() {
             $state.go('register');
         }
+
         function getProducts() {
             if (vm.incidentDataSelections.product) {
-                console.log(vm.incidentDataSelections.product);
-                return vm.incidentData.products.filter(function(o){return o.name === vm.incidentDataSelections.product});
+                return vm.incidentData.products.filter(function (o) {
+                    return o.name === vm.incidentDataSelections.product
+                });
             }
 
             return vm.incidentData.products;
+        }
+
+        function setProduct(product) {
+            if (vm.incidentDataSelections.product !== product.name) {
+                vm.incidentDataSelections.product = product.name;
+            } else {
+                vm.incidentDataSelections.product = '';
+                vm.incidentDataSelections.incidentTypes = [];
+            }
+        }
+
+        function getIncidentTypes() {
+            var incidentTypes = [];
+            var incidentType;
+
+            if (vm.incidentDataSelections.product) {
+                incidentTypes = vm.incidentData.products.filter(function (o) {
+                    return o.name === vm.incidentDataSelections.product
+                });
+            }
+
+            if (incidentTypes.length) {
+                incidentType = incidentTypes[0].incidentTypes[vm.incidentDataSelections.incidentTypes.length];
+            }
+
+
+            return incidentType;
+        }
+
+        function removeIncidentType(type) {
+            var incidentTypesLength = vm.incidentDataSelections.incidentTypes.length,
+                index = vm.incidentDataSelections.incidentTypes.indexOf(type);
+
+            if (index !== -1) {
+                vm.incidentDataSelections.incidentTypes.splice(index, incidentTypesLength);
+            }
         }
     }
 })();

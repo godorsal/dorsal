@@ -2,24 +2,58 @@
     <div class="row">
         <div class="col-md-12">
             <div style="display: flex; flex-flow: row;">
-                <div style="flex: auto; background-color: #FFFFFF; margin-right:50px;box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);">
-                    <div style="display:flex; align-items:center; height:70px;background-color: #8C7161;padding-left:20px;text-transform: uppercase; color: #F5F1EE; font-size: 20px;font-weight: bold;">expert chat - connected</div>
+                <div
+                    style="flex: auto; background-color: #FFFFFF; margin-right:50px;box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);">
+                    <div
+                        style="display:flex; align-items:center; height:70px;background-color: #8C7161;padding-left:20px;text-transform: uppercase; color: #F5F1EE; font-size: 20px;font-weight: bold;">
+                        expert chat - connected
+                    </div>
                     <div style="height: 700px;">&nbsp;</div>
                 </div>
-                <div style="flex: auto; max-width:470px; background-color: #FFFFFF;box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);">
-                    <div style="display:flex; align-items:center; height:70px;background-color: #8C7161;padding-left:20px;text-transform: uppercase; color: #F5F1EE; font-size: 20px;font-weight: bold;">incident support</div>
-                    <div style="padding:0 20px 20px 20px;">
-                        <h4>Products:</h4>
+                <div
+                    style="flex: auto; max-width:470px; background-color: #FFFFFF;box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);">
+                    <div
+                        style="display:flex; align-items:center; height:70px;background-color: #8C7161;padding-left:20px;text-transform: uppercase; color: #F5F1EE; font-size: 20px;font-weight: bold;">
+                        incident support
+                    </div>
+                    <div style="padding:20px 20px 20px 20px;">
                         <div class="well">
+                            <h4 ng-hide="vm.incidentDataSelections.product">{{vm.incidentData.description}}</h4>
+                            <h4 ng-show="vm.incidentDataSelections.product">{{vm.incidentData.selectedDescription
+                                }}</h4>
                             <div style="margin-bottom:4px;" ng-repeat="product in vm.getProducts()">
                                 <button type="button"
                                         class="btn btn-primary"
                                         ng-class="{'btn-success': vm.incidentDataSelections.product === product.name}"
-                                        ng-click="vm.incidentDataSelections.product !== product.name? vm.incidentDataSelections.product = product.name: vm.incidentDataSelections.product = ''">{{product.name}}
-                                    <span class="badge" ng-show="vm.incidentDataSelections.product === product.name">x</span>
+                                        ng-click="vm.setProduct(product)">{{product.name}}
+                                    <span class="badge"
+                                          ng-show="vm.incidentDataSelections.product === product.name">x</span>
                                 </button>
                             </div>
-                         </div>
+                            <div style="margin-left:20px;margin-bottom:4px;"
+                                 ng-repeat="selectedincidentType in vm.incidentDataSelections.incidentTypes">
+                                <button type="button"
+                                        class="btn btn-success"
+                                        ng-click="vm.removeIncidentType(selectedincidentType)">
+                                    {{selectedincidentType.label}}
+                                    <span class="badge">x</span>
+                                </button>
+                            </div>
+
+
+                            <div class="well" ng-show="vm.getIncidentTypes()">
+                                <h4>{{vm.getIncidentTypes().description}}</h4>
+                                <div style="margin-bottom:4px;" ng-repeat="incidentType in vm.getIncidentTypes().types">
+                                    <button type="button"
+                                            class="btn btn-primary"
+                                            ng-click="vm.incidentDataSelections.incidentTypes.push(incidentType)">
+                                        {{incidentType.label}}
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
