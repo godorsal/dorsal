@@ -21,6 +21,9 @@
 
         vm.incidentDataSelections = {
             product: '',
+            urgency: '',
+            problem: '',
+            description: '',
             incidentTypes: []
         };
 
@@ -95,7 +98,7 @@
                     ]
                 },
                 {
-                    name: 'postgreSQL',
+                    name: 'PostgreSQL',
                     incidentTypes: [
                         {
                             description: 'Which version?',
@@ -158,6 +161,71 @@
                             ]
                         }
                     ]
+                },
+                {
+                    name: 'MongoDB',
+                    incidentTypes: [
+                        {
+                            description: 'Which version?',
+                            types: [
+                                {
+                                    label: '',
+                                    value: '',
+                                    type: 'field'
+                                },
+                                {
+                                    label: 'No version',
+                                    value: ''
+                                }
+                            ]
+                        },
+                        {
+                            description: 'Performance Problems (MongoDB)?',
+                            types: [
+                                {
+                                    label: 'Performance thing one',
+                                    value: 'pt1'
+                                },
+                                {
+                                    label: 'Performance thing two',
+                                    value: 'pt2'
+                                },
+                                {
+                                    label: 'Performance thing three',
+                                    value: 'pt3'
+                                },
+                                {
+                                    label: 'Not performance related',
+                                    value: ''
+                                }
+                            ]
+                        },
+                        {
+                            description: 'Hardware Related (MongoDB)?',
+                            types: [
+                                {
+                                    label: 'Hardware thing one',
+                                    value: 'ht1'
+                                },
+                                {
+                                    label: 'Hardware thing two',
+                                    value: 'ht2'
+                                },
+                                {
+                                    label: 'Hardware thing three',
+                                    value: 'ht3'
+                                },
+                                {
+                                    label: 'Hardware thing four',
+                                    value: 'ht4'
+                                },
+                                {
+                                    label: 'Not hardware related',
+                                    value: ''
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         };
@@ -165,6 +233,12 @@
 
         $scope.$on('authenticationSuccess', function () {
             getAccount();
+        });
+
+        $scope.$watch('vm.incidentDataSelections.product', function(newValue, oldValue){
+            if (oldValue && oldValue !== newValue) {
+                vm.incidentDataSelections.incidentTypes = [];
+            }
         });
 
         getAccount();

@@ -6,7 +6,7 @@
                     style="flex: auto; background-color: #FFFFFF; margin-right:50px;box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);">
                     <div
                         style="display:flex; align-items:center; height:70px;background-color: #8C7161;padding-left:20px;text-transform: uppercase; color: #F5F1EE; font-size: 20px;font-weight: bold;">
-                        expert chat - connected
+                        expert chat
                     </div>
                     <div style="height: 700px;">&nbsp;</div>
                 </div>
@@ -14,27 +14,94 @@
                     style="flex: auto; max-width:470px; background-color: #FFFFFF;box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);">
                     <div
                         style="display:flex; align-items:center; height:70px;background-color: #8C7161;padding-left:20px;text-transform: uppercase; color: #F5F1EE; font-size: 20px;font-weight: bold;">
-                        incident support
+                        case details
+                    </div>
+                    <div style="background-color: #E5E5E5; padding: 10px 20px 10px 20px;">
+                        <div>
+                            <span>Summary: </span>
+                            <span ng-show="vm.incidentDataSelections.urgency || vm.incidentDataSelections.problem || vm.incidentDataSelections.product">
+                                <span>Support</span>
+                                <span ng-show="vm.incidentDataSelections.urgency">required <strong>{{vm.incidentDataSelections.urgency}}</strong></span>
+                                <span ng-show="vm.incidentDataSelections.problem">related to &quot;<strong>{{vm.incidentDataSelections.problem}}</strong>&quot;</span>
+                                <span ng-show="vm.incidentDataSelections.product">using <strong>{{vm.incidentDataSelections.product}}</strong></span>
+                                <span ng-show="vm.incidentDataSelections.incidentTypes.length > 0">
+                                    (<span
+                                    ng-repeat="selectedincidentType in vm.incidentDataSelections.incidentTypes">
+                                        <span ng-show="selectedincidentType.type && selectedincidentType.type === 'field'">v. </span>
+                                        {{selectedincidentType.label}}<span ng-show="!$last">,</span>
+                                    </span>)
+                                </span>
+                            </span>
+                        </div>
                     </div>
                     <div style="padding:20px 20px 20px 20px;">
-                        <div class="well">
-                            <h4 ng-hide="vm.incidentDataSelections.product">{{vm.incidentData.description}}</h4>
-                            <h4 ng-show="vm.incidentDataSelections.product">{{vm.incidentData.selectedDescription
-                                }}</h4>
-                            <div style="margin-bottom:4px;" ng-repeat="product in vm.getProducts()">
-                                <button type="button"
-                                        class="btn btn-primary"
-                                        ng-class="{'btn-success': vm.incidentDataSelections.product === product.name}"
-                                        ng-click="vm.setProduct(product)">{{product.name}}
-                                    <span class="badge"
-                                          ng-show="vm.incidentDataSelections.product === product.name">x</span>
-                                </button>
+
+                        <div style="display:flex; flex-flow: row;align-items: center;text-align: center;margin-bottom: 30px;">
+                            <div style="flex: 1;margin-right:10px;text-align: left;">Urgency</div>
+                            <div style="position:relative;top:-5px;flex: 3;">
+                                <div style="position:relative;display:flex;flex-flow: row;z-index: 1;">
+                                    <div style="flex: 1;font-size:11px;">
+                                        <div>Immediate<br/><input name="urgency" type="radio" ng-model="vm.incidentDataSelections.urgency" value="immediately"></div>
+                                    </div>
+                                    <div style="flex: 1;font-size:11px;">
+                                        <div>4 hours<br/><input name="urgency" type="radio" ng-model="vm.incidentDataSelections.urgency" value="within 4 hrs"></div>
+                                    </div>
+                                    <div style="flex: 1;font-size:11px;">
+                                        <div>1 day<br/><input name="urgency" type="radio" ng-model="vm.incidentDataSelections.urgency" value="within 1 day"></div>
+                                    </div>
+                                    <div style="flex: 1;font-size:11px;">
+                                        <div>this week<br/><input name="urgency" type="radio" ng-model="vm.incidentDataSelections.urgency" value="this Week"></div>
+                                    </div>
+                                </div>
+                                <hr style="position:absolute;top:75%;left:0;width:100%;margin: 0px;z-index: 0;" />
                             </div>
+                        </div>
+
+                        <div style="display:flex; flex-flow: row;align-items: center;text-align: center;margin-bottom: 30px;">
+                            <div style="flex: 1;margin-right:10px;text-align: left;">Problem Type</div>
+                            <div style="position:relative;top:-5px;flex: 3;">
+                                <div style="position:relative;display:flex;flex-flow: row;z-index: 1;">
+                                    <div style="flex: 1;font-size:11px;">
+                                        <div>Performance<br/><input name="problem" type="radio" ng-model="vm.incidentDataSelections.problem" value="performance"></div>
+                                    </div>
+                                    <div style="flex: 1;font-size:11px;">
+                                        <div>Availability<br/><input name="problem" type="radio" ng-model="vm.incidentDataSelections.problem" value="availability"></div>
+                                    </div>
+                                    <div style="flex: 1;font-size:11px;">
+                                        <div>Security<br/><input name="problem" type="radio" ng-model="vm.incidentDataSelections.problem" value="security"></div>
+                                    </div>
+                                </div>
+                                <hr style="position:absolute;top:75%;left:0;width:100%;margin: 0px;z-index: 0;" />
+                            </div>
+                        </div>
+
+                        <div style="display:flex; flex-flow: row;align-items: center;text-align: center;margin-bottom: 30px;">
+                            <div style="flex: 1;margin-right:10px;text-align: left;">Database Type</div>
+                            <div style="position:relative;top:-5px;flex: 3;">
+                                <div style="position:relative;display:flex;flex-flow: row;z-index: 1;">
+                                    <div style="flex: 1;font-size:11px;">
+                                        <div style="">MySQL<br/><input name="product" type="radio" value="MySQL" ng-model="vm.incidentDataSelections.product"></div>
+                                    </div>
+                                    <div style="flex: 1;font-size:11px;">
+                                        <div>PostgreSQL<br/><input name="product" type="radio" value="PostgreSQL" ng-model="vm.incidentDataSelections.product"></div>
+                                    </div>
+                                    <div style="flex: 1;font-size:11px;">
+                                        <div>MongoDB<br/><input name="product" type="radio" value="MongoDB" ng-model="vm.incidentDataSelections.product"></div>
+                                    </div>
+                                </div>
+                                <hr style="position:absolute;top:75%;left:0;width:100%;margin: 0px;z-index: 0;" />
+
+                            </div>
+                        </div>
+
+                        <div class="well" ng-show="vm.incidentDataSelections.product" style="margin-bottom: 40px;">
+                            <h4 style="margin-top: 0;">{{vm.incidentDataSelections.product}}</h4>
                             <div style="margin-left:20px;margin-bottom:4px;"
                                  ng-repeat="selectedincidentType in vm.incidentDataSelections.incidentTypes">
                                 <button type="button"
                                         class="btn btn-success"
                                         ng-click="vm.removeIncidentType(selectedincidentType)">
+                                    <span ng-show="selectedincidentType.type && selectedincidentType.type === 'field'">v. </span>
                                     {{selectedincidentType.label}}
                                     <span class="badge">x</span>
                                 </button>
@@ -60,8 +127,27 @@
                                 </div>
 
                             </div>
-
                         </div>
+
+                        <div style="display:flex; flex-flow: row;align-items: center;text-align: center;margin-bottom: 30px;">
+                            <div style="flex: 1;margin-right:10px;text-align: left;">Description</div>
+                            <div style="position:relative;top:-5px;flex: 3;">
+                                <input type="text" ng-model="vm.incidentDataSelections.description" style="width: 100%;">
+                            </div>
+                        </div>
+
+                        <div style="display:flex; flex-flow: row;align-items: center;text-align: center;">
+                            <div style="flex: 2;margin-right:10px;text-align: left;">Upload log file (optional)</div>
+                            <div style="flex: 3; background-color: #E5E5E5;padding: 5px;">
+                                <div style="width: 100%;color:#c0c0c0;">drag files here to upload</div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex;flex-flow: column;align-items: center;margin-top: 40px;">
+                            <div style="flex: inherit"><button type="submit" class="drsl-custom-button"><span>get<br/>support</span></button></div>
+                        </div>
+
+
                     </div>
                 </div>
             </div>
