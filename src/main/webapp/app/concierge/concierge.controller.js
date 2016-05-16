@@ -17,6 +17,7 @@
         vm.getProducts = getProducts;
         vm.getIncidentTypes = getIncidentTypes;
         vm.removeIncidentType = removeIncidentType;
+        vm.canShowProductDetails = canShowProductDetails;
 
         vm.caseDetails = {
             description: '',
@@ -59,6 +60,10 @@
                         {
                             label: 'Security',
                             value: 'Security',
+                        },
+                        {
+                            label: 'Other',
+                            value: 'Other',
                         }
                     ],
                     selectedValue: ''
@@ -264,6 +269,11 @@
                                     ]
                                 }
                             ]
+                        },
+                        {
+                            label: 'Other',
+                            value: 'Other',
+                            incidentTypes: []
                         }
                     ],
 
@@ -338,6 +348,22 @@
             if (index !== -1) {
                 vm.product.incidentTypeSelections.splice(index, incidentTypesLength);
             }
+        }
+
+        function canShowProductDetails() {
+            var canShow = false,
+                hasIncidentTypes;
+
+            if (vm.product.selectedValue) {
+                canShow = true;
+
+                hasIncidentTypes = vm.product.values.filter(function (o) {
+                    return o.value === vm.product.selectedValue;
+                })[0].incidentTypes.length;
+
+            }
+
+            return canShow && hasIncidentTypes;
         }
     }
 })();

@@ -17,7 +17,7 @@
                             '<div class="drsl-radio-wrapper">' +
                                 '<div class="drsl-radio-set">' +
                                     '<div class="drsl-radio-item" ng-repeat="radio in radioData.values">' +
-                                        '<div><label>{{radio.label}}<br/><input name="{{radioData.id}}" type="radio" ng-model="$parent.targetData" value="{{radio.value}}"></label></div>' +
+                                        '<div><input name="{{radioData.id}}" id="incidentRadio_{{$id}}" type="radio" ng-model="$parent.targetData" value="{{radio.value}}"><label for="incidentRadio_{{$id}}">{{radio.label}}<br><span></span></label></div>' +
                                     '</div>' +
                                 '</div>' +
                                 '<hr />' +

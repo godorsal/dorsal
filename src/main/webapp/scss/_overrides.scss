@@ -14,8 +14,11 @@
     z-index: 2;
     color: $nav-text-color;
 
-    .navbar-brand.logo .logo-img {
+    .navbar-brand {
         height: inherit;
+        &.logo .logo-img {
+            height: inherit;
+        }
     }
 }
 
@@ -73,5 +76,32 @@
                 visibility: hidden;
             }
         }
+    }
+}
+
+.btn {
+    &.btn-primary {
+        background-color: #B0AFB4;
+        border-color: #9C9FA3;
+
+        &:active, &:hover, &:focus {
+            background-color: #B0AFB4;
+            border-color: #9C9FA3;
+        }
+    }
+
+    &.btn-success {
+        background-color: $brand-color;
+        border-color: $brand-border-color;
+
+        &:active, &:hover, &:focus {
+            background-color: $brand-color;
+            border-color: $brand-border-color;
+        }
+
+        .badge {
+            color:  $brand-color;
+        }
+
     }
 }

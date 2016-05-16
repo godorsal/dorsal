@@ -10,12 +10,15 @@ $form-field-placeholder-color: #F8F8F8;
 $form-field-background-color: #DBDBDB;
 $content-container-color: #E5E5E5;
 
-$custom-button-color: #F48B3D;
+$brand-color: #F48B3D;
+$brand-border-color: #E58C38;
+
+$custom-button-color: $brand-color;
 $custom-button-size: 150px;
 $custom-button-shadow: 0px 5px 40px rgba(0, 0, 0, 0.5);
 $custom-button-text-color: #FFFFFF;
 $custom-button-font-size: 30px;
-$custom-button-line-height: 30px;
+$custom-button-line-height: .95em;
 
 // Dimensions
 $site-max-width: 1280px;

@@ -17,24 +17,20 @@
             <div class="col-md-12">
                 <form class="form" role="form" ng-submit="vm.login($event)">
                     <div class="row">
-                        <div class="col-md-9">
-                        <div class="form-group">
-                            <!--<label for="username" translate="global.form.username">Login</label>-->
-                            <input type="text" class="form-control" id="username" placeholder="{{'global.form.username.placeholder' | translate}}" ng-model="vm.username">
-                        </div>
-                        <div class="form-group">
-                            <!--<label for="password" translate="login.form.password">Password</label>-->
-                            <input type="password" class="form-control" id="password" placeholder="{{'login.form.password.placeholder' | translate}}"
-                                   ng-model="vm.password">
-                        </div>
-                        </div>
-                        <div class="col-md-3">
-                            <!--<button type="submit" class="btn btn-primary" translate="login.form.button">Sign in</button>-->
-                            <div class="drsl-sign-in">
-                                <button type="submit" class="drsl-custom-button"><span>sign in</span></button>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <!--<label for="username" translate="global.form.username">Login</label>-->
+                                <input type="text" class="form-control" id="username" placeholder="{{'global.form.username.placeholder' | translate}}" ng-model="vm.username">
+                            </div>
+                            <div class="form-group">
+                                <!--<label for="password" translate="login.form.password">Password</label>-->
+                                <input type="password" class="form-control" id="password" placeholder="{{'login.form.password.placeholder' | translate}}"
+                                       ng-model="vm.password">
+                            </div>
+                            <div class="drsl-sign-in sr-only sr-only-focusable">
+                                <button type="submit" class="btn btn-primary" translate="login.form.button">Sign in</button>
                             </div>
                         </div>
-
                     </div>
                     <!--<div class="form-group">-->
                         <!--<label for="rememberMe">-->

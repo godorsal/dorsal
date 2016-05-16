@@ -3,25 +3,25 @@
 <div class="drsl-content-container" ng-cloak>
     <div class="row">
         <div class="col-md-12">
-            <h4 style="text-transform: uppercase;font-weight: bold;color:#F48B3D;margin-bottom: 25px;margin-left: 65px;">incident support</h4>
             <div style="display: flex; flex-flow: row;">
                 <div
                     style="flex: auto; background-color: #FFFFFF; margin-right:50px;box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);">
-                    <div
-                        style="display:flex; align-items:center; height:70px;background-color: #8C7161;padding-left:20px;text-transform: uppercase; color: #F5F1EE; font-size: 20px;font-weight: bold;">
-                        expert chat
+                    <div class="drsl-sub-header"
+                        style="display:flex; flex-flow: row; align-items:center; height:70px;background-color: #8C7161;padding-left:20px;padding-right:20px;text-transform: uppercase; color: #F5F1EE; font-size: 20px;font-weight: bold;">
+                        <div style="flex: 1">concierge chat</div>
+                        <div style="flex: 1;text-align: right;color:#838584;">incident support</div>
                     </div>
                 </div>
                 <div
                     style="flex: auto; max-width:470px; background-color: #FFFFFF;box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);">
-                    <div
+                    <div class="drsl-sub-header"
                         style="display:flex; align-items:center; height:70px;background-color: #8C7161;padding-left:20px;text-transform: uppercase; color: #F5F1EE; font-size: 20px;font-weight: bold;">
                         case details
                     </div>
                     <div style="padding:20px 20px 20px 20px;">
                         <incident-radio target-data="radio.selectedValue" radio-data="radio" ng-repeat="radio in vm.caseDetails.radios"></incident-radio>
 
-                        <div class="well" ng-show="vm.product.selectedValue" style="margin-bottom: 40px;">
+                        <div class="well" ng-show="vm.canShowProductDetails()" style="margin-bottom: 40px;">
                             <h4 style="margin-top: 0;">{{vm.product.selectedValue}}</h4>
                             <div style="margin-left:20px;margin-bottom:4px;"
                                  ng-repeat="selectedincidentType in vm.product.incidentTypeSelections">
@@ -43,7 +43,7 @@
                                         {{incidentType.label}}
                                     </button>
                                     <div ng-show="incidentType.type && incidentType.type === 'field'">
-                                        <input type="text" ng-model="incidentType.label">
+                                        <input type="text" class="form-control" style="display: inline-block;width:150px;" ng-model="incidentType.label">
                                         <button  type="button"
                                                 class="btn btn-primary"
                                                 ng-click="vm.product.incidentTypeSelections.push(incidentType)">
@@ -69,7 +69,7 @@
                         </div>
 
                         <div style="display: flex;flex-flow: column;align-items: center;margin-top: 40px;">
-                            <div style="flex: inherit"><button type="submit" class="drsl-custom-button"><span>get<br/>support</span></button></div>
+                            <div style="flex: inherit"><button type="submit" class="drsl-custom-button"><span>get started</span></button></div>
                         </div>
                     </div>
                 </div>
