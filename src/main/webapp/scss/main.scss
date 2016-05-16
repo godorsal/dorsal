@@ -185,19 +185,18 @@
         }
     }
 
-
     input[type="radio"] {
-        display:none;
+        display: none;
     }
     input[type="radio"] + label span {
-        display:inline-block;
-        width:17px;
-        height:17px;
-        cursor:pointer;
+        display: inline-block;
+        width: 17px;
+        height: 17px;
+        cursor: pointer;
         background-color: #ffffff;
         border: 3px solid #B0AFB4;
         border-radius: 50%;
-        margin-top:5px;
+        margin-top: 5px;
     }
     input[type="radio"]:checked + label span {
         background-color: $brand-color;
@@ -206,7 +205,120 @@
 }
 
 .drsl-sub-header {
-    background: rgb(53,48,45);
-    background: linear-gradient(to bottom,  rgba(53,48,45,1) 0%,rgba(77,67,75,1) 50%,rgba(53,48,45,1) 100%);
+    background: rgb(53, 48, 45);
+    background: linear-gradient(to bottom, rgba(53, 48, 45, 1) 0%, rgba(77, 67, 75, 1) 50%, rgba(53, 48, 45, 1) 100%);
+}
+
+.drsl-concierge-wrapper {
+    display: flex;
+    flex-flow: row;
+
+    .drsl-sub-header {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        height: 70px;
+        padding-left: 20px;
+        padding-right: 20px;
+        text-transform: uppercase;
+        color: #F5F1EE;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .drsl-chat-wrapper {
+        flex: auto;
+        background-color: #FFFFFF;
+        margin-right: 50px;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
+
+        .drsl-sub-header div {
+            flex: 1;
+
+            &:last-child {
+                text-align: right;
+                color: #838584;
+            }
+        }
+    }
+
+    .drsl-chat-body {
+        padding: 20px;
+    }
+
+    .drsl-case-details-wrapper {
+        flex: auto;
+        max-width: 470px;
+        background-color: #FFFFFF;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
+
+        .drsl-field-seciton {
+            display: flex;
+            flex-flow: row;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 30px;
+
+            .drsl-field-label {
+                flex: 1;
+                margin-right: 10px;
+                text-align: left;
+            }
+
+            .drsl-field-input {
+                position: relative;
+                flex: 3;
+            }
+        }
+
+        .drsl-file-upload {
+            .drsl-field-label {
+                flex: 2;
+            }
+
+            .drsl-field-input {
+                flex: 3;
+                background-color: #E5E5E5;
+                padding: 5px;
+                color: #c0c0c0;
+            }
+        }
+
+        .drsl-button-wrapper {
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            margin-top: 40px;
+
+            div {
+                flex: inherit
+            }
+        }
+
+        .drsl-product-details-wrapper {
+            margin-bottom: 40px;
+
+            > h4 {
+                margin-top: 0
+            }
+
+            .drsl-product-detail-selections {
+                margin-left: 20px;
+                margin-bottom: 4px;
+            }
+
+            .drsl-product-detail-input {
+                margin-bottom: 4px;
+
+                input[type="text"].form-control {
+                    display: inline-block;
+                    width: 150px;
+                    margin-right: 5px;
+                }
+            }
+        }
+
+    }
+
 }
 

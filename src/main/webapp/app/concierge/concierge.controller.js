@@ -5,19 +5,10 @@
         .module('dorsalApp')
         .controller('ConciergeController', HomeController);
 
-    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state'];
+    HomeController.$inject = ['$scope'];
 
-    function HomeController($scope, Principal, LoginService, $state) {
+    function HomeController($scope) {
         var vm = this;
-
-        vm.account = null;
-        vm.isAuthenticated = null;
-        vm.login = LoginService.open;
-        vm.register = register;
-        vm.getProducts = getProducts;
-        vm.getIncidentTypes = getIncidentTypes;
-        vm.removeIncidentType = removeIncidentType;
-        vm.canShowProductDetails = canShowProductDetails;
 
         vm.caseDetails = {
             description: '',
@@ -283,87 +274,17 @@
             ]
         };
 
+        // Store a shortcut reference to the product object
         vm.product = vm.caseDetails.radios.filter(function (o) {
             return o.id === 'product';
         })[0];
 
-
-        $scope.$on('authenticationSuccess', function () {
-            getAccount();
-        });
-
+        // Watch for changes on the product's selected value property and clear out incidentTypeSelections on change
         $scope.$watch('vm.product.selectedValue', function(newValue, oldValue){
             if (oldValue && oldValue !== newValue) {
-                console.log(newValue);
                 vm.product.incidentTypeSelections = [];
             }
         });
 
-        getAccount();
-
-        function getAccount() {
-            Principal.identity().then(function (account) {
-                vm.account = account;
-                vm.isAuthenticated = Principal.isAuthenticated;
-            });
-        }
-
-        function register() {
-            $state.go('register');
-        }
-
-        function getProducts() {
-            if (vm.product.selectedValue) {
-                return vm.product.values.filter(function (o) {
-                    return o.value === vm.product.selectedValue
-                });
-            }
-
-            return vm.product.values;
-        }
-
-
-        function getIncidentTypes() {
-            var incidentTypes = [];
-            var incidentType;
-
-            if (vm.product.selectedValue) {
-                incidentTypes = vm.product.values.filter(function (o) {
-                    return o.value === vm.product.selectedValue
-                });
-            }
-
-            if (incidentTypes.length) {
-                incidentType = incidentTypes[0].incidentTypes[vm.product.incidentTypeSelections.length];
-            }
-
-
-            return incidentType;
-        }
-
-        function removeIncidentType(type) {
-            var incidentTypesLength = vm.product.incidentTypeSelections.length,
-                index = vm.product.incidentTypeSelections.indexOf(type);
-
-            if (index !== -1) {
-                vm.product.incidentTypeSelections.splice(index, incidentTypesLength);
-            }
-        }
-
-        function canShowProductDetails() {
-            var canShow = false,
-                hasIncidentTypes;
-
-            if (vm.product.selectedValue) {
-                canShow = true;
-
-                hasIncidentTypes = vm.product.values.filter(function (o) {
-                    return o.value === vm.product.selectedValue;
-                })[0].incidentTypes.length;
-
-            }
-
-            return canShow && hasIncidentTypes;
-        }
     }
 })();

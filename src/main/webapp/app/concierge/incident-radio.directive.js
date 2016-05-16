@@ -23,14 +23,8 @@
                                 '<hr />' +
                             '</div>' +
                         '</div>'
-            ,
-            link: linkFunc
         };
 
         return directive;
-
-        function linkFunc(scope, element, attrs) {
-
-        }
     }
 })();
