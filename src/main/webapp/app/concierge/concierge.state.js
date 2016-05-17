@@ -10,7 +10,7 @@
     function stateConfig($stateProvider) {
         $stateProvider.state('concierge', {
             parent: 'app',
-            url: '/concierge',
+            url: '/concierge/:type',
             data: {
                 authorities: []
             },

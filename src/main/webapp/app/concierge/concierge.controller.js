@@ -5,10 +5,12 @@
         .module('dorsalApp')
         .controller('ConciergeController', HomeController);
 
-    HomeController.$inject = ['$scope'];
+    HomeController.$inject = ['$scope', '$state'];
 
-    function HomeController($scope) {
+    function HomeController($scope, $state) {
         var vm = this;
+
+        vm.init = init;
 
         vm.caseDetails = {
             description: '',
@@ -285,6 +287,27 @@
                 vm.product.incidentTypeSelections = [];
             }
         });
+
+        vm.init();
+
+        function init(){
+            vm.pageTitle = '';
+
+            switch ($state.params.type) {
+                case 'incident':
+                    vm.pageTitle = 'incident support';
+                    break;
+                case 'pro-active':
+                    vm.pageTitle = 'pro-active support';
+                    break;
+                case 'on-demand':
+                    vm.pageTitle = 'on-demand pros';
+                    break;
+                default:
+                    vm.pageTitle = 'connect now';
+                    break;
+            }
+        }
 
     }
 })();

@@ -31,8 +31,21 @@
             $state.go('register');
         }
 
-        function concierge () {
-            $state.go('concierge');
+        function concierge(type) {
+            switch (type) {
+                case 1:
+                    $state.go('concierge', {'type': 'incident'});
+                    break;
+                case 2:
+                    $state.go('concierge', {"type": 'pro-active'});
+                    break;
+                case 3:
+                    $state.go('concierge', {"type": 'on-demand'});
+                    break;
+                default:
+                    $state.go('concierge', {"type": 'connect-now'});
+                    break;
+            }
         }
     }
 })();
