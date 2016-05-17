@@ -11,12 +11,27 @@
                 </div>
                 <div class="drsl-sections-wrapper">
                     <div class="drsl-sections">
-                        <div class="drsl-section" ng-repeat="index in [1, 2, 3]">
+                        <div class="drsl-section">
                             <div class="drsl-section-icon-wrapper">
-                                <div ng-click="vm.concierge(index)"><img ng-src="content/images/landing-page/section{{index}}-icon.png" /></div>
+                                <div ng-click="vm.concierge(1)"><img src="content/images/landing-page/section1-icon.png" /></div>
                             </div>
-                            <div class="drsl-section-text" ng-click="vm.concierge(index)"><img ng-src="content/images/landing-page/section{{index}}-text.png" /></div>
+                            <div class="drsl-section-text" ng-click="vm.concierge(1)"><img ng-src="content/images/landing-page/section1-text.png" /></div>
                         </div>
+
+                        <div class="drsl-section">
+                            <div class="drsl-section-icon-wrapper">
+                                <div ng-click="vm.concierge(2)"><img src="content/images/landing-page/section2-icon.png" /></div>
+                            </div>
+                            <div class="drsl-section-text" ng-click="vm.concierge(2)"><img ng-src="content/images/landing-page/section2-text.png" /></div>
+                        </div>
+
+                        <div class="drsl-section">
+                            <div class="drsl-section-icon-wrapper">
+                                <div ng-click="vm.concierge(3)"><img src="content/images/landing-page/section3-icon.png" /></div>
+                            </div>
+                            <div class="drsl-section-text" ng-click="vm.concierge(3)"><img ng-src="content/images/landing-page/section3-text.png" /></div>
+                        </div>
+
                     </div>
                 </div>
             </div>

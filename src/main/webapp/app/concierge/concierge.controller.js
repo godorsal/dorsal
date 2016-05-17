@@ -3,14 +3,15 @@
 
     angular
         .module('dorsalApp')
-        .controller('ConciergeController', HomeController);
+        .controller('ConciergeController', ConciergeController);
 
-    HomeController.$inject = ['$scope', '$state'];
+    ConciergeController.$inject = ['$scope', '$state'];
 
-    function HomeController($scope, $state) {
+    function ConciergeController($scope, $state) {
         var vm = this;
 
         vm.init = init;
+        vm.productDetailInputComplete = false;
 
         vm.caseDetails = {
             description: '',
@@ -264,8 +265,8 @@
                             ]
                         },
                         {
-                            label: 'Other',
-                            value: 'Other',
+                            label: 'MariaDB',
+                            value: 'MariaDB',
                             incidentTypes: []
                         }
                     ],
@@ -285,6 +286,7 @@
         $scope.$watch('vm.product.selectedValue', function(newValue, oldValue){
             if (oldValue && oldValue !== newValue) {
                 vm.product.incidentTypeSelections = [];
+                vm.productDetailInputComplete = false;
             }
         });
 
@@ -296,12 +298,15 @@
             switch ($state.params.type) {
                 case 'incident':
                     vm.pageTitle = 'incident support';
+                    vm.caseDetails.radios[0].selectedValue = '1 day';
                     break;
                 case 'pro-active':
                     vm.pageTitle = 'pro-active support';
+                    vm.caseDetails.radios[0].selectedValue = 'Immediate';
                     break;
                 case 'on-demand':
                     vm.pageTitle = 'on-demand pros';
+                    vm.caseDetails.radios[0].selectedValue = '4 hrs'
                     break;
                 default:
                     vm.pageTitle = 'connect now';

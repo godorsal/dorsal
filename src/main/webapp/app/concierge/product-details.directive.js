@@ -9,7 +9,8 @@
         var directive = {
             restrict: 'E',
             scope:  {
-                product: '='
+                product: '=',
+                complete: '='
             },
             template:   '<div class="well drsl-product-details-wrapper" ng-show="canShowProductDetails()">' +
                             '<h4>{{product.selectedValue}}</h4>' +
@@ -19,11 +20,11 @@
                                         'class="btn btn-success"' +
                                         'ng-click="removeIncidentType(selectedincidentType)">' +
                                     '<span ng-show="selectedincidentType.type && selectedincidentType.type === \'field\'">v. </span>' +
-                                    '{{selectedincidentType.label}}' +
+                                    '{{selectedincidentType.label}} ' +
                                     '<span class="badge">x</span>' +
                                 '</button>' +
                             '</div>' +
-                            '<div class="well" ng-show="getIncidentTypes()">' +
+                            '<div class="well" ng-show="getIncidentTypes()" style="margin-bottom: 5px;">' +
                                 '<h4>{{getIncidentTypes().description}}</h4>' +
                                 '<div class="drsl-product-detail-input"' +
                                      'ng-repeat="incidentType in getIncidentTypes().types">' +
@@ -42,6 +43,7 @@
                                     '</div>' +
                                 '</div>' +
                             '</div>' +
+                            '<div ng-show="getIncidentTypes()" style="text-align: right;"><button class="btn btn-primary" ng-click="toggleComplete()">done</button></div>'+
                         '</div>'
             ,
             link: linkFunc
@@ -50,6 +52,14 @@
         return directive;
 
         function linkFunc(scope, element, attrs) {
+            /**
+             *
+             */
+            scope.toggleComplete = function () {
+                if (scope.product.incidentTypeSelections.length > 0) {
+                    scope.complete = !scope.complete;
+                }
+            };
 
             /**
              * Returns an IncidentType object to further refine the product details.
@@ -59,16 +69,18 @@
                 var incidentTypes = [],
                     incidentType;
 
-                // Grab the incidentType array for the selected product
-                if (scope.product.selectedValue) {
-                    incidentTypes = scope.product.values.filter(function (o) {
-                        return o.value === scope.product.selectedValue
-                    });
-                }
+                if (!scope.complete) {
+                    // Grab the incidentType array for the selected product
+                    if (scope.product.selectedValue) {
+                        incidentTypes = scope.product.values.filter(function (o) {
+                            return o.value === scope.product.selectedValue
+                        });
+                    }
 
-                // Pull the next *incomplete* IncidentType for this product
-                if (incidentTypes.length) {
-                    incidentType = incidentTypes[0].incidentTypes[scope.product.incidentTypeSelections.length];
+                    // Pull the next *incomplete* IncidentType for this product
+                    if (incidentTypes.length) {
+                        incidentType = incidentTypes[0].incidentTypes[scope.product.incidentTypeSelections.length];
+                    }
                 }
 
                 return incidentType;
@@ -81,6 +93,9 @@
             scope.removeIncidentType = function (type) {
                 var incidentTypesLength = scope.product.incidentTypeSelections.length,
                     index = scope.product.incidentTypeSelections.indexOf(type);
+
+                // Enable further editing
+                scope.complete = false;
 
                 // Remove any incidentTypeSelections after the index of the provided IncidentType object
                 if (index !== -1) {

@@ -11,6 +11,7 @@
             },
             "account": {
                 "main": "Account",
+                "mycases": "My Cases",
                 "settings": "Settings",
                 "password": "Password",
                 "sessions": "Sessions",
