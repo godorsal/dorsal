@@ -14,11 +14,16 @@
         vm.cancel = cancel;
         vm.credentials = {};
         vm.login = login;
+        vm.togglePath = togglePath;
         vm.password = null;
         vm.register = register;
         vm.rememberMe = true;
         vm.requestResetPassword = requestResetPassword;
         vm.username = null;
+        vm.altPathSignInText = "sign in";
+        vm.altPathRegisterText = "create an account";
+        vm.altPathText = vm.altPathRegisterText;
+        vm.isLogin = true;
 
         $timeout(function (){angular.element('#username').focus();});
 
@@ -68,6 +73,18 @@
         function requestResetPassword () {
             $uibModalInstance.dismiss('cancel');
             $state.go('requestReset');
+        }
+
+        function togglePath(e) {
+            e.preventDefault();
+
+            vm.isLogin = !vm.isLogin;
+
+            if (vm.isLogin) {
+                vm.altPathText = vm.altPathRegisterText;
+            } else {
+                vm.altPathText = vm.altPathSignInText;
+            }
         }
     }
 })();

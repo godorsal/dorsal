@@ -12,10 +12,20 @@
                 <div class="drsl-case-details-wrapper">
                     <div class="drsl-sub-header">case details</div>
                     <div class="drsl-chat-body">
+                        <!-- Summary -->
+                        <div class="drsl-field-seciton">
+                            <div class="drsl-field-label">Summary</div>
+                            <div class="drsl-field-input">
+                                <input type="text" class="form-control" ng-model="vm.caseDetails.summary">
+                            </div>
+                        </div>
+
+                        <!-- Radio Buttons -->
                         <incident-radio target-data="radio.selectedValue"
                                         radio-data="radio"
                                         ng-repeat="radio in vm.caseDetails.radios"></incident-radio>
 
+                        <!-- Dynamic Product Details -->
                         <product-details product="vm.product" complete="vm.productDetailInputComplete"></product-details>
 
                         <div class="drsl-field-seciton">
@@ -25,6 +35,7 @@
                             </div>
                         </div>
 
+                        <!-- File Upload -->
                         <div class="drsl-field-seciton drsl-file-upload">
                             <div class="drsl-field-label">Upload log file (optional)</div>
                             <div class="drsl-field-input">
@@ -32,9 +43,10 @@
                             </div>
                         </div>
 
+                        <!-- Main Button -->
                         <div class="drsl-button-wrapper">
                             <div>
-                                <button type="submit" class="drsl-custom-button"><span>get started</span></button>
+                                <button type="submit" class="drsl-custom-button" ng-click="vm.submitForm()"><span>get started</span></button>
                             </div>
                         </div>
                     </div>

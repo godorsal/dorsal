@@ -5,15 +5,18 @@
         .module('dorsalApp')
         .controller('ConciergeController', ConciergeController);
 
-    ConciergeController.$inject = ['$scope', '$state'];
+    ConciergeController.$inject = ['$scope', '$state', 'LoginService', 'Principal'];
 
-    function ConciergeController($scope, $state) {
+    function ConciergeController($scope, $state, LoginService, Principal) {
         var vm = this;
 
         vm.init = init;
+        vm.submitForm = submitForm;
         vm.productDetailInputComplete = false;
+        vm.isAuthenticated = Principal.isAuthenticated;
 
         vm.caseDetails = {
+            summary: '',
             description: '',
             radios: [
                 {
@@ -314,5 +317,12 @@
             }
         }
 
+        function submitForm() {
+            if (vm.isAuthenticated()) {
+                $state.go('case');
+            } else {
+                LoginService.open();
+            }
+        }
     }
 })();

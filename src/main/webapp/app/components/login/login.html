@@ -7,7 +7,10 @@
     <div class="modal-body">
         <div class="row">
             <div class="col-md-12">
-                <h1 translate="login.title">Authentication</h1>
+                <div style="display: flex; flex-flow: row; align-items: center;">
+                    <div style="flex: 2;"><h1 translate="login.title">Authentication</h1></div>
+                    <div style="flex: 1;text-align: right;">or <a href="#" ng-click="vm.togglePath($event)">{{vm.altPathText}}</a></div>
+                </div>
             </div>
             <div class="col-md-12">
                 <div class="alert alert-danger" ng-show="vm.authenticationError" translate="login.messages.error.authentication">
@@ -15,7 +18,7 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <form class="form" role="form" ng-submit="vm.login($event)">
+                <form class="form" role="form" ng-submit="vm.login($event)" ng-show="vm.isLogin">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
@@ -27,18 +30,46 @@
                                 <input type="password" class="form-control" id="password" placeholder="{{'login.form.password.placeholder' | translate}}"
                                        ng-model="vm.password">
                             </div>
-                            <div class="drsl-sign-in sr-only sr-only-focusable">
-                                <button type="submit" class="btn btn-primary" translate="login.form.button">Sign in</button>
+                            <div style="text-align: right;">
+                                <button type="submit" class="btn btn-primary">Sign in</button>
                             </div>
                         </div>
                     </div>
-                    <!--<div class="form-group">-->
+                </form>
+                <form class="form" role="form" ng-submit="vm.login($event)" ng-hide="vm.isLogin">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <!--<label for="username" translate="global.form.username">Login</label>-->
+                                <input type="text" class="form-control" id="username" placeholder="{{'global.form.username.placeholder' | translate}}" ng-model="vm.username">
+                            </div>
+                            <div class="form-group" ng-hide="vm.isLogin">
+                                <!--<label class="control-label" for="email" translate="global.form.email">E-mail</label>-->
+                                <input type="email" class="form-control" id="email" name="email" placeholder="{{'global.form.email.placeholder' | translate}}"
+                                       ng-model="vm.registerAccount.email" ng-minlength=5 ng-maxlength=100 required>
+                            </div>
+                            <div class="form-group">
+                                <!--<label for="password" translate="login.form.password">Password</label>-->
+                                <input type="password" class="form-control" id="password" placeholder="{{'login.form.password.placeholder' | translate}}"
+                                       ng-model="vm.password">
+                            </div>
+                            <div class="form-group" ng-hide="vm.isLogin">
+                                <!--<label class="control-label" for="confirmPassword" translate="global.form.confirmpassword">New password confirmation</label>-->
+                                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="{{'global.form.confirmpassword.placeholder' | translate}}"
+                                       ng-model="vm.confirmPassword" ng-minlength=4 ng-maxlength=50 required>
+                            </div>
+                            <div style="text-align: right;">
+                                <button type="submit" class="btn btn-primary">Create an account</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!--<div class="form-group">-->
                         <!--<label for="rememberMe">-->
                             <!--<input type="checkbox" id="rememberMe" ng-model="vm.rememberMe" checked>-->
                             <!--<span translate="login.form.rememberme">Remember me</span>-->
                         <!--</label>-->
                     <!--</div>-->
-                </form>
                 <!--
                 <p></p>
                 <div class="alert alert-warning">
