@@ -12,51 +12,147 @@
                     <div style="flex: 1;text-align: right;">or <a href="#" ng-click="vm.togglePath($event)">{{vm.altPathText}}</a></div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12" ng-show="vm.isLogin">
                 <div class="alert alert-danger" ng-show="vm.authenticationError" translate="login.messages.error.authentication">
                     <strong>Failed to sign in!</strong> Please check your credentials and try again.
                 </div>
             </div>
             <div class="col-md-12">
+                <!-- Login -->
                 <form class="form" role="form" ng-submit="vm.login($event)" ng-show="vm.isLogin">
                     <div class="row">
                         <div class="col-md-12">
+                            <!-- User Name -->
                             <div class="form-group">
                                 <!--<label for="username" translate="global.form.username">Login</label>-->
                                 <input type="text" class="form-control" id="username" placeholder="{{'global.form.username.placeholder' | translate}}" ng-model="vm.username">
                             </div>
+                            <!-- Password -->
                             <div class="form-group">
                                 <!--<label for="password" translate="login.form.password">Password</label>-->
                                 <input type="password" class="form-control" id="password" placeholder="{{'login.form.password.placeholder' | translate}}"
                                        ng-model="vm.password">
                             </div>
+                            <!-- Submit Button -->
                             <div style="text-align: right;">
                                 <button type="submit" class="btn btn-primary">Sign in</button>
                             </div>
                         </div>
                     </div>
                 </form>
-                <form class="form" role="form" ng-submit="vm.login($event)" ng-hide="vm.isLogin">
+
+                <!-- Register -->
+                <div class="col-md-12" ng-hide="vm.isLogin">
+                    <div class="alert alert-success" ng-show="vm.success" translate="login.messages.success">
+                        <strong>Registration saved!</strong> Please check your email for confirmation.
+                    </div>
+
+                    <div class="alert alert-danger" ng-show="vm.error" translate="login.messages.error.fail">
+                        <strong>Registration failed!</strong> Please try again later.
+                    </div>
+
+                    <div class="alert alert-danger" ng-show="vm.errorUserExists" translate="login.messages.error.userexists">
+                        <strong>Login name already registered!</strong> Please choose another one.
+                    </div>
+
+                    <div class="alert alert-danger" ng-show="vm.errorEmailExists" translate="login.messages.error.emailexists">
+                        <strong>E-mail is already in use!</strong> Please choose another one.
+                    </div>
+
+                    <div class="alert alert-danger" ng-show="vm.doNotMatch" translate="global.messages.error.dontmatch">
+                        The password and its confirmation do not match!
+                    </div>
+                </div>
+                <form class="form" name="form" role="form" novalidate ng-submit="vm.register($event)" ng-hide="vm.isLogin" show-validation>
                     <div class="row">
                         <div class="col-md-12">
+                            <!-- User Name -->
                             <div class="form-group">
                                 <!--<label for="username" translate="global.form.username">Login</label>-->
-                                <input type="text" class="form-control" id="username" placeholder="{{'global.form.username.placeholder' | translate}}" ng-model="vm.username">
+                                <input type="text" class="form-control" id="loginReg" name="login" placeholder="{{'global.form.username.placeholder' | translate}}"
+                                       ng-model="vm.registerAccount.login" ng-minlength=1 ng-maxlength=50 ng-pattern="/^[_'.@A-Za-z0-9-]*$/" required>
+                                <div ng-show="form.login.$dirty && form.login.$invalid">
+                                    <p class="help-block"
+                                       ng-show="form.login.$error.required" translate="login.messages.validate.login.required">
+                                        Your username is required.
+                                    </p>
+                                    <p class="help-block"
+                                       ng-show="form.login.$error.minlength" translate="login.messages.validate.login.minlength">
+                                        Your username is required to be at least 1 character.
+                                    </p>
+                                    <p class="help-block"
+                                       ng-show="form.login.$error.maxlength" translate="login.messages.validate.login.maxlength">
+                                        Your username cannot be longer than 50 characters.
+                                    </p>
+                                    <p class="help-block"
+                                       ng-show="form.login.$error.pattern" translate="login.messages.validate.login.pattern">
+                                        Your username can only contain lower-case letters and digits.
+                                    </p>
+                                </div>
                             </div>
+                            <!-- Email -->
                             <div class="form-group" ng-hide="vm.isLogin">
                                 <!--<label class="control-label" for="email" translate="global.form.email">E-mail</label>-->
                                 <input type="email" class="form-control" id="email" name="email" placeholder="{{'global.form.email.placeholder' | translate}}"
                                        ng-model="vm.registerAccount.email" ng-minlength=5 ng-maxlength=100 required>
+                                <div ng-show="form.email.$dirty && form.email.$invalid">
+                                    <p class="help-block"
+                                       ng-show="form.email.$error.required" translate="global.messages.validate.email.required">
+                                        Your e-mail is required.
+                                    </p>
+                                    <p class="help-block"
+                                       ng-show="form.email.$error.email" translate="global.messages.validate.email.invalid">
+                                        Your e-mail is invalid.
+                                    </p>
+                                    <p class="help-block"
+                                       ng-show="form.email.$error.minlength" translate="global.messages.validate.email.minlength">
+                                        Your e-mail is required to be at least 5 characters.
+                                    </p>
+                                    <p class="help-block"
+                                       ng-show="form.email.$error.maxlength" translate="global.messages.validate.email.maxlength">
+                                        Your e-mail cannot be longer than 100 characters.
+                                    </p>
+                                </div>
                             </div>
+                            <!-- Password -->
                             <div class="form-group">
                                 <!--<label for="password" translate="login.form.password">Password</label>-->
-                                <input type="password" class="form-control" id="password" placeholder="{{'login.form.password.placeholder' | translate}}"
-                                       ng-model="vm.password">
+                                <input type="password" class="form-control" id="passwordReg" name="password" placeholder="{{'global.form.newpassword.placeholder' | translate}}"
+                                       ng-model="vm.registerAccount.password" ng-minlength=4 ng-maxlength=50 required>
+                                <div ng-show="form.password.$dirty && form.password.$invalid">
+                                    <p class="help-block"
+                                       ng-show="form.password.$error.required" translate="global.messages.validate.newpassword.required">
+                                        Your password is required.
+                                    </p>
+                                    <p class="help-block"
+                                       ng-show="form.password.$error.minlength" translate="global.messages.validate.newpassword.minlength">
+                                        Your password is required to be at least 4 characters.
+                                    </p>
+                                    <p class="help-block"
+                                       ng-show="form.password.$error.maxlength" translate="global.messages.validate.newpassword.maxlength">
+                                        Your password cannot be longer than 50 characters.
+                                    </p>
+                                </div>
                             </div>
+                            <!-- Confirm Password -->
                             <div class="form-group" ng-hide="vm.isLogin">
                                 <!--<label class="control-label" for="confirmPassword" translate="global.form.confirmpassword">New password confirmation</label>-->
                                 <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="{{'global.form.confirmpassword.placeholder' | translate}}"
                                        ng-model="vm.confirmPassword" ng-minlength=4 ng-maxlength=50 required>
+                                <div ng-show="form.confirmPassword.$dirty && form.confirmPassword.$invalid">
+                                    <p class="help-block"
+                                       ng-show="form.confirmPassword.$error.required" translate="global.messages.validate.confirmpassword.required">
+                                        Your confirmation password is required.
+                                    </p>
+                                    <p class="help-block"
+                                       ng-show="form.confirmPassword.$error.minlength" translate="global.messages.validate.confirmpassword.minlength">
+                                        Your confirmation password is required to be at least 4 characters.
+                                    </p>
+                                    <p class="help-block"
+                                       ng-show="form.confirmPassword.$error.maxlength" translate="global.messages.validate.confirmpassword.maxlength">
+                                        Your confirmation password cannot be longer than 50 characters.
+                                    </p>
+                                </div>
                             </div>
                             <div style="text-align: right;">
                                 <button type="submit" class="btn btn-primary">Create an account</button>

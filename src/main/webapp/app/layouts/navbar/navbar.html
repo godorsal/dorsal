@@ -14,7 +14,13 @@
         </div>
         <div class="navbar-collapse" uib-collapse="vm.isNavbarCollapsed" ng-switch="vm.isAuthenticated()">
             <ul class="nav navbar-nav navbar-right">
-                <li ng-class="{active: vm.$state.includes('account')}" uib-dropdown class="dropdown pointer">
+                <li ui-sref-active="active" ng-switch-when="false">
+                    <a href="" ng-click="vm.login()" id="login">
+                        <span class="glyphicon glyphicon-log-in"></span>&nbsp;
+                        <span translate="global.menu.account.login">SSign in</span>
+                    </a>
+                </li>
+                <li ng-class="{active: vm.$state.includes('account')}" uib-dropdown class="dropdown pointer" ng-switch-when="true">
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="account-menu">
                         <span>
                             <span class="glyphicon glyphicon-user"></span>
@@ -25,46 +31,34 @@
                         </span>
                     </a>
                     <ul class="dropdown-menu" uib-dropdown-menu>
-                        <li ui-sref-active="active" ng-switch-when="true">
+                        <li ui-sref-active="active">
                             <a ui-sref="case" ng-click="vm.collapseNavbar()">
                                 <span class="glyphicon glyphicon-th-list"></span>&nbsp;
                                 <span translate="global.menu.account.mycases">My Cases</span>
                             </a>
                         </li>
-                        <li ui-sref-active="active" ng-switch-when="true">
+                        <li ui-sref-active="active">
                             <a ui-sref="settings" ng-click="vm.collapseNavbar()">
                                 <span class="glyphicon glyphicon-wrench"></span>&nbsp;
                                 <span translate="global.menu.account.settings">Settings</span>
                             </a>
                         </li>
-                        <li ui-sref-active="active" ng-switch-when="true">
+                        <li ui-sref-active="active">
                             <a ui-sref="password" ng-click="vm.collapseNavbar()">
                                 <span class="glyphicon glyphicon-lock"></span>
                                 <span translate="global.menu.account.password">Password</span>
                             </a>
                         </li>
-                        <li ui-sref-active="active" ng-switch-when="true">
+                        <li ui-sref-active="active">
                             <a ui-sref="sessions" ng-click="vm.collapseNavbar()">
                                 <span class="glyphicon glyphicon-cloud"></span>&nbsp;
                                 <span translate="global.menu.account.sessions">Sessions</span>
                             </a>
                         </li>
-                        <li ui-sref-active="active" ng-switch-when="true">
+                        <li ui-sref-active="active">
                             <a href="" ng-click="vm.logout()" id="logout">
                                 <span class="glyphicon glyphicon-log-out"></span>&nbsp;
                                 <span translate="global.menu.account.logout">Sign out</span>
-                            </a>
-                        </li>
-                        <li ui-sref-active="active" ng-switch-when="false">
-                            <a href="" ng-click="vm.login()" id="login">
-                                <span class="glyphicon glyphicon-log-in"></span>&nbsp;
-                                <span translate="global.menu.account.login">Sign in</span>
-                            </a>
-                        </li>
-                        <li ui-sref-active="active" ng-switch-when="false">
-                            <a ui-sref="register" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;
-                                <span translate="global.menu.account.register">Register</span>
                             </a>
                         </li>
                     </ul>

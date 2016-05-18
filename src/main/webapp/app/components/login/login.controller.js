@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance'];
+    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate'];
 
-    function LoginController ($rootScope, $state, $timeout, Auth, $uibModalInstance) {
+    function LoginController ($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate) {
         var vm = this;
 
         vm.authenticationError = false;
@@ -16,7 +16,6 @@
         vm.login = login;
         vm.togglePath = togglePath;
         vm.password = null;
-        vm.register = register;
         vm.rememberMe = true;
         vm.requestResetPassword = requestResetPassword;
         vm.username = null;
@@ -24,6 +23,14 @@
         vm.altPathRegisterText = "create an account";
         vm.altPathText = vm.altPathRegisterText;
         vm.isLogin = true;
+
+        // Register Properties
+        vm.register = register;
+        vm.doNotMatch = null;
+        vm.error = null;
+        vm.errorUserExists = null;
+        vm.registerAccount = {};
+        vm.success = null;
 
         $timeout(function (){angular.element('#username').focus();});
 
@@ -65,9 +72,31 @@
             });
         }
 
-        function register () {
-            $uibModalInstance.dismiss('cancel');
-            $state.go('register');
+        function register (event) {
+            event.preventDefault();
+
+            if (vm.registerAccount.password !== vm.confirmPassword) {
+                vm.doNotMatch = 'ERROR';
+            } else {
+                vm.registerAccount.langKey = $translate.use();
+                vm.doNotMatch = null;
+                vm.error = null;
+                vm.errorUserExists = null;
+                vm.errorEmailExists = null;
+
+                Auth.createAccount(vm.registerAccount).then(function () {
+                    vm.success = 'OK';
+                }).catch(function (response) {
+                    vm.success = null;
+                    if (response.status === 400 && response.data === 'login already in use') {
+                        vm.errorUserExists = 'ERROR';
+                    } else if (response.status === 400 && response.data === 'e-mail address already in use') {
+                        vm.errorEmailExists = 'ERROR';
+                    } else {
+                        vm.error = 'ERROR';
+                    }
+                });
+            }
         }
 
         function requestResetPassword () {
@@ -82,8 +111,10 @@
 
             if (vm.isLogin) {
                 vm.altPathText = vm.altPathRegisterText;
+                vm.username = vm.registerAccount.login;
             } else {
                 vm.altPathText = vm.altPathSignInText;
+                vm.registerAccount.login = vm.username;
             }
         }
     }
