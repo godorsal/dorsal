@@ -7,7 +7,26 @@
                         <div>concierge chat</div>
                         <div>{{vm.pageTitle}}</div>
                     </div>
-                    <div><img src="content/images/chat.jpg" /></div>
+                    <div ng-show="vm.showChat"><img src="content/images/chat.jpg" /></div>
+                    <form ng-hide="vm.showChat" ng-submit="vm.startChat($event)">
+                        <div style="width: 652px;position: relative; top: 100px;">
+                            <div style="width: 300px; margin: auto;">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Start Chat</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <input type="text" ng-model="vm.chatName" class="form-control" placeholder="your name" />
+                                        </div>
+                                        <div class="form-group" style="text-align: right; margin-bottom: 0px;">
+                                            <button type="submit" class="btn btn-success">let's chat</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="drsl-case-details-wrapper">
                     <div class="drsl-sub-header">case details</div>
@@ -16,7 +35,7 @@
                         <div class="drsl-field-seciton">
                             <div class="drsl-field-label">Summary</div>
                             <div class="drsl-field-input">
-                                <input type="text" class="form-control" ng-model="vm.caseDetails.summary">
+                                <input type="text" class="form-control" ng-model="vm.caseDetails.summary" placeholder="just describe your problem">
                             </div>
                         </div>
 
@@ -31,13 +50,16 @@
                         <div class="drsl-field-seciton">
                             <div class="drsl-field-label">Description</div>
                             <div class="drsl-field-input">
-                                <textarea class="form-control" ng-model="vm.caseDetails.description"></textarea>
+                                <textarea class="form-control" ng-model="vm.caseDetails.description" placeholder="do you have more details"></textarea>
                             </div>
                         </div>
 
                         <!-- File Upload -->
                         <div class="drsl-field-seciton drsl-file-upload">
-                            <div class="drsl-field-label">Upload log file (optional)</div>
+                            <div class="drsl-field-label">
+                                Attach file (optional)
+                                <div style="font-size:10px;">(Screenshot, Logfile, Configuration) </div>
+                            </div>
                             <div class="drsl-field-input">
                                 drag files here to upload
                             </div>

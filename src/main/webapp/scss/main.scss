@@ -221,6 +221,17 @@
     font-weight: bold;
 }
 
+.drsl-button-wrapper {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin-top: 40px;
+
+    div {
+        flex: inherit
+    }
+}
+
 .drsl-concierge-wrapper {
     display: flex;
     flex-flow: row;
@@ -281,17 +292,6 @@
                 background-color: #E5E5E5;
                 padding: 5px;
                 color: #c0c0c0;
-            }
-        }
-
-        .drsl-button-wrapper {
-            display: flex;
-            flex-flow: column;
-            align-items: center;
-            margin-top: 40px;
-
-            div {
-                flex: inherit
             }
         }
 

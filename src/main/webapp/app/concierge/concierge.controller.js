@@ -12,7 +12,10 @@
 
         vm.init = init;
         vm.submitForm = submitForm;
+        vm.startChat = startChat;
         vm.productDetailInputComplete = false;
+        vm.showChat = false;
+        vm.chatName = '';
         vm.isAuthenticated = Principal.isAuthenticated;
 
         vm.caseDetails = {
@@ -309,7 +312,7 @@
                     break;
                 case 'on-demand':
                     vm.pageTitle = 'on-demand pros';
-                    vm.caseDetails.radios[0].selectedValue = '4 hrs'
+                    vm.caseDetails.radios[0].selectedValue = '4 hrs';
                     break;
                 default:
                     vm.pageTitle = 'connect now';
@@ -322,6 +325,13 @@
                 $state.go('case');
             } else {
                 LoginService.open();
+            }
+        }
+
+        function startChat(event) {
+            event.preventDefault();
+            if (vm.chatName){
+                vm.showChat = true;
             }
         }
     }
