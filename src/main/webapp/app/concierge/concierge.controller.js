@@ -113,8 +113,12 @@
                                     description: 'Cluster Type',
                                     types: [
                                         {
-                                            label: 'Tungsten Percona cluster',
-                                            value: 'Tungsten Percona cluster'
+                                            label: 'Tungsten cluster',
+                                            value: 'Tungsten cluster'
+                                        },
+                                        {
+                                            label: 'Percona cluster',
+                                            value: 'Percona cluster'
                                         },
                                         {
                                             label: 'none',
@@ -198,8 +202,12 @@
                                     description: 'Cluster Type',
                                     types: [
                                         {
-                                            label: 'Tungsten Percona cluster',
-                                            value: 'Tungsten Percona cluster'
+                                            label: 'Tungsten cluster',
+                                            value: 'Tungsten cluster'
+                                        },
+                                        {
+                                            label: 'Percona cluster',
+                                            value: 'Percona cluster'
                                         },
                                         {
                                             label: 'none',
@@ -283,8 +291,12 @@
                                     description: 'Cluster Type',
                                     types: [
                                         {
-                                            label: 'Tungsten Percona cluster',
-                                            value: 'Tungsten Percona cluster'
+                                            label: 'Tungsten cluster',
+                                            value: 'Tungsten cluster'
+                                        },
+                                        {
+                                            label: 'Percona cluster',
+                                            value: 'Percona cluster'
                                         },
                                         {
                                             label: 'none',
@@ -368,8 +380,12 @@
                                     description: 'Cluster Type',
                                     types: [
                                         {
-                                            label: 'Tungsten Percona cluster',
-                                            value: 'Tungsten Percona cluster'
+                                            label: 'Tungsten cluster',
+                                            value: 'Tungsten cluster'
+                                        },
+                                        {
+                                            label: 'Percona cluster',
+                                            value: 'Percona cluster'
                                         },
                                         {
                                             label: 'none',
