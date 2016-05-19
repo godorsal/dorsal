@@ -77,7 +77,7 @@
                             value: 'MySQL',
                             incidentTypes: [
                                 {
-                                    description: 'Which version?',
+                                    description: 'Version',
                                     types: [
                                         {
                                             label: '',
@@ -86,55 +86,74 @@
                                         },
                                         {
                                             label: 'No version',
-                                            value: ''
+                                            value: 'na'
                                         }
-                                    ]
+                                    ],
+                                    selectedValue: ''
                                 },
                                 {
-                                    description: 'Performance Problems?',
+                                    description: 'Environment',
                                     types: [
                                         {
-                                            label: 'System crash',
-                                            value: 'SC'
+                                            label: 'VMware',
+                                            value: 'VMware'
                                         },
+                                        {
+                                            label: 'Open Stack',
+                                            value: 'Open Stack'
+                                        },
+                                        {
+                                            label: 'bare metal',
+                                            value: 'bare metal'
+                                        }
+                                    ],
+                                    selectedValue: ''
+                                },
+                                {
+                                    description: 'Cluster Type',
+                                    types: [
+                                        {
+                                            label: 'Tungsten Percona cluster',
+                                            value: 'Tungsten Percona cluster'
+                                        },
+                                        {
+                                            label: 'none',
+                                            value: 'none'
+                                        }
+                                    ],
+                                    selectedValue: ''
+                                },
+                                {
+                                    description: 'Connectivity',
+                                    types: [
+                                        {
+                                            label: 'timeout',
+                                            value: 'timeout'
+                                        },
+                                        {
+                                            label: 'connection drop',
+                                            value: 'connection drop'
+                                        }
+                                    ],
+                                    selectedValue: ''
+                                },
+                                {
+                                    description: 'Performance',
+                                    types: [
                                         {
                                             label: 'Slow queries',
-                                            value: 'SQ'
+                                            value: 'Slow queries'
                                         },
                                         {
-                                            label: 'High CPU/mem',
-                                            value: 'HC'
+                                            label: 'HighCPU/mem',
+                                            value: 'HighCPU/mem'
                                         },
                                         {
-                                            label: 'Temporal paradox',
-                                            value: 'TP'
-                                        },
-                                        {
-                                            label: 'Not performance related',
-                                            value: ''
+                                            label: 'Query time out',
+                                            value: 'Query time out'
                                         }
-                                    ]
-                                },
-                                {
-                                    description: 'Hardware Related?',
-                                    types: [
-                                        {
-                                            label: 'Things are broken',
-                                            value: 'TB'
-                                        },
-                                        {
-                                            label: 'There was smoke',
-                                            value: 'SQ'
-                                        },
-                                        {
-                                            label: 'There was fire',
-                                            value: 'HC'
-                                        },
-                                        {
-                                            label: 'Not hardware related',
-                                            value: ''
-                                        }
-                                    ]
+                                    ],
+                                    selectedValue: ''
                                 }
                             ]
                         },
@@ -143,7 +162,7 @@
                             value: 'PostgreSQL',
                             incidentTypes: [
                                 {
-                                    description: 'Which version?',
+                                    description: 'Version',
                                     types: [
                                         {
                                             label: '',
@@ -152,55 +171,74 @@
                                         },
                                         {
                                             label: 'No version',
-                                            value: ''
+                                            value: 'na'
                                         }
-                                    ]
+                                    ],
+                                    selectedValue: ''
                                 },
                                 {
-                                    description: 'Performance Problems (postgreSQL)?',
+                                    description: 'Environment',
                                     types: [
                                         {
-                                            label: 'Performance thing one',
-                                            value: 'pt1'
+                                            label: 'VMware',
+                                            value: 'VMware'
                                         },
                                         {
-                                            label: 'Performance thing two',
-                                            value: 'pt2'
+                                            label: 'Open Stack',
+                                            value: 'Open Stack'
                                         },
                                         {
-                                            label: 'Performance thing three',
-                                            value: 'pt3'
-                                        },
-                                        {
-                                            label: 'Not performance related',
-                                            value: ''
+                                            label: 'bare metal',
+                                            value: 'bare metal'
                                         }
-                                    ]
+                                    ],
+                                    selectedValue: ''
                                 },
                                 {
-                                    description: 'Hardware Related (postgreSQL)?',
+                                    description: 'Cluster Type',
                                     types: [
                                         {
-                                            label: 'Hardware thing one',
-                                            value: 'ht1'
+                                            label: 'Tungsten Percona cluster',
+                                            value: 'Tungsten Percona cluster'
                                         },
                                         {
-                                            label: 'Hardware thing two',
-                                            value: 'ht2'
-                                        },
-                                        {
-                                            label: 'Hardware thing three',
-                                            value: 'ht3'
-                                        },
-                                        {
-                                            label: 'Hardware thing four',
-                                            value: 'ht4'
-                                        },
-                                        {
-                                            label: 'Not hardware related',
-                                            value: ''
+                                            label: 'none',
+                                            value: 'none'
                                         }
-                                    ]
+                                    ],
+                                    selectedValue: ''
+                                },
+                                {
+                                    description: 'Connectivity',
+                                    types: [
+                                        {
+                                            label: 'timeout',
+                                            value: 'timeout'
+                                        },
+                                        {
+                                            label: 'connection drop',
+                                            value: 'connection drop'
+                                        }
+                                    ],
+                                    selectedValue: ''
+                                },
+                                {
+                                    description: 'Performance',
+                                    types: [
+                                        {
+                                            label: 'Slow queries',
+                                            value: 'Slow queries'
+                                        },
+                                        {
+                                            label: 'HighCPU/mem',
+                                            value: 'HighCPU/mem'
+                                        },
+                                        {
+                                            label: 'Query time out',
+                                            value: 'Query time out'
+                                        }
+                                    ],
+                                    selectedValue: ''
                                 }
                             ]
                         },
@@ -209,7 +247,7 @@
                             value: 'MongoDB',
                             incidentTypes: [
                                 {
-                                    description: 'Which version?',
+                                    description: 'Version',
                                     types: [
                                         {
                                             label: '',
@@ -218,62 +256,161 @@
                                         },
                                         {
                                             label: 'No version',
-                                            value: ''
+                                            value: 'na'
                                         }
-                                    ]
+                                    ],
+                                    selectedValue: ''
                                 },
                                 {
-                                    description: 'Performance Problems (MongoDB)?',
+                                    description: 'Environment',
                                     types: [
                                         {
-                                            label: 'Performance thing one',
-                                            value: 'pt1'
+                                            label: 'VMware',
+                                            value: 'VMware'
                                         },
                                         {
-                                            label: 'Performance thing two',
-                                            value: 'pt2'
+                                            label: 'Open Stack',
+                                            value: 'Open Stack'
                                         },
                                         {
-                                            label: 'Performance thing three',
-                                            value: 'pt3'
-                                        },
-                                        {
-                                            label: 'Not performance related',
-                                            value: ''
+                                            label: 'bare metal',
+                                            value: 'bare metal'
                                         }
-                                    ]
+                                    ],
+                                    selectedValue: ''
                                 },
                                 {
-                                    description: 'Hardware Related (MongoDB)?',
+                                    description: 'Cluster Type',
                                     types: [
                                         {
-                                            label: 'Hardware thing one',
-                                            value: 'ht1'
+                                            label: 'Tungsten Percona cluster',
+                                            value: 'Tungsten Percona cluster'
                                         },
                                         {
-                                            label: 'Hardware thing two',
-                                            value: 'ht2'
-                                        },
-                                        {
-                                            label: 'Hardware thing three',
-                                            value: 'ht3'
-                                        },
-                                        {
-                                            label: 'Hardware thing four',
-                                            value: 'ht4'
-                                        },
-                                        {
-                                            label: 'Not hardware related',
-                                            value: ''
+                                            label: 'none',
+                                            value: 'none'
                                         }
-                                    ]
+                                    ],
+                                    selectedValue: ''
+                                },
+                                {
+                                    description: 'Connectivity',
+                                    types: [
+                                        {
+                                            label: 'timeout',
+                                            value: 'timeout'
+                                        },
+                                        {
+                                            label: 'connection drop',
+                                            value: 'connection drop'
+                                        }
+                                    ],
+                                    selectedValue: ''
+                                },
+                                {
+                                    description: 'Performance',
+                                    types: [
+                                        {
+                                            label: 'Slow queries',
+                                            value: 'Slow queries'
+                                        },
+                                        {
+                                            label: 'HighCPU/mem',
+                                            value: 'HighCPU/mem'
+                                        },
+                                        {
+                                            label: 'Query time out',
+                                            value: 'Query time out'
+                                        }
+                                    ],
+                                    selectedValue: ''
                                 }
                             ]
                         },
                         {
                             label: 'MariaDB',
                             value: 'MariaDB',
-                            incidentTypes: []
+                            incidentTypes: [
+                                {
+                                    description: 'Version',
+                                    types: [
+                                        {
+                                            label: '',
+                                            value: '',
+                                            type: 'field'
+                                        },
+                                        {
+                                            label: 'No version',
+                                            value: 'na'
+                                        }
+                                    ],
+                                    selectedValue: ''
+                                },
+                                {
+                                    description: 'Environment',
+                                    types: [
+                                        {
+                                            label: 'VMware',
+                                            value: 'VMware'
+                                        },
+                                        {
+                                            label: 'Open Stack',
+                                            value: 'Open Stack'
+                                        },
+                                        {
+                                            label: 'bare metal',
+                                            value: 'bare metal'
+                                        }
+                                    ],
+                                    selectedValue: ''
+                                },
+                                {
+                                    description: 'Cluster Type',
+                                    types: [
+                                        {
+                                            label: 'Tungsten Percona cluster',
+                                            value: 'Tungsten Percona cluster'
+                                        },
+                                        {
+                                            label: 'none',
+                                            value: 'none'
+                                        }
+                                    ],
+                                    selectedValue: ''
+                                },
+                                {
+                                    description: 'Connectivity',
+                                    types: [
+                                        {
+                                            label: 'timeout',
+                                            value: 'timeout'
+                                        },
+                                        {
+                                            label: 'connection drop',
+                                            value: 'connection drop'
+                                        }
+                                    ],
+                                    selectedValue: ''
+                                },
+                                {
+                                    description: 'Performance',
+                                    types: [
+                                        {
+                                            label: 'Slow queries',
+                                            value: 'Slow queries'
+                                        },
+                                        {
+                                            label: 'HighCPU/mem',
+                                            value: 'HighCPU/mem'
+                                        },
+                                        {
+                                            label: 'Query time out',
+                                            value: 'Query time out'
+                                        }
+                                    ],
+                                    selectedValue: ''
+                                }
+                            ]
                         }
                     ],
 

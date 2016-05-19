@@ -14,36 +14,26 @@
             },
             template:   '<div class="well drsl-product-details-wrapper" ng-show="canShowProductDetails()">' +
                             '<h4>{{product.selectedValue}}</h4>' +
-                            '<div class="drsl-product-detail-selections"' +
-                                 'ng-repeat="selectedincidentType in product.incidentTypeSelections">' +
-                                '<button type="button"' +
-                                        'class="btn btn-success"' +
-                                        'ng-click="removeIncidentType(selectedincidentType)">' +
-                                    '<span ng-show="selectedincidentType.type && selectedincidentType.type === \'field\'">v. </span>' +
-                                    '{{selectedincidentType.label}} ' +
-                                    '<span class="badge">x</span>' +
-                                '</button>' +
-                            '</div>' +
-                            '<div class="well" ng-show="getIncidentTypes()" style="margin-bottom: 5px;">' +
-                                '<h4>{{getIncidentTypes().description}}</h4>' +
-                                '<div class="drsl-product-detail-input"' +
-                                     'ng-repeat="incidentType in getIncidentTypes().types">' +
-                                    '<button ng-hide="incidentType.type" type="button"' +
-                                            'class="btn btn-primary"' +
-                                            'ng-click="product.incidentTypeSelections.push(incidentType)">' +
+                            '<div><uib-accordion close-others="true"><uib-accordion-group ng-repeat="rootType in getAllIncidentTypes()" is-open="rootType.open">' +
+                            '<uib-accordion-heading>{{rootType.description}}<br /><span ng-show="rootType.selectedValue" style="font-weight: 200;color:#F48B3D;">{{rootType.selectedValue}}</span><i class="pull-right glyphicon" ng-class="{\'glyphicon-ok-sign\': rootType.selectedValue}" style="color:#F48B3D"></i></uib-accordion-heading>' +
+                                '<div class="drsl-product-detail-input" ' +
+                                     'ng-repeat="incidentType in rootType.types">' +
+                                    '<button ng-hide="incidentType.type" type="button" ' +
+                                            'class="btn" ' +
+                                            'ng-class="{\'btn-success\': (incidentType.label == rootType.selectedValue)}" ' +
+                                            'ng-click="setIncidentTypeValue(rootType, incidentType)">' +
                                         '{{incidentType.label}}' +
                                     '</button>' +
                                     '<div ng-show="incidentType.type && incidentType.type === \'field\'">' +
-                                        '<input type="text" class="form-control" ng-model="incidentType.label">' +
-                                        '<button type="button"' +
-                                                'class="btn btn-primary"' +
-                                                'ng-click="product.incidentTypeSelections.push(incidentType)">' +
+                                        '<form ng-submit="setIncidentTypeValue(rootType, incidentType)"><input type="text" class="form-control" ng-model="incidentType.label">' +
+                                        '<button type="submit" ' +
+                                                'class="btn btn-primary" ' +
+                                                '>' +
                                             'add' +
-                                        '</button>' +
+                                        '</button></form>' +
                                     '</div>' +
                                 '</div>' +
-                            '</div>' +
-                            '<div ng-show="getIncidentTypes()" style="text-align: right;"><button class="btn btn-primary" ng-click="toggleComplete()">done</button></div>'+
+                            '</uib-accordion-group></uib-accordion></div>' +
                         '</div>'
             ,
             link: linkFunc
@@ -86,6 +76,19 @@
                 return incidentType;
             };
 
+            scope.getAllIncidentTypes = function () {
+                var incidentTypes = [];
+
+                // Grab the incidentType array for the selected product
+                if (scope.product.selectedValue) {
+                    incidentTypes = scope.product.values.filter(function (o) {
+                        return o.value === scope.product.selectedValue
+                    })[0].incidentTypes;
+                }
+
+                return incidentTypes;
+            };
+
             /**
              * Removes a given IncidentType object from the incidentTypeSelections array.
              * @param type an IncidentType object
@@ -123,6 +126,19 @@
 
                 return canShow && hasIncidentTypes;
             };
+
+            scope.setIncidentTypeValue = function (type, value){
+                if (value.type && value.type === 'field'){
+                    type.selectedValue = 'v. ' +value.label;
+                } else {
+                    type.selectedValue = (type.selectedValue === value.label)? '':value.label;
+                }
+
+                type.open = false;
+
+            }
+
+
         }
     }
 })();
