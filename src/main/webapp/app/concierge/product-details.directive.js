@@ -15,7 +15,7 @@
             template:   '<div class="well drsl-product-details-wrapper" ng-show="canShowProductDetails()">' +
                             '<h4>{{product.selectedValue}}</h4>' +
                             '<div><uib-accordion close-others="true"><uib-accordion-group ng-repeat="rootType in getAllIncidentTypes()" is-open="rootType.open">' +
-                            '<uib-accordion-heading>{{rootType.description}}<br /><span ng-show="rootType.selectedValue" style="font-weight: 200;color:#F48B3D;">{{rootType.selectedValue}}</span><i class="pull-right glyphicon" ng-class="{\'glyphicon-ok-sign\': rootType.selectedValue}" style="color:#F48B3D"></i></uib-accordion-heading>' +
+                            '<uib-accordion-heading>{{rootType.description}}<br /><span class="drsl-product-header-selection" ng-show="rootType.selectedValue">{{rootType.selectedValue}}</span><i class="pull-right glyphicon" ng-class="{\'glyphicon-ok-sign\': rootType.selectedValue}"></i></uib-accordion-heading>' +
                                 '<div class="drsl-product-detail-input" ' +
                                      'ng-repeat="incidentType in rootType.types">' +
                                     '<button ng-hide="incidentType.type" type="button" ' +

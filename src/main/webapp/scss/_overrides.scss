@@ -1,5 +1,6 @@
-// Bootstrap Overrides
-
+/* ==========================================================================
+Navbar
+========================================================================== */
 .navbar {
     min-height: $nav-height;
 
@@ -52,6 +53,9 @@
     margin-top: 17px;
 }
 
+/* ==========================================================================
+Container
+========================================================================== */
 .container {
     @media (min-width: 1200px) {
         width: $site-max-width;
@@ -64,6 +68,9 @@
     }
 }
 
+/* ==========================================================================
+Dialogs
+========================================================================== */
 .modal-dialog {
     @media (min-width: 768px) {
         width: 760px;
@@ -86,14 +93,17 @@
     }
 }
 
+/* ==========================================================================
+Buttons
+========================================================================== */
 .btn {
     &.btn-primary {
-        background-color: #B0AFB4;
-        border-color: #9C9FA3;
+        background-color: $primary-button-background-color;
+        border-color: $primary-button-border-color;
 
         &:active, &:hover, &:focus {
-            background-color: #B0AFB4;
-            border-color: #9C9FA3;
+            background-color: $primary-button-background-color;
+            border-color: $primary-button-border-color;
         }
     }
 

@@ -7,9 +7,9 @@
     <div class="modal-body">
         <div class="row">
             <div class="col-md-12">
-                <div style="display: flex; flex-flow: row; align-items: center;">
-                    <div style="flex: 2;"><h1 translate="login.title">Authentication</h1></div>
-                    <div style="flex: 1;text-align: right;">or <a href="#" ng-click="vm.togglePath($event)">{{vm.altPathText}}</a></div>
+                <div class="drsl-login-header">
+                    <div><h1 translate="login.title">Authentication</h1></div>
+                    <div>or <a href="#" ng-click="vm.togglePath($event)">{{vm.altPathText}}</a></div>
                 </div>
             </div>
             <div class="col-md-12" ng-show="vm.isLogin">
@@ -34,7 +34,7 @@
                                        ng-model="vm.password">
                             </div>
                             <!-- Submit Button -->
-                            <div style="text-align: right;">
+                            <div class="drsl-login-submit">
                                 <button type="submit" class="btn btn-primary">Sign in</button>
                             </div>
                         </div>
@@ -154,7 +154,7 @@
                                     </p>
                                 </div>
                             </div>
-                            <div style="text-align: right;">
+                            <div class="drsl-login-submit">
                                 <button type="submit" class="btn btn-primary">Create an account</button>
                             </div>
                         </div>

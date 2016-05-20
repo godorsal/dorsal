@@ -1,7 +1,19 @@
-// Fonts
+/* ==========================================================================
+Fonts
+========================================================================== */
 $main-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$default-font-size: 14px;
+$tiny-font-size: 10px;
+$small-font-size: 11px;
+$medium-font-size: 16px;
+$large-font-size: 20px;
+$default-weight: 400;
+$thin-weight: 200;
+$thick-weight: 700;
 
-// Colors
+/* ==========================================================================
+Colors
+========================================================================== */
 $background-color: #FFFFFF;
 $default-text-color: #333;
 $nav-text-color: #DDDCDB;
@@ -9,19 +21,31 @@ $nav-text-active-color: #FFF;
 $form-field-placeholder-color: #F8F8F8;
 $form-field-background-color: #DBDBDB;
 $content-container-color: #E5E5E5;
-
+$content-background-color: $background-color;
+$inverted-heading-text-color: #FFFFFF;
+$inverted-heading-right-text-color: #838584;
+$content-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
+$sub-header-text-color: #F5F1EE;
+$inactive-text-color: #c0c0c0;
 $brand-color: #F48B3D;
 $brand-border-color: #E58C38;
-
 $custom-button-color: $brand-color;
 $custom-button-size: 150px;
 $custom-button-shadow: 0px 5px 40px rgba(0, 0, 0, 0.5);
 $custom-button-text-color: #FFFFFF;
 $custom-button-font-size: 30px;
 $custom-button-line-height: .95em;
+$custom-radio-border-color: #B0AFB4;
+$primary-button-background-color: #B0AFB4;
+$primary-button-border-color: #9C9FA3;
 
-// Dimensions
+/* ==========================================================================
+Dimensions
+========================================================================== */
 $site-max-width: 1280px;
 $nav-height: 84px;
+$default-padding: 20px;
+$default-double-padding: ($default-padding * 2);
+$default-half-padding: ($default-padding / 2);
 $content-padding-top: 25px;
 $content-padding-side: 50px;

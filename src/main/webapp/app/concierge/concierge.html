@@ -1,4 +1,4 @@
-<div class="drsl-content-container" ng-cloak>
+<div ng-cloak>
     <div class="row">
         <div class="col-md-12">
             <div class="drsl-concierge-wrapper">
@@ -9,8 +9,8 @@
                     </div>
                     <div ng-show="vm.showChat"><img src="content/images/chat.jpg" /></div>
                     <form ng-hide="vm.showChat" ng-submit="vm.startChat($event)">
-                        <div style="width: 652px;position: relative; top: 100px;">
-                            <div style="width: 300px; margin: auto;">
+                        <div class="drsl-chat-login-wrapper">
+                            <div class="drsl-chat-login">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h3 class="panel-title">Start Chat</h3>
@@ -19,7 +19,7 @@
                                         <div class="form-group">
                                             <input type="text" ng-model="vm.chatName" class="form-control" placeholder="your name" />
                                         </div>
-                                        <div class="form-group" style="text-align: right; margin-bottom: 0px;">
+                                        <div class="form-group">
                                             <button type="submit" class="btn btn-success">let's chat</button>
                                         </div>
                                     </div>
@@ -58,7 +58,7 @@
                         <div class="drsl-field-seciton drsl-file-upload">
                             <div class="drsl-field-label">
                                 Attach file (optional)
-                                <div style="font-size:10px;">(Screenshot, Logfile, Configuration) </div>
+                                <div class="drsl-field-sub-label">(Screenshot, Logfile, Configuration) </div>
                             </div>
                             <div class="drsl-field-input">
                                 drag files here to upload
