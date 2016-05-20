@@ -37,11 +37,6 @@
                                         '</div> ' +
                                         '<div class="panel panel-default drsl-sub-panel"> ' +
                                             '<div class="panel-body"> ' +
-                                                '<span>Profile:</span> Link ' +
-                                            '</div> ' +
-                                        '</div> ' +
-                                        '<div class="panel panel-default drsl-sub-panel"> ' +
-                                            '<div class="panel-body"> ' +
                                                 '<span>Expert Score:</span> {{expert.score}} out of 100 ' +
                                             '</div> ' +
                                         '</div> ' +
