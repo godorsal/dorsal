@@ -31,8 +31,8 @@
         content: ' ';
         display: block;
         position: absolute;
-        top: 0px;
-        left: 0px;
+        top: 0;
+        left: 0;
         background: transparent url("../images/global/nv-bkg.png") repeat-x;
         width: 100%;
         height: 320px;
@@ -219,6 +219,15 @@
     color: #F5F1EE;
     font-size: 20px;
     font-weight: bold;
+
+    &.drsl-sub-sub-header {
+        font-size: 16px;
+        text-transform: capitalize;
+        height: auto;
+        padding: 10px 15px 10px 15px;
+        line-height: 1.1;
+        font-weight: 200;
+    }
 }
 
 .drsl-button-wrapper {
@@ -235,7 +244,6 @@
 .drsl-concierge-wrapper {
     display: flex;
     flex-flow: row;
-
 
     .drsl-chat-wrapper {
         flex: auto;
@@ -321,4 +329,90 @@
     }
 
 }
+
+.drsl-case-wrapper {
+    .drsl-panels {
+        background-color: #ffffff;
+        .panel.drsl-panel {
+            border-radius: 0;
+            margin-bottom: 0;
+            border: 0;
+
+            > .panel-heading {
+                border-radius: 0;
+                border: 0;
+                background-color: #F48B3D;
+                color: #ffffff;
+
+                h3 {
+                    font-weight: 200;
+                }
+            }
+
+            .drsl-contact-wrapper {
+                display: flex;
+                flex-flow: row;
+                align-items: flex-start;
+
+                > div {
+                    flex: inherit;
+                    padding-right: 10px;
+                    i {
+                        font-size: 16px;
+                        margin-right: 5px;
+                    }
+                }
+            }
+        }
+    }
+
+    .drsl-sub-panel {
+        margin-bottom: 10px;
+
+        .panel-body span {
+            padding-right: 10px; //test
+        }
+    }
+
+    .drsl-case-history-wrapper {
+        .panel-collapse > .panel-body {
+            padding: 0;
+        }
+    }
+
+}
+
+.drsl-expert-thumbnail {
+    margin-bottom: 10px;
+
+    .panel-body {
+        text-align: center;
+    }
+
+    .thumbnail {
+        text-align: center;
+        margin-bottom: 0
+    }
+
+    .drsl-thumbnail-badge-wrapper {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        text-align: center;
+        color: #F48B3D;
+        font-size: 20px;
+        margin-top: 10px;
+
+        div {
+            flex: 1;
+            span {
+                border: 1px solid #F48B3D;
+                display: inline-block;
+                width: 25px;
+                border-radius: 25%;
+            }
+        }
+    }
+}
+
 
