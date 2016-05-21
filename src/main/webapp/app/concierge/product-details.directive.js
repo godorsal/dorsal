@@ -80,7 +80,7 @@
                 var incidentTypes = [];
 
                 // Grab the incidentType array for the selected product
-                if (scope.product.selectedValue) {
+                if (scope.product && scope.product.selectedValue) {
                     incidentTypes = scope.product.values.filter(function (o) {
                         return o.value === scope.product.selectedValue
                     })[0].incidentTypes;
@@ -115,7 +115,7 @@
                     hasIncidentTypes;
 
                 // Continue if we have selected a product
-                if (scope.product.selectedValue) {
+                if (scope.product && scope.product.selectedValue) {
                     canShow = true;
 
                     // Check to see if the currently selected product has incidentTypes
