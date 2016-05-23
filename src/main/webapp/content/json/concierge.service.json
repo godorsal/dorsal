@@ -5,22 +5,22 @@
         "radios": [
             {
                 "id": "urgency",
-                "label": "concierge.urgency.main",
+                "label": "concierge.caseDetails.urgency.main",
                 "values": [
                     {
-                        "label": "concierge.urgency.immediate",
+                        "label": "concierge.caseDetails.urgency.immediate",
                         "value": "Immediate"
                     },
                     {
-                        "label": "concierge.urgency.fourHours",
+                        "label": "concierge.caseDetails.urgency.fourHours",
                         "value": "4 hrs"
                     },
                     {
-                        "label": "concierge.urgency.oneDay",
+                        "label": "concierge.caseDetails.urgency.oneDay",
                         "value": "1 day"
                     },
                     {
-                        "label": "concierge.urgency.thisWeek",
+                        "label": "concierge.caseDetails.urgency.thisWeek",
                         "value": "this week"
                     }
                 ],
@@ -28,22 +28,22 @@
             },
             {
                 "id": "problem",
-                "label": "concierge.problem.main",
+                "label": "concierge.caseDetails.problem.main",
                 "values": [
                     {
-                        "label": "concierge.problem.performance",
+                        "label": "concierge.caseDetails.problem.performance",
                         "value": "Performance"
                     },
                     {
-                        "label": "concierge.problem.availability",
+                        "label": "concierge.caseDetails.problem.availability",
                         "value": "Availability"
                     },
                     {
-                        "label": "concierge.problem.security",
+                        "label": "concierge.caseDetails.problem.security",
                         "value": "Security"
                     },
                     {
-                        "label": "concierge.problem.other",
+                        "label": "concierge.caseDetails.problem.other",
                         "value": "Other"
                     }
                 ],
@@ -51,14 +51,14 @@
             },
             {
                 "id": "product",
-                "label": "concierge.product.main",
+                "label": "concierge.caseDetails.product.main",
                 "values": [
                     {
-                        "label": "concierge.product.mySQL",
+                        "label": "concierge.caseDetails.product.mySQL",
                         "value": "MySQL",
                         "incidentTypes": [
                             {
-                                "description": "concierge.incidentTypes.version.main",
+                                "description": "concierge.caseDetails.incidentTypes.version.main",
                                 "types": [
                                     {
                                         "label": "",
@@ -66,75 +66,75 @@
                                         "type": "field"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.version.noVersion",
+                                        "label": "concierge.caseDetails.incidentTypes.version.noVersion",
                                         "value": "na"
                                     }
                                 ],
                                 "selectedValue": ""
                             },
                             {
-                                "description": "concierge.incidentTypes.environment.main",
+                                "description": "concierge.caseDetails.incidentTypes.environment.main",
                                 "types": [
                                     {
-                                        "label": "concierge.incidentTypes.environment.vmWare",
+                                        "label": "concierge.caseDetails.incidentTypes.environment.vmWare",
                                         "value": "VMware"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.environment.openStack",
+                                        "label": "concierge.caseDetails.incidentTypes.environment.openStack",
                                         "value": "Open Stack"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.environment.bareMetal",
+                                        "label": "concierge.caseDetails.incidentTypes.environment.bareMetal",
                                         "value": "bare metal"
                                     }
                                 ],
                                 "selectedValue": ""
                             },
                             {
-                                "description": "concierge.incidentTypes.clusterType.main",
+                                "description": "concierge.caseDetails.incidentTypes.clusterType.main",
                                 "types": [
                                     {
-                                        "label": "concierge.incidentTypes.clusterType.tungstenCluster",
+                                        "label": "concierge.caseDetails.incidentTypes.clusterType.tungstenCluster",
                                         "value": "Tungsten cluster"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.clusterType.perconaCluster",
+                                        "label": "concierge.caseDetails.incidentTypes.clusterType.perconaCluster",
                                         "value": "Percona cluster"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.clusterType.none",
+                                        "label": "concierge.caseDetails.incidentTypes.clusterType.none",
                                         "value": "none"
                                     }
                                 ],
                                 "selectedValue": ""
                             },
                             {
-                                "description": "concierge.incidentTypes.connectivity.main",
+                                "description": "concierge.caseDetails.incidentTypes.connectivity.main",
                                 "types": [
                                     {
-                                        "label": "concierge.incidentTypes.connectivity.timeout",
+                                        "label": "concierge.caseDetails.incidentTypes.connectivity.timeout",
                                         "value": "timeout"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.connectivity.connectionDrop",
+                                        "label": "concierge.caseDetails.incidentTypes.connectivity.connectionDrop",
                                         "value": "connection drop"
                                     }
                                 ],
                                 "selectedValue": ""
                             },
                             {
-                                "description": "concierge.incidentTypes.performance.main",
+                                "description": "concierge.caseDetails.incidentTypes.performance.main",
                                 "types": [
                                     {
-                                        "label": "concierge.incidentTypes.performance.slowQueries",
+                                        "label": "concierge.caseDetails.incidentTypes.performance.slowQueries",
                                         "value": "Slow queries"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.performance.resources",
+                                        "label": "concierge.caseDetails.incidentTypes.performance.resources",
                                         "value": "HighCPU/mem"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.performance.queryTimeout",
+                                        "label": "concierge.caseDetails.incidentTypes.performance.queryTimeout",
                                         "value": "Query time out"
                                     }
                                 ],
@@ -143,11 +143,11 @@
                         ]
                     },
                     {
-                        "label": "concierge.product.postgreSQL",
+                        "label": "concierge.caseDetails.product.postgreSQL",
                         "value": "PostgreSQL",
                         "incidentTypes": [
                             {
-                                "description": "concierge.incidentTypes.version.main",
+                                "description": "concierge.caseDetails.incidentTypes.version.main",
                                 "types": [
                                     {
                                         "label": "",
@@ -155,75 +155,75 @@
                                         "type": "field"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.version.noVersion",
+                                        "label": "concierge.caseDetails.incidentTypes.version.noVersion",
                                         "value": "na"
                                     }
                                 ],
                                 "selectedValue": ""
                             },
                             {
-                                "description": "concierge.incidentTypes.environment.main",
+                                "description": "concierge.caseDetails.incidentTypes.environment.main",
                                 "types": [
                                     {
-                                        "label": "concierge.incidentTypes.environment.vmWare",
+                                        "label": "concierge.caseDetails.incidentTypes.environment.vmWare",
                                         "value": "VMware"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.environment.openStack",
+                                        "label": "concierge.caseDetails.incidentTypes.environment.openStack",
                                         "value": "Open Stack"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.environment.bareMetal",
+                                        "label": "concierge.caseDetails.incidentTypes.environment.bareMetal",
                                         "value": "bare metal"
                                     }
                                 ],
                                 "selectedValue": ""
                             },
                             {
-                                "description": "concierge.incidentTypes.clusterType.main",
+                                "description": "concierge.caseDetails.incidentTypes.clusterType.main",
                                 "types": [
                                     {
-                                        "label": "concierge.incidentTypes.clusterType.tungstenCluster",
+                                        "label": "concierge.caseDetails.incidentTypes.clusterType.tungstenCluster",
                                         "value": "Tungsten cluster"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.clusterType.perconaCluster",
+                                        "label": "concierge.caseDetails.incidentTypes.clusterType.perconaCluster",
                                         "value": "Percona cluster"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.clusterType.none",
+                                        "label": "concierge.caseDetails.incidentTypes.clusterType.none",
                                         "value": "none"
                                     }
                                 ],
                                 "selectedValue": ""
                             },
                             {
-                                "description": "concierge.incidentTypes.connectivity.main",
+                                "description": "concierge.caseDetails.incidentTypes.connectivity.main",
                                 "types": [
                                     {
-                                        "label": "concierge.incidentTypes.connectivity.timeout",
+                                        "label": "concierge.caseDetails.incidentTypes.connectivity.timeout",
                                         "value": "timeout"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.connectivity.connectionDrop",
+                                        "label": "concierge.caseDetails.incidentTypes.connectivity.connectionDrop",
                                         "value": "connection drop"
                                     }
                                 ],
                                 "selectedValue": ""
                             },
                             {
-                                "description": "concierge.incidentTypes.performance.main",
+                                "description": "concierge.caseDetails.incidentTypes.performance.main",
                                 "types": [
                                     {
-                                        "label": "concierge.incidentTypes.performance.slowQueries",
+                                        "label": "concierge.caseDetails.incidentTypes.performance.slowQueries",
                                         "value": "Slow queries"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.performance.resources",
+                                        "label": "concierge.caseDetails.incidentTypes.performance.resources",
                                         "value": "HighCPU/mem"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.performance.queryTimeout",
+                                        "label": "concierge.caseDetails.incidentTypes.performance.queryTimeout",
                                         "value": "Query time out"
                                     }
                                 ],
@@ -232,11 +232,11 @@
                         ]
                     },
                     {
-                        "label": "concierge.product.mongoDB",
+                        "label": "concierge.caseDetails.product.mongoDB",
                         "value": "MongoDB",
                         "incidentTypes": [
                             {
-                                "description": "concierge.incidentTypes.version.main",
+                                "description": "concierge.caseDetails.incidentTypes.version.main",
                                 "types": [
                                     {
                                         "label": "",
@@ -244,75 +244,75 @@
                                         "type": "field"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.version.noVersion",
+                                        "label": "concierge.caseDetails.incidentTypes.version.noVersion",
                                         "value": "na"
                                     }
                                 ],
                                 "selectedValue": ""
                             },
                             {
-                                "description": "concierge.incidentTypes.environment.main",
+                                "description": "concierge.caseDetails.incidentTypes.environment.main",
                                 "types": [
                                     {
-                                        "label": "concierge.incidentTypes.environment.vmWare",
+                                        "label": "concierge.caseDetails.incidentTypes.environment.vmWare",
                                         "value": "VMware"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.environment.openStack",
+                                        "label": "concierge.caseDetails.incidentTypes.environment.openStack",
                                         "value": "Open Stack"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.environment.bareMetal",
+                                        "label": "concierge.caseDetails.incidentTypes.environment.bareMetal",
                                         "value": "bare metal"
                                     }
                                 ],
                                 "selectedValue": ""
                             },
                             {
-                                "description": "concierge.incidentTypes.clusterType.main",
+                                "description": "concierge.caseDetails.incidentTypes.clusterType.main",
                                 "types": [
                                     {
-                                        "label": "concierge.incidentTypes.clusterType.tungstenCluster",
+                                        "label": "concierge.caseDetails.incidentTypes.clusterType.tungstenCluster",
                                         "value": "Tungsten cluster"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.clusterType.perconaCluster",
+                                        "label": "concierge.caseDetails.incidentTypes.clusterType.perconaCluster",
                                         "value": "Percona cluster"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.clusterType.none",
+                                        "label": "concierge.caseDetails.incidentTypes.clusterType.none",
                                         "value": "none"
                                     }
                                 ],
                                 "selectedValue": ""
                             },
                             {
-                                "description": "concierge.incidentTypes.connectivity.main",
+                                "description": "concierge.caseDetails.incidentTypes.connectivity.main",
                                 "types": [
                                     {
-                                        "label": "concierge.incidentTypes.connectivity.timeout",
+                                        "label": "concierge.caseDetails.incidentTypes.connectivity.timeout",
                                         "value": "timeout"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.connectivity.connectionDrop",
+                                        "label": "concierge.caseDetails.incidentTypes.connectivity.connectionDrop",
                                         "value": "connection drop"
                                     }
                                 ],
                                 "selectedValue": ""
                             },
                             {
-                                "description": "concierge.incidentTypes.performance.main",
+                                "description": "concierge.caseDetails.incidentTypes.performance.main",
                                 "types": [
                                     {
-                                        "label": "concierge.incidentTypes.performance.slowQueries",
+                                        "label": "concierge.caseDetails.incidentTypes.performance.slowQueries",
                                         "value": "Slow queries"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.performance.resources",
+                                        "label": "concierge.caseDetails.incidentTypes.performance.resources",
                                         "value": "HighCPU/mem"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.performance.queryTimeout",
+                                        "label": "concierge.caseDetails.incidentTypes.performance.queryTimeout",
                                         "value": "Query time out"
                                     }
                                 ],
@@ -321,11 +321,11 @@
                         ]
                     },
                     {
-                        "label": "concierge.product.mariaDB",
+                        "label": "concierge.caseDetails.product.mariaDB",
                         "value": "MariaDB",
                         "incidentTypes": [
                             {
-                                "description": "concierge.incidentTypes.version.main",
+                                "description": "concierge.caseDetails.incidentTypes.version.main",
                                 "types": [
                                     {
                                         "label": "",
@@ -333,75 +333,75 @@
                                         "type": "field"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.version.noVersion",
+                                        "label": "concierge.caseDetails.incidentTypes.version.noVersion",
                                         "value": "na"
                                     }
                                 ],
                                 "selectedValue": ""
                             },
                             {
-                                "description": "concierge.incidentTypes.environment.main",
+                                "description": "concierge.caseDetails.incidentTypes.environment.main",
                                 "types": [
                                     {
-                                        "label": "concierge.incidentTypes.environment.vmWare",
+                                        "label": "concierge.caseDetails.incidentTypes.environment.vmWare",
                                         "value": "VMware"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.environment.openStack",
+                                        "label": "concierge.caseDetails.incidentTypes.environment.openStack",
                                         "value": "Open Stack"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.environment.bareMetal",
+                                        "label": "concierge.caseDetails.incidentTypes.environment.bareMetal",
                                         "value": "bare metal"
                                     }
                                 ],
                                 "selectedValue": ""
                             },
                             {
-                                "description": "concierge.incidentTypes.clusterType.main",
+                                "description": "concierge.caseDetails.incidentTypes.clusterType.main",
                                 "types": [
                                     {
-                                        "label": "concierge.incidentTypes.clusterType.tungstenCluster",
+                                        "label": "concierge.caseDetails.incidentTypes.clusterType.tungstenCluster",
                                         "value": "Tungsten cluster"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.clusterType.perconaCluster",
+                                        "label": "concierge.caseDetails.incidentTypes.clusterType.perconaCluster",
                                         "value": "Percona cluster"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.clusterType.none",
+                                        "label": "concierge.caseDetails.incidentTypes.clusterType.none",
                                         "value": "none"
                                     }
                                 ],
                                 "selectedValue": ""
                             },
                             {
-                                "description": "concierge.incidentTypes.connectivity.main",
+                                "description": "concierge.caseDetails.incidentTypes.connectivity.main",
                                 "types": [
                                     {
-                                        "label": "concierge.incidentTypes.connectivity.timeout",
+                                        "label": "concierge.caseDetails.incidentTypes.connectivity.timeout",
                                         "value": "timeout"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.connectivity.connectionDrop",
+                                        "label": "concierge.caseDetails.incidentTypes.connectivity.connectionDrop",
                                         "value": "connection drop"
                                     }
                                 ],
                                 "selectedValue": ""
                             },
                             {
-                                "description": "concierge.incidentTypes.performance.main",
+                                "description": "concierge.caseDetails.incidentTypes.performance.main",
                                 "types": [
                                     {
-                                        "label": "concierge.incidentTypes.performance.slowQueries",
+                                        "label": "concierge.caseDetails.incidentTypes.performance.slowQueries",
                                         "value": "Slow queries"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.performance.resources",
+                                        "label": "concierge.caseDetails.incidentTypes.performance.resources",
                                         "value": "HighCPU/mem"
                                     },
                                     {
-                                        "label": "concierge.incidentTypes.performance.queryTimeout",
+                                        "label": "concierge.caseDetails.incidentTypes.performance.queryTimeout",
                                         "value": "Query time out"
                                     }
                                 ],

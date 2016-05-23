@@ -5,14 +5,15 @@
         .module('dorsalApp')
         .controller('ConciergeController', ConciergeController);
 
-    ConciergeController.$inject = ['$scope', '$state', 'LoginService', 'Principal', 'ConciergeService'];
+    ConciergeController.$inject = ['$scope', '$state', 'LoginService', 'Principal', 'ConciergeService', '$translate'];
 
-    function ConciergeController($scope, $state, LoginService, Principal, ConciergeService) {
+    function ConciergeController($scope, $state, LoginService, Principal, ConciergeService, $translate) {
         var vm = this;
 
         vm.init = init;
         vm.submitForm = submitForm;
         vm.startChat = startChat;
+        vm.updatePageTitle = updatePageTitle;
         vm.productDetailInputComplete = false;
         vm.showChat = false;
         vm.chatName = '';
@@ -32,11 +33,13 @@
             }
         });
 
-        vm.init();
-
+        /**
+         * Initialize the controller's data.
+         */
         function init(){
             vm.pageTitle = '';
 
+            // Make a call to get the initial data.
             ConciergeService.get(function(data){
                 vm.caseDetails = data[0] || [];
 
@@ -44,27 +47,37 @@
                 vm.product = vm.caseDetails.radios.filter(function (o) {
                     return o.id === 'product';
                 })[0];
-            });
 
+                vm.updatePageTitle();
+            });
+        }
+
+        /**
+         * Updates the page title to match the params *type* data
+         */
+        function updatePageTitle () {
             switch ($state.params.type) {
                 case 'incident':
-                    vm.pageTitle = 'incident support';
+                    vm.pageTitle = $translate.instant('concierge.pageTitles.incident');
                     vm.caseDetails.radios[0].selectedValue = '1 day';
                     break;
                 case 'pro-active':
-                    vm.pageTitle = 'pro-active support';
+                    vm.pageTitle = $translate.instant('concierge.pageTitles.proActive');
                     vm.caseDetails.radios[0].selectedValue = 'Immediate';
                     break;
                 case 'on-demand':
-                    vm.pageTitle = 'on-demand pros';
+                    vm.pageTitle = $translate.instant('concierge.pageTitles.onDemand');
                     vm.caseDetails.radios[0].selectedValue = '4 hrs';
                     break;
                 default:
-                    vm.pageTitle = 'connect now';
+                    vm.pageTitle = $translate.instant('concierge.pageTitles.connect');
                     break;
             }
         }
 
+        /**
+         * Submits the form, or opens the login dialog if the user isn't logged in.
+         */
         function submitForm() {
             if (vm.isAuthenticated()) {
                 $state.go('case');
@@ -73,11 +86,18 @@
             }
         }
 
+        /**
+         * Toggles the chat display if the user provided a chat name.
+         * @param event
+         */
         function startChat(event) {
             event.preventDefault();
             if (vm.chatName){
                 vm.showChat = true;
             }
         }
+
+        // Call to initialize the controller.
+        vm.init();
     }
 })();

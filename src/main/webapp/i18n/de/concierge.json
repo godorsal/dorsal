@@ -1,55 +1,87 @@
 {
     "concierge": {
-        "urgency": {
-            "main": "Urgency",
-            "immediate": "Immediate",
-            "fourHours": "4 hours",
-            "oneDay": "1 day",
-            "thisWeek": "this week"
+        "pageTitles": {
+            "connect": "Connect Now",
+            "incident": "Incident Support",
+            "proActive": "pro-active support",
+            "onDemand": "on-demand pros"
         },
-        "problem": {
-            "main": "Problem Type",
-            "performance": "Performance",
-            "availability": "Availability",
-            "security": "Security",
-            "other": "Other"
+        "chat": {
+            "header": "Concierge Chat",
+            "login": {
+                "header": "Start Chat",
+                "placeholder": "your name",
+                "button": "let's chat"
+            }
         },
-        "product": {
-            "main": "Database Type",
-            "mySQL": "MySQL",
-            "postgreSQL": "PostgreSQL",
-            "mongoDB": "MongoDB",
-            "mariaDB": "MariaDB"
-        },
-        "incidentTypes": {
-            "version": {
-                "main": "Version",
-                "prefix": "v.",
-                "add":"add",
-                "noVersion":"No version"
+        "caseDetails": {
+            "header": "case details",
+            "button": "get started",
+            "summary": {
+                "main": "Summary",
+                "placeholder": "just describe your problem"
             },
-            "environment": {
-                "main": "Environment",
-                "vmWare": "VMware",
-                "openStack": "Open Stack",
-                "bareMetal": "Bare Metal"
+            "description": {
+                "main": "Description",
+                "placeholder": "do you have more details"
             },
-            "clusterType": {
-                "main": "Cluster Type",
-                "tungstenCluster": "Tungsten Cluster",
-                "perconaCluster": "Percona Cluster",
-                "none": "None"
+            "file": {
+                "main": "Attach file (optional)",
+                "placeholder": "do you have more details",
+                "notes": "(Screenshot, Logfile, Configuration)",
+                "instructions": "drag files here to upload"
             },
-            "connectivity": {
-                "main": "Connectivity",
-                "timeout": "Timeout",
-                "connectionDrop": "Connection Drop"
+            "urgency": {
+                "main": "Urgency",
+                "immediate": "Immediate",
+                "fourHours": "4 hours",
+                "oneDay": "1 day",
+                "thisWeek": "this week"
             },
-            "performance": {
-                "main": "Performance",
-                "slowQueries": "Slow Queries",
-                "resources": "HighCPU/Mem",
-                "queryTimeout": "Query Timeout"
+            "problem": {
+                "main": "Problem Type",
+                "performance": "Performance",
+                "availability": "Availability",
+                "security": "Security",
+                "other": "Other"
+            },
+            "product": {
+                "main": "Database Type",
+                "mySQL": "MySQL",
+                "postgreSQL": "PostgreSQL",
+                "mongoDB": "MongoDB",
+                "mariaDB": "MariaDB"
+            },
+            "incidentTypes": {
+                "version": {
+                    "main": "Version",
+                    "prefix": "v.",
+                    "add": "add",
+                    "noVersion": "No version"
+                },
+                "environment": {
+                    "main": "Environment",
+                    "vmWare": "VMware",
+                    "openStack": "Open Stack",
+                    "bareMetal": "Bare Metal"
+                },
+                "clusterType": {
+                    "main": "Cluster Type",
+                    "tungstenCluster": "Tungsten Cluster",
+                    "perconaCluster": "Percona Cluster",
+                    "none": "None"
+                },
+                "connectivity": {
+                    "main": "Connectivity",
+                    "timeout": "Timeout",
+                    "connectionDrop": "Connection Drop"
+                },
+                "performance": {
+                    "main": "Performance",
+                    "slowQueries": "Slow Queries",
+                    "resources": "HighCPU/Mem",
+                    "queryTimeout": "Query Timeout"
+                }
             }
         }
     }

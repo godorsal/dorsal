@@ -3,9 +3,9 @@
 
     angular
         .module('dorsalApp')
-        .directive('incidentRadio', activeMenu);
+        .directive('incidentRadio', incidentRadio);
 
-    function activeMenu($translate, $locale, tmhDynamicLocale) {
+    function incidentRadio($translate, $locale, tmhDynamicLocale) {
         var directive = {
             restrict: 'E',
             scope:  {
