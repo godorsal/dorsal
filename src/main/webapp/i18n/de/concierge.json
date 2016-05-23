@@ -1,4 +1,56 @@
 {
     "concierge": {
+        "urgency": {
+            "main": "Urgency",
+            "immediate": "Immediate",
+            "fourHours": "4 hours",
+            "oneDay": "1 day",
+            "thisWeek": "this week"
+        },
+        "problem": {
+            "main": "Problem Type",
+            "performance": "Performance",
+            "availability": "Availability",
+            "security": "Security",
+            "other": "Other"
+        },
+        "product": {
+            "main": "Database Type",
+            "mySQL": "MySQL",
+            "postgreSQL": "PostgreSQL",
+            "mongoDB": "MongoDB",
+            "mariaDB": "MariaDB"
+        },
+        "incidentTypes": {
+            "version": {
+                "main": "Version",
+                "prefix": "v.",
+                "add":"add",
+                "noVersion":"No version"
+            },
+            "environment": {
+                "main": "Environment",
+                "vmWare": "VMware",
+                "openStack": "Open Stack",
+                "bareMetal": "Bare Metal"
+            },
+            "clusterType": {
+                "main": "Cluster Type",
+                "tungstenCluster": "Tungsten Cluster",
+                "perconaCluster": "Percona Cluster",
+                "none": "None"
+            },
+            "connectivity": {
+                "main": "Connectivity",
+                "timeout": "Timeout",
+                "connectionDrop": "Connection Drop"
+            },
+            "performance": {
+                "main": "Performance",
+                "slowQueries": "Slow Queries",
+                "resources": "HighCPU/Mem",
+                "queryTimeout": "Query Timeout"
+            }
+        }
     }
 }
