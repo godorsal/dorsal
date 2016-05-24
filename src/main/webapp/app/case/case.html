@@ -5,7 +5,7 @@
                 <div class="drsl-sub-header">Your Service Case History</div>
                 <div class="drsl-panels">
                     <case-details case="case"></case-details>
-                    <case-professional expert="case.expert"></case-professional>
+                    <case-professional expert="case.expert" ng-show="case.expert"></case-professional>
                 </div>
                 <div class="drsl-case-separator"></div>
             </div>
@@ -14,14 +14,14 @@
                 <div class="drsl-sub-header drsl-sub-sub-header">Previous Cases</div>
                 <div class="drsl-case-history-wrapper">
                     <uib-accordion close-others="true">
-                        <uib-accordion-group ng-repeat="case in vm.getHistory() | orderBy:'-details.lastUpdate'">
+                        <uib-accordion-group ng-repeat="case in vm.getHistory() | orderBy:'-case.lastUpdated'">
                             <uib-accordion-heading>
-                                {{case.details.lastUpdate | date}}
-                                <div class="pull-right drsl-right-sub-header">Case ID: {{case.details.id}}</div>
+                                {{case.lastUpdated | date}}
+                                <div class="pull-right drsl-right-sub-header">Case ID: {{case.id}}</div>
                             </uib-accordion-heading>
                             <div class="drsl-panels">
                                 <case-details case="case"></case-details>
-                                <case-professional expert="case.expert"></case-professional>
+                                <case-professional expert="case.expert" ng-show="case.expert"></case-professional>
                             </div>
                         </uib-accordion-group>
                     </uib-accordion>

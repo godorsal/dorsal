@@ -28,9 +28,9 @@
                                                 '<div class="drsl-contact-wrapper"> ' +
                                                     '<div>Contact:</div> ' +
                                                     '<div> ' +
-                                                        '<i class="fa fa-envelope" title="email"></i> {{expert.contact.email}}<br/> ' +
-                                                        '<i class="fa fa-phone" title="phone"></i> {{expert.contact.phone}}<br/> ' +
-                                                        '<i class="fa fa-skype" title="skype"></i> {{expert.contact.skype}} ' +
+                                                        '<div ng-show="expert.contact.email"><i class="fa fa-envelope" title="email"></i> {{expert.contact.email}}</div> ' +
+                                                        '<div ng-show="expert.contact.phone"><i class="fa fa-phone" title="phone"></i> {{expert.contact.phone}}</div>' +
+                                                        '<div ng-show="expert.contact.skype"><i class="fa fa-skype" title="skype"></i> {{expert.contact.skype}}</div>' +
                                                     '</div> ' +
                                                 '</div> ' +
                                             '</div> ' +

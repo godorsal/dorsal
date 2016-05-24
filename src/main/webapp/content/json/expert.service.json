@@ -1,0 +1,19 @@
+[
+    {
+        "id": "expertForeignKey",
+        "name": "John Smith",
+        "picture": "content/images/John-Smith.jpg",
+        "contact": {
+            "email": "jsmith@support.com",
+            "phone": "(707) 555-1212",
+            "skype": "minatourpower"
+        },
+        "score": 69,
+        "stars": 4,
+        "badges": [
+            "fast",
+            "efficient",
+            "expert"
+        ]
+    }
+]

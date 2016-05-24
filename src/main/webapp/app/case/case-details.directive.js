@@ -20,31 +20,31 @@
                                 '<div class="col-md-6"> ' +
                                     '<div class="panel panel-default drsl-sub-panel"> ' +
                                         '<div class="panel-body"> ' +
-                                            '<span>User:</span>{{case.details.user}} ' +
+                                            '<span>User:</span>{{case.user}} ' +
                                         '</div> ' +
                                     '</div> ' +
                                     '<div class="panel panel-default drsl-sub-panel"> ' +
                                         '<div class="panel-body"> ' +
-                                            '<span>Status:</span> {{case.details.status}} ' +
+                                            '<span>Status:</span> {{case.status}} ' +
                                         '</div> ' +
                                     '</div> ' +
                                 '</div> ' +
                                 '<div class="col-md-6"> ' +
                                     '<div class="panel panel-default drsl-sub-panel"> ' +
                                         '<div class="panel-body"> ' +
-                                            '<span>Case ID:</span> {{case.details.id}} ' +
+                                            '<span>Case ID:</span> {{case.id}} ' +
                                         '</div> ' +
                                     '</div> ' +
                                     '<div class="panel panel-default drsl-sub-panel"> ' +
                                         '<div class="panel-body"> ' +
-                                            '<span>Last Update:</span> {{case.details.lastUpdate | date}} ' +
+                                            '<span>Last Update:</span> {{case.lastUpdated | date}} ' +
                                         '</div> ' +
                                     '</div> ' +
                                 '</div> ' +
                                 '<div class="col-md-12"> ' +
                                     '<div class="panel panel-default drsl-sub-panel"> ' +
                                         '<div class="panel-body"> ' +
-                                            '<span>Chat room:</span> <a ng-href="{{case.details.chatRoom.link}}" target="_blank">{{case.details.chatRoom.id}}</a> ' +
+                                            '<span>Chat room:</span> <a ng-href="{{case.chatRoom.link}}" target="_blank">{{case.chatRoom.id}}</a> ' +
                                         '</div> ' +
                                     '</div> ' +
                                 '</div> ' +

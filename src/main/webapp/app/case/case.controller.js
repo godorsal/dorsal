@@ -5,18 +5,24 @@
         .module('dorsalApp')
         .controller('CaseController', CaseController);
 
-    CaseController.$inject = ['$scope', '$state'];
+    CaseController.$inject = ['$scope', '$state', 'CaseService'];
 
-    function CaseController($scope, $state) {
+    function CaseController($scope, $state, CaseService) {
         var vm = this;
-
         vm.init = init;
         vm.getHistory = getHistory;
         vm.getCurrentCase = getCurrentCase;
-
         vm.init();
 
+        vm.cases = [];
+
+        vm.currentUser = {
+            id: 'userForeignKey',
+            name: 'Joe Doe'
+        };
+
         vm.placeHolderExpert = {
+            id: 'expertForeignKey',
             name: 'John Smith',
             picture: 'content/images/John-Smith.jpg',
             contact: {
@@ -33,62 +39,45 @@
             ]
         };
 
-        vm.cases = [
-            {
-                expert: vm.placeHolderExpert,
-                details: {
-                    id: 'MySQL - 101008',
-                    user: 'Joe Doe',
-                    status: 'Assigned',
-                    lastUpdate: new Date(Date.parse('May 16, 2016')),
-                    chatRoom: {
-                        id: 'chat Case-05152016',
-                        link: 'http://54.67.112.235:5000/#!/room/5739fcddc8e3b3c31381dbc2'
-                    }
-                }
-            },
-            {
-                expert: vm.placeHolderExpert,
-                details: {
-                    id: 'MySQL - 101006',
-                    user: 'Joe Doe',
-                    status: 'Resolved',
-                    lastUpdate:  new Date(Date.parse('May 12, 2016')),
-                    chatRoom: {
-                        id: 'chat Case-05152016',
-                        link: 'http://54.67.112.235:5000/#!/room/5739fcddc8e3b3c31381dbc2'
-                    }
-                }
-            },
-            {
-                expert: vm.placeHolderExpert,
-                details: {
-                    id: 'PostgreSQL - 101004',
-                    user: 'Joe Doe',
-                    status: 'Resolved',
-                    lastUpdate: new Date(Date.parse('May 5, 2016')),
-                    chatRoom: {
-                        id: 'chat Case-05152016',
-                        link: 'http://54.67.112.235:5000/#!/room/5739fcddc8e3b3c31381dbc2'
-                    }
-                }
-            },
-            {
-                expert: vm.placeHolderExpert,
-                details: {
-                    id: 'MySQL - 101001',
-                    user: 'Joe Doe',
-                    status: 'Resolved',
-                    lastUpdate:  new Date(Date.parse('April 1, 2016')),
-                    chatRoom: {
-                        id: 'chat Case-05152016',
-                        link: 'http://54.67.112.235:5000/#!/room/5739fcddc8e3b3c31381dbc2'
-                    }
-                }
-            }
+        /**
+         * Initialize the controller's data.
+         */
+        function init(){
+            // Make a call to get the initial data.
+            CaseService.get(function(data){
+                var i, cases, casesLength, currentCase, ecount = {count:0}, cleanCases = [];
+                cases = data || [];
+                casesLength = cases.length;
 
-        ];
+                // Loop through all the cases that came back with the service data
+                for (i =0; i < casesLength; i++){
+                    currentCase = cases[i];
 
+                    // Only continue if the current user matches the case user
+                    if (currentCase.user === vm.currentUser.id) {
+                        // Try to find the associated expert data
+                        currentCase.expert = vm.placeHolderExpert;
+
+                        // Update case's date so we can display and sort on it
+                        currentCase.lastUpdate = new Date(currentCase.lastUpdated);
+
+                        // Update the case's username
+                        currentCase.user = vm.currentUser.name;
+
+                        // Add the case to the cleanCases array
+                        cleanCases.push(currentCase);
+                    }
+                }
+
+                // update the controller's cases
+                vm.cases = cleanCases;
+            });
+        }
+
+        /**
+         * Get the current case.
+         * @returns {Array}
+         */
         function getCurrentCase() {
             var cases = [];
 
@@ -99,6 +88,10 @@
             return cases;
         }
 
+        /**
+         * Get the history cases as an array of case objects.
+         * @returns {Array}
+         */
         function getHistory() {
             var history = [];
 
@@ -107,11 +100,6 @@
             }
 
             return history;
-        }
-
-
-        function init(){
-
         }
     }
 })();
