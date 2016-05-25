@@ -1,4 +1,39 @@
 {
     "case": {
+        "header": "Your Service Case History",
+        "details": {
+            "header": "Current Case",
+            "user": "User:",
+            "status": {
+                "main": "Status:",
+                "assigned": "Assigned",
+                "completed": "Completed"
+            },
+            "chatRoom": "Chat room:",
+            "id":"Case ID:",
+            "lastUpdate": "Last Update:"
+        },
+        "professional": {
+            "header": "Support Professional",
+            "expert": "Expert:",
+            "contact": {
+                "main": "Contact:",
+                "email": "email",
+                "phone": "phone",
+                "skype": "skype"
+            },
+            "score": "Expert Score:",
+            "badges": {
+                "badge1": "Lightning fast responses!",
+                "badge2": "Burns through issues!",
+                "badge3": "Rocket science level expert!"
+            }
+        },
+        "history": {
+            "header": "Previous Cases",
+            "details": {
+                "header": "Case History"
+            }
+        }
     }
 }

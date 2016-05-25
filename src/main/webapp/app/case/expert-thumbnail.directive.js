@@ -21,14 +21,14 @@
 
                                 '</div> ' +
                                 '<div class="drsl-thumbnail-badge-wrapper"> ' +
-                                    '<div ng-show="expert.badges.indexOf(\'fast\') !== -1"> ' +
-                                        '<span uib-tooltip="Lightning fast responses!"><i class="fa fa-flash"></i></span> ' +
+                                    '<div ng-show="expert.badges && expert.badges.indexOf(\'fast\') !== -1"> ' +
+                                        '<span uib-tooltip="{{\'case.professional.badges.badge1\' | translate}}"><i class="fa fa-flash"></i></span> ' +
                                     '</div> ' +
-                                    '<div ng-show="expert.badges.indexOf(\'efficient\') !== -1"> ' +
-                                        '<span uib-tooltip="Burns through issues!"><i class="fa fa-fire"></i></span> ' +
+                                    '<div ng-show="expert.badges && expert.badges.indexOf(\'efficient\') !== -1"> ' +
+                                        '<span uib-tooltip="{{\'case.professional.badges.badge2\' | translate}}"><i class="fa fa-fire"></i></span> ' +
                                     '</div> ' +
-                                    '<div ng-show="expert.badges.indexOf(\'expert\') !== -1"> ' +
-                                        '<span tooltip-placement="left" uib-tooltip="Rocket science level expert!"><i class="fa fa-rocket"></i></span> ' +
+                                    '<div ng-show="expert.badges && expert.badges.indexOf(\'expert\') !== -1"> ' +
+                                        '<span tooltip-placement="left" uib-tooltip="{{\'case.professional.badges.badge3\' | translate}}"><i class="fa fa-rocket"></i></span> ' +
                                     '</div> ' +
                                 '</div> ' +
                             '</div> ' +

@@ -12,32 +12,13 @@
         vm.init = init;
         vm.getHistory = getHistory;
         vm.getCurrentCase = getCurrentCase;
-        vm.init();
-
         vm.cases = [];
-
         vm.currentUser = {
             id: 'userForeignKey',
             name: 'Joe Doe'
         };
-
-        vm.placeHolderExpert = {
-            id: 'expertForeignKey',
-            name: 'John Smith',
-            picture: 'content/images/John-Smith.jpg',
-            contact: {
-                email: 'jsmith@support.com',
-                phone: '(707) 555-1212',
-                skype: 'minatourpower'
-            },
-            score: 69,
-            stars: 4,
-            badges: [
-                'fast',
-                'efficient',
-                'expert'
-            ]
-        };
+        vm.experts = {};
+        vm.init();
 
         /**
          * Initialize the controller's data.
@@ -56,7 +37,9 @@
                     // Only continue if the current user matches the case user
                     if (currentCase.user === vm.currentUser.id) {
                         // Try to find the associated expert data
-                        currentCase.expert = vm.placeHolderExpert;
+                        if (!vm.experts[currentCase.expert]) {
+                            vm.experts[currentCase.expert] = {};
+                        }
 
                         // Update case's date so we can display and sort on it
                         currentCase.lastUpdate = new Date(currentCase.lastUpdated);
@@ -69,8 +52,25 @@
                     }
                 }
 
+                // Only request unique experts, to help avoid redundant calls.
+                for (var expert in vm.experts) {
+                    if (vm.experts.hasOwnProperty(expert)){
+                        getExpert(expert);
+                    }
+                }
+
                 // update the controller's cases
                 vm.cases = cleanCases;
+            });
+        }
+
+        /**
+         * Call getExpert in CaseService and set the result on the vm for the given expert id.
+         * @param expert
+         */
+        function getExpert(expert){
+            CaseService.getExpert(function(data){
+                vm.experts[expert] = data[0];
             });
         }
 

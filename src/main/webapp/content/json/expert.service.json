@@ -1,7 +1,8 @@
 [
     {
         "id": "expertForeignKey",
-        "name": "John Smith",
+        "firstName": "John",
+        "lastName": "Smith",
         "picture": "content/images/John-Smith.jpg",
         "contact": {
             "email": "jsmith@support.com",

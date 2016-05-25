@@ -2,26 +2,26 @@
     <div class="row">
         <div class="col-md-12">
             <div class="drsl-case-wrapper" ng-repeat="case in vm.getCurrentCase()">
-                <div class="drsl-sub-header">Your Service Case History</div>
+                <div class="drsl-sub-header" translate="case.header">Your Service Case History</div>
                 <div class="drsl-panels">
                     <case-details case="case"></case-details>
-                    <case-professional expert="case.expert" ng-show="case.expert"></case-professional>
+                    <case-professional expert="vm.experts[case.expert]" ng-show="vm.experts[case.expert]"></case-professional>
                 </div>
                 <div class="drsl-case-separator"></div>
             </div>
 
             <div class="drsl-case-wrapper">
-                <div class="drsl-sub-header drsl-sub-sub-header">Previous Cases</div>
+                <div class="drsl-sub-header drsl-sub-sub-header" translate="case.history.header">Previous Cases</div>
                 <div class="drsl-case-history-wrapper">
                     <uib-accordion close-others="true">
                         <uib-accordion-group ng-repeat="case in vm.getHistory() | orderBy:'-case.lastUpdated'">
                             <uib-accordion-heading>
                                 {{case.lastUpdated | date}}
-                                <div class="pull-right drsl-right-sub-header">Case ID: {{case.id}}</div>
+                                <div class="pull-right drsl-right-sub-header">{{'case.details.id' | translate}} {{case.id}}</div>
                             </uib-accordion-heading>
                             <div class="drsl-panels">
-                                <case-details case="case"></case-details>
-                                <case-professional expert="case.expert" ng-show="case.expert"></case-professional>
+                                <case-details case="case" history="true"></case-details>
+                                <case-professional expert="vm.experts[case.expert]" ng-show="vm.experts[case.expert]"></case-professional>
                             </div>
                         </uib-accordion-group>
                     </uib-accordion>
