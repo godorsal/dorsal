@@ -9,7 +9,15 @@
 
     function RatingController ($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate) {
         var vm = this;
+        vm.cancel = cancel;
+        vm.submit = submit;
 
+        function cancel () {
+            $uibModalInstance.dismiss('cancel');
+        }
 
+        function submit() {
+            $uibModalInstance.close({"status":"completed"});
+        }
     }
 })();

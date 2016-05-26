@@ -125,6 +125,10 @@ body {
     }
 }
 
+.modal-dialog.modal-sm {
+    width: 600px;
+}
+
 /* ==========================================================================
 Landing Page
 ========================================================================== */
@@ -438,7 +442,6 @@ Concierge
     }
 }
 
-
 /* ==========================================================================
 Case History
 ========================================================================== */
@@ -505,6 +508,48 @@ Case History
     .drsl-case-separator {
         background-color: $brand-color;
         height: $default-half-padding;
+    }
+}
+
+.drsl-rating {
+    .drsl-dialog-header {
+        h2 {
+            font-weight: 200;
+            margin-top: 0;
+            span {
+                font-size: $large-font-size;
+            }
+        }
+    }
+    .drsl-incident-radio {
+        margin-bottom: 20px;
+        .drsl-radio-desc {
+            display: none;
+        }
+        .drsl-radio-item {
+            font-size: $default-font-size;
+        }
+    }
+    h3 {
+        font-size: $medium-font-size;
+        margin-bottom: 20px;
+        font-weight: 200;
+        background-color: #F48B3D;
+        padding: 10px 15px;
+        color: white;
+        margin-top: 0;
+    }
+    form > div {
+        border: 1px solid #F48B3D;
+        margin-bottom: 15px;
+        background-color: white;
+
+        &:last-child {
+            background-color: transparent;
+            margin-bottom: 0;
+            border: 0;
+            text-align: right;
+        }
     }
 }
 

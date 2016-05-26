@@ -7,6 +7,7 @@
             "status": {
                 "main": "Status:",
                 "assigned": "Assigned",
+                "pending": "Pending",
                 "completed": "Completed"
             },
             "chatRoom": "Chat room:",

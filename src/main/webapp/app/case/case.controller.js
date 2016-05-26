@@ -13,6 +13,11 @@
         vm.getHistory = getHistory;
         vm.getCurrentCase = getCurrentCase;
         vm.cases = [];
+        vm.status = {
+            assigned: 'case.details.status.assigned',
+            pending: 'case.details.status.pending',
+            completed: 'case.details.status.completed'
+        };
         vm.currentUser = {
             id: 'userForeignKey',
             name: 'Joe Doe'

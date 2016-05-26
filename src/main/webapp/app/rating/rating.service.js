@@ -26,6 +26,7 @@
                 templateUrl: 'app/rating/rating.html',
                 controller: 'RatingController',
                 controllerAs: 'vm',
+                size:'sm',
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('rating');
@@ -37,6 +38,8 @@
                 resetModal,
                 resetModal
             );
+
+            return modalInstance;
         }
     }
 })();

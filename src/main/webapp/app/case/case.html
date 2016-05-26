@@ -4,7 +4,7 @@
             <div class="drsl-case-wrapper" ng-repeat="case in vm.getCurrentCase()">
                 <div class="drsl-sub-header" translate="case.header">Your Service Case History</div>
                 <div class="drsl-panels">
-                    <case-details case="case"></case-details>
+                    <case-details case="case" status="vm.status"></case-details>
                     <case-professional expert="vm.experts[case.expert]" ng-show="vm.experts[case.expert]"></case-professional>
                 </div>
                 <div class="drsl-case-separator"></div>
@@ -20,7 +20,7 @@
                                 <div class="pull-right drsl-right-sub-header">{{'case.details.id' | translate}} {{case.id}}</div>
                             </uib-accordion-heading>
                             <div class="drsl-panels">
-                                <case-details case="case" history="true"></case-details>
+                                <case-details case="case" status="vm.status" history="true"></case-details>
                                 <case-professional expert="vm.experts[case.expert]" ng-show="vm.experts[case.expert]"></case-professional>
                             </div>
                         </uib-accordion-group>

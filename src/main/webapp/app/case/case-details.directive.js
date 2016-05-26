@@ -5,12 +5,13 @@
         .module('dorsalApp')
         .directive('caseDetails', caseDetails);
 
-    function caseDetails($translate, $locale, tmhDynamicLocale) {
+    function caseDetails($translate, $locale, tmhDynamicLocale, RatingService) {
         var directive = {
             restrict: 'E',
             scope:  {
                 case: '=',
-                history: '@'
+                status: '=',
+                history: '@',
             },
             template:'<div class="panel panel-default drsl-panel"> ' +
                         '<div class="panel-heading"> ' +
@@ -27,7 +28,10 @@
                                     '</div> ' +
                                     '<div class="panel panel-default drsl-sub-panel"> ' +
                                         '<div class="panel-body"> ' +
-                                            '<span translate="case.details.status.main">Status:</span> {{case.status | translate}} ' +
+                                            '<div style="display: flex; flex-flow: row; align-items: center"> ' +
+                                                '<div style="flex: 2"><span translate="case.details.status.main">Status:</span> {{status[case.status] | translate}}</div> ' +
+                                                '<div style="flex: 1;text-align: right" ng-show="case.status == \'pending\'"><button class="btn btn-success" ng-click="complete()">complete</button></div> ' +
+                                            '</div> ' +
                                         '</div> ' +
                                     '</div> ' +
                                 '</div> ' +
@@ -52,9 +56,20 @@
                                 '</div> ' +
                             '</div> ' +
                         '</div> ' +
-                    '</div> '
+                    '</div> ',
+            link: linkFunc
         };
 
         return directive;
+
+        function linkFunc(scope) {
+            scope.complete = function(){
+                var modalInstance = RatingService.open();
+
+                modalInstance.result.then(function (result) {
+                    scope.case.status = result.status;
+                });
+            };
+        }
     }
 })();
