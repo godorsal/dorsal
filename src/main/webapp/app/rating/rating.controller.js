@@ -17,7 +17,7 @@
         }
 
         function submit() {
-            $uibModalInstance.close({"status":"completed"});
+            $uibModalInstance.close({"rated": true});
         }
     }
 })();

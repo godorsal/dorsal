@@ -14,9 +14,10 @@
         vm.getCurrentCase = getCurrentCase;
         vm.cases = [];
         vm.status = {
+            unassigned: 'case.details.status.unassigned',
             assigned: 'case.details.status.assigned',
-            pending: 'case.details.status.pending',
-            completed: 'case.details.status.completed'
+            working: 'case.details.status.working',
+            resolved: 'case.details.status.resolved'
         };
         vm.currentUser = {
             id: 'userForeignKey',

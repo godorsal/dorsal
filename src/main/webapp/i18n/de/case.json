@@ -6,9 +6,10 @@
             "user": "User:",
             "status": {
                 "main": "Status:",
+                "unassigned": "Unassigned",
                 "assigned": "Assigned",
-                "pending": "Pending",
-                "completed": "Completed"
+                "working": "Working",
+                "resolved": "Resolved"
             },
             "chatRoom": "Chat room:",
             "id":"Case ID:",

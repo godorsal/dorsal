@@ -29,8 +29,9 @@
                                     '<div class="panel panel-default drsl-sub-panel"> ' +
                                         '<div class="panel-body"> ' +
                                             '<div style="display: flex; flex-flow: row; align-items: center"> ' +
-                                                '<div style="flex: 2"><span translate="case.details.status.main">Status:</span> {{status[case.status] | translate}}</div> ' +
-                                                '<div style="flex: 1;text-align: right" ng-show="case.status == \'pending\'"><button class="btn btn-success" ng-click="complete()">complete</button></div> ' +
+                                                '<div style="flex: 2" ng-show="history || rated"><span translate="case.details.status.main">Status:</span> {{status[case.status] | translate}}</div> ' +
+                                                '<div style="flex: 2" ng-hide="history || rated"><span translate="case.details.status.main">Status:</span><select class="form-control" style="display: inline-block; width: auto;" ng-model="case.status" ng-options="item.value as item.label for item in statusOptions"></select></div> ' +
+                                                '<div style="flex: 1;text-align: right" ng-show="!history && !rated && case.status == \'resolved\'"><button class="btn btn-success" ng-click="rate()">rate</button></div> ' +
                                             '</div> ' +
                                         '</div> ' +
                                     '</div> ' +
@@ -63,11 +64,31 @@
         return directive;
 
         function linkFunc(scope) {
-            scope.complete = function(){
+            scope.rated = false;
+            scope.statusOptions = [
+                {
+                    label: 'Unassigned',
+                    value: 'unassigned'
+                },
+                {
+                    label: 'Assigned',
+                    value: 'assigned'
+                },
+                {
+                    label: 'Working',
+                    value: 'working'
+                },
+                {
+                    label: 'Resolved',
+                    value: 'resolved'
+                }
+            ];
+
+            scope.rate = function(){
                 var modalInstance = RatingService.open();
 
                 modalInstance.result.then(function (result) {
-                    scope.case.status = result.status;
+                    scope.rated = result.rated;
                 });
             };
         }
