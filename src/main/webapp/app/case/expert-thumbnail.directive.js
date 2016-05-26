@@ -14,7 +14,7 @@
             template:  '<div class="panel panel-default drsl-expert-thumbnail"> ' +
                             '<div class="panel-body"> ' +
                                 '<a href="#" ng-click="$event.preventDefault()" class="thumbnail"> ' +
-                                    '<img ng-src="{{expert.picture}}" /> ' +
+                                    '<img src="content/images/John-Smith.jpg" /> ' +
                                 '</a> ' +
                                 '<div> ' +
                                     '<span class="glyphicon" ng-class="{\'glyphicon-star\': (expert.stars >= (star/1)), \'glyphicon-star-empty\': (expert.stars < (star/1))}" ng-repeat="star in [1, 2, 3, 4, 5]"></span> ' +
