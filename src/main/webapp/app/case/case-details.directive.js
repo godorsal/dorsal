@@ -81,6 +81,10 @@
                 {
                     label: 'Resolved',
                     value: 'resolved'
+                },
+                {
+                    label: 'completed',
+                    value: 'completed'
                 }
             ];
 
@@ -89,6 +93,7 @@
 
                 modalInstance.result.then(function (result) {
                     scope.rated = result.rated;
+                    scope.case.status = 'completed';
                 });
             };
         }

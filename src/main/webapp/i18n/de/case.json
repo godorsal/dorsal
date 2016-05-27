@@ -9,7 +9,8 @@
                 "unassigned": "Unassigned",
                 "assigned": "Assigned",
                 "working": "Working",
-                "resolved": "Resolved"
+                "resolved": "Resolved",
+                "completed": "Completed"
             },
             "chatRoom": "Chat room:",
             "id":"Case ID:",

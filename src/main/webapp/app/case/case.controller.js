@@ -17,7 +17,8 @@
             unassigned: 'case.details.status.unassigned',
             assigned: 'case.details.status.assigned',
             working: 'case.details.status.working',
-            resolved: 'case.details.status.resolved'
+            resolved: 'case.details.status.resolved',
+            completed: 'case.details.status.completed'
         };
         vm.currentUser = {
             id: 'userForeignKey',
