@@ -3,16 +3,16 @@
 
     angular
         .module('dorsalApp')
-        .directive('incidentRadio', incidentRadio);
+        .directive('linearRadio', linearRadio);
 
-    function incidentRadio($translate, $locale, tmhDynamicLocale) {
+    function linearRadio($translate, $locale, tmhDynamicLocale) {
         var directive = {
             restrict: 'E',
             scope:  {
                 targetData: '=',
                 radioData: '='
             },
-            template:   '<div class="drsl-incident-radio">' +
+            template:   '<div class="drsl-linear-radio">' +
                             '<div class="drsl-radio-desc" translate="{{radioData.label}}"></div>' +
                             '<div class="drsl-radio-wrapper">' +
                                 '<div class="drsl-radio-set">' +

@@ -5,7 +5,7 @@
                 <div class="drsl-sub-header" translate="case.header">Your Service Case History</div>
                 <div class="drsl-panels">
                     <case-details case="case" status="vm.status"></case-details>
-                    <case-professional expert="vm.experts[case.expert]" ng-show="vm.experts[case.expert]"></case-professional>
+                    <case-professional expert="vm.experts[case.expert]" chat-room="case.chatRoom" ng-show="vm.experts[case.expert]"></case-professional>
                 </div>
                 <div class="drsl-case-separator"></div>
             </div>

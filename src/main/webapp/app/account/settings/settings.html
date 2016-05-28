@@ -1,13 +1,11 @@
-<div>
+<div class="drsl-account-settings">
     <div class="row">
         <div class="col-md-12">
-            <div class="drsl-case-wrapper">
+            <div class="drsl-settings-wrapper">
                 <div class="drsl-sub-header">
                     <h2 translate="settings.title" translate-values="{username: '{{vm.settingsAccount.login}}'}">User settings for *** [<b>{{vm.settingsAccount.login}}</b>]</h2>
                 </div>
-                <div class="drsl-panels" style="padding: 20px;">
-
-
+                <div class="drsl-panels">
                     <div class="alert alert-success" ng-show="vm.success" translate="settings.messages.success">
                         <strong>Settings saved!</strong>
                     </div>
@@ -91,104 +89,102 @@
                         <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary" translate="settings.form.button">Save</button>
                     </form>
                 </div>
-
             </div>
 
-            <div class="drsl-case-wrapper">
+            <div class="drsl-settings-wrapper">
                 <div class="drsl-sub-header drsl-sub-sub-header">Manage Payments</div>
-                <div style="padding: 20px; background-color: #ffffff;" >
-                    <div style="display: flex; flex-flow: row;">
-                        <div style="flex:1;margin-right: 20px;">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">Authorized Credit Card</div>
-                                <div class="panel-body">
+                <div class="drsl-payment-content">
+                    <div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Authorized Credit Card</div>
+                            <div class="panel-body">
 
-                                    <div class="form-group">
-                                        <label class="control-label sr-only" for="ccName">Name on Card</label>
-                                        <input type="text" class="form-control" id="ccName" name="ccName" placeholder="Card Holder's Name"
-                                               ng-minlength=1 ng-maxlength=50 maxlength="50">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label sr-only" for="ccNumber">Card Number</label>
-                                        <input type="text" class="form-control" id="ccNumber" name="ccNumber" placeholder="Credit Card Number"
-                                               ng-minlength=1 ng-maxlength=50 maxlength="50">
-                                    </div>
-                                    <div class="form-group">
-
-                                        <label class="control-label sr-only" for="ccName">Expiration Date</label>
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <select class="form-control" name="expiry-month">
-                                                    <option>Month</option>
-                                                    <option value="01">Jan (01)</option>
-                                                    <option value="02">Feb (02)</option>
-                                                    <option value="03">Mar (03)</option>
-                                                    <option value="04">Apr (04)</option>
-                                                    <option value="05">May (05)</option>
-                                                    <option value="06">June (06)</option>
-                                                    <option value="07">July (07)</option>
-                                                    <option value="08">Aug (08)</option>
-                                                    <option value="09">Sep (09)</option>
-                                                    <option value="10">Oct (10)</option>
-                                                    <option value="11">Nov (11)</option>
-                                                    <option value="12">Dec (12)</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <select class="form-control" name="expiry-year">
-                                                    <option value="13">2013</option>
-                                                    <option value="14">2014</option>
-                                                    <option value="15">2015</option>
-                                                    <option value="16">2016</option>
-                                                    <option value="17">2017</option>
-                                                    <option value="18">2018</option>
-                                                    <option value="19">2019</option>
-                                                    <option value="20">2020</option>
-                                                    <option value="21">2021</option>
-                                                    <option value="22">2022</option>
-                                                    <option value="23">2023</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <label class="control-label sr-only" for="cvv">Card CVV</label>
-                                                <input type="text" class="form-control" id="cvv" name="cvv" placeholder="Security Code"
-                                                       ng-minlength=1 ng-maxlength=50  maxlength="50">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div><button class="btn btn-primary">Update</button></div>
-
+                                <div class="form-group">
+                                    <label class="control-label sr-only" for="ccName">Name on Card</label>
+                                    <input type="text" class="form-control" id="ccName" name="ccName" placeholder="Card Holder's Name"
+                                           ng-minlength=1 ng-maxlength=50 maxlength="50">
                                 </div>
+                                <div class="form-group">
+                                    <label class="control-label sr-only" for="ccNumber">Card Number</label>
+                                    <input type="text" class="form-control" id="ccNumber" name="ccNumber" placeholder="Credit Card Number"
+                                           ng-minlength=1 ng-maxlength=50 maxlength="50">
+                                </div>
+                                <div class="form-group">
+
+                                    <label class="control-label sr-only" for="ccName">Expiration Date</label>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <select class="form-control" name="expiry-month">
+                                                <option>Month</option>
+                                                <option value="01">Jan (01)</option>
+                                                <option value="02">Feb (02)</option>
+                                                <option value="03">Mar (03)</option>
+                                                <option value="04">Apr (04)</option>
+                                                <option value="05">May (05)</option>
+                                                <option value="06">June (06)</option>
+                                                <option value="07">July (07)</option>
+                                                <option value="08">Aug (08)</option>
+                                                <option value="09">Sep (09)</option>
+                                                <option value="10">Oct (10)</option>
+                                                <option value="11">Nov (11)</option>
+                                                <option value="12">Dec (12)</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <select class="form-control" name="expiry-year">
+                                                <option value="13">2013</option>
+                                                <option value="14">2014</option>
+                                                <option value="15">2015</option>
+                                                <option value="16">2016</option>
+                                                <option value="17">2017</option>
+                                                <option value="18">2018</option>
+                                                <option value="19">2019</option>
+                                                <option value="20">2020</option>
+                                                <option value="21">2021</option>
+                                                <option value="22">2022</option>
+                                                <option value="23">2023</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label class="control-label sr-only" for="cvv">Card CVV</label>
+                                            <input type="text" class="form-control" id="cvv" name="cvv" placeholder="Security Code"
+                                                   ng-minlength=1 ng-maxlength=50  maxlength="50">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div><button class="btn btn-primary">Update</button></div>
+
                             </div>
                         </div>
-                        <div style="flex:1;">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">Authorized Users</div>
-                                <div class="panel-body" style="height:100%;">
-                                    <label class="control-label sr-only" for="uEmail">Add User</label>
-                                    <form name="addUserForm" ng-submit="vm.addAuthorizedUser()">
-                                        <div style="display: flex;flex-flow: row;">
-                                            <div style="flex: 3; padding-right: 15px;">
-                                                <input type="text" class="form-control" id="uEmail" ng-model="vm.authorizedUser" name="uEmail" placeholder="User's email address"
-                                                       ng-minlength=1 ng-maxlength=50 maxlength="50">
-                                            </div>
-                                            <div style="flex: 1;">
-                                                <button type="submit" class="btn btn-primary">add</button>
-                                            </div>
+                    </div>
+                    <div>
+                        <div class="panel panel-default drsl-user-managment">
+                            <div class="panel-heading">Authorized Users</div>
+                            <div class="panel-body">
+                                <label class="control-label sr-only" for="uEmail">Add User</label>
+                                <form class="drsl-user-add-form" name="addUserForm" ng-submit="vm.addAuthorizedUser()">
+                                    <div>
+                                        <div>
+                                            <input type="text" class="form-control" id="uEmail" ng-model="vm.authorizedUser" name="uEmail" placeholder="User's email address"
+                                                   ng-minlength=1 ng-maxlength=50 maxlength="50">
                                         </div>
-                                    </form>
-
-                                    <div ng-hide="vm.getAuthorizedUsers().length" style="display:flex;flex-flow:row;align-items:center;height:180px; background-color: #F5F5F5; border: 1px solid #DDDDDD;margin-top: 15px;">
-                                        <div style="flex: 1;text-align: center;color:#c0c0c0;">No Authorized Users</div>
+                                        <div>
+                                            <button type="submit" class="btn btn-primary">add</button>
+                                        </div>
                                     </div>
-                                    <div ng-show="vm.getAuthorizedUsers().length"  style="display:flex;flex-flow:row;height:180px; background-color: #F5F5F5; border: 1px solid #DDDDDD;margin-top: 15px;">
-                                        <div style="flex: 1;color:#c0c0c0;padding: 5px;overflow: auto;">
-                                            <button class="btn btn-success" ng-click="vm.removeAuthorizedUsers(user)" ng-repeat="user in vm.getAuthorizedUsers()" uib-tooltip="remove user" style="margin: 5px;">{{user}} <i style="" class="fa fa-times-circle fa-lg"></i></button>
-                                        </div>
+                                </form>
+
+                                <div class="drsl-user-list empty" ng-hide="vm.getAuthorizedUsers().length">
+                                    <div>No Authorized Users</div>
+                                </div>
+
+                                <div class="drsl-user-list" ng-show="vm.getAuthorizedUsers().length">
+                                    <div>
+                                        <button class="btn btn-success" ng-click="vm.removeAuthorizedUsers(user)" ng-repeat="user in vm.getAuthorizedUsers()" uib-tooltip="remove user">{{user}} <i class="fa fa-times-circle fa-lg"></i></button>
                                     </div>
                                 </div>
                             </div>

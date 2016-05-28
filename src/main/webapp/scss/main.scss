@@ -54,7 +54,6 @@ body {
     padding: 0;
 }
 
-
 .drsl-sub-header {
     display: flex;
     flex-flow: row;
@@ -127,6 +126,76 @@ body {
                 border-radius: 25%;
             }
         }
+    }
+}
+
+// Linear Radio Buttons
+.drsl-linear-radio {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 30px;
+
+    .drsl-radio-desc {
+        flex: 1;
+        margin-right: $default-half-padding;
+        text-align: left;
+    }
+
+    .drsl-radio-wrapper {
+        position: relative;
+        top: -5px;
+        flex: 3;
+
+        hr {
+            position: absolute;
+            top: 70%;
+            left: 0;
+            width: 100%;
+            margin: 0;
+            z-index: 0;
+        }
+    }
+
+    .drsl-radio-set {
+        position: relative;
+        display: flex;
+        flex-flow: row;
+        z-index: 1;
+    }
+
+    .drsl-radio-item {
+        flex: 1;
+        font-size: $small-font-size;
+
+        label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: $default-weight;
+        }
+
+        input {
+            cursor: pointer;
+        }
+    }
+
+    input[type="radio"] {
+        display: none;
+    }
+    input[type="radio"] + label span {
+        display: inline-block;
+        width: 17px;
+        height: 17px;
+        cursor: pointer;
+        background-color: $content-background-color;
+        border: 3px solid $custom-radio-border-color;
+        border-radius: 50%;
+        margin-top: 5px;
+    }
+    input[type="radio"]:checked + label span {
+        background-color: $brand-color;
+        border: 3px solid $brand-color;
     }
 }
 
@@ -377,76 +446,6 @@ Concierge
     }
 }
 
-// Incident Radio Buttons
-.drsl-incident-radio {
-    display: flex;
-    flex-flow: row;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 30px;
-
-    .drsl-radio-desc {
-        flex: 1;
-        margin-right: $default-half-padding;
-        text-align: left;
-    }
-
-    .drsl-radio-wrapper {
-        position: relative;
-        top: -5px;
-        flex: 3;
-
-        hr {
-            position: absolute;
-            top: 70%;
-            left: 0;
-            width: 100%;
-            margin: 0;
-            z-index: 0;
-        }
-    }
-
-    .drsl-radio-set {
-        position: relative;
-        display: flex;
-        flex-flow: row;
-        z-index: 1;
-    }
-
-    .drsl-radio-item {
-        flex: 1;
-        font-size: $small-font-size;
-
-        label {
-            margin: 0;
-            cursor: pointer;
-            font-weight: $default-weight;
-        }
-
-        input {
-            cursor: pointer;
-        }
-    }
-
-    input[type="radio"] {
-        display: none;
-    }
-    input[type="radio"] + label span {
-        display: inline-block;
-        width: 17px;
-        height: 17px;
-        cursor: pointer;
-        background-color: $content-background-color;
-        border: 3px solid $custom-radio-border-color;
-        border-radius: 50%;
-        margin-top: 5px;
-    }
-    input[type="radio"]:checked + label span {
-        background-color: $brand-color;
-        border: 3px solid $brand-color;
-    }
-}
-
 /* ==========================================================================
 Case History
 ========================================================================== */
@@ -514,8 +513,30 @@ Case History
         background-color: $brand-color;
         height: $default-half-padding;
     }
+    .drsl-case-status-wrapper {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+
+        > div {
+            flex: 2;
+
+            &:last-child {
+                flex: 1;
+                text-align: right;
+            }
+        }
+
+        select {
+            display: inline-block;
+            width: auto;
+        }
+    }
 }
 
+/* ==========================================================================
+Case Rating
+========================================================================== */
 .drsl-rating {
     .drsl-dialog-header {
         h2 {
@@ -526,7 +547,7 @@ Case History
             }
         }
     }
-    .drsl-incident-radio {
+    .drsl-linear-radio {
         margin-bottom: 20px;
         .drsl-radio-desc {
             display: none;
@@ -539,7 +560,7 @@ Case History
         font-size: $medium-font-size;
         margin-bottom: 20px;
         font-weight: 200;
-        background-image: linear-gradient(to bottom,#f5f5f5 0,#e8e8e8 100%);
+        background-image: linear-gradient(to bottom, #f5f5f5 0, #e8e8e8 100%);
         padding: 10px 15px;
         color: #666666;
         margin-top: 0;
@@ -558,5 +579,81 @@ Case History
             box-shadow: none;
         }
     }
+
+    .btn.btn-default {
+        margin-right: 10px;
+    }
 }
 
+/* ==========================================================================
+Account Settings
+========================================================================== */
+.drsl-account-settings {
+    .drsl-settings-wrapper {
+        box-shadow: $content-box-shadow;
+        margin-bottom: $default-padding;
+        background-color: #FFFFFF;
+    }
+
+    .drsl-panels {
+        padding: 20px;
+    }
+
+    .drsl-payment-content {
+        padding: 20px;
+        display: flex;
+        flex-flow: row;
+        > div {
+            flex: 1;
+
+            &:first-child {
+                margin-right: $default-padding;
+            }
+        }
+    }
+
+    .drsl-user-managment {
+        .drsl-user-add-form {
+            > div {
+                display: flex;
+                flex-flow: row;
+
+                > div {
+                    flex: 1;
+
+                    &:first-child {
+                        flex: 3;
+                        padding-right: 15px;
+                    }
+                }
+            }
+        }
+
+        .drsl-user-list {
+            display: flex;
+            flex-flow: row;
+            height: 180px;
+            background-color: #F5F5F5;
+            border: 1px solid #DDDDDD;
+            margin-top: 15px;
+
+            &.empty {
+                align-items: center;
+                > div {
+                    text-align: center;
+                }
+            }
+
+            > div {
+                flex: 1;
+                color: #c0c0c0;
+                padding: 5px;
+                overflow: auto;
+            }
+
+            button {
+                margin: 5px;
+            }
+        }
+    }
+}

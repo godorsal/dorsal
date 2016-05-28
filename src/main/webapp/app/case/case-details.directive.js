@@ -28,10 +28,10 @@
                                     '</div> ' +
                                     '<div class="panel panel-default drsl-sub-panel"> ' +
                                         '<div class="panel-body"> ' +
-                                            '<div style="display: flex; flex-flow: row; align-items: center"> ' +
-                                                '<div style="flex: 2" ng-show="history || rated"><span translate="case.details.status.main">Status:</span> {{status[case.status] | translate}}</div> ' +
-                                                '<div style="flex: 2" ng-hide="history || rated"><span translate="case.details.status.main">Status:</span><select class="form-control" style="display: inline-block; width: auto;" ng-model="case.status" ng-options="item.value as item.label for item in statusOptions"></select></div> ' +
-                                                '<div style="flex: 1;text-align: right" ng-show="!history && !rated && case.status == \'resolved\'"><button class="btn btn-success" ng-click="rate()">rate</button></div> ' +
+                                            '<div class="drsl-case-status-wrapper"> ' +
+                                                '<div ng-show="history || rated"><span translate="case.details.status.main">Status:</span> {{status[case.status] | translate}}</div> ' +
+                                                '<div ng-hide="history || rated"><span translate="case.details.status.main">Status:</span><select class="form-control" ng-model="case.status" ng-options="item.value as item.label for item in statusOptions"></select></div> ' +
+                                                '<div ng-show="!history && !rated && case.status == \'resolved\'"><button class="btn btn-success" ng-click="rate()">rate</button></div> ' +
                                             '</div> ' +
                                         '</div> ' +
                                     '</div> ' +
@@ -45,13 +45,6 @@
                                     '<div class="panel panel-default drsl-sub-panel"> ' +
                                         '<div class="panel-body"> ' +
                                             '<span translate="case.details.lastUpdate">Last Update:</span> {{case.lastUpdated | date}} ' +
-                                        '</div> ' +
-                                    '</div> ' +
-                                '</div> ' +
-                                '<div class="col-md-12"> ' +
-                                    '<div class="panel panel-default drsl-sub-panel"> ' +
-                                        '<div class="panel-body"> ' +
-                                            '<span translate="case.details.chatRoom">Chat room:</span> <a ng-href="{{case.chatRoom.link}}" target="_blank">{{case.chatRoom.id}}</a> ' +
                                         '</div> ' +
                                     '</div> ' +
                                 '</div> ' +
@@ -83,7 +76,7 @@
                     value: 'resolved'
                 },
                 {
-                    label: 'completed',
+                    label: 'Completed',
                     value: 'completed'
                 }
             ];

@@ -9,7 +9,8 @@
         var directive = {
             restrict: 'E',
             scope:  {
-                expert: '='
+                expert: '=',
+                chatRoom: '='
             },
             template: '<div class="panel panel-default drsl-panel" > ' +
                             '<div class="panel-heading"> ' +
@@ -31,6 +32,7 @@
                                                         '<div ng-show="expert.contact.email"><i class="fa fa-envelope" title="{{\'case.professional.contact.email\' | translate}}"></i> {{expert.contact.email}}</div> ' +
                                                         '<div ng-show="expert.contact.phone"><i class="fa fa-phone" title="{{\'case.professional.contact.phone\' | translate}}"></i> {{expert.contact.phone}}</div>' +
                                                         '<div ng-show="expert.contact.skype"><i class="fa fa-skype" title="{{\'case.professional.contact.skype\' | translate}}"></i> {{expert.contact.skype}}</div>' +
+                                                        '<div ng-show="chatRoom"><i class="fa fa-comments-o" title="{{\'case.professional.contact.chat\' | translate}}"></i> <a ng-href="{{chatRoom.link}}" target="_blank">{{chatRoom.id}}</a></div>' +
                                                     '</div> ' +
                                                 '</div> ' +
                                             '</div> ' +

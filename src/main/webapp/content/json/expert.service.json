@@ -3,7 +3,7 @@
         "id": "expertForeignKey",
         "firstName": "John",
         "lastName": "Smith",
-        "picture": "content/images/John-Smith.jpg",
+        "picture": "content/images/dynamic/John-Smith.jpg",
         "contact": {
             "email": "jsmith@support.com",
             "phone": "(707) 555-1212",

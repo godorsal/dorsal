@@ -2,9 +2,9 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="vm.cancel()">&times;</button>
-        <h4 class="modal-title" >Rating for:</h4>
+        <h4 class="modal-title">Rating for:</h4>
     </div>
-    <div class="modal-body" >
+    <div class="modal-body">
         <div class="row">
             <div class="col-md-12">
                 <div class="drsl-dialog-header">
@@ -13,150 +13,14 @@
             </div>
             <div class="col-md-12">
                 <form ng-submit="vm.submit()">
-                    <div>
-                        <h3>How satisfied where you with the transaction?</h3>
-                        <div class="drsl-incident-radio">
-                            <div class="drsl-radio-desc"></div>
-                            <div class="drsl-radio-wrapper">
-                                <div class="drsl-radio-set">
-                                    <div class="drsl-radio-item">
-                                        <div>
-                                            <input name="satisfied" id="incidentRadio_236" type="radio" value="Immediate" aria-invalid="false">
-                                            <label for="incidentRadio_236">poor/incomplete<br><span></span></label>
-                                        </div>
-                                    </div>
-                                    <div class="drsl-radio-item">
-                                        <div>
-                                            <input name="satisfied" id="incidentRadio_237" type="radio" value="4 hrs"  aria-invalid="false">
-                                            <label for="incidentRadio_237">average<br><span></span></label>
-                                        </div>
-                                    </div>
-                                    <div class="drsl-radio-item">
-                                        <div>
-                                            <input name="satisfied" id="incidentRadio_238" type="radio" value="1 day" aria-invalid="false">
-                                            <label for="incidentRadio_238">good<br><span></span></label>
-                                        </div>
-                                    </div>
-                                    <div class="drsl-radio-item">
-                                        <div>
-                                            <input name="satisfied" id="incidentRadio_239" type="radio" value="this week" aria-invalid="false" checked>
-                                            <label for="incidentRadio_239">excellent<br><span></span></label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr>
-                            </div>
-                        </div>
+                    <div ng-repeat="radio in vm.radios">
+                        <h3 translate="{{radio.label}}"></h3>
+                        <linear-radio target-data="radio.selectedValue" radio-data="radio"></linear-radio>
                     </div>
-
                     <div>
-                        <h3>Prompt initial response</h3>
-                        <div class="drsl-incident-radio">
-                            <div class="drsl-radio-desc"></div>
-                            <div class="drsl-radio-wrapper">
-                                <div class="drsl-radio-set">
-                                    <div class="drsl-radio-item">
-                                        <div>
-                                            <input name="prompt" id="incidentRadio1_236" type="radio" value="Immediate" aria-invalid="false">
-                                            <label for="incidentRadio1_236" >poor/incomplete<br><span></span></label>
-                                        </div>
-                                    </div>
-                                    <div class="drsl-radio-item">
-                                        <div>
-                                            <input name="prompt" id="incidentRadio2_237" type="radio" value="4 hrs"  aria-invalid="false">
-                                            <label for="incidentRadio2_237">average<br><span></span></label>
-                                        </div>
-                                    </div>
-                                    <div class="drsl-radio-item">
-                                        <div>
-                                            <input name="prompt" id="incidentRadio3_238" type="radio" value="1 day" aria-invalid="false">
-                                            <label for="incidentRadio3_238">good<br><span></span></label>
-                                        </div>
-                                    </div>
-                                    <div class="drsl-radio-item">
-                                        <div>
-                                            <input name="prompt" id="incidentRadio4_239" type="radio" value="this week" aria-invalid="false" checked>
-                                            <label for="incidentRadio4_239">excellent<br><span></span></label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr>
-                            </div>
-                        </div>
+                        <button class="btn btn-default" ng-click="vm.cancel()">Cancel</button>
+                        <button type="submit" class="btn btn-success">Submit</button>
                     </div>
-
-                    <div>
-                        <h3>Courtesy &amp; Trust</h3>
-                        <div class="drsl-incident-radio">
-                            <div class="drsl-radio-desc"></div>
-                            <div class="drsl-radio-wrapper">
-                                <div class="drsl-radio-set">
-                                    <div class="drsl-radio-item">
-                                        <div>
-                                            <input name="courtesy" id="incidentRadio5_236" type="radio" value="Immediate" aria-invalid="false">
-                                            <label for="incidentRadio5_236" >poor<br><span></span></label>
-                                        </div>
-                                    </div>
-                                    <div class="drsl-radio-item">
-                                        <div>
-                                            <input name="courtesy" id="incidentRadio6_237" type="radio" value="4 hrs"  aria-invalid="false">
-                                            <label for="incidentRadio6_237">average<br><span></span></label>
-                                        </div>
-                                    </div>
-                                    <div class="drsl-radio-item">
-                                        <div>
-                                            <input name="courtesy" id="incidentRadio7_238" type="radio" value="1 day" aria-invalid="false">
-                                            <label for="incidentRadio7_238">good<br><span></span></label>
-                                        </div>
-                                    </div>
-                                    <div class="drsl-radio-item">
-                                        <div>
-                                            <input name="courtesy" id="incidentRadio8_239" type="radio" value="this week" aria-invalid="false" checked>
-                                            <label for="incidentRadio8_239">excellent<br><span></span></label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <h3>Technical Skill</h3>
-                        <div class="drsl-incident-radio">
-                            <div class="drsl-radio-desc"></div>
-                            <div class="drsl-radio-wrapper">
-                                <div class="drsl-radio-set">
-                                    <div class="drsl-radio-item">
-                                        <div>
-                                            <input name="skill" id="incidentRadio9_236" type="radio" value="Immediate" aria-invalid="false">
-                                            <label for="incidentRadio9_236" >poor/incomplete<br><span></span></label>
-                                        </div>
-                                    </div>
-                                    <div class="drsl-radio-item">
-                                        <div>
-                                            <input name="skill" id="incidentRadio10_237" type="radio" value="4 hrs"  aria-invalid="false">
-                                            <label for="incidentRadio10_237">average<br><span></span></label>
-                                        </div>
-                                    </div>
-                                    <div class="drsl-radio-item">
-                                        <div>
-                                            <input name="skill" id="incidentRadio11_238" type="radio" value="1 day" aria-invalid="false">
-                                            <label for="incidentRadio11_238">good<br><span></span></label>
-                                        </div>
-                                    </div>
-                                    <div class="drsl-radio-item">
-                                        <div>
-                                            <input name="skill" id="incidentRadio12_239" type="radio" value="this week" aria-invalid="false" checked>
-                                            <label for="incidentRadio12_239">excellent<br><span></span></label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr>
-                            </div>
-                        </div>
-                    </div>
-                    <div><button class="btn btn-default" ng-click="vm.cancel()" style="margin-right: 10px;">Cancel</button><button type="submit" class="btn btn-success">Submit</button></div>
                 </form>
             </div>
         </div>

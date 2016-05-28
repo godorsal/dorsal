@@ -13,7 +13,7 @@
                 "completed": "Completed"
             },
             "chatRoom": "Chat room:",
-            "id":"Case ID:",
+            "id": "Case ID:",
             "lastUpdate": "Last Update:"
         },
         "professional": {
@@ -23,7 +23,8 @@
                 "main": "Contact:",
                 "email": "email",
                 "phone": "phone",
-                "skype": "skype"
+                "skype": "skype",
+                "chat": "chat"
             },
             "score": "Expert Score:",
             "badges": {
@@ -36,6 +37,21 @@
             "header": "Previous Cases",
             "details": {
                 "header": "Case History"
+            }
+        },
+        "rating": {
+            "label": {
+                "satisfaction": "How satisfied were you with the transaction?",
+                "prompt": "Prompt initial response",
+                "courtesy": "Courtesy &amp; Trust",
+                "skill": "Technical Skill"
+            },
+            "value": {
+                "poor": "poor",
+                "poorIncomplete": "poor/incomplete",
+                "average": "average",
+                "good": "good",
+                "excellent": "excellent"
             }
         }
     }

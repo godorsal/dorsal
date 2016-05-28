@@ -20,6 +20,7 @@ var gulp = require('gulp'),
     plumber = require('gulp-plumber'),
     changed = require('gulp-changed'),
     gulpIf = require('gulp-if'),
+    filter = require('gulp-filter'),
     inject = require('gulp-inject'),
     angularFilesort = require('gulp-angular-filesort'),
     naturalSort = require('gulp-natural-sort'),
@@ -65,11 +66,15 @@ gulp.task('copy', function () {
 });
 
 gulp.task('images', function () {
+    var f = filter(['**', '!' + config.app + 'content/images/dynamic/**'], {restore: true});
+
     return gulp.src(config.app + 'content/images/**')
         .pipe(plumber({errorHandler: handleErrors}))
         .pipe(changed(config.dist + 'content/images'))
         .pipe(imagemin({optimizationLevel: 5, progressive: true, interlaced: true}))
+        .pipe(f)
         .pipe(rev())
+        .pipe(f.restore)
         .pipe(gulp.dest(config.dist + 'content/images'))
         .pipe(rev.manifest(config.revManifest, {
             base: config.dist,
