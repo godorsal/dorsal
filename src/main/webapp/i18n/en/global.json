@@ -15,7 +15,7 @@
                 "settings": "Settings",
                 "password": "Password",
                 "sessions": "Sessions",
-                "login": "Sign in",
+                "login": "Register/Sign in",
                 "logout": "Sign out",
                 "register": "Register"
             },
@@ -36,7 +36,7 @@
         },
         "form": {
             "username": "Username",
-            "username.placeholder": "User:",
+            "username.placeholder": "User",
             "newpassword": "New password",
             "newpassword.placeholder": "New password",
             "confirmpassword": "New password confirmation",

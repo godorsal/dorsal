@@ -80,7 +80,14 @@
          */
         function getExpert(expert){
             CaseService.getExpert(function(data){
-                vm.experts[expert] = data[0];
+                var foundExpert = data.filter(function(o){
+                    console.log(o.id + '==' + expert);
+                    return o.id == expert;
+                })[0];
+
+                if (foundExpert) {
+                    vm.experts[expert] = foundExpert;
+                }
             });
         }
 

@@ -14,7 +14,7 @@
     {
         "id": "MySQL - 101006",
         "user": "userForeignKey",
-        "expert": "expertForeignKey",
+        "expert": "expertForeignKey2",
         "status": "completed",
         "startDate": 1462950000000,
         "lastUpdated": 1463036400000,
@@ -26,7 +26,7 @@
     {
         "id": "MySQL - 101004",
         "user": "userForeignKey",
-        "expert": "expertForeignKey",
+        "expert": "expertForeignKey3",
         "status": "completed",
         "startDate": 1462345200000,
         "lastUpdated": 1462431600000,

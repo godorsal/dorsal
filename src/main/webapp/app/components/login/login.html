@@ -2,14 +2,14 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="vm.cancel()">&times;</button>
-        <h4 class="modal-title" translate="login.title">Authentication</h4>
+        <h4 class="modal-title">Sign In or Register</h4>
     </div>
     <div class="modal-body">
         <div class="row">
             <div class="col-md-12">
                 <div class="drsl-login-header">
-                    <div><h1 translate="login.title">Authentication</h1></div>
-                    <div>or <a href="#" ng-click="vm.togglePath($event)">{{vm.altPathText}}</a></div>
+                    <div ng-show="vm.isLogin"><h1>Sign In or <a href="#" ng-click="vm.togglePath($event)">Register</a></h1></div>
+                    <div ng-hide="vm.isLogin"><h1>Register or <a href="#" ng-click="vm.togglePath($event)">Sign In</a></h1></div>
                 </div>
             </div>
             <div class="col-md-12" ng-show="vm.isLogin">
@@ -35,7 +35,7 @@
                             </div>
                             <!-- Submit Button -->
                             <div class="drsl-login-submit">
-                                <button type="submit" class="btn btn-primary">Sign in</button>
+                                <button type="submit" class="btn btn-primary">Sign In</button>
                             </div>
                         </div>
                     </div>
@@ -155,7 +155,7 @@
                                 </div>
                             </div>
                             <div class="drsl-login-submit">
-                                <button type="submit" class="btn btn-primary">Create an account</button>
+                                <button type="submit" class="btn btn-primary">Register</button>
                             </div>
                         </div>
                     </div>

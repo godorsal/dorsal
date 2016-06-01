@@ -1,9 +1,9 @@
 {
     "login": {
-        "title": "Authentication",
+        "title": "Sign In",
         "form": {
             "password": "Password",
-            "password.placeholder": "Password:",
+            "password.placeholder": "Password",
             "rememberme": "Remember me",
             "button": "Sign in"
         },

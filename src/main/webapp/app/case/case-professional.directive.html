@@ -25,14 +25,14 @@
 
     <!-- Score -->
     <div>
-        <span translate="case.professional.score">Expert Score:</span> {{expert.score}} out of 100
+        <span translate="case.professional.score">Score:</span> {{expert.score}} out of 100
     </div>
 
     <!-- Badges -->
     <div>
         <span>Badges:</span>
         <div style="padding-top: 10px;">
-            <span class="drsl-badge-sprites badge-{{badge}}" uib-tooltip="badge description here" ng-repeat="badge in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]"></span>
+            <span class="drsl-badge-sprites {{badge}}" uib-tooltip="badge description here" ng-repeat="badge in expert.badges"></span>
         </div>
     </div>
 

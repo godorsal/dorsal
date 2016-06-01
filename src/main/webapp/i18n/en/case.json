@@ -13,7 +13,7 @@
                 "completed": "Completed"
             },
             "chatRoom": "Chat room:",
-            "id": "Case ID:",
+            "id": "ID:",
             "lastUpdate": "Last Update:"
         },
         "professional": {
@@ -26,7 +26,7 @@
                 "skype": "skype",
                 "chat": "chat"
             },
-            "score": "Expert Score:",
+            "score": "Score:",
             "badges": {
                 "badge1": "Lightning fast responses!",
                 "badge2": "Burns through issues!",

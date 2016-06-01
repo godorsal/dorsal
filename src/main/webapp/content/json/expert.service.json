@@ -12,9 +12,64 @@
         "score": 69,
         "stars": 4,
         "badges": [
-            "fast",
-            "efficient",
-            "expert"
+            "badge-1",
+            "badge-2",
+            "badge-3",
+            "badge-4",
+            "badge-5",
+            "badge-6",
+            "badge-7",
+            "badge-8",
+            "badge-9",
+            "badge-10",
+            "badge-11",
+            "badge-12",
+            "badge-13"
+        ]
+    },
+    {
+        "id": "expertForeignKey2",
+        "firstName": "John",
+        "lastName": "Doe",
+        "picture": "content/images/dynamic/John-Doe.jpg",
+        "contact": {
+            "email": "jdoe@support.com",
+            "phone": "(707) 555-1313",
+            "skype": "myskypeid"
+        },
+        "score": 72,
+        "stars": 4,
+        "badges": [
+            "badge-3",
+            "badge-6",
+            "badge-7",
+            "badge-8",
+            "badge-9",
+            "badge-12"
+        ]
+    },
+    {
+        "id": "expertForeignKey3",
+        "firstName": "John Q.",
+        "lastName": "Public",
+        "picture": "content/images/dynamic/John-Public.jpg",
+        "contact": {
+            "email": "jqp@support.com",
+            "phone": "(707) 555-1234",
+            "skype": "johnqp"
+        },
+        "score": 80,
+        "stars": 4,
+        "badges": [
+            "badge-2",
+            "badge-3",
+            "badge-4",
+            "badge-6",
+            "badge-7",
+            "badge-8",
+            "badge-9",
+            "badge-11",
+            "badge-13"
         ]
     }
 ]

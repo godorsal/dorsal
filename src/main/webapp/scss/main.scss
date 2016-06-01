@@ -370,19 +370,6 @@ Login
             margin-bottom: $default-padding;
         }
 
-        .drsl-login-header {
-            display: flex;
-            flex-flow: row;
-            align-items: center;
-            div:first-child {
-                flex: 2;
-            }
-            div:last-child {
-                flex: 1;
-                text-align: right;
-            }
-        }
-
         .drsl-login-submit {
             text-align: right;
         }
@@ -830,5 +817,25 @@ Account Settings
     to {
         width: 100%;
     }
+}
+
+.nav.navbar-nav.navbar-right {
+    .dropdown-menu {
+        right: initial;
+        background-color:rgba(0,0,0,.4);
+
+        > li {
+            > a {
+                color: #FFFFFF;
+                &:hover {
+                    color: #000000;
+                }
+            }
+        }
+    }
+}
+
+a, a:hover {
+    color: $brand-color;
 }
 
