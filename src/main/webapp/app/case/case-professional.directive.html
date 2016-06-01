@@ -1,0 +1,40 @@
+<div class="drsl-case-expert" style="position: relative;">
+    <!-- Name -->
+    <div>
+        <span translate="case.professional.expert">Expert:</span>
+        {{expert.firstName}} {{expert.lastName}}
+    </div>
+
+    <!-- Contact -->
+    <div class="drsl-contact-wrapper">
+        <div translate="case.professional.contact.main">Contact:</div>
+        <div>
+            <div ng-show="expert.contact.email"><i class="fa fa-envelope" tooltip-placement="top" uib-tooltip="{{'case.professional.contact.email' | translate}}" ></i> {{expert.contact.email}}</div>
+            <div ng-show="expert.contact.phone"><i class="fa fa-phone" tooltip-placement="left" uib-tooltip="{{'case.professional.contact.phone' | translate}}"></i> {{expert.contact.phone}}</div>
+            <div ng-show="expert.contact.skype"><i class="fa fa-skype" tooltip-placement="left" uib-tooltip="{{'case.professional.contact.skype' | translate}}"></i> {{expert.contact.skype}}</div>
+            <div ng-show="chatRoom"><i class="fa fa-comments-o" tooltip-placement="left" uib-tooltip="{{'case.professional.contact.chat' | translate}}"></i> <a ng-href="{{chatRoom.link}}" target="_blank">{{chatRoom.id}}</a></div>
+        </div>
+    </div>
+
+    <!-- Profile Photo -->
+    <div style="position: absolute; top: 10px; right: 0;background-color: white; border: 0;">
+        <a href="#" ng-click="$event.preventDefault()">
+            <img style="box-shadow:0px 5px 40px rgba(0, 0, 0, 0.5);border: 5px solid white; border-radius: 50%;max-width: 175px;" ng-src="{{expert.picture}}" />
+        </a>
+    </div>
+
+    <!-- Score -->
+    <div>
+        <span translate="case.professional.score">Expert Score:</span> {{expert.score}} out of 100
+    </div>
+
+    <!-- Badges -->
+    <div>
+        <span>Badges:</span>
+        <div style="padding-top: 10px;">
+            <span class="drsl-badge-sprites badge-{{badge}}" uib-tooltip="badge description here" ng-repeat="badge in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]"></span>
+        </div>
+    </div>
+
+</div>
+

@@ -1,12 +1,12 @@
 {
     "case": {
-        "header": "Your Service Case History",
+        "header": "Case Details",
         "details": {
             "header": "Current Case",
             "user": "User:",
             "status": {
                 "main": "Status:",
-                "unassigned": "Unassigned",
+                "created": "Created",
                 "assigned": "Assigned",
                 "working": "Working",
                 "resolved": "Resolved",
@@ -34,7 +34,7 @@
             }
         },
         "history": {
-            "header": "Previous Cases",
+            "header": "Your Case History",
             "details": {
                 "header": "Case History"
             }

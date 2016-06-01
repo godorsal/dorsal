@@ -1,30 +1,26 @@
 <div ng-cloak>
     <div class="row">
         <div class="col-md-12">
-            <div class="drsl-case-wrapper" ng-repeat="case in vm.getCurrentCase()">
-                <div class="drsl-sub-header" translate="case.header">Your Service Case History</div>
-                <div class="drsl-panels">
-                    <case-details case="case" status="vm.status"></case-details>
-                    <case-professional expert="vm.experts[case.expert]" chat-room="case.chatRoom" ng-show="vm.experts[case.expert]"></case-professional>
-                </div>
+            <div class="drsl-case-wrapper">
+                <div class="drsl-sub-header" translate="case.header">Case Details</div>
+                    <div style="display: flex; flex-flow: row;">
+                        <div style="flex: 1;margin-right: 20px;background-color: white;">
+                            <case-details case="vm.currentCase" status="vm.status"></case-details>
+                        </div>
+                        <div style="flex: 1;background-color: white;"><case-professional expert="vm.experts[vm.currentCase.expert]" chat-room="vm.currentCase.chatRoom" ng-show="vm.experts[vm.currentCase.expert]"></case-professional></div>
+                    </div>
                 <div class="drsl-case-separator"></div>
             </div>
 
             <div class="drsl-case-wrapper">
-                <div class="drsl-sub-header drsl-sub-sub-header" translate="case.history.header">Previous Cases</div>
-                <div class="drsl-case-history-wrapper">
-                    <uib-accordion close-others="true">
-                        <uib-accordion-group ng-repeat="case in vm.getHistory() | orderBy:'-case.lastUpdated'">
-                            <uib-accordion-heading>
-                                {{case.lastUpdated | date}}
-                                <div class="pull-right drsl-right-sub-header">{{'case.details.id' | translate}} {{case.id}}</div>
-                            </uib-accordion-heading>
-                            <div class="drsl-panels">
-                                <case-details case="case" status="vm.status" history="true"></case-details>
-                                <case-professional expert="vm.experts[case.expert]" ng-show="vm.experts[case.expert]"></case-professional>
-                            </div>
-                        </uib-accordion-group>
-                    </uib-accordion>
+                <div class="drsl-sub-header drsl-sub-sub-header" translate="case.history.header" style="text-transform: uppercase">Your Case History</div>
+                <div class="drsl-case-history-wrapper" style="padding-bottom: 20px;">
+                    <div class="panel panel-default" style="cursor: pointer;margin-bottom: 5px;" ng-repeat="case in vm.cases | orderBy:'-case.lastUpdated'">
+                        <div class="panel-heading" ng-class="{active: vm.currentCase == case}" ng-click="vm.setCurrentCase(case);" style=""><h4 class="panel-title">
+                            <span>{{case.lastUpdate | date}}</span>
+                            <div class="pull-right drsl-right-sub-header">ID: {{case.id}}</div>
+                        </h4></div>
+                    </div>
                 </div>
             </div>
         </div>

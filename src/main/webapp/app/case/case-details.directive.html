@@ -1,0 +1,47 @@
+<div class="drsl-case-details">
+    <!-- User Name -->
+    <div><span translate="case.details.user">User:</span> {{case.user}}</div>
+
+    <!-- Case ID -->
+    <div><span translate="case.details.id">Case ID:</span> {{case.id}}</div>
+
+    <!-- Status -->
+    <div class="drsl-case-status-wrapper">
+        <div>
+            <span translate="case.details.status.main" ng-click="cycleStatus()">Current Status:</span>
+            <span ng-show="case.status == 'created'">This case has been created and is currently being assigned to an expert.</span>
+            <span ng-show="case.status == 'assigned'">An expert is currently investigating the issue.</span>
+            <span ng-show="case.status == 'working'">&quot;Log file shows configuration errors. Testing new config...&quot;.</span>
+            <span ng-show="case.status == 'resolved'">The expert has marked this issue as resolved.</span>
+            <span ng-show="case.status == 'completed'">This issue is completed.</span>
+        </div>
+    </div>
+
+    <!-- Start Date/Time -->
+    <div><span>Start:</span> {{case.startDate | date:"MM/dd/yy h:mm a PST"}}</div>
+
+    <!-- ETA to Resolution -->
+    <div><span>ETA to Resolution:</span> 4 hours</div>
+
+    <!-- Timeline -->
+    <div class="drsl-timeline">
+        <div>Timeline:</div>
+        <div class="drsl-timeline-text" style="display: flex; flex-flow: row; align-items: center; text-align: center;margin-top: 20px;margin-bottom: 5px;">
+            <div ng-class="{passed: passedStep($index)}" style="flex: 1;" ng-repeat="status in statusOptions">
+                {{status.label}}
+            </div>
+
+        </div>
+        <!--25, 50, 75, 100-->
+        <div style="padding: 0 10% 0 10%;">
+            <div style="background-color: #DBD9DA;width:100%;height:10px;">
+                <div class="drsl-progress"
+                     ng-class="{created: case.status == 'created',
+                                assigned: case.status == 'assigned',
+                                working: case.status == 'working',
+                                resolved: case.status == 'resolved',
+                                complete: case.status == 'completed'}"></div>
+            </div>
+        </div>
+    </div>
+</div>

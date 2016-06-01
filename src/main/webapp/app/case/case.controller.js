@@ -12,9 +12,11 @@
         vm.init = init;
         vm.getHistory = getHistory;
         vm.getCurrentCase = getCurrentCase;
+        vm.setCurrentCase = setCurrentCase;
         vm.cases = [];
+        vm.currentCase = {};
         vm.status = {
-            unassigned: 'case.details.status.unassigned',
+            created: 'case.details.status.created',
             assigned: 'case.details.status.assigned',
             working: 'case.details.status.working',
             resolved: 'case.details.status.resolved',
@@ -68,6 +70,7 @@
 
                 // update the controller's cases
                 vm.cases = cleanCases;
+                vm.setCurrentCase(cleanCases[0]);
             });
         }
 
@@ -107,6 +110,10 @@
             }
 
             return history;
+        }
+
+        function setCurrentCase(targetCase) {
+            vm.currentCase = targetCase;
         }
     }
 })();

@@ -203,6 +203,69 @@ body {
     width: 600px;
 }
 
+.drsl-badge-sprites {
+    background: url("../images/global/badge-sprites.gif") no-repeat;
+    width: 65px;
+    height: 65px;
+    display: inline-block;
+    $pos-width: 65px;
+    $pos-x: 0px;
+    $pos-y: 0px;
+
+    &.badge-1 {
+        background-position: 0 0;
+    }
+    &.badge-2 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x 0;
+    }
+    &.badge-3 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x 0;
+    }
+    &.badge-4 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x 0;
+    }
+    &.badge-5 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x 0;
+    }
+    &.badge-6 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x 0;
+    }
+    &.badge-7 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x 0;
+    }
+    &.badge-8 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x 0;
+    }
+    &.badge-9 {
+        $pos-x: 0px;
+        $pos-y: -65px;
+        background-position: $pos-x $pos-y;
+    }
+    &.badge-10 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x $pos-y;
+    }
+    &.badge-11 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x $pos-y;
+    }
+    &.badge-12 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x $pos-y;
+    }
+    &.badge-13 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x $pos-y;
+    }
+}
+
 /* ==========================================================================
 Landing Page
 ========================================================================== */
@@ -472,20 +535,7 @@ Case History
                 }
             }
 
-            .drsl-contact-wrapper {
-                display: flex;
-                flex-flow: row;
-                align-items: flex-start;
 
-                > div {
-                    flex: inherit;
-                    padding-right: $default-half-padding;
-                    i {
-                        font-size: $medium-font-size;
-                        margin-right: 5px;
-                    }
-                }
-            }
         }
     }
 
@@ -508,6 +558,13 @@ Case History
         .drsl-right-sub-header {
             font-weight: $thin-weight;
         }
+
+        .panel-default > .panel-heading {
+            &.active {
+                background-color: $brand-color;
+                color: white;
+            }
+        }
     }
     .drsl-case-separator {
         background-color: $brand-color;
@@ -520,11 +577,6 @@ Case History
 
         > div {
             flex: 2;
-
-            &:last-child {
-                flex: 1;
-                text-align: right;
-            }
         }
 
         select {
@@ -532,6 +584,84 @@ Case History
             width: auto;
         }
     }
+
+
+
+    .drsl-case-details, .drsl-case-expert {
+        > div {
+            padding: 20px;
+            border-bottom: 2px solid #E2E2E2;
+
+            &:last-child {
+                border: 0;
+            }
+        }
+    }
+
+    .drsl-case-details {
+        .drsl-timeline {
+            .drsl-timeline-text {
+                color: #c0c0c0;
+                .passed {
+                    color: black;
+                }
+            }
+
+            .drsl-progress {
+                background-color: #4A4144;
+                width: 10%;
+                height: 10px;
+
+                &.created {
+                    width: 10%;
+                    animation-name: drsl-created-keyframe;
+                    animation-duration: 2s;
+                }
+                &.assigned {
+                    width: 25%;
+                    animation-name: drsl-assigned-keyframe;
+                    animation-duration: 2s;
+                }
+                &.working {
+                    width: 50%;
+                    animation-name: drsl-working-keyframe;
+                    animation-duration: 2s;
+                }
+                &.resolved {
+                    width: 75%;
+                    animation-name: drsl-resolved-keyframe;
+                    animation-duration: 2s;
+                }
+                &.complete {
+                    width: 100%;
+                    animation-name: drsl-complete-keyframe;
+                    animation-duration: 2s;
+                }
+            }
+        }
+
+
+
+    }
+
+    .drsl-case-expert {
+        .drsl-contact-wrapper {
+            display: flex;
+            flex-flow: row;
+            align-items: flex-start;
+
+            > div {
+                flex: inherit;
+                padding-right: $default-half-padding;
+                i {
+                    font-size: $medium-font-size;
+                    margin-right: 5px;
+                }
+            }
+        }
+    }
+
+
 }
 
 /* ==========================================================================
@@ -657,3 +787,48 @@ Account Settings
         }
     }
 }
+
+@keyframes drsl-created-keyframe {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 10%;
+    }
+}
+
+@keyframes drsl-assigned-keyframe {
+    from {
+        width: 10%;
+    }
+    to {
+        width: 25%;
+    }
+}
+
+@keyframes drsl-working-keyframe {
+    from {
+        width: 25%;
+    }
+    to {
+        width: 50%;
+    }
+}
+
+@keyframes drsl-resolved-keyframe {
+    from {
+        width: 50%;
+    }
+    to {
+        width: 75%;
+    }
+}
+@keyframes drsl-complete-keyframe {
+    from {
+        width: 75%;
+    }
+    to {
+        width: 100%;
+    }
+}
+

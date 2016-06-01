@@ -3,7 +3,8 @@
         "id": "MySQL - 101008",
         "user": "userForeignKey",
         "expert": "expertForeignKey",
-        "status": "unassigned",
+        "status": "created",
+        "startDate": 1463295600000,
         "lastUpdated": 1463382000000,
         "chatRoom": {
             "id": "chat Case-05152016",
@@ -15,6 +16,7 @@
         "user": "userForeignKey",
         "expert": "expertForeignKey",
         "status": "completed",
+        "startDate": 1462950000000,
         "lastUpdated": 1463036400000,
         "chatRoom": {
             "id": "chat Case-05152016",
@@ -26,6 +28,7 @@
         "user": "userForeignKey",
         "expert": "expertForeignKey",
         "status": "completed",
+        "startDate": 1462345200000,
         "lastUpdated": 1462431600000,
         "chatRoom": {
             "id": "chat Case-05152016",
@@ -37,6 +40,7 @@
         "user": "userForeignKey",
         "expert": "expertForeignKey",
         "status": "completed",
+        "startDate": 1458457200000,
         "lastUpdated": 1459494000000,
         "chatRoom": {
             "id": "chat Case-05152016",
