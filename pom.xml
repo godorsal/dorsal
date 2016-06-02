@@ -773,7 +773,10 @@
                                     <goal>gulp</goal>
                                 </goals>
                                 <configuration>
-                                    <arguments>build --no-notification</arguments>
+                                    <!-- Default is supressiong notifications (no-notification) which hides real
+                                         processing errors
+                                    -->
+                                    <arguments>build</arguments>
                                 </configuration>
                             </execution>
                             <execution>
