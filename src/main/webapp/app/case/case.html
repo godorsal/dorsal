@@ -2,13 +2,22 @@
     <div class="row">
         <div class="col-md-12">
             <div class="drsl-case-wrapper">
-                <div class="drsl-sub-header" translate="case.header">Case Details</div>
-                    <div style="display: flex; flex-flow: row;">
-                        <div style="flex: 1;margin-right: 20px;background-color: white;">
-                            <case-details case="vm.currentCase" status="vm.status"></case-details>
-                        </div>
-                        <div style="flex: 1;background-color: white;"><case-professional expert="vm.experts[vm.currentCase.expert]" chat-room="vm.currentCase.chatRoom" ng-show="vm.experts[vm.currentCase.expert]"></case-professional></div>
+                <div class="drsl-sub-header">
+                    <div>
+                        <span style="margin-right: 10px;" translate="case.header">Case Summary</span>
+                        <span style="color: #838584">ID:</span>
+                        <span style="color: #838584; margin-right: 10px;">{{vm.currentCase.id}}</span>
+                        <span style="color: #838584">Start:</span>
+                        <span style="color: #838584"> {{vm.currentCase.startDate | date:"MM/dd/yy h:mm a"}}</span>
                     </div>
+                    <div>{{'case.details.status.main' | translate}} <span style="color: white;">{{'case.details.status.'+vm.currentCase.status | translate}}</span></div>
+                </div>
+                <div style="display: flex; flex-flow: row;min-height:450px;">
+                    <div style="flex: 1;margin-right: 20px;background-color: white;">
+                        <case-details case="vm.currentCase" status="vm.status"></case-details>
+                    </div>
+                    <div style="flex: 1;background-color: white;"><case-professional expert="vm.experts[vm.currentCase.expert]" chat-room="vm.currentCase.chatRoom" ng-show="vm.experts[vm.currentCase.expert]"></case-professional></div>
+                </div>
                 <div class="drsl-case-separator"></div>
             </div>
 
@@ -17,8 +26,13 @@
                 <div class="drsl-case-history-wrapper" style="padding-bottom: 20px;">
                     <div class="panel panel-default" style="cursor: pointer;margin-bottom: 5px;" ng-repeat="case in vm.cases | orderBy:'-case.lastUpdated'">
                         <div class="panel-heading" ng-class="{active: vm.currentCase == case}" ng-click="vm.setCurrentCase(case);" style=""><h4 class="panel-title">
-                            <span>{{case.lastUpdate | date}}</span>
-                            <div class="pull-right drsl-right-sub-header">ID: {{case.id}}</div>
+                            <span>{{case.startDate | date}}</span>
+                            <div class="pull-right drsl-right-sub-header">
+                                <div style="display: flex;flex-flow: row; width:350px; text-align: right;">
+                                    <div style="flex:1;">Status: {{'case.details.status.'+case.status | translate}}</div>
+                                    <div style="flex:1;">ID: {{case.id}}</div>
+                                </div>
+                            </div>
                         </h4></div>
                     </div>
                 </div>

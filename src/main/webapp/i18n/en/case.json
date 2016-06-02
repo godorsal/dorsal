@@ -1,6 +1,6 @@
 {
     "case": {
-        "header": "Case Details",
+        "header": "Case Summary",
         "details": {
             "header": "Current Case",
             "user": "User:",

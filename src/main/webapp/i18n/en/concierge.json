@@ -15,8 +15,8 @@
             }
         },
         "caseDetails": {
-            "header": "case details",
-            "button": "get started",
+            "header": "Create Your Case",
+            "button": "go",
             "summary": {
                 "main": "Summary",
                 "placeholder": "just describe your problem"
