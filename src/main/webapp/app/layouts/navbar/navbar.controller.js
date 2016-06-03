@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .controller('NavbarController', NavbarController);
 
-    NavbarController.$inject = ['$state', 'Auth', 'Principal', 'ProfileService', 'LoginService'];
+    NavbarController.$inject = ['$state', 'Auth', 'Principal', 'ProfileService', 'LoginService', 'ElementFocusService'];
 
-    function NavbarController ($state, Auth, Principal, ProfileService, LoginService) {
+    function NavbarController ($state, Auth, Principal, ProfileService, LoginService, ElementFocusService) {
         var vm = this;
 
         vm.isNavbarCollapsed = true;
@@ -23,6 +23,11 @@
         vm.toggleNavbar = toggleNavbar;
         vm.collapseNavbar = collapseNavbar;
         vm.$state = $state;
+        vm.searchExpanded = false;
+        vm.expandSearch = expandSearch;
+        vm.collapseSearch = collapseSearch;
+        vm.submitSearch = submitSearch;
+        vm.searchTerm = '';
 
         function login() {
             collapseNavbar();
@@ -41,6 +46,20 @@
 
         function collapseNavbar() {
             vm.isNavbarCollapsed = true;
+        }
+
+        function expandSearch() {
+            vm.searchExpanded = true;
+            ElementFocusService('drslSearch');
+        }
+
+        function collapseSearch() {
+            vm.searchExpanded = false;
+        }
+
+        function submitSearch() {
+            vm.searchExpanded = false;
+            vm.searchTerm = '';
         }
     }
 })();

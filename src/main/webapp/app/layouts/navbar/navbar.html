@@ -161,8 +161,14 @@
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a><i class="fa fa-search"></i></a>
+                <li class="drsl-search" ng-class="{expanded: vm.searchExpanded}">
+                    <form name="drslNavSearchForm" ng-submit="vm.submitSearch();">
+                        <span ng-hide="vm.searchExpanded" class="drsl-search-toggle" ng-click="vm.expandSearch()"><i class="fa fa-search"></i></span>
+                        <span ng-show="vm.searchExpanded" class="drsl-search-toggle"><i class="fa fa-search"></i></span>
+                        <div class="drsl-search-input">
+                            <div><input id="drslSearch" type="text" placeholder="search" ng-model="vm.searchTerm" ng-blur="vm.collapseSearch()"></div>
+                        </div>
+                    </form>
                 </li>
             </ul>
         </div>

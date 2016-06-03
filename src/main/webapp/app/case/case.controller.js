@@ -81,7 +81,6 @@
         function getExpert(expert){
             CaseService.getExpert(function(data){
                 var foundExpert = data.filter(function(o){
-                    console.log(o.id + '==' + expert);
                     return o.id == expert;
                 })[0];
 

@@ -1,0 +1,53 @@
+@keyframes drsl-created-keyframe {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 10%;
+    }
+}
+
+@keyframes drsl-assigned-keyframe {
+    from {
+        width: 10%;
+    }
+    to {
+        width: 25%;
+    }
+}
+
+@keyframes drsl-working-keyframe {
+    from {
+        width: 25%;
+    }
+    to {
+        width: 50%;
+    }
+}
+
+@keyframes drsl-resolved-keyframe {
+    from {
+        width: 50%;
+    }
+    to {
+        width: 75%;
+    }
+}
+
+@keyframes drsl-complete-keyframe {
+    from {
+        width: 75%;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes drsl-search-expand-keyframe {
+    from {
+        width: 0px;
+    }
+    to {
+        width: 150px;
+    }
+}

@@ -1,4 +1,5 @@
 @import "variables";
+@import "keyframes";
 @import "hipster";
 @import "components";
 @import "overrides";
@@ -522,7 +523,6 @@ Case History
                 }
             }
 
-
         }
     }
 
@@ -582,8 +582,6 @@ Case History
         }
     }
 
-
-
     .drsl-case-details, .drsl-case-expert {
         > div {
             padding: 20px;
@@ -637,8 +635,6 @@ Case History
             }
         }
 
-
-
     }
 
     .drsl-case-expert {
@@ -657,7 +653,6 @@ Case History
             }
         }
     }
-
 
 }
 
@@ -785,56 +780,21 @@ Account Settings
     }
 }
 
-@keyframes drsl-created-keyframe {
-    from {
-        width: 0%;
-    }
-    to {
-        width: 10%;
-    }
-}
-
-@keyframes drsl-assigned-keyframe {
-    from {
-        width: 10%;
-    }
-    to {
-        width: 25%;
-    }
-}
-
-@keyframes drsl-working-keyframe {
-    from {
-        width: 25%;
-    }
-    to {
-        width: 50%;
-    }
-}
-
-@keyframes drsl-resolved-keyframe {
-    from {
-        width: 50%;
-    }
-    to {
-        width: 75%;
-    }
-}
-@keyframes drsl-complete-keyframe {
-    from {
-        width: 75%;
-    }
-    to {
-        width: 100%;
-    }
-}
-
 .nav.navbar-nav.navbar-right {
     .dropdown-menu {
         right: initial;
-        background-color:rgba(0,0,0,.4);
+        background-color: rgba(0, 0, 0, .4);
 
         > li {
+            &.active {
+                a {
+                    background-color: rgba(0, 0, 0, .6);
+                    &:hover {
+                        color: #ffffff;
+                    }
+                }
+            }
+
             > a {
                 color: #FFFFFF;
                 &:hover {
@@ -848,4 +808,55 @@ Account Settings
 a, a:hover {
     color: $brand-color;
 }
+
+.drsl-search {
+    padding: 10px 15px 15px 5px;
+    cursor: default;
+
+    .drsl-search-input {
+        display: none;
+        align-items: center;
+
+        input {
+            width: 150px;
+            color: white;
+            border: 1px solid #DDDCDB;
+            background-color: transparent;
+            padding: 4px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
+
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+
+    .drsl-search-toggle {
+        i {
+            margin: 8px 10px 10px 0;
+        }
+        &:hover, &:active, &focus {
+            color: #ffffff;
+        }
+    }
+
+    &.expanded {
+
+        .drsl-search-input {
+            display: inline-block;
+            input {
+                animation-name: drsl-search-expand-keyframe;
+                animation-duration: .5s;
+            }
+        }
+
+        .drsl-search-toggle {
+            i {
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+
 
