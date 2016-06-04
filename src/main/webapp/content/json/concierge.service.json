@@ -6,6 +6,7 @@
             {
                 "id": "urgency",
                 "label": "concierge.caseDetails.urgency.main",
+                "tooltip": "concierge.caseDetails.urgency.tooltip",
                 "values": [
                     {
                         "label": "concierge.caseDetails.urgency.immediate",
@@ -52,6 +53,7 @@
             {
                 "id": "product",
                 "label": "concierge.caseDetails.product.main",
+                "tooltip": "concierge.caseDetails.product.tooltip",
                 "values": [
                     {
                         "label": "concierge.caseDetails.product.mySQL",

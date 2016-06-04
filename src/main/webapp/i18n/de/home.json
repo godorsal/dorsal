@@ -14,6 +14,11 @@
             "follow": "kontaktieren Sie uns mit @java_hipster auf Twitter"
         },
         "like": "Wenn Sie JHipster mögen, vergessen Sie nicht uns einen Stern zu geben auf",
-        "github": "GitHub"
+        "github": "GitHub",
+        "tooltips": {
+            "incident": "Issues with the product. Something is broken and needs to be addressed immediately",
+            "proactive": "Scheduled support task like migration, upgrades or tuning",
+            "onDemand": "Have access to an expert to learn about best practices"
+        }
     }
 }

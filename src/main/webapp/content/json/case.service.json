@@ -4,6 +4,8 @@
         "user": "userForeignKey",
         "expert": "expertForeignKey",
         "status": "created",
+        "summary": "This is a placeholder summary for the first case.",
+        "resolutionETA": "4 hours",
         "startDate": 1463295600000,
         "lastUpdated": 1463382000000,
         "chatRoom": {
@@ -16,6 +18,8 @@
         "user": "userForeignKey",
         "expert": "expertForeignKey2",
         "status": "completed",
+        "summary": "A summary for the second case in the list.",
+        "resolutionETA": "1 hour",
         "startDate": 1462950000000,
         "lastUpdated": 1463036400000,
         "chatRoom": {
@@ -28,6 +32,8 @@
         "user": "userForeignKey",
         "expert": "expertForeignKey3",
         "status": "completed",
+        "summary": "Placeholder summary for case number three.",
+        "resolutionETA": "1 day",
         "startDate": 1462345200000,
         "lastUpdated": 1462431600000,
         "chatRoom": {
@@ -40,6 +46,8 @@
         "user": "userForeignKey",
         "expert": "expertForeignKey",
         "status": "completed",
+        "summary": "Another summary, but this one is for case number four.",
+        "resolutionETA": "2 hours",
         "startDate": 1458457200000,
         "lastUpdated": 1459494000000,
         "chatRoom": {

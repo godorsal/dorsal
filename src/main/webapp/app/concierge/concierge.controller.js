@@ -59,15 +59,15 @@
             switch ($state.params.type) {
                 case 'incident':
                     vm.pageTitle = $translate.instant('concierge.pageTitles.incident');
-                    vm.caseDetails.radios[0].selectedValue = '1 day';
+                    vm.caseDetails.radios[0].selectedValue = '4 hrs';
                     break;
                 case 'pro-active':
                     vm.pageTitle = $translate.instant('concierge.pageTitles.proActive');
-                    vm.caseDetails.radios[0].selectedValue = 'Immediate';
+                    vm.caseDetails.radios[0].selectedValue = 'this week';
                     break;
                 case 'on-demand':
                     vm.pageTitle = $translate.instant('concierge.pageTitles.onDemand');
-                    vm.caseDetails.radios[0].selectedValue = '4 hrs';
+                    vm.caseDetails.radios[0].selectedValue = '1 day';
                     break;
                 default:
                     vm.pageTitle = $translate.instant('concierge.pageTitles.connect');

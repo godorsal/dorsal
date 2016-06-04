@@ -1,15 +1,16 @@
-(function() {
+(function () {
     'use strict';
 
     angular
         .module('dorsalApp')
-        .directive('caseDetails', caseDetails);
+        .directive('caseSummary', caseSummary);
 
-    function caseDetails($translate, $locale, tmhDynamicLocale, RatingService) {
+    function caseSummary($translate, $locale, tmhDynamicLocale, RatingService, CaseDetailsService) {
         var directive = {
             restrict: 'E',
-            scope:  {
+            scope: {
                 case: '=',
+                expert: '=',
                 status: '=',
                 history: '@',
             },
@@ -45,16 +46,26 @@
                 }
             ];
 
-            scope.rate = function(){
-                var modalInstance = RatingService.open();
+            scope.rate = function () {
+                if (scope.case.status === 'resolved') {
+                    var modalInstance = RatingService.open();
+
+                    modalInstance.result.then(function (result) {
+                        scope.rated = result.rated;
+                        scope.case.status = 'completed';
+                    });
+                }
+            };
+
+            scope.openDetails = function () {
+                var modalInstance = CaseDetailsService.open(scope.case, scope.expert);
 
                 modalInstance.result.then(function (result) {
-                    scope.rated = result.rated;
-                    scope.case.status = 'completed';
+                    // console.log(result);
                 });
             };
 
-            scope.passedStep = function(step){
+            scope.passedStep = function (step) {
                 var stepIndex = 0;
 
                 if (scope.case.status == 'completed') {
@@ -70,18 +81,14 @@
                 return (step <= stepIndex );
             };
 
-            scope.cycleStatus = function(){
+            scope.cycleStatus = function () {
                 if (scope.caseIndex < scope.statusOptions.length - 1) {
-                    scope.caseIndex ++;
+                    scope.caseIndex++;
                 } else {
                     scope.caseIndex = 0;
                 }
 
                 scope.case.status = scope.statusOptions[scope.caseIndex].value;
-
-                if (scope.case.status === 'resolved') {
-                    scope.rate();
-                }
             };
         }
     }

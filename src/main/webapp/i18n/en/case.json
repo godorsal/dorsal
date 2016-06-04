@@ -4,6 +4,8 @@
         "details": {
             "header": "Current Case",
             "user": "User:",
+            "summary": "Summary:",
+            "resolutionETA": "ETA to Resolution:",
             "status": {
                 "main": "Status:",
                 "created": "Created",
@@ -12,7 +14,9 @@
                 "resolved": "Resolved",
                 "completed": "Completed"
             },
-            "chatRoom": "Chat room:",
+            "chatRoom": "Chat With Expert",
+            "viewDetails": "View Case Details",
+            "rateCase": "Rate This Case",
             "id": "ID:",
             "lastUpdate": "Last Update:"
         },

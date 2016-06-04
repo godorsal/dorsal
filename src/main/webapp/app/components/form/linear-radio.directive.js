@@ -13,7 +13,7 @@
                 radioData: '='
             },
             template:   '<div class="drsl-linear-radio">' +
-                            '<div class="drsl-radio-desc" translate="{{radioData.label}}"></div>' +
+                            '<div class="drsl-radio-desc" tooltip-placement="left" uib-tooltip="{{radioData.tooltip | translate}}" translate="{{radioData.label}}"></div>' +
                             '<div class="drsl-radio-wrapper">' +
                                 '<div class="drsl-radio-set">' +
                                     '<div class="drsl-radio-item" ng-repeat="radio in radioData.values">' +

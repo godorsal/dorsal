@@ -1,6 +1,19 @@
 <div class="drsl-case-details">
     <!-- User Name -->
-    <div><span translate="case.details.user">User:</span> {{case.user}}</div>
+    <div style="display: flex; flex-flow: row;">
+        <div style="flex: 1;"><span translate="case.details.user">User:</span> {{case.user}}</div>
+        <div style="flex: 2; text-align: right;">
+            <a ng-click="openDetails()" translate="case.details.viewDetails">View Case Details</a>
+            <span>|</span>
+            <a ng-show="!passedStep(1)" class="drsl-link-disabled" translate="case.details.chatRoom">Chat With Expert</a>
+            <a ng-show="passedStep(1)" ng-href="{{case.chatRoom.link}}" target="_blank" ng-class="{'drsl-link-disabled': !passedStep(1)}" translate="case.details.chatRoom">Chat With Expert</a>
+            <span>|</span>
+            <a ng-class="{'drsl-link-disabled': !passedStep(3), 'drsl-link-inactive': case.status == 'completed'}" ng-click="rate()" translate="case.details.rateCase">Rate This Case</a>
+        </div>
+    </div>
+
+    <!-- Summary -->
+    <div><span translate="case.details.summary">Summary:</span> {{case.summary}}</div>
 
     <!-- Status -->
     <div class="drsl-case-status-wrapper">
@@ -15,7 +28,7 @@
     </div>
 
     <!-- ETA to Resolution -->
-    <div><span>ETA to Resolution:</span> 4 hours</div>
+    <div><span translate="case.details.resolutionETA">ETA to Resolution:</span> {{case.resolutionETA}}</div>
 
     <!-- Timeline -->
     <div class="drsl-timeline">

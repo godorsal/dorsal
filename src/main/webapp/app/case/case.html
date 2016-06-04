@@ -14,7 +14,7 @@
                 </div>
                 <div style="display: flex; flex-flow: row;min-height:450px;">
                     <div style="flex: 1;margin-right: 20px;background-color: white;">
-                        <case-details case="vm.currentCase" status="vm.status"></case-details>
+                        <case-summary case="vm.currentCase" expert="vm.experts[vm.currentCase.expert]" status="vm.status"></case-summary>
                     </div>
                     <div style="flex: 1;background-color: white;"><case-professional expert="vm.experts[vm.currentCase.expert]" chat-room="vm.currentCase.chatRoom" ng-show="vm.experts[vm.currentCase.expert]"></case-professional></div>
                 </div>

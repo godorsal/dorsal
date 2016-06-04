@@ -1,0 +1,80 @@
+<div class="drsl-case-details">
+    <div class="modal-header"></div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="drsl-dialog-header">
+                    <div><h2>Case Details: <span>ID: {{vm.case.id}} &nbsp; START: {{vm.case.startDate | date:"MM/dd/yy h:mm a"}}</span><div class="pull-right"><span style="text-transform: uppercase;">Status: {{vm.case.status}}</span></div></h2></div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div>
+                    <form ng-submit="vm.submit()">
+                        <div style="background-color: white;padding: 20px;margin-bottom: 10px;">
+                            <div class="drsl-form-grid">
+                                <div>User</div>
+                                <div>{{vm.case.user}}</div>
+                            </div>
+                            <div class="drsl-form-grid">
+                                <div>Expert</div>
+                                <div>
+                                    <div>{{vm.expert.firstName}} {{vm.expert.lastName}}</div>
+                                    <div>
+                                        <div ng-show="vm.expert.contact.email"><i class="fa fa-envelope" tooltip-placement="left" uib-tooltip="{{'case.professional.contact.email' | translate}}" ></i> {{vm.expert.contact.email}}</div>
+                                        <div ng-show="vm.expert.contact.phone"><i class="fa fa-phone" tooltip-placement="left" uib-tooltip="{{'case.professional.contact.phone' | translate}}"></i> {{vm.expert.contact.phone}}</div>
+                                        <div ng-show="vm.expert.contact.skype"><i class="fa fa-skype" tooltip-placement="left" uib-tooltip="{{'case.professional.contact.skype' | translate}}"></i> {{vm.expert.contact.skype}}</div>
+                                        <div ng-show="vm.case.chatRoom"><i class="fa fa-comments-o" tooltip-placement="left" uib-tooltip="{{'case.professional.contact.chat' | translate}}"></i> <a ng-href="{{chatRoom.link}}" target="_blank">{{vm.case.chatRoom.id}}</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="drsl-form-grid">
+                                <div>Summary</div>
+                                <div><input type="text" class="form-control" ng-model="vm.summary"></div>
+                            </div>
+                            <div class="drsl-form-grid">
+                                <div>Urgency</div>
+                                <div>
+                                    <div style="display:flex; flex-flow: row;">
+                                        <div style="flex: .5;">4 days</div>
+                                        <div style="flex: 1; text-align: left;"><span style="font-weight: normal;padding-left:10px;padding-right: 10px;">Problem Type:</span><span>Performance</span></div>
+                                        <div style="flex: 1; text-align: center;"><span style="font-weight: normal;padding-right: 10px;">Database Type:</span><span>MySQL</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="drsl-form-grid">
+                                <div>Detailed Resolution</div>
+                                <div><textarea class="form-control" name="detailedResolution" id="detailedResolution" cols="30" rows="5"></textarea></div>
+                            </div>
+                            <div class="drsl-form-grid">
+                                <div>Uploaded Files</div>
+                                <div>
+                                    <div style="display: flex; flex-flow: row;">
+                                        <div style="flex: 1">
+                                            <div>config_5916.cfg</div>
+                                            <div>logfile_5916.txt</div>
+                                        </div>
+                                        <div style="flex: 3">
+                                            <div style="border: 1px dashed #DBD9DA; text-align: center; padding: 10px;"><i class="fa fa-cloud-upload fa-lg"></i> Drop files to attach, or <span style="color:#F48B3D;">browse</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="drsl-form-grid">
+                                <div>Downloaded Files</div>
+                                <div><i class="fa fa-minus"></i></div>
+                            </div>
+                            <div class="drsl-form-grid">
+                                <div>Chat Log</div>
+                                <div><textarea class="form-control" name="chatLog" id="chatLog" cols="30" rows="10"></textarea></div>
+                            </div>
+                        </div>
+                        <div style="text-align: right;">
+                            <button class="btn btn-default" ng-click="vm.cancel($event)">Cancel</button>
+                            <button type="submit" class="btn btn-success">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

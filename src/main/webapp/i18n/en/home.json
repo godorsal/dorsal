@@ -14,6 +14,11 @@
             "follow": "follow @java_hipster on Twitter"
         },
         "like": "If you like JHipster, don't forget to give us a star on",
-        "github": "GitHub"
+        "github": "GitHub",
+        "tooltips": {
+            "incident": "Issues with the product. Something is broken and needs to be addressed immediately",
+            "proactive": "Scheduled support task like migration, upgrades or tuning",
+            "onDemand": "Have access to an expert to learn about best practices"
+        }
     }
 }
