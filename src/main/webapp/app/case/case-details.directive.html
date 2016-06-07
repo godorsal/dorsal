@@ -3,17 +3,18 @@
     <div style="display: flex; flex-flow: row;">
         <div style="flex: 1;"><span translate="case.details.user">User:</span> {{case.user}}</div>
         <div style="flex: 2; text-align: right;">
-            <a ng-click="openDetails()" translate="case.details.viewDetails">View Case Details</a>
-            <span>|</span>
-            <a ng-show="!passedStep(1)" class="drsl-link-disabled" translate="case.details.chatRoom">Chat With Expert</a>
-            <a ng-show="passedStep(1)" ng-href="{{case.chatRoom.link}}" target="_blank" ng-class="{'drsl-link-disabled': !passedStep(1)}" translate="case.details.chatRoom">Chat With Expert</a>
-            <span>|</span>
-            <a ng-class="{'drsl-link-disabled': !passedStep(3), 'drsl-link-inactive': case.status == 'completed'}" ng-click="rate()" translate="case.details.rateCase">Rate This Case</a>
+            <a style="margin-left:10px;"  ng-click="openDetails()" translate="case.details.viewDetails">view case details</a>
+            <a style="margin-left:10px;" ng-show="!passedStep(1)" class="drsl-link-disabled" translate="case.details.chatRoom">chat with expert</as>
+            <a style="margin-left:10px;" ng-show="passedStep(1)" ng-href="{{case.chatRoom.link}}" target="_blank" ng-class="{'drsl-link-disabled': !passedStep(1)}" translate="case.details.chatRoom">chat with expert</a>
+            <a style="margin-left:10px;" ng-class="{'drsl-link-disabled': !passedStep(3), 'drsl-link-inactive': case.status == 'completed'}" ng-click="rate()" translate="case.details.rateCase">rate this case</a>
         </div>
     </div>
 
     <!-- Summary -->
-    <div><span translate="case.details.summary">Summary:</span> {{case.summary}}</div>
+    <div style="display: flex;flex-flow: row;">
+        <div style="flex: inherit;margin-right: 5px;"><span translate="case.details.summary">Summary:</span></div>
+        <div style="flex: inherit;">{{case.summary}}</div>
+    </div>
 
     <!-- Status -->
     <div class="drsl-case-status-wrapper">

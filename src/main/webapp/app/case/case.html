@@ -28,13 +28,11 @@
                         <div class="panel-heading" ng-class="{active: vm.currentCase == case}" ng-click="vm.setCurrentCase(case);" style="">
                             <h4 class="panel-title">
                                 <div style="display: flex;flex-flow: row;">
-                                    <div style="flex: .5;margin-right: 10px;">
-                                        <span>ID: {{case.id}}</span>
-                                    </div>
-                                    <div style="flex: 1;text-align: left;">
+                                    <div style="flex: 3;margin-right: 10px;">
+                                        <span style="display: inline-block;width: 200px;">ID: {{case.id}}</span>
                                         <span>Start: {{case.startDate | date}}</span>
                                     </div>
-                                    <div style="flex: 2; text-align: right">
+                                    <div style="flex: 1; text-align: right">
                                         <div>Status: {{'case.details.status.'+case.status | translate}}</div>
                                     </div>
                                 </div>

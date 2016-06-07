@@ -1,28 +1,25 @@
-<div class="drsl-rating">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                ng-click="vm.cancel()">&times;</button>
-        <h4 class="modal-title">Rating for:</h4>
-    </div>
-    <div class="modal-body">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="drsl-dialog-header">
-                    <div><h2>Rating for: <span>Case ID: MySQL - 101008</span></h2></div>
+<div class="drsl-dialog">
+    <form ng-submit="vm.submit()">
+        <div class="modal-body">
+            <div>
+                <div>
+                    <div class="drsl-dialog-header">
+                        <div><h2>Rating for: Case ID: {{vm.case.id}}</h2></div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <div ng-repeat="radio in vm.radios">
+                            <h3 translate="{{radio.label}}"></h3>
+                            <linear-radio target-data="radio.selectedValue" radio-data="radio"></linear-radio>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-12">
-                <form ng-submit="vm.submit()">
-                    <div ng-repeat="radio in vm.radios">
-                        <h3 translate="{{radio.label}}"></h3>
-                        <linear-radio target-data="radio.selectedValue" radio-data="radio"></linear-radio>
-                    </div>
-                    <div>
-                        <button class="btn btn-default" ng-click="vm.cancel()">Cancel</button>
-                        <button type="submit" class="btn btn-success">Submit</button>
-                    </div>
-                </form>
+            <div>
+                <button class="btn btn-default" ng-click="vm.cancel()">Cancel</button>
+                <button type="submit" class="btn btn-success">Submit</button>
             </div>
         </div>
-    </div>
+    </form>
 </div>

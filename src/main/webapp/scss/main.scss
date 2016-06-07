@@ -181,10 +181,10 @@ body {
         }
     }
 
-    input[type="radio"] {
+    input[type="radio"], input[type="checkbox"] {
         display: none;
     }
-    input[type="radio"] + label span {
+    input[type="radio"] + label span, input[type="checkbox"] + label span {
         display: inline-block;
         width: 17px;
         height: 17px;
@@ -194,26 +194,29 @@ body {
         border-radius: 50%;
         margin-top: 5px;
     }
-    input[type="radio"]:checked + label span {
+    input[type="checkbox"] + label span {
+        border-radius: 25%;
+    }
+    input[type="radio"]:checked + label span, input[type="checkbox"]:checked + label span {
         background-color: $brand-color;
         border: 3px solid $brand-color;
     }
 }
 
-.modal-dialog.modal-sm {
-    width: 600px;
-}
+.modal-dialog {
+    &.modal-sm {
+        width: 600px;
+    }
 
-.modal-dialog.modal-lg {
-    width: 970px;
-}
+    &.modal-lg {
+        width: 970px;
+    }
 
-.drsl-dialog-header {
-    h2 {
-        font-weight: 200;
-        margin-top: 0;
-        span {
-            font-size: $large-font-size;
+    .drsl-dialog-header {
+        h2 {
+            font-weight: 200;
+            margin-top: 0;
+            font-size: 22px;
         }
     }
 }
@@ -489,9 +492,7 @@ Concierge
 
             .drsl-field-input {
                 flex: 3;
-                background-color: $content-container-color;
                 padding: 5px;
-                color: $inactive-text-color;
             }
         }
 
@@ -691,7 +692,25 @@ Case History
 /* ==========================================================================
 Case Rating
 ========================================================================== */
-.drsl-rating {
+.drsl-dialog {
+    .modal-body {
+        padding: 0;
+
+        > div {
+            padding: 20px;
+
+            &:first-child {
+                background-color: white;
+                box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.15);
+            }
+
+            &:last-child {
+                text-align: right;
+            }
+
+        }
+    }
+
     .drsl-linear-radio {
         margin-bottom: 20px;
         .drsl-radio-desc {
@@ -701,28 +720,14 @@ Case Rating
             font-size: $default-font-size;
         }
     }
+    h2 {
+        margin-bottom: 20px;
+    }
     h3 {
         font-size: $medium-font-size;
-        margin-bottom: 20px;
         font-weight: 200;
-        background-image: linear-gradient(to bottom, #f5f5f5 0, #e8e8e8 100%);
-        padding: 10px 15px;
-        color: #666666;
-        margin-top: 0;
-    }
-    form > div {
-        border: 1px solid #dddddd;
-        margin-bottom: 15px;
-        background-color: white;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);;
-
-        &:last-child {
-            background-color: transparent;
-            margin-bottom: 0;
-            border: 0;
-            text-align: right;
-            box-shadow: none;
-        }
+        padding: 10px 0px;
+        margin: 0 0 10px;
     }
 
     .btn.btn-default {
@@ -806,12 +811,12 @@ Account Settings
 .nav.navbar-nav.navbar-right {
     .dropdown-menu {
         right: initial;
-        background-color: rgba(0, 0, 0, .4);
+        background-color: rgba(0, 0, 0, .8);
 
         > li {
             &.active {
                 a {
-                    background-color: rgba(0, 0, 0, .6);
+                    background-color: rgba(0, 0, 0, 1);
                     &:hover {
                         color: #ffffff;
                     }
@@ -899,6 +904,3 @@ a, a:hover, a:focus {
 .drsl-home-view .tooltip {
     font-size: $default-font-size;
 }
-
-
-

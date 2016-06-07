@@ -15,8 +15,6 @@
         vm.expert = expert;
         vm.summary = vm.case.summary.toString();
 
-        console.log(vm.case);
-
         function cancel(e) {
             e.preventDefault();
             $uibModalInstance.dismiss('cancel');
