@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .controller('ConciergeController', ConciergeController);
 
-    ConciergeController.$inject = ['$scope', '$state', 'LoginService', 'Principal', 'ConciergeService', '$translate'];
+    ConciergeController.$inject = ['$scope', '$state', 'LoginService', 'Principal', 'ConciergeService', '$translate', '$http'];
 
-    function ConciergeController($scope, $state, LoginService, Principal, ConciergeService, $translate) {
+    function ConciergeController($scope, $state, LoginService, Principal, ConciergeService, $translate, $http) {
         var vm = this;
 
         vm.init = init;
@@ -92,9 +92,9 @@
          */
         function startChat(event) {
             event.preventDefault();
-            if (vm.chatName){
+            // if (vm.chatName){
                 vm.showChat = true;
-            }
+            // }
         }
 
         // Call to initialize the controller.

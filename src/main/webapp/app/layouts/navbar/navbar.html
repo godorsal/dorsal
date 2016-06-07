@@ -140,6 +140,12 @@
                                 <span translate="global.menu.admin.logs">Logs</span>
                             </a>
                         </li>
+                        <li ui-sref-active="active">
+                            <a ui-sref="conciergeAdmin" ng-click="vm.collapseNavbar()">
+                                <span class="glyphicon glyphicon-tasks"></span>&nbsp;
+                                <span translate="global.menu.admin.concierge">Concierge</span>
+                            </a>
+                        </li>
                         <li ng-hide="vm.inProduction || vm.swaggerDisabled" ui-sref-active="active">
                             <a ui-sref="docs" ng-click="vm.collapseNavbar()">
                                 <span class="glyphicon glyphicon-book"></span>&nbsp;
