@@ -54,6 +54,7 @@
                 "id": "product",
                 "label": "concierge.caseDetails.product.main",
                 "tooltip": "concierge.caseDetails.product.tooltip",
+                "type": "complex",
                 "values": [
                     {
                         "label": "concierge.caseDetails.product.mySQL",
@@ -413,8 +414,36 @@
                     }
                 ],
 
-                "selectedValue": "",
-                "incidentTypeSelections": []
+                "selectedValue": ""
+            },
+            {
+                "id": "contact",
+                "label": "concierge.caseDetails.contact.main",
+                "tooltip": "concierge.caseDetails.contact.tooltip",
+                "multiSelect": "true",
+                "values": [
+                    {
+                        "id": "email",
+                        "label": "concierge.caseDetails.contact.email",
+                        "value": "false"
+                    },
+                    {
+                        "id": "phone",
+                        "label": "concierge.caseDetails.contact.phone",
+                        "value": "false"
+                    },
+                    {
+                        "id": "skype",
+                        "label": "concierge.caseDetails.contact.skype",
+                        "value": "false"
+                    },
+                    {
+                        "id": "other",
+                        "label": "concierge.caseDetails.contact.other",
+                        "value": "false"
+                    }
+                ],
+                "selectedValue": ""
             }
         ]
     }

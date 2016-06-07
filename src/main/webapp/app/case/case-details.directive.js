@@ -48,7 +48,7 @@
 
             scope.rate = function () {
                 if (scope.case.status === 'resolved') {
-                    var modalInstance = RatingService.open();
+                    var modalInstance = RatingService.open(scope.case);
 
                     modalInstance.result.then(function (result) {
                         scope.rated = result.rated;

@@ -57,14 +57,8 @@ Navbar
 Container
 ========================================================================== */
 .container {
-    @media (min-width: 1200px) {
+    @media screen and (min-width: 200px) and (max-width: 2500px) {
         width: $site-max-width;
-    }
-}
-
-.container .navbar-header {
-    @media (min-width: 768px) {
-        //margin-left: 40px;
     }
 }
 

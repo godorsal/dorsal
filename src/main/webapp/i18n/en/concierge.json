@@ -37,7 +37,7 @@
                 "immediate": "Immediate",
                 "fourHours": "4 hours",
                 "oneDay": "1 day",
-                "thisWeek": "this week"
+                "thisWeek": "This week"
             },
             "problem": {
                 "main": "Problem Type",
@@ -53,6 +53,14 @@
                 "postgreSQL": "PostgreSQL",
                 "mongoDB": "MongoDB",
                 "mariaDB": "MariaDB"
+            },
+            "contact": {
+                "main": "Contact",
+                "tooltip": "Select one or more preferred methods of contact",
+                "email": "email",
+                "phone": "phone",
+                "skype": "skype",
+                "other": "other"
             },
             "incidentTypes": {
                 "version": {

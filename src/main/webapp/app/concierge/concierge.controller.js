@@ -14,7 +14,6 @@
         vm.submitForm = submitForm;
         vm.startChat = startChat;
         vm.updatePageTitle = updatePageTitle;
-        vm.productDetailInputComplete = false;
         vm.showChat = false;
         vm.chatName = '';
         vm.isAuthenticated = Principal.isAuthenticated;
@@ -24,14 +23,6 @@
             description: '',
             radios: []
         };
-
-        // Watch for changes on the product's selected value property and clear out incidentTypeSelections on change
-        $scope.$watch('vm.product.selectedValue', function(newValue, oldValue){
-            if (oldValue && oldValue !== newValue) {
-                vm.product.incidentTypeSelections = [];
-                vm.productDetailInputComplete = false;
-            }
-        });
 
         /**
          * Initialize the controller's data.

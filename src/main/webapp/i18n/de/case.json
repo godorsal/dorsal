@@ -14,9 +14,9 @@
                 "resolved": "Resolved",
                 "completed": "Completed"
             },
-            "chatRoom": "Chat With Expert",
-            "viewDetails": "View Case Details",
-            "rateCase": "Rate This Case",
+            "chatRoom": "chat with expert",
+            "viewDetails": "view case details",
+            "rateCase": "rate this case",
             "id": "ID:",
             "lastUpdate": "Last Update:"
         },
