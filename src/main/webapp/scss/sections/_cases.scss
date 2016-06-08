@@ -1,0 +1,161 @@
+/* ==========================================================================
+Cases
+========================================================================== */
+
+.drsl-case-wrapper {
+    box-shadow: $content-box-shadow;
+    margin-bottom: $default-padding;
+
+    .drsl-current-case {
+        display: flex;
+        flex-flow: row;
+        min-height: 450px;
+
+        > div {
+            flex: 1;
+            background-color: white;
+
+            &:first-child {
+                margin-right: 20px;
+            }
+        }
+    }
+
+    .drsl-panels {
+        background-color: $content-background-color;
+
+        .panel.drsl-panel {
+            border-radius: 0;
+            margin-bottom: 0;
+            border: 0;
+
+            > .panel-heading {
+                border-radius: 0;
+                border: 0;
+                background-color: $brand-color;
+                color: $inverted-heading-text-color;
+
+                h3 {
+                    font-weight: $thin-weight;
+                }
+            }
+
+        }
+    }
+
+    .drsl-sub-header div {
+        flex: 2;
+        span {
+            margin-right: 10px;
+        }
+
+        &:last-child {
+            flex: 1;
+            text-align: right;
+            color: $inverted-heading-right-text-color;
+
+            span {
+                margin-right: 0;
+                &:last-child {
+                    color: $inverted-heading-text-color;
+                }
+            }
+        }
+    }
+
+    .drsl-sub-panel {
+        margin-bottom: $default-half-padding;
+
+        .panel-body span {
+            padding-right: $default-half-padding;
+        }
+    }
+
+    .drsl-case-history-wrapper {
+        padding: $default-padding $default-padding 1px $default-padding;
+        background-color: $content-background-color;
+
+        .panel-collapse > .panel-body {
+            padding: 0;
+        }
+
+        .drsl-right-sub-header {
+            font-weight: $thin-weight;
+        }
+
+        .panel-default > .panel-heading {
+            &.active {
+                background-color: $brand-color;
+                color: white;
+            }
+        }
+    }
+    .drsl-case-separator {
+        background-color: $brand-color;
+        height: $default-half-padding;
+    }
+    .drsl-case-status-wrapper {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+
+        > div {
+            flex: 2;
+        }
+
+        select {
+            display: inline-block;
+            width: auto;
+        }
+    }
+
+    .drsl-case-details, .drsl-case-expert {
+        > div {
+            padding: 20px;
+            border-bottom: 2px solid #E2E2E2;
+
+            &:last-child {
+                border: 0;
+            }
+        }
+    }
+
+    .drsl-case-details {
+        .drsl-timeline {
+            color: #c0c0c0;
+
+            .drsl-icon-sprites {
+                background-position: -65px 0;
+            }
+
+            .drsl-timeline-item-done {
+                .drsl-timeline-text {
+                    color: black;
+                    font-weight: 600;
+                }
+
+                .drsl-icon-sprites {
+                    background-position: -4px 0;
+                }
+            }
+        }
+    }
+
+    .drsl-case-expert {
+        .drsl-contact-wrapper {
+            display: flex;
+            flex-flow: row;
+            align-items: flex-start;
+
+            > div {
+                flex: inherit;
+                padding-right: $default-half-padding;
+                i {
+                    font-size: $medium-font-size;
+                    margin-right: 5px;
+                }
+            }
+        }
+    }
+
+}

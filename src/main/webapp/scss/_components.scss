@@ -22,6 +22,23 @@
     }
 }
 
+.drsl-action-bar {
+    background-color: #F48B3D;
+    padding: 5px 15px 5px 20px;
+    color: white;
+    font-size: 14px;
+    font-weight: 200;
+
+    i {
+        margin-right: 5px;
+    }
+
+    a {
+       color: white;
+       margin-right: 20px;
+    }
+}
+
 /*!
  *  Font Awesome 4.6.3 by @davegandy - http://fontawesome.io - @fontawesome
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)

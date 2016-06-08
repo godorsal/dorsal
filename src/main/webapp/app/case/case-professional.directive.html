@@ -1,13 +1,13 @@
 <div class="drsl-case-expert" style="position: relative;">
     <!-- Name -->
     <div>
-        <span translate="case.professional.expert">Expert:</span>
+        <span class="drsl-label" translate="case.professional.expert">Expert:</span>
         {{expert.firstName}} {{expert.lastName}}
     </div>
 
     <!-- Contact -->
     <div class="drsl-contact-wrapper">
-        <div translate="case.professional.contact.main">Contact:</div>
+        <div><span class="drsl-label" translate="case.professional.contact.main">Contact:</span></div>
         <div>
             <div ng-show="expert.contact.email"><i class="fa fa-envelope" tooltip-placement="top" uib-tooltip="{{'case.professional.contact.email' | translate}}" ></i> {{expert.contact.email}}</div>
             <div ng-show="expert.contact.phone"><i class="fa fa-phone" tooltip-placement="left" uib-tooltip="{{'case.professional.contact.phone' | translate}}"></i> {{expert.contact.phone}}</div>
@@ -23,14 +23,20 @@
         </a>
     </div>
 
-    <!-- Score -->
+    <!-- Languages -->
     <div>
-        <span translate="case.professional.score">Score:</span> {{expert.score}} out of 100
+        <span class="drsl-label">Languages</span> English, German, French, Italian, Farsi
+    </div>
+
+    <!-- Location and Score -->
+    <div>
+        <span><span class="drsl-label">Location</span> NYC</span>
+        <div class="pull-right"><span class="drsl-label" translate="case.professional.score">Score</span> {{expert.score}} out of 100</div>
     </div>
 
     <!-- Badges -->
     <div>
-        <span>Badges:</span>
+        <span class="drsl-label">Badges</span>
         <div style="padding-top: 10px;">
             <span class="drsl-badge-sprites {{badge}}" uib-tooltip="badge description here" ng-repeat="badge in expert.badges"></span>
         </div>

@@ -53,11 +53,36 @@ Navbar
     margin-top: 17px;
 }
 
+.nav.navbar-nav.navbar-right {
+    .dropdown-menu {
+        right: initial;
+        background-color: rgba(0, 0, 0, .8);
+
+        > li {
+            &.active {
+                a {
+                    background-color: rgba(0, 0, 0, 1);
+                    &:hover {
+                        color: #ffffff;
+                    }
+                }
+            }
+
+            > a {
+                color: #FFFFFF;
+                &:hover {
+                    color: #000000;
+                }
+            }
+        }
+    }
+}
+
 /* ==========================================================================
 Container
 ========================================================================== */
 .container {
-    @media screen and (min-width: 200px) and (max-width: 2500px) {
+    @media screen and (min-width: 200px) and (max-width: 4000px) {
         width: $site-max-width;
     }
 }
@@ -114,5 +139,34 @@ Buttons
             color:  $brand-color;
         }
 
+    }
+}
+
+/* ==========================================================================
+Forms
+========================================================================== */
+.form-control[readonly] {
+    background: white;
+}
+
+/* ==========================================================================
+Links
+========================================================================== */
+a, a:hover, a:focus {
+    color: $brand-color;
+
+    &.drsl-link-disabled {
+        opacity: .5;
+        cursor: default;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    &.drsl-link-inactive, &.drsl-link-inactive:hover, &.drsl-link-inactive:focus {
+        opacity: .5;
+        text-decoration: none;
+        cursor: default;
     }
 }

@@ -5,14 +5,18 @@
         .module('dorsalApp')
         .controller('CaseController', CaseController);
 
-    CaseController.$inject = ['$scope', '$state', 'CaseService'];
+    CaseController.$inject = ['$window', 'CaseService', 'RatingService', 'CaseDetailsService'];
 
-    function CaseController($scope, $state, CaseService) {
+    function CaseController($window, CaseService, RatingService, CaseDetailsService) {
         var vm = this;
         vm.init = init;
         vm.getHistory = getHistory;
         vm.getCurrentCase = getCurrentCase;
         vm.setCurrentCase = setCurrentCase;
+        vm.openRating = openRating;
+        vm.openDetails = openDetails;
+        vm.passedStep = passedStep;
+        vm.openChat = openChat;
         vm.cases = [];
         vm.currentCase = {};
         vm.status = {
@@ -35,7 +39,7 @@
         function init(){
             // Make a call to get the initial data.
             CaseService.get(function(data){
-                var i, cases, casesLength, currentCase, ecount = {count:0}, cleanCases = [];
+                var i, cases, casesLength, currentCase, cleanCases = [];
                 cases = data || [];
                 casesLength = cases.length;
 
@@ -49,9 +53,6 @@
                         if (!vm.experts[currentCase.expert]) {
                             vm.experts[currentCase.expert] = {};
                         }
-
-                        // Update case's date so we can display and sort on it
-                        currentCase.lastUpdate = new Date(currentCase.lastUpdated);
 
                         // Update the case's username
                         currentCase.user = vm.currentUser.name;
@@ -118,8 +119,67 @@
             return history;
         }
 
+        /**
+         * Sets the currentCase reference to the given case object.
+         * @param targetCase
+         */
         function setCurrentCase(targetCase) {
             vm.currentCase = targetCase;
+        }
+
+        /**
+         * Opens the rating dialog.
+         */
+        function openRating() {
+            if (vm.currentCase.status === 'resolved') {
+                var modalInstance = RatingService.open(vm.currentCase);
+
+                modalInstance.result.then(function () {
+                    vm.currentCase.status = 'completed';
+                });
+            }
+        }
+
+        /**
+         * Opens the case details dialog.
+         */
+        function openDetails() {
+            var modalInstance = CaseDetailsService.open(vm.currentCase, vm.experts[vm.currentCase.expert]);
+
+            modalInstance.result.then(function (result) {
+                // console.log(result);
+            });
+        }
+
+
+        /**
+         * Opens the chat dialog.
+         */
+        function openChat() {
+            if (vm.passedStep(1)){
+                $window.open(vm.currentCase.chatRoom.link, '_blank');
+            }
+        }
+
+        /**
+         * Checks to see if the provided index is less than or equal to the current step/status index.
+         * @param step
+         * @returns {boolean}
+         */
+        function passedStep(step) {
+            var stepIndex = 0;
+
+            if (vm.currentCase.status == 'completed') {
+                stepIndex = 4;
+            } else if (vm.currentCase.status == 'resolved') {
+                stepIndex = 3;
+            } else if (vm.currentCase.status == 'working') {
+                stepIndex = 2;
+            } else if (vm.currentCase.status == 'assigned') {
+                stepIndex = 1;
+            }
+
+            return (step <= stepIndex );
         }
     }
 })();
