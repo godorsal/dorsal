@@ -1,41 +1,54 @@
-<div ng-cloak>
+<div class="drsl-case-view" ng-cloak>
     <div class="row">
         <div class="col-md-12">
             <div class="drsl-case-wrapper">
+                <!-- Main Header -->
                 <div class="drsl-sub-header">
                     <div>
-                        <span style="margin-right: 10px;" translate="case.header">Case Summary</span>
-                        <span style="color: #838584">ID:</span>
-                        <span style="color: #838584; margin-right: 10px;">{{vm.currentCase.id}}</span>
-                        <span style="color: #838584">Start:</span>
-                        <span style="color: #838584"> {{vm.currentCase.startDate | date:"MM/dd/yy h:mm a"}}</span>
+                        <span translate="case.header">Case Summary</span>
+                        <span class="drsl-understated">ID: {{vm.currentCase.id}}</span>
                     </div>
-                    <div>{{'case.details.status.main' | translate}} <span style="color: white;">{{'case.details.status.'+vm.currentCase.status | translate}}</span></div>
-                </div>
-                <div style="display: flex; flex-flow: row;min-height:450px;">
-                    <div style="flex: 1;margin-right: 20px;background-color: white;">
-                        <case-summary case="vm.currentCase" expert="vm.experts[vm.currentCase.expert]" status="vm.status"></case-summary>
+                    <div>
+                        {{'case.details.status.main' | translate}}:
+                        <span>{{'case.details.status.'+vm.currentCase.status | translate}}</span>
                     </div>
-                    <div style="flex: 1;background-color: white;"><case-professional expert="vm.experts[vm.currentCase.expert]" chat-room="vm.currentCase.chatRoom" ng-show="vm.experts[vm.currentCase.expert]"></case-professional></div>
                 </div>
-                <div class="drsl-case-separator"></div>
+
+                <!-- Action Bar -->
+                <div class="drsl-action-bar">
+                    <i class="glyphicon glyphicon-menu-right"></i>
+                    <a ng-click="vm.openDetails()" translate="case.details.viewDetails">view case details</a>
+                    <a ng-click="vm.openChat()" ng-class="{'drsl-link-disabled': !vm.passedStep(1)}" class="drsl-link-disabled" translate="case.details.chatRoom">chat with expert</a>
+                    <a ng-class="{'drsl-link-disabled': !vm.passedStep(3), 'drsl-link-inactive': vm.currentCase.status == 'completed'}" ng-click="vm.openRating()" translate="case.details.rateCase">rate this case</a>
+                </div>
+
+                <!-- Current Case -->
+                <div class="drsl-current-case">
+                    <!-- Case Summary -->
+                    <div><case-summary case="vm.currentCase" expert="vm.experts[vm.currentCase.expert]" status="vm.status" passed-step="vm.passedStep"></case-summary></div>
+
+                    <!-- Case Professional -->
+                    <div><case-professional expert="vm.experts[vm.currentCase.expert]" chat-room="vm.currentCase.chatRoom" ng-show="vm.experts[vm.currentCase.expert]"></case-professional></div>
+                </div>
             </div>
 
+            <!-- Case History -->
             <div class="drsl-case-wrapper">
-                <div class="drsl-sub-header drsl-sub-sub-header" translate="case.history.header" style="text-transform: uppercase">Your Case History</div>
-                <div class="drsl-case-history-wrapper" style="padding-bottom: 20px;">
-                    <div class="panel panel-default" style="cursor: pointer;margin-bottom: 5px;" ng-repeat="case in vm.cases | orderBy:'-case.lastUpdated'">
-                        <div class="panel-heading" ng-class="{active: vm.currentCase == case}" ng-click="vm.setCurrentCase(case);" style="">
+                <!-- Header -->
+                <div class="drsl-sub-header drsl-sub-sub-header" translate="case.history.header">Your Case History</div>
+
+                <!-- Listing -->
+                <div class="drsl-case-history-wrapper">
+                    <div class="panel panel-default" ng-repeat="case in vm.cases | orderBy:'-case.lastUpdated'">
+                        <div class="panel-heading" ng-class="{active: vm.currentCase == case}" ng-click="vm.setCurrentCase(case);">
                             <h4 class="panel-title">
-                                <div style="display: flex;flex-flow: row;">
-                                    <div style="flex: .5;margin-right: 10px;">
-                                        <span>ID: {{case.id}}</span>
+                                <div class="drsl-case-list">
+                                    <div>
+                                        <span class="drsl-case-list-id">{{case.id}}</span>
+                                        <span>{{case.startDate | date}}</span>
                                     </div>
-                                    <div style="flex: 1;text-align: left;">
-                                        <span>Start: {{case.startDate | date}}</span>
-                                    </div>
-                                    <div style="flex: 2; text-align: right">
-                                        <div>Status: {{'case.details.status.'+case.status | translate}}</div>
+                                    <div>
+                                        <div>{{'case.details.status.'+case.status | translate}}</div>
                                     </div>
                                 </div>
                             </h4>

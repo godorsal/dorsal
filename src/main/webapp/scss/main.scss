@@ -1,9 +1,16 @@
-@import "variables";
-@import "keyframes";
-@import "hipster";
-@import "components";
-@import "overrides";
+@import "components/variables";
+@import "components/keyframes";
+@import "components/hipster";
+@import "components/overrides";
+@import "components/global";
+@import "components/icons";
 
+// Sections
+@import "sections/landing";
+@import "sections/login";
+@import "sections/concierge";
+@import "sections/cases";
+@import "sections/case-rating";
 /* ==========================================================================
 Global
 ========================================================================== */

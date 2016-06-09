@@ -1,0 +1,416 @@
+/* ==========================================================================
+Global
+========================================================================== */
+
+body {
+    background: $background-color url("../images/global/bkg.jpg") repeat-x;
+    font-family: $main-font;
+    color: $default-text-color;
+    font-size: $default-font-size;
+}
+
+.drsl-main-content {
+    position: relative;
+
+    &:after {
+        content: ' ';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: transparent;
+        width: 100%;
+        height: $nav-height;
+        z-index: 1;
+    }
+}
+
+.drsl-view {
+    > div:first-child {
+        padding: ($nav-height + $content-padding-top) $content-padding-side $content-padding-side $content-padding-side;
+        background-color: $content-container-color;
+        margin-left: -15px;
+        margin-right: -15px;
+        min-height: 800px;
+
+        &:before {
+            content: ' ';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: transparent url("../images/global/nv-bkg.png") repeat-x;
+            width: 100%;
+            height: 320px;
+        }
+    }
+}
+
+.drsl-no-padding {
+    padding: 0;
+}
+
+.drsl-sub-header {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    height: 70px;
+    padding-left: $default-padding;
+    padding-right: $default-padding;
+    text-transform: uppercase;
+    color: $sub-header-text-color;
+    font-size: $large-font-size;
+    font-weight: $thick-weight;
+    background: rgb(53, 48, 45);
+    background: linear-gradient(to bottom, rgba(53, 48, 45, 1) 0%, rgba(77, 67, 75, 1) 50%, rgba(53, 48, 45, 1) 100%);
+
+    &.drsl-sub-sub-header {
+        font-size: $medium-font-size;
+        text-transform: capitalize;
+        height: auto;
+        padding: $default-half-padding 15px $default-half-padding 15px;
+        line-height: 1.1;
+        font-weight: $thin-weight;
+    }
+
+    h2 {
+        font-size: $large-font-size;
+        font-weight: $thick-weight;
+        margin: 0;
+        padding: 0;
+    }
+
+    .drsl-understated {
+        color: $inverted-heading-right-text-color;
+    }
+}
+
+.drsl-button-wrapper {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin-top: $default-double-padding;
+
+    div {
+        flex: inherit
+    }
+}
+
+.drsl-expert-thumbnail {
+    margin-bottom: $default-half-padding;
+
+    .panel-body {
+        text-align: center;
+    }
+
+    .thumbnail {
+        text-align: center;
+        margin-bottom: 0
+    }
+
+    .drsl-thumbnail-badge-wrapper {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        text-align: center;
+        color: $brand-color;
+        font-size: $large-font-size;
+        margin-top: $default-half-padding;
+
+        div {
+            flex: 1;
+            span {
+                border: 1px solid $brand-color;
+                display: inline-block;
+                width: 25px;
+                border-radius: 25%;
+            }
+        }
+    }
+}
+
+// Linear Radio Buttons
+.drsl-linear-radio {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 30px;
+
+    .drsl-radio-desc {
+        flex: 1;
+        margin-right: $default-half-padding;
+        text-align: left;
+    }
+
+    .drsl-radio-wrapper {
+        position: relative;
+        top: -5px;
+        flex: 3;
+
+        hr {
+            position: absolute;
+            top: 70%;
+            left: 0;
+            width: 100%;
+            margin: 0;
+            z-index: 0;
+        }
+    }
+
+    .drsl-radio-set {
+        position: relative;
+        display: flex;
+        flex-flow: row;
+        z-index: 1;
+    }
+
+    .drsl-radio-item {
+        flex: 1;
+        font-size: $small-font-size;
+
+        label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: $default-weight;
+        }
+
+        input {
+            cursor: pointer;
+        }
+    }
+
+    input[type="radio"], input[type="checkbox"] {
+        display: none;
+    }
+    input[type="radio"] + label span, input[type="checkbox"] + label span {
+        display: inline-block;
+        width: 17px;
+        height: 17px;
+        cursor: pointer;
+        background-color: $content-background-color;
+        border: 3px solid $custom-radio-border-color;
+        border-radius: 50%;
+        margin-top: 5px;
+    }
+    input[type="checkbox"] + label span {
+        border-radius: 25%;
+    }
+    input[type="radio"]:checked + label span, input[type="checkbox"]:checked + label span {
+        background-color: $brand-color;
+        border: 3px solid $brand-color;
+    }
+}
+
+.modal-dialog {
+    &.modal-sm {
+        width: 600px;
+    }
+
+    &.modal-lg {
+        width: 970px;
+    }
+
+    .drsl-dialog-header {
+        h2 {
+            font-weight: 200;
+            margin-top: 0;
+            font-size: 22px;
+        }
+    }
+}
+
+.drsl-form-grid {
+    display: flex;
+    flex-flow: row;
+
+    > div {
+        flex: 1;
+        text-align: right;
+        margin-right: 20px;
+        margin-bottom: 15px;
+
+        &:last-child {
+            flex: 3;
+            text-align: left;
+            font-weight: 500;
+        }
+    }
+}
+
+.drsl-label {
+    color: #c0c0c0;
+}
+
+.drsl-badge-sprites {
+    background: url("../images/global/badge-sprites.png") no-repeat;
+    width: 65px;
+    height: 65px;
+    display: inline-block;
+    $pos-width: 65px;
+    $pos-x: 0px;
+    $pos-y: 0px;
+
+    &.badge-1 {
+        background-position: 0 0;
+    }
+    &.badge-2 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x 0;
+    }
+    &.badge-3 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x 0;
+    }
+    &.badge-4 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x 0;
+    }
+    &.badge-5 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x 0;
+    }
+    &.badge-6 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x 0;
+    }
+    &.badge-7 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x 0;
+    }
+    &.badge-8 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x 0;
+    }
+    &.badge-9 {
+        $pos-x: 0px;
+        $pos-y: -65px;
+        background-position: $pos-x $pos-y;
+    }
+    &.badge-10 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x $pos-y;
+    }
+    &.badge-11 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x $pos-y;
+    }
+    &.badge-12 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x $pos-y;
+    }
+    &.badge-13 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x $pos-y;
+    }
+}
+
+.drsl-icon-sprites {
+    background: url("../images/global/icon-sprites.png") no-repeat;
+    position: relative;
+    width: 65px;
+    height: 65px;
+    display: inline-block;
+    $pos-width: 65px;
+    $pos-x: 0px;
+    $pos-y: 0px;
+}
+
+.drsl-search {
+    padding: 10px 15px 15px 5px;
+    cursor: default;
+
+    .drsl-search-input {
+        display: none;
+        align-items: center;
+
+        input {
+            width: 150px;
+            color: white;
+            border: 1px solid #DDDCDB;
+            background-color: transparent;
+            padding: 4px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+
+    .drsl-search-toggle {
+        i {
+            margin: 8px 10px 10px 0;
+        }
+        &:hover, &:active, &focus {
+            color: #ffffff;
+        }
+    }
+
+    &.expanded {
+
+        .drsl-search-input {
+            display: inline-block;
+            margin-left: 5px;
+            input {
+                animation-name: drsl-search-expand-keyframe;
+                animation-duration: .5s;
+            }
+        }
+
+        .drsl-search-toggle {
+            i {
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+.drsl-custom-button {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    position: relative;
+    width: $custom-button-size;
+    height: $custom-button-size;
+    background-color: $custom-button-color;
+    box-shadow: $custom-button-shadow;
+    border-radius: 50%;
+    cursor: pointer;
+    text-align: center;
+    color: $custom-button-text-color;
+    font-size: $custom-button-font-size;
+    font-weight: bold;
+    line-height: $custom-button-line-height;
+    cursor: pointer;
+    border: 0;
+
+    span {
+        flex: 1;
+    }
+}
+
+.drsl-action-bar {
+    background-color: #F48B3D;
+    padding: 5px 15px 5px 20px;
+    color: white;
+    font-size: 14px;
+    font-weight: 200;
+
+    i {
+        margin-right: 5px;
+    }
+
+    a {
+        color: white;
+        margin-right: 20px;
+    }
+}
+
+.drsl-scrolling-container {
+    display: block;
+    overflow-y: auto;
+    border: 2px solid #E2E2E2;
+    border-radius: 5px;
+    padding: 5px;
+}

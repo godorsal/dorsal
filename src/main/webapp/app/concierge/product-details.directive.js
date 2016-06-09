@@ -9,8 +9,7 @@
         var directive = {
             restrict: 'E',
             scope:  {
-                product: '=',
-                complete: '='
+                product: '='
             },
             template:   '<div class="well drsl-product-details-wrapper" ng-show="canShowProductDetails()">' +
                             '<h4>{{getSelectedProductsLabel() | translate}}</h4>' +

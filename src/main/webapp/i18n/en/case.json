@@ -3,34 +3,34 @@
         "header": "Case Summary",
         "details": {
             "header": "Current Case",
-            "user": "User:",
-            "summary": "Summary:",
-            "resolutionETA": "ETA to Resolution:",
+            "user": "User",
+            "summary": "Summary",
+            "resolutionETA": "ETA to Completion",
             "status": {
-                "main": "Status:",
+                "main": "Status",
                 "created": "Created",
                 "assigned": "Assigned",
                 "working": "Working",
                 "resolved": "Resolved",
                 "completed": "Completed"
             },
-            "chatRoom": "Chat With Expert",
-            "viewDetails": "View Case Details",
-            "rateCase": "Rate This Case",
+            "chatRoom": "chat with expert",
+            "viewDetails": "view case details",
+            "rateCase": "rate this case",
             "id": "ID:",
             "lastUpdate": "Last Update:"
         },
         "professional": {
             "header": "Support Professional",
-            "expert": "Expert:",
+            "expert": "Expert",
             "contact": {
-                "main": "Contact:",
+                "main": "Contact",
                 "email": "email",
                 "phone": "phone",
                 "skype": "skype",
                 "chat": "chat"
             },
-            "score": "Score:",
+            "score": "Score",
             "badges": {
                 "badge1": "Lightning fast responses!",
                 "badge2": "Burns through issues!",

@@ -1,0 +1,118 @@
+/* ==========================================================================
+Concierge
+========================================================================== */
+
+.drsl-concierge-wrapper {
+    display: flex;
+    flex-flow: row;
+
+    .drsl-chat-wrapper {
+        flex: auto;
+        max-width: 652px;
+        background-color: $content-background-color;
+        margin-right: 50px;
+        box-shadow: $content-box-shadow;
+
+        .drsl-sub-header div {
+            flex: 1;
+
+            &:last-child {
+                text-align: right;
+                color: $inverted-heading-right-text-color;
+            }
+        }
+
+        .drsl-chat-login-wrapper {
+            width: 652px;
+            position: relative;
+            top: 100px;
+
+            .drsl-chat-login {
+                width: 300px;
+                margin: auto;
+
+                .panel-body .form-group:last-child {
+                    text-align: right;
+                    margin-bottom: 0;
+                }
+            }
+        }
+
+    }
+
+    .drsl-chat-body {
+        padding: $default-padding;
+    }
+
+    .drsl-case-details-wrapper {
+        flex: auto;
+        background-color: $content-background-color;
+        box-shadow: $content-box-shadow;
+
+        .drsl-field-seciton {
+            display: flex;
+            flex-flow: row;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 30px;
+
+            .drsl-field-label {
+                flex: 1;
+                margin-right: $default-half-padding;
+                text-align: left;
+            }
+
+            .drsl-field-sub-label {
+                font-size: $tiny-font-size;
+            }
+
+            .drsl-field-input {
+                position: relative;
+                flex: 3;
+            }
+        }
+
+        .drsl-file-upload {
+            .drsl-field-label {
+                flex: 2;
+            }
+
+            .drsl-field-input {
+                flex: 3;
+                padding: 5px;
+            }
+        }
+
+        .drsl-product-details-wrapper {
+            margin-bottom: $default-double-padding;
+
+            > h4 {
+                margin-top: 0
+            }
+
+            .drsl-product-detail-selections {
+                margin-left: $default-padding;
+                margin-bottom: 4px;
+            }
+
+            .accordion-toggle i.pull-right {
+                color: $brand-color;
+            }
+
+            .drsl-product-header-selection {
+                font-weight: $thin-weight;
+                color: $brand-color;
+            }
+
+            .drsl-product-detail-input {
+                margin-bottom: 4px;
+
+                input[type="text"].form-control {
+                    display: inline-block;
+                    width: 150px;
+                    margin-right: 5px;
+                }
+            }
+        }
+    }
+}

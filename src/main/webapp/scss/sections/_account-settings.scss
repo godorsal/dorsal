@@ -1,0 +1,73 @@
+/* ==========================================================================
+Account Settings
+========================================================================== */
+
+.drsl-account-settings {
+    .drsl-settings-wrapper {
+        box-shadow: $content-box-shadow;
+        margin-bottom: $default-padding;
+        background-color: #FFFFFF;
+    }
+
+    .drsl-panels {
+        padding: 20px;
+    }
+
+    .drsl-payment-content {
+        padding: 20px;
+        display: flex;
+        flex-flow: row;
+        > div {
+            flex: 1;
+
+            &:first-child {
+                margin-right: $default-padding;
+            }
+        }
+    }
+
+    .drsl-user-managment {
+        .drsl-user-add-form {
+            > div {
+                display: flex;
+                flex-flow: row;
+
+                > div {
+                    flex: 1;
+
+                    &:first-child {
+                        flex: 3;
+                        padding-right: 15px;
+                    }
+                }
+            }
+        }
+
+        .drsl-user-list {
+            display: flex;
+            flex-flow: row;
+            height: 180px;
+            background-color: #F5F5F5;
+            border: 1px solid #DDDDDD;
+            margin-top: 15px;
+
+            &.empty {
+                align-items: center;
+                > div {
+                    text-align: center;
+                }
+            }
+
+            > div {
+                flex: 1;
+                color: #c0c0c0;
+                padding: 5px;
+                overflow: auto;
+            }
+
+            button {
+                margin: 5px;
+            }
+        }
+    }
+}

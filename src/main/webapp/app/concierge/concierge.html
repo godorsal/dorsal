@@ -50,6 +50,18 @@
                                 <textarea class="form-control" ng-model="vm.caseDetails.description" placeholder="{{'concierge.caseDetails.description.placeholder' | translate}}"></textarea>
                             </div>
                         </div>
+                        <!-- Dynamic Product Details -->
+                        <product-details product="vm.product" complete="vm.productDetailInputComplete"></product-details>
+                        <!-- File Upload -->
+                        <div class="drsl-field-seciton drsl-file-upload">
+                            <div class="drsl-field-label">
+                                <span translate="concierge.caseDetails.file.main">Attach file (optional)</span>
+                                <div class="drsl-field-sub-label" translate="concierge.caseDetails.file.notes">(Screenshot, Logfile, Configuration) </div>
+                            </div>
+                            <div class="drsl-field-input">
+                                <div style="border: 1px dashed #DBD9DA; text-align: center; padding: 10px;"><i class="fa fa-cloud-upload fa-lg"></i> Drop files to attach, or <span style="color:#F48B3D;">browse</span></div>
+                            </div>
+                        </div>
 
                         <!-- Main Button -->
                         <div class="drsl-button-wrapper">

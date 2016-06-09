@@ -19,7 +19,7 @@
 
         return service;
 
-        function open () {
+        function open (drslCase) {
             if (modalInstance !== null) return;
             modalInstance = $uibModal.open({
                 animation: true,
@@ -28,6 +28,7 @@
                 controllerAs: 'vm',
                 size:'sm',
                 resolve: {
+                    drslCase: function(){ return drslCase; },
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('rating');
                         return $translate.refresh();

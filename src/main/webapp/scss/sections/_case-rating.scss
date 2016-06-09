@@ -1,0 +1,46 @@
+/* ==========================================================================
+Case Rating
+========================================================================== */
+
+.drsl-dialog {
+    .modal-body {
+        padding: 0;
+
+        > div {
+            padding: 20px;
+
+            &:first-child {
+                background-color: white;
+                box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.15);
+            }
+
+            &:last-child {
+                text-align: right;
+            }
+
+        }
+    }
+
+    .drsl-linear-radio {
+        margin-bottom: 20px;
+        .drsl-radio-desc {
+            display: none;
+        }
+        .drsl-radio-item {
+            font-size: $default-font-size;
+        }
+    }
+    h2 {
+        margin-bottom: 20px;
+    }
+    h3 {
+        font-size: $medium-font-size;
+        font-weight: 200;
+        padding: 10px 0px;
+        margin: 0 0 10px;
+    }
+
+    .btn.btn-default {
+        margin-right: 10px;
+    }
+}

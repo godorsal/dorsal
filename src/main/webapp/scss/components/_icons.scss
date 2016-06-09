@@ -1,27 +1,3 @@
-.drsl-custom-button {
-    display: flex;
-    flex-flow: row;
-    align-items: center;
-    position: relative;
-    width: $custom-button-size;
-    height: $custom-button-size;
-    background-color: $custom-button-color;
-    box-shadow: $custom-button-shadow;
-    border-radius: 50%;
-    cursor: pointer;
-    text-align: center;
-    color: $custom-button-text-color;
-    font-size: $custom-button-font-size;
-    font-weight: bold;
-    line-height: $custom-button-line-height;
-    cursor: pointer;
-    border: 0;
-
-    span {
-        flex: 1;
-    }
-}
-
 /*!
  *  Font Awesome 4.6.3 by @davegandy - http://fontawesome.io - @fontawesome
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
