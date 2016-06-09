@@ -15,7 +15,7 @@
                 passedStep: '=',
                 history: '@',
             },
-            templateUrl: 'app/case/case-details.directive.html',
+            templateUrl: 'app/case/case-summary.directive.html',
             link: linkFunc
         };
 
