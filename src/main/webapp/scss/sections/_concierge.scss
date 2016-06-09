@@ -3,12 +3,13 @@ Concierge
 ========================================================================== */
 
 .drsl-concierge-wrapper {
-    display: flex;
-    flex-flow: row;
+    // display: flex;
+    // flex-flow: row;
 
     .drsl-chat-wrapper {
         flex: auto;
         max-width: 652px;
+        // max-height: 723px;
         background-color: $content-background-color;
         margin-right: 50px;
         box-shadow: $content-box-shadow;

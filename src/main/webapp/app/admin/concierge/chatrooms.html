@@ -19,8 +19,8 @@
       <div class="col-md-2 col-sm-3">
         <br>
         <ul class="nav nav-pills pull-right">
-          <li><button type="button" class="btn btn-default" ng-click="crc.refreshRooms()"><i class="glyphicon glyphicon-refresh"></i></button></li>
-          <li><button type="button" class="btn btn-default" ng-click="crc.delete()" ng-disabled="crc.rooms.length == 0"><i class="glyphicon glyphicon-trash"></i></button></li>
+          <li><button type="button" class="btn btn-different" ng-click="crc.refreshRooms()"><i class="glyphicon glyphicon-refresh"></i></button></li>
+          <li><button type="button" class="btn btn-different" ng-click="crc.delete()" ng-disabled="crc.rooms.length == 0"><i class="glyphicon glyphicon-trash"></i></button></li>
         </ul>
       </div>
     </div>
@@ -34,8 +34,8 @@
         <uib-accordion-heading>
           {{room.room}}&nbsp;&nbsp;
           <span ng-if="room.membersCount === 2">Concierge is present</span>
-          <button class="btn btn-xs btn-default" ng-click="crc.join(room)" ng-hide="crc.isMemberOfRoom(room.room)">Join</button>
-          <button class="btn btn-xs btn-default" ng-click="crc.leave(room)" ng-show="crc.isMemberOfRoom(room.room)">Leave</button>
+          <button class="btn btn-xs btn-different" ng-click="crc.join(room)" ng-hide="crc.isMemberOfRoom(room.room)">Join</button>
+          <button class="btn btn-xs btn-different" ng-click="crc.leave(room)" ng-show="crc.isMemberOfRoom(room.room)">Leave</button>
           &nbsp;<i class="pull-right glyphicon glyphicon glyphicon-remove" ng-click="crc.deleteRoom(room, $index)"></i>
         </uib-accordion-heading>
 
