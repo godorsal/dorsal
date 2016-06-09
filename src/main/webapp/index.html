@@ -10,7 +10,9 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css content/css/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/toastr/toastr.css">
     <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css">
+    <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css">
     <!-- endinject -->
     <link rel="stylesheet" href="content/css/vendor.css">
     <!-- endbuild -->
@@ -49,6 +51,8 @@
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/messageformat/messageformat.js"></script>
     <script src="bower_components/json3/lib/json3.js"></script>
+    <script src="bower_components/lodash/lodash.js"></script>
+    <script src="bower_components/toastr/toastr.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
@@ -67,6 +71,8 @@
     <script src="bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.js"></script>
     <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
     <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
+    <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
     <!-- endinject -->
     <!-- endbuild -->
 
@@ -95,6 +101,7 @@
     <script src="app/layouts/navbar/active-menu.directive.js"></script>
     <script src="app/layouts/navbar/active-link.directive.js"></script>
     <script src="app/layouts/error/error.state.js"></script>
+    <script src="app/index.config.js"></script>
     <script src="app/home/home.state.js"></script>
     <script src="app/home/home.controller.js"></script>
     <script src="app/entities/entity.state.js"></script>
@@ -102,12 +109,7 @@
     <script src="app/concierge/concierge.state.js"></script>
     <script src="app/concierge/concierge.service.js"></script>
     <script src="app/concierge/concierge.controller.js"></script>
-    <script src="app/concierge/chat-system/simplemodal.service.js"></script>
-    <script src="app/concierge/chat-system/server.service.js"></script>
-    <script src="app/concierge/chat-system/chatrooms.service.js"></script>
-    <script src="app/concierge/chat-system/chatrooms.controller.js"></script>
-    <script src="app/concierge/chat-system/chatroom.controller.js"></script>
-    <script src="app/concierge/chat-system/chat.service.js"></script>
+    <script src="app/concierge/chatroom.directive.js"></script>
     <script src="app/components/util/truncate-words.filter.js"></script>
     <script src="app/components/util/truncate-characters.filter.js"></script>
     <script src="app/components/util/sort-by.directive.js"></script>
@@ -135,6 +137,10 @@
     <script src="app/components/alert/alert-error.directive.js"></script>
     <script src="app/components/alert/alert.service.js"></script>
     <script src="app/components/alert/alert.directive.js"></script>
+    <script src="app/chat-system/simplemodal.service.js"></script>
+    <script src="app/chat-system/server.service.js"></script>
+    <script src="app/chat-system/chatrooms.service.js"></script>
+    <script src="app/chat-system/chat.service.js"></script>
     <script src="app/case-details/case-details.service.js"></script>
     <script src="app/case-details/case-details.controller.js"></script>
     <script src="app/case/expert-thumbnail.directive.js"></script>
@@ -179,7 +185,8 @@
     <script src="app/admin/configuration/configuration.state.js"></script>
     <script src="app/admin/configuration/configuration.service.js"></script>
     <script src="app/admin/configuration/configuration.controller.js"></script>
-    <script src="app/admin/concierge/concierge.state.js"></script>
+    <script src="app/admin/concierge/concierge-admin.state.js"></script>
+    <script src="app/admin/concierge/chatrooms/chatrooms.directive.js"></script>
     <script src="app/admin/audits/audits.state.js"></script>
     <script src="app/admin/audits/audits.service.js"></script>
     <script src="app/admin/audits/audits.controller.js"></script>

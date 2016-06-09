@@ -120,7 +120,7 @@
             /**
              * Returns the label for the given type's selectedValue type.
              * @param type an incident type object.
-             * @returns {string} the label for the given type's selectedValue type.
+             * @returns {string} the label  for the given type's selectedValue type.
              */
             scope.getLabelForTypeValue = function (type) {
                 var label = '',

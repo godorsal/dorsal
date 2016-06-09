@@ -1,151 +1,65 @@
 <div ng-cloak>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="drsl-concierge-wrapper">
-        <!-- Concierge Chat -->
-        <div class="drsl-chat-wrapper">
-          <!-- Header -->
-          <div class="drsl-sub-header">
-            <div translate="concierge.chat.header">Concierge Chat</div>
-            <div>{{vm.pageTitle}}</div>
-          </div>
-
-          <!-- Mock chat page -->
-          <div ng-show="vm.showChat">
-            <iframe src="http://localhost:3000/#/chatroom" width="652" height="725"></iframe>
-
-            <!-- <img src="content/images/chat.jpg" /> -->
-          </div>
-
-          <!-- Login Form -->
-          <form ng-hide="vm.showChat" ng-submit="vm.startChat($event)">
-            <!-- <div class="drsl-chat-login-wrapper">
-            <div class="drsl-chat-login">
-            <div class="panel panel-default">
-            <div class="panel-heading">
-            <h3 class="panel-title" translate="concierge.chat.login.header">Need help getting started?</h3>
-          </div>
-          <div class="panel-body">
-          <div class="form-group">
-          <input type="text" ng-model="vm.chatName" class="form-control" placeholder="{{'concierge.chat.login.placeholder' | translate}}" />
-        </div>
-        <div class="form-group">
-        <button type="submit" class="btn btn-success" translate="concierge.chat.login.button">Chat with a concierge</button>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-</div> -->
-<!-- <iframe class="chatroom" src="http://localhost:3000/#/chatroom" width="650" height="725"></iframe> -->
-<div class="container">
-  <br />
-  <div class="container grid-container no-padding">
-    <div class="" ng-show="!rc.joined">
-      <div class="drsl-chat-login-wrapper">
-        <div class="drsl-chat-login">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title" translate="concierge.chat.login.header">Start Chat</h3>
-            </div>
-            <div class="panel-body">
-              <form class="form-horizontal col-sm-8 col-md-8" name="joinform" novalidate>
-                <div class="form-group">
-                  <label class="col-sm-2 control-label"></label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="First Name" ng-model="rc.person.firstName" required>
-                  </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="drsl-concierge-wrapper">
+                <!-- Concierge Chat -->
+                <div class="drsl-chat-wrapper">
+                    <!-- Header -->
+                    <div class="drsl-sub-header">
+                        <div translate="concierge.chat.header">Concierge Chat</div>
+                        <div>{{vm.pageTitle}}</div>
+                    </div>
+                    <chatroom></chatroom>
                 </div>
-                <div class="form-group">
-                  <label class="col-sm-2 control-label"></label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="Last Name" ng-model="rc.person.lastName" required>
-                  </div>
+
+                <!-- Case Details -->
+                <div class="drsl-case-details-wrapper">
+                    <!-- Header -->
+                    <div class="drsl-sub-header" translate="concierge.caseDetails.header">Create Your Case</div>
+
+                    <div class="drsl-chat-body">
+                        <!-- Summary -->
+                        <div class="drsl-field-seciton">
+                            <div class="drsl-field-label" translate="concierge.caseDetails.summary.main">Summary</div>
+                            <div class="drsl-field-input">
+                                <input type="text" class="form-control" ng-model="vm.caseDetails.summary" placeholder="{{'concierge.caseDetails.summary.placeholder' | translate}}">
+                            </div>
+                        </div>
+
+                        <!-- Radio Buttons -->
+                        <linear-radio target-data="radio.selectedValue"
+                        radio-data="radio"
+                        ng-repeat="radio in vm.caseDetails.radios"></linear-radio>
+
+                        <!-- Dynamic Product Details -->
+                        <product-details product="vm.product" complete="vm.productDetailInputComplete"></product-details>
+                        <!-- File Upload -->
+                        <div class="drsl-field-seciton drsl-file-upload">
+                            <div class="drsl-field-label">
+                                <span translate="concierge.caseDetails.file.main">Attach file (optional)</span>
+                                <div class="drsl-field-sub-label" translate="concierge.caseDetails.file.notes">(Screenshot, Logfile, Configuration) </div>
+                            </div>
+                            <div class="drsl-field-input">
+                                <div style="border: 1px dashed #DBD9DA; text-align: center; padding: 10px;"><i class="fa fa-cloud-upload fa-lg"></i> Drop files to attach, or <span style="color:#F48B3D;">browse</span></div>
+                            </div>
+                        </div>
+
+                        <div class="drsl-field-seciton">
+                            <div class="drsl-field-label"translate="concierge.caseDetails.description.main">Description</div>
+                            <div class="drsl-field-input">
+                                <textarea class="form-control" ng-model="vm.caseDetails.description" placeholder="{{'concierge.caseDetails.description.placeholder' | translate}}"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Main Button -->
+                        <div class="drsl-button-wrapper">
+                            <div>
+                                <button type="submit" class="drsl-custom-button" ng-click="vm.submitForm()"><span translate="concierge.caseDetails.button" style="margin-bottom: 5px;">go</span></button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                  <div class="col-sm-offset-2 col-sm-10 text-right">
-                    <button type="submit" class="btn btn-default" ng-click="rc.join()" ng-disabled="!joinform.$valid">let's chat</button>
-                  </div>
-                </div>
-              </form>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-    <div class="" ng-show="rc.joined">
-      <div class="panel panel-default">
-        <div class="chat">
-          <p class="phrase" ng-repeat="phrase in rc.phrases">
-            <span class="name">{{phrase.username}}</span><br><span class="text">{{phrase.message}}</span></p>
-          </div>
-          <hr>
-          <form ng-submit="rc.post()">
-            <div class="input-group chatbar">
-              <input type="text" class="form-control " placeholder="Type a phrase..." ng-model="rc.message"/>
-              <span class="input-group-btn">
-                <button class="btn btn-different" type="submit" ng-click="rc.post()">SEND</button>
-              </span>
-            </div>
-          </form>
-          <br />
-        </div>
-      </div>
-    </div>
-  </div>
-
-</form>
-</div>
-
-<!-- Case Details -->
-<div class="drsl-case-details-wrapper">
-  <!-- Header -->
-  <div class="drsl-sub-header" translate="concierge.caseDetails.header">Create Your Case</div>
-
-  <div class="drsl-chat-body">
-    <!-- Summary -->
-    <div class="drsl-field-seciton">
-      <div class="drsl-field-label" translate="concierge.caseDetails.summary.main">Summary</div>
-      <div class="drsl-field-input">
-        <input type="text" class="form-control" ng-model="vm.caseDetails.summary" placeholder="{{'concierge.caseDetails.summary.placeholder' | translate}}">
-      </div>
-    </div>
-
-    <!-- Radio Buttons -->
-    <linear-radio target-data="radio.selectedValue"
-    radio-data="radio"
-    ng-repeat="radio in vm.caseDetails.radios"></linear-radio>
-
-    <!-- Dynamic Product Details -->
-    <product-details product="vm.product" complete="vm.productDetailInputComplete"></product-details>
-
-    <div class="drsl-field-seciton">
-      <div class="drsl-field-label"translate="concierge.caseDetails.description.main">Description</div>
-      <div class="drsl-field-input">
-        <textarea class="form-control" ng-model="vm.caseDetails.description" placeholder="{{'concierge.caseDetails.description.placeholder' | translate}}"></textarea>
-      </div>
-    </div>
-
-    <!-- File Upload -->
-    <div class="drsl-field-seciton drsl-file-upload">
-      <div class="drsl-field-label">
-        <span translate="concierge.caseDetails.file.main">Attach file (optional)</span>
-        <div class="drsl-field-sub-label" translate="concierge.caseDetails.file.notes">(Screenshot, Logfile, Configuration) </div>
-      </div>
-      <div class="drsl-field-input" translate="concierge.caseDetails.file.instructions">
-        drag files here to upload
-      </div>
-    </div>
-
-    <!-- Main Button -->
-    <div class="drsl-button-wrapper">
-      <div>
-        <button type="submit" class="drsl-custom-button" ng-click="vm.submitForm()"><span translate="concierge.caseDetails.button" style="margin-bottom: 5px;">go</span></button>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-</div>
 </div>

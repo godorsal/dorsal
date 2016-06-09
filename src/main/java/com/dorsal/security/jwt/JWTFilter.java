@@ -15,9 +15,9 @@ import org.springframework.web.filter.GenericFilterBean;
 import io.jsonwebtoken.ExpiredJwtException;
 
 /**
- * Filters incoming requests and installs a Spring Security principal if a header corresponding to a valid user is
- * found.
- */
+* Filters incoming requests and installs a Spring Security principal if a header corresponding to a valid user is
+* found.
+*/
 public class JWTFilter extends GenericFilterBean {
 
     private final Logger log = LoggerFactory.getLogger(JWTFilter.class);
@@ -30,7 +30,7 @@ public class JWTFilter extends GenericFilterBean {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
-        throws IOException, ServletException {
+    throws IOException, ServletException {
         try {
             HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
             String jwt = resolveToken(httpServletRequest);
@@ -53,7 +53,7 @@ public class JWTFilter extends GenericFilterBean {
             String jwt = bearerToken.substring(7, bearerToken.length());
             return jwt;
         }
-        
+
         return null;
     }
 }
