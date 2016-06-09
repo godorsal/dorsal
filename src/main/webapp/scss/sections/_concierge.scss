@@ -3,8 +3,8 @@ Concierge
 ========================================================================== */
 
 .drsl-concierge-wrapper {
-    // display: flex;
-    // flex-flow: row;
+    display: flex;
+    flex-flow: row;
 
     .drsl-chat-wrapper {
         flex: auto;
@@ -115,5 +115,47 @@ Concierge
                 }
             }
         }
+    }
+}
+.chatrooms{
+    margin-top: 100px;
+}
+.chatroom{
+    border: none;
+    width: 637px;
+}
+
+.btn-different{
+    background-color: #F48B3D;
+    color: white;
+    margin-right: 10px;
+    height: 34px;
+}
+
+.chat {
+    min-height: 500px;
+    overflow-y: scroll;
+    height: 500px;
+    .name {
+        color: #333;
+        font-weight: bold;
+        // color: #B4001D;
+    }
+
+    .name::after {
+        // content: ': ';
+    }
+
+    .text {
+        color: #333333;
+        // color: #3B00B2;
+    }
+
+    .phrase:last-child {
+        margin-bottom: 0;
+    }
+    .phrase{
+        border-bottom: 0.5px solid #EEEEEE;
+        margin-left: 10px;
     }
 }
