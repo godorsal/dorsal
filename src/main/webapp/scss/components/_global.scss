@@ -406,3 +406,11 @@ body {
         margin-right: 20px;
     }
 }
+
+.drsl-scrolling-container {
+    display: block;
+    overflow-y: auto;
+    border: 2px solid #E2E2E2;
+    border-radius: 5px;
+    padding: 5px;
+}

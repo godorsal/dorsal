@@ -1,13 +1,13 @@
-<div class="drsl-case-details">
+<div class="drsl-case-summary">
     <!-- User Name -->
-    <div style="display: flex; flex-flow: row;">
-        <div style="flex: 1;"><span class="drsl-label" translate="case.details.user">User:</span> {{case.user}}</div>
+    <div>
+        <span class="drsl-label" translate="case.details.user">User:</span> {{case.user}}
     </div>
 
     <!-- Summary -->
-    <div style="display: flex;flex-flow: row;">
-        <div style="flex: inherit;margin-right: 5px;"><span class="drsl-label" translate="case.details.summary">Summary:</span></div>
-        <div style="flex: auto;"><textarea readonly class="form-control" style="max-width: 450px;height:76px;">{{case.summary}}</textarea></div>
+    <div class="drsl-label-value-row">
+        <div><span class="drsl-label" translate="case.details.summary">Summary:</span></div>
+        <div><div class="drsl-scrolling-container">{{case.summary}}</div></div>
     </div>
 
     <!-- Status -->
@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    <!-- Start / ETA to Resolution -->
+    <!-- Start / ETA to Completion -->
     <div>
         <span><span class="drsl-label">Start</span> {{case.startDate | date:"MM/dd/yy h:mm a"}}</span>
         <div class="pull-right"><span class="drsl-label" translate="case.details.resolutionETA">ETA to Completion</span> {{case.resolutionETA}}</div>
@@ -30,12 +30,12 @@
 
     <!-- Timeline -->
     <div class="drsl-timeline">
-        <div><span class="drsl-label">Timeline</span></div>
-        <div style="margin-top:10px;margin-left: -20px;margin-right: -20px;position: relative;">
-            <div style="border-bottom: 2px solid #E2E2E2; position: absolute;top:40%;width: 100%;"></div>
+        <div class="drsl-label">Timeline</div>
+        <div class="drsl-timeline-icon-wrapper">
+            <hr />
 
-            <div style="display: flex; flex-flow: row; text-align: center;">
-                <div ng-class="{'drsl-timeline-item-done': passedStep($index)}" style="flex: 1;" ng-repeat="status in statusOptions">
+            <div class="drsl-timeline-icons">
+                <div ng-class="{'drsl-timeline-item-done': passedStep($index)}" ng-repeat="status in statusOptions">
                     <div>
                         <span class="drsl-icon-sprites"></span>
                     </div>

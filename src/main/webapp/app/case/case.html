@@ -1,4 +1,4 @@
-<div ng-cloak>
+<div class="drsl-case-view" ng-cloak>
     <div class="row">
         <div class="col-md-12">
             <div class="drsl-case-wrapper">
@@ -35,19 +35,19 @@
             <!-- Case History -->
             <div class="drsl-case-wrapper">
                 <!-- Header -->
-                <div class="drsl-sub-header drsl-sub-sub-header" translate="case.history.header" style="text-transform: uppercase">Your Case History</div>
+                <div class="drsl-sub-header drsl-sub-sub-header" translate="case.history.header">Your Case History</div>
 
                 <!-- Listing -->
-                <div class="drsl-case-history-wrapper" style="padding-bottom: 20px;">
-                    <div class="panel panel-default" style="cursor: pointer;margin-bottom: 5px;" ng-repeat="case in vm.cases | orderBy:'-case.lastUpdated'">
-                        <div class="panel-heading" ng-class="{active: vm.currentCase == case}" ng-click="vm.setCurrentCase(case);" style="">
+                <div class="drsl-case-history-wrapper">
+                    <div class="panel panel-default" ng-repeat="case in vm.cases | orderBy:'-case.lastUpdated'">
+                        <div class="panel-heading" ng-class="{active: vm.currentCase == case}" ng-click="vm.setCurrentCase(case);">
                             <h4 class="panel-title">
-                                <div style="display: flex;flex-flow: row;">
-                                    <div style="flex: 3;margin-right: 10px;">
-                                        <span style="display: inline-block;width: 200px;">{{case.id}}</span>
+                                <div class="drsl-case-list">
+                                    <div>
+                                        <span class="drsl-case-list-id">{{case.id}}</span>
                                         <span>{{case.startDate | date}}</span>
                                     </div>
-                                    <div style="flex: 1; text-align: right">
+                                    <div>
                                         <div>{{'case.details.status.'+case.status | translate}}</div>
                                     </div>
                                 </div>

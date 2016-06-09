@@ -2,9 +2,16 @@
 Cases
 ========================================================================== */
 
-.drsl-case-wrapper {
-    box-shadow: $content-box-shadow;
-    margin-bottom: $default-padding;
+.drsl-case-view {
+
+    .drsl-case-wrapper {
+        box-shadow: $content-box-shadow;
+        margin-bottom: $default-padding;
+    }
+
+    .drsl-sub-sub-header {
+        text-transform: uppercase;
+    }
 
     .drsl-current-case {
         display: flex;
@@ -72,7 +79,7 @@ Cases
     }
 
     .drsl-case-history-wrapper {
-        padding: $default-padding $default-padding 1px $default-padding;
+        padding: $default-padding;
         background-color: $content-background-color;
 
         .panel-collapse > .panel-body {
@@ -83,10 +90,35 @@ Cases
             font-weight: $thin-weight;
         }
 
-        .panel-default > .panel-heading {
-            &.active {
-                background-color: $brand-color;
-                color: white;
+        .panel-default {
+            cursor: pointer;
+            margin-bottom: 5px;
+
+            > .panel-heading {
+                &.active {
+                    background-color: $brand-color;
+                    color: white;
+                }
+            }
+        }
+
+        .drsl-case-list {
+            display: flex;
+            flex-flow: row;
+            > div {
+                &:first-child {
+                    flex: 3;
+                    margin-right: 10px;
+                }
+                &:last-child {
+                    flex: 1;
+                    text-align: right
+                }
+            }
+
+            .drsl-case-list-id {
+                display: inline-block;
+                width: 200px;
             }
         }
     }
@@ -109,7 +141,7 @@ Cases
         }
     }
 
-    .drsl-case-details, .drsl-case-expert {
+    .drsl-case-summary, .drsl-case-expert {
         > div {
             padding: 20px;
             border-bottom: 2px solid #E2E2E2;
@@ -120,12 +152,59 @@ Cases
         }
     }
 
-    .drsl-case-details {
+    .drsl-case-summary {
+        .drsl-label-value-row {
+            display: flex;
+            flex-flow: row;
+
+            > div {
+                flex: auto;
+
+                &:first-child {
+                    flex: inherit;
+                    margin-right: 5px;
+                }
+
+                .drsl-scrolling-container {
+                    width: 450px;
+                    height: 76px;
+                    margin-top: -5px;
+                }
+            }
+        }
+
         .drsl-timeline {
             color: #c0c0c0;
 
+            hr {
+                border: 0;
+                height: 2px;
+                background: #E2E2E2;
+                position: absolute;
+                top: 40%;
+                width: 100%;
+                margin: 0;
+            }
+
             .drsl-icon-sprites {
                 background-position: -65px 0;
+            }
+
+            .drsl-timeline-icon-wrapper {
+                margin-top: 10px;
+                margin-left: -20px;
+                margin-right: -20px;
+                position: relative;
+
+                .drsl-timeline-icons {
+                    display: flex;
+                    flex-flow: row;
+                    text-align: center;
+
+                    > div {
+                        flex: 1;
+                    }
+                }
             }
 
             .drsl-timeline-item-done {
@@ -142,6 +221,27 @@ Cases
     }
 
     .drsl-case-expert {
+        position: relative;
+
+        .drsl-profile-photo {
+            position: absolute;
+            top: 10px;
+            right: 0;
+            background-color: white;
+            border: 0;
+
+            img {
+                box-shadow: 0px 5px 40px rgba(0, 0, 0, 0.5);
+                border: 5px solid white;
+                border-radius: 50%;
+                max-width: 175px;
+            }
+        }
+
+        .drsl-badges {
+            padding-top: 10px;
+        }
+
         .drsl-contact-wrapper {
             display: flex;
             flex-flow: row;
@@ -157,5 +257,4 @@ Cases
             }
         }
     }
-
 }
