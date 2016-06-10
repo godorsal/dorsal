@@ -1,4 +1,4 @@
-<div class="drsl-dialog">
+<div class="drsl-case-rating-view drsl-dialog">
     <form ng-submit="vm.submit()">
         <div class="modal-body">
             <div>
@@ -7,17 +7,31 @@
                         <div><h2>Rating for: Case ID: {{vm.case.id}}</h2></div>
                     </div>
                 </div>
+                <h3>
+                    <span>Expert: John S</span>
+                    <div class="pull-right">Case completed June 2, 2016</div>
+                </h3>
+                <div class="drsl-rating-section">
+                    <h3>Case Resolution Details</h3>
+                    <div class="drsl-scrolling-container">Database config files were carried over from MySQL v3.4.1 after version upgrade.
+                        Performance of the output was sub-optimal/unacceptable.  Review of log file and
+                        config yielded the info I needed to update config options to v3.7.51.</div>
+                </div>
                 <div>
-                    <div>
-                        <div ng-repeat="radio in vm.radios">
-                            <h3 translate="{{radio.label}}"></h3>
-                            <linear-radio target-data="radio.selectedValue" radio-data="radio"></linear-radio>
-                        </div>
+                    <div ng-repeat="radio in vm.radios">
+                        <h3 translate="{{radio.label}}"></h3>
+                        <linear-radio target-data="radio.selectedValue" radio-data="radio"></linear-radio>
+                    </div>
+                </div>
+                <div class="drsl-rating-section">
+                    <h3>Rating Badges <span>(select multiple badges to help rate your expert)</span></h3>
+                    <div class="drsl-scrolling-container">
+                        <span class="drsl-badge-sprites {{badge.icon}}" uib-tooltip="{{badge.description}}" ng-repeat="badge in vm.badges"></span>
                     </div>
                 </div>
             </div>
             <div>
-                <button class="btn btn-default" ng-click="vm.cancel()">Cancel</button>
+                <button class="btn btn-default" ng-click="vm.cancel()">Later</button>
                 <button type="submit" class="btn btn-success">Submit</button>
             </div>
         </div>

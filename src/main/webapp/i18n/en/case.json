@@ -45,7 +45,7 @@
         },
         "rating": {
             "label": {
-                "satisfaction": "How satisfied were you with the transaction?",
+                "satisfaction": "How satisfied were you with the Case Resolution?",
                 "prompt": "Prompt initial response",
                 "courtesy": "Courtesy &amp; Trust",
                 "skill": "Technical Skill"
