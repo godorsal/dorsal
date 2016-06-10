@@ -52,7 +52,8 @@
                 "mySQL": "MySQL",
                 "postgreSQL": "PostgreSQL",
                 "mongoDB": "MongoDB",
-                "mariaDB": "MariaDB"
+                "mariaDB": "MariaDB",
+                "other": "Other"
             },
             "contact": {
                 "main": "Contact",

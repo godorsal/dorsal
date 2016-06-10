@@ -19,10 +19,6 @@
                     {
                         "label": "concierge.caseDetails.urgency.oneDay",
                         "value": "1 day"
-                    },
-                    {
-                        "label": "concierge.caseDetails.urgency.thisWeek",
-                        "value": "this week"
                     }
                 ],
                 "selectedValue": ""
@@ -326,6 +322,95 @@
                     {
                         "label": "concierge.caseDetails.product.mariaDB",
                         "value": "MariaDB",
+                        "incidentTypes": [
+                            {
+                                "description": "concierge.caseDetails.incidentTypes.version.main",
+                                "types": [
+                                    {
+                                        "label": "",
+                                        "value": "",
+                                        "type": "field"
+                                    },
+                                    {
+                                        "label": "concierge.caseDetails.incidentTypes.version.noVersion",
+                                        "value": "na"
+                                    }
+                                ],
+                                "selectedValue": ""
+                            },
+                            {
+                                "description": "concierge.caseDetails.incidentTypes.environment.main",
+                                "types": [
+                                    {
+                                        "label": "concierge.caseDetails.incidentTypes.environment.vmWare",
+                                        "value": "VMware"
+                                    },
+                                    {
+                                        "label": "concierge.caseDetails.incidentTypes.environment.openStack",
+                                        "value": "Open Stack"
+                                    },
+                                    {
+                                        "label": "concierge.caseDetails.incidentTypes.environment.bareMetal",
+                                        "value": "bare metal"
+                                    }
+                                ],
+                                "selectedValue": ""
+                            },
+                            {
+                                "description": "concierge.caseDetails.incidentTypes.clusterType.main",
+                                "types": [
+                                    {
+                                        "label": "concierge.caseDetails.incidentTypes.clusterType.tungstenCluster",
+                                        "value": "Tungsten cluster"
+                                    },
+                                    {
+                                        "label": "concierge.caseDetails.incidentTypes.clusterType.perconaCluster",
+                                        "value": "Percona cluster"
+                                    },
+                                    {
+                                        "label": "concierge.caseDetails.incidentTypes.clusterType.none",
+                                        "value": "none"
+                                    }
+                                ],
+                                "selectedValue": ""
+                            },
+                            {
+                                "description": "concierge.caseDetails.incidentTypes.connectivity.main",
+                                "types": [
+                                    {
+                                        "label": "concierge.caseDetails.incidentTypes.connectivity.timeout",
+                                        "value": "timeout"
+                                    },
+                                    {
+                                        "label": "concierge.caseDetails.incidentTypes.connectivity.connectionDrop",
+                                        "value": "connection drop"
+                                    }
+                                ],
+                                "selectedValue": ""
+                            },
+                            {
+                                "description": "concierge.caseDetails.incidentTypes.performance.main",
+                                "types": [
+                                    {
+                                        "label": "concierge.caseDetails.incidentTypes.performance.slowQueries",
+                                        "value": "Slow queries"
+                                    },
+                                    {
+                                        "label": "concierge.caseDetails.incidentTypes.performance.resources",
+                                        "value": "HighCPU/mem"
+                                    },
+                                    {
+                                        "label": "concierge.caseDetails.incidentTypes.performance.queryTimeout",
+                                        "value": "Query time out"
+                                    }
+                                ],
+                                "selectedValue": ""
+                            }
+                        ]
+                    },
+                    {
+                        "label": "concierge.caseDetails.product.other",
+                        "value": "Other",
                         "incidentTypes": [
                             {
                                 "description": "concierge.caseDetails.incidentTypes.version.main",

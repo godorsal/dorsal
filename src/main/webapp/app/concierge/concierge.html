@@ -1,23 +1,21 @@
 <div ng-cloak>
     <div class="row">
         <div class="col-md-12">
+            <div class="drsl-sub-header">
+                <div>Create your case</div>
+                <div ng-if="chatting" class="pull-right">Concierge Chat</div>
+            </div>
+            <div class="drsl-action-bar">
+                <i class="glyphicon glyphicon-menu-right"></i>
+                <a ng-click="vm.openChat()">chat with expert</a>
+                <a ng-click="vm.openDetails()">manage cases</a>
+                <a ng-class="{'drsl-link-disabled': !vm.passedStep(3), 'drsl-link-inactive': vm.currentCase.status == 'completed'}" ng-click="vm.openRating()">clone a case</a>
+            </div>
             <div class="drsl-concierge-wrapper">
-                <!-- Concierge Chat -->
-                <div class="drsl-chat-wrapper">
-                    <!-- Header -->
-                    <div class="drsl-sub-header">
-                        <div translate="concierge.chat.header">Concierge Chat</div>
-                        <div>{{vm.pageTitle}}</div>
-                    </div>
-                    <chatroom></chatroom>
-                </div>
-
-                <!-- Case Details -->
                 <div class="drsl-case-details-wrapper">
                     <!-- Header -->
-                    <div class="drsl-sub-header" translate="concierge.caseDetails.header">Create Your Case</div>
 
-                    <div class="drsl-chat-body">
+                    <div class="drsl-case-body">
                         <!-- Summary -->
                         <div class="drsl-field-seciton">
                             <div class="drsl-field-label" translate="concierge.caseDetails.summary.main">Summary</div>
@@ -31,21 +29,11 @@
                         radio-data="radio"
                         ng-repeat="radio in vm.caseDetails.radios"></linear-radio>
 
-                        <!-- Dynamic Product Details -->
-                        <!-- <product-details product="vm.product" complete="vm.productDetailInputComplete"></product-details> -->
-<!--
-                        <div class="drsl-field-seciton">
-                            <div class="drsl-field-label"translate="concierge.caseDetails.description.main">Description</div>
-                            <div class="drsl-field-input">
-                                <textarea class="form-control" ng-model="vm.caseDetails.description" placeholder="{{'concierge.caseDetails.description.placeholder' | translate}}"></textarea>
-                            </div>
-                        </div> -->
-
                         <!-- File Upload -->
                         <div class="drsl-field-seciton drsl-file-upload">
                             <div class="drsl-field-label">
                                 <span translate="concierge.caseDetails.file.main">Attach file (optional)</span>
-                                <div class="drsl-field-sub-label" translate="concierge.caseDetails.file.notes">(Screenshot, Logfile, Configuration) </div>
+                                <!-- <div class="drsl-field-sub-label" translate="concierge.caseDetails.file.notes">(Screenshot, Logfile, Configuration) </div> -->
                             </div>
                             <div class="drsl-field-input">
                                 <div style="border: 1px dashed #DBD9DA; text-align: center; padding: 10px;"><i class="fa fa-cloud-upload fa-lg"></i> Drop files to attach, or <span style="color:#F48B3D;">browse</span></div>
@@ -60,7 +48,15 @@
                         </div>
                     </div>
                 </div>
+                <!-- Concierge Chat -->
+                <div class="drsl-chat-wrapper">
+                    <!-- Header -->
+                    <!-- <div class="drsl-sub-header"> -->
+                    <!-- <div translate="concierge.chat.header">Concierge Chat</div> -->
+                <!-- </div> -->
+                <chatroom ng-if="chatting"></chatroom>
             </div>
         </div>
     </div>
+</div>
 </div>
