@@ -43,4 +43,24 @@ Case Rating
     .btn.btn-default {
         margin-right: 10px;
     }
+
+    &.drsl-case-rating-view {
+        .drsl-rating-section {
+            margin-bottom: 20px;
+
+            h3 {
+                padding-bottom: 5px;
+                margin-bottom: 0;
+
+                span {
+                    font-size: 14px;
+                    color: #c0c0c0;
+                }
+            }
+        }
+        .drsl-badge-sprites {
+            cursor: pointer;
+        }
+    }
+
 }
