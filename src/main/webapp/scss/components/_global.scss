@@ -244,47 +244,46 @@ body {
 
 .drsl-badge-sprites {
     background: url("../images/global/badge-sprites.png") no-repeat;
-    width: 65px;
-    height: 65px;
+    width: 75px;
+    height: 75px;
     display: inline-block;
-    $pos-width: 65px;
+    $pos-width: 75px;
     $pos-x: 0px;
     $pos-y: 0px;
 
     &.badge-1 {
-        background-position: 0 0;
+        background-position: 0px 0px;
     }
     &.badge-2 {
         $pos-x: ($pos-x - $pos-width);
-        background-position: $pos-x 0;
+        background-position: $pos-x $pos-y;
     }
     &.badge-3 {
         $pos-x: ($pos-x - $pos-width);
-        background-position: $pos-x 0;
+        background-position: $pos-x $pos-y;
     }
     &.badge-4 {
         $pos-x: ($pos-x - $pos-width);
-        background-position: $pos-x 0;
+        background-position: $pos-x $pos-y;
     }
     &.badge-5 {
         $pos-x: ($pos-x - $pos-width);
-        background-position: $pos-x 0;
+        background-position: $pos-x $pos-y;
     }
     &.badge-6 {
         $pos-x: ($pos-x - $pos-width);
-        background-position: $pos-x 0;
+        background-position: $pos-x $pos-y;
     }
     &.badge-7 {
         $pos-x: ($pos-x - $pos-width);
-        background-position: $pos-x 0;
+        background-position: $pos-x $pos-y;
     }
     &.badge-8 {
         $pos-x: ($pos-x - $pos-width);
-        background-position: $pos-x 0;
+        background-position: $pos-x $pos-y;
     }
     &.badge-9 {
-        $pos-x: 0px;
-        $pos-y: -65px;
+        $pos-x: ($pos-x - $pos-width);
         background-position: $pos-x $pos-y;
     }
     &.badge-10 {
@@ -302,6 +301,9 @@ body {
     &.badge-13 {
         $pos-x: ($pos-x - $pos-width);
         background-position: $pos-x $pos-y;
+    }
+    &.selected {
+        background-position-y: -75px;
     }
 }
 
