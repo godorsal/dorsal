@@ -7,17 +7,14 @@ Concierge
     flex-flow: row;
 
     .drsl-chat-wrapper {
-        // float: right;
-        // flex: auto;
-        max-width: 590px;
-        max-height: 628px;
+        flex: auto;
+        max-width: 652px;
+        max-height: 723px;
         background-color: $content-background-color;
-        // margin-left: 25px;
         box-shadow: $content-box-shadow;
 
         .drsl-sub-header div {
-            // flex: 1;
-            width: 100%;
+            flex: 1;
             &:last-child {
                 text-align: right;
                 color: $inverted-heading-right-text-color;
@@ -31,7 +28,7 @@ Concierge
 
             .drsl-chat-login {
                 width: 300px;
-                margin: auto;
+                // margin: auto;
 
                 .panel-body .form-group:last-child {
                     text-align: right;
@@ -43,14 +40,18 @@ Concierge
     }
 
     .drsl-chat-body {
-        // padding: $default-padding;
+        padding: $default-padding;
     }
 
     .drsl-case-details-wrapper {
         flex: auto;
+        height: auto;
+        // height: 642px;
         background-color: $content-background-color;
         box-shadow: $content-box-shadow;
-
+        width: 590px;
+        max-width: 590px;
+        // margin-right: 20px;
         .drsl-field-seciton {
             display: flex;
             flex-flow: row;
@@ -60,7 +61,7 @@ Concierge
 
             .drsl-field-label {
                 flex: 1;
-                // margin-right: $default-half-padding;
+                margin-right: $default-half-padding;
                 text-align: left;
             }
 
@@ -81,19 +82,20 @@ Concierge
 
             .drsl-field-input {
                 flex: 3;
-                // padding: 5px;
+                padding: 5px;
             }
         }
 
         .drsl-product-details-wrapper {
-            // margin-bottom: $default-double-padding;
+
+            margin-bottom: $default-double-padding;
 
             > h4 {
                 margin-top: 0
             }
 
             .drsl-product-detail-selections {
-                // margin-left: $default-padding;
+                margin-left: $default-padding;
                 margin-bottom: 4px;
             }
 
@@ -116,14 +118,17 @@ Concierge
                 }
             }
         }
+
     }
 }
 .chatrooms{
     margin-top: 100px;
 }
 .chatroom{
-    width: 637px;
-    // height: 300px;
+    border: none;
+    width: 580px;
+    max-width: 580px;
+    min-width: 580px;
 }
 
 .btn-different{
@@ -134,8 +139,9 @@ Concierge
 }
 
 .chat {
+    min-height: 500px;
     overflow-y: scroll;
-    height: 423px;
+    height: 500px;
     .name {
         color: #333;
         font-weight: bold;
@@ -160,10 +166,40 @@ Concierge
     }
 }
 .drsl-case-body{
-    // float: left;
+    width: 580px;
+    margin-right: 20px;
+    > div {
+        padding: 20px;
+        border-bottom: 2px solid #E2E2E2;
+
+        &:last-child {
+            border: 0;
+        }
+    }
+}
+.chat-section{
+    width: 570px;
+    height: 642px;
+}
+.drsl-sub-header, .drsl-action-bar{
+    width: 1180px;
+    transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s;
+}
+.havle{
     width: 590px;
 }
-.pull-right{
-    margin-left: 700px;
-    float: right;
+.bgimg{
+    float: left;
+    margin-left: 0px;
+    width: 45%;
+    height: 45%;
+}
+.margin{
+    margin-right: 20px;
+}
+.slide{
+    // -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 2s;
+    // -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 2s;
+    // -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 2s;
+    transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 2s;
 }
