@@ -44,7 +44,7 @@ Case Rating
         margin-right: 10px;
     }
 
-    .drsl-case-rating-view {
+    &.drsl-case-rating-view {
         .drsl-rating-section {
             margin-bottom: 20px;
 
@@ -57,6 +57,9 @@ Case Rating
                     color: #c0c0c0;
                 }
             }
+        }
+        .drsl-badge-sprites {
+            cursor: pointer;
         }
     }
 
