@@ -9,7 +9,8 @@
   /** @ngInject */
   function ServerService($log, MSG, _) {
     var apiHttpConfig = {
-      withCredentials: true
+      withCredentials: false
+    //   withCredentials: true
     };
 
     var appConfig = {
@@ -32,7 +33,8 @@
     }
 
     function api(endPoint, pathParam, pathParam2, pathParam3, pathParam4) {
-      var url = location.protocol + '//' + location.hostname + '/api' + endPoint;
+      var url = location.protocol + '//' + location.hostname + ':' + appConfig.apiPort + '/api' + endPoint;
+    //   var url = location.protocol + '//' + location.hostname + '/api' + endPoint;
       if (location.hostname === 'localhost') {
         url = location.protocol + '//' + location.hostname + ':' + appConfig.apiPort + '/api' + endPoint;
       }
