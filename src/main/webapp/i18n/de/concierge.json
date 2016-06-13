@@ -37,7 +37,7 @@
                 "immediate": "Immediate",
                 "fourHours": "4 hours",
                 "oneDay": "1 day",
-                "thisWeek": "This week"
+                "scheduled": "scheduled"
             },
             "problem": {
                 "main": "Problem Type",
@@ -52,8 +52,7 @@
                 "mySQL": "MySQL",
                 "postgreSQL": "PostgreSQL",
                 "mongoDB": "MongoDB",
-                "mariaDB": "MariaDB",
-                "other": "Other"
+                "mariaDB": "MariaDB"
             },
             "contact": {
                 "main": "Contact",

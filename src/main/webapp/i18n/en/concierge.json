@@ -35,8 +35,9 @@
                 "main": "Urgency",
                 "tooltip": "Set the time you expect an Expert to respond to the request",
                 "immediate": "Immediate",
-                "fourHours": "24 hours",
-                "oneDay": "Scheduled"
+                "fourHours": "4 hours",
+                "oneDay": "One Day",
+                "scheduled": "Scheduled"
             },
             "problem": {
                 "main": "Problem Type",
