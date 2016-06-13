@@ -60,6 +60,7 @@ Concierge
             margin-bottom: 30px;
 
             .drsl-field-label {
+                color: #5F5B5C;
                 flex: 1;
                 margin-right: $default-half-padding;
                 text-align: left;
@@ -126,9 +127,10 @@ Concierge
 }
 .chatroom{
     border: none;
-    width: 580px;
-    max-width: 580px;
-    min-width: 580px;
+    width: 5px !important;
+    // width: 570px;
+    max-width: 570px;
+    min-width: 570px;
 }
 
 .btn-different{
@@ -142,6 +144,7 @@ Concierge
     min-height: 500px;
     overflow-y: scroll;
     height: 500px;
+
     .name {
         color: #333;
         font-weight: bold;
@@ -166,11 +169,12 @@ Concierge
     }
 }
 .drsl-case-body{
+    text-align: center;
     width: 580px;
     margin-right: 20px;
     > div {
         padding: 20px;
-        border-bottom: 2px solid #E2E2E2;
+        // border-bottom: 2px solid #E2E2E2;
 
         &:last-child {
             border: 0;

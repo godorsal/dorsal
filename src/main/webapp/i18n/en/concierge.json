@@ -19,7 +19,7 @@
             "button": "go",
             "summary": {
                 "main": "Summary",
-                "placeholder": "just describe your problem"
+                "placeholder": "describe your problem"
             },
             "description": {
                 "main": "Description",
@@ -32,27 +32,27 @@
                 "instructions": "drag files here to upload"
             },
             "urgency": {
-                "main": "Urgency",
+                "main": "Response Time",
                 "tooltip": "Set the time you expect an Expert to respond to the request",
                 "immediate": "Immediate",
-                "fourHours": "4 hours",
-                "oneDay": "One Day",
+                "oneDay": "24 hours",
                 "scheduled": "Scheduled"
             },
             "problem": {
-                "main": "Problem Type",
+                "main": "Issue",
                 "performance": "Performance",
                 "availability": "Availability",
                 "security": "Security",
                 "other": "Other"
             },
             "product": {
-                "main": "Database Type",
+                "main": "Technology",
                 "tooltip": "Select a database and define some additional details which are optional",
                 "mySQL": "MySQL",
                 "postgreSQL": "PostgreSQL",
                 "mongoDB": "MongoDB",
-                "mariaDB": "MariaDB"
+                "mariaDB": "MariaDB",
+                "other": "Other"
             },
             "contact": {
                 "main": "Contact",
