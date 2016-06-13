@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .config(stateConfig);
 
-    stateConfig.$inject = ['$stateProvider'];
+    stateConfig.$inject = ['$stateProvider', '$locationProvider'];
 
-    function stateConfig($stateProvider) {
+    function stateConfig($stateProvider, $locationProvider) {
         $stateProvider.state('app', {
             abstract: true,
             views: {
@@ -28,5 +28,7 @@
                 }]
             }
         });
+
+        $locationProvider.html5Mode(true);
     }
 })();
