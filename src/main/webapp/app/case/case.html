@@ -18,8 +18,10 @@
                 <div class="drsl-action-bar">
                     <i class="glyphicon glyphicon-menu-right"></i>
                     <a ng-click="vm.openDetails()" translate="case.details.viewDetails">view case details</a>
-                    <a ng-click="vm.openChat()" ng-class="{'drsl-link-disabled': !vm.passedStep(1)}" class="drsl-link-disabled" translate="case.details.chatRoom">chat with expert</a>
+                    <a ng-click="vm.openChat()" ng-class="{'drsl-link-disabled': !vm.passedStep(1)}" class="drsl-link-disabled" translate="case.details.chatRoom">secure chat with expert</a>
                     <a ng-class="{'drsl-link-disabled': !vm.passedStep(3), 'drsl-link-inactive': vm.currentCase.status == 'completed'}" ng-click="vm.openRating()" translate="case.details.rateCase">rate this case</a>
+                    <a ng-click="vm.openEscalation()" ng-class="{'drsl-link-disabled': !vm.passedStep(2), 'drsl-link-inactive': vm.currentCase.status != 'working'}">escalate this case</a>
+                    <a class="alignRight" ui-sref="concierge">create case</a>
                 </div>
 
                 <!-- Current Case -->

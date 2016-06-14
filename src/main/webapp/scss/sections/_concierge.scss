@@ -51,7 +51,7 @@ Concierge
         box-shadow: $content-box-shadow;
         width: 590px;
         max-width: 590px;
-        // margin-right: 20px;
+        margin-right: 20px;
         .drsl-field-seciton {
             display: flex;
             flex-flow: row;
@@ -168,8 +168,12 @@ Concierge
         margin-left: 10px;
     }
 }
+.glyphicon-chevron-left, .glyphicon-chevron-right{
+    color: $brand-color;
+    font-size: 25px;
+}
 .drsl-case-body{
-    text-align: center;
+    // text-align: center;
     width: 580px;
     margin-right: 20px;
     > div {
@@ -195,8 +199,7 @@ Concierge
 .bgimg{
     float: left;
     margin-left: 0px;
-    width: 45%;
-    height: 45%;
+    width: 570px;
 }
 .margin{
     margin-right: 20px;
@@ -206,4 +209,8 @@ Concierge
     // -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 2s;
     // -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 2s;
     transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 2s;
+}
+#sel1{
+    height: 50%;
+    text-align: center;
 }

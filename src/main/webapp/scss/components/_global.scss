@@ -131,6 +131,9 @@ body {
 
 // Linear Radio Buttons
 .drsl-linear-radio {
+    // overflow-x: scroll;
+    // max-width: 100px;
+    height: 100px;
     display: flex;
     flex-flow: row;
     align-items: center;
@@ -160,6 +163,9 @@ body {
     }
 
     .drsl-radio-set {
+        max-width: 400px;
+        overflow-x: scroll;
+        overflow-y: hidden;
         position: relative;
         display: flex;
         flex-flow: row;
@@ -167,6 +173,8 @@ body {
     }
 
     .drsl-radio-item {
+        margin-right: 20px;
+        margin-left: 20px;
         flex: 1;
         font-size: $small-font-size;
 
@@ -229,6 +237,23 @@ body {
         flex: 1;
         text-align: right;
         margin-right: 20px;
+        margin-bottom: 15px;
+
+        &:last-child {
+            flex: 3;
+            text-align: left;
+            font-weight: 500;
+        }
+    }
+}
+.escalation-form-grid {
+    // display: flex;
+    // flex-flow: row;
+
+    > div {
+        // flex: 1;
+        // text-align: right;
+        // margin-right: 20px;
         margin-bottom: 15px;
 
         &:last-child {

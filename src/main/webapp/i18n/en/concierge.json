@@ -52,7 +52,11 @@
                 "postgreSQL": "PostgreSQL",
                 "mongoDB": "MongoDB",
                 "mariaDB": "MariaDB",
-                "other": "Other"
+                "other": "Other",
+                "cassandra": "CassandraDB",
+                "bark": "Bark",
+                "hadoop": "Hadoop",
+                "hbase": "HBase"
             },
             "contact": {
                 "main": "Contact",

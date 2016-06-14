@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .controller('CaseController', CaseController);
 
-    CaseController.$inject = ['$window', 'CaseService', 'RatingService', 'CaseDetailsService'];
+    CaseController.$inject = ['$window', 'CaseService', 'RatingService', 'CaseDetailsService', 'EscalationFormService'];
 
-    function CaseController($window, CaseService, RatingService, CaseDetailsService) {
+    function CaseController($window, CaseService, RatingService, CaseDetailsService, EscalationFormService) {
         var vm = this;
         vm.init = init;
         vm.getHistory = getHistory;
@@ -15,6 +15,7 @@
         vm.setCurrentCase = setCurrentCase;
         vm.openRating = openRating;
         vm.openDetails = openDetails;
+        vm.openEscalation = openEscalation;
         vm.passedStep = passedStep;
         vm.openChat = openChat;
         vm.cases = [];
@@ -145,6 +146,14 @@
          */
         function openDetails() {
             var modalInstance = CaseDetailsService.open(vm.currentCase, vm.experts[vm.currentCase.expert]);
+
+            modalInstance.result.then(function (result) {
+                // console.log(result);
+            });
+        }
+        function openEscalation() {
+            var modalInstance = EscalationFormService.open(vm.currentCase, vm.experts[vm.currentCase.expert]);
+            // var modalInstance = CaseDetailsService.open(vm.currentCase, vm.experts[vm.currentCase.expert]);
 
             modalInstance.result.then(function (result) {
                 // console.log(result);

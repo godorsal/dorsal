@@ -5,15 +5,21 @@
                 <div class="drsl-dialog-header">
                     <div><h2>CASE DETAILS: <span>ID: {{vm.case.id}} &nbsp; START: {{vm.case.startDate | date:"MM/dd/yy h:mm a"}}</span><div class="pull-right"><span style="text-transform: uppercase;">Status: {{vm.case.status}}</span></div></h2></div>
                 </div>
+                <div style="float: right">
+                    <div class="escalation-form-grid">
+                        <div>
+                            <div><span style="font-weight: normal;padding-left:10px;padding-right: 10px;">Current Plan:</span>$125 hourly</span></div>
+                            <div><span style="font-weight: normal;padding-left:10px;padding-right: 10px;">Issue:</span><span>{{vm.case.problem}}</span></div>
+                            <div><span style="font-weight: normal;padding-left:10px;padding-right: 10px;">Technology:</span><span>{{vm.case.product}}</span></div>
+                        </div>
+                    </div>
+                    <textarea name="name" rows="8" cols="40"></textarea>
+                </div>
 
                 <div>
 
                     <div style="background-color: white;padding: 20px;margin-bottom: 10px;">
-                        <div class="drsl-form-grid">
-                            <div>User</div>
-                            <div>{{vm.case.user}}</div>
-                        </div>
-                        <div class="drsl-form-grid">
+                        <div class="escalation-form-grid">
                             <div>Expert</div>
                             <div>
                                 <div>{{vm.expert.firstName}} {{vm.expert.lastName}}</div>
@@ -25,25 +31,18 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="drsl-form-grid">
+                        <div class="escalation-form-grid">
                             <div>Summary</div>
-                            <div><input type="text" class="form-control" ng-model="vm.summary"></div>
+                            <p style="width: 250px;">{{vm.summary}}</p>
                         </div>
-                        <div class="drsl-form-grid">
-                            <div>Response Time</div>
+                        <!-- <div class="escalation-form-grid">
                             <div>
-                                <div style="display:flex; flex-flow: row;">
-                                    <div style="flex: .5;">{{vm.case.urgency}}</div>
-                                    <div style="flex: 1; text-align: left;"><span style="font-weight: normal;padding-left:10px;padding-right: 10px;">Issue:</span><span>{{vm.case.problem}}</span></div>
-                                    <div style="flex: 1; text-align: center;"><span style="font-weight: normal;padding-right: 10px;">Technology:</span><span>{{vm.case.product}}</span></div>
-                                </div>
+                                <div><span style="font-weight: normal;padding-left:10px;padding-right: 10px;">Response Time:</span><span>{{vm.case.urgency}}</span></div>
+                                <div><span style="font-weight: normal;padding-left:10px;padding-right: 10px;">Issue:</span><span>{{vm.case.problem}}</span></div>
+                                <div><span style="font-weight: normal;padding-left:10px;padding-right: 10px;">Technology:</span><span>{{vm.case.product}}</span></div>
                             </div>
-                        </div>
-                        <div class="drsl-form-grid">
-                            <div>Detailed Resolution</div>
-                            <div><textarea class="form-control" name="detailedResolution" id="detailedResolution" cols="30" rows="5"></textarea></div>
-                        </div>
-                        <div class="drsl-form-grid">
+                        </div> -->
+                        <div class="escalation-form-grid">
                             <div>Uploaded Files</div>
                             <div>
                                 <div style="display: flex; flex-flow: row;">
@@ -51,24 +50,12 @@
                                         <div>config_5916.cfg</div>
                                         <div>logfile_5916.txt</div>
                                     </div>
-                                    <div style="flex: 3">
-                                        <div style="border: 1px dashed #DBD9DA; text-align: center; padding: 10px;"><i class="fa fa-cloud-upload fa-lg"></i> Drop files to attach, or <span style="color:#F48B3D;">browse</span></div>
-                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="drsl-form-grid">
-                            <div>Downloaded Files</div>
-                            <div><i class="fa fa-minus"></i></div>
-                        </div>
-                        <div class="drsl-form-grid">
-                            <div>Chat Log</div>
-                            <div><textarea class="form-control" name="chatLog" id="chatLog" cols="30" rows="10"></textarea></div>
                         </div>
                     </div>
                 </div>
             </div>
-
             <div style="text-align: right;">
                 <button class="btn btn-default" ng-click="vm.cancel($event)">Cancel</button>
                 <button type="submit" class="btn btn-success">Update</button>

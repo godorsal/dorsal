@@ -40,7 +40,6 @@
                 vm.updatePageTitle();
             });
         }
-
         /**
         * Updates the page title to match the params *type* data
         */
