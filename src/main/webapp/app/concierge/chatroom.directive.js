@@ -18,8 +18,9 @@
             };
 
             vm.person = {
-                firstName: '',
-                lastName: ''
+                name: '',
+                // firstName: '',
+                // lastName: ''
             };
 
             vm.roomInfo = {}
@@ -60,11 +61,12 @@
                         return;
                     }
                     vm.person.id = info.data.id;
-                    var roomName = ChatService.makeRoomName(vm.person);
+                    var roomName = vm.person.name;
+                    // var roomName = ChatService.makeRoomName(vm.person);
                     ChatService.createChatRoom(roomName, vm.person, function (response) {
                         vm.joined = true;
                         vm.roomInfo = response.room;
-                        console.log("RC", $scope.rc.phrases);
+                        console.log("RESP", response);
                         //console.log('--- connected ' + JSON.stringify(vm.roomInfo));
                     })
                 })

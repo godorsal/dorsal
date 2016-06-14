@@ -31,7 +31,7 @@
                 ChatRoomsService.list()
                 .then(function(data) {
                     vm.rooms = data;
-                    console.log(data);
+                    console.log("Rooms", data);
                 });
             };
 
@@ -41,7 +41,6 @@
                     if ((message.from === vm.person.id)) {
                         name = vm.person.name;
                         // name = vm.person.firstName;
-                        console.log("HERE I AM", name);
                     }
                     else {
                         var member = vm.roomDetails[message.room].members[message.from];
