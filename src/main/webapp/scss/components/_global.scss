@@ -136,10 +136,11 @@ body {
     align-items: center;
     text-align: center;
     margin-bottom: 30px;
-
+    margin-left: 20px;
     .drsl-radio-desc {
         flex: 1;
-        margin-right: $default-half-padding;
+        // margin-right: $default-half-padding;
+        color: #5F5B5C;
         text-align: left;
     }
 

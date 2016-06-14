@@ -3,11 +3,11 @@
         "header": "Case Summary",
         "details": {
             "header": "Current Case",
-            "user": "User:",
-            "summary": "Summary:",
-            "resolutionETA": "ETA to Resolution:",
+            "user": "User",
+            "summary": "Summary",
+            "resolutionETA": "ETA to Completion",
             "status": {
-                "main": "Status:",
+                "main": "Status",
                 "created": "Created",
                 "assigned": "Assigned",
                 "working": "Working",
@@ -22,19 +22,29 @@
         },
         "professional": {
             "header": "Support Professional",
-            "expert": "Expert:",
+            "expert": "Expert",
             "contact": {
-                "main": "Contact:",
+                "main": "Contact",
                 "email": "email",
                 "phone": "phone",
                 "skype": "skype",
                 "chat": "chat"
             },
-            "score": "Score:",
+            "score": "Score",
             "badges": {
-                "badge1": "Lightning fast responses!",
-                "badge2": "Burns through issues!",
-                "badge3": "Rocket science level expert!"
+                "badge-1": "happy fun place",
+                "badge-2": "defender of the realm",
+                "badge-3": "craftsperson",
+                "badge-4": "detail oriented",
+                "badge-5": "focused like a laser",
+                "badge-6": "McLuvin It!",
+                "badge-7": "masterful multitasking",
+                "badge-8": "network specialist",
+                "badge-9": "double plus good",
+                "badge-10": "database magician",
+                "badge-11": "super heavy lifter",
+                "badge-12": "resolution writer pro",
+                "badge-13": "time sensitive"
             }
         },
         "history": {
@@ -45,7 +55,7 @@
         },
         "rating": {
             "label": {
-                "satisfaction": "How satisfied were you with the transaction?",
+                "satisfaction": "How satisfied were you with the Case Resolution?",
                 "prompt": "Prompt initial response",
                 "courtesy": "Courtesy &amp; Trust",
                 "skill": "Technical Skill"

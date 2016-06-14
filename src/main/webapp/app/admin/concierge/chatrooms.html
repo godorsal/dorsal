@@ -32,7 +32,7 @@
     <uib-accordion close-others="false">
       <uib-accordion-group ng-repeat="room in crc.rooms track by $index" heading="{{room.room}}" is-open="crc._isopen[room.room]" is-disabled="!crc.isMemberOfRoom(room.room)">
         <uib-accordion-heading>
-          {{room.room}}&nbsp;&nbsp;
+          Name: {{room.room}}&nbsp;&nbsp;
           <span ng-if="room.membersCount === 2">Concierge is present</span>
           <button class="btn btn-xs btn-different" ng-click="crc.join(room)" ng-hide="crc.isMemberOfRoom(room.room)">Join</button>
           <button class="btn btn-xs btn-different" ng-click="crc.leave(room)" ng-show="crc.isMemberOfRoom(room.room)">Leave</button>

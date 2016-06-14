@@ -124,8 +124,10 @@
     function createChatRoom(room, member, callback) {
       var guest = {
         name: room,
-        firstName: member.firstName,
-        lastName: member.lastName,
+        // name: room,
+        firstName: member.name,
+        // firstName: member.firstName,
+        // lastName: member.lastName,
         id: client.id
       };
       client.action('chatrooms:createGuestRoom', {guest: guest},
@@ -137,7 +139,8 @@
     }
 
     function makeRoomName(person) {
-      return person.firstName + '-' + person.lastName;
+      return person.name;
+    //   return person.name + '-' + person.lastName;
     }
   }
 })();

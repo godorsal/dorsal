@@ -18,8 +18,9 @@
             };
 
             vm.person = {
-                firstName: '',
-                lastName: ''
+                name: '',
+                // firstName: '',
+                // lastName: ''
             };
 
             vm.roomInfo = {}
@@ -30,7 +31,8 @@
 
             vm.notify = function (type, message) {
                 if (type === 'say') {
-                    var name = (message.from === vm.person.id) ? vm.person.firstName : 'Concierge';
+                    var name = (message.from === vm.person.id) ? vm.person.name : 'Concierge';
+                    // var name = (message.from === vm.person.id) ? vm.person.firstName : 'Concierge';
 
                     $scope.$apply(function() {
                         vm.phrases.push({message: message.message, username: name});
@@ -39,7 +41,8 @@
                 }
                 else if (type === 'welcome') {
                     $scope.$apply(function() {
-                        vm.phrases.push({message: MSG.WelcomeChatGuest1 + vm.person.firstName + MSG.WelcomeChatGuest2, username: 'Administrator'});
+                        vm.phrases.push({message: MSG.WelcomeChatGuest1 + vm.person.name + MSG.WelcomeChatGuest2, username: 'Administrator'});
+                        // vm.phrases.push({message: MSG.WelcomeChatGuest1 + vm.person.firstName + MSG.WelcomeChatGuest2, username: 'Administrator'});
                     });
                     //   ChatRoomsService.formatMessage(MSG.WelcomeChatGuest1 + vm.person.firstName + MSG.WelcomeChatGuest2, 'Administrator');
                 }
@@ -58,11 +61,12 @@
                         return;
                     }
                     vm.person.id = info.data.id;
-                    var roomName = ChatService.makeRoomName(vm.person);
+                    var roomName = vm.person.name;
+                    // var roomName = ChatService.makeRoomName(vm.person);
                     ChatService.createChatRoom(roomName, vm.person, function (response) {
                         vm.joined = true;
                         vm.roomInfo = response.room;
-                        console.log("RC", $scope.rc.phrases);
+                        console.log("RESP", response);
                         //console.log('--- connected ' + JSON.stringify(vm.roomInfo));
                     })
                 })

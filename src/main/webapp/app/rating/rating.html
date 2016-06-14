@@ -26,7 +26,7 @@
                 <div class="drsl-rating-section">
                     <h3>Rating Badges <span>(select multiple badges to help rate your expert)</span></h3>
                     <div class="drsl-scrolling-container">
-                        <span class="drsl-badge-sprites {{badge.icon}}" ng-class="{selected: badge.selected}" ng-click="badge.selected = !badge.selected" uib-tooltip="{{badge.description}}" ng-repeat="badge in vm.badges"></span>
+                        <expert-badges badge-select="true"></expert-badges>
                     </div>
                 </div>
             </div>

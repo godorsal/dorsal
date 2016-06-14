@@ -7,17 +7,16 @@
 
     function chatrooms($translate, $locale, tmhDynamicLocale) {
         var controller = ['$rootScope', '$scope', '$uibModal', '$location', 'ChatRoomsService', 'ChatService', 'SimpleModalService', 'toastr', function($rootScope, $scope, $uibModal, $location, ChatRoomsService, ChatService, SimpleModalService, toastr){
-            console.log(SimpleModalService);
             var vm = this;
-
             vm.rooms = [];
             vm.roomDetails = {};
             vm._isopen = {};
             vm.phrases = {};
             vm.messages = {};
             vm.person = {
-                firstName: 'Concierge',
-                lastName: ''
+                name: 'Concierge'
+                // firstName: 'Concierge',
+                // lastName: ''
             };
 
             vm.go = function (path) {
@@ -32,7 +31,7 @@
                 ChatRoomsService.list()
                 .then(function(data) {
                     vm.rooms = data;
-                    console.log(data);
+                    console.log("Rooms", data);
                 });
             };
 
@@ -40,11 +39,14 @@
                 if (type === 'say') {
                     var name;
                     if ((message.from === vm.person.id)) {
-                        name = vm.person.firstName;
+                        name = vm.person.name;
+                        // name = vm.person.firstName;
                     }
                     else {
                         var member = vm.roomDetails[message.room].members[message.from];
-                        name = (member) ? member.firstName : "Guest";
+                        console.log("HERE I AM", member);
+                        name = (member) ? member.name : "Guest";
+                        // name = (member) ? member.firstName : "Guest";
                     }
 
                     if(!vm.phrases[message.room])
@@ -102,8 +104,9 @@
                         console.log('--=== ROOM ' + JSON.stringify(room))
                         var info = {
                             room: rm.room,
-                            firstName: vm.person.firstName,
-                            lastName: vm.person.lastName,
+                            name: vm.person.name,
+                            // firstName: vm.person.firstName,
+                            // lastName: vm.person.lastName,
                             id: vm.person.id
                         };
                         ChatService.addMemberToRoom(info, function (data) {
