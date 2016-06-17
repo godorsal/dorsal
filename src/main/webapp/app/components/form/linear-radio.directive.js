@@ -28,7 +28,6 @@
                             '<div class="drsl-radio-desc" tooltip-placement="left" uib-tooltip="{{radioData.tooltip | translate}}" translate="{{radioData.label}}"></div>' +
                             '<div class="drsl-radio-wrapper">' +
                                 '<div class="drsl-radio-set">' +
-                                // '<div class="glyphicon glyphicon-chevron-left" ng-click="showLess()"ng-if="radioData.label === \'concierge.caseDetails.product.main\' && startLimit > 4"></div>' +
                                     '<div class="drsl-radio-item" ng-repeat="radio in radioData.values | limitTo: startLimit track by $index">' +
                                         '<div ng-if="$index === 4">' +
                                                 '<div class="glyphicon glyphicon-chevron-left" ng-click="showLess()"ng-if="radioData.label === \'concierge.caseDetails.product.main\' && startLimit > 4"></div>' +

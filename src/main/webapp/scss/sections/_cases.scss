@@ -262,3 +262,42 @@ Cases
 .alignRight{
     float: right;
 }
+.tier-list{
+    max-width: none !important;
+    margin-left: 100px;
+}
+.tiers{
+    margin-bottom: 10px;
+    margin-left: 100px;
+    width: 200px;
+}
+.tiers:hover{
+    color: #F48B3D;
+}
+.current-tier{
+    color: $custom-radio-border-color;
+    // color: #F48B3D;
+}
+.drsl-radio-set {
+    max-width: 400px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    position: relative;
+    display: flex;
+    flex-flow: row;
+    z-index: 1;
+}
+input[type="radio"] + label span, input[type="checkbox"] + label span {
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    cursor: pointer;
+    background-color: $content-background-color;
+    border: 3px solid $custom-radio-border-color;
+    border-radius: 50%;
+    margin-top: 5px;
+}
+.request {
+    margin-left: 50px;
+    margin-right: 50px;
+}

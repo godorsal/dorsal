@@ -1,0 +1,30 @@
+<div class="drsl-dialog drsl-case-details">
+    <form ng-submit="vm.addUser()">
+        <div class="modal-body">
+            <div>
+                <div class="drsl-dialog-header">
+                    <div><h2>Share Case: <span>ID: {{vm.case.id}}</span></h2></div>
+                </div>
+                <h1>Shared Users</h1>
+                <div ng-repeat="user in vm.sharedUsers track by $index">
+                    <div>Name: {{user.name}}</div>
+                    <div>Permissions:
+                        <div style="width: 100px;" class="form-group">
+                            <select class="form-control" ng-model="user.permissions">
+                                <option>read</option>
+                                <option>write</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <label for="emailInput"></label>
+                <input type="text" class="form-control" id="emailInput" name="emailInput"
+                ng-model="vm.emailInput" ng-minlength=4 ng-maxlength=50 required>
+                <div style="text-align: right;">
+                    <button class="btn btn-default" ng-click="vm.cancel($event)">Cancel</button>
+                    <button type="submit" class="btn btn-success">Add User</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
