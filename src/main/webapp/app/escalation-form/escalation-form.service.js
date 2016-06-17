@@ -26,7 +26,8 @@
                 templateUrl: 'app/escalation-form/escalation-form.html',
                 controller: 'EscalationFormController',
                 controllerAs: 'vm',
-                size:'lg',
+                size:'sm',
+                // size:'lg',
                 resolve: {
                     drslCase: function(){ return drslCase; },
                     expert: function(){ return expert; },

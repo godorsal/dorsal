@@ -153,7 +153,9 @@
             });
         }
         function openEscalation() {
-            var modalInstance = EscalationFormService.open(vm.currentCase, vm.experts[vm.currentCase.expert]);
+            if (vm.currentCase.status === 'working') {
+                var modalInstance = EscalationFormService.open(vm.currentCase, vm.experts[vm.currentCase.expert]);
+            }
         }
         function openShare() {
             var modalInstance = ShareCaseService.open(vm.currentCase, vm.experts[vm.currentCase.expert]);
