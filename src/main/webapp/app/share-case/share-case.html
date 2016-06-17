@@ -18,12 +18,12 @@
                 </div>
                 <hr>
                 <label for="emailInput">Email Address: </label>
-                <input type="text" id="emailInput" name="emailInput"
+                <input type="email" id="emailInput" name="emailInput"
                 ng-model="vm.emailInput" ng-minlength=4 ng-maxlength=50 required>
                 <br>
                 <label for="permissionInput">Permissions: </label>
-                <select class="form-control" ng-model="vm.permissions" id="permissionInput" style="width: 166px; display: inline-block;">
-                    <option>read</option>
+                <select class="form-control" ng-model="vm.permissions" id="permissionInput" style="width: 166px; display: inline-block;" required>
+                    <option selected="selected">read</option>
                     <option>write</option>
                 </select>
                 <div style="text-align: right;">
