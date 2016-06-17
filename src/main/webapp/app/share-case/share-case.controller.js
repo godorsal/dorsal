@@ -12,6 +12,8 @@
         vm.cancel = cancel;
         vm.submit = submit;
         vm.addUser = addUser;
+        vm.removeUser = removeUser;
+        vm.updateUser = updateUser;
         vm.case = drslCase;
         vm.expert = expert;
         // localStorage.setItem('sharedUsers', '[]');
@@ -34,16 +36,25 @@
             if(vm.sharedUsers.indexOf(vm.emailInput) < 0){
                 var newUser = {
                     name: vm.emailInput,
-                    permissions: 'read'
+                    permissions: vm.permissions
                 }
                 vm.sharedUsers.push(newUser);
                 // vm.sharedUsers.push(vm.emailInput);
                 vm.emailInput = '';
                 localStorage.setItem('sharedUsers', JSON.stringify(vm.sharedUsers));
-
             } else {
                 vm.emailInput = 'User already added';
             }
+        }
+        function removeUser(index) {
+            vm.sharedUsers.splice(index, 1);
+            localStorage.setItem('sharedUsers', JSON.stringify(vm.sharedUsers));
+            console.log(vm.sharedUsers);
+        }
+        function updateUser(index, user) {
+            vm.sharedUsers.splice(index, 1, user);
+            localStorage.setItem('sharedUsers', JSON.stringify(vm.sharedUsers));
+            console.log(vm.sharedUsers);
         }
     }
 })();

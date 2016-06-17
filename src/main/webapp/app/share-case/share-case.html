@@ -1,4 +1,4 @@
-<div class="drsl-dialog drsl-case-details">
+<div class="drsl-dialog drsl-share-case">
     <form ng-submit="vm.addUser()">
         <div class="modal-body">
             <div>
@@ -8,18 +8,24 @@
                 <h1>Shared Users</h1>
                 <div ng-repeat="user in vm.sharedUsers track by $index">
                     <div>Name: {{user.name}}</div>
-                    <div>Permissions:
-                        <div style="width: 100px;" class="form-group">
-                            <select class="form-control" ng-model="user.permissions">
-                                <option>read</option>
-                                <option>write</option>
-                            </select>
-                        </div>
+                    <div>Permissions: <select class="form-control" ng-model="user.permissions" style="width: 100px; display: inline-block;">
+                            <option>read</option>
+                            <option>write</option>
+                        </select>
                     </div>
+                    <button class="btn btn-warning" ng-click="vm.removeUser($index)" type="button">Remove</button>
+                    <button class="btn btn-different" ng-click="vm.updateUser($index, user)" type="button">Update</button>
                 </div>
-                <label for="emailInput"></label>
-                <input type="text" class="form-control" id="emailInput" name="emailInput"
+                <hr>
+                <label for="emailInput">Email Address: </label>
+                <input type="text" id="emailInput" name="emailInput"
                 ng-model="vm.emailInput" ng-minlength=4 ng-maxlength=50 required>
+                <br>
+                <label for="permissionInput">Permissions: </label>
+                <select class="form-control" ng-model="vm.permissions" id="permissionInput" style="width: 166px; display: inline-block;">
+                    <option>read</option>
+                    <option>write</option>
+                </select>
                 <div style="text-align: right;">
                     <button class="btn btn-default" ng-click="vm.cancel($event)">Cancel</button>
                     <button type="submit" class="btn btn-success">Add User</button>

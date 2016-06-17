@@ -26,7 +26,7 @@
                 templateUrl: 'app/share-case/share-case.html',
                 controller: 'ShareCaseController',
                 controllerAs: 'vm',
-                size:'lg',
+                size:'sm',
                 resolve: {
                     drslCase: function(){ return drslCase; },
                     expert: function(){ return expert; },
