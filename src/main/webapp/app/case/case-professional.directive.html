@@ -8,12 +8,7 @@
     <!-- Contact -->
     <div class="drsl-contact-wrapper">
         <div><span class="drsl-label" translate="case.professional.contact.main">Contact:</span></div>
-        <div>
-            <div ng-show="expert.contact.email"><i class="fa fa-envelope" tooltip-placement="top" uib-tooltip="{{'case.professional.contact.email' | translate}}" ></i> {{expert.contact.email}}</div>
-            <div ng-show="expert.contact.phone"><i class="fa fa-phone" tooltip-placement="left" uib-tooltip="{{'case.professional.contact.phone' | translate}}"></i> {{expert.contact.phone}}</div>
-            <div ng-show="expert.contact.skype"><i class="fa fa-skype" tooltip-placement="left" uib-tooltip="{{'case.professional.contact.skype' | translate}}"></i> {{expert.contact.skype}}</div>
-            <div ng-show="chatRoom"><i class="fa fa-comments-o" tooltip-placement="left" uib-tooltip="{{'case.professional.contact.chat' | translate}}"></i> <a ng-href="{{chatRoom.link}}" target="_blank">{{chatRoom.id}}</a></div>
-        </div>
+        <contact-info contact="expert.contact" chat-room="chatRoom"></contact-info>
     </div>
 
     <!-- Profile Photo -->

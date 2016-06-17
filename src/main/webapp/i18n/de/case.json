@@ -5,6 +5,13 @@
             "header": "Current Case",
             "user": "User",
             "summary": "Summary",
+            "responseTime": "Response Time",
+            "detailedResolution": "Detailed Resolution",
+            "uploadedFiles": "Uploaded Files",
+            "downloadedFiles": "Downloaded Files",
+            "chatLog": "Chat Log",
+            "issue": "Issue:",
+            "technology": "Technology:",
             "resolutionETA": "ETA to Completion",
             "status": {
                 "main": "Status",
@@ -14,7 +21,7 @@
                 "resolved": "Resolved",
                 "completed": "Completed"
             },
-            "chatRoom": "chat with expert",
+            "chatRoom": "secure chat with expert",
             "viewDetails": "view case details",
             "rateCase": "rate this case",
             "id": "ID:",

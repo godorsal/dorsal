@@ -42,7 +42,11 @@
             "confirmpassword": "New password confirmation",
             "confirmpassword.placeholder": "Confirm the new password",
             "email": "E-mail",
-            "email.placeholder": "Your e-mail"
+            "email.placeholder": "Your e-mail",
+            "fileupload": {
+                "drop": "Drop files to attach, or ",
+                "browse": "browse"
+            }
         },
         "messages": {
             "info": {
@@ -89,6 +93,7 @@
             "edit": "Edit",
             "open": "Open",
             "save": "Save",
+            "update": "Update",
             "view": "View"
         },
         "detail": {

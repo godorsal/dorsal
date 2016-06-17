@@ -259,6 +259,42 @@ Cases
         }
     }
 }
+.drsl-case-details-view {
+    .drsl-header-status {
+        text-transform: uppercase;
+    }
+    .drsl-dialog-content {
+        padding: 20px;
+    }
+    .drsl-incident-items {
+        display: flex;
+        flex-flow: row;
+        > div {
+            flex: 1;
+            text-align: center;
+
+            &:first-child {
+                flex: .5;
+                text-align: left;
+            }
+
+            span {
+                font-weight: normal;padding-right: 10px;
+            }
+        }
+    }
+    .drsl-file-upload-section {
+        display: flex;
+        flex-flow: row;
+
+        > div {
+            flex: 1;
+            &:last-child {
+                flex: 3;
+            }
+        }
+    }
+}
 .alignRight{
     float: right;
 }

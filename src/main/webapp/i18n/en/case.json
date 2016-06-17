@@ -5,6 +5,13 @@
             "header": "Current Case",
             "user": "User",
             "summary": "Summary",
+            "responseTime": "Response Time",
+            "detailedResolution": "Detailed Resolution",
+            "uploadedFiles": "Uploaded Files",
+            "downloadedFiles": "Downloaded Files",
+            "chatLog": "Chat Log",
+            "issue": "Issue:",
+            "technology": "Technology:",
             "resolutionETA": "ETA to Completion",
             "status": {
                 "main": "Status",
