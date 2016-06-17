@@ -12,6 +12,9 @@
         vm.init = init;
         vm.submitForm = submitForm;
         vm.startChat = startChat;
+        vm.currentPlan = '';
+        vm.selectPlan = selectPlan;
+        vm.setClass = setClass;
         vm.updatePageTitle = updatePageTitle;
         vm.showChat = false;
         vm.chatName = '';
@@ -84,7 +87,16 @@
             vm.showChat = true;
             // }
         }
-
+        function selectPlan(tier){
+            vm.currentPlan = tier;
+        }
+        function setClass(tier){
+            if(vm.currentPlan == tier){
+                return 'selectedPlan';
+            } else {
+                return 'plan';
+            }
+        }
         // Call to initialize the controller.
         vm.init();
     }

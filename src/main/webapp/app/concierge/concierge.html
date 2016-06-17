@@ -48,26 +48,53 @@
                             </div>
 
                             <!-- Main Button -->
-                            <div class="drsl-button-wrapper">
+                            <!-- <div class="drsl-button-wrapper">
                                 <div>
                                     <button type="submit" class="drsl-custom-button" ng-click="vm.submitForm()"><span translate="concierge.caseDetails.button" style="margin-bottom: 5px;">go</span></button>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
-                    <!-- <img ng-hide="chatting" class="bgimg" src="/content/images/smaller_lady_transparent.png" alt=""> -->
                     <!-- Concierge Chat -->
                     <div>
                         <div class="drsl-chat-wrapper">
-                            <img ng-hide="chatting" class="bgimg" src="/content/images/PricingExample.png" alt="">
+                            <div class="chat-section">
+                                <br>
+                                <div class="plan" ng-click="vm.selectPlan(1)" ng-class="vm.setClass(1)">
+                                    <div class="tierTitle">
+                                        <h1>Tier 1</h1>
+                                    </div>
+                                    <div class="tierContent">
+                                        <span>$125 Per Hour</span>
+                                    </div>
+                                </div>
+                                <div class="plan" ng-click="vm.selectPlan(2)" ng-class="vm.setClass(2)">
+                                    <div class="tierTitle">
+                                        <h1>Tier 2</h1>
+                                    </div>
+                                    <div class="tierContent">
+                                        <span>$1000 Per Day</span>
+                                    </div>
+                                </div>
+                                <div class="plan" ng-click="vm.selectPlan(3)" ng-class="vm.setClass(3)">
+                                    <div class="tierTitle">
+                                        <h1>Tier 3</h1>
+                                    </div>
+                                    <div class="tierContent">
+                                        <span>Time and Pricing Scheduled</span>
+                                    </div>
+                                </div>
+                                <div class="drsl-button-wrapper">
+                                    <div>
+                                        <button ng-if="!vm.currentPlan" type="submit" class="drsl-custom-button" ng-click="vm.submitForm()" ng-disabled="true"><span style="margin-bottom: 5px;">select price</span></button>
+                                        <button ng-if="vm.currentPlan" type="submit" class="drsl-custom-button" ng-click="vm.submitForm()"><span translate="concierge.caseDetails.button" style="margin-bottom: 5px;">go</span></button>
+                                    </div>
+                                </div>
+                            </div>
+
                             <chatroom ng-show="chatting"></chatroom>
                         </div>
                     </div>
-                    <!-- <div ng-show="chatting">
-                        <div class="drsl-chat-wrapper">
-                            <chatroom></chatroom>
-                        </div>
-                    </div> -->
                 </div>
 
             </div>

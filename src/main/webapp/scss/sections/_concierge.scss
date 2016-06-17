@@ -218,5 +218,32 @@ Concierge
 .chatBody{
     width: 620px !important;
 }
-.drsl-share-case{
+.plan{
+    border: 1px solid black;
+    background: rgb(53, 48, 45);
+    background: linear-gradient(to bottom, rgba(53, 48, 45, 1) 0%, rgba(77, 67, 75, 1) 50%, rgba(53, 48, 45, 1) 100%);
+    font-size: 20px;
+    color: white;
+    padding: 10px;
+    margin: 10px;
+    margin-top: 30px;
+}
+.selectedPlan{
+    border: 1px solid black;
+    background: rgb(53, 48, 45);
+    background: linear-gradient(to bottom, rgba(53, 48, 45, 1) 0%, rgba(77, 67, 75, 1) 50%, rgba(53, 48, 45, 1) 100%);
+    font-size: 20px;
+    color: #F48B3D;
+    padding: 10px;
+    margin: 10px;
+    margin-top: 30px;
+}
+.plan:hover{
+    color: #F48B3D;
+}
+.tierTitle{
+    display: inline-block;
+}
+.tierContent{
+    display: inline-block;
 }
