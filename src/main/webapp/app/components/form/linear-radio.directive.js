@@ -18,6 +18,7 @@
                 $scope.showAll = function(a) {
                     $scope.startLimit = 1000;
                     console.log($scope.startLimit);
+
                 }
                 $scope.showLess = function(a) {
                     $scope.startLimit = 4;

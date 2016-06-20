@@ -23,6 +23,13 @@
                         <!-- Header -->
 
                         <div class="drsl-case-body">
+
+
+                            <!-- Radio Buttons -->
+                            <linear-radio target-data="radio.selectedValue"
+                            radio-data="radio" start-limit="4"
+                            ng-repeat="radio in vm.caseDetails.radios"></linear-radio>
+
                             <!-- Summary -->
                             <div class="drsl-field-seciton">
                                 <div class="drsl-field-label" translate="concierge.caseDetails.summary.main">Summary</div>
@@ -31,13 +38,8 @@
                                 </div>
                             </div>
 
-                            <!-- Radio Buttons -->
-                            <linear-radio target-data="radio.selectedValue"
-                            radio-data="radio" start-limit="4"
-                            ng-repeat="radio in vm.caseDetails.radios"></linear-radio>
-
                             <!-- File Upload -->
-                            <div class="drsl-field-seciton drsl-file-upload">
+                            <!-- <div class="drsl-field-seciton drsl-file-upload">
                                 <div class="drsl-field-label">
                                     <span translate="concierge.caseDetails.file.main">Attach file (optional)</span>
                                     <div class="drsl-field-sub-label" translate="concierge.caseDetails.file.notes">(Screenshot, Logfile, Configuration) </div>
@@ -45,14 +47,14 @@
                                 <div class="drsl-field-input">
                                     <div style="border: 1px dashed #DBD9DA; text-align: center; padding: 10px;"><i class="fa fa-cloud-upload fa-lg"></i> Drop files to attach, or <span style="color:#F48B3D;">browse</span></div>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <!-- Main Button -->
-                            <!-- <div class="drsl-button-wrapper">
+                            <div class="drsl-button-wrapper">
                                 <div>
                                     <button type="submit" class="drsl-custom-button" ng-click="vm.submitForm()"><span translate="concierge.caseDetails.button" style="margin-bottom: 5px;">go</span></button>
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                     <!-- Concierge Chat -->
@@ -60,6 +62,8 @@
                         <div class="drsl-chat-wrapper">
                             <div class="chat-section" ng-hide="chatting">
                                 <br>
+                                <h3>Select issue type and database on the left</h3>
+                                <h3>Concierge is available to chat by clicking on chat with expert in the action bar</h3>
                                 <div class="plan" ng-click="vm.selectPlan(1)" ng-class="vm.setClass(1)">
                                     <div class="tierTitle">
                                         <h3>On Demand Expert</h3>
@@ -84,12 +88,12 @@
                                         <span>$1000 Per Day</span>
                                     </div>
                                 </div>
-                                <div class="drsl-button-wrapper">
+                                <!-- <div class="drsl-button-wrapper">
                                     <div>
                                         <button ng-if="!vm.currentPlan" type="submit" class="drsl-custom-button" ng-click="vm.submitForm()" ng-disabled="true"><span style="margin-bottom: 5px;">select price</span></button>
                                         <button ng-if="vm.currentPlan" type="submit" class="drsl-custom-button" ng-click="vm.submitForm()"><span translate="concierge.caseDetails.button" style="margin-bottom: 5px;">go</span></button>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
 
                             <chatroom ng-show="chatting"></chatroom>

@@ -4,26 +4,6 @@
         "description": "",
         "radios": [
             {
-                "id": "urgency",
-                "label": "concierge.caseDetails.urgency.main",
-                "tooltip": "concierge.caseDetails.urgency.tooltip",
-                "values": [
-                    {
-                        "label": "concierge.caseDetails.urgency.immediate",
-                        "value": "Immediate"
-                    },
-                    {
-                        "label": "concierge.caseDetails.urgency.oneDay",
-                        "value": "24 hours"
-                    },
-                    {
-                        "label": "concierge.caseDetails.urgency.scheduled",
-                        "value": "Scheduled"
-                    }
-                ],
-                "selectedValue": ""
-            },
-            {
                 "id": "problem",
                 "label": "concierge.caseDetails.problem.main",
                 "values": [
