@@ -24,7 +24,7 @@ Cases
             background-color: $content-background-color;
 
             &:first-child {
-                margin-right: 20px;
+                margin-right: $default-padding;
             }
         }
     }
@@ -54,7 +54,7 @@ Cases
     .drsl-sub-header div {
         flex: 2;
         span {
-            margin-right: 10px;
+            margin-right: $default-half-padding;
         }
 
         &:last-child {
@@ -109,7 +109,7 @@ Cases
             > div {
                 &:first-child {
                     flex: 3;
-                    margin-right: 10px;
+                    margin-right: $default-half-padding;
                 }
                 &:last-child {
                     flex: 1;
@@ -144,7 +144,7 @@ Cases
 
     .drsl-case-summary, .drsl-case-expert {
         > div {
-            padding: 20px;
+            padding: $default-padding;
             border-bottom: 2px solid $horizontal-separator-color;
 
             &:last-child {
@@ -192,9 +192,9 @@ Cases
             }
 
             .drsl-timeline-icon-wrapper {
-                margin-top: 10px;
-                margin-left: -20px;
-                margin-right: -20px;
+                margin-top: $default-half-padding;
+                margin-left: -$default-padding;
+                margin-right: -$default-padding;
                 position: relative;
 
                 .drsl-timeline-icons {
@@ -211,7 +211,7 @@ Cases
             .drsl-timeline-item-done {
                 .drsl-timeline-text {
                     color: $default-text-color;
-                    font-weight: 600;
+                    font-weight: $medium-weight;
                 }
 
                 .drsl-icon-sprites {
@@ -226,7 +226,7 @@ Cases
 
         .drsl-profile-photo {
             position: absolute;
-            top: 10px;
+            top: $default-half-padding;
             right: 0;
             background-color: $content-background-color;
             border: 0;
@@ -240,7 +240,7 @@ Cases
         }
 
         .drsl-badges {
-            padding-top: 10px;
+            padding-top: $default-half-padding;
         }
 
         .drsl-contact-wrapper {
@@ -264,7 +264,7 @@ Cases
         text-transform: uppercase;
     }
     .drsl-dialog-content {
-        padding: 20px;
+        padding: $default-padding;
     }
     .drsl-incident-items {
         display: flex;
@@ -279,8 +279,8 @@ Cases
             }
 
             span {
-                font-weight: normal;
-                padding-right: 10px;
+                font-weight: $default-weight;
+                padding-right: $default-half-padding;
             }
         }
     }
@@ -306,7 +306,7 @@ Cases
     max-width: none !important;
 }
 .tiers{
-    margin-bottom: 10px;
+    margin-bottom: $default-half-padding;
     width: 200px;
 }
 .tiers:hover{
@@ -314,7 +314,6 @@ Cases
 }
 .current-tier{
     color: $custom-radio-border-color;
-    // color: $brand-color;
 }
 .drsl-radio-set {
     max-width: 400px;
@@ -336,6 +335,6 @@ input[type="radio"] + label span, input[type="checkbox"] + label span {
     margin-top: 5px;
 }
 .request {
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-left: $content-padding-side;
+    margin-right: 50$content-padding-side;
 }
