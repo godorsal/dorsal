@@ -21,7 +21,7 @@ Cases
 
         > div {
             flex: 1;
-            background-color: white;
+            background-color: $content-background-color;
 
             &:first-child {
                 margin-right: 20px;
@@ -98,7 +98,7 @@ Cases
             > .panel-heading {
                 &.active {
                     background-color: $brand-color;
-                    color: white;
+                    color: $inverted-heading-text-color;
                 }
             }
         }
@@ -145,7 +145,7 @@ Cases
     .drsl-case-summary, .drsl-case-expert {
         > div {
             padding: 20px;
-            border-bottom: 2px solid #E2E2E2;
+            border-bottom: 2px solid $horizontal-separator-color;
 
             &:last-child {
                 border: 0;
@@ -175,12 +175,12 @@ Cases
         }
 
         .drsl-timeline {
-            color: #c0c0c0;
+            color: $inactive-text-color;
 
             hr {
                 border: 0;
                 height: 2px;
-                background: #E2E2E2;
+                background: $horizontal-separator-color;
                 position: absolute;
                 top: 40%;
                 width: 100%;
@@ -210,7 +210,7 @@ Cases
 
             .drsl-timeline-item-done {
                 .drsl-timeline-text {
-                    color: black;
+                    color: $default-text-color;
                     font-weight: 600;
                 }
 
@@ -228,12 +228,12 @@ Cases
             position: absolute;
             top: 10px;
             right: 0;
-            background-color: white;
+            background-color: $content-background-color;
             border: 0;
 
             img {
                 box-shadow: 0px 5px 40px rgba(0, 0, 0, 0.5);
-                border: 5px solid white;
+                border: 5px solid $photo-border-color;
                 border-radius: 50%;
                 max-width: 175px;
             }
@@ -259,6 +259,46 @@ Cases
         }
     }
 }
+.drsl-case-details-view {
+    .drsl-header-status {
+        text-transform: uppercase;
+    }
+    .drsl-dialog-content {
+        padding: 20px;
+    }
+    .drsl-incident-items {
+        display: flex;
+        flex-flow: row;
+        > div {
+            flex: 1;
+            text-align: center;
+
+            &:first-child {
+                flex: .5;
+                text-align: left;
+            }
+
+            span {
+                font-weight: normal;
+                padding-right: 10px;
+            }
+        }
+    }
+    .drsl-file-upload-section {
+        display: flex;
+        flex-flow: row;
+
+        > div {
+            flex: 1;
+            &:last-child {
+                flex: 3;
+            }
+        }
+    }
+    .drsl-dialog-buttons {
+        text-align: right;
+    }
+}
 .alignRight{
     float: right;
 }
@@ -270,11 +310,11 @@ Cases
     width: 200px;
 }
 .tiers:hover{
-    color: #F48B3D;
+    color: $brand-color;
 }
 .current-tier{
     color: $custom-radio-border-color;
-    // color: #F48B3D;
+    // color: $brand-color;
 }
 .drsl-radio-set {
     max-width: 400px;

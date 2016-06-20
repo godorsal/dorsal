@@ -37,8 +37,8 @@ Install Postgres. From the command line run:
     export PGUSER=postgres
     export PGHOST=localhost
     export PGPASSWORD=postgres
-    createdb dorsaldev
-    createdb dorsalprod
+    psql -U postgres -f scripts/setup-dorsal-psql-db.sql
+
 
 ## Building for production
 
@@ -78,6 +78,7 @@ To setup this project in Jenkins, use the following configuration:
     * Invoke Maven / Tasks: `-Pprod clean package`
 * Post-build Actions
     * Publish JUnit test result report / Test Report XMLs: `build/test-results/*.xml`
+
 
 [JHipster]: https://jhipster.github.io/
 [Node.js]: https://nodejs.org/
