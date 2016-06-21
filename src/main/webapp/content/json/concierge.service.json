@@ -4,29 +4,6 @@
         "description": "",
         "radios": [
             {
-                "id": "problem",
-                "label": "concierge.caseDetails.problem.main",
-                "values": [
-                    {
-                        "label": "concierge.caseDetails.problem.performance",
-                        "value": "Performance"
-                    },
-                    {
-                        "label": "concierge.caseDetails.problem.availability",
-                        "value": "Availability"
-                    },
-                    {
-                        "label": "concierge.caseDetails.problem.security",
-                        "value": "Security"
-                    },
-                    {
-                        "label": "concierge.caseDetails.problem.other",
-                        "value": "Other"
-                    }
-                ],
-                "selectedValue": ""
-            },
-            {
                 "id": "product",
                 "label": "concierge.caseDetails.product.main",
                 "tooltip": "concierge.caseDetails.product.tooltip",
@@ -667,6 +644,29 @@
                     }
                 ],
 
+                "selectedValue": ""
+            },
+            {
+                "id": "problem",
+                "label": "concierge.caseDetails.problem.main",
+                "values": [
+                    {
+                        "label": "concierge.caseDetails.problem.performance",
+                        "value": "Performance"
+                    },
+                    {
+                        "label": "concierge.caseDetails.problem.availability",
+                        "value": "Availability"
+                    },
+                    {
+                        "label": "concierge.caseDetails.problem.security",
+                        "value": "Security"
+                    },
+                    {
+                        "label": "concierge.caseDetails.problem.other",
+                        "value": "Other"
+                    }
+                ],
                 "selectedValue": ""
             }
 
