@@ -5,27 +5,28 @@
                 <div class="drsl-dialog-header">
                     <div><h2>Share Case: <span>ID: {{vm.case.id}}</span></h2></div>
                 </div>
-                <h1>Shared Users</h1>
+                <h3 ng-if="vm.sharedUsers.length">Shared Users</h3>
                 <div ng-repeat="user in vm.sharedUsers track by $index">
                     <div>Name: {{user.name}}</div>
-                    <div>Permissions: <select class="form-control" ng-model="user.permissions" style="width: 100px; display: inline-block;">
-                            <option>read</option>
-                            <option>write</option>
+                    <div>Permissions: <select class="form-control" ng-model="user.permissions" style="width: 150px; display: inline-block;">
+                            <option value="read">read</option>
+                            <option value="write">write</option>
                         </select>
                     </div>
+                    <br>
                     <button class="btn btn-warning" ng-click="vm.removeUser($index)" type="button">Remove</button>
                     <button class="btn btn-different" ng-click="vm.updateUser($index, user)" type="button">Update</button>
                 </div>
                 <hr>
-                <label for="emailInput">Email Address: </label>
                 <input type="email" id="emailInput" name="emailInput"
-                ng-model="vm.emailInput" ng-minlength=4 ng-maxlength=50 required>
-                <br>
-                <label for="permissionInput">Permissions: </label>
-                <select class="form-control" ng-model="vm.permissions" id="permissionInput" style="width: 166px; display: inline-block;" required>
-                    <option selected="selected">read</option>
-                    <option>write</option>
+                ng-model="vm.emailInput" ng-minlength=4 ng-maxlength=50 required placeholder="Email address" style="width: 400px; height: 33px;">
+                <select class="form-control" ng-model="vm.permissions" id="permissionInput" style="width: 150px; display: inline-block;" required>
+                    <option value="">Permissions</option>
+                    <option value="read">read</option>
+                    <option value="write">write</option>
                 </select>
+                <br>
+                <br>
                 <div style="text-align: right;">
                     <button class="btn btn-default" ng-click="vm.cancel($event)">Cancel</button>
                     <button type="submit" class="btn btn-success">Add User</button>
