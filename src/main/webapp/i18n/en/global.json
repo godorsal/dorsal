@@ -89,11 +89,13 @@
             "addimage": "Add image",
             "back": "Back",
             "cancel": "Cancel",
+            "later": "Later",
             "delete": "Delete",
             "edit": "Edit",
             "open": "Open",
             "save": "Save",
             "update": "Update",
+            "submit": "Submit",
             "view": "View"
         },
         "detail": {

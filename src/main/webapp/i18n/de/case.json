@@ -7,12 +7,14 @@
             "summary": "Summary",
             "responseTime": "Response Time",
             "detailedResolution": "Detailed Resolution",
+            "resolutionDetails": "Case Resolution Details",
             "uploadedFiles": "Uploaded Files",
             "downloadedFiles": "Downloaded Files",
             "chatLog": "Chat Log",
             "issue": "Issue:",
             "technology": "Technology:",
             "resolutionETA": "ETA to Completion",
+            "caseCompleted": "Case completed",
             "status": {
                 "main": "Status",
                 "created": "Created",
@@ -25,6 +27,7 @@
             "viewDetails": "view case details",
             "rateCase": "rate this case",
             "id": "ID:",
+            "caseID": "Case ID:",
             "lastUpdate": "Last Update:"
         },
         "professional": {
@@ -61,6 +64,9 @@
             }
         },
         "rating": {
+            "header": "Rating for:",
+            "badges": "Rating Badges",
+            "badges.note": "select multiple badges to help rate your expert",
             "label": {
                 "satisfaction": "How satisfied were you with the Case Resolution?",
                 "prompt": "Prompt initial response",

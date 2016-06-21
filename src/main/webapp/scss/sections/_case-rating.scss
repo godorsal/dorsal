@@ -7,60 +7,63 @@ Case Rating
         padding: 0;
 
         > div {
-            padding: 20px;
+            padding: $default-padding;
 
             &:first-child {
                 background-color: white;
                 box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.15);
             }
-
-            &:last-child {
-                // text-align: right;
-            }
-
         }
     }
 
     .drsl-linear-radio {
-        margin-bottom: 20px;
+        margin-bottom: $default-padding;
+
         .drsl-radio-desc {
             display: none;
         }
+
         .drsl-radio-item {
             font-size: $default-font-size;
         }
     }
+
     h2 {
-        margin-bottom: 20px;
+        margin-bottom: $default-padding;
     }
+
     h3 {
         font-size: $medium-font-size;
-        font-weight: 200;
-        padding: 10px 0px;
-        margin: 0 0 10px;
+        font-weight: $thin-weight;
+        padding: $default-half-padding 0;
+        margin: 0 0 $default-half-padding;
     }
 
     .btn.btn-default {
-        margin-right: 10px;
+        margin-right: $default-half-padding;
     }
 
     &.drsl-case-rating-view {
         .drsl-rating-section {
-            margin-bottom: 20px;
+            margin-bottom: $default-padding;
 
             h3 {
                 padding-bottom: 5px;
                 margin-bottom: 0;
 
                 span {
-                    font-size: 14px;
-                    color: #c0c0c0;
+                    font-size: $default-font-size;
+                    color: $inactive-text-color;
                 }
             }
         }
+
         .drsl-badge-sprites {
             cursor: pointer;
         }
     }
 
+    .drsl-dialog-buttons {
+        text-align: right;
+    }
 }
