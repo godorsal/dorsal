@@ -1,0 +1,21 @@
+
+<div>
+    <h2><span translate="dorsalApp.issue.detail.title">Issue</span> {{vm.issue.id}}</h2>
+    <hr>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span translate="dorsalApp.issue.name">Name</span></dt>
+        <dd>
+            <span>{{vm.issue.name}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.issue.description">Description</span></dt>
+        <dd>
+            <span>{{vm.issue.description}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

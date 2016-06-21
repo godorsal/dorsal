@@ -1,0 +1,24 @@
+{
+    "dorsalApp": {
+        "technology" : {
+            "home": {
+                "title": "Technologies",
+                "createLabel": "Technology erstellen",
+                "createOrEditLabel": "Technology erstellen oder bearbeiten",
+                "search": "Suche nach Technology"
+            },
+            "created": "Technology erstellt mit ID {{ param }}",
+            "updated": "Technology aktualisiert mit ID {{ param }}",
+            "deleted": "Technology gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Technology {{ id }} wirklich dauerhaft gejöscht werden?"
+            },
+            "detail": {
+                "title": "Technology"
+            },
+            "name": "Name",
+            "description": "Description",
+            "technology": "Technology"
+        }
+    }
+}

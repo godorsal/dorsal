@@ -1,0 +1,24 @@
+{
+    "dorsalApp": {
+        "technologypropertyvalue" : {
+            "home": {
+                "title": "Technologypropertyvalues",
+                "createLabel": "Create a new Technologypropertyvalue",
+                "createOrEditLabel": "Create or edit a Technologypropertyvalue",
+                "search": "Search for Technologypropertyvalue"
+            },
+            "created": "A new Technologypropertyvalue is created with identifier {{ param }}",
+            "updated": "A Technologypropertyvalue is updated with identifier {{ param }}",
+            "deleted": "A Technologypropertyvalue is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Technologypropertyvalue {{ id }}?"
+            },
+            "detail": {
+                "title": "Technologypropertyvalue"
+            },
+            "value": "Value",
+            "technology": "Technology",
+            "technologyproperty": "Technologyproperty"
+        }
+    }
+}

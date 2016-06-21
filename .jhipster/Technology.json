@@ -1,0 +1,30 @@
+{
+  "relationships": [
+    {
+      "relationshipId": 1,
+      "relationshipName": "technology",
+      "otherEntityName": "technologypropertyvalue",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "technology"
+    }
+  ],
+  "fields": [
+    {
+      "fieldId": 1,
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldId": 2,
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "changelogDate": "20160621220712",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceClass"
+}
