@@ -5,7 +5,7 @@
                 <!-- Dialog Header -->
                 <div>
                     <div class="drsl-dialog-header">
-                        <div><h2>Rating for: Case ID: {{vm.case.id}}</h2></div>
+                        <div><h2>{{'case.rating.header' | translate}} {{'case.details.caseID' | translate}} {{vm.case.id}}</h2></div>
                     </div>
                 </div>
 
@@ -14,13 +14,13 @@
                     <div class="drsl-dialog-content">
                         <!-- Expert -->
                         <h3>
-                            <span>Expert: John S</span>
-                            <div class="pull-right">Case completed June 2, 2016</div>
+                            <span>{{'case.professional.expert' | translate}}: John S</span>
+                            <div class="pull-right">{{'case.details.caseCompleted' | translate}} June 2, 2016</div>
                         </h3>
 
                         <!-- Case Resolution Details -->
                         <div class="drsl-rating-section">
-                            <h3>Case Resolution Details</h3>
+                            <h3 translate="case.details.resolutionDetails">Case Resolution Details</h3>
                             <div class="drsl-scrolling-container">Database config files were carried over from MySQL v3.4.1 after version upgrade.
                                 Performance of the output was sub-optimal/unacceptable.  Review of log file and
                                 config yielded the info I needed to update config options to v3.7.51.</div>
@@ -36,7 +36,7 @@
 
                         <!-- Badge Selection -->
                         <div class="drsl-rating-section">
-                            <h3>Rating Badges <span>(select multiple badges to help rate your expert)</span></h3>
+                            <h3>{{'case.rating.badges' | translate}} <span>({{'case.rating.badges.note' | translate}})</span></h3>
                             <div class="drsl-scrolling-container">
                                 <expert-badges badge-select="true"></expert-badges>
                             </div>
@@ -47,8 +47,8 @@
 
             <!-- Main Buttons -->
             <div class="drsl-dialog-buttons">
-                <button class="btn btn-default" ng-click="vm.cancel()">Later</button>
-                <button type="submit" class="btn btn-success">Submit</button>
+                <button class="btn btn-default" ng-click="vm.cancel()" translate="entity.action.later">Later</button>
+                <button type="submit" class="btn btn-success" translate="entity.action.submit">Submit</button>
             </div>
         </div>
     </form>
