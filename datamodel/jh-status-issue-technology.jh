@@ -1,0 +1,37 @@
+entity Technology {
+	name String required,
+    description String
+}
+
+entity Technologyproperty {
+	name String
+}
+
+entity Technologypropertyvalue {
+	value String
+}
+
+entity Issue {
+	name String required,
+    description String
+}
+
+entity Status {
+	name String required,
+    description String
+}
+
+
+relationship OneToMany {
+	Technology{technology} to Technologypropertyvalue
+}
+
+relationship OneToMany {
+   Technologyproperty{technologyproperty} to Technologypropertyvalue 
+}
+
+dto Technology with mapstruct
+service Technology with serviceClass
+
+
+
