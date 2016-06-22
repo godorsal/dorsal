@@ -5,10 +5,21 @@
     .module('dorsalApp')
     .directive('chatroom', chatroom);
 
-    function chatroom($translate, $locale, tmhDynamicLocale) {
-        var controller = ['$rootScope', '$scope', '$uibModal', '$location', 'MSG', 'ChatRoomsService', 'ChatService', 'SimpleModalService', 'toastr', function($rootScope, $scope, $uibModal, $location, MSG, ChatRoomsService, ChatService, SimpleModalService, toastr){
+    function chatroom($translate, $locale, tmhDynamicLocale, Principal) {
+        var controller = ['$rootScope', '$scope', '$uibModal', '$location', 'MSG', 'ChatRoomsService', 'ChatService', 'SimpleModalService', 'toastr', 'Principal', function($rootScope, $scope, $uibModal, $location, MSG, ChatRoomsService, ChatService, SimpleModalService, toastr, Principal){
             var vm = this;
-
+            console.log($scope.isChatting);
+            Principal.identity().then(function(account) {
+                if(account){
+                    vm.currentUsername = account.firstName
+                }
+            });
+            $scope.$watch("isChatting", function(newValue, oldValue) {
+                if(vm.currentUsername && $scope.isChatting){
+                    vm.person.name = vm.currentUsername
+                    vm.join()
+                }
+            });
             vm.go = function (path) {
                 $location.path(path);
             };
@@ -78,7 +89,10 @@
             restrict: 'E',
             templateUrl: 'app/concierge/chatroom.html',
             controller: controller,
-            controllerAs: 'rc'
+            controllerAs: 'rc',
+            scope: {
+                isChatting: '='
+            }
         };
 
         return directive;

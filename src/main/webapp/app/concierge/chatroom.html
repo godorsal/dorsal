@@ -1,12 +1,11 @@
 <link rel="stylesheet" href="content/css/main.css">
-
 <div class="chat-section ">
 <!-- <div class="container chat-section"> -->
     <div class="grid-container no-padding chatbody">
         <div class="" ng-show="!rc.joined">
             <div class="drsl-chat-login-wrapper">
                 <div class="drsl-chat-login">
-                    <div class="panel panel-default">
+                    <div class="panel panel-default" ng-if="!vm.currentUsername">
                         <div class="panel-heading">
                             <h3 class="panel-title" translate="concierge.chat.login.header">Start Chat</h3>
                         </div>
@@ -18,18 +17,6 @@
                                         <input type="text" class="form-control" placeholder="name" ng-model="rc.person.name" require style="margin-left: 50px;">
                                     </div>
                                 </div>
-                                <!-- <div class="form-group">
-                                    <label class="col-sm-2 control-label"></label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder="First Name" ng-model="rc.person.firstName" required>
-                                    </div>
-                                </div> -->
-                                <!-- <div class="form-group">
-                                    <label class="col-sm-2 control-label"></label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder="Last Name" ng-model="rc.person.lastName" required>
-                                    </div>
-                                </div> -->
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10 text-right">
                                         <button type="submit" class="btn btn-different" ng-click="rc.join()" ng-disabled="!joinform.$valid" style="margin-left: 40px;">let's chat</button>

@@ -25,10 +25,16 @@
             description: '',
             radios: []
         };
+
         /**
         * Initialize the controller's data.
         */
         function init(){
+            Principal.identity().then(function(account) {
+                if(account){
+                    vm.currentUsername = account.firstName
+                }
+            });
             vm.pageTitle = '';
 
             // Make a call to get the initial data.
