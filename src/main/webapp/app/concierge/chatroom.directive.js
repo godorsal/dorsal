@@ -8,14 +8,18 @@
     function chatroom($translate, $locale, tmhDynamicLocale, Principal) {
         var controller = ['$rootScope', '$scope', '$uibModal', '$location', 'MSG', 'ChatRoomsService', 'ChatService', 'SimpleModalService', 'toastr', 'Principal', function($rootScope, $scope, $uibModal, $location, MSG, ChatRoomsService, ChatService, SimpleModalService, toastr, Principal){
             var vm = this;
-            console.log($scope.isChatting);
-            Principal.identity().then(function(account) {
-                if(account){
-                    vm.currentUsername = account.firstName
-                }
-            });
+            $scope.isAuthed = Principal.isAuthenticated()
+            vm.getCurrentUser = function(){
+                Principal.identity().then(function(account) {
+                    if(account){
+                        vm.currentUsername = account.firstName
+                    }
+                });
+            }
             $scope.$watch("isChatting", function(newValue, oldValue) {
-                if(vm.currentUsername && $scope.isChatting){
+                $scope.isAuthed = Principal.isAuthenticated()
+                vm.getCurrentUser()
+                if(vm.currentUsername && $scope.isChatting && !vm.joined){
                     vm.person.name = vm.currentUsername
                     vm.join()
                 }
