@@ -1,0 +1,6 @@
+id;name;description
+1;CREATED;Case was created and assigned to Expert
+2;ESTIMATED;Initial Case duration has been estimated by Expert Ready to be reiewed by user
+3;WORKING;Case work has started
+4;COMPLETED;Case work has been completed and a resolution was provided. Ready to be rated
+5;CLOSED;Case has been completed and solution has been reviewd an accepted by user

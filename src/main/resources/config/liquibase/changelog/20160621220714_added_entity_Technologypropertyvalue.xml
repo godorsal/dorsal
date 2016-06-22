@@ -24,7 +24,7 @@
             <column name="value" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="technology_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -35,6 +35,11 @@
 
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
-        
+
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/technologypropertyvalue.csv"
+                  separator=";"
+                  tableName="technologypropertyvalue"/>
+
     </changeSet>
 </databaseChangeLog>

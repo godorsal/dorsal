@@ -1,0 +1,7 @@
+id;name;description
+1;MySQL;MySQL The world's most popular open source database
+2;MariaDB;MariaDB is one of the most popular database servers in the world
+3;PostgreSQL;PostgreSQL The world's most advanced open source database
+4;MongoDB;MongoDB For Giant Ideas
+5;HBase;Apache HBase™ when you need random, realtime read/write access to your Big Data
+6;CassandraDB;Apache Cassandra for scalability and high availability without compromising performance

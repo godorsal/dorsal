@@ -1,0 +1,5 @@
+id;name;description
+1;Performance;Performance issue with the tools
+2;Availability;Availability of the systems. Not running, not reachable
+3;Security;Security issue
+4;Other;Other issue described in more details in the summary
