@@ -9,7 +9,6 @@ id;technology_id;technologyproperty_id;value
 8;1;4;Timeout
 9;1;4;Connection Drop
 10;1;5;Slow Queries
-60;1;5;HighCPU/Memory
 11;1;5;Query Timeout
 12;2;1;none
 13;2;2;VMware
@@ -59,3 +58,4 @@ id;technology_id;technologyproperty_id;value
 57;6;5;Slow Queries
 58;6;5;HighCPU/Memory
 59;6;5;Query Timeout
+60;1;5;HighCPU/Memory
