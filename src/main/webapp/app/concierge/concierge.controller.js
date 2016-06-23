@@ -32,16 +32,16 @@
             vm.pageTitle = '';
 
             // Make a call to get the initial data.
-            ConciergeService.get(function(data){
-                vm.caseDetails = data[0] || [];
+            ConciergeService.getEntityData().then(function(data){
+                vm.caseDetails = data;
 
                 // Store a shortcut reference to the product object
                 vm.product = vm.caseDetails.radios.filter(function (o) {
                     return o.id === 'product';
                 })[0];
-
-                vm.updatePageTitle();
             });
+
+            vm.updatePageTitle();
         }
         /**
         * Updates the page title to match the params *type* data
