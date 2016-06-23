@@ -75,7 +75,7 @@
                         // Iterate over Technology Property Value belonging to the current type
                         for (j = 0; j < byProp.length; j++) {
                             propVal = byProp[j];
-                            propVal.code = propVal.value.replace(/\s/g, '_').toLowerCase();
+                            propVal.code = propVal.value.replace(/\/|\s/gi, '_').toLowerCase();
 
                             // Push a new object containing the values to the types array
                             types.push({

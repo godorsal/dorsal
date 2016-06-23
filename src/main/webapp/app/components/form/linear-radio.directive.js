@@ -24,6 +24,7 @@
                     $scope.startLimit = 4;
                     console.log($scope.startLimit);
                 }
+                console.log($scope.radioData);
             },
             template:   '<div class="drsl-linear-radio">' +
                             '<div class="drsl-radio-desc" tooltip-placement="left" uib-tooltip="{{radioData.tooltip | translate}}" translate="{{radioData.label}}"></div>' +

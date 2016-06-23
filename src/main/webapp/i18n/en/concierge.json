@@ -89,6 +89,7 @@
                     "slow_queries": "Slow Queries",
                     "resources": "HighCPU/Mem",
                     "query_timeout": "Query Timeout",
+                    "highcpu_memory": "HighCPU",
                     "none": "None"
                 }
             }

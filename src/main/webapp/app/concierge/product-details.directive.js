@@ -14,14 +14,14 @@
             template:   '<div class="well drsl-product-details-wrapper" ng-show="canShowProductDetails()">' +
             '<h4>{{getSelectedProductsLabel() | translate}}</h4>' +
             '<div><uib-accordion close-others="true"><uib-accordion-group ng-repeat="rootType in getAllIncidentTypes()" is-open="rootType.open">' +
-            '<uib-accordion-heading>{{rootType.description | translate}}<br /><span class="drsl-product-header-selection" ng-show="rootType.selectedValue">{{getLabelForTypeValue(rootType) | translate}}</span><i class="pull-right glyphicon" ng-class="{\'glyphicon-ok-sign\': rootType.selectedValue}"></i></uib-accordion-heading>' +
+            '<uib-accordion-heading><div ng-if="rootTranslationWorks(rootType)"> {{rootType.description | translate}}</div><div ng-if="!rootTranslationWorks(rootType)">{{rootType.name}}</div><br /><span class="drsl-product-header-selection" ng-show="rootType.selectedValue">{{getLabelForTypeValue(rootType) | translate}}</span><i class="pull-right glyphicon" ng-class="{\'glyphicon-ok-sign\': rootType.selectedValue}"></i></uib-accordion-heading>' +
             '<div class="drsl-product-detail-input" ' +
             'ng-repeat="incidentType in rootType.types">' +
             '<button ng-hide="incidentType.type" type="button" ' +
             'class="btn" ' +
             'ng-class="{\'btn-success\': (incidentType.value == rootType.selectedValue)}" ' +
             'ng-click="setIncidentTypeValue(rootType, incidentType)">' +
-            '{{incidentType.label | translate}}' +
+            '<div ng-if="incidentTranslationWorks(incidentType)">{{incidentType.label | translate}}</div>' + '<div ng-if="!incidentTranslationWorks(incidentType)">{{incidentType.value}}</div>' +
             '</button>' +
             '<div ng-show="incidentType.type && incidentType.type === \'field\'">' +
             '<form ng-submit="setIncidentTypeValue(rootType, incidentType)"><input type="text" class="form-control" ng-model="incidentType.value">' +
@@ -56,7 +56,18 @@
                 // console.log(scope.product);
                 return incidentTypes;
             };
-
+            scope.rootTranslationWorks = function(rootType){
+                // console.log(rootType);
+                    var source = rootType.description;
+                    var translation = $translate.instant(rootType.description)
+                    return source !== translation;
+            }
+            scope.incidentTranslationWorks = function(incident){
+                console.log(incident);
+                    var source = incident.label;
+                    var translation = $translate.instant(incident.label)
+                    return source !== translation;
+            }
             /**
             * Returns true if we can show the product details for currently selected product.
             * @returns {boolean} a boolean for deciding to show/hide the product details/incidents.

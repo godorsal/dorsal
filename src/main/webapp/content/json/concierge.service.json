@@ -10,7 +10,7 @@
                 "type": "complex",
                 "values": [
                     {
-                        "label": "concierge.caseDetails.product.mySQL",
+                        "code": "concierge.caseDetails.product.mysql",
                         "value": "MySQL",
                         "incidentTypes": [
                             {
