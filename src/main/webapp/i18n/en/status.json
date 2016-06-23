@@ -17,7 +17,8 @@
                 "title": "Status"
             },
             "name": "Name",
-            "description": "Description"
+            "code": "Code",
+            "supportcase": "Supportcase"
         }
     }
 }

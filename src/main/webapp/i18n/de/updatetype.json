@@ -1,0 +1,23 @@
+{
+    "dorsalApp": {
+        "updatetype" : {
+            "home": {
+                "title": "Updatetypes",
+                "createLabel": "Updatetype erstellen",
+                "createOrEditLabel": "Updatetype erstellen oder bearbeiten",
+                "search": "Suche nach Updatetype"
+            },
+            "created": "Updatetype erstellt mit ID {{ param }}",
+            "updated": "Updatetype aktualisiert mit ID {{ param }}",
+            "deleted": "Updatetype gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Updatetype {{ id }} wirklich dauerhaft gejöscht werden?"
+            },
+            "detail": {
+                "title": "Updatetype"
+            },
+            "name": "Name",
+            "caseupdate": "Caseupdate"
+        }
+    }
+}

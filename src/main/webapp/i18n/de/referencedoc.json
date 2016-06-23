@@ -1,0 +1,25 @@
+{
+    "dorsalApp": {
+        "referencedoc" : {
+            "home": {
+                "title": "Referencedocs",
+                "createLabel": "Referencedoc erstellen",
+                "createOrEditLabel": "Referencedoc erstellen oder bearbeiten",
+                "search": "Suche nach Referencedoc"
+            },
+            "created": "Referencedoc erstellt mit ID {{ param }}",
+            "updated": "Referencedoc aktualisiert mit ID {{ param }}",
+            "deleted": "Referencedoc gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Referencedoc {{ id }} wirklich dauerhaft gejöscht werden?"
+            },
+            "detail": {
+                "title": "Referencedoc"
+            },
+            "name": "Name",
+            "url": "Url",
+            "user": "User",
+            "technology": "Technology"
+        }
+    }
+}

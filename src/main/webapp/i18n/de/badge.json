@@ -1,0 +1,24 @@
+{
+    "dorsalApp": {
+        "badge" : {
+            "home": {
+                "title": "Badges",
+                "createLabel": "Badge erstellen",
+                "createOrEditLabel": "Badge erstellen oder bearbeiten",
+                "search": "Suche nach Badge"
+            },
+            "created": "Badge erstellt mit ID {{ param }}",
+            "updated": "Badge aktualisiert mit ID {{ param }}",
+            "deleted": "Badge gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Badge {{ id }} wirklich dauerhaft gejöscht werden?"
+            },
+            "detail": {
+                "title": "Badge"
+            },
+            "name": "Name",
+            "code": "Code",
+            "expertbadge": "Expertbadge"
+        }
+    }
+}

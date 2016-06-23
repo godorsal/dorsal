@@ -17,8 +17,11 @@
                 "title": "Technology"
             },
             "name": "Name",
-            "description": "Description",
-            "technology": "Technology"
+            "code": "Code",
+            "technology": "Technology",
+            "referencedoc": "Referencedoc",
+            "supportcase": "Supportcase",
+            "casetechnologyproperty": "Casetechnologyproperty"
         }
     }
 }

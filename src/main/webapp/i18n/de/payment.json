@@ -1,0 +1,23 @@
+{
+    "dorsalApp": {
+        "payment" : {
+            "home": {
+                "title": "Payments",
+                "createLabel": "Payment erstellen",
+                "createOrEditLabel": "Payment erstellen oder bearbeiten",
+                "search": "Suche nach Payment"
+            },
+            "created": "Payment erstellt mit ID {{ param }}",
+            "updated": "Payment aktualisiert mit ID {{ param }}",
+            "deleted": "Payment gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Payment {{ id }} wirklich dauerhaft gejöscht werden?"
+            },
+            "detail": {
+                "title": "Payment"
+            },
+            "ccdata": "Ccdata",
+            "user": "User"
+        }
+    }
+}

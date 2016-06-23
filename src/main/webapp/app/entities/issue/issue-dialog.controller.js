@@ -5,11 +5,12 @@
         .module('dorsalApp')
         .controller('IssueDialogController', IssueDialogController);
 
-    IssueDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Issue'];
+    IssueDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Issue', 'Supportcase'];
 
-    function IssueDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Issue) {
+    function IssueDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Issue, Supportcase) {
         var vm = this;
         vm.issue = entity;
+        vm.supportcases = Supportcase.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

@@ -1,0 +1,124 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="mySupportcaseLabel" translate="dorsalApp.supportcase.home.createOrEditLabel">Create or edit a Supportcase</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.supportcase.id">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.supportcase.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.supportcase.summary" for="field_summary">Summary</label>
+            <input type="text" class="form-control" name="summary" id="field_summary"
+                    ng-model="vm.supportcase.summary"
+                    ng-maxlength="1024" />
+            <div ng-show="editForm.summary.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.summary.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="1024">
+                    This field cannot be longer than 1024 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.supportcase.expectedresult" for="field_expectedresult">Expectedresult</label>
+            <input type="text" class="form-control" name="expectedresult" id="field_expectedresult"
+                    ng-model="vm.supportcase.expectedresult"
+                    ng-maxlength="1024" />
+            <div ng-show="editForm.expectedresult.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.expectedresult.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="1024">
+                    This field cannot be longer than 1024 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.supportcase.statusmsg" for="field_statusmsg">Statusmsg</label>
+            <input type="text" class="form-control" name="statusmsg" id="field_statusmsg"
+                    ng-model="vm.supportcase.statusmsg"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.supportcase.datecreated" for="field_datecreated">Datecreated</label>
+                <div class="input-group">
+                    <input id="field_datecreated" type="text" class="form-control" name="datecreated" datetime-picker="{{dateformat}}" ng-model="vm.supportcase.datecreated" is-open="vm.datePickerOpenStatus.datecreated"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('datecreated')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.supportcase.datelastupdate" for="field_datelastupdate">Datelastupdate</label>
+                <div class="input-group">
+                    <input id="field_datelastupdate" type="text" class="form-control" name="datelastupdate" datetime-picker="{{dateformat}}" ng-model="vm.supportcase.datelastupdate" is-open="vm.datePickerOpenStatus.datelastupdate"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('datelastupdate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.supportcase.chaturl" for="field_chaturl">Chaturl</label>
+            <input type="text" class="form-control" name="chaturl" id="field_chaturl"
+                    ng-model="vm.supportcase.chaturl"
+                    ng-maxlength="1024" />
+            <div ng-show="editForm.chaturl.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.chaturl.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="1024">
+                    This field cannot be longer than 1024 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.supportcase.etacompletion" for="field_etacompletion">Etacompletion</label>
+            <input type="text" class="form-control" name="etacompletion" id="field_etacompletion"
+                    ng-model="vm.supportcase.etacompletion"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label translate="dorsalApp.supportcase.user" for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" ng-model="vm.supportcase.user" ng-options="user as user.id for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="dorsalApp.supportcase.expert" for="field_expert">Expert</label>
+            <select class="form-control" id="field_expert" name="expert" ng-model="vm.supportcase.expert" ng-options="user as user.id for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="dorsalApp.supportcase.technology" for="field_technology">Technology</label>
+            <select class="form-control" id="field_technology" name="technology" ng-model="vm.supportcase.technology" ng-options="technology as technology.id for technology in vm.technologies track by technology.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="dorsalApp.supportcase.status" for="field_status">Status</label>
+            <select class="form-control" id="field_status" name="status" ng-model="vm.supportcase.status" ng-options="status as status.id for status in vm.statuses track by status.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="dorsalApp.supportcase.issue" for="field_issue">Issue</label>
+            <select class="form-control" id="field_issue" name="issue" ng-model="vm.supportcase.issue" ng-options="issue as issue.id for issue in vm.issues track by issue.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

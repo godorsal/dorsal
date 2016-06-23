@@ -1,0 +1,86 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myUseraccountLabel" translate="dorsalApp.useraccount.home.createOrEditLabel">Create or edit a Useraccount</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.useraccount.id">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.useraccount.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.useraccount.phone" for="field_phone">Phone</label>
+            <input type="text" class="form-control" name="phone" id="field_phone"
+                    ng-model="vm.useraccount.phone"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.useraccount.skype" for="field_skype">Skype</label>
+            <input type="text" class="form-control" name="skype" id="field_skype"
+                    ng-model="vm.useraccount.skype"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.useraccount.othercommunication" for="field_othercommunication">Othercommunication</label>
+            <input type="text" class="form-control" name="othercommunication" id="field_othercommunication"
+                    ng-model="vm.useraccount.othercommunication"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.useraccount.location" for="field_location">Location</label>
+            <input type="text" class="form-control" name="location" id="field_location"
+                    ng-model="vm.useraccount.location"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.useraccount.score" for="field_score">Score</label>
+            <input type="number" class="form-control" name="score" id="field_score"
+                    ng-model="vm.useraccount.score"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.useraccount.isexpert" for="field_isexpert">Isexpert</label>
+            <input type="checkbox" class="form-control" name="isexpert" id="field_isexpert"
+                    ng-model="vm.useraccount.isexpert"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.useraccount.preferlocalexpert" for="field_preferlocalexpert">Preferlocalexpert</label>
+            <input type="checkbox" class="form-control" name="preferlocalexpert" id="field_preferlocalexpert"
+                    ng-model="vm.useraccount.preferlocalexpert"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.useraccount.handle" for="field_handle">Handle</label>
+            <input type="text" class="form-control" name="handle" id="field_handle"
+                    ng-model="vm.useraccount.handle"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.useraccount.languages" for="field_languages">Languages</label>
+            <input type="text" class="form-control" name="languages" id="field_languages"
+                    ng-model="vm.useraccount.languages"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.useraccount.companyname" for="field_companyname">Companyname</label>
+            <input type="text" class="form-control" name="companyname" id="field_companyname"
+                    ng-model="vm.useraccount.companyname"
+                     />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

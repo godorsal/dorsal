@@ -1,0 +1,37 @@
+{
+    "dorsalApp": {
+        "supportcase" : {
+            "home": {
+                "title": "Supportcases",
+                "createLabel": "Supportcase erstellen",
+                "createOrEditLabel": "Supportcase erstellen oder bearbeiten",
+                "search": "Suche nach Supportcase"
+            },
+            "created": "Supportcase erstellt mit ID {{ param }}",
+            "updated": "Supportcase aktualisiert mit ID {{ param }}",
+            "deleted": "Supportcase gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Supportcase {{ id }} wirklich dauerhaft gejöscht werden?"
+            },
+            "detail": {
+                "title": "Supportcase"
+            },
+            "summary": "Summary",
+            "expectedresult": "Expectedresult",
+            "statusmsg": "Statusmsg",
+            "datecreated": "Datecreated",
+            "datelastupdate": "Datelastupdate",
+            "chaturl": "Chaturl",
+            "etacompletion": "Etacompletion",
+            "casetechnologyproperty": "Casetechnologyproperty",
+            "caseupdate": "Caseupdate",
+            "rating": "Rating",
+            "attachement": "Attachement",
+            "user": "User",
+            "expert": "Expert",
+            "technology": "Technology",
+            "status": "Status",
+            "issue": "Issue"
+        }
+    }
+}

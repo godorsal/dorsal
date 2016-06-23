@@ -1,0 +1,29 @@
+
+<div>
+    <h2><span translate="dorsalApp.casetechnologyproperty.detail.title">Casetechnologyproperty</span> {{vm.casetechnologyproperty.id}}</h2>
+    <hr>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span translate="dorsalApp.casetechnologyproperty.propertyname">Propertyname</span></dt>
+        <dd>
+            <span>{{vm.casetechnologyproperty.propertyname}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.casetechnologyproperty.propertyvalue">Propertyvalue</span></dt>
+        <dd>
+            <span>{{vm.casetechnologyproperty.propertyvalue}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.casetechnologyproperty.supportcase">Supportcase</span></dt>
+        <dd>
+            <a ui-sref="supportcase-detail({id:vm.casetechnologyproperty.supportcase.id})">{{vm.casetechnologyproperty.supportcase.id}}</a>
+        </dd>
+        <dt><span translate="dorsalApp.casetechnologyproperty.technology">Technology</span></dt>
+        <dd>
+            <a ui-sref="technology-detail({id:vm.casetechnologyproperty.technology.id})">{{vm.casetechnologyproperty.technology.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

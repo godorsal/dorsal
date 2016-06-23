@@ -29,13 +29,28 @@ public class Technology implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "code")
+    private String code;
 
     @OneToMany(mappedBy = "technology")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Technologypropertyvalue> technologies = new HashSet<>();
+
+    @OneToMany(mappedBy = "technology")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Referencedoc> referencedocs = new HashSet<>();
+
+    @OneToMany(mappedBy = "technology")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Supportcase> supportcases = new HashSet<>();
+
+    @OneToMany(mappedBy = "technology")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Casetechnologyproperty> casetechnologyproperties = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -53,12 +68,12 @@ public class Technology implements Serializable {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getCode() {
+        return code;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public Set<Technologypropertyvalue> getTechnologies() {
@@ -67,6 +82,30 @@ public class Technology implements Serializable {
 
     public void setTechnologies(Set<Technologypropertyvalue> technologypropertyvalues) {
         this.technologies = technologypropertyvalues;
+    }
+
+    public Set<Referencedoc> getReferencedocs() {
+        return referencedocs;
+    }
+
+    public void setReferencedocs(Set<Referencedoc> referencedocs) {
+        this.referencedocs = referencedocs;
+    }
+
+    public Set<Supportcase> getSupportcases() {
+        return supportcases;
+    }
+
+    public void setSupportcases(Set<Supportcase> supportcases) {
+        this.supportcases = supportcases;
+    }
+
+    public Set<Casetechnologyproperty> getCasetechnologyproperties() {
+        return casetechnologyproperties;
+    }
+
+    public void setCasetechnologyproperties(Set<Casetechnologyproperty> casetechnologyproperties) {
+        this.casetechnologyproperties = casetechnologyproperties;
     }
 
     @Override
@@ -94,7 +133,7 @@ public class Technology implements Serializable {
         return "Technology{" +
             "id=" + id +
             ", name='" + name + "'" +
-            ", description='" + description + "'" +
+            ", code='" + code + "'" +
             '}';
     }
 }

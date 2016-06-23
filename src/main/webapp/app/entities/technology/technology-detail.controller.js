@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .controller('TechnologyDetailController', TechnologyDetailController);
 
-    TechnologyDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'entity', 'Technology', 'Technologypropertyvalue'];
+    TechnologyDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'entity', 'Technology', 'Technologypropertyvalue', 'Referencedoc', 'Supportcase', 'Casetechnologyproperty'];
 
-    function TechnologyDetailController($scope, $rootScope, $stateParams, entity, Technology, Technologypropertyvalue) {
+    function TechnologyDetailController($scope, $rootScope, $stateParams, entity, Technology, Technologypropertyvalue, Referencedoc, Supportcase, Casetechnologyproperty) {
         var vm = this;
         vm.technology = entity;
         

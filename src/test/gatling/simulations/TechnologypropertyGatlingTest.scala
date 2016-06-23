@@ -68,7 +68,7 @@ class TechnologypropertyGatlingTest extends Simulation {
             .exec(http("Create new technologyproperty")
             .post("/api/technologyproperties")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "code":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_technologyproperty_url"))).exitHereIfFailed
             .pause(10)

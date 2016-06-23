@@ -1,0 +1,23 @@
+{
+    "dorsalApp": {
+        "groupaccess" : {
+            "home": {
+                "title": "Groupaccesses",
+                "createLabel": "Create a new Groupaccess",
+                "createOrEditLabel": "Create or edit a Groupaccess",
+                "search": "Search for Groupaccess"
+            },
+            "created": "A new Groupaccess is created with identifier {{ param }}",
+            "updated": "A Groupaccess is updated with identifier {{ param }}",
+            "deleted": "A Groupaccess is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Groupaccess {{ id }}?"
+            },
+            "detail": {
+                "title": "Groupaccess"
+            },
+            "authorizeduser": "Authorizeduser",
+            "user": "User"
+        }
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "dorsalApp": {
+        "Updateenum" : {
+            "null": "",
+            "UPDATE": "UPDATE",
+            "RESOLUTION": "RESOLUTION",
+            "ATTEMPTED_RESOLUTION": "ATTEMPTED_RESOLUTION"
+        }
+    }
+}

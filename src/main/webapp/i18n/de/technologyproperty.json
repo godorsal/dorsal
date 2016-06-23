@@ -17,6 +17,7 @@
                 "title": "Technologyproperty"
             },
             "name": "Name",
+            "code": "Code",
             "technologyproperty": "Technologyproperty"
         }
     }

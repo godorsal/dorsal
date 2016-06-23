@@ -20,7 +20,7 @@
                 <tr>
                     <th><span translate="global.field.id">ID</span></th>
                     <th><span translate="dorsalApp.status.name">Name</span></th>
-                    <th><span translate="dorsalApp.status.description">Description</span></th>
+                    <th><span translate="dorsalApp.status.code">Code</span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -28,7 +28,7 @@
                 <tr ng-repeat="status in vm.statuses track by status.id">
                     <td><a ui-sref="status-detail({id:status.id})">{{status.id}}</a></td>
                     <td>{{status.name}}</td>
-                    <td>{{status.description}}</td>
+                    <td>{{status.code}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

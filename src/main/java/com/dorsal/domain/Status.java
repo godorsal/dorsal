@@ -1,11 +1,14 @@
 package com.dorsal.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -26,8 +29,13 @@ public class Status implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "code")
+    private String code;
+
+    @OneToMany(mappedBy = "status")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Supportcase> supportcases = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -45,12 +53,20 @@ public class Status implements Serializable {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getCode() {
+        return code;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Set<Supportcase> getSupportcases() {
+        return supportcases;
+    }
+
+    public void setSupportcases(Set<Supportcase> supportcases) {
+        this.supportcases = supportcases;
     }
 
     @Override
@@ -78,7 +94,7 @@ public class Status implements Serializable {
         return "Status{" +
             "id=" + id +
             ", name='" + name + "'" +
-            ", description='" + description + "'" +
+            ", code='" + code + "'" +
             '}';
     }
 }

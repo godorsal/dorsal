@@ -1,0 +1,31 @@
+{
+    "dorsalApp": {
+        "useraccount" : {
+            "home": {
+                "title": "Useraccounts",
+                "createLabel": "Useraccount erstellen",
+                "createOrEditLabel": "Useraccount erstellen oder bearbeiten",
+                "search": "Suche nach Useraccount"
+            },
+            "created": "Useraccount erstellt mit ID {{ param }}",
+            "updated": "Useraccount aktualisiert mit ID {{ param }}",
+            "deleted": "Useraccount gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Useraccount {{ id }} wirklich dauerhaft gejöscht werden?"
+            },
+            "detail": {
+                "title": "Useraccount"
+            },
+            "phone": "Phone",
+            "skype": "Skype",
+            "othercommunication": "Othercommunication",
+            "location": "Location",
+            "score": "Score",
+            "isexpert": "Isexpert",
+            "preferlocalexpert": "Preferlocalexpert",
+            "handle": "Handle",
+            "languages": "Languages",
+            "companyname": "Companyname"
+        }
+    }
+}

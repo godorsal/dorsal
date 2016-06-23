@@ -27,6 +27,9 @@ public class Technologyproperty implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "code")
+    private String code;
+
     @OneToMany(mappedBy = "technologyproperty")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -46,6 +49,14 @@ public class Technologyproperty implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public Set<Technologypropertyvalue> getTechnologyproperties() {
@@ -81,6 +92,7 @@ public class Technologyproperty implements Serializable {
         return "Technologyproperty{" +
             "id=" + id +
             ", name='" + name + "'" +
+            ", code='" + code + "'" +
             '}';
     }
 }

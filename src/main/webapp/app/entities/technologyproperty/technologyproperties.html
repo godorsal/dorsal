@@ -20,6 +20,7 @@
                 <tr>
                     <th><span translate="global.field.id">ID</span></th>
                     <th><span translate="dorsalApp.technologyproperty.name">Name</span></th>
+                    <th><span translate="dorsalApp.technologyproperty.code">Code</span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -27,6 +28,7 @@
                 <tr ng-repeat="technologyproperty in vm.technologyproperties track by technologyproperty.id">
                     <td><a ui-sref="technologyproperty-detail({id:technologyproperty.id})">{{technologyproperty.id}}</a></td>
                     <td>{{technologyproperty.name}}</td>
+                    <td>{{technologyproperty.code}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
