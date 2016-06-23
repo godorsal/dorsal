@@ -1,0 +1,31 @@
+{
+    "dorsalApp": {
+        "useraccount" : {
+            "home": {
+                "title": "Useraccounts",
+                "createLabel": "Create a new Useraccount",
+                "createOrEditLabel": "Create or edit a Useraccount",
+                "search": "Search for Useraccount"
+            },
+            "created": "A new Useraccount is created with identifier {{ param }}",
+            "updated": "A Useraccount is updated with identifier {{ param }}",
+            "deleted": "A Useraccount is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Useraccount {{ id }}?"
+            },
+            "detail": {
+                "title": "Useraccount"
+            },
+            "phone": "Phone",
+            "skype": "Skype",
+            "othercommunication": "Othercommunication",
+            "location": "Location",
+            "score": "Score",
+            "isexpert": "Isexpert",
+            "preferlocalexpert": "Preferlocalexpert",
+            "handle": "Handle",
+            "languages": "Languages",
+            "companyname": "Companyname"
+        }
+    }
+}

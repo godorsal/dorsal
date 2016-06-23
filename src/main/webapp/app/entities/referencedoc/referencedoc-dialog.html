@@ -1,0 +1,50 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myReferencedocLabel" translate="dorsalApp.referencedoc.home.createOrEditLabel">Create or edit a Referencedoc</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.referencedoc.id">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.referencedoc.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.referencedoc.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="vm.referencedoc.name"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.referencedoc.url" for="field_url">Url</label>
+            <input type="text" class="form-control" name="url" id="field_url"
+                    ng-model="vm.referencedoc.url"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label translate="dorsalApp.referencedoc.user" for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" ng-model="vm.referencedoc.user" ng-options="user as user.id for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="dorsalApp.referencedoc.technology" for="field_technology">Technology</label>
+            <select class="form-control" id="field_technology" name="technology" ng-model="vm.referencedoc.technology" ng-options="technology as technology.id for technology in vm.technologies track by technology.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

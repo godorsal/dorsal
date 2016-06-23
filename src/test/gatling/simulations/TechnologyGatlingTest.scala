@@ -68,7 +68,7 @@ class TechnologyGatlingTest extends Simulation {
             .exec(http("Create new technology")
             .post("/api/technologies")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "description":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "code":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_technology_url"))).exitHereIfFailed
             .pause(10)

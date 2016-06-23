@@ -43,6 +43,8 @@ public class TechnologypropertyResourceIntTest {
 
     private static final String DEFAULT_NAME = "AAAAA";
     private static final String UPDATED_NAME = "BBBBB";
+    private static final String DEFAULT_CODE = "AAAAA";
+    private static final String UPDATED_CODE = "BBBBB";
 
     @Inject
     private TechnologypropertyRepository technologypropertyRepository;
@@ -71,6 +73,7 @@ public class TechnologypropertyResourceIntTest {
     public void initTest() {
         technologyproperty = new Technologyproperty();
         technologyproperty.setName(DEFAULT_NAME);
+        technologyproperty.setCode(DEFAULT_CODE);
     }
 
     @Test
@@ -90,6 +93,7 @@ public class TechnologypropertyResourceIntTest {
         assertThat(technologyproperties).hasSize(databaseSizeBeforeCreate + 1);
         Technologyproperty testTechnologyproperty = technologyproperties.get(technologyproperties.size() - 1);
         assertThat(testTechnologyproperty.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testTechnologyproperty.getCode()).isEqualTo(DEFAULT_CODE);
     }
 
     @Test
@@ -103,7 +107,8 @@ public class TechnologypropertyResourceIntTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(technologyproperty.getId().intValue())))
-                .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
+                .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+                .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE.toString())));
     }
 
     @Test
@@ -117,7 +122,8 @@ public class TechnologypropertyResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(technologyproperty.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
+            .andExpect(jsonPath("$.code").value(DEFAULT_CODE.toString()));
     }
 
     @Test
@@ -139,6 +145,7 @@ public class TechnologypropertyResourceIntTest {
         Technologyproperty updatedTechnologyproperty = new Technologyproperty();
         updatedTechnologyproperty.setId(technologyproperty.getId());
         updatedTechnologyproperty.setName(UPDATED_NAME);
+        updatedTechnologyproperty.setCode(UPDATED_CODE);
 
         restTechnologypropertyMockMvc.perform(put("/api/technologyproperties")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -150,6 +157,7 @@ public class TechnologypropertyResourceIntTest {
         assertThat(technologyproperties).hasSize(databaseSizeBeforeUpdate);
         Technologyproperty testTechnologyproperty = technologyproperties.get(technologyproperties.size() - 1);
         assertThat(testTechnologyproperty.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testTechnologyproperty.getCode()).isEqualTo(UPDATED_CODE);
     }
 
     @Test

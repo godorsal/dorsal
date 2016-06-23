@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .controller('IssueDetailController', IssueDetailController);
 
-    IssueDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'entity', 'Issue'];
+    IssueDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'entity', 'Issue', 'Supportcase'];
 
-    function IssueDetailController($scope, $rootScope, $stateParams, entity, Issue) {
+    function IssueDetailController($scope, $rootScope, $stateParams, entity, Issue, Supportcase) {
         var vm = this;
         vm.issue = entity;
         

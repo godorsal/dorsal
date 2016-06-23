@@ -1,0 +1,88 @@
+<div>
+    <h2 translate="dorsalApp.supportcase.home.title">Supportcases</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="supportcase.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  translate="dorsalApp.supportcase.home.createLabel">
+                        Create new Supportcase
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span translate="global.field.id">ID</span></th>
+                    <th><span translate="dorsalApp.supportcase.summary">Summary</span></th>
+                    <th><span translate="dorsalApp.supportcase.expectedresult">Expectedresult</span></th>
+                    <th><span translate="dorsalApp.supportcase.statusmsg">Statusmsg</span></th>
+                    <th><span translate="dorsalApp.supportcase.datecreated">Datecreated</span></th>
+                    <th><span translate="dorsalApp.supportcase.datelastupdate">Datelastupdate</span></th>
+                    <th><span translate="dorsalApp.supportcase.chaturl">Chaturl</span></th>
+                    <th><span translate="dorsalApp.supportcase.etacompletion">Etacompletion</span></th>
+                    <th><span translate="dorsalApp.supportcase.user">User</span></th>
+                    <th><span translate="dorsalApp.supportcase.expert">Expert</span></th>
+                    <th><span translate="dorsalApp.supportcase.technology">Technology</span></th>
+                    <th><span translate="dorsalApp.supportcase.status">Status</span></th>
+                    <th><span translate="dorsalApp.supportcase.issue">Issue</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="supportcase in vm.supportcases track by supportcase.id">
+                    <td><a ui-sref="supportcase-detail({id:supportcase.id})">{{supportcase.id}}</a></td>
+                    <td>{{supportcase.summary}}</td>
+                    <td>{{supportcase.expectedresult}}</td>
+                    <td>{{supportcase.statusmsg}}</td>
+                    <td>{{supportcase.datecreated | date:'medium'}}</td>
+                    <td>{{supportcase.datelastupdate | date:'medium'}}</td>
+                    <td>{{supportcase.chaturl}}</td>
+                    <td>{{supportcase.etacompletion}}</td>
+                    <td>
+                        {{supportcase.user.id}}
+                    </td>
+                    <td>
+                        {{supportcase.expert.id}}
+                    </td>
+                    <td>
+                        <a ui-sref="technology-detail({id:supportcase.technology.id})">{{supportcase.technology.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="status-detail({id:supportcase.status.id})">{{supportcase.status.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="issue-detail({id:supportcase.issue.id})">{{supportcase.issue.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="supportcase-detail({id:supportcase.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="supportcase.edit({id:supportcase.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="supportcase.delete({id:supportcase.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+
+<div>
+    <h2><span translate="dorsalApp.caseupdate.detail.title">Caseupdate</span> {{vm.caseupdate.id}}</h2>
+    <hr>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span translate="dorsalApp.caseupdate.dateupdated">Dateupdated</span></dt>
+        <dd>
+            <span>{{vm.caseupdate.dateupdated | date:'medium'}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.caseupdate.updatemsg">Updatemsg</span></dt>
+        <dd>
+            <span>{{vm.caseupdate.updatemsg}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.caseupdate.url">Url</span></dt>
+        <dd>
+            <span>{{vm.caseupdate.url}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.caseupdate.user">User</span></dt>
+        <dd>
+            {{vm.caseupdate.user.id}}
+        </dd>
+        <dt><span translate="dorsalApp.caseupdate.supportcase">Supportcase</span></dt>
+        <dd>
+            <a ui-sref="supportcase-detail({id:vm.caseupdate.supportcase.id})">{{vm.caseupdate.supportcase.id}}</a>
+        </dd>
+        <dt><span translate="dorsalApp.caseupdate.updatetype">Updatetype</span></dt>
+        <dd>
+            <a ui-sref="updatetype-detail({id:vm.caseupdate.updatetype.id})">{{vm.caseupdate.updatetype.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

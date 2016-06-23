@@ -46,8 +46,8 @@ public class TechnologyResourceIntTest {
 
     private static final String DEFAULT_NAME = "AAAAA";
     private static final String UPDATED_NAME = "BBBBB";
-    private static final String DEFAULT_DESCRIPTION = "AAAAA";
-    private static final String UPDATED_DESCRIPTION = "BBBBB";
+    private static final String DEFAULT_CODE = "AAAAA";
+    private static final String UPDATED_CODE = "BBBBB";
 
     @Inject
     private TechnologyRepository technologyRepository;
@@ -83,7 +83,7 @@ public class TechnologyResourceIntTest {
     public void initTest() {
         technology = new Technology();
         technology.setName(DEFAULT_NAME);
-        technology.setDescription(DEFAULT_DESCRIPTION);
+        technology.setCode(DEFAULT_CODE);
     }
 
     @Test
@@ -104,7 +104,7 @@ public class TechnologyResourceIntTest {
         assertThat(technologies).hasSize(databaseSizeBeforeCreate + 1);
         Technology testTechnology = technologies.get(technologies.size() - 1);
         assertThat(testTechnology.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testTechnology.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testTechnology.getCode()).isEqualTo(DEFAULT_CODE);
     }
 
     @Test
@@ -138,7 +138,7 @@ public class TechnologyResourceIntTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(technology.getId().intValue())))
                 .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-                .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
+                .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE.toString())));
     }
 
     @Test
@@ -153,7 +153,7 @@ public class TechnologyResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(technology.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
+            .andExpect(jsonPath("$.code").value(DEFAULT_CODE.toString()));
     }
 
     @Test
@@ -175,7 +175,7 @@ public class TechnologyResourceIntTest {
         Technology updatedTechnology = new Technology();
         updatedTechnology.setId(technology.getId());
         updatedTechnology.setName(UPDATED_NAME);
-        updatedTechnology.setDescription(UPDATED_DESCRIPTION);
+        updatedTechnology.setCode(UPDATED_CODE);
         TechnologyDTO technologyDTO = technologyMapper.technologyToTechnologyDTO(updatedTechnology);
 
         restTechnologyMockMvc.perform(put("/api/technologies")
@@ -188,7 +188,7 @@ public class TechnologyResourceIntTest {
         assertThat(technologies).hasSize(databaseSizeBeforeUpdate);
         Technology testTechnology = technologies.get(technologies.size() - 1);
         assertThat(testTechnology.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testTechnology.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testTechnology.getCode()).isEqualTo(UPDATED_CODE);
     }
 
     @Test

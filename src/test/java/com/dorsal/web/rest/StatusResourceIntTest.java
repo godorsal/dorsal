@@ -43,8 +43,8 @@ public class StatusResourceIntTest {
 
     private static final String DEFAULT_NAME = "AAAAA";
     private static final String UPDATED_NAME = "BBBBB";
-    private static final String DEFAULT_DESCRIPTION = "AAAAA";
-    private static final String UPDATED_DESCRIPTION = "BBBBB";
+    private static final String DEFAULT_CODE = "AAAAA";
+    private static final String UPDATED_CODE = "BBBBB";
 
     @Inject
     private StatusRepository statusRepository;
@@ -73,7 +73,7 @@ public class StatusResourceIntTest {
     public void initTest() {
         status = new Status();
         status.setName(DEFAULT_NAME);
-        status.setDescription(DEFAULT_DESCRIPTION);
+        status.setCode(DEFAULT_CODE);
     }
 
     @Test
@@ -93,7 +93,7 @@ public class StatusResourceIntTest {
         assertThat(statuses).hasSize(databaseSizeBeforeCreate + 1);
         Status testStatus = statuses.get(statuses.size() - 1);
         assertThat(testStatus.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testStatus.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testStatus.getCode()).isEqualTo(DEFAULT_CODE);
     }
 
     @Test
@@ -126,7 +126,7 @@ public class StatusResourceIntTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(status.getId().intValue())))
                 .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-                .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
+                .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE.toString())));
     }
 
     @Test
@@ -141,7 +141,7 @@ public class StatusResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(status.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
+            .andExpect(jsonPath("$.code").value(DEFAULT_CODE.toString()));
     }
 
     @Test
@@ -163,7 +163,7 @@ public class StatusResourceIntTest {
         Status updatedStatus = new Status();
         updatedStatus.setId(status.getId());
         updatedStatus.setName(UPDATED_NAME);
-        updatedStatus.setDescription(UPDATED_DESCRIPTION);
+        updatedStatus.setCode(UPDATED_CODE);
 
         restStatusMockMvc.perform(put("/api/statuses")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -175,7 +175,7 @@ public class StatusResourceIntTest {
         assertThat(statuses).hasSize(databaseSizeBeforeUpdate);
         Status testStatus = statuses.get(statuses.size() - 1);
         assertThat(testStatus.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testStatus.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testStatus.getCode()).isEqualTo(UPDATED_CODE);
     }
 
     @Test

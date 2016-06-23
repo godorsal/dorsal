@@ -68,7 +68,7 @@ class StatusGatlingTest extends Simulation {
             .exec(http("Create new status")
             .post("/api/statuses")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "description":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "code":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_status_url"))).exitHereIfFailed
             .pause(10)

@@ -1,0 +1,62 @@
+<div>
+    <h2 translate="dorsalApp.groupaccess.home.title">Groupaccesses</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="groupaccess.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  translate="dorsalApp.groupaccess.home.createLabel">
+                        Create new Groupaccess
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span translate="global.field.id">ID</span></th>
+                    <th><span translate="dorsalApp.groupaccess.authorizeduser">Authorizeduser</span></th>
+                    <th><span translate="dorsalApp.groupaccess.user">User</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="groupaccess in vm.groupaccesses track by groupaccess.id">
+                    <td><a ui-sref="groupaccess-detail({id:groupaccess.id})">{{groupaccess.id}}</a></td>
+                    <td>
+                        {{groupaccess.authorizeduser.id}}
+                    </td>
+                    <td>
+                        {{groupaccess.user.id}}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="groupaccess-detail({id:groupaccess.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="groupaccess.edit({id:groupaccess.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="groupaccess.delete({id:groupaccess.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

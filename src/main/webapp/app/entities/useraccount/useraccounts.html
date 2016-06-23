@@ -1,0 +1,74 @@
+<div>
+    <h2 translate="dorsalApp.useraccount.home.title">Useraccounts</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="useraccount.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  translate="dorsalApp.useraccount.home.createLabel">
+                        Create new Useraccount
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span translate="global.field.id">ID</span></th>
+                    <th><span translate="dorsalApp.useraccount.phone">Phone</span></th>
+                    <th><span translate="dorsalApp.useraccount.skype">Skype</span></th>
+                    <th><span translate="dorsalApp.useraccount.othercommunication">Othercommunication</span></th>
+                    <th><span translate="dorsalApp.useraccount.location">Location</span></th>
+                    <th><span translate="dorsalApp.useraccount.score">Score</span></th>
+                    <th><span translate="dorsalApp.useraccount.isexpert">Isexpert</span></th>
+                    <th><span translate="dorsalApp.useraccount.preferlocalexpert">Preferlocalexpert</span></th>
+                    <th><span translate="dorsalApp.useraccount.handle">Handle</span></th>
+                    <th><span translate="dorsalApp.useraccount.languages">Languages</span></th>
+                    <th><span translate="dorsalApp.useraccount.companyname">Companyname</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="useraccount in vm.useraccounts track by useraccount.id">
+                    <td><a ui-sref="useraccount-detail({id:useraccount.id})">{{useraccount.id}}</a></td>
+                    <td>{{useraccount.phone}}</td>
+                    <td>{{useraccount.skype}}</td>
+                    <td>{{useraccount.othercommunication}}</td>
+                    <td>{{useraccount.location}}</td>
+                    <td>{{useraccount.score}}</td>
+                    <td>{{useraccount.isexpert}}</td>
+                    <td>{{useraccount.preferlocalexpert}}</td>
+                    <td>{{useraccount.handle}}</td>
+                    <td>{{useraccount.languages}}</td>
+                    <td>{{useraccount.companyname}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="useraccount-detail({id:useraccount.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="useraccount.edit({id:useraccount.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="useraccount.delete({id:useraccount.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

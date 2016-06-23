@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <!--
+        Added the constraints for entity Expertbadge.
+    -->
+    <changeSet id="20160623155308-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="expertbadge"
+                                 constraintName="fk_expertbadge_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="badge_id"
+                                 baseTableName="expertbadge"
+                                 constraintName="fk_expertbadge_badge_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="badge"/>
+
+    </changeSet>
+</databaseChangeLog>

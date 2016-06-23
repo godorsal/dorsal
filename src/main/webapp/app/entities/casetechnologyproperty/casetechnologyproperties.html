@@ -1,0 +1,66 @@
+<div>
+    <h2 translate="dorsalApp.casetechnologyproperty.home.title">Casetechnologyproperties</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="casetechnologyproperty.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  translate="dorsalApp.casetechnologyproperty.home.createLabel">
+                        Create new Casetechnologyproperty
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span translate="global.field.id">ID</span></th>
+                    <th><span translate="dorsalApp.casetechnologyproperty.propertyname">Propertyname</span></th>
+                    <th><span translate="dorsalApp.casetechnologyproperty.propertyvalue">Propertyvalue</span></th>
+                    <th><span translate="dorsalApp.casetechnologyproperty.supportcase">Supportcase</span></th>
+                    <th><span translate="dorsalApp.casetechnologyproperty.technology">Technology</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="casetechnologyproperty in vm.casetechnologyproperties track by casetechnologyproperty.id">
+                    <td><a ui-sref="casetechnologyproperty-detail({id:casetechnologyproperty.id})">{{casetechnologyproperty.id}}</a></td>
+                    <td>{{casetechnologyproperty.propertyname}}</td>
+                    <td>{{casetechnologyproperty.propertyvalue}}</td>
+                    <td>
+                        <a ui-sref="supportcase-detail({id:casetechnologyproperty.supportcase.id})">{{casetechnologyproperty.supportcase.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="technology-detail({id:casetechnologyproperty.technology.id})">{{casetechnologyproperty.technology.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="casetechnologyproperty-detail({id:casetechnologyproperty.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="casetechnologyproperty.edit({id:casetechnologyproperty.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="casetechnologyproperty.delete({id:casetechnologyproperty.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

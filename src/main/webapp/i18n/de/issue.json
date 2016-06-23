@@ -17,7 +17,8 @@
                 "title": "Issue"
             },
             "name": "Name",
-            "description": "Description"
+            "code": "Code",
+            "supportcase": "Supportcase"
         }
     }
 }

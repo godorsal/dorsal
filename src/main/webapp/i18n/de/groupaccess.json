@@ -1,0 +1,23 @@
+{
+    "dorsalApp": {
+        "groupaccess" : {
+            "home": {
+                "title": "Groupaccesses",
+                "createLabel": "Groupaccess erstellen",
+                "createOrEditLabel": "Groupaccess erstellen oder bearbeiten",
+                "search": "Suche nach Groupaccess"
+            },
+            "created": "Groupaccess erstellt mit ID {{ param }}",
+            "updated": "Groupaccess aktualisiert mit ID {{ param }}",
+            "deleted": "Groupaccess gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Groupaccess {{ id }} wirklich dauerhaft gejöscht werden?"
+            },
+            "detail": {
+                "title": "Groupaccess"
+            },
+            "authorizeduser": "Authorizeduser",
+            "user": "User"
+        }
+    }
+}

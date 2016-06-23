@@ -20,7 +20,7 @@
                 <tr>
                     <th><span translate="global.field.id">ID</span></th>
                     <th><span translate="dorsalApp.issue.name">Name</span></th>
-                    <th><span translate="dorsalApp.issue.description">Description</span></th>
+                    <th><span translate="dorsalApp.issue.code">Code</span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -28,7 +28,7 @@
                 <tr ng-repeat="issue in vm.issues track by issue.id">
                     <td><a ui-sref="issue-detail({id:issue.id})">{{issue.id}}</a></td>
                     <td>{{issue.name}}</td>
-                    <td>{{issue.description}}</td>
+                    <td>{{issue.code}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

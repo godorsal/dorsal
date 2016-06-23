@@ -1,0 +1,61 @@
+
+<div>
+    <h2><span translate="dorsalApp.supportcase.detail.title">Supportcase</span> {{vm.supportcase.id}}</h2>
+    <hr>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span translate="dorsalApp.supportcase.summary">Summary</span></dt>
+        <dd>
+            <span>{{vm.supportcase.summary}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.supportcase.expectedresult">Expectedresult</span></dt>
+        <dd>
+            <span>{{vm.supportcase.expectedresult}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.supportcase.statusmsg">Statusmsg</span></dt>
+        <dd>
+            <span>{{vm.supportcase.statusmsg}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.supportcase.datecreated">Datecreated</span></dt>
+        <dd>
+            <span>{{vm.supportcase.datecreated | date:'medium'}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.supportcase.datelastupdate">Datelastupdate</span></dt>
+        <dd>
+            <span>{{vm.supportcase.datelastupdate | date:'medium'}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.supportcase.chaturl">Chaturl</span></dt>
+        <dd>
+            <span>{{vm.supportcase.chaturl}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.supportcase.etacompletion">Etacompletion</span></dt>
+        <dd>
+            <span>{{vm.supportcase.etacompletion}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.supportcase.user">User</span></dt>
+        <dd>
+            {{vm.supportcase.user.id}}
+        </dd>
+        <dt><span translate="dorsalApp.supportcase.expert">Expert</span></dt>
+        <dd>
+            {{vm.supportcase.expert.id}}
+        </dd>
+        <dt><span translate="dorsalApp.supportcase.technology">Technology</span></dt>
+        <dd>
+            <a ui-sref="technology-detail({id:vm.supportcase.technology.id})">{{vm.supportcase.technology.id}}</a>
+        </dd>
+        <dt><span translate="dorsalApp.supportcase.status">Status</span></dt>
+        <dd>
+            <a ui-sref="status-detail({id:vm.supportcase.status.id})">{{vm.supportcase.status.id}}</a>
+        </dd>
+        <dt><span translate="dorsalApp.supportcase.issue">Issue</span></dt>
+        <dd>
+            <a ui-sref="issue-detail({id:vm.supportcase.issue.id})">{{vm.supportcase.issue.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

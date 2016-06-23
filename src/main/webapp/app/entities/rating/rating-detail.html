@@ -1,0 +1,25 @@
+
+<div>
+    <h2><span translate="dorsalApp.rating.detail.title">Rating</span> {{vm.rating.id}}</h2>
+    <hr>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span translate="dorsalApp.rating.daterated">Daterated</span></dt>
+        <dd>
+            <span>{{vm.rating.daterated | date:'medium'}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.rating.score">Score</span></dt>
+        <dd>
+            <span>{{vm.rating.score}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.rating.supportcase">Supportcase</span></dt>
+        <dd>
+            <a ui-sref="supportcase-detail({id:vm.rating.supportcase.id})">{{vm.rating.supportcase.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

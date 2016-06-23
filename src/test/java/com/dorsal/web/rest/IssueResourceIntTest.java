@@ -43,8 +43,8 @@ public class IssueResourceIntTest {
 
     private static final String DEFAULT_NAME = "AAAAA";
     private static final String UPDATED_NAME = "BBBBB";
-    private static final String DEFAULT_DESCRIPTION = "AAAAA";
-    private static final String UPDATED_DESCRIPTION = "BBBBB";
+    private static final String DEFAULT_CODE = "AAAAA";
+    private static final String UPDATED_CODE = "BBBBB";
 
     @Inject
     private IssueRepository issueRepository;
@@ -73,7 +73,7 @@ public class IssueResourceIntTest {
     public void initTest() {
         issue = new Issue();
         issue.setName(DEFAULT_NAME);
-        issue.setDescription(DEFAULT_DESCRIPTION);
+        issue.setCode(DEFAULT_CODE);
     }
 
     @Test
@@ -93,7 +93,7 @@ public class IssueResourceIntTest {
         assertThat(issues).hasSize(databaseSizeBeforeCreate + 1);
         Issue testIssue = issues.get(issues.size() - 1);
         assertThat(testIssue.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testIssue.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testIssue.getCode()).isEqualTo(DEFAULT_CODE);
     }
 
     @Test
@@ -126,7 +126,7 @@ public class IssueResourceIntTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(issue.getId().intValue())))
                 .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-                .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
+                .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE.toString())));
     }
 
     @Test
@@ -141,7 +141,7 @@ public class IssueResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(issue.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
+            .andExpect(jsonPath("$.code").value(DEFAULT_CODE.toString()));
     }
 
     @Test
@@ -163,7 +163,7 @@ public class IssueResourceIntTest {
         Issue updatedIssue = new Issue();
         updatedIssue.setId(issue.getId());
         updatedIssue.setName(UPDATED_NAME);
-        updatedIssue.setDescription(UPDATED_DESCRIPTION);
+        updatedIssue.setCode(UPDATED_CODE);
 
         restIssueMockMvc.perform(put("/api/issues")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -175,7 +175,7 @@ public class IssueResourceIntTest {
         assertThat(issues).hasSize(databaseSizeBeforeUpdate);
         Issue testIssue = issues.get(issues.size() - 1);
         assertThat(testIssue.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testIssue.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testIssue.getCode()).isEqualTo(UPDATED_CODE);
     }
 
     @Test

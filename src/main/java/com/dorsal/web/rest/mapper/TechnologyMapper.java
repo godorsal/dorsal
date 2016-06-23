@@ -17,6 +17,9 @@ public interface TechnologyMapper {
     List<TechnologyDTO> technologiesToTechnologyDTOs(List<Technology> technologies);
 
     @Mapping(target = "technologies", ignore = true)
+    @Mapping(target = "referencedocs", ignore = true)
+    @Mapping(target = "supportcases", ignore = true)
+    @Mapping(target = "casetechnologyproperties", ignore = true)
     Technology technologyDTOToTechnology(TechnologyDTO technologyDTO);
 
     List<Technology> technologyDTOsToTechnologies(List<TechnologyDTO> technologyDTOs);

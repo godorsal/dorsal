@@ -12,6 +12,18 @@
                 "technologypropertyvalue": "Technologypropertyvalue",
                 "issue": "Issue",
                 "status": "Status",
+                "useraccount": "Useraccount",
+                "groupaccess": "Groupaccess",
+                "referencedoc": "Referencedoc",
+                "supportcase": "Supportcase",
+                "casetechnologyproperty": "Casetechnologyproperty",
+                "payment": "Payment",
+                "expertbadge": "Expertbadge",
+                "badge": "Badge",
+                "updatetype": "Updatetype",
+                "caseupdate": "Caseupdate",
+                "rating": "Rating",
+                "attachement": "Attachement",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

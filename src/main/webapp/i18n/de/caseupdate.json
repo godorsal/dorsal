@@ -1,0 +1,27 @@
+{
+    "dorsalApp": {
+        "caseupdate" : {
+            "home": {
+                "title": "Caseupdates",
+                "createLabel": "Caseupdate erstellen",
+                "createOrEditLabel": "Caseupdate erstellen oder bearbeiten",
+                "search": "Suche nach Caseupdate"
+            },
+            "created": "Caseupdate erstellt mit ID {{ param }}",
+            "updated": "Caseupdate aktualisiert mit ID {{ param }}",
+            "deleted": "Caseupdate gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Caseupdate {{ id }} wirklich dauerhaft gejöscht werden?"
+            },
+            "detail": {
+                "title": "Caseupdate"
+            },
+            "dateupdated": "Dateupdated",
+            "updatemsg": "Updatemsg",
+            "url": "Url",
+            "user": "User",
+            "supportcase": "Supportcase",
+            "updatetype": "Updatetype"
+        }
+    }
+}

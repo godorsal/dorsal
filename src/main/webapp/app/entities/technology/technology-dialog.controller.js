@@ -5,12 +5,15 @@
         .module('dorsalApp')
         .controller('TechnologyDialogController', TechnologyDialogController);
 
-    TechnologyDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Technology', 'Technologypropertyvalue'];
+    TechnologyDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Technology', 'Technologypropertyvalue', 'Referencedoc', 'Supportcase', 'Casetechnologyproperty'];
 
-    function TechnologyDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Technology, Technologypropertyvalue) {
+    function TechnologyDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Technology, Technologypropertyvalue, Referencedoc, Supportcase, Casetechnologyproperty) {
         var vm = this;
         vm.technology = entity;
         vm.technologypropertyvalues = Technologypropertyvalue.query();
+        vm.referencedocs = Referencedoc.query();
+        vm.supportcases = Supportcase.query();
+        vm.casetechnologyproperties = Casetechnologyproperty.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

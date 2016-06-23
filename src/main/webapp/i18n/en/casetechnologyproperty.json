@@ -1,0 +1,25 @@
+{
+    "dorsalApp": {
+        "casetechnologyproperty" : {
+            "home": {
+                "title": "Casetechnologyproperties",
+                "createLabel": "Create a new Casetechnologyproperty",
+                "createOrEditLabel": "Create or edit a Casetechnologyproperty",
+                "search": "Search for Casetechnologyproperty"
+            },
+            "created": "A new Casetechnologyproperty is created with identifier {{ param }}",
+            "updated": "A Casetechnologyproperty is updated with identifier {{ param }}",
+            "deleted": "A Casetechnologyproperty is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Casetechnologyproperty {{ id }}?"
+            },
+            "detail": {
+                "title": "Casetechnologyproperty"
+            },
+            "propertyname": "Propertyname",
+            "propertyvalue": "Propertyvalue",
+            "supportcase": "Supportcase",
+            "technology": "Technology"
+        }
+    }
+}

@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .controller('StatusDetailController', StatusDetailController);
 
-    StatusDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'entity', 'Status'];
+    StatusDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'entity', 'Status', 'Supportcase'];
 
-    function StatusDetailController($scope, $rootScope, $stateParams, entity, Status) {
+    function StatusDetailController($scope, $rootScope, $stateParams, entity, Status, Supportcase) {
         var vm = this;
         vm.status = entity;
         

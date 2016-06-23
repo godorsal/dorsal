@@ -18,7 +18,7 @@ public class TechnologyDTO implements Serializable {
     private String name;
 
 
-    private String description;
+    private String code;
 
 
     public Long getId() {
@@ -35,12 +35,12 @@ public class TechnologyDTO implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    public String getDescription() {
-        return description;
+    public String getCode() {
+        return code;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     @Override
@@ -69,7 +69,7 @@ public class TechnologyDTO implements Serializable {
         return "TechnologyDTO{" +
             "id=" + id +
             ", name='" + name + "'" +
-            ", description='" + description + "'" +
+            ", code='" + code + "'" +
             '}';
     }
 }

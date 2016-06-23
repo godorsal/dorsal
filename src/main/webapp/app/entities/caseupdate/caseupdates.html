@@ -1,0 +1,72 @@
+<div>
+    <h2 translate="dorsalApp.caseupdate.home.title">Caseupdates</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="caseupdate.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  translate="dorsalApp.caseupdate.home.createLabel">
+                        Create new Caseupdate
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span translate="global.field.id">ID</span></th>
+                    <th><span translate="dorsalApp.caseupdate.dateupdated">Dateupdated</span></th>
+                    <th><span translate="dorsalApp.caseupdate.updatemsg">Updatemsg</span></th>
+                    <th><span translate="dorsalApp.caseupdate.url">Url</span></th>
+                    <th><span translate="dorsalApp.caseupdate.user">User</span></th>
+                    <th><span translate="dorsalApp.caseupdate.supportcase">Supportcase</span></th>
+                    <th><span translate="dorsalApp.caseupdate.updatetype">Updatetype</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="caseupdate in vm.caseupdates track by caseupdate.id">
+                    <td><a ui-sref="caseupdate-detail({id:caseupdate.id})">{{caseupdate.id}}</a></td>
+                    <td>{{caseupdate.dateupdated | date:'medium'}}</td>
+                    <td>{{caseupdate.updatemsg}}</td>
+                    <td>{{caseupdate.url}}</td>
+                    <td>
+                        {{caseupdate.user.id}}
+                    </td>
+                    <td>
+                        <a ui-sref="supportcase-detail({id:caseupdate.supportcase.id})">{{caseupdate.supportcase.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="updatetype-detail({id:caseupdate.updatetype.id})">{{caseupdate.updatetype.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="caseupdate-detail({id:caseupdate.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="caseupdate.edit({id:caseupdate.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="caseupdate.delete({id:caseupdate.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
