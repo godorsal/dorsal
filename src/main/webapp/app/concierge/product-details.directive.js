@@ -27,7 +27,7 @@
             '<form ng-submit="setIncidentTypeValue(rootType, incidentType)"><input type="text" class="form-control" ng-model="incidentType.value">' +
             '<button type="submit" ' +
             'class="btn btn-primary" ' +
-            'translate="concierge.caseDetails.incidentTypes.version.add">' +
+            'translate="concierge.caseDetails.version.add">' +
             'add' +
             '</button></form>' +
             '</div>' +
@@ -129,7 +129,7 @@
 
                 // For version, add a prefix to the label
                 if (selectedType && selectedType.type === 'field') {
-                    label = $translate.instant('concierge.caseDetails.incidentTypes.version.prefix') + ' ' + selectedType.label;
+                    label = $translate.instant('concierge.caseDetails.version.prefix') + ' ' + selectedType.label;
                 } else if (selectedType) {
                     label = selectedType.label;
                 }

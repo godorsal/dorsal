@@ -48,12 +48,12 @@
             "product": {
                 "main": "Technology",
                 "tooltip": "Select a database and define some additional details which are optional",
-                "mySQL": "MySQL",
-                "postgreSQL": "PostgreSQL",
-                "mongoDB": "MongoDB",
-                "mariaDB": "MariaDB",
+                "mysql": "MySQL",
+                "postgresql": "PostgreSQL",
+                "mongodb": "MongoDB",
+                "mariadb": "MariaDB",
                 "other": "Other",
-                "cassandra": "CassandraDB",
+                "cassandradb": "CassandraDB",
                 "bark": "Bark",
                 "hadoop": "Hadoop",
                 "hbase": "HBase"
@@ -66,35 +66,30 @@
                 "skype": "skype",
                 "other": "other"
             },
+            "version": {
+                "main": "Version",
+                "prefix": "v.",
+                "add": "add",
+                "noVersion": "No version"
+            },
             "incidentTypes": {
-                "version": {
-                    "main": "Version",
-                    "prefix": "v.",
-                    "add": "add",
-                    "noVersion": "No version"
-                },
-                "environment": {
-                    "main": "Environment",
-                    "vmWare": "VMware",
-                    "openStack": "Open Stack",
-                    "bareMetal": "Bare Metal"
-                },
-                "clusterType": {
-                    "main": "Cluster Type",
-                    "tungstenCluster": "Tungsten Cluster",
-                    "perconaCluster": "Percona Cluster",
-                    "none": "None"
-                },
-                "connectivity": {
-                    "main": "Connectivity",
+                "version": "Version",
+                "environment": "Environment",
+                "cluster_type": "Cluster Type",
+                "connectivity": "Connectivity",
+                "performance": "Performance",
+                "values": {
+                    "vmware": "VMware",
+                    "open_stack": "Open Stack",
+                    "bare_metal": "Bare Metal",
+                    "tungsten_cluster": "Tungsten Cluster",
+                    "percona_cluster": "Percona Cluster",
                     "timeout": "Timeout",
-                    "connectionDrop": "Connection Drop"
-                },
-                "performance": {
-                    "main": "Performance",
-                    "slowQueries": "Slow Queries",
+                    "connection_drop": "Connection Drop",
+                    "slow_queries": "Slow Queries",
                     "resources": "HighCPU/Mem",
-                    "queryTimeout": "Query Timeout"
+                    "query_timeout": "Query Timeout",
+                    "none": "None"
                 }
             }
         }
