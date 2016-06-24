@@ -3,11 +3,11 @@
 
     angular
         .module('dorsalApp')
-        .factory('RatingService', RatingService);
+        .factory('DrslRatingService', DrslRatingService);
 
-    RatingService.$inject = ['$uibModal'];
+    DrslRatingService.$inject = ['$uibModal'];
 
-    function RatingService ($uibModal) {
+    function DrslRatingService ($uibModal) {
         var service = {
             open: open
         };
@@ -24,7 +24,7 @@
             modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'app/rating/rating.html',
-                controller: 'RatingController',
+                controller: 'DrslRatingController',
                 controllerAs: 'vm',
                 size:'sm',
                 resolve: {

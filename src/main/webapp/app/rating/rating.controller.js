@@ -3,11 +3,11 @@
 
     angular
         .module('dorsalApp')
-        .controller('RatingController', RatingController);
+        .controller('DrslRatingController', DrslRatingController);
 
-    RatingController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase'];
+    DrslRatingController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase'];
 
-    function RatingController($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase) {
+    function DrslRatingController($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase) {
         var vm = this;
         vm.case = drslCase;
         vm.cancel = cancel;

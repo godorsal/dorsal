@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .controller('CaseController', CaseController);
 
-    CaseController.$inject = ['$scope', '$window', 'CaseService', 'RatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService'];
+    CaseController.$inject = ['$scope', '$window', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService'];
 
-    function CaseController($scope, $window, CaseService, RatingService, CaseDetailsService, EscalationFormService, ShareCaseService) {
+    function CaseController($scope, $window, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService) {
         var vm = this;
         vm.init = init;
         vm.getHistory = getHistory;
@@ -134,7 +134,7 @@
          */
         function openRating() {
             if (vm.currentCase.status === 'completed') {
-                var modalInstance = RatingService.open(vm.currentCase);
+                var modalInstance = DrslRatingService.open(vm.currentCase);
 
                 modalInstance.result.then(function () {
                     vm.currentCase.status = 'closed';
