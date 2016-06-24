@@ -1,0 +1,59 @@
+<div class="drsl-case-agreement-view drsl-dialog">
+    <form ng-submit="vm.submit()">
+        <div class="modal-body">
+            <div>
+                <!-- Dialog Header -->
+                <div>
+                    <div class="drsl-dialog-header">
+                        <div><h2>{{'case.agreement.header' | translate}} <span>{{'case.details.caseID' | translate}} {{vm.case.id}}</span></h2></div>
+                    </div>
+                </div>
+
+                <!-- Dialog Content -->
+                <div>
+                    <div class="drsl-dialog-content">
+                        <!-- Summary -->
+                        <div class="drsl-form-grid">
+                            <div translate="case.details.summary">Summary</div>
+                            <div><textarea class="form-control" name="detailedResolution" id="detailedResolution" ng-model="vm.case.summary" cols="30" rows="5" readonly></textarea></div>
+                        </div>
+
+                        <!--Desired Outcome-->
+                        <div class="drsl-form-grid">
+                            <div translate="case.details.desiredOutcome">Desired Outcome</div>
+                            <div><textarea class="form-control" name="detailedResolution" id="detailedResolution" cols="30" rows="5" readonly>Database should meet the reported baseline metrics prior to the migration.</textarea></div>
+                        </div>
+
+                        <!-- Expert -->
+                        <div class="drsl-form-grid">
+                            <div translate="case.professional.expert">Expert</div>
+                            <div>
+                                <div>{{vm.expert.firstName}} {{vm.expert.lastName}}</div>
+                            </div>
+                        </div>
+
+                        <!-- Estimate -->
+                        <div class="drsl-form-grid">
+                            <div translate="case.details.estimate">Estimate</div>
+                            <div>
+                                <div>$500 (4 hrs @ $125/hr)</div>
+                            </div>
+                        </div>
+
+                        <!-- Agreement -->
+                        <div class="drsl-form-grid">
+                            <div translate="case.agreement.agreementLabel">Agreement</div>
+                            <div><label><input type="checkbox" ng-model="vm.agreeToEstimate"> <span translate="case.agreement.checkboxMsg" translate-values="{username: vm.case.user}"></span></label></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Buttons -->
+            <div class="drsl-dialog-buttons">
+                <button class="btn btn-default" ng-click="vm.cancel()" translate="entity.action.later">Later</button>
+                <button type="submit" class="btn btn-success" ng-class="{disabled: !vm.agreeToEstimate}" translate="entity.action.submit">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>

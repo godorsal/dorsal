@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .controller('CaseController', CaseController);
 
-    CaseController.$inject = ['$scope', '$window', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService'];
+    CaseController.$inject = ['$scope', '$window', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService'];
 
-    function CaseController($scope, $window, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService) {
+    function CaseController($scope, $window, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService) {
         var vm = this;
         vm.init = init;
         vm.getHistory = getHistory;
@@ -19,6 +19,7 @@
         vm.openShare = openShare;
         vm.passedStep = passedStep;
         vm.openChat = openChat;
+        vm.openCaseAgreement = openCaseAgreement;
         vm.cases = [];
         vm.currentCase = {};
         vm.status = {
@@ -174,6 +175,19 @@
         }
 
         /**
+         * Opens the Case Agreement dialog.
+         */
+        function openCaseAgreement() {
+            if (vm.currentCase.status === 'estimated') {
+                var modalInstance = CaseAgreementService.open(vm.currentCase, vm.experts[vm.currentCase.expert]);
+
+                modalInstance.result.then(function () {
+                    vm.currentCase.status = 'working';
+                });
+            }
+        }
+
+        /**
          * Checks to see if the provided index is less than or equal to the current step/status index.
          * @param step
          * @returns {boolean}
@@ -197,6 +211,11 @@
         $scope.$on('openRating', function (event) {
             event.stopPropagation();
             vm.openRating();
+        });
+
+        $scope.$on('openCaseAgreement', function (event) {
+            event.stopPropagation();
+            vm.openCaseAgreement();
         });
     }
 })();

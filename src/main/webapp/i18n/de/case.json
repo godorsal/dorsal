@@ -13,8 +13,10 @@
             "chatLog": "Chat Log",
             "issue": "Issue:",
             "technology": "Technology:",
+            "desiredOutcome": "Desired Outcome",
             "resolutionETA": "ETA to Completion",
             "caseCompleted": "Case completed",
+            "estimate": "Estimate",
             "status": {
                 "main": "Status",
                 "created": "Created",
@@ -80,6 +82,11 @@
                 "good": "good",
                 "excellent": "excellent"
             }
+        },
+        "agreement": {
+            "header": "Agreement for:",
+            "agreementLabel": "Agreement",
+            "checkboxMsg": "I ({{username}}) agree to the provided estimate and the suggested resolution."
         }
     }
 }
