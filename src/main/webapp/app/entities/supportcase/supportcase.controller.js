@@ -13,10 +13,11 @@
         vm.loadAll = function() {
             Supportcase.query(function(result) {
                 vm.supportcases = result;
+                console.log(result);
             });
         };
 
         vm.loadAll();
-        
+
     }
 })();

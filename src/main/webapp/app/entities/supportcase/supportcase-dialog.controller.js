@@ -35,6 +35,7 @@
 
         vm.save = function () {
             vm.isSaving = true;
+            console.log("THISSSSS", vm.supportcase);
             if (vm.supportcase.id !== null) {
                 Supportcase.update(vm.supportcase, onSaveSuccess, onSaveError);
             } else {

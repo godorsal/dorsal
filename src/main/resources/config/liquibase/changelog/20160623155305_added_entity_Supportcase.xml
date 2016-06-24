@@ -24,31 +24,31 @@
             <column name="summary" type="varchar(1024)">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="expectedresult" type="varchar(1024)">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="statusmsg" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="datecreated" type="timestamp">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="datelastupdate" type="timestamp">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="chaturl" type="varchar(1024)">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="etacompletion" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="user_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -73,6 +73,6 @@
         </createTable>
         <dropDefaultValue tableName="supportcase" columnName="datecreated" columnDataType="datetime"/>
         <dropDefaultValue tableName="supportcase" columnName="datelastupdate" columnDataType="datetime"/>
-        
+
     </changeSet>
 </databaseChangeLog>

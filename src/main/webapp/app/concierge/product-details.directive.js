@@ -9,7 +9,8 @@
         var directive = {
             restrict: 'E',
             scope:  {
-                product: '='
+                product: '=',
+                technologyProperties: '='
             },
             template:   '<div class="well drsl-product-details-wrapper" ng-show="canShowProductDetails()">' +
             '<h4>{{getSelectedProductsLabel() | translate}}</h4>' +
@@ -20,7 +21,7 @@
             '<button ng-hide="incidentType.type" type="button" ' +
             'class="btn" ' +
             'ng-class="{\'btn-success\': (incidentType.value == rootType.selectedValue)}" ' +
-            'ng-click="setIncidentTypeValue(rootType, incidentType)">' +
+            'ng-click="setIncidentTypeValue(rootType, incidentType)" ng-model="superScope">' +
             '<div ng-if="incidentTranslationWorks(incidentType)">{{incidentType.label | translate}}</div>' + '<div ng-if="!incidentTranslationWorks(incidentType)">{{incidentType.value}}</div>' +
             '</button>' +
             '<div ng-show="incidentType.type && incidentType.type === \'field\'">' +
@@ -44,7 +45,7 @@
         return directive;
 
         function linkFunc(scope) {
-
+            // scope.technologyProperties = {};
             /**
             * Returns a list of all incident types for the currently selected product.
             * @returns {Array} an array of incident types for the selected product.
@@ -97,8 +98,12 @@
                 if (value.type && value.type === 'field') {
                     type.selectedValue = (value.value) ? value.value : '';
                     value.label = (value.value) ? value.value : '';
+                    scope.technologyProperties[type.name] = type.selectedValue;
+                    console.log(scope.technologyProperties);
                 } else {
                     type.selectedValue = (type.selectedValue === value.value) ? '' : value.value;
+                    scope.technologyProperties[type.name] = type.selectedValue;
+                    console.log(scope.technologyProperties);
                 }
 
                 type.open = false;
@@ -110,7 +115,6 @@
             */
             scope.getSelectedProduct = function () {
                 var selectedProduct = {};
-
                 if (scope.product && scope.product.selectedValue) {
                     selectedProduct = scope.product.values.filter(function (o) {
                         return o.value === scope.product.selectedValue
@@ -138,12 +142,11 @@
                 selectedType = type.types.filter(function (o) {
                     return o.value === type.selectedValue
                 })[0];
-
                 // For version, add a prefix to the label
                 if (selectedType && selectedType.type === 'field' && selectedType.id === 'version') {
                     label = $translate.instant('concierge.caseDetails.version.prefix') + ' ' + selectedType.label;
                 } else if (selectedType) {
-                    if(selectedType.value.match(/[^a-zA-Z\d\-_]/)){
+                    if(selectedType.value.match(/[^a-zA-Z\d\-_\s\/]/)){
                         label = null;
                     } else {
                         label = selectedType.label;

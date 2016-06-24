@@ -37,17 +37,15 @@
                 types, propVal,
                 issueItem,
                 i, k, j;
-
             // Iterate over available technology
             for (i = 0; i < techData.length; i++) {
                 techItem = techData[i];
-
                 // Filter prop value data by the current technology
                 byTech = _.filter(propValData, {'technology': techItem});
 
                 // Add an empty incidentTypes array prop to the current technology object
                 techItem.incidentTypes = [];
-                techItem.code = techItem.name.replace(/\s/g, '_').toLowerCase();
+                // techItem.code = techItem.name.replace(/\s/g, '_').toLowerCase();
                 techItem.label = 'concierge.caseDetails.product.' + techItem.code;
                 techItem.value = techItem.name;
 

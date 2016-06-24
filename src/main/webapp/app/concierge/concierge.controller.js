@@ -5,18 +5,20 @@
     .module('dorsalApp')
     .controller('ConciergeController', ConciergeController);
 
-    ConciergeController.$inject = ['$scope', '$state', 'LoginService', 'Principal', 'ConciergeService', '$translate', '$http'];
+    ConciergeController.$inject = ['$scope', '$state', 'LoginService', 'Principal', 'ConciergeService', '$translate', '$http', 'Supportcase', 'Casetechnologyproperty'];
 
-    function ConciergeController($scope, $state, LoginService, Principal, ConciergeService, $translate, $http) {
+    function ConciergeController($scope, $state, LoginService, Principal, ConciergeService, $translate, $http, Supportcase, Casetechnologyproperty) {
         var vm = this;
         vm.init = init;
         vm.submitForm = submitForm;
+        vm.createCase = createCase;
         vm.startChat = startChat;
         vm.currentPlan = '';
         vm.selectPlan = selectPlan;
         vm.setClass = setClass;
         vm.updatePageTitle = updatePageTitle;
         vm.showChat = false;
+        vm.isSaving = false;
         vm.chatName = '';
         vm.isAuthenticated = Principal.isAuthenticated;
         vm.product = null;
@@ -25,7 +27,48 @@
             description: '',
             radios: []
         };
+        //
+        vm.technologyProperties = {};
+        vm.technology = {};
+        vm.issue = {};
 
+        function createCase(){
+            var brandNewCase = {};
+            brandNewCase.technology = vm.technology;
+            brandNewCase.issue = vm.issue;
+            brandNewCase.status = {code: "case_created_assigned_to-Expert", id: 1, name:"CREATED"};
+            brandNewCase.id = null;
+            brandNewCase.expectedresult = null;
+            brandNewCase.chaturl = null;
+            brandNewCase.etacompletion = null;
+            brandNewCase.statusmsg = 'Case Created';
+            brandNewCase.datecreated = Date.now();
+            brandNewCase.datelastupdate = Date.now();
+            brandNewCase.summary = vm.caseDetails.summary;
+            vm.isSaving = true;
+            if (brandNewCase.id !== null) {
+                Supportcase.update(brandNewCase, onSaveSuccess, onSaveError);
+            } else {
+                Supportcase.save(brandNewCase, onSaveSuccess, onSaveError);
+            }
+        }
+        var onSaveSuccess = function (result) {
+            for (var key in vm.technologyProperties) {
+                if (vm.technologyProperties.hasOwnProperty(key)) {
+                    var brandNewProperty = {};
+                    brandNewProperty.technology = vm.technology;
+                    brandNewProperty.supportcase = result;
+                    brandNewProperty.propertyname = key;
+                    brandNewProperty.propertyvalue = vm.technologyProperties[key];
+                    Casetechnologyproperty.save(brandNewProperty);
+                }
+            }
+            $scope.$emit('dorsalApp:supportcaseUpdate', result);
+            vm.isSaving = false;
+        };
+        var onSaveError = function () {
+            vm.isSaving = false;
+        };
         /**
         * Initialize the controller's data.
         */
@@ -77,7 +120,8 @@
         */
         function submitForm() {
             if (vm.isAuthenticated()) {
-                $state.go('case');
+                // $state.go('case');
+                vm.createCase();
             } else {
                 LoginService.open();
             }

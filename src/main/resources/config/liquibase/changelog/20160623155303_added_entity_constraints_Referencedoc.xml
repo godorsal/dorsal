@@ -7,7 +7,7 @@
         Added the constraints for entity Referencedoc.
     -->
     <changeSet id="20160623155303-2" author="jhipster">
-        
+
         <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="referencedoc"
                                  constraintName="fk_referencedoc_user_id"

@@ -53,10 +53,10 @@
                 "mongodb": "MongoDB",
                 "mariadb": "MariaDB",
                 "other": "Other",
-                "cassandradb": "CassandraDB",
+                "apache_cassandra": "CassandraDB",
                 "bark": "Bark",
                 "hadoop": "Hadoop",
-                "hbase": "HBase"
+                "apache_hbase": "HBase"
             },
             "contact": {
                 "main": "Contact",
