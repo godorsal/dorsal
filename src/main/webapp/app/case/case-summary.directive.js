@@ -51,6 +51,7 @@
             ];
 
             scope.agreeToEstimate = function () {
+                scope.$emit('openCaseAgreement');
             };
 
             scope.rateExpert = function() {

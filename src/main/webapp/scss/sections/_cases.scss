@@ -303,6 +303,11 @@ Cases
         }
     }
 }
+.drsl-case-agreement-view {
+    .drsl-dialog-content {
+        padding-top: $default-padding;;
+    }
+}
 .alignRight{
     float: right;
 }
