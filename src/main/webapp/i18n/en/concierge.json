@@ -47,16 +47,13 @@
             },
             "product": {
                 "main": "Technology",
-                "tooltip": "Select a database and define some additional details which are optional",
+                "tooltip": "Select a technology and define some additional details which are optional",
                 "mysql": "MySQL",
                 "postgresql": "PostgreSQL",
                 "mongodb": "MongoDB",
                 "mariadb": "MariaDB",
-                "other": "Other",
-                "cassandradb": "CassandraDB",
-                "bark": "Bark",
-                "hadoop": "Hadoop",
-                "hbase": "HBase"
+                "apache_cassandra": "CassandraDB",
+                "apache_hbase": "HBase"
             },
             "contact": {
                 "main": "Contact",
@@ -83,7 +80,7 @@
                     "open_stack": "Open Stack",
                     "bare_metal": "Bare Metal",
                     "tungsten_cluster": "Tungsten Cluster",
-                    "percona_cluster": "Percona Cluster",
+                    "percona_xtradb_cluster": "Percona XtraDB Cluster",
                     "timeout": "Timeout",
                     "connection_drop": "Connection Drop",
                     "slow_queries": "Slow Queries",
