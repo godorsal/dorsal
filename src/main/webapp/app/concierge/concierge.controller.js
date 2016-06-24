@@ -31,7 +31,6 @@
         vm.technologyProperties = {};
         vm.technology = {};
         vm.issue = {};
-
         function createCase(){
             var brandNewCase = {};
             brandNewCase.technology = vm.technology;

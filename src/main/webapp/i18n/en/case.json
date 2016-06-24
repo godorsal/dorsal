@@ -18,13 +18,13 @@
             "status": {
                 "main": "Status",
                 "created": "Created",
-                "assigned": "Assigned",
+                "estimated": "Estimated",
                 "working": "Working",
-                "resolved": "Resolved",
-                "completed": "Completed"
+                "completed": "Completed",
+                "closed": "Closed"
             },
-            "chatRoom": "secure chat with expert",
-            "viewDetails": "view case details",
+            "chatRoom": "chat",
+            "viewDetails": "details",
             "rateCase": "rate this case",
             "id": "ID:",
             "caseID": "Case ID:",

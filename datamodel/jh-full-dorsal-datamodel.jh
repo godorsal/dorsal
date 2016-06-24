@@ -1,0 +1,214 @@
+//////////////////////////
+// Entity Technology
+
+entity Technology {
+	name String required,
+    code String
+}
+
+entity Technologyproperty {
+	name String,
+	code String
+}
+
+entity Technologypropertyvalue {
+	value String
+}
+
+/////////////////////////
+// Entity Issue
+
+entity Issue {
+	name String required,
+    code String
+}
+
+///////////////////////
+// Entity Status
+
+entity Status {
+	name String required,
+    code String
+}
+
+
+relationship OneToMany {
+	Technology{technology} to Technologypropertyvalue
+}
+
+relationship OneToMany {
+   Technologyproperty{technologyproperty} to Technologypropertyvalue
+}
+
+
+dto Technology with mapstruct
+service Technology with serviceClass
+
+//////////////////////////
+// Entity User Account
+
+entity Useraccount  {
+	phone String,
+    skype String,
+    othercommunication String,
+    location String,
+    score Integer,
+    isexpert Boolean,
+    preferlocalexpert Boolean,
+    handle String,
+    languages String,
+    companyname String
+}
+
+relationship OneToOne {
+	User{user} to Useraccount
+}
+
+//////////////////////
+// Entity Reference Doc
+
+entity Referencedoc {
+	name String,
+    url String
+}
+
+relationship OneToMany {
+    User{referencedoc(user)} to Referencedoc{user}
+}
+
+relationship OneToMany {
+    Technology{referencedoc(technology)} to Referencedoc{technology}
+}
+
+entity Groupaccess {}
+
+relationship OneToMany {
+    User{groupaccess(authorizeduser)} to Groupaccess{authorizeduser}
+}
+
+relationship OneToMany {
+    User{groupaccess(user)} to Groupaccess{user}
+}
+
+entity Supportcase {
+	summary String maxlength (1024),
+    expectedresult String maxlength (1024),
+    statusmsg String,
+    datecreated ZonedDateTime,
+    datelastupdate ZonedDateTime,
+    chaturl String maxlength (1024),
+    etacompletion String
+}
+
+relationship OneToMany {
+    User{supportcase(user)} to Supportcase{user}
+}
+
+relationship OneToMany {
+    User{supportcase(expert)} to Supportcase{expert}
+}
+
+relationship OneToMany {
+    Technology{supportcase(technology)} to Supportcase{technology}
+}
+relationship OneToMany {
+    Status{supportcase(status)} to Supportcase{status}
+}
+relationship OneToMany {
+    Issue{supportcase(issue)} to Supportcase{issue}
+}
+
+
+entity Casetechnologyproperty {
+	propertyname String,
+    propertyvalue String
+}
+
+relationship OneToMany {
+    Supportcase{casetechnologyproperty(case)} to Casetechnologyproperty{supportcase}
+}
+
+relationship OneToMany {
+    Technology{casetechnologyproperty(technology)} to Casetechnologyproperty{technology}
+}
+
+// Entity Payment
+
+entity Payment {
+	ccdata String maxlength(1024)
+}
+
+relationship OneToMany {
+    User{payment(user)} to Payment{user}
+}
+
+// Entity Badge and ExpertBadge
+entity Expertbadge {}
+
+entity Badge {
+	name String required,
+    code String
+}
+
+relationship OneToMany {
+    User{expertbadge(user)} to Expertbadge{user}
+}
+
+relationship OneToMany {
+    Badge{expertbadge(badge)} to Expertbadge{badge}
+}
+
+// Entity Updatetype
+
+enum Updateenum {
+    UPDATE, RESOLUTION, ATTEMPTED_RESOLUTION
+}
+
+entity Updatetype {
+	name Updateenum
+}
+
+// Entity Case update
+
+entity Caseupdate  {
+	dateupdated ZonedDateTime,
+    updatemsg String maxlength(2048),
+    url String maxlength(1024)
+}
+
+
+relationship OneToMany {
+    User{Caseupdate(user)} to Caseupdate{user}
+}
+
+relationship OneToMany {
+    Supportcase{Caseupdate(supportcase)} to Caseupdate{supportcase}
+}
+
+relationship OneToMany {
+    Updatetype{Caseupdate(updatetype)} to Caseupdate{updatetype}
+}
+
+// Entity Rating
+
+entity Rating {
+	daterated ZonedDateTime,
+    score Integer
+}
+
+relationship OneToMany {
+	Supportcase{Rating(case)} to Rating{supportcase}
+}
+
+// Entity Attachement
+
+entity Attachement {
+	name String maxlength(1024),
+    url String maxlength(1024)
+}
+
+relationship OneToMany {
+	Supportcase{Attachement(supportcase)} to Attachement{supportcase}
+}
+
+
