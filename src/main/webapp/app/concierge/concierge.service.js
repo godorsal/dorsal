@@ -65,6 +65,13 @@
 
                         if (propItemCode === 'version') {
                             types.push({
+                                id: 'version',
+                                value: '',
+                                type: 'field',
+                                label: ''
+                            });
+                        } else {
+                            types.unshift({
                                 id: '',
                                 value: '',
                                 type: 'field',
