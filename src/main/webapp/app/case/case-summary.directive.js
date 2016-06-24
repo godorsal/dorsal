@@ -5,7 +5,7 @@
         .module('dorsalApp')
         .directive('caseSummary', caseSummary);
 
-    function caseSummary($translate, $locale, tmhDynamicLocale) {
+    function caseSummary($translate, $locale, tmhDynamicLocale, $sce) {
         var directive = {
             restrict: 'E',
             scope: {
@@ -13,7 +13,7 @@
                 expert: '=',
                 status: '=',
                 passedStep: '=',
-                history: '@',
+                history: '@'
             },
             templateUrl: 'app/case/case-summary.directive.html',
             link: linkFunc
@@ -30,22 +30,32 @@
                     value: 'created'
                 },
                 {
-                    label: 'Assigned',
-                    value: 'assigned'
+                    label: 'Estimated',
+                    value: 'estimated',
+                    template: 'app/case/agree-to-estimate-button.directive.html'
                 },
                 {
                     label: 'Working',
                     value: 'working'
                 },
                 {
-                    label: 'Complete',
-                    value: 'resolved'
+                    label: 'Completed',
+                    value: 'completed',
+                    template: 'app/case/rate-expert-button.directive.html'
+
                 },
                 {
                     label: 'Closed',
-                    value: 'completed'
+                    value: 'closed'
                 }
             ];
+
+            scope.agreeToEstimate = function () {
+            };
+
+            scope.rateExpert = function() {
+                scope.$emit('openRating');
+            };
 
             scope.cycleStatus = function () {
                 if (scope.caseIndex < scope.statusOptions.length - 1) {

@@ -153,27 +153,28 @@ Cases
         }
     }
 
-    .drsl-case-summary {
-        .drsl-label-value-row {
-            display: flex;
-            flex-flow: row;
+    .drsl-label-value-row {
+        display: flex;
+        flex-flow: row;
 
-            > div {
-                flex: auto;
+        > div {
+            flex: auto;
 
-                &:first-child {
-                    flex: inherit;
-                    margin-right: 5px;
-                }
+            &:first-child {
+                flex: inherit;
+                margin-right: 5px;
+            }
 
-                .drsl-scrolling-container {
-                    width: 450px;
-                    height: 76px;
-                    margin-top: -5px;
-                }
+            .drsl-scrolling-container {
+                width: 450px;
+                height: 81px;
+                margin-top: -5px;
             }
         }
+    }
 
+
+    .drsl-case-summary {
         .drsl-timeline {
             color: $inactive-text-color;
 
@@ -216,6 +217,12 @@ Cases
 
                 .drsl-icon-sprites {
                     background-position: -4px 0;
+                }
+            }
+
+            .drsl-timeline-icons {
+                .popover {
+                    max-width: 350px;
                 }
             }
         }

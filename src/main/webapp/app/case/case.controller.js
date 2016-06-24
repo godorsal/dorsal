@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .controller('CaseController', CaseController);
 
-    CaseController.$inject = ['$window', 'CaseService', 'RatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService'];
+    CaseController.$inject = ['$scope', '$window', 'CaseService', 'RatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService'];
 
-    function CaseController($window, CaseService, RatingService, CaseDetailsService, EscalationFormService, ShareCaseService) {
+    function CaseController($scope, $window, CaseService, RatingService, CaseDetailsService, EscalationFormService, ShareCaseService) {
         var vm = this;
         vm.init = init;
         vm.getHistory = getHistory;
@@ -38,15 +38,15 @@
         /**
          * Initialize the controller's data.
          */
-        function init(){
+        function init() {
             // Make a call to get the initial data.
-            CaseService.get(function(data){
+            CaseService.get(function (data) {
                 var i, cases, casesLength, currentCase, cleanCases = [];
                 cases = data || [];
                 casesLength = cases.length;
 
                 // Loop through all the cases that came back with the service data
-                for (i =0; i < casesLength; i++){
+                for (i = 0; i < casesLength; i++) {
                     currentCase = cases[i];
 
                     // Only continue if the current user matches the case user
@@ -66,7 +66,7 @@
 
                 // Only request unique experts, to help avoid redundant calls.
                 for (var expert in vm.experts) {
-                    if (vm.experts.hasOwnProperty(expert)){
+                    if (vm.experts.hasOwnProperty(expert)) {
                         getExpert(expert);
                     }
                 }
@@ -81,9 +81,9 @@
          * Call getExpert in CaseService and set the result on the vm for the given expert id.
          * @param expert
          */
-        function getExpert(expert){
-            CaseService.getExpert(function(data){
-                var foundExpert = data.filter(function(o){
+        function getExpert(expert) {
+            CaseService.getExpert(function (data) {
+                var foundExpert = data.filter(function (o) {
                     return o.id == expert;
                 })[0];
 
@@ -133,11 +133,11 @@
          * Opens the rating dialog.
          */
         function openRating() {
-            if (vm.currentCase.status === 'resolved') {
+            if (vm.currentCase.status === 'completed') {
                 var modalInstance = RatingService.open(vm.currentCase);
 
                 modalInstance.result.then(function () {
-                    vm.currentCase.status = 'completed';
+                    vm.currentCase.status = 'closed';
                 });
             }
         }
@@ -152,11 +152,13 @@
                 // console.log(result);
             });
         }
+
         function openEscalation() {
             if (vm.currentCase.status === 'working') {
                 var modalInstance = EscalationFormService.open(vm.currentCase, vm.experts[vm.currentCase.expert]);
             }
         }
+
         function openShare() {
             var modalInstance = ShareCaseService.open(vm.currentCase, vm.experts[vm.currentCase.expert]);
         }
@@ -166,7 +168,7 @@
          * Opens the chat dialog.
          */
         function openChat() {
-            if (vm.passedStep(1)){
+            if (vm.passedStep(1)) {
                 $window.open(vm.currentCase.chatRoom.link, '_blank');
             }
         }
@@ -179,17 +181,22 @@
         function passedStep(step) {
             var stepIndex = 0;
 
-            if (vm.currentCase.status == 'completed') {
+            if (vm.currentCase.status == 'closed') {
                 stepIndex = 4;
-            } else if (vm.currentCase.status == 'resolved') {
+            } else if (vm.currentCase.status == 'completed') {
                 stepIndex = 3;
             } else if (vm.currentCase.status == 'working') {
                 stepIndex = 2;
-            } else if (vm.currentCase.status == 'assigned') {
+            } else if (vm.currentCase.status == 'estimated') {
                 stepIndex = 1;
             }
 
             return (step <= stepIndex );
         }
+
+        $scope.$on('openRating', function (event) {
+            event.stopPropagation();
+            vm.openRating();
+        });
     }
 })();
