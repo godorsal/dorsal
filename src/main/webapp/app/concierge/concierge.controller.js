@@ -40,12 +40,15 @@
             brandNewCase.id = null;
             brandNewCase.expectedresult = null;
             brandNewCase.chaturl = null;
-            brandNewCase.etacompletion = null;
+            brandNewCase.user = vm.currentUser;
+            brandNewCase.user.id = 1;
+            brandNewCase.etacompletion = "4 hours";
             brandNewCase.statusmsg = 'Case Created';
             brandNewCase.datecreated = Date.now();
             brandNewCase.datelastupdate = Date.now();
             brandNewCase.summary = vm.caseDetails.summary;
             vm.isSaving = true;
+            // console.log(brandNewCase);
             if (brandNewCase.id !== null) {
                 Supportcase.update(brandNewCase, onSaveSuccess, onSaveError);
             } else {
@@ -75,6 +78,7 @@
         function init(){
             Principal.identity().then(function(account) {
                 if(account){
+                    vm.currentUser = account
                     vm.currentUsername = account.firstName
                 }
             });

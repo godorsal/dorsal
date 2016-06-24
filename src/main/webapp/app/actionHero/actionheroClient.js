@@ -3237,7 +3237,11 @@
     }
 
     ActionheroClient.prototype.defaults = function(){
-        var currentUrl = window.location.protocol + window.location.hostname + ':4000'
+        if(window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost'){
+            var currentUrl = window.location.protocol + window.location.hostname + ':4000'
+        } else {
+            var currentUrl = window.location.protocol + window.location.hostname
+        }
         return { apiPath: '/api', url: currentUrl  }
     }
 
