@@ -2,19 +2,45 @@
 Landing Page
 ========================================================================== */
 .drsl-view > div.drsl-home-view {
-    padding: 0;
-    margin: 0;
     min-height: initial;
+    position: relative;
+    min-height: 840px;
 
     &:before {
         content: '';
         display: none;
     }
+
+    .drsl-home-bg-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
 }
 
 .drsl-landing-wrapper {
     position: relative;
     z-index: 0;
+    width: 1280px;
+    overflow: hidden;
+    margin-left: 15px;
+
+    .drsl-home-gradient {
+        position: absolute;
+        background: url('../images/global/nv-bkg.png') repeat-x;
+        height: 840px;
+        width: 1280px;
+        z-index: 1;
+    }
+
+    .drsl-home-main-bg {
+        margin-top: -375px;
+        opacity: .4;
+        width:1280px;
+        height: 1280px;
+        background: url('../images/global/main-bg.jpg') no-repeat;
+    }
 
     .badge-wrapper {
         position: absolute;

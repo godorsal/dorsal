@@ -1,40 +1,52 @@
 <div class="drsl-home-view" ng-cloak>
-    <div class="row">
+    <div class="row drsl-home-bg-wrapper">
         <div class="col-md-12 drsl-no-padding">
             <div class="drsl-landing-wrapper">
-                <div><img src="content/images/landing-page/hero.jpg" /></div>
-                <div class="badge-wrapper">
-                    <div class="drsl-badge"><img src="content/images/landing-page/on-demand-badge.png" /></div>
-                    <div class="drsl-connect-now">
-                        <div class="drsl-custom-button" ng-click="vm.concierge()"><span>connect now</span></div>
-                    </div>
-                </div>
-                <div class="drsl-sections-wrapper">
-                    <div class="drsl-sections">
-                        <div class="drsl-section" uib-tooltip="{{'home.tooltips.incident' | translate}}">
-                            <div class="drsl-section-icon-wrapper">
-                                <div ng-click="vm.concierge(1)"><img src="content/images/landing-page/section1-icon.png" /></div>
-                            </div>
-                            <div class="drsl-section-text" ng-click="vm.concierge(1)"><img ng-src="content/images/landing-page/section1-text.png" /></div>
-                        </div>
-
-                        <div class="drsl-section" uib-tooltip="{{'home.tooltips.proactive' | translate}}">
-                            <div class="drsl-section-icon-wrapper">
-                                <div ng-click="vm.concierge(2)"><img src="content/images/landing-page/section2-icon.png" /></div>
-                            </div>
-                            <div class="drsl-section-text" ng-click="vm.concierge(2)"><img ng-src="content/images/landing-page/section2-text.png" /></div>
-                        </div>
-
-                        <div class="drsl-section" uib-tooltip="{{'home.tooltips.onDemand' | translate}}">
-                            <div class="drsl-section-icon-wrapper">
-                                <div ng-click="vm.concierge(3)"><img src="content/images/landing-page/section3-icon.png" /></div>
-                            </div>
-                            <div class="drsl-section-text" ng-click="vm.concierge(3)"><img ng-src="content/images/landing-page/section3-text.png" /></div>
-                        </div>
-
-                    </div>
-                </div>
+                <div class="drsl-home-gradient"></div>
+                <div class="drsl-home-main-bg"></div>
             </div>
         </div>
+    </div>
+    <div class="row" style="position: relative;padding-top: 25px;">
+        <div class="col-md-12" style="min-height: 350px;">
+            <div style="padding-left: 64px;padding-top: 40px;">
+                <h1 style="font-size: 40px; font-weight: 300;color:#333333;">CONNECT, SOLVE, SHARE</h1>
+                <p style="line-height: 1.6;font-size: 18px; max-width: 340px;color:#333333;">Fast, reliable open source support without subscriptions or license fees</p>
+                <a class="btn btn-success" style="border-radius: 0;width:275px;margin-top: 20px;padding: 10px;" ui-sref="concierge">Get Started</a>
+            </div>
+        </div>
+    </div>
+    <div style="padding:0;margin-left: -50px; margin-right: -50px;margin-bottom: 60px;position: relative;">
+        <div style="background-color: rgba(0, 0, 0, 0.05); font-size: 24px;font-weight: 200; text-align: center">
+            <div style="opacity: .7;">
+            <span style="padding: 0 40px;">MySQL</span>
+            <span style="padding: 0 40px;">MariaDB</span>
+            <span style="padding: 0 40px;">PostgreSQL</span>
+            <span style="padding: 0 40px;">MongoDB</span>
+            <span style="padding: 0 40px;">HBase</span>
+            <span style="padding: 0 40px;">CassandraDB</span>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding: 0 64px;">
+        <div class="col-md-4" style="background-color: rgba(0, 0, 0, 0.2);">
+            <div style="height: 160px;">
+                <h3 style="font-size: 18px;">FAST, EASY ACCESS</h3>
+                <p>Describe your problem in seconds, get the right Experts started on your case and keep everyone on your team in the loop. The Dorsal web service makes it easy, fast and secure.</p>
+            </div>
+        </div>
+        <div class="col-md-4" style="background-color:  rgba(0, 0, 0, 0.3);">
+            <div style="height: 160px;">
+                <h3 style="font-size: 18px;">COMMUNITY POWER</h3>
+                <p>Share, solve and collaborate on your case with the Dorsal community experts and anyone on your team</p>
+            </div>
+        </div>
+        <div class="col-md-4" style="background-color:  rgba(0, 0, 0, 0.2);;">
+            <div  style="height: 160px;">
+                <h3 style="font-size: 18px;">PERSONALIZED TO YOU</h3>
+                <p>Tune the Dorsal service to meet your technology interests, company best practices and technical standards.</p>
+            </div>
+        </div>
+
     </div>
 </div>
