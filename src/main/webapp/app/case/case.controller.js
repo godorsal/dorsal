@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .controller('CaseController', CaseController);
 
-    CaseController.$inject = ['$scope', '$window', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService'];
+    CaseController.$inject = ['$scope', '$window', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', 'Supportcase'];
 
-    function CaseController($scope, $window, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService) {
+    function CaseController($scope, $window, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, Supportcase) {
         var vm = this;
         vm.init = init;
         vm.getHistory = getHistory;
@@ -34,12 +34,19 @@
             name: 'Joe Doe'
         };
         vm.experts = {};
+        vm.loadAll = function() {
+            Supportcase.query(function(result) {
+                vm.supportcases = result;
+                console.log(result);
+            });
+        };
         vm.init();
 
         /**
          * Initialize the controller's data.
          */
         function init() {
+            vm.loadAll()
             // Make a call to get the initial data.
             CaseService.get(function (data) {
                 var i, cases, casesLength, currentCase, cleanCases = [];

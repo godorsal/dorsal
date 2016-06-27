@@ -12,6 +12,7 @@
         vm.init = init;
         vm.submitForm = submitForm;
         vm.createCase = createCase;
+        vm.getCurrentUser = getCurrentUser;
         vm.startChat = startChat;
         vm.currentPlan = '';
         vm.selectPlan = selectPlan;
@@ -21,13 +22,13 @@
         vm.isSaving = false;
         vm.chatName = '';
         vm.isAuthenticated = Principal.isAuthenticated;
+        $scope.checkAuth = Principal.isAuthenticated;
         vm.product = null;
         vm.caseDetails = {
             summary: '',
             description: '',
             radios: []
         };
-        //
         vm.technologyProperties = {};
         vm.technology = {};
         vm.issue = {};
@@ -39,7 +40,11 @@
             brandNewCase.id = null;
             brandNewCase.expectedresult = null;
             brandNewCase.chaturl = null;
-            brandNewCase.user = vm.currentUser;
+            // brandNewCase.user = vm.getCurrentUser();
+            brandNewCase.user = {};
+            // Principal.identity().then(function(account) {
+            //     brandNewCase.user = account;
+            // });
             brandNewCase.user.id = 1;
             brandNewCase.etacompletion = "4 hours";
             brandNewCase.statusmsg = 'Case Created';
@@ -65,22 +70,24 @@
                     Casetechnologyproperty.save(brandNewProperty);
                 }
             }
-            $scope.$emit('dorsalApp:supportcaseUpdate', result);
             vm.isSaving = false;
+            $scope.$emit('dorsalApp:supportcaseUpdate', result);
+            $state.go('case');
         };
         var onSaveError = function () {
             vm.isSaving = false;
         };
+        function getCurrentUser(){
+            Principal.identity().then(function(account) {
+                return account
+            });
+        }
         /**
         * Initialize the controller's data.
         */
         function init(){
-            Principal.identity().then(function(account) {
-                if(account){
-                    vm.currentUser = account
-                    vm.currentUsername = account.firstName
-                }
-            });
+
+            console.log(vm.getCurrentUser());
             vm.pageTitle = '';
 
             // Make a call to get the initial data.
@@ -122,13 +129,23 @@
         * Submits the form, or opens the login dialog if the user isn't logged in.
         */
         function submitForm() {
-            if (vm.isAuthenticated()) {
-                // $state.go('case');
-                vm.createCase();
-            } else {
-                LoginService.open();
-            }
+            Principal.identity().then(function(account) {
+                if(account){
+                    vm.createCase();
+                    vm.currentUser = account;
+                } else {
+                    LoginService.open();
+                }
+            });
         }
+        // function submitForm() {
+        //     console.log("USER", vm.getCurrentUser());
+        //     if (vm.isAuthenticated()) {
+        // brandNewCase.user = account;
+        //     } else {
+        //         LoginService.open();
+        //     }
+        // }
 
         /**
         * Toggles the chat display if the user provided a chat name.
