@@ -36,7 +36,9 @@
         vm.experts = {};
         vm.loadAll = function() {
             Supportcase.query(function(result) {
+                // vm.cases = result;
                 vm.supportcases = result;
+                // vm.setCurrentCase(result[0]);
                 console.log(result);
             });
         };

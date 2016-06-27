@@ -48,8 +48,10 @@
             brandNewCase.user.id = 1;
             brandNewCase.etacompletion = "4 hours";
             brandNewCase.statusmsg = 'Case Created';
-            brandNewCase.datecreated = Date.now();
-            brandNewCase.datelastupdate = Date.now();
+            brandNewCase.datecreated = new Date();
+            brandNewCase.datelastupdate = new Date();
+            // brandNewCase.datecreated = Date.now();
+            // brandNewCase.datelastupdate = Date.now();
             brandNewCase.summary = vm.caseDetails.summary;
             vm.isSaving = true;
             // console.log(brandNewCase);
