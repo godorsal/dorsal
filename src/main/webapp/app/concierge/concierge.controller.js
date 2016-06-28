@@ -76,9 +76,21 @@
             $scope.$emit('dorsalApp:supportcaseUpdate', result);
             $state.go('case');
         };
-        var onSaveError = function () {
+        var onSaveError = function (err) {
             vm.isSaving = false;
+            checkError()
         };
+        function checkError(){
+            if(Object.keys(vm.issue).length === 0){
+                alert('you forgot the issue')
+            }
+            if(Object.keys(vm.technology).length === 0) {
+                alert('You forgot the technology')
+            }
+            if(Object.keys(vm.technology).length === 0 && Object.keys(vm.issue).length === 0) {
+                alert('You forgot the technology and the issue')
+            }
+        }
         function getCurrentUser(){
             Principal.identity().then(function(account) {
                 return account
