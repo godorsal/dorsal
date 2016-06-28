@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('ConciergeController', ConciergeController);
 
-    ConciergeController.$inject = ['$scope', '$state', 'LoginService', 'Principal', 'ConciergeService', '$translate', '$http', 'Supportcase', 'Casetechnologyproperty'];
+    ConciergeController.$inject = ['$rootScope', '$scope', '$state', 'LoginService', 'Principal', 'ConciergeService', '$translate', '$http', 'Supportcase', 'Casetechnologyproperty'];
 
-    function ConciergeController($scope, $state, LoginService, Principal, ConciergeService, $translate, $http, Supportcase, Casetechnologyproperty) {
+    function ConciergeController($rootScope, $scope, $state, LoginService, Principal, ConciergeService, $translate, $http, Supportcase, Casetechnologyproperty) {
         var vm = this;
         vm.init = init;
         vm.submitForm = submitForm;
@@ -81,14 +81,12 @@
             checkError()
         };
         function checkError(){
-            if(Object.keys(vm.issue).length === 0){
-                alert('you forgot the issue')
-            }
-            if(Object.keys(vm.technology).length === 0) {
-                alert('You forgot the technology')
-            }
-            if(Object.keys(vm.technology).length === 0 && Object.keys(vm.issue).length === 0) {
+            if (Object.keys(vm.technology).length === 0 && Object.keys(vm.issue).length === 0) {
                 alert('You forgot the technology and the issue')
+            } else if(Object.keys(vm.technology).length === 0){
+                alert('You forgot the technology')
+            } else if(Object.keys(vm.issue).length === 0){
+                alert('You forgot the issue')
             }
         }
         function getCurrentUser(){
@@ -143,23 +141,21 @@
         * Submits the form, or opens the login dialog if the user isn't logged in.
         */
         function submitForm() {
-            Principal.identity().then(function(account) {
-                if(account){
-                    vm.createCase();
+            if (!vm.isAuthenticated()) {
+                LoginService.open()
+                $rootScope.$on('authenticationSuccess', function(){
+                    Principal.identity().then(function(account){
+                        vm.currentUser = account;
+                        vm.createCase();
+                    })
+                })
+            } else {
+                Principal.identity().then(function(account){
                     vm.currentUser = account;
-                } else {
-                    LoginService.open()
-                }
-            });
+                    vm.createCase();
+                })
+            }
         }
-        // function submitForm() {
-        //     console.log("USER", vm.getCurrentUser());
-        //     if (vm.isAuthenticated()) {
-        // brandNewCase.user = account;
-        //     } else {
-        //         LoginService.open();
-        //     }
-        // }
 
         /**
         * Toggles the chat display if the user provided a chat name.
