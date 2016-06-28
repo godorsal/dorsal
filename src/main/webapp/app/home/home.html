@@ -1,39 +1,44 @@
 <div class="drsl-home-view" ng-cloak>
-    <div class="row">
+    <!-- Background Container -->
+    <div class="row drsl-home-bg-wrapper">
         <div class="col-md-12 drsl-no-padding">
             <div class="drsl-landing-wrapper">
-                <div><img src="content/images/landing-page/hero.jpg" /></div>
-                <div class="badge-wrapper">
-                    <div class="drsl-badge"><img src="content/images/landing-page/on-demand-badge.png" /></div>
-                    <div class="drsl-connect-now">
-                        <div class="drsl-custom-button" ng-click="vm.concierge()"><span>connect now</span></div>
-                    </div>
-                </div>
-                <div class="drsl-sections-wrapper">
-                    <div class="drsl-sections">
-                        <div class="drsl-section" uib-tooltip="{{'home.tooltips.incident' | translate}}">
-                            <div class="drsl-section-icon-wrapper">
-                                <div ng-click="vm.concierge(1)"><img src="content/images/landing-page/section1-icon.png" /></div>
-                            </div>
-                            <div class="drsl-section-text" ng-click="vm.concierge(1)"><img ng-src="content/images/landing-page/section1-text.png" /></div>
-                        </div>
+                <div class="drsl-home-gradient"></div>
+                <div class="drsl-home-main-bg"></div>
+            </div>
+        </div>
+    </div>
 
-                        <div class="drsl-section" uib-tooltip="{{'home.tooltips.proactive' | translate}}">
-                            <div class="drsl-section-icon-wrapper">
-                                <div ng-click="vm.concierge(2)"><img src="content/images/landing-page/section2-icon.png" /></div>
-                            </div>
-                            <div class="drsl-section-text" ng-click="vm.concierge(2)"><img ng-src="content/images/landing-page/section2-text.png" /></div>
-                        </div>
+    <!--Main Header, Tagline, and Main Button-->
+    <div class="row drsl-main-info-wrapper">
+        <div class="col-md-12">
+            <div>
+                <!-- Header -->
+                <h1 translate="home.header">Connect, Solve, Deliver</h1>
+                <!-- Tagline -->
+                <p translate="home.tagline">Fast, reliable open source support without subscriptions or license fees</p>
+                <!-- Button -->
+                <a class="btn btn-success" ui-sref="concierge" translate="home.mainButton">Get Started</a>
+            </div>
+        </div>
+    </div>
 
-                        <div class="drsl-section" uib-tooltip="{{'home.tooltips.onDemand' | translate}}">
-                            <div class="drsl-section-icon-wrapper">
-                                <div ng-click="vm.concierge(3)"><img src="content/images/landing-page/section3-icon.png" /></div>
-                            </div>
-                            <div class="drsl-section-text" ng-click="vm.concierge(3)"><img ng-src="content/images/landing-page/section3-text.png" /></div>
-                        </div>
+    <!-- Technology -->
+    <div class="drsl-home-tech-wrapper">
+        <span translate="home.tech.mysql">MySQL</span>
+        <span translate="home.tech.mariadb">MariaDB</span>
+        <span translate="home.tech.postgresql">PostgreSQL</span>
+        <span translate="home.tech.mongodb">MongoDB</span>
+        <span translate="home.tech.hbase">HBase</span>
+        <span translate="home.tech.cassandradb">CassandraDB</span>
+    </div>
 
-                    </div>
-                </div>
+    <!-- Additional-Information -->
+    <div class="row drsl-home-additional-info-wrapper">
+        <div class="col-md-4" ng-repeat="slot in [1, 2, 3]">
+            <div class="drsl-home-additional-info-item">
+                <h3>{{'home.additionalInfo.slot_'+slot+'.title' | translate}}</h3>
+                <p>{{'home.additionalInfo.slot_'+slot+'.description' | translate}}</p>
             </div>
         </div>
     </div>
