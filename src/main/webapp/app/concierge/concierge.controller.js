@@ -136,7 +136,7 @@
                     vm.createCase();
                     vm.currentUser = account;
                 } else {
-                    LoginService.open();
+                    LoginService.open()
                 }
             });
         }

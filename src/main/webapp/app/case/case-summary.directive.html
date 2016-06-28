@@ -14,7 +14,7 @@
     </div>
 
     <!-- Status -->
-    <!-- <div class="drsl-case-status-wrapper">
+    <div class="drsl-case-status-wrapper">
         <div>
             <span class="drsl-label" translate="case.details.status.main" ng-click="cycleStatus()">Current Status:</span>
             <span ng-show="case.status.name == 'CREATED'">This case has been created and is currently being assigned to an expert.</span>
@@ -23,8 +23,8 @@
             <span ng-show="case.status.name == 'completed'">The expert has marked this issue as resolved.</span>
             <span ng-show="case.status.name == 'closed'">This issue is closed.</span>
         </div>
-    </div> -->
-    <div class="drsl-case-status-wrapper">
+    </div>
+    <!-- <div class="drsl-case-status-wrapper">
         <div>
             <span class="drsl-label" translate="case.details.status.main" ng-click="cycleStatus()">Current Status:</span>
             <span ng-show="case.status == 'created'">This case has been created and is currently being assigned to an expert.</span>
@@ -33,17 +33,17 @@
             <span ng-show="case.status == 'completed'">The expert has marked this issue as resolved.</span>
             <span ng-show="case.status == 'closed'">This issue is closed.</span>
         </div>
-    </div>
+    </div> -->
 
     <!-- Start / ETA to Completion -->
-    <!-- <div>
+    <div>
         <span><span class="drsl-label">Start</span> {{case.datecreated | date:"MM/dd/yy h:mm a"}}</span>
         <div class="pull-right"><span class="drsl-label" translate="case.details.resolutionETA">ETA to Completion</span> {{case.resolutionETA}}</div>
-    </div> -->
-    <div>
+    </div>
+    <!-- <div>
         <span><span class="drsl-label">Start</span> {{case.startDate | date:"MM/dd/yy h:mm a"}}</span>
         <div class="pull-right"><span class="drsl-label" translate="case.details.resolutionETA">ETA to Completion</span> {{case.resolutionETA}}</div>
-    </div>
+    </div> -->
 
     <!-- Estimate -->
     <div>

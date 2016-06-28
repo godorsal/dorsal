@@ -38,7 +38,7 @@
             Supportcase.query(function(result) {
                 // vm.cases = result;
                 vm.supportcases = result;
-                // vm.setCurrentCase(result[0]);
+                vm.setCurrentCase(result[0]);
                 console.log(result);
             });
         };
@@ -83,7 +83,7 @@
 
                 // update the controller's cases
                 vm.cases = cleanCases;
-                vm.setCurrentCase(cleanCases[0]);
+                // vm.setCurrentCase(cleanCases[0]);
             });
         }
 

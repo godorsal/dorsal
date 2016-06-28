@@ -9,10 +9,10 @@
                         <span class="drsl-understated">ID: {{vm.currentCase.id}}</span>
                     </div>
                     <div>
-                        <!-- Status:
-                        <span>{{vm.currentCase.status.name}}</span> -->
-                        {{'case.details.status.main' | translate}}:
-                        <span>{{'case.details.status.'+vm.currentCase.status | translate}}</span>
+                        Status:
+                        <span>{{vm.currentCase.status.name}}</span>
+                        <!-- {{'case.details.status.main' | translate}}:
+                        <span>{{'case.details.status.'+vm.currentCase.status | translate}}</span> -->
                     </div>
                 </div>
 
@@ -42,7 +42,7 @@
                 <div class="drsl-sub-header drsl-sub-sub-header" translate="case.history.header">Your Case History</div>
 
                 <!-- Listing -->
-                <!-- <div class="drsl-case-history-wrapper">
+                <div class="drsl-case-history-wrapper">
                     <div class="panel panel-default" ng-repeat="case in vm.supportcases | orderBy:'-case.lastUpdated'">
                         <div class="panel-heading" ng-class="{active: vm.currentCase == case}" ng-click="vm.setCurrentCase(case);">
                             <h4 class="panel-title">
@@ -58,8 +58,8 @@
                             </h4>
                         </div>
                     </div>
-                </div> -->
-                <div class="drsl-case-history-wrapper">
+                </div>
+                <!-- <div class="drsl-case-history-wrapper">
                     <div class="panel panel-default" ng-repeat="case in vm.cases | orderBy:'-case.lastUpdated'">
                         <div class="panel-heading" ng-class="{active: vm.currentCase == case}" ng-click="vm.setCurrentCase(case);">
                             <h4 class="panel-title">
@@ -75,7 +75,7 @@
                             </h4>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

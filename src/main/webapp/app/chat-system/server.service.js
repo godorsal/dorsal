@@ -33,10 +33,10 @@
         }
 
         function api(endPoint, pathParam, pathParam2, pathParam3, pathParam4) {
-            var url = location.protocol + '//' + location.hostname + ':' + appConfig.apiPort + '/api' + endPoint;
+            var url = location.protocol + '//' + location.hostname + ':' + appConfig.apiPort + '/conciergechat' + endPoint;
             //   var url = location.protocol + '//' + location.hostname + '/api' + endPoint;
             if (location.hostname === 'localhost') {
-                url = location.protocol + '//' + location.hostname + ':' + appConfig.apiPort + '/api' + endPoint;
+                url = location.protocol + '//' + location.hostname + ':' + appConfig.apiPort + '/conciergechat' + endPoint;
             }
             if (angular.isDefined(pathParam)) {
                 url += '/' + pathParam;
