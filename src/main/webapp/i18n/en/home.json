@@ -1,24 +1,29 @@
 {
     "home": {
-        "title": "Welcome, Java Hipster!",
-        "subtitle": "This is your homepage",
-        "logged": {
-            "message": "You are logged in as user \"{{username}}\"."
+        "header": "Connect, Solve, Deliver",
+        "tagline": "Fast, reliable open source support without subscriptions or license fees",
+        "mainButton": "Get Started",
+        "tech": {
+            "mysql": "MySQL",
+            "mariadb": "MariaDB",
+            "postgresql": "PostgreSQL",
+            "mongodb": "MongoDB",
+            "hbase": "HBase",
+            "cassandradb": "CassandraDB"
         },
-        "question": "If you have any question on JHipster:",
-        "link": {
-            "homepage": "JHipster homepage",
-            "stackoverflow": "JHipster on Stack Overflow",
-            "bugtracker": "JHipster bug tracker",
-            "chat": "JHipster public chat room",
-            "follow": "follow @java_hipster on Twitter"
-        },
-        "like": "If you like JHipster, don't forget to give us a star on",
-        "github": "GitHub",
-        "tooltips": {
-            "incident": "Issues with the product. Something is broken and needs to be addressed immediately",
-            "proactive": "Scheduled support task like migration, upgrades or tuning",
-            "onDemand": "Have access to an expert to learn about best practices"
+        "additionalInfo": {
+            "slot_1": {
+                "title": "FAST, EASY ACCESS",
+                "description": "Describe your problem in seconds, get the right Experts started on your case and keep everyone on your team in the loop. The Dorsal web service makes it easy, fast and secure."
+            },
+            "slot_2": {
+                "title": "COMMUNITY POWER",
+                "description": "Share, solve and collaborate on your case with the Dorsal community experts and anyone on your team"
+            },
+            "slot_3": {
+                "title": "PERSONALIZED TO YOU",
+                "description": "Tune the Dorsal service to meet your technology interests, company best practices and technical standards."
+            }
         }
     }
 }

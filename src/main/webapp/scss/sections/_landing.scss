@@ -17,6 +17,75 @@ Landing Page
         left: 0;
     }
 
+    .drsl-main-info-wrapper {
+        position: relative;
+        padding-top: 25px;
+
+        .col-md-12 {
+            min-height: 350px;
+
+            > div {
+                padding-left: 64px;
+                padding-top: 40px;
+                h1 {
+                    font-size: 40px;
+                    font-weight: 300;
+                    color: #333333;
+                    text-transform: capitalize;
+                }
+                p {
+                    line-height: 1.6;
+                    font-size: 18px;
+                    max-width: 340px;
+                    color: #333333;
+                }
+
+                a.btn.btn-success {
+                    border-radius: 0;
+                    width: 275px;
+                    margin-top: 20px;
+                    padding: 10px;
+                }
+            }
+        }
+    }
+
+    .drsl-home-tech-wrapper {
+        padding: 0;
+        margin-left: -50px;
+        margin-right: -50px;
+        margin-bottom: 60px;
+        position: relative;
+        background-color: rgba(0, 0, 0, 0.05);
+        font-size: 24px;
+        font-weight: 200;
+        text-align: center;
+
+        span {
+            padding: 0 40px;
+            opacity: .7;
+        }
+    }
+
+    .drsl-home-additional-info-wrapper {
+        padding: 0 64px;
+
+        > div {
+            background-color: rgba(0, 0, 0, 0.10);
+
+            &:nth-child(2) {
+                background-color: rgba(0, 0, 0, 0.15);
+            }
+        }
+    }
+
+    .drsl-home-additional-info-item {
+        height: 160px;
+
+        h3 {
+            font-size: 18px;
+        }
+    }
 }
 
 .drsl-landing-wrapper {
@@ -37,7 +106,7 @@ Landing Page
     .drsl-home-main-bg {
         margin-top: -375px;
         opacity: .4;
-        width:1280px;
+        width: 1280px;
         height: 1280px;
         background: url('../images/global/main-bg.jpg') no-repeat;
     }
