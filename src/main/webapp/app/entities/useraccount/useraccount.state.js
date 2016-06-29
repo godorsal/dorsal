@@ -81,6 +81,7 @@
                                 handle: null,
                                 languages: null,
                                 companyname: null,
+                                technologypreference: null,
                                 id: null
                             };
                         }

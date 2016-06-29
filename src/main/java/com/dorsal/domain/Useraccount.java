@@ -51,6 +51,13 @@ public class Useraccount implements Serializable {
     @Column(name = "companyname")
     private String companyname;
 
+    @Column(name = "technologypreference")
+    private String technologypreference;
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private User user;
+
     public Long getId() {
         return id;
     }
@@ -139,6 +146,22 @@ public class Useraccount implements Serializable {
         this.companyname = companyname;
     }
 
+    public String getTechnologypreference() {
+        return technologypreference;
+    }
+
+    public void setTechnologypreference(String technologypreference) {
+        this.technologypreference = technologypreference;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -173,6 +196,7 @@ public class Useraccount implements Serializable {
             ", handle='" + handle + "'" +
             ", languages='" + languages + "'" +
             ", companyname='" + companyname + "'" +
+            ", technologypreference='" + technologypreference + "'" +
             '}';
     }
 }

@@ -25,7 +25,9 @@
             "preferlocalexpert": "Preferlocalexpert",
             "handle": "Handle",
             "languages": "Languages",
-            "companyname": "Companyname"
+            "companyname": "Companyname",
+            "technologypreference": "Technologypreference",
+            "user": "User"
         }
     }
 }

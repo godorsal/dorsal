@@ -48,7 +48,7 @@ service Technology with serviceClass
 // Entity User Account
 
 entity Useraccount  {
-	phone String,
+    phone String,
     skype String,
     othercommunication String,
     location String,
@@ -57,11 +57,12 @@ entity Useraccount  {
     preferlocalexpert Boolean,
     handle String,
     languages String,
-    companyname String
+    companyname String,
+    technologypreference String
 }
 
 relationship OneToOne {
-	User{user} to Useraccount
+	Useraccount{user} to User{useraccount}
 }
 
 //////////////////////

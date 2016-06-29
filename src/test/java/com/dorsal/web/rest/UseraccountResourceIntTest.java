@@ -64,6 +64,8 @@ public class UseraccountResourceIntTest {
     private static final String UPDATED_LANGUAGES = "BBBBB";
     private static final String DEFAULT_COMPANYNAME = "AAAAA";
     private static final String UPDATED_COMPANYNAME = "BBBBB";
+    private static final String DEFAULT_TECHNOLOGYPREFERENCE = "AAAAA";
+    private static final String UPDATED_TECHNOLOGYPREFERENCE = "BBBBB";
 
     @Inject
     private UseraccountRepository useraccountRepository;
@@ -101,6 +103,7 @@ public class UseraccountResourceIntTest {
         useraccount.setHandle(DEFAULT_HANDLE);
         useraccount.setLanguages(DEFAULT_LANGUAGES);
         useraccount.setCompanyname(DEFAULT_COMPANYNAME);
+        useraccount.setTechnologypreference(DEFAULT_TECHNOLOGYPREFERENCE);
     }
 
     @Test
@@ -129,6 +132,7 @@ public class UseraccountResourceIntTest {
         assertThat(testUseraccount.getHandle()).isEqualTo(DEFAULT_HANDLE);
         assertThat(testUseraccount.getLanguages()).isEqualTo(DEFAULT_LANGUAGES);
         assertThat(testUseraccount.getCompanyname()).isEqualTo(DEFAULT_COMPANYNAME);
+        assertThat(testUseraccount.getTechnologypreference()).isEqualTo(DEFAULT_TECHNOLOGYPREFERENCE);
     }
 
     @Test
@@ -151,7 +155,8 @@ public class UseraccountResourceIntTest {
                 .andExpect(jsonPath("$.[*].preferlocalexpert").value(hasItem(DEFAULT_PREFERLOCALEXPERT.booleanValue())))
                 .andExpect(jsonPath("$.[*].handle").value(hasItem(DEFAULT_HANDLE.toString())))
                 .andExpect(jsonPath("$.[*].languages").value(hasItem(DEFAULT_LANGUAGES.toString())))
-                .andExpect(jsonPath("$.[*].companyname").value(hasItem(DEFAULT_COMPANYNAME.toString())));
+                .andExpect(jsonPath("$.[*].companyname").value(hasItem(DEFAULT_COMPANYNAME.toString())))
+                .andExpect(jsonPath("$.[*].technologypreference").value(hasItem(DEFAULT_TECHNOLOGYPREFERENCE.toString())));
     }
 
     @Test
@@ -174,7 +179,8 @@ public class UseraccountResourceIntTest {
             .andExpect(jsonPath("$.preferlocalexpert").value(DEFAULT_PREFERLOCALEXPERT.booleanValue()))
             .andExpect(jsonPath("$.handle").value(DEFAULT_HANDLE.toString()))
             .andExpect(jsonPath("$.languages").value(DEFAULT_LANGUAGES.toString()))
-            .andExpect(jsonPath("$.companyname").value(DEFAULT_COMPANYNAME.toString()));
+            .andExpect(jsonPath("$.companyname").value(DEFAULT_COMPANYNAME.toString()))
+            .andExpect(jsonPath("$.technologypreference").value(DEFAULT_TECHNOLOGYPREFERENCE.toString()));
     }
 
     @Test
@@ -205,6 +211,7 @@ public class UseraccountResourceIntTest {
         updatedUseraccount.setHandle(UPDATED_HANDLE);
         updatedUseraccount.setLanguages(UPDATED_LANGUAGES);
         updatedUseraccount.setCompanyname(UPDATED_COMPANYNAME);
+        updatedUseraccount.setTechnologypreference(UPDATED_TECHNOLOGYPREFERENCE);
 
         restUseraccountMockMvc.perform(put("/api/useraccounts")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -225,6 +232,7 @@ public class UseraccountResourceIntTest {
         assertThat(testUseraccount.getHandle()).isEqualTo(UPDATED_HANDLE);
         assertThat(testUseraccount.getLanguages()).isEqualTo(UPDATED_LANGUAGES);
         assertThat(testUseraccount.getCompanyname()).isEqualTo(UPDATED_COMPANYNAME);
+        assertThat(testUseraccount.getTechnologypreference()).isEqualTo(UPDATED_TECHNOLOGYPREFERENCE);
     }
 
     @Test
