@@ -32,7 +32,9 @@
                     <div><case-summary case="vm.currentCase" expert="vm.experts[vm.currentCase.expert]" status="vm.status" passed-step="vm.passedStep"></case-summary></div>
 
                     <!-- Case Professional -->
-                    <div><case-professional expert="vm.experts[vm.currentCase.expert]" chat-room="vm.currentCase.chatRoom" ng-show="vm.experts[vm.currentCase.expert]"></case-professional></div>
+                    <div><case-professional expert="vm.currentCase.expert" chat-room="vm.currentCase.chatRoom"></case-professional></div>
+
+                    <!-- <div><case-professional expert="vm.experts[vm.currentCase.expert]" chat-room="vm.currentCase.chatRoom" ng-show="vm.experts[vm.currentCase.expert]"></case-professional></div> -->
                 </div>
             </div>
 

@@ -29,6 +29,17 @@
             description: '',
             radios: []
         };
+        vm.placeholderExpert = {
+            activated: true,
+            email: "system@localhost",
+            firstName: "System",
+            id:1,
+            langKey: "en",
+            lastName: "System",
+            login: "system",
+            resetDate: null,
+            resetKey: null
+        }
         vm.technologyProperties = {};
         vm.technology = {};
         vm.issue = {};
@@ -42,6 +53,7 @@
             brandNewCase.chaturl = null;
             // brandNewCase.user = vm.getCurrentUser();
             brandNewCase.user = {};
+            brandNewCase.expert = vm.placeholderExpert;
             // Principal.identity().then(function(account) {
             //     brandNewCase.user = account;
             // });
@@ -54,10 +66,10 @@
             // brandNewCase.datelastupdate = Date.now();
             brandNewCase.summary = vm.caseDetails.summary;
             vm.isSaving = true;
-            // console.log(brandNewCase);
             if (brandNewCase.id !== null) {
                 Supportcase.update(brandNewCase, onSaveSuccess, onSaveError);
             } else {
+                console.log(brandNewCase);
                 Supportcase.save(brandNewCase, onSaveSuccess, onSaveError);
             }
         }

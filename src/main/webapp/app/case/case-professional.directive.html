@@ -1,14 +1,19 @@
 <div class="drsl-case-expert">
     <!-- Name -->
     <div>
-        <span class="drsl-label" translate="case.professional.expert">Expert:</span>
+        <span class="drsl-label">Expert:</span>
         {{expert.firstName}} {{expert.lastName}}
     </div>
+    <!-- <div>
+        <span class="drsl-label" translate="case.professional.expert">Expert:</span>
+        {{expert.firstName}} {{expert.lastName}}
+    </div> -->
 
     <!-- Contact -->
     <div class="drsl-contact-wrapper">
         <div><span class="drsl-label" translate="case.professional.contact.main">Contact:</span></div>
-        <contact-info contact="expert.contact" chat-room="chatRoom"></contact-info>
+        <contact-info contact="expert" chat-room="chatRoom"></contact-info>
+        <!-- <contact-info contact="expert.contact" chat-room="chatRoom"></contact-info> -->
     </div>
 
     <!-- Profile Photo -->
@@ -42,4 +47,3 @@
     </div>
 
 </div>
-
