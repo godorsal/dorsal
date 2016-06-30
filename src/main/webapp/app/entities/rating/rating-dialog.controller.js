@@ -40,7 +40,7 @@
         };
 
         vm.datePickerOpenStatus = {};
-        vm.datePickerOpenStatus.daterated = false;
+        vm.datePickerOpenStatus.dateRated = false;
 
         vm.openCalendar = function(date) {
             vm.datePickerOpenStatus[date] = true;

@@ -15,7 +15,7 @@
                 method: 'GET',
                 transformResponse: function (data) {
                     data = angular.fromJson(data);
-                    data.dateupdated = DateUtils.convertDateTimeFromServer(data.dateupdated);
+                    data.dateUpdated = DateUtils.convertDateTimeFromServer(data.dateUpdated);
                     return data;
                 }
             },

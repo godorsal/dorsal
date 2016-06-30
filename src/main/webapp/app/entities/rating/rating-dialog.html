@@ -14,12 +14,12 @@
                     ng-model="vm.rating.id" readonly />
         </div>
         <div class="form-group">
-            <label class="control-label" translate="dorsalApp.rating.daterated" for="field_daterated">Daterated</label>
+            <label class="control-label" translate="dorsalApp.rating.dateRated" for="field_dateRated">Date Rated</label>
                 <div class="input-group">
-                    <input id="field_daterated" type="text" class="form-control" name="daterated" datetime-picker="{{dateformat}}" ng-model="vm.rating.daterated" is-open="vm.datePickerOpenStatus.daterated"
+                    <input id="field_dateRated" type="text" class="form-control" name="dateRated" datetime-picker="{{dateformat}}" ng-model="vm.rating.dateRated" is-open="vm.datePickerOpenStatus.dateRated"
                       />
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('daterated')"><i class="glyphicon glyphicon-calendar"></i></button>
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('dateRated')"><i class="glyphicon glyphicon-calendar"></i></button>
                     </span>
                 </div>
         </div>

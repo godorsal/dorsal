@@ -16,7 +16,7 @@
             "detail": {
                 "title": "Rating"
             },
-            "daterated": "Daterated",
+            "dateRated": "Date Rated",
             "score": "Score",
             "supportcase": "Supportcase"
         }

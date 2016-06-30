@@ -19,7 +19,7 @@
             <thead>
                 <tr>
                     <th><span translate="global.field.id">ID</span></th>
-                    <th><span translate="dorsalApp.rating.daterated">Daterated</span></th>
+                    <th><span translate="dorsalApp.rating.dateRated">Date Rated</span></th>
                     <th><span translate="dorsalApp.rating.score">Score</span></th>
                     <th><span translate="dorsalApp.rating.supportcase">Supportcase</span></th>
                     <th></th>
@@ -28,7 +28,7 @@
             <tbody>
                 <tr ng-repeat="rating in vm.ratings track by rating.id">
                     <td><a ui-sref="rating-detail({id:rating.id})">{{rating.id}}</a></td>
-                    <td>{{rating.daterated | date:'medium'}}</td>
+                    <td>{{rating.dateRated | date:'medium'}}</td>
                     <td>{{rating.score}}</td>
                     <td>
                         <a ui-sref="supportcase-detail({id:rating.supportcase.id})">{{rating.supportcase.id}}</a>

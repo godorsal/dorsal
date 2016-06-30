@@ -93,12 +93,16 @@ relationship OneToMany {
 
 entity Supportcase {
 	summary String maxlength (1024),
-    expectedresult String maxlength (1024),
-    statusmsg String,
-    datecreated ZonedDateTime,
-    datelastupdate ZonedDateTime,
-    chaturl String maxlength (1024),
-    etacompletion String
+    expectedResult String maxlength (1024),
+    statusMsg String,
+    dateCreated ZonedDateTime,
+    dateLastUpdate ZonedDateTime,
+    chatUrl String maxlength (1024),
+    etaCompletion String,
+    estimateHours Integer,
+    estimateComment String maxlength (2048)
+    isApproved Boolean,
+    timeOnCase Integer
 }
 
 relationship OneToMany {
@@ -172,8 +176,8 @@ entity Updatetype {
 // Entity Case update
 
 entity Caseupdate  {
-	dateupdated ZonedDateTime,
-    updatemsg String maxlength(2048),
+	dateUpdated ZonedDateTime,
+    updateMsg String maxlength(2048),
     url String maxlength(1024)
 }
 
@@ -193,7 +197,7 @@ relationship OneToMany {
 // Entity Rating
 
 entity Rating {
-	daterated ZonedDateTime,
+	dateRated ZonedDateTime,
     score Integer
 }
 

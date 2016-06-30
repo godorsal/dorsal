@@ -23,12 +23,12 @@ public class Caseupdate implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "dateupdated")
-    private ZonedDateTime dateupdated;
+    @Column(name = "date_updated")
+    private ZonedDateTime dateUpdated;
 
     @Size(max = 2048)
-    @Column(name = "updatemsg", length = 2048)
-    private String updatemsg;
+    @Column(name = "update_msg", length = 2048)
+    private String updateMsg;
 
     @Size(max = 1024)
     @Column(name = "url", length = 1024)
@@ -51,20 +51,20 @@ public class Caseupdate implements Serializable {
         this.id = id;
     }
 
-    public ZonedDateTime getDateupdated() {
-        return dateupdated;
+    public ZonedDateTime getDateUpdated() {
+        return dateUpdated;
     }
 
-    public void setDateupdated(ZonedDateTime dateupdated) {
-        this.dateupdated = dateupdated;
+    public void setDateUpdated(ZonedDateTime dateUpdated) {
+        this.dateUpdated = dateUpdated;
     }
 
-    public String getUpdatemsg() {
-        return updatemsg;
+    public String getUpdateMsg() {
+        return updateMsg;
     }
 
-    public void setUpdatemsg(String updatemsg) {
-        this.updatemsg = updatemsg;
+    public void setUpdateMsg(String updateMsg) {
+        this.updateMsg = updateMsg;
     }
 
     public String getUrl() {
@@ -123,8 +123,8 @@ public class Caseupdate implements Serializable {
     public String toString() {
         return "Caseupdate{" +
             "id=" + id +
-            ", dateupdated='" + dateupdated + "'" +
-            ", updatemsg='" + updatemsg + "'" +
+            ", dateUpdated='" + dateUpdated + "'" +
+            ", updateMsg='" + updateMsg + "'" +
             ", url='" + url + "'" +
             '}';
     }

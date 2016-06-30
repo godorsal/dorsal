@@ -16,8 +16,8 @@
             "detail": {
                 "title": "Caseupdate"
             },
-            "dateupdated": "Dateupdated",
-            "updatemsg": "Updatemsg",
+            "dateUpdated": "Date Updated",
+            "updateMsg": "Update Msg",
             "url": "Url",
             "user": "User",
             "supportcase": "Supportcase",

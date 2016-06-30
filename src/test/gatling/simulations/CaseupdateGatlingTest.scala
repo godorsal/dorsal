@@ -68,7 +68,7 @@ class CaseupdateGatlingTest extends Simulation {
             .exec(http("Create new caseupdate")
             .post("/api/caseupdates")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "dateupdated":"2020-01-01T00:00:00.000Z", "updatemsg":"SAMPLE_TEXT", "url":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "dateUpdated":"2020-01-01T00:00:00.000Z", "updateMsg":"SAMPLE_TEXT", "url":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_caseupdate_url"))).exitHereIfFailed
             .pause(10)

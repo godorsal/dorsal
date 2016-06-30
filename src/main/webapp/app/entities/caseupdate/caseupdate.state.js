@@ -71,8 +71,8 @@
                     resolve: {
                         entity: function () {
                             return {
-                                dateupdated: null,
-                                updatemsg: null,
+                                dateUpdated: null,
+                                updateMsg: null,
                                 url: null,
                                 id: null
                             };

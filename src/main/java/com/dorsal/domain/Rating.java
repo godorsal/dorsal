@@ -22,8 +22,8 @@ public class Rating implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "daterated")
-    private ZonedDateTime daterated;
+    @Column(name = "date_rated")
+    private ZonedDateTime dateRated;
 
     @Column(name = "score")
     private Integer score;
@@ -39,12 +39,12 @@ public class Rating implements Serializable {
         this.id = id;
     }
 
-    public ZonedDateTime getDaterated() {
-        return daterated;
+    public ZonedDateTime getDateRated() {
+        return dateRated;
     }
 
-    public void setDaterated(ZonedDateTime daterated) {
-        this.daterated = daterated;
+    public void setDateRated(ZonedDateTime dateRated) {
+        this.dateRated = dateRated;
     }
 
     public Integer getScore() {
@@ -87,7 +87,7 @@ public class Rating implements Serializable {
     public String toString() {
         return "Rating{" +
             "id=" + id +
-            ", daterated='" + daterated + "'" +
+            ", dateRated='" + dateRated + "'" +
             ", score='" + score + "'" +
             '}';
     }

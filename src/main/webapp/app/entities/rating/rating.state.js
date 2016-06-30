@@ -71,7 +71,7 @@
                     resolve: {
                         entity: function () {
                             return {
-                                daterated: null,
+                                dateRated: null,
                                 score: null,
                                 id: null
                             };

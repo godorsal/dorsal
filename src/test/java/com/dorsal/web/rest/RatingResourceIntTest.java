@@ -48,9 +48,9 @@ public class RatingResourceIntTest {
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").withZone(ZoneId.of("Z"));
 
 
-    private static final ZonedDateTime DEFAULT_DATERATED = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
-    private static final ZonedDateTime UPDATED_DATERATED = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
-    private static final String DEFAULT_DATERATED_STR = dateTimeFormatter.format(DEFAULT_DATERATED);
+    private static final ZonedDateTime DEFAULT_DATE_RATED = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
+    private static final ZonedDateTime UPDATED_DATE_RATED = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final String DEFAULT_DATE_RATED_STR = dateTimeFormatter.format(DEFAULT_DATE_RATED);
 
     private static final Integer DEFAULT_SCORE = 1;
     private static final Integer UPDATED_SCORE = 2;
@@ -81,7 +81,7 @@ public class RatingResourceIntTest {
     @Before
     public void initTest() {
         rating = new Rating();
-        rating.setDaterated(DEFAULT_DATERATED);
+        rating.setDateRated(DEFAULT_DATE_RATED);
         rating.setScore(DEFAULT_SCORE);
     }
 
@@ -101,7 +101,7 @@ public class RatingResourceIntTest {
         List<Rating> ratings = ratingRepository.findAll();
         assertThat(ratings).hasSize(databaseSizeBeforeCreate + 1);
         Rating testRating = ratings.get(ratings.size() - 1);
-        assertThat(testRating.getDaterated()).isEqualTo(DEFAULT_DATERATED);
+        assertThat(testRating.getDateRated()).isEqualTo(DEFAULT_DATE_RATED);
         assertThat(testRating.getScore()).isEqualTo(DEFAULT_SCORE);
     }
 
@@ -116,7 +116,7 @@ public class RatingResourceIntTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(rating.getId().intValue())))
-                .andExpect(jsonPath("$.[*].daterated").value(hasItem(DEFAULT_DATERATED_STR)))
+                .andExpect(jsonPath("$.[*].dateRated").value(hasItem(DEFAULT_DATE_RATED_STR)))
                 .andExpect(jsonPath("$.[*].score").value(hasItem(DEFAULT_SCORE)));
     }
 
@@ -131,7 +131,7 @@ public class RatingResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(rating.getId().intValue()))
-            .andExpect(jsonPath("$.daterated").value(DEFAULT_DATERATED_STR))
+            .andExpect(jsonPath("$.dateRated").value(DEFAULT_DATE_RATED_STR))
             .andExpect(jsonPath("$.score").value(DEFAULT_SCORE));
     }
 
@@ -153,7 +153,7 @@ public class RatingResourceIntTest {
         // Update the rating
         Rating updatedRating = new Rating();
         updatedRating.setId(rating.getId());
-        updatedRating.setDaterated(UPDATED_DATERATED);
+        updatedRating.setDateRated(UPDATED_DATE_RATED);
         updatedRating.setScore(UPDATED_SCORE);
 
         restRatingMockMvc.perform(put("/api/ratings")
@@ -165,7 +165,7 @@ public class RatingResourceIntTest {
         List<Rating> ratings = ratingRepository.findAll();
         assertThat(ratings).hasSize(databaseSizeBeforeUpdate);
         Rating testRating = ratings.get(ratings.size() - 1);
-        assertThat(testRating.getDaterated()).isEqualTo(UPDATED_DATERATED);
+        assertThat(testRating.getDateRated()).isEqualTo(UPDATED_DATE_RATED);
         assertThat(testRating.getScore()).isEqualTo(UPDATED_SCORE);
     }
 
