@@ -1,26 +1,22 @@
-(function() {
+(function () {
     'use strict';
 
     angular
         .module('dorsalApp')
         .controller('NavbarController', NavbarController);
 
-    NavbarController.$inject = ['$state', 'Auth', 'Principal', 'ProfileService', 'LoginService', 'ElementFocusService'];
+    NavbarController.$inject = ['$state', '$scope', 'Auth', 'Principal', 'ProfileService', 'LoginService', 'ElementFocusService'];
 
-    function NavbarController ($state, Auth, Principal, ProfileService, LoginService, ElementFocusService) {
+    function NavbarController($state, $scope, Auth, Principal, ProfileService, LoginService, ElementFocusService) {
         var vm = this;
 
         vm.isNavbarCollapsed = true;
         vm.isAuthenticated = Principal.isAuthenticated;
         vm.accountFirstName = null;
 
-        ProfileService.getProfileInfo().then(function(response) {
+        ProfileService.getProfileInfo().then(function (response) {
             vm.inProduction = response.inProduction;
             vm.swaggerDisabled = response.swaggerDisabled;
-        });
-
-        Principal.identity().then(function(account) {
-            vm.accountFirstName = account.firstName;
         });
 
         vm.login = login;
@@ -32,7 +28,9 @@
         vm.expandSearch = expandSearch;
         vm.collapseSearch = collapseSearch;
         vm.submitSearch = submitSearch;
+        vm.getIdentity = getIdentity;
         vm.searchTerm = '';
+        vm.getIdentity();
 
         function login() {
             collapseNavbar();
@@ -66,5 +64,17 @@
             vm.searchExpanded = false;
             vm.searchTerm = '';
         }
+
+        function getIdentity() {
+            Principal.identity().then(function (account) {
+                if (account) {
+                    vm.accountFirstName = account.firstName;
+                }
+            });
+        }
+
+        $scope.$on('authenticationSuccess', function () {
+            vm.getIdentity();
+        });
     }
 })();
