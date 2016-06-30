@@ -72,12 +72,16 @@
                         entity: function () {
                             return {
                                 summary: null,
-                                expectedresult: null,
-                                statusmsg: null,
-                                datecreated: null,
-                                datelastupdate: null,
-                                chaturl: null,
-                                etacompletion: null,
+                                expectedResult: null,
+                                statusMsg: null,
+                                dateCreated: null,
+                                dateLastUpdate: null,
+                                chatUrl: null,
+                                etaCompletion: null,
+                                estimateHours: null,
+                                estimateComment: null,
+                                isApproved: null,
+                                timeOnCase: null,
                                 id: null
                             };
                         }

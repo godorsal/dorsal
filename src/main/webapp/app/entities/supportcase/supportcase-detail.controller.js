@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .controller('SupportcaseDetailController', SupportcaseDetailController);
 
-    SupportcaseDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'entity', 'Supportcase', 'Casetechnologyproperty', 'Caseupdate', 'Rating', 'Attachement', 'User', 'Technology', 'Status', 'Issue'];
+    SupportcaseDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'entity', 'Supportcase', 'User', 'Technology', 'Status', 'Issue'];
 
-    function SupportcaseDetailController($scope, $rootScope, $stateParams, entity, Supportcase, Casetechnologyproperty, Caseupdate, Rating, Attachement, User, Technology, Status, Issue) {
+    function SupportcaseDetailController($scope, $rootScope, $stateParams, entity, Supportcase, User, Technology, Status, Issue) {
         var vm = this;
         vm.supportcase = entity;
         

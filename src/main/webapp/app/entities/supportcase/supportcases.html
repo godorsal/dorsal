@@ -20,12 +20,16 @@
                 <tr>
                     <th><span translate="global.field.id">ID</span></th>
                     <th><span translate="dorsalApp.supportcase.summary">Summary</span></th>
-                    <th><span translate="dorsalApp.supportcase.expectedresult">Expectedresult</span></th>
-                    <th><span translate="dorsalApp.supportcase.statusmsg">Statusmsg</span></th>
-                    <th><span translate="dorsalApp.supportcase.datecreated">Datecreated</span></th>
-                    <th><span translate="dorsalApp.supportcase.datelastupdate">Datelastupdate</span></th>
-                    <th><span translate="dorsalApp.supportcase.chaturl">Chaturl</span></th>
-                    <th><span translate="dorsalApp.supportcase.etacompletion">Etacompletion</span></th>
+                    <th><span translate="dorsalApp.supportcase.expectedResult">Expected Result</span></th>
+                    <th><span translate="dorsalApp.supportcase.statusMsg">Status Msg</span></th>
+                    <th><span translate="dorsalApp.supportcase.dateCreated">Date Created</span></th>
+                    <th><span translate="dorsalApp.supportcase.dateLastUpdate">Date Last Update</span></th>
+                    <th><span translate="dorsalApp.supportcase.chatUrl">Chat Url</span></th>
+                    <th><span translate="dorsalApp.supportcase.etaCompletion">Eta Completion</span></th>
+                    <th><span translate="dorsalApp.supportcase.estimateHours">Estimate Hours</span></th>
+                    <th><span translate="dorsalApp.supportcase.estimateComment">Estimate Comment</span></th>
+                    <th><span translate="dorsalApp.supportcase.isApproved">Is Approved</span></th>
+                    <th><span translate="dorsalApp.supportcase.timeOnCase">Time On Case</span></th>
                     <th><span translate="dorsalApp.supportcase.user">User</span></th>
                     <th><span translate="dorsalApp.supportcase.expert">Expert</span></th>
                     <th><span translate="dorsalApp.supportcase.technology">Technology</span></th>
@@ -38,12 +42,16 @@
                 <tr ng-repeat="supportcase in vm.supportcases track by supportcase.id">
                     <td><a ui-sref="supportcase-detail({id:supportcase.id})">{{supportcase.id}}</a></td>
                     <td>{{supportcase.summary}}</td>
-                    <td>{{supportcase.expectedresult}}</td>
-                    <td>{{supportcase.statusmsg}}</td>
-                    <td>{{supportcase.datecreated | date:'medium'}}</td>
-                    <td>{{supportcase.datelastupdate | date:'medium'}}</td>
-                    <td>{{supportcase.chaturl}}</td>
-                    <td>{{supportcase.etacompletion}}</td>
+                    <td>{{supportcase.expectedResult}}</td>
+                    <td>{{supportcase.statusMsg}}</td>
+                    <td>{{supportcase.dateCreated | date:'medium'}}</td>
+                    <td>{{supportcase.dateLastUpdate | date:'medium'}}</td>
+                    <td>{{supportcase.chatUrl}}</td>
+                    <td>{{supportcase.etaCompletion}}</td>
+                    <td>{{supportcase.estimateHours}}</td>
+                    <td>{{supportcase.estimateComment}}</td>
+                    <td>{{supportcase.isApproved}}</td>
+                    <td>{{supportcase.timeOnCase}}</td>
                     <td>
                         {{supportcase.user.id}}
                     </td>

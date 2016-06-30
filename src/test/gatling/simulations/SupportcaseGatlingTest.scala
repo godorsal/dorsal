@@ -68,7 +68,7 @@ class SupportcaseGatlingTest extends Simulation {
             .exec(http("Create new supportcase")
             .post("/api/supportcases")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "summary":"SAMPLE_TEXT", "expectedresult":"SAMPLE_TEXT", "statusmsg":"SAMPLE_TEXT", "datecreated":"2020-01-01T00:00:00.000Z", "datelastupdate":"2020-01-01T00:00:00.000Z", "chaturl":"SAMPLE_TEXT", "etacompletion":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "summary":"SAMPLE_TEXT", "expectedResult":"SAMPLE_TEXT", "statusMsg":"SAMPLE_TEXT", "dateCreated":"2020-01-01T00:00:00.000Z", "dateLastUpdate":"2020-01-01T00:00:00.000Z", "chatUrl":"SAMPLE_TEXT", "etaCompletion":"SAMPLE_TEXT", "estimateHours":"0", "estimateComment":"SAMPLE_TEXT", "isApproved":null, "timeOnCase":"0"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_supportcase_url"))).exitHereIfFailed
             .pause(10)

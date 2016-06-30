@@ -5,15 +5,11 @@
         .module('dorsalApp')
         .controller('SupportcaseDialogController', SupportcaseDialogController);
 
-    SupportcaseDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Supportcase', 'Casetechnologyproperty', 'Caseupdate', 'Rating', 'Attachement', 'User', 'Technology', 'Status', 'Issue'];
+    SupportcaseDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Supportcase', 'User', 'Technology', 'Status', 'Issue'];
 
-    function SupportcaseDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Supportcase, Casetechnologyproperty, Caseupdate, Rating, Attachement, User, Technology, Status, Issue) {
+    function SupportcaseDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Supportcase, User, Technology, Status, Issue) {
         var vm = this;
         vm.supportcase = entity;
-        vm.casetechnologyproperties = Casetechnologyproperty.query();
-        vm.caseupdates = Caseupdate.query();
-        vm.ratings = Rating.query();
-        vm.attachements = Attachement.query();
         vm.users = User.query();
         vm.technologies = Technology.query();
         vm.statuses = Status.query();
@@ -35,7 +31,6 @@
 
         vm.save = function () {
             vm.isSaving = true;
-            console.log("THISSSSS", vm.supportcase);
             if (vm.supportcase.id !== null) {
                 Supportcase.update(vm.supportcase, onSaveSuccess, onSaveError);
             } else {
@@ -48,8 +43,8 @@
         };
 
         vm.datePickerOpenStatus = {};
-        vm.datePickerOpenStatus.datecreated = false;
-        vm.datePickerOpenStatus.datelastupdate = false;
+        vm.datePickerOpenStatus.dateCreated = false;
+        vm.datePickerOpenStatus.dateLastUpdate = false;
 
         vm.openCalendar = function(date) {
             vm.datePickerOpenStatus[date] = true;

@@ -1,6 +1,5 @@
 package com.dorsal.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -8,8 +7,6 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -31,44 +28,37 @@ public class Supportcase implements Serializable {
     private String summary;
 
     @Size(max = 1024)
-    @Column(name = "expectedresult", length = 1024)
-    private String expectedresult;
+    @Column(name = "expected_result", length = 1024)
+    private String expectedResult;
 
-    @Column(name = "statusmsg")
-    private String statusmsg;
+    @Column(name = "status_msg")
+    private String statusMsg;
 
-    @Column(name = "datecreated")
-    private ZonedDateTime datecreated;
+    @Column(name = "date_created")
+    private ZonedDateTime dateCreated;
 
-    @Column(name = "datelastupdate")
-    private ZonedDateTime datelastupdate;
+    @Column(name = "date_last_update")
+    private ZonedDateTime dateLastUpdate;
 
     @Size(max = 1024)
-    @Column(name = "chaturl", length = 1024)
-    private String chaturl;
+    @Column(name = "chat_url", length = 1024)
+    private String chatUrl;
 
-    @Column(name = "etacompletion")
-    private String etacompletion;
+    @Column(name = "eta_completion")
+    private String etaCompletion;
 
-    @OneToMany(mappedBy = "supportcase")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Casetechnologyproperty> casetechnologyproperties = new HashSet<>();
+    @Column(name = "estimate_hours")
+    private Integer estimateHours;
 
-    @OneToMany(mappedBy = "supportcase")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Caseupdate> caseupdates = new HashSet<>();
+    @Size(max = 2048)
+    @Column(name = "estimate_comment", length = 2048)
+    private String estimateComment;
 
-    @OneToMany(mappedBy = "supportcase")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Rating> ratings = new HashSet<>();
+    @Column(name = "is_approved")
+    private Boolean isApproved;
 
-    @OneToMany(mappedBy = "supportcase")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Attachement> attachements = new HashSet<>();
+    @Column(name = "time_on_case")
+    private Integer timeOnCase;
 
     @ManyToOne
     private User user;
@@ -101,84 +91,84 @@ public class Supportcase implements Serializable {
         this.summary = summary;
     }
 
-    public String getExpectedresult() {
-        return expectedresult;
+    public String getExpectedResult() {
+        return expectedResult;
     }
 
-    public void setExpectedresult(String expectedresult) {
-        this.expectedresult = expectedresult;
+    public void setExpectedResult(String expectedResult) {
+        this.expectedResult = expectedResult;
     }
 
-    public String getStatusmsg() {
-        return statusmsg;
+    public String getStatusMsg() {
+        return statusMsg;
     }
 
-    public void setStatusmsg(String statusmsg) {
-        this.statusmsg = statusmsg;
+    public void setStatusMsg(String statusMsg) {
+        this.statusMsg = statusMsg;
     }
 
-    public ZonedDateTime getDatecreated() {
-        return datecreated;
+    public ZonedDateTime getDateCreated() {
+        return dateCreated;
     }
 
-    public void setDatecreated(ZonedDateTime datecreated) {
-        this.datecreated = datecreated;
+    public void setDateCreated(ZonedDateTime dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
-    public ZonedDateTime getDatelastupdate() {
-        return datelastupdate;
+    public ZonedDateTime getDateLastUpdate() {
+        return dateLastUpdate;
     }
 
-    public void setDatelastupdate(ZonedDateTime datelastupdate) {
-        this.datelastupdate = datelastupdate;
+    public void setDateLastUpdate(ZonedDateTime dateLastUpdate) {
+        this.dateLastUpdate = dateLastUpdate;
     }
 
-    public String getChaturl() {
-        return chaturl;
+    public String getChatUrl() {
+        return chatUrl;
     }
 
-    public void setChaturl(String chaturl) {
-        this.chaturl = chaturl;
+    public void setChatUrl(String chatUrl) {
+        this.chatUrl = chatUrl;
     }
 
-    public String getEtacompletion() {
-        return etacompletion;
+    public String getEtaCompletion() {
+        return etaCompletion;
     }
 
-    public void setEtacompletion(String etacompletion) {
-        this.etacompletion = etacompletion;
+    public void setEtaCompletion(String etaCompletion) {
+        this.etaCompletion = etaCompletion;
     }
 
-    public Set<Casetechnologyproperty> getCasetechnologyproperties() {
-        return casetechnologyproperties;
+    public Integer getEstimateHours() {
+        return estimateHours;
     }
 
-    public void setCasetechnologyproperties(Set<Casetechnologyproperty> casetechnologyproperties) {
-        this.casetechnologyproperties = casetechnologyproperties;
+    public void setEstimateHours(Integer estimateHours) {
+        this.estimateHours = estimateHours;
     }
 
-    public Set<Caseupdate> getCaseupdates() {
-        return caseupdates;
+    public String getEstimateComment() {
+        return estimateComment;
     }
 
-    public void setCaseupdates(Set<Caseupdate> caseupdates) {
-        this.caseupdates = caseupdates;
+    public void setEstimateComment(String estimateComment) {
+        this.estimateComment = estimateComment;
     }
 
-    public Set<Rating> getRatings() {
-        return ratings;
+    public Boolean isIsApproved() {
+        return isApproved;
     }
 
-    public void setRatings(Set<Rating> ratings) {
-        this.ratings = ratings;
+    public void setIsApproved(Boolean isApproved) {
+        this.isApproved = isApproved;
     }
 
-    public Set<Attachement> getAttachements() {
-        return attachements;
+    public Integer getTimeOnCase() {
+        return timeOnCase;
     }
 
-    public void setAttachements(Set<Attachement> attachements) {
-        this.attachements = attachements;
+    public void setTimeOnCase(Integer timeOnCase) {
+        this.timeOnCase = timeOnCase;
     }
 
     public User getUser() {
@@ -246,12 +236,16 @@ public class Supportcase implements Serializable {
         return "Supportcase{" +
             "id=" + id +
             ", summary='" + summary + "'" +
-            ", expectedresult='" + expectedresult + "'" +
-            ", statusmsg='" + statusmsg + "'" +
-            ", datecreated='" + datecreated + "'" +
-            ", datelastupdate='" + datelastupdate + "'" +
-            ", chaturl='" + chaturl + "'" +
-            ", etacompletion='" + etacompletion + "'" +
+            ", expectedResult='" + expectedResult + "'" +
+            ", statusMsg='" + statusMsg + "'" +
+            ", dateCreated='" + dateCreated + "'" +
+            ", dateLastUpdate='" + dateLastUpdate + "'" +
+            ", chatUrl='" + chatUrl + "'" +
+            ", etaCompletion='" + etaCompletion + "'" +
+            ", estimateHours='" + estimateHours + "'" +
+            ", estimateComment='" + estimateComment + "'" +
+            ", isApproved='" + isApproved + "'" +
+            ", timeOnCase='" + timeOnCase + "'" +
             '}';
     }
 }
