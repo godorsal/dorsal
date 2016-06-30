@@ -40,6 +40,22 @@
                 return 7;
             }
         }
+        function getUser(user) {
+            switch(user.login) {
+                case 'system':
+                    return 1;
+                    break;
+                case 'anonymoususer':
+                    return 2;
+                    break;
+                case 'admin':
+                    return 3;
+                    break;
+                case 'user':
+                    return 4;
+                    break;
+            }
+        }
         vm.technologyProperties = {};
         vm.technology = {};
         vm.issue = {};
@@ -53,12 +69,14 @@
             brandNewCase.chaturl = null;
             // brandNewCase.user = vm.getCurrentUser();
             brandNewCase.user = {};
+            brandNewCase.user.id = getUser(vm.currentUser);
+
             brandNewCase.expert = {};
             brandNewCase.expert.id = getExpert(brandNewCase.technology);
             // Principal.identity().then(function(account) {
             //     brandNewCase.user = account;
             // });
-            brandNewCase.user.id = 1;
+            // brandNewCase.user.id = 1;
             brandNewCase.etacompletion = "4 hours";
             brandNewCase.statusmsg = 'Case Created';
             brandNewCase.datecreated = new Date();
@@ -105,6 +123,7 @@
         }
         function getCurrentUser(){
             Principal.identity().then(function(account) {
+                console.log(account);
                 return account
             });
         }
