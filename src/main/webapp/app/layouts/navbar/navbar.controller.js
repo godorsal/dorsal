@@ -12,10 +12,15 @@
 
         vm.isNavbarCollapsed = true;
         vm.isAuthenticated = Principal.isAuthenticated;
+        vm.accountFirstName = null;
 
         ProfileService.getProfileInfo().then(function(response) {
             vm.inProduction = response.inProduction;
             vm.swaggerDisabled = response.swaggerDisabled;
+        });
+
+        Principal.identity().then(function(account) {
+            vm.accountFirstName = account.firstName;
         });
 
         vm.login = login;
