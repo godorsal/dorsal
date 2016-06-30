@@ -14,6 +14,7 @@
         vm.createCase = createCase;
         vm.getCurrentUser = getCurrentUser;
         vm.startChat = startChat;
+        vm.getExpert = getExpert;
         vm.currentPlan = '';
         vm.selectPlan = selectPlan;
         vm.setClass = setClass;
@@ -29,16 +30,15 @@
             description: '',
             radios: []
         };
-        vm.placeholderExpert = {
-            activated: true,
-            email: "system@localhost",
-            firstName: "System",
-            id:1,
-            langKey: "en",
-            lastName: "System",
-            login: "system",
-            resetDate: null,
-            resetKey: null
+        function getExpert(tech) {
+            console.log(tech);
+            if(tech.id === 1 || tech.id === 2){
+                return 5;
+            } else if(tech.id === 3){
+                return 6;
+            } else {
+                return 7;
+            }
         }
         vm.technologyProperties = {};
         vm.technology = {};
@@ -53,7 +53,8 @@
             brandNewCase.chaturl = null;
             // brandNewCase.user = vm.getCurrentUser();
             brandNewCase.user = {};
-            brandNewCase.expert = vm.placeholderExpert;
+            brandNewCase.expert = {};
+            brandNewCase.expert.id = getExpert(brandNewCase.technology);
             // Principal.identity().then(function(account) {
             //     brandNewCase.user = account;
             // });
@@ -66,6 +67,7 @@
             // brandNewCase.datelastupdate = Date.now();
             brandNewCase.summary = vm.caseDetails.summary;
             vm.isSaving = true;
+            // console.log(brandNewCase);
             if (brandNewCase.id !== null) {
                 Supportcase.update(brandNewCase, onSaveSuccess, onSaveError);
             } else {
