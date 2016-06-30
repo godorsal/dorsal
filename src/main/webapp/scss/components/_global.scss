@@ -46,6 +46,16 @@ body {
     }
 }
 
+.drsl-nav-hello {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: .75;
+    font-size: $small-font-size;
+    margin-left: 15px;
+    white-space: nowrap
+}
+
 .drsl-no-padding {
     padding: 0;
 }

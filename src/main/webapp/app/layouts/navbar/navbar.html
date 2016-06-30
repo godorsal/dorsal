@@ -137,6 +137,7 @@
                             <span class="hidden-sm">
                                 About Us
                             </span>
+                            <b class="caret"></b>
                         </span>
                     </a>
                     <ul class="dropdown-menu" uib-dropdown-menu>
@@ -180,10 +181,13 @@
                 </li>
                 <li ng-class="{active: vm.$state.includes('account')}" uib-dropdown class="dropdown pointer" ng-switch-when="true">
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="account-menu">
+                        <span class="drsl-nav-hello" ng-show="vm.accountFirstName"><span translate="global.menu.account.hello">Hello,</span> {{vm.accountFirstName}}</span>
+
                         <span>
                             <span class="hidden-sm" translate="global.menu.account.main">
-                                Account
+                                Your Account
                             </span>
+                            <b class="caret"></b>
                         </span>
                     </a>
                     <ul class="dropdown-menu" uib-dropdown-menu>
