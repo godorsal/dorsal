@@ -7,99 +7,121 @@
                     <div><h2>CASE DETAILS: <span>ID: {{vm.case.id}} &nbsp; START: {{vm.case.dateCreated | date:"MM/dd/yy h:mm a"}}</span><div class="pull-right"><span class="drsl-header-status">Status: {{vm.case.status.name}}</span></div></h2></div>
                 </div>
                 <!-- <div class="drsl-dialog-header">
-                    <div><h2>CASE DETAILS: <span>ID: {{vm.case.id}} &nbsp; START: {{vm.case.startDate | date:"MM/dd/yy h:mm a"}}</span><div class="pull-right"><span class="drsl-header-status">Status: {{vm.case.status}}</span></div></h2></div>
+                <div><h2>CASE DETAILS: <span>ID: {{vm.case.id}} &nbsp; START: {{vm.case.startDate | date:"MM/dd/yy h:mm a"}}</span><div class="pull-right"><span class="drsl-header-status">Status: {{vm.case.status}}</span></div></h2></div>
+            </div> -->
+
+            <!-- Dialog Content -->
+            <div>
+                <div class="drsl-dialog-content">
+                    <!-- User -->
+                    <div class="drsl-form-grid">
+                        <div translate="case.details.user">User</div>
+                        <div>{{vm.case.user.firstName}} {{vm.case.user.lastName}}</div>
+                    </div>
+                    <!-- <div class="drsl-form-grid">
+                    <div translate="case.details.user">User</div>
+                    <div>{{vm.case.user}}</div>
                 </div> -->
 
-                <!-- Dialog Content -->
+                <!-- Expert -->
+                <div class="drsl-form-grid">
+                    <div translate="case.professional.expert">Expert</div>
+                    <div>
+                        <div>{{vm.case.expert.firstName}} {{vm.case.expert.lastName}}</div>
+                        <contact-info contact="vm.expert.contact" chat-room="vm.case.chatRoom"></contact-info>
+                    </div>
+                </div>
+                <!-- <div class="drsl-form-grid">
+                <div translate="case.professional.expert">Expert</div>
                 <div>
-                    <div class="drsl-dialog-content">
-                        <!-- User -->
-                        <div class="drsl-form-grid">
-                            <div translate="case.details.user">User</div>
-                            <div>{{vm.case.user.firstName}} {{vm.case.user.lastName}}</div>
-                        </div>
-                        <!-- <div class="drsl-form-grid">
-                            <div translate="case.details.user">User</div>
-                            <div>{{vm.case.user}}</div>
-                        </div> -->
+                <div>{{vm.expert.firstName}} {{vm.expert.lastName}}</div>
+                <contact-info contact="vm.expert.contact" chat-room="vm.case.chatRoom"></contact-info>
+            </div>
+        </div> -->
 
-                        <!-- Expert -->
-                        <div class="drsl-form-grid">
-                            <div translate="case.professional.expert">Expert</div>
-                            <div>
-                                <div>{{vm.case.expert.firstName}} {{vm.case.expert.lastName}}</div>
-                                <contact-info contact="vm.expert.contact" chat-room="vm.case.chatRoom"></contact-info>
-                            </div>
-                        </div>
-                        <!-- <div class="drsl-form-grid">
-                            <div translate="case.professional.expert">Expert</div>
-                            <div>
-                                <div>{{vm.expert.firstName}} {{vm.expert.lastName}}</div>
-                                <contact-info contact="vm.expert.contact" chat-room="vm.case.chatRoom"></contact-info>
-                            </div>
-                        </div> -->
+        <!-- Summary -->
+        <div class="drsl-form-grid">
+            <div translate="case.details.summary">Summary</div>
+            <div><input type="text" class="form-control" ng-model="vm.summary"></div>
+        </div>
 
-                        <!-- Summary -->
-                        <div class="drsl-form-grid">
-                            <div translate="case.details.summary">Summary</div>
-                            <div><input type="text" class="form-control" ng-model="vm.summary"></div>
-                        </div>
+        <!-- Incident Details -->
+        <div class="drsl-form-grid">
+            <!-- <div translate="case.details.responseTime">Response Time</div> -->
+            <div>
+                <div class="drsl-incident-items">
+                    <!-- <div>{{vm.case.urgency}}</div> -->
+                    <div><span translate="case.details.issue">Issue:</span><span>{{vm.case.issue.name}}</span></div>
+                    <div><span translate="case.details.technology">Technology:</span><span>{{vm.case.technology.name}}</span></div>
+                    <div><span>Technology Properties:</span><br><span ng-repeat="property in vm.technologyProps">{{property.propertyname}}: {{property.propertyvalue}}<br></span></div>
+                </div>
+            </div>
+        </div>
 
-                        <!-- Incident Details -->
-                        <div class="drsl-form-grid">
-                            <!-- <div translate="case.details.responseTime">Response Time</div> -->
-                            <div>
-                                <div class="drsl-incident-items">
-                                    <!-- <div>{{vm.case.urgency}}</div> -->
-                                    <div><span translate="case.details.issue">Issue:</span><span>{{vm.case.issue.name}}</span></div>
-                                    <div><span translate="case.details.technology">Technology:</span><span>{{vm.case.technology.name}}</span></div>
-                                    <div><span>Technology Properties:</span><span>{{vm.case.technologyProps}}</span></div>
-                                </div>
-                            </div>
-                        </div>
+        <!-- Detailed Resolution -->
+        <div class="drsl-form-grid">
+            <div translate="case.details.detailedResolution">Detailed Resolution</div>
+            <div><textarea class="form-control" name="detailedResolution" id="detailedResolution" cols="30" rows="5"></textarea></div>
+        </div>
 
-                        <!-- Detailed Resolution -->
-                        <div class="drsl-form-grid">
-                            <div translate="case.details.detailedResolution">Detailed Resolution</div>
-                            <div><textarea class="form-control" name="detailedResolution" id="detailedResolution" cols="30" rows="5"></textarea></div>
-                        </div>
-
-                        <!-- Uploaded Files -->
-                        <div class="drsl-form-grid">
-                            <div translate="case.details.uploadedFiles">Uploaded Files</div>
-                            <div>
-                                <div class="drsl-file-upload-section">
-                                    <div>
-                                        <div>config_5916.cfg</div>
-                                        <div>logfile_5916.txt</div>
-                                    </div>
-                                    <div>
-                                        <file-upload></file-upload>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Dowloaded Files -->
-                        <div class="drsl-form-grid">
-                            <div translate="case.details.downloadedFiles">Downloaded Files</div>
-                            <div><i class="fa fa-minus"></i></div>
-                        </div>
-
-                        <!-- Chat Log -->
-                        <div class="drsl-form-grid">
-                            <div translate="case.details.chatLog">Chat Log</div>
-                            <div><textarea class="form-control" name="chatLog" id="chatLog" cols="30" rows="10"></textarea></div>
-                        </div>
+        <!-- Uploaded Files -->
+        <div class="drsl-form-grid">
+            <div translate="case.details.uploadedFiles">Uploaded Files</div>
+            <div>
+                <div class="drsl-file-upload-section">
+                    <div>
+                        <div>config_5916.cfg</div>
+                        <div>logfile_5916.txt</div>
+                    </div>
+                    <div>
+                        <file-upload></file-upload>
                     </div>
                 </div>
             </div>
-
-            <!-- Main Buttons -->
-            <div class="drsl-dialog-buttons">
-                <button class="btn btn-default" ng-click="vm.cancel($event)" translate="entity.action.cancel">Cancel</button>
-                <button type="submit" class="btn btn-success" translate="entity.action.update">Update</button>
-            </div>
         </div>
-    </form>
+
+        <!-- Dowloaded Files -->
+        <div class="drsl-form-grid">
+            <div translate="case.details.downloadedFiles">Downloaded Files</div>
+            <div><i class="fa fa-minus"></i></div>
+        </div>
+
+        <!-- Chat Log -->
+        <div class="drsl-form-grid">
+            <div>Update Message</div>
+            <div><textarea class="form-control" name="updateHistory" id="updateHistory" cols="30" rows="5" ng-model="vm.updatemsg"></textarea></div>
+        </div>
+        <div class="drsl-form-grid" style="margin-right: 450px;">
+            <div>Update History</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Message</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody >
+                    <tr ng-repeat="update in vm.updates track by $index">
+                        <td>{{update.updateMsg}}</td>
+                        <td>{{update.dateUpdated | date:"MM/dd/yy h:mm a"}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- <div class="drsl-form-grid">
+        <div translate="case.details.chatLog">Chat Log</div>
+        <div><textarea class="form-control" name="chatLog" id="chatLog" cols="30" rows="10"></textarea></div>
+    </div> -->
+</div>
+</div>
+</div>
+
+<!-- Main Buttons -->
+<div class="drsl-dialog-buttons">
+    <button class="btn btn-default" ng-click="vm.cancel($event)" translate="entity.action.cancel">Cancel</button>
+    <button type="submit" class="btn btn-success" translate="entity.action.update">Update</button>
+</div>
+</div>
+</form>
 </div>

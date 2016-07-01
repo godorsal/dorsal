@@ -2,8 +2,8 @@
     'use strict';
 
     angular
-        .module('dorsalApp')
-        .config(stateConfig);
+    .module('dorsalApp')
+    .config(stateConfig);
 
     stateConfig.$inject = ['$stateProvider'];
 
@@ -51,7 +51,7 @@
                     return $translate.refresh();
                 }],
                 entity: ['$stateParams', 'Casetechnologyproperty', function($stateParams, Casetechnologyproperty) {
-                    return Casetechnologyproperty.get({technology : $stateParams.id});
+                    return Casetechnologyproperty.get({id : $stateParams.id});
                 }]
             }
         })
