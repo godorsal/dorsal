@@ -73,34 +73,31 @@
 
             brandNewCase.expert = {};
             brandNewCase.expert.id = getExpert(brandNewCase.technology);
-            // Principal.identity().then(function(account) {
-            //     brandNewCase.user = account;
-            // });
-            // brandNewCase.user.id = 1;
             brandNewCase.etacompletion = "4 hours";
             brandNewCase.statusmsg = 'Case Created';
-            brandNewCase.datecreated = new Date();
-            brandNewCase.datelastupdate = new Date();
-            // brandNewCase.datecreated = Date.now();
-            // brandNewCase.datelastupdate = Date.now();
+            brandNewCase.dateCreated = new Date();
+            brandNewCase.dateLastUpdate = new Date();
             brandNewCase.summary = vm.caseDetails.summary;
             vm.isSaving = true;
             // console.log(brandNewCase);
             if (brandNewCase.id !== null) {
                 Supportcase.update(brandNewCase, onSaveSuccess, onSaveError);
             } else {
-                console.log(brandNewCase);
                 Supportcase.save(brandNewCase, onSaveSuccess, onSaveError);
             }
         }
         var onSaveSuccess = function (result) {
+            console.log("RESULT", result);
             for (var key in vm.technologyProperties) {
                 if (vm.technologyProperties.hasOwnProperty(key)) {
                     var brandNewProperty = {};
                     brandNewProperty.technology = vm.technology;
-                    brandNewProperty.supportcase = result;
+                    brandNewProperty.supportcase = {};
+                    brandNewProperty.supportcase.id = result.id;
+                    // brandNewProperty.supportcase = result.id;
                     brandNewProperty.propertyname = key;
                     brandNewProperty.propertyvalue = vm.technologyProperties[key];
+                    console.log(brandNewProperty);
                     Casetechnologyproperty.save(brandNewProperty);
                 }
             }

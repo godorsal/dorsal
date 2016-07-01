@@ -12,11 +12,12 @@
         vm.casetechnologyproperties = [];
         vm.loadAll = function() {
             Casetechnologyproperty.query(function(result) {
+                console.log(result);
                 vm.casetechnologyproperties = result;
             });
         };
 
         vm.loadAll();
-        
+
     }
 })();

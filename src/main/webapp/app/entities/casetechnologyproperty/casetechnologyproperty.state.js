@@ -51,7 +51,7 @@
                     return $translate.refresh();
                 }],
                 entity: ['$stateParams', 'Casetechnologyproperty', function($stateParams, Casetechnologyproperty) {
-                    return Casetechnologyproperty.get({id : $stateParams.id});
+                    return Casetechnologyproperty.get({technology : $stateParams.id});
                 }]
             }
         })

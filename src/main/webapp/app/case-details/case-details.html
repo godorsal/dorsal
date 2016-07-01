@@ -4,8 +4,11 @@
             <div>
                 <!-- Dialog Header -->
                 <div class="drsl-dialog-header">
-                    <div><h2>CASE DETAILS: <span>ID: {{vm.case.id}} &nbsp; START: {{vm.case.startDate | date:"MM/dd/yy h:mm a"}}</span><div class="pull-right"><span class="drsl-header-status">Status: {{vm.case.status}}</span></div></h2></div>
+                    <div><h2>CASE DETAILS: <span>ID: {{vm.case.id}} &nbsp; START: {{vm.case.dateCreated | date:"MM/dd/yy h:mm a"}}</span><div class="pull-right"><span class="drsl-header-status">Status: {{vm.case.status.name}}</span></div></h2></div>
                 </div>
+                <!-- <div class="drsl-dialog-header">
+                    <div><h2>CASE DETAILS: <span>ID: {{vm.case.id}} &nbsp; START: {{vm.case.startDate | date:"MM/dd/yy h:mm a"}}</span><div class="pull-right"><span class="drsl-header-status">Status: {{vm.case.status}}</span></div></h2></div>
+                </div> -->
 
                 <!-- Dialog Content -->
                 <div>
@@ -13,17 +16,28 @@
                         <!-- User -->
                         <div class="drsl-form-grid">
                             <div translate="case.details.user">User</div>
-                            <div>{{vm.case.user}}</div>
+                            <div>{{vm.case.user.firstName}} {{vm.case.user.lastName}}</div>
                         </div>
+                        <!-- <div class="drsl-form-grid">
+                            <div translate="case.details.user">User</div>
+                            <div>{{vm.case.user}}</div>
+                        </div> -->
 
                         <!-- Expert -->
                         <div class="drsl-form-grid">
                             <div translate="case.professional.expert">Expert</div>
                             <div>
-                                <div>{{vm.expert.firstName}} {{vm.expert.lastName}}</div>
+                                <div>{{vm.case.expert.firstName}} {{vm.case.expert.lastName}}</div>
                                 <contact-info contact="vm.expert.contact" chat-room="vm.case.chatRoom"></contact-info>
                             </div>
                         </div>
+                        <!-- <div class="drsl-form-grid">
+                            <div translate="case.professional.expert">Expert</div>
+                            <div>
+                                <div>{{vm.expert.firstName}} {{vm.expert.lastName}}</div>
+                                <contact-info contact="vm.expert.contact" chat-room="vm.case.chatRoom"></contact-info>
+                            </div>
+                        </div> -->
 
                         <!-- Summary -->
                         <div class="drsl-form-grid">
@@ -33,12 +47,13 @@
 
                         <!-- Incident Details -->
                         <div class="drsl-form-grid">
-                            <div translate="case.details.responseTime">Response Time</div>
+                            <!-- <div translate="case.details.responseTime">Response Time</div> -->
                             <div>
                                 <div class="drsl-incident-items">
-                                    <div>{{vm.case.urgency}}</div>
-                                    <div><span translate="case.details.issue">Issue:</span><span>{{vm.case.problem}}</span></div>
-                                    <div><span translate="case.details.technology">Technology:</span><span>{{vm.case.product}}</span></div>
+                                    <!-- <div>{{vm.case.urgency}}</div> -->
+                                    <div><span translate="case.details.issue">Issue:</span><span>{{vm.case.issue.name}}</span></div>
+                                    <div><span translate="case.details.technology">Technology:</span><span>{{vm.case.technology.name}}</span></div>
+                                    <div><span>Technology Properties:</span><span>{{vm.case.technologyProps}}</span></div>
                                 </div>
                             </div>
                         </div>

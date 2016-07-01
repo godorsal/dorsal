@@ -37,9 +37,9 @@
         vm.loadAll = function() {
             Supportcase.query(function(result) {
                 // vm.cases = result;
-                vm.supportcases = result;
+                vm.supportcases = result.reverse();
                 vm.setCurrentCase(result[0]);
-                console.log(result);
+                // console.log(result);
             });
         };
         vm.init();
@@ -58,6 +58,7 @@
                 // Loop through all the cases that came back with the service data
                 for (i = 0; i < casesLength; i++) {
                     currentCase = cases[i];
+                    // currentCase = cases[i];
 
                     // Only continue if the current user matches the case user
                     if (currentCase.user === vm.currentUser.id) {
