@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .controller('CaseController', CaseController);
 
-    CaseController.$inject = ['$scope', '$window', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', 'Supportcase'];
+    CaseController.$inject = ['$scope', '$window', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', 'Supportcase', '$state'];
 
-    function CaseController($scope, $window, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, Supportcase) {
+    function CaseController($scope, $window, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, Supportcase, $state) {
         var vm = this;
         vm.init = init;
         vm.getHistory = getHistory;
@@ -37,8 +37,15 @@
         vm.loadAll = function() {
             Supportcase.query(function(result) {
                 // vm.cases = result;
-                vm.supportcases = result.reverse();
-                vm.setCurrentCase(result[0]);
+                if(result.length < 1){
+                    console.log("GAME OVER");
+                    $state.go('concierge')
+                } else {
+                    vm.supportcases = result.reverse();
+                    vm.setCurrentCase(result[0]);
+
+
+                }
                 // console.log(result);
             });
         };

@@ -91,8 +91,8 @@
             <div>Update Message</div>
             <div><textarea class="form-control" name="updateHistory" id="updateHistory" cols="30" rows="5" ng-model="vm.updatemsg"></textarea></div>
         </div>
-        <div class="drsl-form-grid" style="margin-right: 450px;">
-            <div>Update History</div>
+        <div class="drsl-form-grid" style="left: 0px;">
+            <div style="padding-right: 100px;">Update History</div>
             <table>
                 <thead>
                     <tr>
@@ -102,7 +102,7 @@
                 </thead>
                 <tbody >
                     <tr ng-repeat="update in vm.updates track by $index">
-                        <td>{{update.updateMsg}}</td>
+                        <td style="padding-right: 50px;">{{update.updateMsg}}</td>
                         <td>{{update.dateUpdated | date:"MM/dd/yy h:mm a"}}</td>
                     </tr>
                 </tbody>
