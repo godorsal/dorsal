@@ -278,11 +278,12 @@ Cases
         flex-flow: row;
         > div {
             flex: 1;
+            // text-align: left;
             text-align: center;
 
             &:first-child {
-                flex: .5;
-                text-align: left;
+                // flex: .5;
+                // text-align: left;
             }
 
             span {

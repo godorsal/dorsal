@@ -238,9 +238,37 @@ body {
         }
     }
 }
-.historyBox{
-    max-height: 95px;
-    overflow-y: scroll;
+tr:nth-child(even) {
+  background-color: #ccc;
+}
+tr:nth-child(odd) {
+  background-color: white;
+}
+// .historyBox{
+//     max-height: 95px;
+//     overflow-y: hidden;
+//     font-weight: normal !important;
+//     border: 1px solid #ccc;
+// }
+// .updatesList{
+//     overflow-y: auto;
+//     overflow-x: hidden;
+// }
+
+
+table.scroll tbody,
+table.scroll {
+    display: block;
+    padding-bottom: 20px;
+    width: 630px;
+}
+
+table.scroll tbody {
+    height: 120px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 630px;
+    padding-right: 20px;
 }
 .drsl-form-grid {
     display: flex;
@@ -248,8 +276,9 @@ body {
 
     > div {
         flex: 1;
-        text-align: right;
-        margin-right: 20px;
+        text-align: left;
+        // margin-left: 45px;
+        // margin-right: 20px;
         margin-bottom: 15px;
 
         &:last-child {
