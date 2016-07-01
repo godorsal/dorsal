@@ -86,27 +86,29 @@
             <div><i class="fa fa-minus"></i></div>
         </div>
 
+        <div class="drsl-form-grid">
+            <div>Update History</div>
+            <div class="historyBox">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Message</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="update in vm.updates track by $index" >
+                            <td style="padding-right: 50px;">{{update.updateMsg}}</td>
+                            <td>{{update.dateUpdated | date:"MM/dd/yy h:mm a"}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <!-- Chat Log -->
         <div class="drsl-form-grid">
             <div>Update Message</div>
             <div><textarea class="form-control" name="updateHistory" id="updateHistory" cols="30" rows="5" ng-model="vm.updatemsg"></textarea></div>
-        </div>
-        <div class="drsl-form-grid" style="left: 0px;">
-            <div style="padding-right: 100px;">Update History</div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Message</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody >
-                    <tr ng-repeat="update in vm.updates track by $index">
-                        <td style="padding-right: 50px;">{{update.updateMsg}}</td>
-                        <td>{{update.dateUpdated | date:"MM/dd/yy h:mm a"}}</td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
 
         <!-- <div class="drsl-form-grid">

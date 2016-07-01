@@ -238,6 +238,10 @@ body {
         }
     }
 }
+.historyBox{
+    max-height: 95px;
+    overflow-y: scroll;
+}
 .drsl-form-grid {
     display: flex;
     flex-flow: row;
