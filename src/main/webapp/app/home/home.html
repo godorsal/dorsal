@@ -8,7 +8,6 @@
             </div>
         </div>
     </div>
-
     <!--Main Header, Tagline, and Main Button-->
     <div class="row drsl-main-info-wrapper">
         <div class="col-md-12">
@@ -16,9 +15,12 @@
                 <!-- Header -->
                 <h1 translate="home.header">Connect, Solve, Deliver</h1>
                 <!-- Tagline -->
-                <p translate="home.tagline">Fast, reliable open source support without subscriptions or license fees</p>
+                <p translate="home.tagline" >Fast, reliable open source support without subscriptions or license fees</p>
                 <!-- Button -->
-                <a class="btn btn-success" ui-sref="concierge" translate="home.mainButton">Get Started</a>
+                <!-- <a class="drsl-custom-button" ui-sref="concierge" translate="home.mainButton" style="display: inline-block;">Get Started</a> -->
+                <button ui-sref="concierge" translate="home.mainButton" class="drsl-custom-button" ><span translate="concierge.caseDetails.button" style="margin-bottom: 5px; display: inline-block !important;" class="ng-scope">connect now</span></button>
+                <!-- <a class="drsl-custom-button" ui-sref="concierge" translate="home.mainButton" style="display: inline-block;">Get Started</a> -->
+                <!-- <a class="btn btn-success" ui-sref="concierge" translate="home.mainButton">Get Started</a> -->
             </div>
         </div>
     </div>
@@ -37,6 +39,7 @@
     <div class="row drsl-home-additional-info-wrapper">
         <div class="col-md-4" ng-repeat="slot in [1, 2, 3]">
             <div class="drsl-home-additional-info-item">
+                <!-- <p>{{'home.additionalInfo.slot_'+slot+'.title' | translate}}</p> -->
                 <h3>{{'home.additionalInfo.slot_'+slot+'.title' | translate}}</h3>
                 <p>{{'home.additionalInfo.slot_'+slot+'.description' | translate}}</p>
             </div>

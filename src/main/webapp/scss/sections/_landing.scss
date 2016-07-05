@@ -20,7 +20,7 @@ Landing Page
     .drsl-main-info-wrapper {
         position: relative;
         padding-top: 25px;
-
+        text-align: center;
         .col-md-12 {
             min-height: 350px;
 
@@ -36,7 +36,7 @@ Landing Page
                 p {
                     line-height: 1.6;
                     font-size: 18px;
-                    max-width: 340px;
+                    // max-width: 340px;
                     color: #333333;
                 }
 
@@ -56,7 +56,7 @@ Landing Page
         margin-right: -50px;
         margin-bottom: 60px;
         position: relative;
-        background-color: rgba(0, 0, 0, 0.05);
+        // background-color: rgba(0, 0, 0, 0.05);
         font-size: 24px;
         font-weight: 200;
         text-align: center;
@@ -71,19 +71,33 @@ Landing Page
         padding: 0 64px;
 
         > div {
-            background-color: rgba(0, 0, 0, 0.10);
-
+            // background-color: #FEFEFE;
+            // background-color: rgba(0, 0, 0, 0);
+            color: #9A9798;
+            // color: #383232;
+            text-align: center;
             &:nth-child(2) {
-                background-color: rgba(0, 0, 0, 0.15);
+                // background-color: #FEFEFE;
+                // background-color: rgba(0, 0, 0, 0);
             }
         }
     }
 
     .drsl-home-additional-info-item {
-        height: 160px;
+        padding: 5px;
+        background-color: #FEFEFE;
+        border: 1px solid #B1B1B1;
+
+        // height: 160px;
+        height: 150px;
+        // width: 400px;
 
         h3 {
-            font-size: 18px;
+            color: #6A6A6A;
+            // font-size: 18px;
+            font-size: 24px;
+            font-weight: 200;
+            text-align: center;
         }
     }
 }
@@ -108,7 +122,7 @@ Landing Page
         opacity: .4;
         width: 1280px;
         height: 1280px;
-        background: url('../images/global/main-bg.jpg') no-repeat;
+        // background: url('../images/global/main-bg.jpg') no-repeat;
     }
 
     .badge-wrapper {
