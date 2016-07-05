@@ -3,6 +3,7 @@ package com.dorsal.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.dorsal.domain.Caseupdate;
 import com.dorsal.repository.CaseupdateRepository;
+import com.dorsal.repository.UserRepository;
 import com.dorsal.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,10 +28,14 @@ import java.util.Optional;
 public class CaseupdateResource {
 
     private final Logger log = LoggerFactory.getLogger(CaseupdateResource.class);
-        
+
     @Inject
     private CaseupdateRepository caseupdateRepository;
-    
+
+    // User repository functinality for finding currently logged in user
+    @Inject
+    private UserRepository userRepository;
+
     /**
      * POST  /caseupdates : Create a new caseupdate.
      *
@@ -47,6 +52,9 @@ public class CaseupdateResource {
         if (caseupdate.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("caseupdate", "idexists", "A new caseupdate cannot already have an ID")).body(null);
         }
+        // Get the current logged in user to be used as the case creator
+        caseupdate.setUser(userRepository.findLoggedInUser());
+
         Caseupdate result = caseupdateRepository.save(caseupdate);
         return ResponseEntity.created(new URI("/api/caseupdates/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("caseupdate", result.getId().toString()))
@@ -88,7 +96,7 @@ public class CaseupdateResource {
     @Timed
     public List<Caseupdate> getAllCaseupdates() {
         log.debug("REST request to get all Caseupdates");
-        List<Caseupdate> caseupdates = caseupdateRepository.findAll();
+        List<Caseupdate> caseupdates = caseupdateRepository.findByUserIsCurrentUser();
         return caseupdates;
     }
 

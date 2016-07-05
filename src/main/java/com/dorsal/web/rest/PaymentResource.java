@@ -3,6 +3,7 @@ package com.dorsal.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.dorsal.domain.Payment;
 import com.dorsal.repository.PaymentRepository;
+import com.dorsal.repository.UserRepository;
 import com.dorsal.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,10 +28,14 @@ import java.util.Optional;
 public class PaymentResource {
 
     private final Logger log = LoggerFactory.getLogger(PaymentResource.class);
-        
+
     @Inject
     private PaymentRepository paymentRepository;
-    
+
+    // User repository functinality for finding currently logged in user
+    @Inject
+    private UserRepository userRepository;
+
     /**
      * POST  /payments : Create a new payment.
      *
@@ -47,6 +52,8 @@ public class PaymentResource {
         if (payment.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("payment", "idexists", "A new payment cannot already have an ID")).body(null);
         }
+        // Get the current logged in user to be used as the case creator
+        payment.setUser(userRepository.findLoggedInUser());
         Payment result = paymentRepository.save(payment);
         return ResponseEntity.created(new URI("/api/payments/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("payment", result.getId().toString()))
@@ -88,7 +95,7 @@ public class PaymentResource {
     @Timed
     public List<Payment> getAllPayments() {
         log.debug("REST request to get all Payments");
-        List<Payment> payments = paymentRepository.findAll();
+        List<Payment> payments = paymentRepository.findByUserIsCurrentUser();
         return payments;
     }
 

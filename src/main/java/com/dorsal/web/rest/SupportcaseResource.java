@@ -3,6 +3,8 @@ package com.dorsal.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.dorsal.domain.Supportcase;
 import com.dorsal.repository.SupportcaseRepository;
+import com.dorsal.repository.UserRepository;
+import com.dorsal.repository.UserRepository;
 import com.dorsal.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,10 +29,15 @@ import java.util.Optional;
 public class SupportcaseResource {
 
     private final Logger log = LoggerFactory.getLogger(SupportcaseResource.class);
-        
+
     @Inject
     private SupportcaseRepository supportcaseRepository;
-    
+
+    // User repository functinality for finding currently logged in user
+    @Inject
+    private UserRepository userRepository;
+
+
     /**
      * POST  /supportcases : Create a new supportcase.
      *
@@ -47,6 +54,9 @@ public class SupportcaseResource {
         if (supportcase.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("supportcase", "idexists", "A new supportcase cannot already have an ID")).body(null);
         }
+        // Get the current logged in user to be used as the case creator
+        supportcase.setUser(userRepository.findLoggedInUser());
+
         Supportcase result = supportcaseRepository.save(supportcase);
         return ResponseEntity.created(new URI("/api/supportcases/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("supportcase", result.getId().toString()))
@@ -88,7 +98,7 @@ public class SupportcaseResource {
     @Timed
     public List<Supportcase> getAllSupportcases() {
         log.debug("REST request to get all Supportcases");
-        List<Supportcase> supportcases = supportcaseRepository.findAll();
+        List<Supportcase> supportcases = supportcaseRepository.findByUserIsCurrentUser(); //.findAll();
         return supportcases;
     }
 
