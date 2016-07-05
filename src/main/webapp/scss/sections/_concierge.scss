@@ -220,19 +220,18 @@ Concierge
     width: 620px !important;
 }
 .plan{
-    border: 1px solid black;
     background: rgb(53, 48, 45);
-    background: linear-gradient(to bottom, rgba(53, 48, 45, 1) 0%, rgba(77, 67, 75, 1) 50%, rgba(53, 48, 45, 1) 100%);
+    background: linear-gradient(to right, rgba(60, 51, 52, 1), 90%, rgba(0,0,0,0));
     font-size: 20px;
     color: white;
     padding: 10px;
     margin: 10px;
     margin-top: 30px;
+    vertical-align: middle;
+    height: 75px;
 }
 .selectedPlan{
-    border: 1px solid black;
-    background: rgb(53, 48, 45);
-    background: linear-gradient(to bottom, rgba(53, 48, 45, 1) 0%, rgba(77, 67, 75, 1) 50%, rgba(53, 48, 45, 1) 100%);
+    background: linear-gradient(to right, rgba(60, 51, 52, 1), rgba(0,0,0,0));
     font-size: 20px;
     color: #F48B3D;
     padding: 10px;
@@ -243,6 +242,7 @@ Concierge
     color: #F48B3D;
 }
 .tierTitle{
+    margin-top: 15px;
     display: inline-block;
 }
 .tierContent{

@@ -63,11 +63,12 @@
                         <div class="drsl-chat-wrapper">
                             <div class="chat-section" ng-hide="chatting">
                                 <br>
-                                <h3>Select issue type and database on the left</h3>
-                                <h3>Concierge is available to chat by clicking on chat with expert in the action bar</h3>
+                                <blockquote>
+                                    Select the database technology and issue type including any details to help us refine the problem. Concierge chat can help you immediately or assist you in filling out the details of your case (it's free! Try it). Select one:
+                                </blockquote>
                                 <div class="plan" ng-click="vm.selectPlan(1)" ng-class="vm.setClass(1)">
                                     <div class="tierTitle">
-                                        <h3>On Demand Expert</h3>
+                                        <span>On-demand Expert</span>
                                     </div>
                                     <div class="tierContent">
                                         <span>$125 Per Hour</span>
@@ -75,7 +76,7 @@
                                 </div>
                                 <div class="plan" ng-click="vm.selectPlan(2)" ng-class="vm.setClass(2)">
                                     <div class="tierTitle">
-                                        <h3>Incident Support</h3>
+                                        <span>Incident Support</span>
                                     </div>
                                     <div class="tierContent">
                                         <span>$1000 Per Day</span>
@@ -83,7 +84,7 @@
                                 </div>
                                 <div class="plan" ng-click="vm.selectPlan(3)" ng-class="vm.setClass(3)">
                                     <div class="tierTitle">
-                                        <h3>Scheduled Pro Services</h3>
+                                        <span>Scheduled Pro Services</span>
                                     </div>
                                     <div class="tierContent">
                                         <span>$1000 Per Day</span>
