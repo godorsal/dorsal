@@ -276,13 +276,14 @@ table.scroll tbody {
 
     > div {
         flex: 1;
-        text-align: left;
+        text-align: right;
         // margin-left: 45px;
         // margin-right: 20px;
         margin-bottom: 15px;
 
         &:last-child {
             flex: 3;
+            margin-left: 10px;
             text-align: left;
             font-weight: 500;
         }

@@ -14,7 +14,7 @@
             <div>
                 <div class="drsl-dialog-content">
                     <!-- User -->
-                    <div class="drsl-form-grid" style="text-align: left;">
+                    <div class="drsl-form-grid" style="text-align: right;">
                         <div translate="case.details.user">User</div>
                         <div>{{vm.case.user.firstName}} {{vm.case.user.lastName}}</div>
                     </div>
@@ -45,6 +45,10 @@
             <div>{{vm.summary}}</div>
             <!-- <div><input type="text" class="form-control" ng-model="vm.summary"></div> -->
         </div>
+        <div class="drsl-form-grid">
+                <div translate="case.details.technology">Technology</div>
+                <div>{{vm.case.technology.name}}</div>
+        </div>
 
         <!-- Incident Details -->
         <div class="drsl-form-grid">
@@ -53,7 +57,7 @@
                 <div class="drsl-incident-items">
                     <!-- <div>{{vm.case.urgency}}</div> -->
                     <div><span translate="case.details.issue">Issue:</span><span>{{vm.case.issue.name}}</span></div>
-                    <div><span translate="case.details.technology">Technology:</span><span>{{vm.case.technology.name}}</span></div>
+                    <!-- <div><span translate="case.details.technology">Technology:</span><span>{{vm.case.technology.name}}</span></div> -->
                     <div  style="text-align: left;"><span>Technology Properties:</span><br><span ng-repeat="property in vm.technologyProps">{{property.propertyname}}: {{property.propertyvalue}}<br></span></div>
                 </div>
             </div>
@@ -90,7 +94,7 @@
         <div class="drsl-form-grid" style="width: 864px;">
             <div>Update History</div>
             <!-- <div class="historyBox"> -->
-                <table class="scroll">
+                <table class="scroll" style="margin-left: 10px;">
                     <thead style="height: 30px; line-height: 30px;">
                         <tr>
                             <th>Message</th>
@@ -100,14 +104,14 @@
                     <tbody>
                         <tr ng-repeat="update in vm.updates track by $index" >
                             <td style="padding-right: 50px;">{{update.updateMsg}}</td>
-                            <td style="width: 100%;">{{update.dateUpdated | date:"MM/dd/yy h:mm a"}}</td>
+                            <td style="width: 32%;">{{update.dateUpdated | date:"MM/dd/yy h:mm a"}}</td>
                         </tr>
                     </tbody>
                 </table>
             <!-- </div> -->
         </div>
         <!-- Chat Log -->
-        <div class="drsl-form-grid">
+        <div class="drsl-form-grid" >
             <div>Update Message</div>
             <div><textarea class="form-control" name="updateHistory" id="updateHistory" cols="30" rows="5" ng-model="vm.updatemsg"></textarea></div>
         </div>
