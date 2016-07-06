@@ -115,13 +115,13 @@ public class CaseupdateResourceIntTest {
         caseupdateRepository.saveAndFlush(caseupdate);
 
         // Get all the caseupdates
-        /*restCaseupdateMockMvc.perform(get("/api/caseupdates?sort=id,desc"))
+        restCaseupdateMockMvc.perform(get("/api/caseupdates?sort=id,desc"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(caseupdate.getId().intValue())))
                 .andExpect(jsonPath("$.[*].dateUpdated").value(hasItem(DEFAULT_DATE_UPDATED_STR)))
                 .andExpect(jsonPath("$.[*].updateMsg").value(hasItem(DEFAULT_UPDATE_MSG.toString())))
-                .andExpect(jsonPath("$.[*].url").value(hasItem(DEFAULT_URL.toString())));*/
+                .andExpect(jsonPath("$.[*].url").value(hasItem(DEFAULT_URL.toString())));
     }
 
     @Test
