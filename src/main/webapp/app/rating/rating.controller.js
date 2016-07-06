@@ -10,6 +10,7 @@
     function DrslRatingController($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase) {
         var vm = this;
         vm.case = drslCase;
+        vm.technologyProperties = {};
         vm.cancel = cancel;
         vm.submit = submit;
 

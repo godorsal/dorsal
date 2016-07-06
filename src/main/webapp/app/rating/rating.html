@@ -30,7 +30,7 @@
                         <div>
                             <div ng-repeat="radio in vm.radios">
                                 <h3 translate="{{radio.label}}"></h3>
-                                <linear-radio target-data="radio.selectedValue" radio-data="radio"></linear-radio>
+                                <linear-radio target-data="radio.selectedValue" technology-properties="vm.technologyProperties" radio-data="radio"></linear-radio>
                             </div>
                         </div>
 
