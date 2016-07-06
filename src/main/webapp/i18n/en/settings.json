@@ -3,11 +3,12 @@
         "title": "User settings for [<b>{{username}}</b>]",
         "form": {
             "firstname": "First Name",
-            "firstname.placeholder": "Your first name",
+            "firstname.placeholder": "Credit Card Holder's First Name",
             "lastname": "Last Name",
-            "lastname.placeholder": "Your last name",
+            "lastname.placeholder": "Credit Card Holder's Last Name",
+            "email.placeholder": "Email: user@localhost.com",
             "language": "Language",
-            "button": "Save"
+            "button": "Update"
         },
         "messages": {
             "error": {

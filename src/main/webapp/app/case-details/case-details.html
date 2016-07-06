@@ -86,10 +86,10 @@
         </div>
 
         <!-- Dowloaded Files -->
-        <div class="drsl-form-grid">
+        <!-- <div class="drsl-form-grid">
             <div translate="case.details.downloadedFiles">Downloaded Files</div>
             <div><i class="fa fa-minus"></i></div>
-        </div>
+        </div> -->
 
         <div class="drsl-form-grid" style="width: 864px;">
             <div>Update History</div>
@@ -97,14 +97,16 @@
                 <table class="scroll" style="margin-left: 10px;">
                     <thead style="height: 30px; line-height: 30px;">
                         <tr>
-                            <th>Message</th>
-                            <th style="padding-left: 350px;">Date</th>
+                            <th style="width: 70%;">Message</th>
+                            <th style="width: 20%; padding-left: 10px;">Date</th>
+                            <th style="width: 10%; padding-left: 23px;">User</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="update in vm.updates track by $index" >
-                            <td style="padding-right: 50px;">{{update.updateMsg}}</td>
-                            <td style="width: 32%;">{{update.dateUpdated | date:"MM/dd/yy h:mm a"}}</td>
+                            <td style="width: 60%; max-width: 375px;">{{update.updateMsg}}</td>
+                            <td style="width: 25%; text-align: center;">{{update.dateUpdated | date:"MM/dd/yy h:mm a"}}</td>
+                            <td style="width: 15%; text-align: center;">{{update.user.login}}</td>
                         </tr>
                     </tbody>
                 </table>

@@ -5,7 +5,7 @@
                 <div class="drsl-sub-header">
                     <h2 translate="settings.title" translate-values="{username: '{{vm.settingsAccount.login}}'}">User settings for *** [<b>{{vm.settingsAccount.login}}</b>]</h2>
                 </div>
-                <div class="drsl-panels" style="display: inline-block; float: left;">
+                <div class="drsl-panels">
                     <div class="alert alert-success" ng-show="vm.success" translate="settings.messages.success">
                         <strong>Settings saved!</strong>
                     </div>
@@ -17,64 +17,63 @@
                     <div class="alert alert-danger" ng-show="vm.error" translate="settings.messages.error.fail">
                         <strong>An error has occurred!</strong> Settings could not be saved.
                     </div>
-                    <div class="settingblock" style="background: white;">
-                        <form name="form" role="form" novalidate ng-submit="vm.save()" show-validation style="width: 589px;
-                        height: 395px; padding: 10px;">
+                    <div class="" style="background: white; padding: 10px; height: 250px; margin-bottom: 20px;">
+                        <form name="form" role="form" novalidate ng-submit="vm.save()" show-validation>
 
-                        <div class="form-group">
-                            <label class="control-label" for="firstName" translate="settings.form.firstname">First Name</label>
-                            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="{{'settings.form.firstname.placeholder' | translate}}"
-                            ng-model="vm.settingsAccount.firstName" ng-minlength=1 ng-maxlength=50 required maxlength="50">
-                            <div ng-show="form.firstName.$dirty && form.firstName.$invalid">
+                            <div class="form-group">
+                                <!-- <label class="control-label" for="firstName" translate="settings.form.firstname">First Name</label> -->
+                                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="{{'settings.form.firstname.placeholder' | translate}}"
+                                ng-model="vm.settingsAccount.firstName" ng-minlength=1 ng-maxlength=50 required maxlength="50">
+                                <div ng-show="form.firstName.$dirty && form.firstName.$invalid">
+                                    <p class="help-block"
+                                    ng-show="form.firstName.$error.required" translate="settings.messages.validate.firstname.required">
+                                    Your first name is required.
+                                </p>
                                 <p class="help-block"
-                                ng-show="form.firstName.$error.required" translate="settings.messages.validate.firstname.required">
-                                Your first name is required.
+                                ng-show="form.firstName.$error.minlength" translate="settings.messages.validate.firstname.minlength">
+                                Your first name is required to be at least 1 character.
                             </p>
                             <p class="help-block"
-                            ng-show="form.firstName.$error.minlength" translate="settings.messages.validate.firstname.minlength">
-                            Your first name is required to be at least 1 character.
+                            ng-show="form.firstName.$error.maxlength" translate="settings.messages.validate.firstname.maxlength">
+                            Your first name cannot be longer than 50 characters.
                         </p>
-                        <p class="help-block"
-                        ng-show="form.firstName.$error.maxlength" translate="settings.messages.validate.firstname.maxlength">
-                        Your first name cannot be longer than 50 characters.
-                    </p>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label" for="lastName" translate="settings.form.lastname">Last Name</label>
-                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="{{'settings.form.lastname.placeholder' | translate}}"
-                ng-model="vm.settingsAccount.lastName" ng-minlength=1 ng-maxlength=50 required maxlength="50">
-                <div ng-show="form.lastName.$dirty && form.lastName.$invalid">
+                <div class="form-group">
+                    <!-- <label class="control-label" for="lastName" translate="settings.form.lastname">Last Name</label> -->
+                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="{{'settings.form.lastname.placeholder' | translate}}"
+                    ng-model="vm.settingsAccount.lastName" ng-minlength=1 ng-maxlength=50 required maxlength="50">
+                    <div ng-show="form.lastName.$dirty && form.lastName.$invalid">
+                        <p class="help-block"
+                        ng-show="form.lastName.$error.required" translate="settings.messages.validate.lastname.required">
+                        Your last name is required.
+                    </p>
                     <p class="help-block"
-                    ng-show="form.lastName.$error.required" translate="settings.messages.validate.lastname.required">
-                    Your last name is required.
+                    ng-show="form.lastName.$error.minlength" translate="settings.messages.validate.lastname.minlength">
+                    Your last name is required to be at least 1 character.
                 </p>
                 <p class="help-block"
-                ng-show="form.lastName.$error.minlength" translate="settings.messages.validate.lastname.minlength">
-                Your last name is required to be at least 1 character.
+                ng-show="form.lastName.$error.maxlength" translate="settings.messages.validate.lastname.maxlength">
+                Your last name cannot be longer than 50 characters.
             </p>
-            <p class="help-block"
-            ng-show="form.lastName.$error.maxlength" translate="settings.messages.validate.lastname.maxlength">
-            Your last name cannot be longer than 50 characters.
-        </p>
+        </div>
     </div>
-</div>
-<div class="form-group">
-    <label class="control-label" for="email" translate="global.form.email">E-mail</label>
-    <input type="email" class="form-control" id="email" name="email" placeholder="{{'global.form.email.placeholder' | translate}}"
-    ng-model="vm.settingsAccount.email" ng-minlength=5 ng-maxlength=100 required maxlength="100">
-    <div ng-show="form.email.$dirty && form.email.$invalid">
+    <div class="form-group">
+        <!-- <label class="control-label" for="email" translate="global.form.email">E-mail</label> -->
+        <input type="email" class="form-control" id="email" name="email" placeholder="{{'global.form.email.placeholder' | translate}}"
+        ng-model="vm.settingsAccount.email" ng-minlength=5 ng-maxlength=100 required maxlength="100">
+        <div ng-show="form.email.$dirty && form.email.$invalid">
+            <p class="help-block"
+            ng-show="form.email.$error.required" translate="global.messages.validate.email.required">
+            Your e-mail is required.
+        </p>
         <p class="help-block"
-        ng-show="form.email.$error.required" translate="global.messages.validate.email.required">
-        Your e-mail is required.
+        ng-show="form.email.$error.email" translate="global.messages.validate.email.invalid">
+        Your e-mail is invalid.
     </p>
     <p class="help-block"
-    ng-show="form.email.$error.email" translate="global.messages.validate.email.invalid">
-    Your e-mail is invalid.
-</p>
-<p class="help-block"
-ng-show="form.email.$error.minlength" translate="global.messages.validate.email.minlength">
-Your e-mail is required to be at least 5 characters.
+    ng-show="form.email.$error.minlength" translate="global.messages.validate.email.minlength">
+    Your e-mail is required to be at least 5 characters.
 </p>
 <p class="help-block"
 ng-show="form.email.$error.maxlength" translate="global.messages.validate.email.maxlength">
@@ -83,65 +82,11 @@ Your e-mail cannot be longer than 100 characters.
 </div>
 </div>
 <div class="form-group">
-    <label for="langKey" translate="settings.form.language">Language</label>
+    <!-- <label for="langKey" translate="settings.form.language">Language</label> -->
     <select id="langKey" name="langKey" class="form-control" ng-model="vm.settingsAccount.langKey" ng-controller="JhiLanguageController as languageVm" ng-options="code as (code | findLanguageFromKey) for code in languageVm.languages"></select>
 </div>
-<button type="submit" ng-disabled="form.$invalid" class="btn btn-primary" translate="settings.form.button">Save</button>
+<button type="submit" ng-disabled="form.$invalid" class="btn btn-success" translate="settings.form.button" style="float: right;">Update</button>
 </div>
-</div>
-
-<div class="settingblock" style="display: inline-block !important; width: 590px; background: white; height: 395px;">
-    <div class="form-group" style="width: 50%; display: inline-block !important;">
-        <label class="control-label" for="contactMe" style="float: left;">Contact Me via</label>
-        <div class="drsl-linear-radio" id="contactMe" style="height: 50px; margin-top: 20px; margin-bottom: 0px;">
-            <div class="drsl-linear-radio" >
-                <div class="drsl-radio-set tier-list" >
-                    <div class="ng-scope"><input name="contact" id="Email" type="radio" class="ng-pristine ng-untouched ng-valid ng-empty" aria-invalid="false" ng-model="vm.settingsAccount.contact" value="email"><label for="Email" class="ng-binding" style="margin-left: 20px;">Email<br><span style="border-radius: 0% !important; display:inline-block;"></span></label></div>
-                    <div class="ng-scope"><input name="contact" id="Phone" type="radio" class="ng-pristine ng-untouched ng-valid ng-empty" aria-invalid="false" ng-model="vm.settingsAccount.contact" value="phone"><label for="Phone" class="ng-binding" style="margin-left: 20px;">Phone<br><span style="border-radius: 0% !important; display:inline-block;"></span></label></div>
-                    <div class="ng-scope"><input name="contact" id="Skype" type="radio" class="ng-pristine ng-untouched ng-valid ng-empty" aria-invalid="false" ng-model="vm.settingsAccount.contact" value="skype"><label for="Skype" class="ng-binding" style="margin-left: 20px;">Skype<br><span style="border-radius: 0% !important; display:inline-block;"></span></label></div>
-                    <div class="ng-scope"><input name="contact" id="Other" type="radio" class="ng-pristine ng-untouched ng-valid ng-empty" aria-invalid="false" ng-model="vm.settingsAccount.contact" value="other"><label for="Other" class="ng-binding" style="margin-left: 20px;">Other<br><span style="border-radius: 0% !important; display:inline-block;"></span></label></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="form-group" style="width: 50%;">
-        <label class="control-label" for="technology" style="float: left;">Technology</label>
-        <div class="drsl-linear-radio" id="technology" style="height: 50px; margin-top: 10px; margin-bottom: 0px;">
-            <div class="drsl-linear-radio" style="height: 50px;">
-                <div class="drsl-radio-set tier-list" style="height: 50px; margin-bottom: 0px;">
-                    <div class="ng-scope"><input name="technology" id="MySQL" type="radio" class="ng-pristine ng-untouched ng-valid ng-empty" aria-invalid="false" ng-model="vm.settingsAccount.technology" value="email"><label for="MySQL" class="ng-binding" style="margin-left: 20px;">MySQL<br><span style=" display:inline-block;"></span></label></div>
-                    <div class="ng-scope"><input name="technology" id="PostgreSQL" type="radio" class="ng-pristine ng-untouched ng-valid ng-empty" aria-invalid="false" ng-model="vm.settingsAccount.technology" value="phone"><label for="PostgreSQL" class="ng-binding" style="margin-left: 20px;">PostgreSQL<br><span style=" display:inline-block;"></span></label></div>
-                    <div class="ng-scope"><input name="technology" id="Skype" type="radio" class="ng-pristine ng-untouched ng-valid ng-empty" aria-invalid="false" ng-model="vm.settingsAccount.technology" value="skype"><label for="Skype" class="ng-binding" style="margin-left: 20px;">Skype<br><span style=" display:inline-block;"></span></label></div>
-                    <div class="ng-scope"><input name="technology" id="Other" type="radio" class="ng-pristine ng-untouched ng-valid ng-empty" aria-invalid="false" ng-model="vm.settingsAccount.technology" value="other"><label for="Other" class="ng-binding" style="margin-left: 20px;">Other<br><span style=" display:inline-block;"></span></label></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="drsl-field-seciton drsl-file-upload">
-        <div class="drsl-field-label">
-            <span>Attach file</span>
-            <span class="drsl-field-sub-label">(Attach your company's best practices and documentation) </span>
-        </div>
-        <div class="drsl-field-input">
-            <div style="border: 1px dashed #DBD9DA; text-align: center; padding: 10px; width: 50%;"><i class="fa fa-cloud-upload fa-lg"></i> Drop files to attach, or <span style="color:#F48B3D;">browse</span></div>
-        </div>
-    </div>
-    <div class="form-group" style="display: inline-block;">
-        <label for="location">Location (optional)</label>
-        <br>
-        <input type="text" id="location">
-    </div>
-    <div class="form-group" style="display: inline-block;">
-        <label class="control-label" for="local">I prefer a local expert (may delay timing)</label>
-        <div class="drsl-linear-radio" id="local">
-            <div class="drsl-linear-radio">
-                <div class="drsl-radio-set tier-list">
-                    <div class="ng-scope"><input name="local" id="Local" type="radio" class="ng-pristine ng-untouched ng-valid ng-empty" aria-invalid="false" ng-model="vm.settingsAccount.local" value="local"><label for="Local" class="ng-binding" style="margin-left: 20px;">Local<br><span style=" display:inline-block;"></span></label></div>
-                    <div class="ng-scope"><input name="local" id="Any" type="radio" class="ng-pristine ng-untouched ng-valid ng-empty" aria-invalid="false" ng-model="vm.settingsAccount.local" value="any"><label for="Any" class="ng-binding" style="margin-left: 20px;">Any<br><span style=" display:inline-block;"></span></label></div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 </div>
 </form>
@@ -150,17 +95,12 @@ Your e-mail cannot be longer than 100 characters.
 </div>
 <div class="drsl-settings-wrapper">
     <div class="drsl-sub-header drsl-sub-sub-header">
-        <div>
-            <span>Manage Payments</span>
-        </div>
-        <div>
-            <span>Manage Group Authorizations</span>
-        </div>
+        <span>Manage Payments</span>
     </div>
 
     <div class="drsl-payment-content">
-        <div style="display: inline-block;">
-            <div class="panel panel-default" style="display: inline-block; float: left; width: 577px;">
+        <div>
+            <div class="panel panel-default">
                 <div class="panel-heading">Authorized Credit Card</div>
                 <div class="panel-body">
 
@@ -221,13 +161,14 @@ Your e-mail cannot be longer than 100 characters.
                             </div>
                         </div>
                     </div>
-                    <div><button class="btn btn-primary">Update</button></div>
+                    <button type="submit" ng-disabled="form.$invalid" class="btn btn-success" translate="settings.form.button" style="float: right;">Update</button>
+                    <!-- <div><button class="btn btn-primary">Update</button></div> -->
 
                 </div>
             </div>
         </div>
-        <div style="display: inline-block;">
-            <div class="panel panel-default drsl-user-managment" style="display: inline-block; float: right; width: 600px; height: 302px;">
+        <div>
+            <div class="panel panel-default drsl-user-managment">
                 <div class="panel-heading">Authorized Users</div>
                 <div class="panel-body">
                     <label class="control-label sr-only" for="uEmail">Add User</label>
@@ -238,7 +179,8 @@ Your e-mail cannot be longer than 100 characters.
                                 ng-minlength=1 ng-maxlength=50 maxlength="50">
                             </div>
                             <div>
-                                <button type="submit" class="btn btn-primary">add</button>
+                                <button type="submit" ng-disabled="form.$invalid" class="btn btn-success" translate="settings.form.button" style="float: right;">Update</button>
+                                <!-- <button type="submit" class="btn btn-primary">add</button> -->
                             </div>
                         </div>
                     </form>
