@@ -1,0 +1,4 @@
+id;phone;skype;othercommunication;location;expert_score;handle;languages;image_path;first_technology_preference;second_technology_preference;third_technology_preference;user_id
+1;415-555-5512;mysql_joe;none;Bay Area;75;mysql_expert_joe;English;thom-johns.png;MySQL;MariaDB;HBase;5
+2;212-555-5512;postgresql_jack;none;New York City;72;postgreSQL_expert_jack;English;jack-wolf.png;PostgreSQL;MySQL;Oracle;6
+3;312-555-5512;nosql_olivia;none;Chicago Area;77;nosql_expert_olivia;English,Spanish;olivia-smith.png;MongoDB;HBase;CasandraDB;7

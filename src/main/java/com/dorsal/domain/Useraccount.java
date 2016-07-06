@@ -21,23 +21,8 @@ public class Useraccount implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "phone")
-    private String phone;
-
-    @Column(name = "skype")
-    private String skype;
-
-    @Column(name = "othercommunication")
-    private String othercommunication;
-
     @Column(name = "location")
     private String location;
-
-    @Column(name = "score")
-    private Integer score;
-
-    @Column(name = "isexpert")
-    private Boolean isexpert;
 
     @Column(name = "preferlocalexpert")
     private Boolean preferlocalexpert;
@@ -45,14 +30,8 @@ public class Useraccount implements Serializable {
     @Column(name = "handle")
     private String handle;
 
-    @Column(name = "languages")
-    private String languages;
-
     @Column(name = "companyname")
     private String companyname;
-
-    @Column(name = "technologypreference")
-    private String technologypreference;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -66,52 +45,12 @@ public class Useraccount implements Serializable {
         this.id = id;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getSkype() {
-        return skype;
-    }
-
-    public void setSkype(String skype) {
-        this.skype = skype;
-    }
-
-    public String getOthercommunication() {
-        return othercommunication;
-    }
-
-    public void setOthercommunication(String othercommunication) {
-        this.othercommunication = othercommunication;
-    }
-
     public String getLocation() {
         return location;
     }
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public Integer getScore() {
-        return score;
-    }
-
-    public void setScore(Integer score) {
-        this.score = score;
-    }
-
-    public Boolean isIsexpert() {
-        return isexpert;
-    }
-
-    public void setIsexpert(Boolean isexpert) {
-        this.isexpert = isexpert;
     }
 
     public Boolean isPreferlocalexpert() {
@@ -130,28 +69,12 @@ public class Useraccount implements Serializable {
         this.handle = handle;
     }
 
-    public String getLanguages() {
-        return languages;
-    }
-
-    public void setLanguages(String languages) {
-        this.languages = languages;
-    }
-
     public String getCompanyname() {
         return companyname;
     }
 
     public void setCompanyname(String companyname) {
         this.companyname = companyname;
-    }
-
-    public String getTechnologypreference() {
-        return technologypreference;
-    }
-
-    public void setTechnologypreference(String technologypreference) {
-        this.technologypreference = technologypreference;
     }
 
     public User getUser() {
@@ -186,17 +109,10 @@ public class Useraccount implements Serializable {
     public String toString() {
         return "Useraccount{" +
             "id=" + id +
-            ", phone='" + phone + "'" +
-            ", skype='" + skype + "'" +
-            ", othercommunication='" + othercommunication + "'" +
             ", location='" + location + "'" +
-            ", score='" + score + "'" +
-            ", isexpert='" + isexpert + "'" +
             ", preferlocalexpert='" + preferlocalexpert + "'" +
             ", handle='" + handle + "'" +
-            ", languages='" + languages + "'" +
             ", companyname='" + companyname + "'" +
-            ", technologypreference='" + technologypreference + "'" +
             '}';
     }
 }

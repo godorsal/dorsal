@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .controller('CaseController', CaseController);
 
-    CaseController.$inject = ['$scope', '$window', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', 'Supportcase', '$state'];
+    CaseController.$inject = ['$scope', '$window', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', 'Supportcase', '$state', 'DrslMetadata', 'StatusModel'];
 
-    function CaseController($scope, $window, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, Supportcase, $state) {
+    function CaseController($scope, $window, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, Supportcase, $state, DrslMetadata, StatusModel) {
         var vm = this;
         vm.init = init;
         vm.getHistory = getHistory;
@@ -19,6 +19,7 @@
         vm.openShare = openShare;
         vm.passedStep = passedStep;
         vm.openChat = openChat;
+        vm.statusStates = [];
         vm.openCaseAgreement = openCaseAgreement;
         vm.cases = [];
         vm.currentCase = {};
@@ -34,65 +35,29 @@
             name: 'Joe Doe'
         };
         vm.experts = {};
-        vm.loadAll = function() {
-            Supportcase.query(function(result) {
-                // vm.cases = result;
-                if(result.length < 1){
-                    console.log("GAME OVER");
-                    $state.go('concierge')
-                } else {
-                    vm.supportcases = result.reverse();
-                    vm.setCurrentCase(result[0]);
-
-
-                }
-                // console.log(result);
-            });
-        };
         vm.init();
 
         /**
          * Initialize the controller's data.
          */
         function init() {
-            vm.loadAll()
             // Make a call to get the initial data.
-            CaseService.get(function (data) {
-                var i, cases, casesLength, currentCase, cleanCases = [];
-                cases = data || [];
-                casesLength = cases.length;
-
-                // Loop through all the cases that came back with the service data
-                for (i = 0; i < casesLength; i++) {
-                    currentCase = cases[i];
-                    // currentCase = cases[i];
-
-                    // Only continue if the current user matches the case user
-                    if (currentCase.user === vm.currentUser.id) {
-                        // Try to find the associated expert data
-                        if (!vm.experts[currentCase.expert]) {
-                            vm.experts[currentCase.expert] = {};
-                        }
-
-                        // Update the case's username
-                        currentCase.user = vm.currentUser.name;
-
-                        // Add the case to the cleanCases array
-                        cleanCases.push(currentCase);
-                    }
+            Supportcase.query(function(result) {
+                if(result.length < 1){
+                    $state.go('concierge')
+                } else {
+                    vm.supportcases = result.reverse();
+                    vm.setCurrentCase(result[0]);
                 }
-
-                // Only request unique experts, to help avoid redundant calls.
-                for (var expert in vm.experts) {
-                    if (vm.experts.hasOwnProperty(expert)) {
-                        getExpert(expert);
-                    }
-                }
-
-                // update the controller's cases
-                vm.cases = cleanCases;
-                // vm.setCurrentCase(cleanCases[0]);
+                // console.log(result);
             });
+
+            StatusModel.getStates().then(function(data){
+                vm.statusStates = data;
+            });
+
+            DrslMetadata.setExpertRate(125);
+            DrslMetadata.setMinimumCaseLength(4);
         }
 
         /**
@@ -151,11 +116,12 @@
          * Opens the rating dialog.
          */
         function openRating() {
-            if (vm.currentCase.status === 'completed') {
+            if (StatusModel.checkCaseStatus(vm.currentCase.status, 'completed')) {
                 var modalInstance = DrslRatingService.open(vm.currentCase);
 
                 modalInstance.result.then(function () {
-                    vm.currentCase.status = 'closed';
+                    vm.currentCase.status = StatusModel.getState('closed');
+                    vm.currentCase.$update();
                 });
             }
         }
@@ -172,7 +138,7 @@
         }
 
         function openEscalation() {
-            if (vm.currentCase.status === 'working') {
+            if (StatusModel.checkCaseStatus(vm.currentCase.status, 'working')) {
                 var modalInstance = EscalationFormService.open(vm.currentCase, vm.experts[vm.currentCase.expert]);
             }
         }
@@ -195,11 +161,13 @@
          * Opens the Case Agreement dialog.
          */
         function openCaseAgreement() {
-            if (vm.currentCase.status === 'estimated') {
+            if (StatusModel.checkCaseStatus(vm.currentCase.status, 'estimated')) {
                 var modalInstance = CaseAgreementService.open(vm.currentCase, vm.experts[vm.currentCase.expert]);
 
                 modalInstance.result.then(function () {
-                    vm.currentCase.status = 'working';
+                    vm.currentCase.isApproved = true;
+                    vm.currentCase.status = StatusModel.getState('working');
+                    vm.currentCase.$update();
                 });
             }
         }
@@ -210,17 +178,7 @@
          * @returns {boolean}
          */
         function passedStep(step) {
-            var stepIndex = 0;
-
-            if (vm.currentCase.status == 'closed') {
-                stepIndex = 4;
-            } else if (vm.currentCase.status == 'completed') {
-                stepIndex = 3;
-            } else if (vm.currentCase.status == 'working') {
-                stepIndex = 2;
-            } else if (vm.currentCase.status == 'estimated') {
-                stepIndex = 1;
-            }
+            var stepIndex = StatusModel.getStatusIndex(vm.currentCase.status);
 
             return (step <= stepIndex );
         }

@@ -47,7 +47,10 @@
 
     <!-- Estimate -->
     <div>
-        <span><span class="drsl-label" translate="case.details.estimate">Estimate</span> $500 (4 hrs @ $125/hr)</span>
+        <span>
+            <span class="drsl-label" translate="case.details.estimate">Estimate</span>
+            <case-estimate hours="{{case.estimateHours}}"></case-estimate>
+        </span>
     </div>
 
     <!-- Timeline -->
@@ -58,7 +61,7 @@
 
             <div class="drsl-timeline-icons">
                 <div ng-class="{'drsl-timeline-item-done': passedStep($index)}" ng-repeat="status in statusOptions">
-                    <div uib-popover-template="status.template" popover-trigger="none" popover-is-open="status.value == case.status">
+                    <div uib-popover-template="status.template" popover-trigger="none" popover-is-open="status.value === case.status.name.toLowerCase()">
                         <span class="drsl-icon-sprites"></span>
                     </div>
                     <div class="drsl-timeline-text">{{status.label}}</div>

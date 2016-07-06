@@ -17,6 +17,7 @@
             "resolutionETA": "ETA to Completion",
             "caseCompleted": "Case completed",
             "estimate": "Estimate",
+            "estimateTotal": "${{total}} ({{hours}} hrs @ ${{rate}}/hr)",
             "status": {
                 "main": "Status",
                 "created": "Created",

@@ -45,20 +45,42 @@ dto Technology with mapstruct
 service Technology with serviceClass
 
 //////////////////////////
-// Entity User Account
+// Entity Expert Account
 
-entity Useraccount  {
+entity ExpertAccount  {
     phone String,
     skype String,
     othercommunication String,
     location String,
-    score Integer,
-    isexpert Boolean,
-    preferlocalexpert Boolean,
+    expertScore Integer,
     handle String,
     languages String,
-    companyname String,
-    technologypreference String
+    imagePath String maxlength(512),
+    firstTechnologyPreference String,
+    secondTechnologyPreference String,
+    thirdTechnologyPreference String
+}
+
+relationship OneToOne {
+	ExpertAccount{user} to User{expertaccount}
+}
+
+///////////////////////////////////////
+// Entity Global Meta Data
+
+entity GlobalMetadata {
+    expertRate Integer,
+    minimumCaseLength Integer
+}
+
+//////////////////////////
+// Entity User Account
+
+entity Useraccount  {
+    location String,
+    preferlocalexpert Boolean,
+    handle String,
+    companyname String
 }
 
 relationship OneToOne {

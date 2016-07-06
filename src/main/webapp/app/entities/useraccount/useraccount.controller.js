@@ -13,11 +13,10 @@
         vm.loadAll = function() {
             Useraccount.query(function(result) {
                 vm.useraccounts = result;
-                console.log(result);
             });
         };
 
         vm.loadAll();
-
+        
     }
 })();

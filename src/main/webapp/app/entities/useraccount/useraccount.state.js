@@ -71,17 +71,10 @@
                     resolve: {
                         entity: function () {
                             return {
-                                phone: null,
-                                skype: null,
-                                othercommunication: null,
                                 location: null,
-                                score: null,
-                                isexpert: null,
                                 preferlocalexpert: null,
                                 handle: null,
-                                languages: null,
                                 companyname: null,
-                                technologypreference: null,
                                 id: null
                             };
                         }
