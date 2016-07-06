@@ -1,3 +1,6 @@
 <div>
-    <button class="btn btn-success" ng-click="agreeToEstimate()">Estimate: $500 (4 hrs @ $125/hr) <br/>click to Agree and Proceed</button>
+    <button class="btn btn-success" ng-click="agreeToEstimate()">Estimate:
+        <case-estimate hours="{{case.estimateHours}}"></case-estimate>
+        <br/>click to Agree and Proceed
+    </button>
 </div>

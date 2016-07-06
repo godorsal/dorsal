@@ -5,7 +5,7 @@
         .module('dorsalApp')
         .directive('caseSummary', caseSummary);
 
-    function caseSummary($translate, $locale, tmhDynamicLocale, $sce) {
+    function caseSummary($translate, $locale, tmhDynamicLocale, $sce, DrslMetadata) {
         var directive = {
             restrict: 'E',
             scope: {
@@ -22,6 +22,7 @@
         return directive;
 
         function linkFunc(scope) {
+            scope.DrslMetadata = DrslMetadata;
             scope.rated = false;
             scope.caseIndex = 0;
             scope.statusOptions = [
