@@ -98,7 +98,13 @@ public class SupportcaseResource {
     @Timed
     public List<Supportcase> getAllSupportcases() {
         log.debug("REST request to get all Supportcases");
+        // Get support cases by currently logged in user
         List<Supportcase> supportcases = supportcaseRepository.findByUserIsCurrentUser(); //.findAll();
+
+        // Get support cases for where currently logged in user is expert
+        supportcases.addAll(supportcaseRepository.findByExpertIsCurrentUser());
+
+        // Return the combined list
         return supportcases;
     }
 
