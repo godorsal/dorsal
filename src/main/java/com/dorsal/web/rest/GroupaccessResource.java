@@ -3,6 +3,7 @@ package com.dorsal.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.dorsal.domain.Groupaccess;
 import com.dorsal.repository.GroupaccessRepository;
+import com.dorsal.repository.UserRepository;
 import com.dorsal.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,10 +27,14 @@ import java.util.Optional;
 public class GroupaccessResource {
 
     private final Logger log = LoggerFactory.getLogger(GroupaccessResource.class);
-        
+
     @Inject
     private GroupaccessRepository groupaccessRepository;
-    
+
+    // User repository functinality for finding currently logged in user
+    @Inject
+    private UserRepository userRepository;
+
     /**
      * POST  /groupaccesses : Create a new groupaccess.
      *
@@ -46,6 +51,9 @@ public class GroupaccessResource {
         if (groupaccess.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("groupaccess", "idexists", "A new groupaccess cannot already have an ID")).body(null);
         }
+        // Get the current logged in user to be used as the case creator
+        groupaccess.setUser(userRepository.findLoggedInUser());
+
         Groupaccess result = groupaccessRepository.save(groupaccess);
         return ResponseEntity.created(new URI("/api/groupaccesses/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("groupaccess", result.getId().toString()))
