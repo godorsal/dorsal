@@ -95,7 +95,11 @@ public class GroupaccessResource {
     @Timed
     public List<Groupaccess> getAllGroupaccesses() {
         log.debug("REST request to get all Groupaccesses");
-        List<Groupaccess> groupaccesses = groupaccessRepository.findAll();
+        // Find group accesses that the user owns
+        List<Groupaccess> groupaccesses = groupaccessRepository.findByUserIsCurrentUser(); //findAll();
+
+        // Find Group accessses that the user is member of
+        groupaccesses.addAll(groupaccessRepository.findByAuthorizeduserIsCurrentUser());
         return groupaccesses;
     }
 

@@ -96,7 +96,7 @@ public class CaseupdateResource {
     @Timed
     public List<Caseupdate> getAllCaseupdates() {
         log.debug("REST request to get all Caseupdates");
-        List<Caseupdate> caseupdates = caseupdateRepository.findByUserIsCurrentUser();
+        List<Caseupdate> caseupdates = caseupdateRepository.findAll();
         return caseupdates;
     }
 
