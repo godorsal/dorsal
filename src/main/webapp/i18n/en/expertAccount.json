@@ -1,0 +1,33 @@
+{
+    "dorsalApp": {
+        "expertAccount" : {
+            "home": {
+                "title": "Expert Accounts",
+                "createLabel": "Create a new Expert Account",
+                "createOrEditLabel": "Create or edit a Expert Account",
+                "search": "Search for Expert Account"
+            },
+            "created": "A new Expert Account is created with identifier {{ param }}",
+            "updated": "A Expert Account is updated with identifier {{ param }}",
+            "deleted": "A Expert Account is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Expert Account {{ id }}?"
+            },
+            "detail": {
+                "title": "Expert Account"
+            },
+            "phone": "Phone",
+            "skype": "Skype",
+            "othercommunication": "Othercommunication",
+            "location": "Location",
+            "expertScore": "Expert Score",
+            "handle": "Handle",
+            "languages": "Languages",
+            "imagePath": "Image Path",
+            "firstTechnologyPreference": "First Technology Preference",
+            "secondTechnologyPreference": "Second Technology Preference",
+            "thirdTechnologyPreference": "Third Technology Preference",
+            "user": "User"
+        }
+    }
+}

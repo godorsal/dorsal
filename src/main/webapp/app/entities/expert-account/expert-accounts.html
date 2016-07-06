@@ -1,0 +1,80 @@
+<div>
+    <h2 translate="dorsalApp.expertAccount.home.title">Expert Accounts</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="expert-account.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  translate="dorsalApp.expertAccount.home.createLabel">
+                        Create new Expert Account
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span translate="global.field.id">ID</span></th>
+                    <th><span translate="dorsalApp.expertAccount.phone">Phone</span></th>
+                    <th><span translate="dorsalApp.expertAccount.skype">Skype</span></th>
+                    <th><span translate="dorsalApp.expertAccount.othercommunication">Othercommunication</span></th>
+                    <th><span translate="dorsalApp.expertAccount.location">Location</span></th>
+                    <th><span translate="dorsalApp.expertAccount.expertScore">Expert Score</span></th>
+                    <th><span translate="dorsalApp.expertAccount.handle">Handle</span></th>
+                    <th><span translate="dorsalApp.expertAccount.languages">Languages</span></th>
+                    <th><span translate="dorsalApp.expertAccount.imagePath">Image Path</span></th>
+                    <th><span translate="dorsalApp.expertAccount.firstTechnologyPreference">First Technology Preference</span></th>
+                    <th><span translate="dorsalApp.expertAccount.secondTechnologyPreference">Second Technology Preference</span></th>
+                    <th><span translate="dorsalApp.expertAccount.thirdTechnologyPreference">Third Technology Preference</span></th>
+                    <th><span translate="dorsalApp.expertAccount.user">User</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="expertAccount in vm.expertAccounts track by expertAccount.id">
+                    <td><a ui-sref="expert-account-detail({id:expertAccount.id})">{{expertAccount.id}}</a></td>
+                    <td>{{expertAccount.phone}}</td>
+                    <td>{{expertAccount.skype}}</td>
+                    <td>{{expertAccount.othercommunication}}</td>
+                    <td>{{expertAccount.location}}</td>
+                    <td>{{expertAccount.expertScore}}</td>
+                    <td>{{expertAccount.handle}}</td>
+                    <td>{{expertAccount.languages}}</td>
+                    <td>{{expertAccount.imagePath}}</td>
+                    <td>{{expertAccount.firstTechnologyPreference}}</td>
+                    <td>{{expertAccount.secondTechnologyPreference}}</td>
+                    <td>{{expertAccount.thirdTechnologyPreference}}</td>
+                    <td>
+                        {{expertAccount.user.id}}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="expert-account-detail({id:expertAccount.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="expert-account.edit({id:expertAccount.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="expert-account.delete({id:expertAccount.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

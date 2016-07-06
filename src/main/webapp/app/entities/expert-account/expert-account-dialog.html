@@ -1,0 +1,104 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myExpertAccountLabel" translate="dorsalApp.expertAccount.home.createOrEditLabel">Create or edit a Expert Account</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.expertAccount.id">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.expertAccount.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.expertAccount.phone" for="field_phone">Phone</label>
+            <input type="text" class="form-control" name="phone" id="field_phone"
+                    ng-model="vm.expertAccount.phone"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.expertAccount.skype" for="field_skype">Skype</label>
+            <input type="text" class="form-control" name="skype" id="field_skype"
+                    ng-model="vm.expertAccount.skype"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.expertAccount.othercommunication" for="field_othercommunication">Othercommunication</label>
+            <input type="text" class="form-control" name="othercommunication" id="field_othercommunication"
+                    ng-model="vm.expertAccount.othercommunication"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.expertAccount.location" for="field_location">Location</label>
+            <input type="text" class="form-control" name="location" id="field_location"
+                    ng-model="vm.expertAccount.location"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.expertAccount.expertScore" for="field_expertScore">Expert Score</label>
+            <input type="number" class="form-control" name="expertScore" id="field_expertScore"
+                    ng-model="vm.expertAccount.expertScore"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.expertAccount.handle" for="field_handle">Handle</label>
+            <input type="text" class="form-control" name="handle" id="field_handle"
+                    ng-model="vm.expertAccount.handle"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.expertAccount.languages" for="field_languages">Languages</label>
+            <input type="text" class="form-control" name="languages" id="field_languages"
+                    ng-model="vm.expertAccount.languages"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.expertAccount.imagePath" for="field_imagePath">Image Path</label>
+            <input type="text" class="form-control" name="imagePath" id="field_imagePath"
+                    ng-model="vm.expertAccount.imagePath"
+                    ng-maxlength="512" />
+            <div ng-show="editForm.imagePath.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.imagePath.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="512">
+                    This field cannot be longer than 512 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.expertAccount.firstTechnologyPreference" for="field_firstTechnologyPreference">First Technology Preference</label>
+            <input type="text" class="form-control" name="firstTechnologyPreference" id="field_firstTechnologyPreference"
+                    ng-model="vm.expertAccount.firstTechnologyPreference"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.expertAccount.secondTechnologyPreference" for="field_secondTechnologyPreference">Second Technology Preference</label>
+            <input type="text" class="form-control" name="secondTechnologyPreference" id="field_secondTechnologyPreference"
+                    ng-model="vm.expertAccount.secondTechnologyPreference"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.expertAccount.thirdTechnologyPreference" for="field_thirdTechnologyPreference">Third Technology Preference</label>
+            <input type="text" class="form-control" name="thirdTechnologyPreference" id="field_thirdTechnologyPreference"
+                    ng-model="vm.expertAccount.thirdTechnologyPreference"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label translate="dorsalApp.expertAccount.user" for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" ng-model="vm.expertAccount.user" ng-options="user as user.id for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

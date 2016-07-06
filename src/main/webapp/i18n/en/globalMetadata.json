@@ -1,0 +1,23 @@
+{
+    "dorsalApp": {
+        "globalMetadata" : {
+            "home": {
+                "title": "Global Metadata",
+                "createLabel": "Create a new Global Metadata",
+                "createOrEditLabel": "Create or edit a Global Metadata",
+                "search": "Search for Global Metadata"
+            },
+            "created": "A new Global Metadata is created with identifier {{ param }}",
+            "updated": "A Global Metadata is updated with identifier {{ param }}",
+            "deleted": "A Global Metadata is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Global Metadata {{ id }}?"
+            },
+            "detail": {
+                "title": "Global Metadata"
+            },
+            "expertRate": "Expert Rate",
+            "minimumCaseLength": "Minimum Case Length"
+        }
+    }
+}
