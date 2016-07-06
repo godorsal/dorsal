@@ -16,17 +16,10 @@
             "detail": {
                 "title": "Useraccount"
             },
-            "phone": "Phone",
-            "skype": "Skype",
-            "othercommunication": "Othercommunication",
             "location": "Location",
-            "score": "Score",
-            "isexpert": "Isexpert",
             "preferlocalexpert": "Preferlocalexpert",
             "handle": "Handle",
-            "languages": "Languages",
             "companyname": "Companyname",
-            "technologypreference": "Technologypreference",
             "user": "User"
         }
     }

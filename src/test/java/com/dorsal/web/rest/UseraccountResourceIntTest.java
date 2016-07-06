@@ -41,31 +41,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @IntegrationTest
 public class UseraccountResourceIntTest {
 
-    private static final String DEFAULT_PHONE = "AAAAA";
-    private static final String UPDATED_PHONE = "BBBBB";
-    private static final String DEFAULT_SKYPE = "AAAAA";
-    private static final String UPDATED_SKYPE = "BBBBB";
-    private static final String DEFAULT_OTHERCOMMUNICATION = "AAAAA";
-    private static final String UPDATED_OTHERCOMMUNICATION = "BBBBB";
     private static final String DEFAULT_LOCATION = "AAAAA";
     private static final String UPDATED_LOCATION = "BBBBB";
-
-    private static final Integer DEFAULT_SCORE = 1;
-    private static final Integer UPDATED_SCORE = 2;
-
-    private static final Boolean DEFAULT_ISEXPERT = false;
-    private static final Boolean UPDATED_ISEXPERT = true;
 
     private static final Boolean DEFAULT_PREFERLOCALEXPERT = false;
     private static final Boolean UPDATED_PREFERLOCALEXPERT = true;
     private static final String DEFAULT_HANDLE = "AAAAA";
     private static final String UPDATED_HANDLE = "BBBBB";
-    private static final String DEFAULT_LANGUAGES = "AAAAA";
-    private static final String UPDATED_LANGUAGES = "BBBBB";
     private static final String DEFAULT_COMPANYNAME = "AAAAA";
     private static final String UPDATED_COMPANYNAME = "BBBBB";
-    private static final String DEFAULT_TECHNOLOGYPREFERENCE = "AAAAA";
-    private static final String UPDATED_TECHNOLOGYPREFERENCE = "BBBBB";
 
     @Inject
     private UseraccountRepository useraccountRepository;
@@ -93,17 +77,10 @@ public class UseraccountResourceIntTest {
     @Before
     public void initTest() {
         useraccount = new Useraccount();
-        useraccount.setPhone(DEFAULT_PHONE);
-        useraccount.setSkype(DEFAULT_SKYPE);
-        useraccount.setOthercommunication(DEFAULT_OTHERCOMMUNICATION);
         useraccount.setLocation(DEFAULT_LOCATION);
-        useraccount.setScore(DEFAULT_SCORE);
-        useraccount.setIsexpert(DEFAULT_ISEXPERT);
         useraccount.setPreferlocalexpert(DEFAULT_PREFERLOCALEXPERT);
         useraccount.setHandle(DEFAULT_HANDLE);
-        useraccount.setLanguages(DEFAULT_LANGUAGES);
         useraccount.setCompanyname(DEFAULT_COMPANYNAME);
-        useraccount.setTechnologypreference(DEFAULT_TECHNOLOGYPREFERENCE);
     }
 
     @Test
@@ -122,17 +99,10 @@ public class UseraccountResourceIntTest {
         List<Useraccount> useraccounts = useraccountRepository.findAll();
         assertThat(useraccounts).hasSize(databaseSizeBeforeCreate + 1);
         Useraccount testUseraccount = useraccounts.get(useraccounts.size() - 1);
-        assertThat(testUseraccount.getPhone()).isEqualTo(DEFAULT_PHONE);
-        assertThat(testUseraccount.getSkype()).isEqualTo(DEFAULT_SKYPE);
-        assertThat(testUseraccount.getOthercommunication()).isEqualTo(DEFAULT_OTHERCOMMUNICATION);
         assertThat(testUseraccount.getLocation()).isEqualTo(DEFAULT_LOCATION);
-        assertThat(testUseraccount.getScore()).isEqualTo(DEFAULT_SCORE);
-        assertThat(testUseraccount.isIsexpert()).isEqualTo(DEFAULT_ISEXPERT);
         assertThat(testUseraccount.isPreferlocalexpert()).isEqualTo(DEFAULT_PREFERLOCALEXPERT);
         assertThat(testUseraccount.getHandle()).isEqualTo(DEFAULT_HANDLE);
-        assertThat(testUseraccount.getLanguages()).isEqualTo(DEFAULT_LANGUAGES);
         assertThat(testUseraccount.getCompanyname()).isEqualTo(DEFAULT_COMPANYNAME);
-        assertThat(testUseraccount.getTechnologypreference()).isEqualTo(DEFAULT_TECHNOLOGYPREFERENCE);
     }
 
     @Test
@@ -146,17 +116,10 @@ public class UseraccountResourceIntTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(useraccount.getId().intValue())))
-                .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE.toString())))
-                .andExpect(jsonPath("$.[*].skype").value(hasItem(DEFAULT_SKYPE.toString())))
-                .andExpect(jsonPath("$.[*].othercommunication").value(hasItem(DEFAULT_OTHERCOMMUNICATION.toString())))
                 .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION.toString())))
-                .andExpect(jsonPath("$.[*].score").value(hasItem(DEFAULT_SCORE)))
-                .andExpect(jsonPath("$.[*].isexpert").value(hasItem(DEFAULT_ISEXPERT.booleanValue())))
                 .andExpect(jsonPath("$.[*].preferlocalexpert").value(hasItem(DEFAULT_PREFERLOCALEXPERT.booleanValue())))
                 .andExpect(jsonPath("$.[*].handle").value(hasItem(DEFAULT_HANDLE.toString())))
-                .andExpect(jsonPath("$.[*].languages").value(hasItem(DEFAULT_LANGUAGES.toString())))
-                .andExpect(jsonPath("$.[*].companyname").value(hasItem(DEFAULT_COMPANYNAME.toString())))
-                .andExpect(jsonPath("$.[*].technologypreference").value(hasItem(DEFAULT_TECHNOLOGYPREFERENCE.toString())));
+                .andExpect(jsonPath("$.[*].companyname").value(hasItem(DEFAULT_COMPANYNAME.toString())));
     }
 
     @Test
@@ -170,17 +133,10 @@ public class UseraccountResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(useraccount.getId().intValue()))
-            .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE.toString()))
-            .andExpect(jsonPath("$.skype").value(DEFAULT_SKYPE.toString()))
-            .andExpect(jsonPath("$.othercommunication").value(DEFAULT_OTHERCOMMUNICATION.toString()))
             .andExpect(jsonPath("$.location").value(DEFAULT_LOCATION.toString()))
-            .andExpect(jsonPath("$.score").value(DEFAULT_SCORE))
-            .andExpect(jsonPath("$.isexpert").value(DEFAULT_ISEXPERT.booleanValue()))
             .andExpect(jsonPath("$.preferlocalexpert").value(DEFAULT_PREFERLOCALEXPERT.booleanValue()))
             .andExpect(jsonPath("$.handle").value(DEFAULT_HANDLE.toString()))
-            .andExpect(jsonPath("$.languages").value(DEFAULT_LANGUAGES.toString()))
-            .andExpect(jsonPath("$.companyname").value(DEFAULT_COMPANYNAME.toString()))
-            .andExpect(jsonPath("$.technologypreference").value(DEFAULT_TECHNOLOGYPREFERENCE.toString()));
+            .andExpect(jsonPath("$.companyname").value(DEFAULT_COMPANYNAME.toString()));
     }
 
     @Test
@@ -201,17 +157,10 @@ public class UseraccountResourceIntTest {
         // Update the useraccount
         Useraccount updatedUseraccount = new Useraccount();
         updatedUseraccount.setId(useraccount.getId());
-        updatedUseraccount.setPhone(UPDATED_PHONE);
-        updatedUseraccount.setSkype(UPDATED_SKYPE);
-        updatedUseraccount.setOthercommunication(UPDATED_OTHERCOMMUNICATION);
         updatedUseraccount.setLocation(UPDATED_LOCATION);
-        updatedUseraccount.setScore(UPDATED_SCORE);
-        updatedUseraccount.setIsexpert(UPDATED_ISEXPERT);
         updatedUseraccount.setPreferlocalexpert(UPDATED_PREFERLOCALEXPERT);
         updatedUseraccount.setHandle(UPDATED_HANDLE);
-        updatedUseraccount.setLanguages(UPDATED_LANGUAGES);
         updatedUseraccount.setCompanyname(UPDATED_COMPANYNAME);
-        updatedUseraccount.setTechnologypreference(UPDATED_TECHNOLOGYPREFERENCE);
 
         restUseraccountMockMvc.perform(put("/api/useraccounts")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -222,17 +171,10 @@ public class UseraccountResourceIntTest {
         List<Useraccount> useraccounts = useraccountRepository.findAll();
         assertThat(useraccounts).hasSize(databaseSizeBeforeUpdate);
         Useraccount testUseraccount = useraccounts.get(useraccounts.size() - 1);
-        assertThat(testUseraccount.getPhone()).isEqualTo(UPDATED_PHONE);
-        assertThat(testUseraccount.getSkype()).isEqualTo(UPDATED_SKYPE);
-        assertThat(testUseraccount.getOthercommunication()).isEqualTo(UPDATED_OTHERCOMMUNICATION);
         assertThat(testUseraccount.getLocation()).isEqualTo(UPDATED_LOCATION);
-        assertThat(testUseraccount.getScore()).isEqualTo(UPDATED_SCORE);
-        assertThat(testUseraccount.isIsexpert()).isEqualTo(UPDATED_ISEXPERT);
         assertThat(testUseraccount.isPreferlocalexpert()).isEqualTo(UPDATED_PREFERLOCALEXPERT);
         assertThat(testUseraccount.getHandle()).isEqualTo(UPDATED_HANDLE);
-        assertThat(testUseraccount.getLanguages()).isEqualTo(UPDATED_LANGUAGES);
         assertThat(testUseraccount.getCompanyname()).isEqualTo(UPDATED_COMPANYNAME);
-        assertThat(testUseraccount.getTechnologypreference()).isEqualTo(UPDATED_TECHNOLOGYPREFERENCE);
     }
 
     @Test

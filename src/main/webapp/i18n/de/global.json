@@ -24,6 +24,9 @@
                 "caseupdate": "Caseupdate",
                 "rating": "Rating",
                 "attachement": "Attachement",
+                "expertAccount": "Expert Account",
+                "globalMetadata": "Global Metadata",
+                "userAccount": "User Account",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

@@ -1,4 +1,3 @@
-id;phone;skype;othercommunication;location;score;isexpert;preferlocalexpert;handle;languages;companyname;technologypreference;user_id
-1;415-555-5512;mysql_joe;none;Bay Area;75;true;false;mysql_expert_joe;English;Expert Team;MySQL;5
-2;212-555-5512;postgresql_jack;none;New York City;72;true;false;postgreSQL_expert_jack;English;Expert Team;PostgreSQL;6
-3;312-555-5512;nosql_olivia;none;Chicago Area;777;true;false;nosql_expert_olivia;English,Spanish;Expert Team;MongoDB;7
+id;location;preferlocalexpert;handle;companyname;user_id
+1;Bay Area;false;dorsal_ceo;Dorsal Corp;8
+2;Bay Area;false;dorsal_eng_vp;Dorsal Corp;9
