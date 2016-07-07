@@ -18,6 +18,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,6 +58,10 @@ public class SupportcaseResource {
         // Get the current logged in user to be used as the case creator
         supportcase.setUser(userRepository.findLoggedInUser());
 
+        // Update the date fields
+        supportcase.setDateCreated( ZonedDateTime.now() );
+        supportcase.setDateLastUpdate( ZonedDateTime.now() );
+
         Supportcase result = supportcaseRepository.save(supportcase);
         return ResponseEntity.created(new URI("/api/supportcases/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("supportcase", result.getId().toString()))
@@ -81,6 +86,9 @@ public class SupportcaseResource {
         if (supportcase.getId() == null) {
             return createSupportcase(supportcase);
         }
+        // Adjust time
+        supportcase.setDateLastUpdate( ZonedDateTime.now() );
+        
         Supportcase result = supportcaseRepository.save(supportcase);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("supportcase", supportcase.getId().toString()))

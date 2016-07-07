@@ -17,6 +17,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,6 +56,9 @@ public class CaseupdateResource {
         // Get the current logged in user to be used as the case creator
         caseupdate.setUser(userRepository.findLoggedInUser());
 
+        // Adjust time
+        caseupdate.setDateUpdated(ZonedDateTime.now());
+
         Caseupdate result = caseupdateRepository.save(caseupdate);
         return ResponseEntity.created(new URI("/api/caseupdates/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("caseupdate", result.getId().toString()))
@@ -79,6 +83,10 @@ public class CaseupdateResource {
         if (caseupdate.getId() == null) {
             return createCaseupdate(caseupdate);
         }
+
+        // Adjust time
+        caseupdate.setDateUpdated(ZonedDateTime.now());
+
         Caseupdate result = caseupdateRepository.save(caseupdate);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("caseupdate", caseupdate.getId().toString()))
