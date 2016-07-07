@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .controller('CaseController', CaseController);
 
-    CaseController.$inject = ['$scope', '$window', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', 'Supportcase', '$state', 'DrslMetadata', 'StatusModel'];
+    CaseController.$inject = ['$scope', '$window', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', 'Supportcase', '$state', 'DrslMetadata', 'StatusModel', 'ExpertAccount'];
 
-    function CaseController($scope, $window, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, Supportcase, $state, DrslMetadata, StatusModel) {
+    function CaseController($scope, $window, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, Supportcase, $state, DrslMetadata, StatusModel, ExpertAccount) {
         var vm = this;
         vm.init = init;
         vm.getHistory = getHistory;
@@ -19,6 +19,7 @@
         vm.openShare = openShare;
         vm.passedStep = passedStep;
         vm.openChat = openChat;
+        vm.isExpert = false;
         vm.statusStates = [];
         vm.openCaseAgreement = openCaseAgreement;
         vm.cases = [];
@@ -41,6 +42,10 @@
          * Initialize the controller's data.
          */
         function init() {
+            ExpertAccount.query(function(result){
+                vm.isExpert = (result.length > 0);
+            });
+
             // Make a call to get the initial data.
             Supportcase.query(function(result) {
                 if(result.length < 1){

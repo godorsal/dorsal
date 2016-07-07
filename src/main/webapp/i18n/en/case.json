@@ -58,6 +58,14 @@
                 "badge-11": "super heavy lifter",
                 "badge-12": "resolution writer pro",
                 "badge-13": "time sensitive"
+            },
+            "input": {
+                "desiredOutcome": "Desired <br/> Outcome",
+                "estimatedHours": "Estimated<br/># hours",
+                "estimateComment": "Estimate<br/>Comment",
+                "timeOnCase": "Total time<br/>on case",
+                "resolved": "Resolved",
+                "lastUpdate": "Last update/action "
             }
         },
         "history": {

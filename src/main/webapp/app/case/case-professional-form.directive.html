@@ -1,0 +1,51 @@
+<div class="drsl-case-expert-form">
+    <form ng-submit="submit()">
+        <!-- Name -->
+        <div>
+            <span class="drsl-label">Expert</span>
+            {{expert.firstName}} {{expert.lastName}}
+        </div>
+
+        <!-- Desired Outcome-->
+        <div class="drsl-label-value-row">
+            <div><span  class="drsl-label" translate="case.professional.input.desiredOutcome">Desired<br/>Outcome</span></div>
+            <div><textarea class="form-control" ng-model="case.expectedResult"></textarea></div>
+        </div>
+
+        <!-- Estimated # hours -->
+        <div class="drsl-label-value-row">
+            <div><span  class="drsl-label" translate="case.professional.input.estimatedHours">Estimated<br/># hours</span></div>
+            <div><input class="form-control" type="number" ng-model="case.estimateHours"/></div>
+        </div>
+
+        <!-- Estimate Comment -->
+        <div class="drsl-label-value-row">
+            <div><span  class="drsl-label" translate="case.professional.input.estimateComment">Estimate<br/>Comment</span></div>
+            <div><textarea class="form-control" ng-model="case.estimateComment"></textarea></div>
+        </div>
+
+        <!-- Total Time on Case -->
+        <div class="drsl-label-value-row">
+            <div><span  class="drsl-label" translate="case.professional.input.timeOnCase">Total time<br/>on case</span></div>
+            <div><input class="form-control" type="number" ng-model="case.timeOnCase"/></div>
+        </div>
+
+        <!-- Resolved -->
+        <div class="drsl-label-value-row drsl-case-resolved-wrapper">
+            <div><span class="drsl-label" translate="case.professional.input.resolved">Resolved</span></div>
+            <div>
+                <input id="caseResolved" type="checkbox">
+                <label for="caseResolved"><span></span></label>
+            </div>
+        </div>
+
+        <!-- Last Update & Main Button -->
+        <div>
+            <div>
+                <span class="drsl-label" translate="case.professional.input.lastUpdate">Last update/action </span>
+                <span> {{case.dateLastUpdate | date:"MM/dd/yy h:mm a"}}</span>
+            </div>
+            <div><button type="submit" class="btn btn-success" translate="entity.action.update">update</button></div>
+        </div>
+    </form>
+</div>
