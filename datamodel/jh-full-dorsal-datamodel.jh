@@ -238,4 +238,21 @@ relationship OneToMany {
 	Supportcase{Attachement(supportcase)} to Attachement{supportcase}
 }
 
+///////////////////////////////////
+// Shared Case Entity
+//
+entity SharedCase {}
+
+relationship OneToMany {
+    Supportcase{sharedcase(supportcase)} to SharedCase{supportcase}
+}
+
+relationship OneToMany {
+    User{sharedcase(user)} to SharedCase{user}
+}
+
+relationship OneToMany {
+    User{sharedcase(owner)} to SharedCase{owner}
+}
+
 

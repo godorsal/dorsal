@@ -1,0 +1,66 @@
+<div>
+    <h2 translate="dorsalApp.sharedCase.home.title">Shared Cases</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="shared-case.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  translate="dorsalApp.sharedCase.home.createLabel">
+                        Create new Shared Case
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span translate="global.field.id">ID</span></th>
+                    <th><span translate="dorsalApp.sharedCase.supportcase">Supportcase</span></th>
+                    <th><span translate="dorsalApp.sharedCase.user">User</span></th>
+                    <th><span translate="dorsalApp.sharedCase.owner">Owner</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="sharedCase in vm.sharedCases track by sharedCase.id">
+                    <td><a ui-sref="shared-case-detail({id:sharedCase.id})">{{sharedCase.id}}</a></td>
+                    <td>
+                        <a ui-sref="supportcase-detail({id:sharedCase.supportcase.id})">{{sharedCase.supportcase.id}}</a>
+                    </td>
+                    <td>
+                        {{sharedCase.user.id}}
+                    </td>
+                    <td>
+                        {{sharedCase.owner.id}}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="shared-case-detail({id:sharedCase.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="shared-case.edit({id:sharedCase.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="shared-case.delete({id:sharedCase.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
