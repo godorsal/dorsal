@@ -67,19 +67,14 @@
             brandNewCase.id = null;
             brandNewCase.expectedresult = null;
             brandNewCase.chaturl = null;
-            // brandNewCase.user = vm.getCurrentUser();
             brandNewCase.user = {};
             brandNewCase.user.id = getUser(vm.currentUser);
-
             brandNewCase.expert = {};
             brandNewCase.expert.id = getExpert(brandNewCase.technology);
             brandNewCase.etacompletion = "4 hours";
             brandNewCase.statusmsg = 'Case Created';
-            brandNewCase.dateCreated = new Date();
-            brandNewCase.dateLastUpdate = new Date();
             brandNewCase.summary = vm.caseDetails.summary;
             vm.isSaving = true;
-            // console.log(brandNewCase);
             if (brandNewCase.id !== null) {
                 Supportcase.update(brandNewCase, onSaveSuccess, onSaveError);
             } else {

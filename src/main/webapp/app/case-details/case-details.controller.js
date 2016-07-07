@@ -43,7 +43,6 @@
         }
 
         function submit() {
-            vm.caseupdate.dateUpdated = new Date;
             vm.caseupdate.updateMsg = vm.updatemsg;
             console.log("Case", vm.caseupdate);
             if (vm.caseupdate.id !== null) {

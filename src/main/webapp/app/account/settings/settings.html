@@ -120,7 +120,7 @@ Your e-mail cannot be longer than 100 characters.
                         <div class="form-group">
                             <label class="control-label sr-only" for="ccName">Name on Card</label>
                             <input type="text" class="form-control" id="ccName" name="ccName" placeholder="Card Holder's Name"
-                            ng-minlength=1 ng-maxlength=50 maxlength="50" ng-model="vm.creditCard.name" required>
+                            ng-minlength=1  ng-model="vm.creditCard.name" required>
                         </div>
                         <div class="form-group">
                             <label class="control-label sr-only" for="text">Card Number</label>
@@ -179,7 +179,7 @@ Your e-mail cannot be longer than 100 characters.
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label class="control-label sr-only" for="cvv">Card CVV</label>
-                                    <input ng-keypress="vm.numberTab($event)" type="number" class="form-control" id="cvv" name="cvv" placeholder="Security Code"
+                                    <input ng-keypress="vm.numberTab($event)" type="number" class="form-control" id="cvv" name="cvv" placeholder="CVV"
                                     ng-minlength=1 ng-maxlength=4  maxlength="3" ng-model="vm.creditCard.cvv" required  style="width: 100px;">
                                 </div>
                             </div>
