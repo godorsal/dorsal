@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('SettingsController', SettingsController);
 
-    SettingsController.$inject = ['Principal', 'Auth', 'JhiLanguageService', '$translate', 'Payment', 'Groupaccess', 'Useraccount', 'User'];
+    SettingsController.$inject = ['Principal', 'Auth', 'JhiLanguageService', '$translate', 'Payment', 'Groupaccess', 'Useraccount', 'User', 'Focus'];
 
-    function SettingsController(Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, Useraccount, User) {
+    function SettingsController(Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, Useraccount, User, focus) {
         var vm = this;
 
         vm.error = null;
@@ -20,6 +20,7 @@
         // vm.authorizedUsers = {};
         vm.isAlreadyAuthorized;
         vm.getAuthorizedUsers = getAuthorizedUsers;
+        vm.numberTab = numberTab;
         vm.checkAuthorized = checkAuthorized;
         vm.addAuthorizedUser = addAuthorizedUser;
         vm.removeAuthorizedUsers = removeAuthorizedUsers;
@@ -31,10 +32,15 @@
                 if(ccdata.user.login === vm.settingsAccount.login){ var data = ccdata.ccdata.split('##')
                     vm.creditCard = {
                         name: data[0],
-                        number: data[1],
+                        number: {
+                            one: parseInt(data[1].match(/.{1,4}/g)[0]),
+                            two: parseInt(data[1].match(/.{1,4}/g)[1]),
+                            three: parseInt(data[1].match(/.{1,4}/g)[2]),
+                            four: parseInt(data[1].match(/.{1,4}/g)[3])
+                        },
                         month: data[2],
                         year: data[3],
-                        cvv: data[4],
+                        cvv: parseInt(data[4]),
                         id: ccdata.id,
                         user: ccdata.user
                     }
@@ -42,7 +48,16 @@
                 }
             })
         })
-
+        function numberTab(event){
+            if(event.target.value.length === event.target.maxLength){
+                var currentNumber = event.target.id.match(/\d+/);
+                if(currentNumber && currentNumber[0] < 4){
+                    var newNumber = parseInt(currentNumber[0]) + 1;
+                    focus('ccNumber' + newNumber);
+                }
+                event.preventDefault();
+            }
+        }
         /**
         * Store the "settings account" in a separate variable, and not in the shared "account" variable.
         */
@@ -91,6 +106,8 @@
             });
         }
         function addCard() {
+            var number = Object.keys(vm.creditCard.number).map(function(k) { return vm.creditCard.number[k] });
+            vm.creditCard.number = number.join('');
             var arr = Object.keys(vm.creditCard).map(function(k) { return vm.creditCard[k] });
             console.log(arr);
             var data = arr.slice(0, 5).join("##")
@@ -107,7 +124,7 @@
                 console.log(payment);
                 Payment.save(payment, onSaveSuccess, onSaveError);
             }
-            // console.log(arr.join("##"));
+            console.log(arr.join("##"));
         }
         function onSaveSuccess(payment){
             console.log(payment);

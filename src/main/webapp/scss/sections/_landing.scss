@@ -10,7 +10,50 @@ Landing Page
         content: '';
         display: none;
     }
+    .home-title{
+        font-size: 52px;
+        font-weight: 800;
+        text-decoration: none;
 
+    }
+    .home-subtitle{
+        font-size: 22px;
+    }
+    .home-connect-button{
+        display: inline-block;
+        color: #fff;
+        background: #f38c20;
+        border-radius: 50%;
+        padding: 55px 15px 55px 15px;
+        font-weight: bold;
+        font-size: 32px;
+        line-height: 0.75;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+    }
+    .cards > img {
+        width: 10px;
+    }
+    .home-connect-button:hover {
+        box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.75);
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+        text-decoration: none;
+    }
+    .headAndTag{
+        padding-bottom: 20px;
+    }
+    .buttonAndJoin{
+        padding-bottom: 40px;
+    }
+    h2{
+        font-family: 'Raleway', Helvetica, Arial, Lucida, sans-serif;
+    }
+    h4{
+        font-family: 'Raleway', sans-serif;
+        font-weight: 300;
+    }
     .drsl-home-bg-wrapper {
         position: absolute;
         top: 0;
@@ -51,25 +94,32 @@ Landing Page
     }
 
     .drsl-home-tech-wrapper {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-wrap: wrap;
         padding: 0;
         margin-left: -50px;
         margin-right: -50px;
         margin-bottom: 60px;
         position: relative;
-        // background-color: rgba(0, 0, 0, 0.05);
         font-size: 24px;
-        font-weight: 200;
+        font-weight: 300;
         text-align: center;
-
-        span {
-            padding: 0 40px;
+        li {
+            list-style: none;
+            margin: 10px 25px;
+            font-size: 28px;
             opacity: .7;
         }
     }
-
+    body {
+        font-family: 'Raleway', Helvetica, Arial, Lucida, sans-serif;
+    }
     .drsl-home-additional-info-wrapper {
-        padding: 0 64px;
-
+        font-family: 'Raleway', Helvetica, Arial, Lucida, sans-serif;
+        padding: 20px 100px 20px;
         > div {
             // background-color: #FEFEFE;
             // background-color: rgba(0, 0, 0, 0);
@@ -85,19 +135,21 @@ Landing Page
 
     .drsl-home-additional-info-item {
         padding: 5px;
-        background-color: #FEFEFE;
-        border: 1px solid #B1B1B1;
+        background-color: #FFFFFF;
+        border: 1px solid #666666;
 
         // height: 160px;
         height: 150px;
-        // width: 400px;
-
-        h3 {
-            color: #6A6A6A;
-            // font-size: 18px;
-            font-size: 24px;
-            font-weight: 200;
+        width: 257.969px;
+        padding: 10px;
+        h4 {
+            color: #666666;
+            font-size: 22px;
             text-align: center;
+            padding-bottom: 16px;
+        }
+        p {
+            font-size: 11px;
         }
     }
 }

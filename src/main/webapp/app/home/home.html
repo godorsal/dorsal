@@ -13,36 +13,46 @@
         <div class="col-md-12">
             <div>
                 <!-- Header -->
-                <h1 translate="home.header">Connect, Solve, Deliver</h1>
-                <!-- Tagline -->
-                <p translate="home.tagline" >Fast, reliable open source support without subscriptions or license fees</p>
+                <div class="headAndTag">
+                    <h2 translate="home.header" class="home-title">Connect, Solve, Deliver</h2>
+                    <!-- <h1 translate="home.header" class="home-title">Connect, Solve, Deliver</h1> -->
+                    <!-- Tagline -->
+                    <h4 translate="home.tagline" >Fast, reliable open source support without subscriptions or license fees</h4>
+                </div>
+                <!-- <p translate="home.tagline" >Fast, reliable open source support without subscriptions or license fees</p> -->
                 <!-- Button -->
                 <!-- <a class="drsl-custom-button" ui-sref="concierge" translate="home.mainButton" style="display: inline-block;">Get Started</a> -->
-                <button ui-sref="concierge" translate="home.mainButton" class="drsl-custom-button" ><span translate="concierge.caseDetails.button" style="margin-bottom: 5px; display: inline-block !important;" class="ng-scope">connect now</span></button>
-                <!-- <a class="drsl-custom-button" ui-sref="concierge" translate="home.mainButton" style="display: inline-block;">Get Started</a> -->
-                <!-- <a class="btn btn-success" ui-sref="concierge" translate="home.mainButton">Get Started</a> -->
+                <p class="buttonAndJoin"><a class="home-connect-button" href="https://app.godorsal.com">connect<br>
+                    now</a><br>
+                    <a class="join-dorsal-button">Join private beta</a>
+                </p>
+
+                    <!-- <button ui-sref="concierge" translate="home.mainButton" class="drsl-custom-button" ><span translate="concierge.caseDetails.button" style="margin-bottom: 5px; display: inline-block !important;" class="ng-scope">connect now</span></button> -->
+                    <!-- <a class="drsl-custom-button" ui-sref="concierge" translate="home.mainButton" style="display: inline-block;">Get Started</a> -->
+                    <!-- <a class="btn btn-success" ui-sref="concierge" translate="home.mainButton">Get Started</a> -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Technology -->
+        <ul class="drsl-home-tech-wrapper">
+            <li translate="home.tech.mysql">MySQL</li>
+            <li translate="home.tech.mariadb">MariaDB</li>
+            <li translate="home.tech.postgresql">PostgreSQL</li>
+            <li translate="home.tech.mongodb">MongoDB</li>
+            <li translate="home.tech.hbase">HBase</li>
+            <li translate="home.tech.cassandradb">CassandraDB</li>
+        </ul>
+
+        <!-- Additional-Information -->
+        <div class="row drsl-home-additional-info-wrapper">
+            <div class="col-md-4" ng-repeat="slot in [1, 2, 3]">
+                <div class="drsl-home-additional-info-item">
+                    <!-- <p>{{'home.additionalInfo.slot_'+slot+'.title' | translate}}</p> -->
+                    <h4>{{'home.additionalInfo.slot_'+slot+'.title' | translate}}</h4>
+                    <!-- <h3>{{'home.additionalInfo.slot_'+slot+'.title' | translate}}</h3> -->
+                    <p>{{'home.additionalInfo.slot_'+slot+'.description' | translate}}</p>
+                </div>
             </div>
         </div>
     </div>
-
-    <!-- Technology -->
-    <div class="drsl-home-tech-wrapper">
-        <span translate="home.tech.mysql">MySQL</span>
-        <span translate="home.tech.mariadb">MariaDB</span>
-        <span translate="home.tech.postgresql">PostgreSQL</span>
-        <span translate="home.tech.mongodb">MongoDB</span>
-        <span translate="home.tech.hbase">HBase</span>
-        <span translate="home.tech.cassandradb">CassandraDB</span>
-    </div>
-
-    <!-- Additional-Information -->
-    <div class="row drsl-home-additional-info-wrapper">
-        <div class="col-md-4" ng-repeat="slot in [1, 2, 3]">
-            <div class="drsl-home-additional-info-item">
-                <!-- <p>{{'home.additionalInfo.slot_'+slot+'.title' | translate}}</p> -->
-                <h3>{{'home.additionalInfo.slot_'+slot+'.title' | translate}}</h3>
-                <p>{{'home.additionalInfo.slot_'+slot+'.description' | translate}}</p>
-            </div>
-        </div>
-    </div>
-</div>

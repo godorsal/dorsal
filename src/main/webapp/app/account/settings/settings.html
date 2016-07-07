@@ -101,7 +101,20 @@ Your e-mail cannot be longer than 100 characters.
     <div class="drsl-payment-content">
         <div >
             <div class="panel panel-default">
-                <div class="panel-heading">Authorized Credit Card</div>
+                <div class="panel-heading">
+                    <span>
+                        Authorized Credit Card
+                    </span>
+                    <span class="cards">
+                        <img src="https://www.braintreepayments.com/images/visa-logo-8ea8a4fc.svg" alt="" style="width: 55px;">
+                        <img src="https://www.braintreepayments.com/images/mastercard-logo-2a82d596.svg" alt="" style="width: 55px;">
+                        <img src="https://www.braintreepayments.com/images/maestro-logo-db229f9d.svg" alt="" style="width: 55px;">
+                        <img src="https://www.braintreepayments.com/images/jcb-logo-62a7882e.svg" alt="" style="width: 55px;">
+                        <img src="https://www.braintreepayments.com/images/discover-logo-d781232e.svg" alt="" style="width: 55px;">
+                        <img src="https://www.braintreepayments.com/images/amex-logo-e238f7a3.svg" alt="" style="width: 55px;">
+                        <img src="https://www.braintreepayments.com/images/diners-club-logo-cd0de029.svg" alt="" style="width: 55px;">
+                    </span>
+                </div>
                 <div class="panel-body">
                     <form ng-submit="vm.addCard()">
                         <div class="form-group">
@@ -111,9 +124,17 @@ Your e-mail cannot be longer than 100 characters.
                         </div>
                         <div class="form-group">
                             <label class="control-label sr-only" for="text">Card Number</label>
-                            <input type="text" class="form-control" id="ccNumber" name="ccNumber" placeholder="Credit Card Number" maxlength="19"
-                            ng-minlength=1 ng-maxlength=19
-                             ng-model="vm.creditCard.number" required>
+                            <input type="number" class="form-control" id="ccNumber1" name="ccNumber" placeholder="Credit"
+                            ng-model="vm.creditCard.number.one" required style="width: 100px; display: inline-block;" ng-keypress="vm.numberTab($event)" maxlength="4">
+                            -
+                            <input type="number" class="form-control" id="ccNumber2" name="ccNumber" placeholder="Card" ng-keypress="vm.numberTab($event)"
+                            ng-model="vm.creditCard.number.two" required style="width: 100px; display: inline-block;" maxlength="4">
+                            -
+                            <input type="number" class="form-control" id="ccNumber3" name="ccNumber" placeholder="Number" ng-keypress="vm.numberTab($event)"
+                            ng-model="vm.creditCard.number.three" required style="width: 100px; display: inline-block;" maxlength="4">
+                            -
+                            <input type="number" class="form-control" id="ccNumber4" name="ccNumber"  ng-keypress="vm.numberTab($event)"
+                            ng-model="vm.creditCard.number.four" required style="width: 100px; display: inline-block;" maxlength="4">
                         </div>
                         <div class="form-group">
 
@@ -158,8 +179,8 @@ Your e-mail cannot be longer than 100 characters.
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label class="control-label sr-only" for="cvv">Card CVV</label>
-                                    <input type="text" class="form-control" id="cvv" name="cvv" placeholder="Security Code"
-                                    ng-minlength=1 ng-maxlength=4  maxlength="4" ng-model="vm.creditCard.cvv" required>
+                                    <input ng-keypress="vm.numberTab($event)" type="number" class="form-control" id="cvv" name="cvv" placeholder="Security Code"
+                                    ng-minlength=1 ng-maxlength=4  maxlength="3" ng-model="vm.creditCard.cvv" required  style="width: 100px;">
                                 </div>
                             </div>
                         </div>
@@ -188,26 +209,26 @@ Your e-mail cannot be longer than 100 characters.
                     </form>
 
                     <!-- <div class="drsl-user-list empty" ng-hide="vm.getAuthorizedUsers().length">
-                        <div>No Authorized Users</div>
-                    </div> -->
-                    <div class="drsl-user-list empty" ng-hide="vm.authorizedUsers.length">
-                        <div>No Authorized Users</div>
-                    </div>
-
-                    <!-- <div class="drsl-user-list" ng-show="vm.getAuthorizedUsers().length">
-                        <div>
-                            <button class="btn btn-success" ng-click="vm.removeAuthorizedUsers(user)" ng-repeat="user in vm.getAuthorizedUsers()" uib-tooltip="remove user">{{user}} <i class="fa fa-times-circle fa-lg"></i></button>
-                        </div>
-                    </div> -->
-                    <div class="drsl-user-list" ng-show="vm.authorizedUsers.length">
-                        <div>
-                            <button class="btn btn-success" ng-click="vm.removeAuthorizedUsers(user.id, $index)" ng-repeat="user in vm.authorizedUsers track by $index" uib-tooltip="remove user" style="display: block; margin-top: 10px; margin-bottom: 10px;">{{user.authorizeduser.email}} <i class="fa fa-times-circle fa-lg"></i></button>
-                        </div>
-                    </div>
+                    <div>No Authorized Users</div>
+                </div> -->
+                <div class="drsl-user-list empty" ng-hide="vm.authorizedUsers.length">
+                    <div>No Authorized Users</div>
                 </div>
+
+                <!-- <div class="drsl-user-list" ng-show="vm.getAuthorizedUsers().length">
+                <div>
+                <button class="btn btn-success" ng-click="vm.removeAuthorizedUsers(user)" ng-repeat="user in vm.getAuthorizedUsers()" uib-tooltip="remove user">{{user}} <i class="fa fa-times-circle fa-lg"></i></button>
+            </div>
+        </div> -->
+        <div class="drsl-user-list" ng-show="vm.authorizedUsers.length">
+            <div>
+                <button class="btn btn-success" ng-click="vm.removeAuthorizedUsers(user.id, $index)" ng-repeat="user in vm.authorizedUsers track by $index" uib-tooltip="remove user" style="display: block; margin-top: 10px; margin-bottom: 10px;">{{user.authorizeduser.email}} <i class="fa fa-times-circle fa-lg"></i></button>
             </div>
         </div>
     </div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>

@@ -14,15 +14,15 @@
         "additionalInfo": {
             "slot_1": {
                 "title": "Fast, Easy Access",
-                "description": "Describe your problem in seconds, get the right Experts started on your case and keep everyone on your team in the loop."
+                "description": "Describe your problem in seconds, get the right experts started on the case and keep your team in the loop."
             },
             "slot_2": {
                 "title": "Personalized For You",
-                "description": "Tune the Dorsal service to meet your technology interests, company best practices and technical standards."
+                "description": "Tune the Dorsal service to your technical interests, enterprise standards and security policies."
             },
             "slot_3": {
                 "title": "Certified Professionals",
-                "description": "Our experts are vetted to maintain the highest standards of expertise, quality, and security."
+                "description": "Our experts are vetted to maintain the highest standards of expertise, quality and security."
             }
         }
     }
