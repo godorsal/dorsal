@@ -1,0 +1,25 @@
+
+<div>
+    <h2><span translate="dorsalApp.sharedCase.detail.title">Shared Case</span> {{vm.sharedCase.id}}</h2>
+    <hr>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span translate="dorsalApp.sharedCase.supportcase">Supportcase</span></dt>
+        <dd>
+            <a ui-sref="supportcase-detail({id:vm.sharedCase.supportcase.id})">{{vm.sharedCase.supportcase.id}}</a>
+        </dd>
+        <dt><span translate="dorsalApp.sharedCase.user">User</span></dt>
+        <dd>
+            {{vm.sharedCase.user.id}}
+        </dd>
+        <dt><span translate="dorsalApp.sharedCase.owner">Owner</span></dt>
+        <dd>
+            {{vm.sharedCase.owner.id}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

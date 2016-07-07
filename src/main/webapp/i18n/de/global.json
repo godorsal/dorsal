@@ -27,6 +27,7 @@
                 "expertAccount": "Expert Account",
                 "globalMetadata": "Global Metadata",
                 "userAccount": "User Account",
+                "sharedCase": "Shared Case",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

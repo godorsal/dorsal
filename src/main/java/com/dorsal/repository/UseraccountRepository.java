@@ -11,5 +11,6 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 public interface UseraccountRepository extends JpaRepository<Useraccount,Long> {
-
+    @Query("select useraccount from Useraccount useraccount where useraccount.user.login = ?#{principal.username}")
+    List<Useraccount> findByUserIsCurrentUser();
 }

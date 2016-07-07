@@ -1,0 +1,24 @@
+{
+    "dorsalApp": {
+        "sharedCase" : {
+            "home": {
+                "title": "Shared Cases",
+                "createLabel": "Create a new Shared Case",
+                "createOrEditLabel": "Create or edit a Shared Case",
+                "search": "Search for Shared Case"
+            },
+            "created": "A new Shared Case is created with identifier {{ param }}",
+            "updated": "A Shared Case is updated with identifier {{ param }}",
+            "deleted": "A Shared Case is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Shared Case {{ id }}?"
+            },
+            "detail": {
+                "title": "Shared Case"
+            },
+            "supportcase": "Supportcase",
+            "user": "User",
+            "owner": "Owner"
+        }
+    }
+}

@@ -98,11 +98,22 @@ public class SupportcaseResource {
     @Timed
     public List<Supportcase> getAllSupportcases() {
         log.debug("REST request to get all Supportcases");
+        int numCases = 0;
         // Get support cases by currently logged in user
         List<Supportcase> supportcases = supportcaseRepository.findByUserIsCurrentUser(); //.findAll();
+        numCases = supportcases.size();
+        log.info("Support cases owned by user " + numCases);
 
         // Get support cases for where currently logged in user is expert
         supportcases.addAll(supportcaseRepository.findByExpertIsCurrentUser());
+        log.info("Support cases user is expert " + (supportcases.size() - numCases) );
+        numCases = supportcases.size();
+
+        // Get support cases tat are shared to user
+        supportcases.addAll(supportcaseRepository.findBySharedIsCurrentUser());
+        log.info("Support cases shared to user " + (supportcases.size() - numCases) );
+        numCases = supportcases.size();
+
 
         // Return the combined list
         return supportcases;
