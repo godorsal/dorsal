@@ -1,37 +1,41 @@
 <div class="drsl-dialog drsl-share-case">
-    <form ng-submit="vm.addUser()">
-        <div class="modal-body">
-            <div>
-                <div class="drsl-dialog-header">
-                    <div><h2>Share Case: <span>ID: {{vm.case.id}}</span></h2></div>
-                </div>
-                <h3 ng-if="vm.sharedUsers.length">Shared Users</h3>
-                <div ng-repeat="user in vm.sharedUsers track by $index">
-                    <div>Name: {{user.name}}</div>
-                    <div>Permissions: <select class="form-control" ng-model="user.permissions" style="width: 150px; display: inline-block;">
-                            <option value="read">read</option>
-                            <option value="write">write</option>
-                        </select>
-                    </div>
-                    <br>
-                    <button class="btn btn-warning" ng-click="vm.removeUser($index)" type="button">Remove</button>
-                    <button class="btn btn-different" ng-click="vm.updateUser($index, user)" type="button">Update</button>
-                </div>
-                <hr>
-                <input type="email" id="emailInput" name="emailInput"
-                ng-model="vm.emailInput" ng-minlength=4 ng-maxlength=50 required placeholder="Email address" style="width: 400px; height: 33px;">
-                <select class="form-control" ng-model="vm.permissions" id="permissionInput" style="width: 150px; display: inline-block;" required>
-                    <option value="">Permissions</option>
-                    <option value="read">read</option>
-                    <option value="write">write</option>
-                </select>
-                <br>
-                <br>
-                <div style="text-align: right;">
-                    <button class="btn btn-default" ng-click="vm.cancel($event)">Cancel</button>
-                    <button type="submit" class="btn btn-success">Add User</button>
-                </div>
+    <div class="modal-body">
+        <div>
+            <div class="drsl-dialog-header">
+                <div><h2>Share Case: <span>ID: {{vm.case.id}}</span></h2></div>
             </div>
-        </form>
-    </div>
+            <table>
+                <thead>
+                    <th><h3 ng-if="vm.sharedUsers.length">Shared Users</h3></th>
+                    <th><h3 ng-if="vm.sharedUsers.length"  style="padding-left: 5px;">Permissions</h3></th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="share in vm.sharedUsers track by $index">
+                        <td>
+                            <button class="btn btn-success" ng-click="vm.removeSharedUser(share.id, $index)" uib-tooltip="remove user" style="display: block; margin-top: 10px; margin-bottom: 10px;">{{share.user.email}}<i class="fa fa-times-circle fa-lg"></i></button>
+                        </td>
+                        <td style="padding-left: 10px;">
+                            Full Access
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <form ng-submit="vm.addUser()">
+                <hr>
+                <input type="text" id="emailInput" name="emailInput"
+                ng-model="vm.emailInput" ng-minlength=4 ng-maxlength=50 required placeholder="Email address" style="width: 400px; height: 33px;">
+                <select class="form-control" ng-model="vm.permissions" id="permissionInput" style="width: 150px; display: inline-block;" required disabled>
+                <option value="">Permissions</option>
+                <option value="read">read</option>
+                <option value="write">write</option>
+            </select>
+            <br>
+            <br>
+            <div style="text-align: right;">
+                <button class="btn btn-default" ng-click="vm.cancel($event)">Cancel</button>
+                <button type="submit" class="btn btn-success">Add User</button>
+            </div>
+        </div>
+    </form>
+</div>
 </div>
