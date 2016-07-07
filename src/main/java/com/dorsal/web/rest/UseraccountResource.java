@@ -26,10 +26,10 @@ import java.util.Optional;
 public class UseraccountResource {
 
     private final Logger log = LoggerFactory.getLogger(UseraccountResource.class);
-        
+
     @Inject
     private UseraccountRepository useraccountRepository;
-    
+
     /**
      * POST  /useraccounts : Create a new useraccount.
      *
@@ -87,7 +87,7 @@ public class UseraccountResource {
     @Timed
     public List<Useraccount> getAllUseraccounts() {
         log.debug("REST request to get all Useraccounts");
-        List<Useraccount> useraccounts = useraccountRepository.findAll();
+        List<Useraccount> useraccounts = useraccountRepository.findByUserIsCurrentUser();// .findAll();
         return useraccounts;
     }
 
