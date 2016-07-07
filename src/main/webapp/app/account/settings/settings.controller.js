@@ -122,7 +122,7 @@
             vm.success = null;
         }
         function addAuthorizedUser(){
-            var newUsers = vm.authorizedUser.split(', ');
+            var newUsers = vm.authorizedUser.split(',');
             User.query(function(result){
                 result.find(function(user){
                     newUsers.forEach(function(newUser){
