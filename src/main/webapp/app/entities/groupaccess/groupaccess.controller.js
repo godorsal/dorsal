@@ -12,11 +12,12 @@
         vm.groupaccesses = [];
         vm.loadAll = function() {
             Groupaccess.query(function(result) {
+                console.log(result);
                 vm.groupaccesses = result;
             });
         };
 
         vm.loadAll();
-        
+
     }
 })();
