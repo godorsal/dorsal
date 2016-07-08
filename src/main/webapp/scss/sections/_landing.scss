@@ -23,7 +23,7 @@ Landing Page
         display: inline-block;
         color: #fff;
         background: #f38c20;
-        border-radius: 50%;
+        border-radius: 100%;
         padding: 55px 15px 55px 15px;
         font-weight: bold;
         font-size: 32px;
@@ -68,8 +68,6 @@ Landing Page
             min-height: 350px;
 
             > div {
-                padding-left: 64px;
-                padding-top: 40px;
                 h1 {
                     font-size: 40px;
                     font-weight: 300;
@@ -79,7 +77,6 @@ Landing Page
                 p {
                     line-height: 1.6;
                     font-size: 18px;
-                    // max-width: 340px;
                     color: #333333;
                 }
 
@@ -102,7 +99,6 @@ Landing Page
         padding: 0;
         margin-left: -50px;
         margin-right: -50px;
-        margin-bottom: 60px;
         position: relative;
         font-size: 24px;
         font-weight: 300;
@@ -114,12 +110,12 @@ Landing Page
             opacity: .7;
         }
     }
-    body {
+    * {
         font-family: 'Raleway', Helvetica, Arial, Lucida, sans-serif;
     }
     .drsl-home-additional-info-wrapper {
         font-family: 'Raleway', Helvetica, Arial, Lucida, sans-serif;
-        padding: 20px 100px 20px;
+        padding: 20px 30px 20px 100px;
         > div {
             // background-color: #FEFEFE;
             // background-color: rgba(0, 0, 0, 0);
@@ -146,10 +142,10 @@ Landing Page
             color: #666666;
             font-size: 22px;
             text-align: center;
-            padding-bottom: 16px;
+            // padding-bottom: 16px;
         }
         p {
-            font-size: 11px;
+            font-size: 14px;
         }
     }
 }
