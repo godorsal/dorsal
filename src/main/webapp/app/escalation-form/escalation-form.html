@@ -27,12 +27,12 @@
                             <div>{{vm.summary}}</div>
                         </div>
                         <div class="drsl-form-grid">
-                            <div>Response Time</div>
+                            <!-- <div>Response Time</div> -->
                             <div>
                                 <div style="display:flex; flex-flow: row;">
                                     <!-- <div style="flex: .5;">{{vm.case.urgency}}</div> -->
-                                    <div style="flex: 1; text-align: left;"><span style="font-weight: normal;padding-left:10px;padding-right: 10px;">Issue:</span><span>{{vm.case.issue}}</span></div>
-                                    <div style="flex: 1; text-align: center;"><span style="font-weight: normal;padding-right: 10px;">Technology:</span><span>{{vm.case.technology}}</span></div>
+                                    <div style="flex: 1; text-align: left;"><span style="font-weight: normal;padding-left:10px;padding-right: 10px;">Issue:</span><span>{{vm.case.issue.name}}</span></div>
+                                    <div style="flex: 1; text-align: center;"><span style="font-weight: normal;padding-right: 10px;">Technology:</span><span>{{vm.case.technology.name}}</span></div>
                                 </div>
                             </div>
                         </div>
