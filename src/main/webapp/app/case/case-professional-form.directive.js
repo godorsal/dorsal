@@ -23,6 +23,7 @@
         function linkFunc(scope) {
             scope.estimateChange = false;
             scope.lastEstimate = 0;
+            scope.resolved = false;
 
             scope.submit = function () {
                 if (StatusModel.checkCaseStatus(scope.case.status, 'created') && scope.case.estimateHours) {
@@ -31,6 +32,10 @@
 
                 if (scope.estimateChange) {
                     scope.case.isApproved = false;
+                }
+                
+                if (scope.case.isApproved && scope.resolved && StatusModel.checkCaseStatus(scope.case.status, 'working')) {
+                    scope.case.status = StatusModel.getState('completed');
                 }
 
                 scope.case.$update();
