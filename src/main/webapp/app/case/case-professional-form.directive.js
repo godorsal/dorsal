@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .directive('caseProfessionalForm', caseProfessionalForm);
 
-    caseProfessionalForm.$inject = ['StatusModel'];
+    caseProfessionalForm.$inject = ['StatusModel', 'toastr'];
 
-    function caseProfessionalForm(StatusModel) {
+    function caseProfessionalForm(StatusModel, toastr) {
         var directive = {
             restrict: 'E',
             scope:  {
@@ -33,12 +33,16 @@
                 if (scope.estimateChange) {
                     scope.case.isApproved = false;
                 }
-                
+
                 if (scope.case.isApproved && scope.resolved && StatusModel.checkCaseStatus(scope.case.status, 'working')) {
                     scope.case.status = StatusModel.getState('completed');
                 }
 
-                scope.case.$update();
+                scope.case.$update(function(){
+                    toastr.success('This case has been updated', 'Success');
+                },function(){
+                    toastr.error('The case has failed to update.<br/> Please report the error and try again.', 'Error');
+                });
             };
 
             scope.$watch('case.estimateHours', function(newValue, oldValue) {
