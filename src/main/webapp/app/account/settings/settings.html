@@ -120,7 +120,8 @@ Your e-mail cannot be longer than 100 characters.
                         <div class="form-group">
                             <label class="control-label sr-only" for="ccName">Name on Card</label>
                             <input type="text" class="form-control" id="ccName" name="ccName" placeholder="Card Holder's Name"
-                            ng-minlength=1  ng-model="vm.creditCard.name" required>
+                            ng-minlength=1  ng-model="vm.creditCard.name" required style="width: 75%; display: inline-block;">
+                            <span ng-if="vm.error && vm.creditCard.name === undefined" style="color: red; display: inline-block;">Invalid Name</span>
                         </div>
                         <div class="form-group">
                             <label class="control-label sr-only" for="text">Card Number</label>
@@ -135,6 +136,7 @@ Your e-mail cannot be longer than 100 characters.
                             -
                             <input type="number" class="form-control" id="ccNumber4" name="ccNumber"  ng-keypress="vm.numberTab($event)"
                             ng-model="vm.creditCard.number.four" required style="width: 100px; display: inline-block;" maxlength="4">
+                            <span ng-if="vm.error && vm.number.join('').length != 16" style="color: red;">Invalid Card Number</span>
                         </div>
                         <div class="form-group">
 
@@ -180,7 +182,8 @@ Your e-mail cannot be longer than 100 characters.
                                 <div class="col-sm-6">
                                     <label class="control-label sr-only" for="cvv">Card CVV</label>
                                     <input ng-keypress="vm.numberTab($event)" type="number" class="form-control" id="cvv" name="cvv" placeholder="CVV"
-                                    ng-minlength=1 ng-maxlength=4  maxlength="3" ng-model="vm.creditCard.cvv" required  style="width: 100px;">
+                                    ng-minlength=1 ng-maxlength=4  maxlength="3" ng-model="vm.creditCard.cvv" required  style="width: 100px; display: inline-block;">
+                                    <span ng-if="vm.error && vm.creditCard.cvv.toString().length != 3" style="color: red; display: inline-block;">Invalid CVV Number</span>
                                 </div>
                             </div>
                         </div>

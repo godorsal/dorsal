@@ -24,6 +24,7 @@
         vm.addAuthorizedUser = addAuthorizedUser;
         vm.removeAuthorizedUsers = removeAuthorizedUsers;
         vm.authorizedUser = '';
+        vm.number = 0;
         getAuthorizedUsers()
         checkAuthorized();
         Payment.query(function(result){
@@ -105,10 +106,16 @@
             });
         }
         function addCard() {
-            var number = Object.keys(vm.creditCard.number).map(function(k) { return vm.creditCard.number[k] });
-            vm.creditCard.number = number.join('');
+            vm.number = Object.keys(vm.creditCard.number).map(function(k) { return vm.creditCard.number[k] });
+            if(vm.number.join('').length != 16 || vm.creditCard.cvv.toString().length != 3 || vm.creditCard.user === undefined) {
+                console.log("NUMBER", vm.number);
+                console.log("CVV", vm.creditCard.cvv.length);
+                vm.error = 'ERROR';
+                return;
+            }
+            vm.creditCard.vm.number = vm.number.join('');
             var arr = Object.keys(vm.creditCard).map(function(k) { return vm.creditCard[k] });
-            console.log(arr);
+
             var data = arr.slice(0, 5).join("##")
             console.log("NO ID?", vm.creditCard.id);
             var payment = {
