@@ -5,7 +5,7 @@
         .module('dorsalApp')
         .directive('caseSummary', caseSummary);
 
-    function caseSummary($translate, $locale, tmhDynamicLocale, $sce, DrslMetadata) {
+    function caseSummary($translate, $locale, tmhDynamicLocale, $sce, DrslMetadata, StatusModel) {
         var directive = {
             restrict: 'E',
             scope: {
@@ -37,7 +37,8 @@
                 },
                 {
                     label: 'Working',
-                    value: 'working'
+                    value: 'working',
+                    template: 'app/case/agree-to-estimate-button.directive.html'
                 },
                 {
                     label: 'Completed',
@@ -67,6 +68,22 @@
                 }
 
                 scope.case.status = scope.statusOptions[scope.caseIndex].value;
+            };
+
+            scope.displayPopover = function (statusValue){
+                var open = false, workingStatus = false;
+
+                if (scope.case && scope.case.status){
+                    workingStatus = StatusModel.checkCaseStatus(scope.case.status, 'working');
+
+                    if (statusValue === scope.case.status.name.toLowerCase() && workingStatus && !scope.case.isApproved){
+                        open = true;
+                    } else if (!workingStatus && statusValue === scope.case.status.name.toLowerCase()){
+                        open = true;
+                    }
+                }
+
+                return open;
             };
         }
     }

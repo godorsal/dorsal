@@ -166,15 +166,13 @@
          * Opens the Case Agreement dialog.
          */
         function openCaseAgreement() {
-            if (StatusModel.checkCaseStatus(vm.currentCase.status, 'estimated')) {
-                var modalInstance = CaseAgreementService.open(vm.currentCase, vm.experts[vm.currentCase.expert]);
+            var modalInstance = CaseAgreementService.open(vm.currentCase, vm.currentCase.expert);
 
-                modalInstance.result.then(function () {
-                    vm.currentCase.isApproved = true;
-                    vm.currentCase.status = StatusModel.getState('working');
-                    vm.currentCase.$update();
-                });
-            }
+            modalInstance.result.then(function () {
+                vm.currentCase.isApproved = true;
+                vm.currentCase.status = StatusModel.getState('working');
+                vm.currentCase.$update();
+            });
         }
 
         /**

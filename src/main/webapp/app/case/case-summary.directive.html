@@ -48,7 +48,7 @@
 
             <div class="drsl-timeline-icons">
                 <div ng-class="{'drsl-timeline-item-done': passedStep($index)}" ng-repeat="status in statusOptions">
-                    <div uib-popover-template="status.template" popover-trigger="none" popover-is-open="status.value === case.status.name.toLowerCase()">
+                    <div uib-popover-template="status.template" popover-trigger="none" popover-is-open="displayPopover(status.value)">
                         <span class="drsl-icon-sprites"></span>
                     </div>
                     <div class="drsl-timeline-text">{{status.label}}</div>
