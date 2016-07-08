@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .controller('CaseController', CaseController);
 
-    CaseController.$inject = ['$scope', '$window', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', 'Supportcase', '$state', 'DrslMetadata', 'StatusModel'];
+    CaseController.$inject = ['$scope', '$window', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', 'Supportcase', '$state', 'DrslMetadata', 'StatusModel', 'ExpertAccount'];
 
-    function CaseController($scope, $window, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, Supportcase, $state, DrslMetadata, StatusModel) {
+    function CaseController($scope, $window, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, Supportcase, $state, DrslMetadata, StatusModel, ExpertAccount) {
         var vm = this;
         vm.init = init;
         vm.getHistory = getHistory;
@@ -19,6 +19,8 @@
         vm.openShare = openShare;
         vm.passedStep = passedStep;
         vm.openChat = openChat;
+        vm.isCaseExpert = isCaseExpert;
+        vm.expertUser = {};
         vm.statusStates = [];
         vm.openCaseAgreement = openCaseAgreement;
         vm.cases = [];
@@ -41,6 +43,10 @@
          * Initialize the controller's data.
          */
         function init() {
+            ExpertAccount.query(function(result){
+                vm.expertUser = result[0].user;
+            });
+
             // Make a call to get the initial data.
             Supportcase.query(function(result) {
                 if(result.length < 1){
@@ -49,7 +55,6 @@
                     vm.supportcases = result.reverse();
                     vm.setCurrentCase(result[0]);
                 }
-                // console.log(result);
             });
 
             StatusModel.getStates().then(function(data){
@@ -74,6 +79,16 @@
                     vm.experts[expert] = foundExpert;
                 }
             });
+        }
+
+        function isCaseExpert(){
+            var caseExpert = false;
+
+            if (vm.currentCase && vm.currentCase.expert && vm.expertUser && vm.expertUser.id) {
+                caseExpert = (vm.currentCase.expert.id === vm.expertUser.id);
+            }
+
+            return caseExpert;
         }
 
         /**
@@ -116,7 +131,7 @@
          * Opens the rating dialog.
          */
         function openRating() {
-            if (StatusModel.checkCaseStatus(vm.currentCase.status, 'completed')) {
+            if (StatusModel.checkCaseStatus(vm.currentCase.status, 'completed') && !vm.isCaseExpert()) {
                 var modalInstance = DrslRatingService.open(vm.currentCase);
 
                 modalInstance.result.then(function () {
@@ -138,7 +153,7 @@
         }
 
         function openEscalation() {
-            if (StatusModel.checkCaseStatus(vm.currentCase.status, 'working')) {
+            if (StatusModel.checkCaseStatus(vm.currentCase.status, 'working') && !vm.isCaseExpert()) {
                 var modalInstance = EscalationFormService.open(vm.currentCase, vm.experts[vm.currentCase.expert]);
             }
         }
@@ -161,8 +176,8 @@
          * Opens the Case Agreement dialog.
          */
         function openCaseAgreement() {
-            if (StatusModel.checkCaseStatus(vm.currentCase.status, 'estimated')) {
-                var modalInstance = CaseAgreementService.open(vm.currentCase, vm.experts[vm.currentCase.expert]);
+            if (!vm.isCaseExpert()){
+                var modalInstance = CaseAgreementService.open(vm.currentCase, vm.currentCase.expert);
 
                 modalInstance.result.then(function () {
                     vm.currentCase.isApproved = true;

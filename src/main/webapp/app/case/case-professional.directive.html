@@ -19,7 +19,8 @@
     <!-- Profile Photo -->
     <div class="drsl-profile-photo">
         <a href="#" ng-click="$event.preventDefault()">
-            <img ng-src="{{expert.picture}}" />
+            <!--<img ng-src="{{expert.picture}}" />-->
+            <img src="content/images/dynamic/John-Smith.jpg" />
         </a>
     </div>
 
@@ -35,14 +36,26 @@
 
     <!-- Score -->
     <div>
-        <span class="drsl-label" translate="case.professional.score">Score</span> {{expert.score}} out of 100
+        <!--<span class="drsl-label" translate="case.professional.score">Score</span> {{expert.score}} out of 100-->
+        <span class="drsl-label" translate="case.professional.score">Score</span> 92 out of 100
     </div>
 
     <!-- Badges -->
     <div>
         <span class="drsl-label">Badges</span>
         <div class="drsl-badges">
-            <expert-badges badge-set="expert.badges"></expert-badges>
+            <!--<expert-badges badge-set="expert.badges"></expert-badges>-->
+            <div>
+                <span class="drsl-badge-sprites badge-1" uib-tooltip="happy fun place" role="button"></span>
+                <span class="drsl-badge-sprites badge-2" uib-tooltip="defender of the realm" role="button"></span>
+                <span class="drsl-badge-sprites badge-3" uib-tooltip="focused like a laser" role="button"></span>
+                <span class="drsl-badge-sprites badge-4" uib-tooltip="detail oriented" role="button"></span>
+                <span class="drsl-badge-sprites badge-5" uib-tooltip="craftsperson" role="button"></span>
+                <span class="drsl-badge-sprites badge-6" uib-tooltip="McLuvin It!" role="button"></span>
+                <span class="drsl-badge-sprites badge-7" uib-tooltip="masterful multitasking" role="button"></span>
+                <span class="drsl-badge-sprites badge-8" uib-tooltip="network specialist" role="button"></span>
+                <span class="drsl-badge-sprites badge-9" uib-tooltip="double plus good" role="button"></span>
+            </div>
         </div>
     </div>
 

@@ -17,28 +17,15 @@
     <div class="drsl-case-status-wrapper">
         <div>
             <span class="drsl-label" translate="case.details.status.main" ng-click="cycleStatus()">Current Status:</span>
-            <span ng-show="case.status.name == 'CREATED'">This case has been created and is currently being assigned to an expert.</span>
-            <span ng-show="case.status.name == 'estimated'">An expert is currently investigating the issue.</span>
-            <span ng-show="case.status.name == 'working'">&quot;Log file shows configuration errors. Testing new config...&quot;.</span>
-            <span ng-show="case.status.name == 'completed'">The expert has marked this issue as resolved.</span>
-            <span ng-show="case.status.name == 'closed'">This issue is closed.</span>
+            <span>{{case.statusMsg}}</span>
         </div>
     </div>
-    <!-- <div class="drsl-case-status-wrapper">
-        <div>
-            <span class="drsl-label" translate="case.details.status.main" ng-click="cycleStatus()">Current Status:</span>
-            <span ng-show="case.status == 'created'">This case has been created and is currently being assigned to an expert.</span>
-            <span ng-show="case.status == 'estimated'">An expert is currently investigating the issue.</span>
-            <span ng-show="case.status == 'working'">&quot;Log file shows configuration errors. Testing new config...&quot;.</span>
-            <span ng-show="case.status == 'completed'">The expert has marked this issue as resolved.</span>
-            <span ng-show="case.status == 'closed'">This issue is closed.</span>
-        </div>
-    </div> -->
 
     <!-- Start / ETA to Completion -->
     <div>
         <span><span class="drsl-label">Start</span> {{case.dateCreated | date:"MM/dd/yy h:mm a"}}</span>
-        <div class="pull-right"><span class="drsl-label" translate="case.details.resolutionETA">ETA to Completion</span> {{case.resolutionETA}}</div>
+        <div class="pull-right" ng-show="case.estimateHours && !case.timeOnCase"><span class="drsl-label" translate="case.details.resolutionETA">ETA to Completion</span> {{case.estimateHours}} hr<span ng-show="(case.estimateHours) > 1">s</span></div>
+        <div class="pull-right" ng-show="case.estimateHours && case.timeOnCase"><span class="drsl-label" translate="case.details.resolutionETA">ETA to Completion</span> {{case.estimateHours - case.timeOnCase}} hr<span ng-show="(case.estimateHours - case.timeOnCase) > 1">s</span></div>
     </div>
     <!-- <div>
         <span><span class="drsl-label">Start</span> {{case.startDate | date:"MM/dd/yy h:mm a"}}</span>
@@ -61,7 +48,7 @@
 
             <div class="drsl-timeline-icons">
                 <div ng-class="{'drsl-timeline-item-done': passedStep($index)}" ng-repeat="status in statusOptions">
-                    <div uib-popover-template="status.template" popover-trigger="none" popover-is-open="status.value === case.status.name.toLowerCase()">
+                    <div uib-popover-template="status.template" popover-trigger="none" popover-is-open="displayPopover(status.value)">
                         <span class="drsl-icon-sprites"></span>
                     </div>
                     <div class="drsl-timeline-text">{{status.label}}</div>
