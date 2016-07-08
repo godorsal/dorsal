@@ -30,8 +30,8 @@
                     <div><case-summary case="vm.currentCase" expert="vm.experts[vm.currentCase.expert]" status="vm.status" passed-step="vm.passedStep"></case-summary></div>
 
                     <!-- Case Professional -->
-                    <div ng-hide="vm.isExpert"><case-professional expert="vm.currentCase.expert" chat-room="vm.currentCase.chatRoom"></case-professional></div>
-                    <div ng-show="vm.isExpert"><case-professional-form expert="vm.currentCase.expert" case="vm.currentCase"></case-professional-form></div>
+                    <div ng-hide="vm.isCaseExpert()"><case-professional expert="vm.currentCase.expert" chat-room="vm.currentCase.chatRoom"></case-professional></div>
+                    <div ng-show="vm.isCaseExpert()"><case-professional-form expert="vm.currentCase.expert" case="vm.currentCase"></case-professional-form></div>
                 </div>
             </div>
 
