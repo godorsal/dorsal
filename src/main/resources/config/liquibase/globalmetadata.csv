@@ -1,2 +1,5 @@
-id;expert_rate;minimum_case_length
-1;125;4
+id;name;value;value_type
+1;expert-rate;125;ISINTEGER
+2;minimum-case-length;4;ISINTEGER
+3;expert-badge-count;3;ISINTEGER
+4;upload-base-url;https%3A%2F%2Fs3-us-west-1.amazonaws.com%2Fdorsal-attachement-upload;ISSTRING

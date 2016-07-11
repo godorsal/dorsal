@@ -66,11 +66,19 @@ relationship OneToOne {
 }
 
 ///////////////////////////////////////
+// Entity MetadataType
+
+enum Metadatatypeenum {
+    ISSTRING, ISINTEGER, ISBOOLEAN
+}
+
+///////////////////////////////////////
 // Entity Global Meta Data
 
 entity GlobalMetadata {
-    expertRate Integer,
-    minimumCaseLength Integer
+    name String,
+    value String,
+    valueType Metadatatypeenum
 }
 
 //////////////////////////

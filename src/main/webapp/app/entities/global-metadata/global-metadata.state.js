@@ -26,6 +26,7 @@
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('globalMetadata');
+                    $translatePartialLoader.addPart('metadatatypeenum');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
@@ -48,6 +49,7 @@
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('globalMetadata');
+                    $translatePartialLoader.addPart('metadatatypeenum');
                     return $translate.refresh();
                 }],
                 entity: ['$stateParams', 'GlobalMetadata', function($stateParams, GlobalMetadata) {
@@ -71,8 +73,9 @@
                     resolve: {
                         entity: function () {
                             return {
-                                expertRate: null,
-                                minimumCaseLength: null,
+                                name: null,
+                                value: null,
+                                valueType: null,
                                 id: null
                             };
                         }

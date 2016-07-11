@@ -21,9 +21,9 @@
     <include file="classpath:config/liquibase/changelog/20160630174740_added_entity_Caseupdate.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160630174741_added_entity_Rating.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160705220223_added_entity_ExpertAccount.xml" relativeToChangelogFile="false"/>
-    <include file="classpath:config/liquibase/changelog/20160705220224_added_entity_GlobalMetadata.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160706003901_added_entity_Useraccount.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160707203249_added_entity_SharedCase.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160711182707_added_entity_GlobalMetadata.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="classpath:config/liquibase/changelog/20160623155303_added_entity_constraints_Referencedoc.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160623155304_added_entity_constraints_Groupaccess.xml" relativeToChangelogFile="false"/>
