@@ -14,7 +14,8 @@ Landing Page
         font-size: 52px;
         font-weight: 800;
         text-decoration: none;
-        color: #1A1A1A;
+        // color: #1A1A1A;
+        color: rgb(25%, 25%, 25%)
     }
     .home-subtitle{
         font-size: 22px;
@@ -25,7 +26,7 @@ Landing Page
         background: #f38c20;
         border-radius: 100%;
         padding: 45px 15px 55px 12px;
-        font-weight: bold;
+        font-weight: 800;
         font-size: 25px;
         line-height: 0.75;
         -webkit-transition: all 0.3s ease-in-out;
@@ -47,7 +48,8 @@ Landing Page
         // padding-bottom: 20px;
     }
     .buttonAndJoin{
-        padding-top: 10px;
+        padding-top: 20px;
+        padding-bottom: 10px;
     }
     h2{
         font-family: 'Raleway', Helvetica, Arial, Lucida, sans-serif;
@@ -98,7 +100,9 @@ Landing Page
         justify-content: center;
         align-content: center;
         flex-wrap: wrap;
-        padding: 0;
+        // padding: 0;
+        padding-bottom: 20px;
+        padding-left: 50px;
         margin-left: -50px;
         margin-right: -50px;
         position: relative;
@@ -138,7 +142,7 @@ Landing Page
         border: 1px solid #666666;
 
         height: 160px;
-        width: 300px;
+        width: 315px;
         padding: 10px;
         h4 {
             color: #666666;
