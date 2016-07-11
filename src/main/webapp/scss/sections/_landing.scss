@@ -14,7 +14,7 @@ Landing Page
         font-size: 52px;
         font-weight: 800;
         text-decoration: none;
-
+        color: #1A1A1A;
     }
     .home-subtitle{
         font-size: 22px;
@@ -24,13 +24,15 @@ Landing Page
         color: #fff;
         background: #f38c20;
         border-radius: 100%;
-        padding: 55px 15px 55px 15px;
+        padding: 45px 15px 55px 12px;
         font-weight: bold;
-        font-size: 32px;
+        font-size: 25px;
         line-height: 0.75;
         -webkit-transition: all 0.3s ease-in-out;
         transition: all 0.3s ease-in-out;
         cursor: pointer;
+        width: 125px;
+        height: 125px;
     }
     .cards > img {
         width: 10px;
@@ -42,10 +44,10 @@ Landing Page
         text-decoration: none;
     }
     .headAndTag{
-        padding-bottom: 20px;
+        // padding-bottom: 20px;
     }
     .buttonAndJoin{
-        padding-bottom: 40px;
+        padding-top: 10px;
     }
     h2{
         font-family: 'Raleway', Helvetica, Arial, Lucida, sans-serif;
@@ -62,10 +64,10 @@ Landing Page
 
     .drsl-main-info-wrapper {
         position: relative;
-        padding-top: 25px;
+        // padding-top: 25px;
         text-align: center;
         .col-md-12 {
-            min-height: 350px;
+            min-height: 275px;
 
             > div {
                 h1 {
@@ -84,7 +86,7 @@ Landing Page
                     border-radius: 0;
                     width: 275px;
                     margin-top: 20px;
-                    padding: 10px;
+                    // padding: 10px;
                 }
             }
         }
@@ -105,7 +107,7 @@ Landing Page
         text-align: center;
         li {
             list-style: none;
-            margin: 10px 25px;
+            margin: 0px 25px;
             font-size: 28px;
             opacity: .7;
         }
@@ -115,7 +117,8 @@ Landing Page
     }
     .drsl-home-additional-info-wrapper {
         font-family: 'Raleway', Helvetica, Arial, Lucida, sans-serif;
-        padding: 20px 30px 20px 100px;
+        // padding: 0px 30px 0px 100px;
+        padding-left: 90px;
         > div {
             // background-color: #FEFEFE;
             // background-color: rgba(0, 0, 0, 0);
@@ -130,22 +133,21 @@ Landing Page
     }
 
     .drsl-home-additional-info-item {
-        padding: 5px;
+        // padding: 5px;
         background-color: #FFFFFF;
         border: 1px solid #666666;
 
-        // height: 160px;
-        height: 150px;
-        width: 257.969px;
+        height: 160px;
+        width: 300px;
         padding: 10px;
         h4 {
             color: #666666;
-            font-size: 22px;
+            font-size: 25px;
             text-align: center;
             // padding-bottom: 16px;
         }
         p {
-            font-size: 14px;
+            font-size: 15px;
         }
     }
 }
@@ -159,10 +161,11 @@ Landing Page
 
     .drsl-home-gradient {
         position: absolute;
-        background: url('../images/global/nv-bkg.png') repeat-x;
+        // background: url('../images/global/nv-bkg.png') repeat-x;
         height: 840px;
         width: 1280px;
         z-index: 1;
+        background: url('../images/global/dorsal_WP_bkg_w_top.png') no-repeat;
     }
 
     .drsl-home-main-bg {
@@ -171,6 +174,7 @@ Landing Page
         width: 1280px;
         height: 1280px;
         // background: url('../images/global/main-bg.jpg') no-repeat;
+        // background: url('../images/global/dorsal_WP_bkg_w_top.png') no-repeat;
     }
 
     .badge-wrapper {
