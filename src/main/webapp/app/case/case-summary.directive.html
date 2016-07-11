@@ -17,7 +17,13 @@
     <div class="drsl-case-status-wrapper">
         <div>
             <span class="drsl-label" translate="case.details.status.main" ng-click="cycleStatus()">Current Status:</span>
-            <span>{{case.statusMsg}}</span>
+            <span>
+                <span ng-show="case.status.name.toLowerCase() == 'created'">This case has been created and is currently being estimated by an expert.</span>
+                <span ng-show="case.status.name.toLowerCase() == 'estimated'">This case has been estimated and is awaiting your approval.</span>
+                <span ng-show="case.status.name.toLowerCase() == 'working'">An expert is currently working on this issue.</span>
+                <span ng-show="case.status.name.toLowerCase() == 'completed'">The expert has marked this issue as resolved.</span>
+                <span ng-show="case.status.name.toLowerCase() == 'closed'">This case is closed.</span>
+            </span>
         </div>
     </div>
 
