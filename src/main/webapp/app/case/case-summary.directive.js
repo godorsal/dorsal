@@ -61,13 +61,33 @@
             };
 
             scope.cycleStatus = function () {
+                scope.caseIndex = StatusModel.getStatusIndex(scope.case.status);
+
                 if (scope.caseIndex < scope.statusOptions.length - 1) {
                     scope.caseIndex++;
                 } else {
                     scope.caseIndex = 0;
                 }
 
-                scope.case.status = scope.statusOptions[scope.caseIndex].value;
+                switch (scope.caseIndex) {
+                    case 0:
+                        break;
+                    case 1:
+                        scope.case.estimateHours = 4;
+                        scope.case.timeOnCase = 0;
+                        break;
+                    case 2:
+                        scope.case.isApproved = true;
+                        break;
+                    case 3:
+                        scope.case.timeOnCase = 3;
+                        break;
+                    case 4:
+                        break;
+                }
+
+
+                scope.case.status = StatusModel.getState(scope.statusOptions[scope.caseIndex].value);
             };
 
             scope.displayPopover = function (statusValue){
