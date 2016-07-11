@@ -445,7 +445,7 @@ table.scroll tbody {
     width: $custom-button-size;
     height: $custom-button-size;
     background-color: $custom-button-color;
-    box-shadow: $custom-button-shadow;
+    // box-shadow: $custom-button-shadow;
     border-radius: 50%;
     cursor: pointer;
     text-align: center;
@@ -455,12 +455,18 @@ table.scroll tbody {
     line-height: $custom-button-line-height;
     cursor: pointer;
     border: 0;
+    -webkit-transition: all 0.3s ease-in-out;
 
     span {
         flex: 1;
     }
 }
-
+.drsl-custom-button:hover {
+    box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.75);
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+}
 .drsl-action-bar {
     background-color: #F48B3D;
     padding: 5px 15px 5px 20px;

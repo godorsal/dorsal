@@ -39,14 +39,14 @@
                 "scheduled": "Scheduled"
             },
             "problem": {
-                "main": "Issue",
+                "main": "Issue*",
                 "performance": "Performance",
                 "availability": "Availability",
                 "security": "Security",
                 "other": "Other"
             },
             "product": {
-                "main": "Technology",
+                "main": "Technology*",
                 "tooltip": "Select a technology and define some additional details which are optional",
                 "mysql": "MySQL",
                 "postgresql": "PostgreSQL",
