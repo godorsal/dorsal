@@ -60,9 +60,6 @@
             StatusModel.getStates().then(function(data){
                 vm.statusStates = data;
             });
-
-            DrslMetadata.setExpertRate(125);
-            DrslMetadata.setMinimumCaseLength(4);
         }
 
         /**
