@@ -2,8 +2,8 @@
     'use strict';
 
     angular
-        .module('dorsalApp')
-        .controller('HomeController', HomeController);
+    .module('dorsalApp')
+    .controller('HomeController', HomeController);
 
     HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state'];
 
@@ -33,21 +33,29 @@
         function register () {
             $state.go('register');
         }
-
+        $scope.quoteSize = function(index){
+            if(index === 0){
+                return "fastEasyAccess";
+            } else if(index === 1){
+                return "personalizedForYou"
+            } else if(index === 2){
+                return "certifiedProfessionals"
+            }
+        }
         function concierge(type) {
             switch (type) {
                 case 1:
-                    $state.go('concierge', {'type': 'incident'});
-                    break;
+                $state.go('concierge', {'type': 'incident'});
+                break;
                 case 2:
-                    $state.go('concierge', {"type": 'pro-active'});
-                    break;
+                $state.go('concierge', {"type": 'pro-active'});
+                break;
                 case 3:
-                    $state.go('concierge', {"type": 'on-demand'});
-                    break;
+                $state.go('concierge', {"type": 'on-demand'});
+                break;
                 default:
-                    $state.go('concierge', {"type": 'connect-now'});
-                    break;
+                $state.go('concierge', {"type": 'connect-now'});
+                break;
             }
         }
     }

@@ -45,12 +45,13 @@
 
     <!-- Additional-Information -->
     <div class="row drsl-home-additional-info-wrapper">
-        <div class="col-md-4" ng-repeat="slot in [1, 2, 3]" style="width: 350px;">
-            <div class="drsl-home-additional-info-item">
+        <div class="col-md-4" ng-repeat="slot in [1, 2, 3] track by $index" style="width: 350px;">
+            <div class="drsl-home-additional-info-item" ng-class="quoteSize($index)">
                 <!-- <p>{{'home.additionalInfo.slot_'+slot+'.title' | translate}}</p> -->
                 <h4>{{'home.additionalInfo.slot_'+slot+'.title' | translate}}</h4>
                 <!-- <h3>{{'home.additionalInfo.slot_'+slot+'.title' | translate}}</h3> -->
-                <p>{{'home.additionalInfo.slot_'+slot+'.description' | translate}}</p>
+                <div>{{'home.additionalInfo.slot_'+slot+'.description' | translate}}</div>
+                <!-- <p>{{'home.additionalInfo.slot_'+slot+'.description' | translate}}</p> -->
             </div>
         </div>
     </div>
