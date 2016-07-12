@@ -261,7 +261,8 @@ table.scroll {
 table.scroll tbody {
     display: block;
     height: 120px;
-    overflow: auto;
+    // width: 445px;
+    overflow-y: scroll;
 }
 table.scroll thead > tr {
     display: block;

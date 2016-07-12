@@ -93,14 +93,14 @@
                     <tr>
                         <th>Message</th>
                         <th style="padding-left: 135px;">Date</th>
-                        <th style="padding-left: 160px;">User/Expert</th>
+                        <th style="padding-left: 192px;">User/Expert</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="update in vm.updates track by $index" >
                         <td>{{update.updateMsg}}</td>
                         <td style="padding-left: 70px;">{{update.dateUpdated | date:"MM/dd/yy h:mm a"}}</td>
-                        <td style="padding-left: 70px;">{{update.user.login}}</td>
+                        <td style="padding-left: 70px; width: 180px !important; text-align: right;">{{update.user.login}}</td>
                     </tr>
                 </tbody>
             </table>
