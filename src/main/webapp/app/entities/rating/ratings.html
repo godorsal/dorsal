@@ -21,6 +21,8 @@
                     <th><span translate="global.field.id">ID</span></th>
                     <th><span translate="dorsalApp.rating.dateRated">Date Rated</span></th>
                     <th><span translate="dorsalApp.rating.score">Score</span></th>
+                    <th><span translate="dorsalApp.rating.rateDetails">Rate Details</span></th>
+                    <th><span translate="dorsalApp.rating.hasExpertExceeded">Has Expert Exceeded</span></th>
                     <th><span translate="dorsalApp.rating.supportcase">Supportcase</span></th>
                     <th></th>
                 </tr>
@@ -30,6 +32,8 @@
                     <td><a ui-sref="rating-detail({id:rating.id})">{{rating.id}}</a></td>
                     <td>{{rating.dateRated | date:'medium'}}</td>
                     <td>{{rating.score}}</td>
+                    <td>{{rating.rateDetails}}</td>
+                    <td>{{rating.hasExpertExceeded}}</td>
                     <td>
                         <a ui-sref="supportcase-detail({id:rating.supportcase.id})">{{rating.supportcase.id}}</a>
                     </td>

@@ -51,13 +51,7 @@
                 {"icon": "badge-4"},
                 {"icon": "badge-5"},
                 {"icon": "badge-6"},
-                {"icon": "badge-7"},
-                {"icon": "badge-8"},
-                {"icon": "badge-9"},
-                {"icon": "badge-10"},
-                {"icon": "badge-11"},
-                {"icon": "badge-12"},
-                {"icon": "badge-13"}
+                {"icon": "badge-7"}
             ];
 
             scope.toggleBadgeSelection = function(badge) {

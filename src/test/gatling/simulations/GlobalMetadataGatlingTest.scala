@@ -68,7 +68,7 @@ class GlobalMetadataGatlingTest extends Simulation {
             .exec(http("Create new globalMetadata")
             .post("/api/global-metadata")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "expertRate":"0", "minimumCaseLength":"0"}""")).asJSON
+            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "value":"SAMPLE_TEXT", "valueType":null}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_globalMetadata_url"))).exitHereIfFailed
             .pause(10)

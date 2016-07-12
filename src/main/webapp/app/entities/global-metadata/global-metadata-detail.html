@@ -3,13 +3,17 @@
     <h2><span translate="dorsalApp.globalMetadata.detail.title">Global Metadata</span> {{vm.globalMetadata.id}}</h2>
     <hr>
     <dl class="dl-horizontal jh-entity-details">
-        <dt><span translate="dorsalApp.globalMetadata.expertRate">Expert Rate</span></dt>
+        <dt><span translate="dorsalApp.globalMetadata.name">Name</span></dt>
         <dd>
-            <span>{{vm.globalMetadata.expertRate}}</span>
+            <span>{{vm.globalMetadata.name}}</span>
         </dd>
-        <dt><span translate="dorsalApp.globalMetadata.minimumCaseLength">Minimum Case Length</span></dt>
+        <dt><span translate="dorsalApp.globalMetadata.value">Value</span></dt>
         <dd>
-            <span>{{vm.globalMetadata.minimumCaseLength}}</span>
+            <span>{{vm.globalMetadata.value}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.globalMetadata.valueType">Value Type</span></dt>
+        <dd>
+            <span translate="{{'dorsalApp.Metadatatypeenum.' + vm.globalMetadata.valueType}}">{{vm.globalMetadata.valueType}}</span>
         </dd>
     </dl>
 

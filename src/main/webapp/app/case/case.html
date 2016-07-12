@@ -6,7 +6,7 @@
                 <div class="drsl-sub-header">
                     <div>
                         <span translate="case.header">Case Summary</span>
-                        <span class="drsl-understated">ID: {{vm.currentCase.id}}</span>
+                        <span class="drsl-understated">ID: {{vm.currentCase.technology.name}} {{vm.currentCase.id}}</span>
                     </div>
                     <div>
                         {{'case.details.status.main' | translate}}:
@@ -47,7 +47,7 @@
                             <h4 class="panel-title">
                                 <div class="drsl-case-list">
                                     <div>
-                                        <span class="drsl-case-list-id">{{case.technology.name}} - {{case.id}}</span>
+                                        <span class="drsl-case-list-id">{{case.technology.name}} {{case.id}}</span>
                                         <span>{{case.dateCreated | date:'MMMM dd, yyyy'}}</span>
                                     </div>
                                     <div>

@@ -29,6 +29,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.dorsal.domain.enumeration.Metadatatypeenum;
 
 /**
  * Test class for the GlobalMetadataResource REST controller.
@@ -41,12 +42,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @IntegrationTest
 public class GlobalMetadataResourceIntTest {
 
+    private static final String DEFAULT_NAME = "AAAAA";
+    private static final String UPDATED_NAME = "BBBBB";
+    private static final String DEFAULT_VALUE = "AAAAA";
+    private static final String UPDATED_VALUE = "BBBBB";
 
-    private static final Integer DEFAULT_EXPERT_RATE = 1;
-    private static final Integer UPDATED_EXPERT_RATE = 2;
-
-    private static final Integer DEFAULT_MINIMUM_CASE_LENGTH = 1;
-    private static final Integer UPDATED_MINIMUM_CASE_LENGTH = 2;
+    private static final Metadatatypeenum DEFAULT_VALUE_TYPE = Metadatatypeenum.ISSTRING;
+    private static final Metadatatypeenum UPDATED_VALUE_TYPE = Metadatatypeenum.ISINTEGER;
 
     @Inject
     private GlobalMetadataRepository globalMetadataRepository;
@@ -74,8 +76,9 @@ public class GlobalMetadataResourceIntTest {
     @Before
     public void initTest() {
         globalMetadata = new GlobalMetadata();
-        globalMetadata.setExpertRate(DEFAULT_EXPERT_RATE);
-        globalMetadata.setMinimumCaseLength(DEFAULT_MINIMUM_CASE_LENGTH);
+        globalMetadata.setName(DEFAULT_NAME);
+        globalMetadata.setValue(DEFAULT_VALUE);
+        globalMetadata.setValueType(DEFAULT_VALUE_TYPE);
     }
 
     @Test
@@ -94,8 +97,9 @@ public class GlobalMetadataResourceIntTest {
         List<GlobalMetadata> globalMetadata = globalMetadataRepository.findAll();
         assertThat(globalMetadata).hasSize(databaseSizeBeforeCreate + 1);
         GlobalMetadata testGlobalMetadata = globalMetadata.get(globalMetadata.size() - 1);
-        assertThat(testGlobalMetadata.getExpertRate()).isEqualTo(DEFAULT_EXPERT_RATE);
-        assertThat(testGlobalMetadata.getMinimumCaseLength()).isEqualTo(DEFAULT_MINIMUM_CASE_LENGTH);
+        assertThat(testGlobalMetadata.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testGlobalMetadata.getValue()).isEqualTo(DEFAULT_VALUE);
+        assertThat(testGlobalMetadata.getValueType()).isEqualTo(DEFAULT_VALUE_TYPE);
     }
 
     @Test
@@ -109,8 +113,9 @@ public class GlobalMetadataResourceIntTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(globalMetadata.getId().intValue())))
-                .andExpect(jsonPath("$.[*].expertRate").value(hasItem(DEFAULT_EXPERT_RATE)))
-                .andExpect(jsonPath("$.[*].minimumCaseLength").value(hasItem(DEFAULT_MINIMUM_CASE_LENGTH)));
+                .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+                .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE.toString())))
+                .andExpect(jsonPath("$.[*].valueType").value(hasItem(DEFAULT_VALUE_TYPE.toString())));
     }
 
     @Test
@@ -124,8 +129,9 @@ public class GlobalMetadataResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(globalMetadata.getId().intValue()))
-            .andExpect(jsonPath("$.expertRate").value(DEFAULT_EXPERT_RATE))
-            .andExpect(jsonPath("$.minimumCaseLength").value(DEFAULT_MINIMUM_CASE_LENGTH));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
+            .andExpect(jsonPath("$.value").value(DEFAULT_VALUE.toString()))
+            .andExpect(jsonPath("$.valueType").value(DEFAULT_VALUE_TYPE.toString()));
     }
 
     @Test
@@ -146,8 +152,9 @@ public class GlobalMetadataResourceIntTest {
         // Update the globalMetadata
         GlobalMetadata updatedGlobalMetadata = new GlobalMetadata();
         updatedGlobalMetadata.setId(globalMetadata.getId());
-        updatedGlobalMetadata.setExpertRate(UPDATED_EXPERT_RATE);
-        updatedGlobalMetadata.setMinimumCaseLength(UPDATED_MINIMUM_CASE_LENGTH);
+        updatedGlobalMetadata.setName(UPDATED_NAME);
+        updatedGlobalMetadata.setValue(UPDATED_VALUE);
+        updatedGlobalMetadata.setValueType(UPDATED_VALUE_TYPE);
 
         restGlobalMetadataMockMvc.perform(put("/api/global-metadata")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -158,8 +165,9 @@ public class GlobalMetadataResourceIntTest {
         List<GlobalMetadata> globalMetadata = globalMetadataRepository.findAll();
         assertThat(globalMetadata).hasSize(databaseSizeBeforeUpdate);
         GlobalMetadata testGlobalMetadata = globalMetadata.get(globalMetadata.size() - 1);
-        assertThat(testGlobalMetadata.getExpertRate()).isEqualTo(UPDATED_EXPERT_RATE);
-        assertThat(testGlobalMetadata.getMinimumCaseLength()).isEqualTo(UPDATED_MINIMUM_CASE_LENGTH);
+        assertThat(testGlobalMetadata.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testGlobalMetadata.getValue()).isEqualTo(UPDATED_VALUE);
+        assertThat(testGlobalMetadata.getValueType()).isEqualTo(UPDATED_VALUE_TYPE);
     }
 
     @Test

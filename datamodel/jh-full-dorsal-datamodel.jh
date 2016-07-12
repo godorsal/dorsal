@@ -66,11 +66,19 @@ relationship OneToOne {
 }
 
 ///////////////////////////////////////
+// Entity MetadataType
+
+enum Metadatatypeenum {
+    ISSTRING, ISINTEGER, ISBOOLEAN
+}
+
+///////////////////////////////////////
 // Entity Global Meta Data
 
 entity GlobalMetadata {
-    expertRate Integer,
-    minimumCaseLength Integer
+    name String,
+    value String,
+    valueType Metadatatypeenum
 }
 
 //////////////////////////
@@ -216,26 +224,32 @@ relationship OneToMany {
     Updatetype{Caseupdate(updatetype)} to Caseupdate{updatetype}
 }
 
+////////////////////////////////////
 // Entity Rating
+//
 
 entity Rating {
 	dateRated ZonedDateTime,
-    score Integer
+    score Integer,
+    rateDetails String,
+    hasExpertExceeded Boolean
 }
 
 relationship OneToMany {
 	Supportcase{Rating(case)} to Rating{supportcase}
 }
 
-// Entity Attachement
-
-entity Attachement {
+////////////////////////////////////////
+// Entity Attachment
+//
+entity Attachment {
 	name String maxlength(1024),
-    url String maxlength(1024)
+    url String maxlength(1024),
+    dataStream Blob
 }
 
 relationship OneToMany {
-	Supportcase{Attachement(supportcase)} to Attachement{supportcase}
+	Supportcase{Attachment(supportcase)} to Attachment{supportcase}
 }
 
 ///////////////////////////////////

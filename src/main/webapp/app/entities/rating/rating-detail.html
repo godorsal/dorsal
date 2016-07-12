@@ -11,6 +11,14 @@
         <dd>
             <span>{{vm.rating.score}}</span>
         </dd>
+        <dt><span translate="dorsalApp.rating.rateDetails">Rate Details</span></dt>
+        <dd>
+            <span>{{vm.rating.rateDetails}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.rating.hasExpertExceeded">Has Expert Exceeded</span></dt>
+        <dd>
+            <span>{{vm.rating.hasExpertExceeded}}</span>
+        </dd>
         <dt><span translate="dorsalApp.rating.supportcase">Supportcase</span></dt>
         <dd>
             <a ui-sref="supportcase-detail({id:vm.rating.supportcase.id})">{{vm.rating.supportcase.id}}</a>

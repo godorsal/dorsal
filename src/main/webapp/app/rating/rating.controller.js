@@ -21,22 +21,22 @@
                 "values": [
                     {
                         "label": "case.rating.value.poorIncomplete",
-                        "value": "poor"
+                        "value": "65"
                     },
                     {
                         "label": "case.rating.value.average",
-                        "value": "average"
+                        "value": "75"
                     },
                     {
                         "label": "case.rating.value.good",
-                        "value": "good"
+                        "value": "85"
                     },
                     {
                         "label": "case.rating.value.excellent",
-                        "value": "excellent"
+                        "value": "100"
                     }
                 ],
-                "selectedValue": "excellent"
+                "selectedValue": "100"
             },
             {
                 "id": "prompt",
@@ -44,22 +44,22 @@
                 "values": [
                     {
                         "label": "case.rating.value.poorIncomplete",
-                        "value": "poor"
+                        "value": "65"
                     },
                     {
                         "label": "case.rating.value.average",
-                        "value": "average"
+                        "value": "75"
                     },
                     {
                         "label": "case.rating.value.good",
-                        "value": "good"
+                        "value": "85"
                     },
                     {
                         "label": "case.rating.value.excellent",
-                        "value": "excellent"
+                        "value": "100"
                     }
                 ],
-                "selectedValue": "excellent"
+                "selectedValue": "100"
             },
             {
                 "id": "courtesy",
@@ -67,22 +67,22 @@
                 "values": [
                     {
                         "label": "case.rating.value.poor",
-                        "value": "poor"
+                        "value": "65"
                     },
                     {
                         "label": "case.rating.value.average",
-                        "value": "average"
+                        "value": "75"
                     },
                     {
                         "label": "case.rating.value.good",
-                        "value": "good"
+                        "value": "85"
                     },
                     {
                         "label": "case.rating.value.excellent",
-                        "value": "excellent"
+                        "value": "100"
                     }
                 ],
-                "selectedValue": "excellent"
+                "selectedValue": "100"
             },
             {
                 "id": "skill",
@@ -90,24 +90,23 @@
                 "values": [
                     {
                         "label": "case.rating.value.poorIncomplete",
-                        "value": "poor"
+                        "value": "65"
                     },
                     {
                         "label": "case.rating.value.average",
-                        "value": "average"
+                        "value": "75"
                     },
                     {
                         "label": "case.rating.value.good",
-                        "value": "good"
+                        "value": "85"
                     },
                     {
                         "label": "case.rating.value.excellent",
-                        "value": "excellent"
+                        "value": "100"
                     }
                 ],
-                "selectedValue": "excellent"
-            },
-
+                "selectedValue": "100"
+            }
         ];
 
         function cancel() {
@@ -115,7 +114,17 @@
         }
 
         function submit() {
-            $uibModalInstance.close({"rated": true});
+            var combinedTotal = 0, combinedAverage = 0, csv = [], i;
+
+            for (i=0; i<vm.radios.length; i++) {
+                var radio = vm.radios[i];
+                combinedTotal += Number(radio.selectedValue);
+                csv.push(radio.id +' '+  radio.selectedValue);
+            }
+
+            combinedAverage = Math.round(combinedTotal/vm.radios.length);
+
+            $uibModalInstance.close({"rated": true, "combinedAverage":combinedAverage, "csv": csv.join(',')});
         }
     }
 })();

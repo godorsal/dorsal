@@ -1,0 +1,10 @@
+{
+    "dorsalApp": {
+        "Metadatatypeenum" : {
+            "null": "",
+            "ISSTRING": "ISSTRING",
+            "ISINTEGER": "ISINTEGER",
+            "ISBOOLEAN": "ISBOOLEAN"
+        }
+    }
+}

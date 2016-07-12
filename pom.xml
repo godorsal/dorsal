@@ -778,7 +778,7 @@
                                     -->
                                     <arguments>build</arguments>
                                 </configuration>
-                            </execution>
+                            </execution><!--
                             <execution>
                                 <id>gulp test</id>
                                 <goals>
@@ -786,9 +786,10 @@
                                 </goals>
                                 <phase>test</phase>
                                 <configuration>
-                                    <arguments>test --no-notification</arguments>
+                                    <arguments>test -no-notification</arguments>
                                 </configuration>
                             </execution>
+                            -->
                         </executions>
                     </plugin>
                     <plugin>

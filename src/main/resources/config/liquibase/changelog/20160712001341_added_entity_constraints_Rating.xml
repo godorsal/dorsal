@@ -6,7 +6,7 @@
     <!--
         Added the constraints for entity Rating.
     -->
-    <changeSet id="20160630174741-2" author="jhipster">
+    <changeSet id="20160712001341-2" author="jhipster">
         
         <addForeignKeyConstraint baseColumnNames="supportcase_id"
                                  baseTableName="rating"

@@ -14,16 +14,24 @@
                     ng-model="vm.globalMetadata.id" readonly />
         </div>
         <div class="form-group">
-            <label class="control-label" translate="dorsalApp.globalMetadata.expertRate" for="field_expertRate">Expert Rate</label>
-            <input type="number" class="form-control" name="expertRate" id="field_expertRate"
-                    ng-model="vm.globalMetadata.expertRate"
+            <label class="control-label" translate="dorsalApp.globalMetadata.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="vm.globalMetadata.name"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" translate="dorsalApp.globalMetadata.minimumCaseLength" for="field_minimumCaseLength">Minimum Case Length</label>
-            <input type="number" class="form-control" name="minimumCaseLength" id="field_minimumCaseLength"
-                    ng-model="vm.globalMetadata.minimumCaseLength"
+            <label class="control-label" translate="dorsalApp.globalMetadata.value" for="field_value">Value</label>
+            <input type="text" class="form-control" name="value" id="field_value"
+                    ng-model="vm.globalMetadata.value"
                      />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.globalMetadata.valueType" for="field_valueType">Value Type</label>
+            <select class="form-control" name="valueType" ng-model="vm.globalMetadata.valueType" id="field_valueType">
+                <option value="ISSTRING" translate="dorsalApp.Metadatatypeenum.ISSTRING">ISSTRING</option>
+                <option value="ISINTEGER" translate="dorsalApp.Metadatatypeenum.ISINTEGER">ISINTEGER</option>
+                <option value="ISBOOLEAN" translate="dorsalApp.Metadatatypeenum.ISBOOLEAN">ISBOOLEAN</option>
+            </select>
         </div>
 
     </div>

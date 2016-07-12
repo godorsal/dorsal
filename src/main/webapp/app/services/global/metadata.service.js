@@ -1,29 +1,42 @@
-(function() {
+(function () {
     'use strict';
 
     angular
         .module('dorsalApp')
         .factory('DrslMetadata', DrslMetadata);
 
-    DrslMetadata.$inject = [];
+    DrslMetadata.$inject = ['GlobalMetadata'];
 
-    function DrslMetadata () {
+    function DrslMetadata(GlobalMetadata) {
         var service = {};
-        service.expertRate = null;
-        service.minimumCaseLength = null;
-
-        service.setExpertRate = function(rate) {
-            service.expertRate = rate;
-        };
-
-        service.setMinimumCaseLength = function (minCaseLength) {
-            service.minimumCaseLength =  minCaseLength;
-        };
 
         service.getTotalForRateAtHours = function (hours) {
             return service.expertRate * hours;
         };
 
+        GlobalMetadata.query(function (result) {
+            var i, metaItem;
+
+            for (i = 0; i < result.length; i++) {
+                metaItem = result[i];
+
+                switch (metaItem.valueType) {
+                    case 'ISINTEGER':
+                        service[camelCase(metaItem.name)] = parseInt(metaItem.value);
+                        break;
+                    default:
+                        service[camelCase(metaItem.name)] = metaItem.value;
+                        break;
+                }
+            }
+        });
+
         return service;
+    }
+
+    function camelCase(input) {
+        return input.toLowerCase().replace(/-(.)/g, function (match, group1) {
+            return group1.toUpperCase();
+        });
     }
 })();

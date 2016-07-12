@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory
 import scala.concurrent.duration._
 
 /**
- * Performance test for the Attachement entity.
+ * Performance test for the Attachment entity.
  */
-class AttachementGatlingTest extends Simulation {
+class AttachmentGatlingTest extends Simulation {
 
     val context: LoggerContext = LoggerFactory.getILoggerFactory.asInstanceOf[LoggerContext]
     // Log all HTTP requests
@@ -42,7 +42,7 @@ class AttachementGatlingTest extends Simulation {
         "Authorization" -> "${access_token}"
     )
 
-    val scn = scenario("Test the Attachement entity")
+    val scn = scenario("Test the Attachment entity")
         .exec(http("First unauthenticated request")
         .get("/api/account")
         .headers(headers_http)
@@ -60,26 +60,26 @@ class AttachementGatlingTest extends Simulation {
         .check(status.is(200)))
         .pause(10)
         .repeat(2) {
-            exec(http("Get all attachements")
-            .get("/api/attachements")
+            exec(http("Get all attachments")
+            .get("/api/attachments")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
-            .exec(http("Create new attachement")
-            .post("/api/attachements")
+            .exec(http("Create new attachment")
+            .post("/api/attachments")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "url":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "url":"SAMPLE_TEXT", "dataStream":null}""")).asJSON
             .check(status.is(201))
-            .check(headerRegex("Location", "(.*)").saveAs("new_attachement_url"))).exitHereIfFailed
+            .check(headerRegex("Location", "(.*)").saveAs("new_attachment_url"))).exitHereIfFailed
             .pause(10)
             .repeat(5) {
-                exec(http("Get created attachement")
-                .get("${new_attachement_url}")
+                exec(http("Get created attachment")
+                .get("${new_attachment_url}")
                 .headers(headers_http_authenticated))
                 .pause(10)
             }
-            .exec(http("Delete created attachement")
-            .delete("${new_attachement_url}")
+            .exec(http("Delete created attachment")
+            .delete("${new_attachment_url}")
             .headers(headers_http_authenticated))
             .pause(10)
         }

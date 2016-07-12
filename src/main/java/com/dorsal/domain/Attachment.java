@@ -9,12 +9,12 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A Attachement.
+ * A Attachment.
  */
 @Entity
-@Table(name = "attachement")
+@Table(name = "attachment")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Attachement implements Serializable {
+public class Attachment implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -29,6 +29,13 @@ public class Attachement implements Serializable {
     @Size(max = 1024)
     @Column(name = "url", length = 1024)
     private String url;
+
+    @Lob
+    @Column(name = "data_stream")
+    private byte[] dataStream;
+
+    @Column(name = "data_stream_content_type")
+    private String dataStreamContentType;
 
     @ManyToOne
     private Supportcase supportcase;
@@ -57,6 +64,22 @@ public class Attachement implements Serializable {
         this.url = url;
     }
 
+    public byte[] getDataStream() {
+        return dataStream;
+    }
+
+    public void setDataStream(byte[] dataStream) {
+        this.dataStream = dataStream;
+    }
+
+    public String getDataStreamContentType() {
+        return dataStreamContentType;
+    }
+
+    public void setDataStreamContentType(String dataStreamContentType) {
+        this.dataStreamContentType = dataStreamContentType;
+    }
+
     public Supportcase getSupportcase() {
         return supportcase;
     }
@@ -73,11 +96,11 @@ public class Attachement implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Attachement attachement = (Attachement) o;
-        if(attachement.id == null || id == null) {
+        Attachment attachment = (Attachment) o;
+        if(attachment.id == null || id == null) {
             return false;
         }
-        return Objects.equals(id, attachement.id);
+        return Objects.equals(id, attachment.id);
     }
 
     @Override
@@ -87,10 +110,12 @@ public class Attachement implements Serializable {
 
     @Override
     public String toString() {
-        return "Attachement{" +
+        return "Attachment{" +
             "id=" + id +
             ", name='" + name + "'" +
             ", url='" + url + "'" +
+            ", dataStream='" + dataStream + "'" +
+            ", dataStreamContentType='" + dataStreamContentType + "'" +
             '}';
     }
 }

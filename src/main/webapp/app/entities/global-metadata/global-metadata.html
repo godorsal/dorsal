@@ -19,16 +19,18 @@
             <thead>
                 <tr>
                     <th><span translate="global.field.id">ID</span></th>
-                    <th><span translate="dorsalApp.globalMetadata.expertRate">Expert Rate</span></th>
-                    <th><span translate="dorsalApp.globalMetadata.minimumCaseLength">Minimum Case Length</span></th>
+                    <th><span translate="dorsalApp.globalMetadata.name">Name</span></th>
+                    <th><span translate="dorsalApp.globalMetadata.value">Value</span></th>
+                    <th><span translate="dorsalApp.globalMetadata.valueType">Value Type</span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="globalMetadata in vm.globalMetadata track by globalMetadata.id">
                     <td><a ui-sref="global-metadata-detail({id:globalMetadata.id})">{{globalMetadata.id}}</a></td>
-                    <td>{{globalMetadata.expertRate}}</td>
-                    <td>{{globalMetadata.minimumCaseLength}}</td>
+                    <td>{{globalMetadata.name}}</td>
+                    <td>{{globalMetadata.value}}</td>
+                    <td translate="{{'dorsalApp.Metadatatypeenum.' + globalMetadata.valueType}}">{{globalMetadata.valueType}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

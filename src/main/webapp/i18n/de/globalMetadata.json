@@ -16,8 +16,9 @@
             "detail": {
                 "title": "Global Metadata"
             },
-            "expertRate": "Expert Rate",
-            "minimumCaseLength": "Minimum Case Length"
+            "name": "Name",
+            "value": "Value",
+            "valueType": "Value Type"
         }
     }
 }

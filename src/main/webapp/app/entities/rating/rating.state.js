@@ -73,6 +73,8 @@
                             return {
                                 dateRated: null,
                                 score: null,
+                                rateDetails: null,
+                                hasExpertExceeded: null,
                                 id: null
                             };
                         }

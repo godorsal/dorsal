@@ -1,0 +1,32 @@
+
+<div>
+    <h2><span translate="dorsalApp.attachment.detail.title">Attachment</span> {{vm.attachment.id}}</h2>
+    <hr>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span translate="dorsalApp.attachment.name">Name</span></dt>
+        <dd>
+            <span>{{vm.attachment.name}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.attachment.url">Url</span></dt>
+        <dd>
+            <span>{{vm.attachment.url}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.attachment.dataStream">Data Stream</span></dt>
+        <dd>
+            <div ng-if="vm.attachment.dataStream">
+                <a ng-click="vm.openFile(vm.attachment.dataStreamContentType, vm.attachment.dataStream)" translate="entity.action.open">open</a>
+                {{vm.attachment.dataStreamContentType}}, {{vm.byteSize(vm.attachment.dataStream)}}
+            </div>
+        </dd>
+        <dt><span translate="dorsalApp.attachment.supportcase">Supportcase</span></dt>
+        <dd>
+            <a ui-sref="supportcase-detail({id:vm.attachment.supportcase.id})">{{vm.attachment.supportcase.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

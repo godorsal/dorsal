@@ -45,19 +45,13 @@
             },
             "score": "Score",
             "badges": {
-                "badge-1": "happy fun place",
-                "badge-2": "defender of the realm",
-                "badge-3": "craftsperson",
+                "badge-1": "time sensitive",
+                "badge-2": "network specialist",
+                "badge-3": "database magician",
                 "badge-4": "detail oriented",
-                "badge-5": "focused like a laser",
-                "badge-6": "McLuvin It!",
-                "badge-7": "masterful multitasking",
-                "badge-8": "network specialist",
-                "badge-9": "double plus good",
-                "badge-10": "database magician",
-                "badge-11": "super heavy lifter",
-                "badge-12": "resolution writer pro",
-                "badge-13": "time sensitive"
+                "badge-5": "happy fun place",
+                "badge-6": "focused like a laser",
+                "badge-7": "resolution writer pro"
             },
             "input": {
                 "desiredOutcome": "Desired <br/> Outcome",

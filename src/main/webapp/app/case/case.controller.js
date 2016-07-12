@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .controller('CaseController', CaseController);
 
-    CaseController.$inject = ['$scope', '$window', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', 'Supportcase', '$state', 'DrslMetadata', 'StatusModel', 'ExpertAccount'];
+    CaseController.$inject = ['$scope', '$window', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', 'Supportcase', '$state', 'DrslMetadata', 'StatusModel', 'ExpertAccount', 'Rating'];
 
-    function CaseController($scope, $window, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, Supportcase, $state, DrslMetadata, StatusModel, ExpertAccount) {
+    function CaseController($scope, $window, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, Supportcase, $state, DrslMetadata, StatusModel, ExpertAccount, Rating) {
         var vm = this;
         vm.init = init;
         vm.getHistory = getHistory;
@@ -60,9 +60,6 @@
             StatusModel.getStates().then(function(data){
                 vm.statusStates = data;
             });
-
-            DrslMetadata.setExpertRate(125);
-            DrslMetadata.setMinimumCaseLength(4);
         }
 
         /**
@@ -134,8 +131,17 @@
             if (StatusModel.checkCaseStatus(vm.currentCase.status, 'completed') && !vm.isCaseExpert()) {
                 var modalInstance = DrslRatingService.open(vm.currentCase);
 
-                modalInstance.result.then(function () {
+                modalInstance.result.then(function (data) {
+                    var newRating = {
+                        id: null,
+                        dateRated: null,
+                        score: data.combinedAverage,
+                        supportcase: vm.currentCase
+                    };
+
                     vm.currentCase.status = StatusModel.getState('closed');
+
+                    Rating.save(newRating);
                     vm.currentCase.$update();
                 });
             }

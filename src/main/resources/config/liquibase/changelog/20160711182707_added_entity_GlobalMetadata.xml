@@ -16,16 +16,20 @@
     <!--
         Added the entity GlobalMetadata.
     -->
-    <changeSet id="20160705220224-1" author="jhipster">
+    <changeSet id="20160711182707-1" author="jhipster">
         <createTable tableName="global_metadata">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="expert_rate" type="integer">
+            <column name="name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="minimum_case_length" type="integer">
+            <column name="value" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="value_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 

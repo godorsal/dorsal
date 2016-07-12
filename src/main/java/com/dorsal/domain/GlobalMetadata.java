@@ -7,6 +7,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.dorsal.domain.enumeration.Metadatatypeenum;
+
 /**
  * A GlobalMetadata.
  */
@@ -21,11 +23,15 @@ public class GlobalMetadata implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "expert_rate")
-    private Integer expertRate;
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "minimum_case_length")
-    private Integer minimumCaseLength;
+    @Column(name = "value")
+    private String value;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "value_type")
+    private Metadatatypeenum valueType;
 
     public Long getId() {
         return id;
@@ -35,20 +41,28 @@ public class GlobalMetadata implements Serializable {
         this.id = id;
     }
 
-    public Integer getExpertRate() {
-        return expertRate;
+    public String getName() {
+        return name;
     }
 
-    public void setExpertRate(Integer expertRate) {
-        this.expertRate = expertRate;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Integer getMinimumCaseLength() {
-        return minimumCaseLength;
+    public String getValue() {
+        return value;
     }
 
-    public void setMinimumCaseLength(Integer minimumCaseLength) {
-        this.minimumCaseLength = minimumCaseLength;
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public Metadatatypeenum getValueType() {
+        return valueType;
+    }
+
+    public void setValueType(Metadatatypeenum valueType) {
+        this.valueType = valueType;
     }
 
     @Override
@@ -75,8 +89,9 @@ public class GlobalMetadata implements Serializable {
     public String toString() {
         return "GlobalMetadata{" +
             "id=" + id +
-            ", expertRate='" + expertRate + "'" +
-            ", minimumCaseLength='" + minimumCaseLength + "'" +
+            ", name='" + name + "'" +
+            ", value='" + value + "'" +
+            ", valueType='" + valueType + "'" +
             '}';
     }
 }

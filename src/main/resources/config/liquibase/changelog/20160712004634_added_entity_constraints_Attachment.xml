@@ -4,13 +4,13 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
     <!--
-        Added the constraints for entity Attachement.
+        Added the constraints for entity Attachment.
     -->
-    <changeSet id="20160623155313-2" author="jhipster">
+    <changeSet id="20160712004634-2" author="jhipster">
         
         <addForeignKeyConstraint baseColumnNames="supportcase_id"
-                                 baseTableName="attachement"
-                                 constraintName="fk_attachement_supportcase_id"
+                                 baseTableName="attachment"
+                                 constraintName="fk_attachment_supportcase_id"
                                  referencedColumnNames="id"
                                  referencedTableName="supportcase"/>
 
