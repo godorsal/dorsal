@@ -16,6 +16,7 @@
             "detail": {
                 "title": "Expertbadge"
             },
+            "expertBadgeCount": "Expert Badge Count",
             "user": "User",
             "badge": "Badge"
         }

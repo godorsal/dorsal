@@ -30,6 +30,10 @@
                     <th><span translate="dorsalApp.expertAccount.firstTechnologyPreference">First Technology Preference</span></th>
                     <th><span translate="dorsalApp.expertAccount.secondTechnologyPreference">Second Technology Preference</span></th>
                     <th><span translate="dorsalApp.expertAccount.thirdTechnologyPreference">Third Technology Preference</span></th>
+                    <th><span translate="dorsalApp.expertAccount.isAvailable">Is Available</span></th>
+                    <th><span translate="dorsalApp.expertAccount.expertBio">Expert Bio</span></th>
+                    <th><span translate="dorsalApp.expertAccount.expertSince">Expert Since</span></th>
+                    <th><span translate="dorsalApp.expertAccount.numberOfCases">Number Of Cases</span></th>
                     <th><span translate="dorsalApp.expertAccount.user">User</span></th>
                     <th></th>
                 </tr>
@@ -48,6 +52,10 @@
                     <td>{{expertAccount.firstTechnologyPreference}}</td>
                     <td>{{expertAccount.secondTechnologyPreference}}</td>
                     <td>{{expertAccount.thirdTechnologyPreference}}</td>
+                    <td>{{expertAccount.isAvailable}}</td>
+                    <td>{{expertAccount.expertBio}}</td>
+                    <td>{{expertAccount.expertSince | date:'medium'}}</td>
+                    <td>{{expertAccount.numberOfCases}}</td>
                     <td>
                         {{expertAccount.user.id}}
                     </td>

@@ -4,9 +4,9 @@
         .module('dorsalApp')
         .factory('ExpertAccount', ExpertAccount);
 
-    ExpertAccount.$inject = ['$resource'];
+    ExpertAccount.$inject = ['$resource', 'DateUtils'];
 
-    function ExpertAccount ($resource) {
+    function ExpertAccount ($resource, DateUtils) {
         var resourceUrl =  'api/expert-accounts/:id';
 
         return $resource(resourceUrl, {}, {
@@ -15,6 +15,7 @@
                 method: 'GET',
                 transformResponse: function (data) {
                     data = angular.fromJson(data);
+                    data.expertSince = DateUtils.convertDateTimeFromServer(data.expertSince);
                     return data;
                 }
             },

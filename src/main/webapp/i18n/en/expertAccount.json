@@ -27,6 +27,10 @@
             "firstTechnologyPreference": "First Technology Preference",
             "secondTechnologyPreference": "Second Technology Preference",
             "thirdTechnologyPreference": "Third Technology Preference",
+            "isAvailable": "Is Available",
+            "expertBio": "Expert Bio",
+            "expertSince": "Expert Since",
+            "numberOfCases": "Number Of Cases",
             "user": "User"
         }
     }

@@ -85,6 +85,40 @@
                     ng-model="vm.expertAccount.thirdTechnologyPreference"
                      />
         </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.expertAccount.isAvailable" for="field_isAvailable">Is Available</label>
+            <input type="checkbox" class="form-control" name="isAvailable" id="field_isAvailable"
+                    ng-model="vm.expertAccount.isAvailable"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.expertAccount.expertBio" for="field_expertBio">Expert Bio</label>
+            <input type="text" class="form-control" name="expertBio" id="field_expertBio"
+                    ng-model="vm.expertAccount.expertBio"
+                    ng-maxlength="4096" />
+            <div ng-show="editForm.expertBio.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.expertBio.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="4096">
+                    This field cannot be longer than 4096 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.expertAccount.expertSince" for="field_expertSince">Expert Since</label>
+                <div class="input-group">
+                    <input id="field_expertSince" type="text" class="form-control" name="expertSince" datetime-picker="{{dateformat}}" ng-model="vm.expertAccount.expertSince" is-open="vm.datePickerOpenStatus.expertSince"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('expertSince')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.expertAccount.numberOfCases" for="field_numberOfCases">Number Of Cases</label>
+            <input type="number" class="form-control" name="numberOfCases" id="field_numberOfCases"
+                    ng-model="vm.expertAccount.numberOfCases"
+                     />
+        </div>
 
         <div class="form-group">
             <label translate="dorsalApp.expertAccount.user" for="field_user">User</label>

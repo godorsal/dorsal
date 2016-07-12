@@ -68,7 +68,7 @@ class ExpertbadgeGatlingTest extends Simulation {
             .exec(http("Create new expertbadge")
             .post("/api/expertbadges")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null}""")).asJSON
+            .body(StringBody("""{"id":null, "expertBadgeCount":"0"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_expertbadge_url"))).exitHereIfFailed
             .pause(10)

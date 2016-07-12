@@ -6,6 +6,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 /**
@@ -55,6 +56,19 @@ public class ExpertAccount implements Serializable {
 
     @Column(name = "third_technology_preference")
     private String thirdTechnologyPreference;
+
+    @Column(name = "is_available")
+    private Boolean isAvailable;
+
+    @Size(max = 4096)
+    @Column(name = "expert_bio", length = 4096)
+    private String expertBio;
+
+    @Column(name = "expert_since")
+    private ZonedDateTime expertSince;
+
+    @Column(name = "number_of_cases")
+    private Integer numberOfCases;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -156,6 +170,38 @@ public class ExpertAccount implements Serializable {
         this.thirdTechnologyPreference = thirdTechnologyPreference;
     }
 
+    public Boolean isIsAvailable() {
+        return isAvailable;
+    }
+
+    public void setIsAvailable(Boolean isAvailable) {
+        this.isAvailable = isAvailable;
+    }
+
+    public String getExpertBio() {
+        return expertBio;
+    }
+
+    public void setExpertBio(String expertBio) {
+        this.expertBio = expertBio;
+    }
+
+    public ZonedDateTime getExpertSince() {
+        return expertSince;
+    }
+
+    public void setExpertSince(ZonedDateTime expertSince) {
+        this.expertSince = expertSince;
+    }
+
+    public Integer getNumberOfCases() {
+        return numberOfCases;
+    }
+
+    public void setNumberOfCases(Integer numberOfCases) {
+        this.numberOfCases = numberOfCases;
+    }
+
     public User getUser() {
         return user;
     }
@@ -199,6 +245,10 @@ public class ExpertAccount implements Serializable {
             ", firstTechnologyPreference='" + firstTechnologyPreference + "'" +
             ", secondTechnologyPreference='" + secondTechnologyPreference + "'" +
             ", thirdTechnologyPreference='" + thirdTechnologyPreference + "'" +
+            ", isAvailable='" + isAvailable + "'" +
+            ", expertBio='" + expertBio + "'" +
+            ", expertSince='" + expertSince + "'" +
+            ", numberOfCases='" + numberOfCases + "'" +
             '}';
     }
 }

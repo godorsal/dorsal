@@ -71,6 +71,7 @@
                     resolve: {
                         entity: function () {
                             return {
+                                expertBadgeCount: null,
                                 id: null
                             };
                         }

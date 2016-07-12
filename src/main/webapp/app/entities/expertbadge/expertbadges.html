@@ -19,6 +19,7 @@
             <thead>
                 <tr>
                     <th><span translate="global.field.id">ID</span></th>
+                    <th><span translate="dorsalApp.expertbadge.expertBadgeCount">Expert Badge Count</span></th>
                     <th><span translate="dorsalApp.expertbadge.user">User</span></th>
                     <th><span translate="dorsalApp.expertbadge.badge">Badge</span></th>
                     <th></th>
@@ -27,6 +28,7 @@
             <tbody>
                 <tr ng-repeat="expertbadge in vm.expertbadges track by expertbadge.id">
                     <td><a ui-sref="expertbadge-detail({id:expertbadge.id})">{{expertbadge.id}}</a></td>
+                    <td>{{expertbadge.expertBadgeCount}}</td>
                     <td>
                         {{expertbadge.user.id}}
                     </td>
