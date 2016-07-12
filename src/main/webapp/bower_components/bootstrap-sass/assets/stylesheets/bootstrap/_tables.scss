@@ -112,7 +112,8 @@ th {
 
 .table-striped {
   > tbody > tr:nth-of-type(odd) {
-    background-color: $table-bg-accent;
+    background-color: #A9A9A9;
+    // background-color: $table-bg-accent;
   }
 }
 

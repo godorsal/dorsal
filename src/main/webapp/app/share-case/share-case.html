@@ -2,11 +2,11 @@
     <div class="modal-body">
         <div>
             <div class="drsl-dialog-header">
-                <div><h2>Share Case: <span>ID: {{vm.case.id}}</span></h2></div>
+                <div><h2>Share My Case: <span>{{vm.case.technology.name}} {{vm.case.id}}</span></h2></div>
             </div>
             <table>
                 <thead>
-                    <th><h3 ng-if="vm.sharedUsers.length">Shared Users</h3></th>
+                    <th><h3 ng-if="vm.sharedUsers.length">Users</h3></th>
                     <th><h3 ng-if="vm.sharedUsers.length"  style="padding-left: 5px;">Permissions</h3></th>
                 </thead>
                 <tbody>
@@ -25,7 +25,7 @@
                 <input type="text" id="emailInput" name="emailInput"
                 ng-model="vm.emailInput" ng-minlength=4 ng-maxlength=50 required placeholder="Email address" style="width: 400px; height: 33px;">
                 <select class="form-control" ng-model="vm.permissions" id="permissionInput" style="width: 150px; display: inline-block;" required disabled>
-                <option value="">Permissions</option>
+                <option value="">Full Access</option>
                 <option value="read">read</option>
                 <option value="write">write</option>
             </select>
