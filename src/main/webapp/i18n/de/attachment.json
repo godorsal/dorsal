@@ -1,0 +1,25 @@
+{
+    "dorsalApp": {
+        "attachment" : {
+            "home": {
+                "title": "Attachments",
+                "createLabel": "Attachment erstellen",
+                "createOrEditLabel": "Attachment erstellen oder bearbeiten",
+                "search": "Suche nach Attachment"
+            },
+            "created": "Attachment erstellt mit ID {{ param }}",
+            "updated": "Attachment aktualisiert mit ID {{ param }}",
+            "deleted": "Attachment gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Attachment {{ id }} wirklich dauerhaft gejöscht werden?"
+            },
+            "detail": {
+                "title": "Attachment"
+            },
+            "name": "Name",
+            "url": "Url",
+            "dataStream": "Data Stream",
+            "supportcase": "Supportcase"
+        }
+    }
+}

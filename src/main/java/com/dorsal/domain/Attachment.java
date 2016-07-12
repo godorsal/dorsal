@@ -9,12 +9,12 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A Attachement.
+ * A Attachment.
  */
 @Entity
-@Table(name = "attachement")
+@Table(name = "attachment")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Attachement implements Serializable {
+public class Attachment implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -96,11 +96,11 @@ public class Attachement implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Attachement attachement = (Attachement) o;
-        if(attachement.id == null || id == null) {
+        Attachment attachment = (Attachment) o;
+        if(attachment.id == null || id == null) {
             return false;
         }
-        return Objects.equals(id, attachement.id);
+        return Objects.equals(id, attachment.id);
     }
 
     @Override
@@ -110,7 +110,7 @@ public class Attachement implements Serializable {
 
     @Override
     public String toString() {
-        return "Attachement{" +
+        return "Attachment{" +
             "id=" + id +
             ", name='" + name + "'" +
             ", url='" + url + "'" +

@@ -2,12 +2,12 @@
     'use strict';
     angular
         .module('dorsalApp')
-        .factory('Attachement', Attachement);
+        .factory('Attachment', Attachment);
 
-    Attachement.$inject = ['$resource'];
+    Attachment.$inject = ['$resource'];
 
-    function Attachement ($resource) {
-        var resourceUrl =  'api/attachements/:id';
+    function Attachment ($resource) {
+        var resourceUrl =  'api/attachments/:id';
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},

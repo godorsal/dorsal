@@ -23,7 +23,7 @@
     <include file="classpath:config/liquibase/changelog/20160707203249_added_entity_SharedCase.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160711182707_added_entity_GlobalMetadata.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160712001341_added_entity_Rating.xml" relativeToChangelogFile="false"/>
-    <include file="classpath:config/liquibase/changelog/20160712001342_added_entity_Attachement.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160712004634_added_entity_Attachment.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="classpath:config/liquibase/changelog/20160623155303_added_entity_constraints_Referencedoc.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160623155304_added_entity_constraints_Groupaccess.xml" relativeToChangelogFile="false"/>
@@ -37,6 +37,6 @@
     <include file="classpath:config/liquibase/changelog/20160706003901_added_entity_constraints_Useraccount.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160707203249_added_entity_constraints_SharedCase.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160712001341_added_entity_constraints_Rating.xml" relativeToChangelogFile="false"/>
-    <include file="classpath:config/liquibase/changelog/20160712001342_added_entity_constraints_Attachement.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160712004634_added_entity_constraints_Attachment.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

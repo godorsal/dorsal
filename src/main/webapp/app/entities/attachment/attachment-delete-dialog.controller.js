@@ -3,18 +3,18 @@
 
     angular
         .module('dorsalApp')
-        .controller('AttachementDeleteController',AttachementDeleteController);
+        .controller('AttachmentDeleteController',AttachmentDeleteController);
 
-    AttachementDeleteController.$inject = ['$uibModalInstance', 'entity', 'Attachement'];
+    AttachmentDeleteController.$inject = ['$uibModalInstance', 'entity', 'Attachment'];
 
-    function AttachementDeleteController($uibModalInstance, entity, Attachement) {
+    function AttachmentDeleteController($uibModalInstance, entity, Attachment) {
         var vm = this;
-        vm.attachement = entity;
+        vm.attachment = entity;
         vm.clear = function() {
             $uibModalInstance.dismiss('cancel');
         };
         vm.confirmDelete = function (id) {
-            Attachement.delete({id: id},
+            Attachment.delete({id: id},
                 function () {
                     $uibModalInstance.close(true);
                 });

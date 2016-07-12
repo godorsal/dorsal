@@ -240,16 +240,16 @@ relationship OneToMany {
 }
 
 ////////////////////////////////////////
-// Entity Attachement
+// Entity Attachment
 //
-entity Attachement {
+entity Attachment {
 	name String maxlength(1024),
     url String maxlength(1024),
     dataStream Blob
 }
 
 relationship OneToMany {
-	Supportcase{Attachement(supportcase)} to Attachement{supportcase}
+	Supportcase{Attachment(supportcase)} to Attachment{supportcase}
 }
 
 ///////////////////////////////////

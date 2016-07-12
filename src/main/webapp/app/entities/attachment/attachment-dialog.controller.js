@@ -3,13 +3,13 @@
 
     angular
         .module('dorsalApp')
-        .controller('AttachementDialogController', AttachementDialogController);
+        .controller('AttachmentDialogController', AttachmentDialogController);
 
-    AttachementDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Attachement', 'Supportcase'];
+    AttachmentDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Attachment', 'Supportcase'];
 
-    function AttachementDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Attachement, Supportcase) {
+    function AttachmentDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Attachment, Supportcase) {
         var vm = this;
-        vm.attachement = entity;
+        vm.attachment = entity;
         vm.supportcases = Supportcase.query();
 
         $timeout(function (){
@@ -17,7 +17,7 @@
         });
 
         var onSaveSuccess = function (result) {
-            $scope.$emit('dorsalApp:attachementUpdate', result);
+            $scope.$emit('dorsalApp:attachmentUpdate', result);
             $uibModalInstance.close(result);
             vm.isSaving = false;
         };
@@ -28,10 +28,10 @@
 
         vm.save = function () {
             vm.isSaving = true;
-            if (vm.attachement.id !== null) {
-                Attachement.update(vm.attachement, onSaveSuccess, onSaveError);
+            if (vm.attachment.id !== null) {
+                Attachment.update(vm.attachment, onSaveSuccess, onSaveError);
             } else {
-                Attachement.save(vm.attachement, onSaveSuccess, onSaveError);
+                Attachment.save(vm.attachment, onSaveSuccess, onSaveError);
             }
         };
 
@@ -39,12 +39,12 @@
             $uibModalInstance.dismiss('cancel');
         };
 
-        vm.setDataStream = function ($file, attachement) {
+        vm.setDataStream = function ($file, attachment) {
             if ($file) {
                 DataUtils.toBase64($file, function(base64Data) {
                     $scope.$apply(function() {
-                        attachement.dataStream = base64Data;
-                        attachement.dataStreamContentType = $file.type;
+                        attachment.dataStream = base64Data;
+                        attachment.dataStreamContentType = $file.type;
                     });
                 });
             }

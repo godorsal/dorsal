@@ -9,62 +9,62 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-        .state('attachement', {
+        .state('attachment', {
             parent: 'entity',
-            url: '/attachement',
+            url: '/attachment',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'dorsalApp.attachement.home.title'
+                pageTitle: 'dorsalApp.attachment.home.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/attachement/attachements.html',
-                    controller: 'AttachementController',
+                    templateUrl: 'app/entities/attachment/attachments.html',
+                    controller: 'AttachmentController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('attachement');
+                    $translatePartialLoader.addPart('attachment');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
             }
         })
-        .state('attachement-detail', {
+        .state('attachment-detail', {
             parent: 'entity',
-            url: '/attachement/{id}',
+            url: '/attachment/{id}',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'dorsalApp.attachement.detail.title'
+                pageTitle: 'dorsalApp.attachment.detail.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/attachement/attachement-detail.html',
-                    controller: 'AttachementDetailController',
+                    templateUrl: 'app/entities/attachment/attachment-detail.html',
+                    controller: 'AttachmentDetailController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('attachement');
+                    $translatePartialLoader.addPart('attachment');
                     return $translate.refresh();
                 }],
-                entity: ['$stateParams', 'Attachement', function($stateParams, Attachement) {
-                    return Attachement.get({id : $stateParams.id});
+                entity: ['$stateParams', 'Attachment', function($stateParams, Attachment) {
+                    return Attachment.get({id : $stateParams.id});
                 }]
             }
         })
-        .state('attachement.new', {
-            parent: 'attachement',
+        .state('attachment.new', {
+            parent: 'attachment',
             url: '/new',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/attachement/attachement-dialog.html',
-                    controller: 'AttachementDialogController',
+                    templateUrl: 'app/entities/attachment/attachment-dialog.html',
+                    controller: 'AttachmentDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
@@ -80,56 +80,56 @@
                         }
                     }
                 }).result.then(function() {
-                    $state.go('attachement', null, { reload: true });
+                    $state.go('attachment', null, { reload: true });
                 }, function() {
-                    $state.go('attachement');
+                    $state.go('attachment');
                 });
             }]
         })
-        .state('attachement.edit', {
-            parent: 'attachement',
+        .state('attachment.edit', {
+            parent: 'attachment',
             url: '/{id}/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/attachement/attachement-dialog.html',
-                    controller: 'AttachementDialogController',
+                    templateUrl: 'app/entities/attachment/attachment-dialog.html',
+                    controller: 'AttachmentDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['Attachement', function(Attachement) {
-                            return Attachement.get({id : $stateParams.id});
+                        entity: ['Attachment', function(Attachment) {
+                            return Attachment.get({id : $stateParams.id});
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('attachement', null, { reload: true });
+                    $state.go('attachment', null, { reload: true });
                 }, function() {
                     $state.go('^');
                 });
             }]
         })
-        .state('attachement.delete', {
-            parent: 'attachement',
+        .state('attachment.delete', {
+            parent: 'attachment',
             url: '/{id}/delete',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/attachement/attachement-delete-dialog.html',
-                    controller: 'AttachementDeleteController',
+                    templateUrl: 'app/entities/attachment/attachment-delete-dialog.html',
+                    controller: 'AttachmentDeleteController',
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
-                        entity: ['Attachement', function(Attachement) {
-                            return Attachement.get({id : $stateParams.id});
+                        entity: ['Attachment', function(Attachment) {
+                            return Attachment.get({id : $stateParams.id});
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('attachement', null, { reload: true });
+                    $state.go('attachment', null, { reload: true });
                 }, function() {
                     $state.go('^');
                 });

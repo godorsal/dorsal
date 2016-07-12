@@ -2,16 +2,16 @@
 
 describe('Controller Tests', function() {
 
-    describe('Attachement Management Detail Controller', function() {
+    describe('Attachment Management Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockAttachement, MockSupportcase;
+        var MockEntity, MockAttachment, MockSupportcase;
         var createController;
 
         beforeEach(inject(function($injector) {
             $rootScope = $injector.get('$rootScope');
             $scope = $rootScope.$new();
             MockEntity = jasmine.createSpy('MockEntity');
-            MockAttachement = jasmine.createSpy('MockAttachement');
+            MockAttachment = jasmine.createSpy('MockAttachment');
             MockSupportcase = jasmine.createSpy('MockSupportcase');
             
 
@@ -19,18 +19,18 @@ describe('Controller Tests', function() {
                 '$scope': $scope,
                 '$rootScope': $rootScope,
                 'entity': MockEntity ,
-                'Attachement': MockAttachement,
+                'Attachment': MockAttachment,
                 'Supportcase': MockSupportcase
             };
             createController = function() {
-                $injector.get('$controller')("AttachementDetailController", locals);
+                $injector.get('$controller')("AttachmentDetailController", locals);
             };
         }));
 
 
         describe('Root Scope Listening', function() {
             it('Unregisters root scope listener upon scope destruction', function() {
-                var eventType = 'dorsalApp:attachementUpdate';
+                var eventType = 'dorsalApp:attachmentUpdate';
 
                 createController();
                 expect($rootScope.$$listenerCount[eventType]).toEqual(1);

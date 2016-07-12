@@ -23,11 +23,11 @@
                 "updatetype": "Updatetype",
                 "caseupdate": "Caseupdate",
                 "rating": "Rating",
-                "attachement": "Attachement",
                 "expertAccount": "Expert Account",
                 "globalMetadata": "Global Metadata",
                 "userAccount": "User Account",
                 "sharedCase": "Shared Case",
+                "attachment": "Attachment",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
