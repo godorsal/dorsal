@@ -18,6 +18,7 @@
             },
             "name": "Name",
             "url": "Url",
+            "dataStream": "Data Stream",
             "supportcase": "Supportcase"
         }
     }

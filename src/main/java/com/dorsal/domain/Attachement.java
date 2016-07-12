@@ -30,6 +30,13 @@ public class Attachement implements Serializable {
     @Column(name = "url", length = 1024)
     private String url;
 
+    @Lob
+    @Column(name = "data_stream")
+    private byte[] dataStream;
+
+    @Column(name = "data_stream_content_type")
+    private String dataStreamContentType;
+
     @ManyToOne
     private Supportcase supportcase;
 
@@ -55,6 +62,22 @@ public class Attachement implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public byte[] getDataStream() {
+        return dataStream;
+    }
+
+    public void setDataStream(byte[] dataStream) {
+        this.dataStream = dataStream;
+    }
+
+    public String getDataStreamContentType() {
+        return dataStreamContentType;
+    }
+
+    public void setDataStreamContentType(String dataStreamContentType) {
+        this.dataStreamContentType = dataStreamContentType;
     }
 
     public Supportcase getSupportcase() {
@@ -91,6 +114,8 @@ public class Attachement implements Serializable {
             "id=" + id +
             ", name='" + name + "'" +
             ", url='" + url + "'" +
+            ", dataStream='" + dataStream + "'" +
+            ", dataStreamContentType='" + dataStreamContentType + "'" +
             '}';
     }
 }

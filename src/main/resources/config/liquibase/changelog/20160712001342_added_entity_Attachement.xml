@@ -16,7 +16,7 @@
     <!--
         Added the entity Attachement.
     -->
-    <changeSet id="20160623155313-1" author="jhipster">
+    <changeSet id="20160712001342-1" author="jhipster">
         <createTable tableName="attachement">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
@@ -26,6 +26,13 @@
             </column>
             
             <column name="url" type="varchar(1024)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="data_stream" type="blob">
+                <constraints nullable="true" />
+            </column>
+            <column name="data_stream_content_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             

@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .controller('AttachementDetailController', AttachementDetailController);
 
-    AttachementDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'entity', 'Attachement', 'Supportcase'];
+    AttachementDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'DataUtils', 'entity', 'Attachement', 'Supportcase'];
 
-    function AttachementDetailController($scope, $rootScope, $stateParams, entity, Attachement, Supportcase) {
+    function AttachementDetailController($scope, $rootScope, $stateParams, DataUtils, entity, Attachement, Supportcase) {
         var vm = this;
         vm.attachement = entity;
         
@@ -16,5 +16,7 @@
         });
         $scope.$on('$destroy', unsubscribe);
 
+        vm.byteSize = DataUtils.byteSize;
+        vm.openFile = DataUtils.openFile;
     }
 })();

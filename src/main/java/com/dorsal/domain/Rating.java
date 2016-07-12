@@ -28,6 +28,12 @@ public class Rating implements Serializable {
     @Column(name = "score")
     private Integer score;
 
+    @Column(name = "rate_details")
+    private String rateDetails;
+
+    @Column(name = "has_expert_exceeded")
+    private Boolean hasExpertExceeded;
+
     @ManyToOne
     private Supportcase supportcase;
 
@@ -53,6 +59,22 @@ public class Rating implements Serializable {
 
     public void setScore(Integer score) {
         this.score = score;
+    }
+
+    public String getRateDetails() {
+        return rateDetails;
+    }
+
+    public void setRateDetails(String rateDetails) {
+        this.rateDetails = rateDetails;
+    }
+
+    public Boolean isHasExpertExceeded() {
+        return hasExpertExceeded;
+    }
+
+    public void setHasExpertExceeded(Boolean hasExpertExceeded) {
+        this.hasExpertExceeded = hasExpertExceeded;
     }
 
     public Supportcase getSupportcase() {
@@ -89,6 +111,8 @@ public class Rating implements Serializable {
             "id=" + id +
             ", dateRated='" + dateRated + "'" +
             ", score='" + score + "'" +
+            ", rateDetails='" + rateDetails + "'" +
+            ", hasExpertExceeded='" + hasExpertExceeded + "'" +
             '}';
     }
 }

@@ -68,7 +68,7 @@ class AttachementGatlingTest extends Simulation {
             .exec(http("Create new attachement")
             .post("/api/attachements")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "url":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "url":"SAMPLE_TEXT", "dataStream":null}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_attachement_url"))).exitHereIfFailed
             .pause(10)

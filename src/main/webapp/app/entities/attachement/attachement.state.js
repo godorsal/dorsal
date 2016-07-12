@@ -73,6 +73,8 @@
                             return {
                                 name: null,
                                 url: null,
+                                dataStream: null,
+                                dataStreamContentType: null,
                                 id: null
                             };
                         }

@@ -21,6 +21,7 @@
                     <th><span translate="global.field.id">ID</span></th>
                     <th><span translate="dorsalApp.attachement.name">Name</span></th>
                     <th><span translate="dorsalApp.attachement.url">Url</span></th>
+                    <th><span translate="dorsalApp.attachement.dataStream">Data Stream</span></th>
                     <th><span translate="dorsalApp.attachement.supportcase">Supportcase</span></th>
                     <th></th>
                 </tr>
@@ -30,6 +31,10 @@
                     <td><a ui-sref="attachement-detail({id:attachement.id})">{{attachement.id}}</a></td>
                     <td>{{attachement.name}}</td>
                     <td>{{attachement.url}}</td>
+                    <td>
+                        <a ng-if="attachement.dataStream" ng-click="vm.openFile(attachement.dataStreamContentType, attachement.dataStream)" translate="entity.action.open">open</a>
+                        <span ng-if="attachement.dataStream">{{attachement.dataStreamContentType}}, {{vm.byteSize(attachement.dataStream)}}</span>
+                    </td>
                     <td>
                         <a ui-sref="supportcase-detail({id:attachement.supportcase.id})">{{attachement.supportcase.id}}</a>
                     </td>

@@ -11,6 +11,13 @@
         <dd>
             <span>{{vm.attachement.url}}</span>
         </dd>
+        <dt><span translate="dorsalApp.attachement.dataStream">Data Stream</span></dt>
+        <dd>
+            <div ng-if="vm.attachement.dataStream">
+                <a ng-click="vm.openFile(vm.attachement.dataStreamContentType, vm.attachement.dataStream)" translate="entity.action.open">open</a>
+                {{vm.attachement.dataStreamContentType}}, {{vm.byteSize(vm.attachement.dataStream)}}
+            </div>
+        </dd>
         <dt><span translate="dorsalApp.attachement.supportcase">Supportcase</span></dt>
         <dd>
             <a ui-sref="supportcase-detail({id:vm.attachement.supportcase.id})">{{vm.attachement.supportcase.id}}</a>

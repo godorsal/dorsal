@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,10 +26,10 @@ import java.util.Optional;
 public class RatingResource {
 
     private final Logger log = LoggerFactory.getLogger(RatingResource.class);
-
+        
     @Inject
     private RatingRepository ratingRepository;
-
+    
     /**
      * POST  /ratings : Create a new rating.
      *
@@ -47,9 +46,6 @@ public class RatingResource {
         if (rating.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("rating", "idexists", "A new rating cannot already have an ID")).body(null);
         }
-        // Adjust time
-        rating.setDateRated(ZonedDateTime.now());
-
         Rating result = ratingRepository.save(rating);
         return ResponseEntity.created(new URI("/api/ratings/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("rating", result.getId().toString()))

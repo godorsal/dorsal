@@ -18,6 +18,8 @@
             },
             "dateRated": "Date Rated",
             "score": "Score",
+            "rateDetails": "Rate Details",
+            "hasExpertExceeded": "Has Expert Exceeded",
             "supportcase": "Supportcase"
         }
     }

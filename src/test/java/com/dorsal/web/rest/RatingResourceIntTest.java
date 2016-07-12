@@ -54,6 +54,11 @@ public class RatingResourceIntTest {
 
     private static final Integer DEFAULT_SCORE = 1;
     private static final Integer UPDATED_SCORE = 2;
+    private static final String DEFAULT_RATE_DETAILS = "AAAAA";
+    private static final String UPDATED_RATE_DETAILS = "BBBBB";
+
+    private static final Boolean DEFAULT_HAS_EXPERT_EXCEEDED = false;
+    private static final Boolean UPDATED_HAS_EXPERT_EXCEEDED = true;
 
     @Inject
     private RatingRepository ratingRepository;
@@ -83,6 +88,8 @@ public class RatingResourceIntTest {
         rating = new Rating();
         rating.setDateRated(DEFAULT_DATE_RATED);
         rating.setScore(DEFAULT_SCORE);
+        rating.setRateDetails(DEFAULT_RATE_DETAILS);
+        rating.setHasExpertExceeded(DEFAULT_HAS_EXPERT_EXCEEDED);
     }
 
     @Test
@@ -101,8 +108,10 @@ public class RatingResourceIntTest {
         List<Rating> ratings = ratingRepository.findAll();
         assertThat(ratings).hasSize(databaseSizeBeforeCreate + 1);
         Rating testRating = ratings.get(ratings.size() - 1);
-//        assertThat(testRating.getDateRated()).isEqualTo(DEFAULT_DATE_RATED);
+        assertThat(testRating.getDateRated()).isEqualTo(DEFAULT_DATE_RATED);
         assertThat(testRating.getScore()).isEqualTo(DEFAULT_SCORE);
+        assertThat(testRating.getRateDetails()).isEqualTo(DEFAULT_RATE_DETAILS);
+        assertThat(testRating.isHasExpertExceeded()).isEqualTo(DEFAULT_HAS_EXPERT_EXCEEDED);
     }
 
     @Test
@@ -117,7 +126,9 @@ public class RatingResourceIntTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(rating.getId().intValue())))
                 .andExpect(jsonPath("$.[*].dateRated").value(hasItem(DEFAULT_DATE_RATED_STR)))
-                .andExpect(jsonPath("$.[*].score").value(hasItem(DEFAULT_SCORE)));
+                .andExpect(jsonPath("$.[*].score").value(hasItem(DEFAULT_SCORE)))
+                .andExpect(jsonPath("$.[*].rateDetails").value(hasItem(DEFAULT_RATE_DETAILS.toString())))
+                .andExpect(jsonPath("$.[*].hasExpertExceeded").value(hasItem(DEFAULT_HAS_EXPERT_EXCEEDED.booleanValue())));
     }
 
     @Test
@@ -132,7 +143,9 @@ public class RatingResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(rating.getId().intValue()))
             .andExpect(jsonPath("$.dateRated").value(DEFAULT_DATE_RATED_STR))
-            .andExpect(jsonPath("$.score").value(DEFAULT_SCORE));
+            .andExpect(jsonPath("$.score").value(DEFAULT_SCORE))
+            .andExpect(jsonPath("$.rateDetails").value(DEFAULT_RATE_DETAILS.toString()))
+            .andExpect(jsonPath("$.hasExpertExceeded").value(DEFAULT_HAS_EXPERT_EXCEEDED.booleanValue()));
     }
 
     @Test
@@ -155,6 +168,8 @@ public class RatingResourceIntTest {
         updatedRating.setId(rating.getId());
         updatedRating.setDateRated(UPDATED_DATE_RATED);
         updatedRating.setScore(UPDATED_SCORE);
+        updatedRating.setRateDetails(UPDATED_RATE_DETAILS);
+        updatedRating.setHasExpertExceeded(UPDATED_HAS_EXPERT_EXCEEDED);
 
         restRatingMockMvc.perform(put("/api/ratings")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -167,6 +182,8 @@ public class RatingResourceIntTest {
         Rating testRating = ratings.get(ratings.size() - 1);
         assertThat(testRating.getDateRated()).isEqualTo(UPDATED_DATE_RATED);
         assertThat(testRating.getScore()).isEqualTo(UPDATED_SCORE);
+        assertThat(testRating.getRateDetails()).isEqualTo(UPDATED_RATE_DETAILS);
+        assertThat(testRating.isHasExpertExceeded()).isEqualTo(UPDATED_HAS_EXPERT_EXCEEDED);
     }
 
     @Test

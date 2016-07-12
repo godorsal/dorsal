@@ -68,7 +68,7 @@ class RatingGatlingTest extends Simulation {
             .exec(http("Create new rating")
             .post("/api/ratings")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "dateRated":"2020-01-01T00:00:00.000Z", "score":"0"}""")).asJSON
+            .body(StringBody("""{"id":null, "dateRated":"2020-01-01T00:00:00.000Z", "score":"0", "rateDetails":"SAMPLE_TEXT", "hasExpertExceeded":null}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_rating_url"))).exitHereIfFailed
             .pause(10)
