@@ -4,3 +4,4 @@ id;name;value;value_type
 3;expert-badge-count;3;ISINTEGER
 4;upload-base-url;https%3A%2F%2Fs3-us-west-1.amazonaws.com%2Fdorsal-attachment-upload;ISSTRING
 5;demo_mode_enabled;0;ISINTEGER
+6;case-polling-rate-seconds;30;ISINTEGER

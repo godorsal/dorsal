@@ -4,23 +4,17 @@
         <span class="drsl-label">Expert:</span>
         {{expert.user.firstName}} {{expert.user.lastName}}
     </div>
-    <!-- <div>
-        <span class="drsl-label" translate="case.professional.expert">Expert:</span>
-        {{expert.firstName}} {{expert.lastName}}
-    </div> -->
 
     <!-- Contact -->
     <div class="drsl-contact-wrapper">
         <div><span class="drsl-label" translate="case.professional.contact.main">Contact:</span></div>
         <contact-info contact="expert" chat-room="chatRoom"></contact-info>
-        <!-- <contact-info contact="expert.contact" chat-room="chatRoom"></contact-info> -->
     </div>
 
     <!-- Profile Photo -->
     <div class="drsl-profile-photo">
         <a href="#" ng-click="$event.preventDefault()">
-            <!--<img ng-src="{{expert.picture}}" />-->
-            <img src="content/images/dynamic/John-Smith.jpg" />
+            <img ng-src="{{expert.imagePath}}" />
         </a>
     </div>
 
@@ -36,7 +30,6 @@
 
     <!-- Score -->
     <div>
-        <!--<span class="drsl-label" translate="case.professional.score">Score</span> {{expert.score}} out of 100-->
         <span class="drsl-label" translate="case.professional.score">Score</span> {{expert.expertScore}} out of 100
     </div>
 
@@ -44,17 +37,7 @@
     <div>
         <span class="drsl-label">Badges</span>
         <div class="drsl-badges">
-            <!--<expert-badges badge-set="expert.badges"></expert-badges>-->
-            <div>
-                <span class="drsl-badge-sprites badge-1 selected" uib-tooltip="time sensitive" role="button"></span>
-                <span class="drsl-badge-sprites badge-2 selected" uib-tooltip="network specialist" role="button"></span>
-                <span class="drsl-badge-sprites badge-3 selected" uib-tooltip="database magician" role="button"></span>
-                <span class="drsl-badge-sprites badge-4 selected" uib-tooltip="detail oriented" role="button"></span>
-                <span class="drsl-badge-sprites badge-5 selected" uib-tooltip="happy fun place" role="button"></span>
-                <span class="drsl-badge-sprites badge-6 selected" uib-tooltip="focused like a laser" role="button"></span>
-                <span class="drsl-badge-sprites badge-7 selected" uib-tooltip="resolution writer pro" role="button"></span>
-            </div>
+            <expert-badges badges="getExpertBadges()"></expert-badges>
         </div>
     </div>
-
 </div>

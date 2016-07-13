@@ -24,7 +24,7 @@
             <column name="expert_badge_count" type="integer">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="expertaccount_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -35,6 +35,11 @@
 
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
-        
+
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/expertbadge.csv"
+                  separator=";"
+                  tableName="expertbadge"/>
+
     </changeSet>
 </databaseChangeLog>

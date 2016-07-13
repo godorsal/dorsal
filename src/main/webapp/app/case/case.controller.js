@@ -20,6 +20,7 @@
         vm.passedStep = passedStep;
         vm.openChat = openChat;
         vm.isCaseExpert = isCaseExpert;
+        vm.badges = [];
         vm.statusStates = [];
         vm.openCaseAgreement = openCaseAgreement;
         vm.cases = [];
@@ -41,6 +42,10 @@
         function init() {
             // Make a call to get the initial data.
             CaseService.getEntityData().then(function (data) {
+                if (data.badges) {
+                    vm.badges = data.badges;
+                }
+
                 if (data.supportCase.length < 1) {
                     $state.go('concierge')
                 } else {
@@ -125,7 +130,7 @@
          */
         function openRating() {
             if (StatusModel.checkCaseStatus(vm.currentCase.status, 'completed') && !vm.isCaseExpert()) {
-                var modalInstance = DrslRatingService.open(vm.currentCase);
+                var modalInstance = DrslRatingService.open(vm.currentCase, vm.badges);
 
                 modalInstance.result.then(function (data) {
                     var newRating = {
