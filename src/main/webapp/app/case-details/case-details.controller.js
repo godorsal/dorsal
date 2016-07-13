@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('CaseDetailsController', CaseDetailsController);
 
-    CaseDetailsController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase', 'expert', 'Casetechnologyproperty', 'Caseupdate'];
+    CaseDetailsController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase', 'expert', 'Casetechnologyproperty', 'Caseupdate', 'Attachment'];
 
-    function CaseDetailsController($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase, expert, Casetechnologyproperty, Caseupdate) {
+    function CaseDetailsController($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase, expert, Casetechnologyproperty, Caseupdate, Attachment) {
         var vm = this;
         vm.cancel = cancel;
         vm.submit = submit;
@@ -20,7 +20,13 @@
             user: vm.case.user,
             supportcase: vm.case
         };
-
+        vm.attachment = {
+            name: null,
+            url: null,
+            dataStream: null,
+            dataStreamContentType: null,
+            id: null
+        };
         Caseupdate.query(function(result){
             result.reverse().forEach(function(update){
                 if(update.supportcase.id === vm.case.id){
@@ -40,14 +46,23 @@
             e.preventDefault();
             $uibModalInstance.dismiss('cancel');
         }
-
+        function onSaveSuccess (result){
+            vm.attachment.supportcase = {
+                id: vm.case.id
+            }
+            console.log(vm.attachment);
+            Attachment.save(vm.attachment);
+        }
+        function onSaveError (){
+            console.log("COMPLETE FAILURE");
+        }
         function submit() {
             vm.caseupdate.updateMsg = vm.updatemsg;
             console.log("Case", vm.caseupdate);
             if (vm.caseupdate.id !== null) {
-                Caseupdate.update(vm.caseupdate);
+                Caseupdate.update(vm.caseupdate, onSaveSuccess, onSaveError);
             } else {
-                Caseupdate.save(vm.caseupdate);
+                Caseupdate.save(vm.caseupdate, onSaveSuccess, onSaveError);
             }
             vm.case.summary = vm.summary.toString();
             $uibModalInstance.close({"updated": true});

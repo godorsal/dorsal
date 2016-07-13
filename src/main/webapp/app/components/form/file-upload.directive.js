@@ -8,13 +8,14 @@
     function fileUpload() {
         var controller = ['$timeout', '$scope', '$stateParams', 'DataUtils', 'Attachment', 'Supportcase', function($timeout, $scope, $stateParams, DataUtils, Attachment, Supportcase){
             var vm = this;
-            $scope.attachment = {
-                name: null,
-                url: null,
-                dataStream: null,
-                dataStreamContentType: null,
-                id: null
-            };
+            $scope.attachments = [];
+            Attachment.query(function(result){
+                result.reverse().forEach(function(attachment){
+                    if(attachment.supportcase.id === $scope.currentcase){
+                        $scope.attachments.push(attachment)
+                    }
+                })
+            })
             $scope.setDataStream = function ($file, attachment) {
                 if ($file) {
                     DataUtils.toBase64($file, function(base64Data) {
@@ -26,10 +27,15 @@
                     });
                 }
             };
+            $scope.openFile = DataUtils.openFile;
+            $scope.byteSize = DataUtils.byteSize;
         }]
         var directive = {
             restrict: 'E',
-            scope: {},
+            scope: {
+                attachment: '=',
+                currentcase: '='
+            },
             controller: controller,
             templateUrl: '/app/components/form/file-upload.html'
         };

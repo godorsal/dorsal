@@ -15,10 +15,11 @@
         vm.loadAll = function() {
             Attachment.query(function(result) {
                 vm.attachments = result;
+                console.log(vm.attachments);
             });
         };
 
         vm.loadAll();
-        
+
     }
 })();
