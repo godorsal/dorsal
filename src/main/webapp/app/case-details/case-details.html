@@ -66,6 +66,7 @@
                 </span>
             </div>
         </div>
+        <br>
         <!-- Uploaded Files -->
         <div class="drsl-form-grid">
             <div translate="case.details.uploadedFiles">Uploaded Files</div>
@@ -98,8 +99,8 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="update in vm.updates track by $index" >
-                        <td>{{update.updateMsg}}</td>
-                        <td style="padding-left: 70px;">{{update.dateUpdated | date:"MM/dd/yy h:mm a"}}</td>
+                        <td style="width: 250px;">{{update.updateMsg}}</td>
+                        <td style="padding-left: 70px; white-space: nowrap;">{{update.dateUpdated | date:"MM/dd/yy h:mm a"}}</td>
                         <td style="padding-left: 70px; width: 180px !important; text-align: right;">{{update.user.login}}</td>
                     </tr>
                 </tbody>
