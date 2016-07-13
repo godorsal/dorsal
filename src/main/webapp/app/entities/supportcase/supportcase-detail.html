@@ -47,13 +47,25 @@
         <dd>
             <span>{{vm.supportcase.timeOnCase}}</span>
         </dd>
+        <dt><span translate="dorsalApp.supportcase.estimateLog">Estimate Log</span></dt>
+        <dd>
+            <span>{{vm.supportcase.estimateLog}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.supportcase.isResolved">Is Resolved</span></dt>
+        <dd>
+            <span>{{vm.supportcase.isResolved}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.supportcase.isRated">Is Rated</span></dt>
+        <dd>
+            <span>{{vm.supportcase.isRated}}</span>
+        </dd>
         <dt><span translate="dorsalApp.supportcase.user">User</span></dt>
         <dd>
             {{vm.supportcase.user.id}}
         </dd>
-        <dt><span translate="dorsalApp.supportcase.expert">Expert</span></dt>
+        <dt><span translate="dorsalApp.supportcase.expertaccount">Expertaccount</span></dt>
         <dd>
-            {{vm.supportcase.expert.id}}
+            <a ui-sref="expert-account-detail({id:vm.supportcase.expertaccount.id})">{{vm.supportcase.expertaccount.id}}</a>
         </dd>
         <dt><span translate="dorsalApp.supportcase.technology">Technology</span></dt>
         <dd>

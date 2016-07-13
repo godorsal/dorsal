@@ -60,11 +60,21 @@ public class Supportcase implements Serializable {
     @Column(name = "time_on_case")
     private Integer timeOnCase;
 
+    @Size(max = 4096)
+    @Column(name = "estimate_log", length = 4096)
+    private String estimateLog;
+
+    @Column(name = "is_resolved")
+    private Boolean isResolved;
+
+    @Column(name = "is_rated")
+    private Boolean isRated;
+
     @ManyToOne
     private User user;
 
     @ManyToOne
-    private User expert;
+    private ExpertAccount expertaccount;
 
     @ManyToOne
     private Technology technology;
@@ -171,6 +181,30 @@ public class Supportcase implements Serializable {
         this.timeOnCase = timeOnCase;
     }
 
+    public String getEstimateLog() {
+        return estimateLog;
+    }
+
+    public void setEstimateLog(String estimateLog) {
+        this.estimateLog = estimateLog;
+    }
+
+    public Boolean isIsResolved() {
+        return isResolved;
+    }
+
+    public void setIsResolved(Boolean isResolved) {
+        this.isResolved = isResolved;
+    }
+
+    public Boolean isIsRated() {
+        return isRated;
+    }
+
+    public void setIsRated(Boolean isRated) {
+        this.isRated = isRated;
+    }
+
     public User getUser() {
         return user;
     }
@@ -179,12 +213,12 @@ public class Supportcase implements Serializable {
         this.user = user;
     }
 
-    public User getExpert() {
-        return expert;
+    public ExpertAccount getExpertaccount() {
+        return expertaccount;
     }
 
-    public void setExpert(User user) {
-        this.expert = user;
+    public void setExpertaccount(ExpertAccount expertAccount) {
+        this.expertaccount = expertAccount;
     }
 
     public Technology getTechnology() {
@@ -246,6 +280,9 @@ public class Supportcase implements Serializable {
             ", estimateComment='" + estimateComment + "'" +
             ", isApproved='" + isApproved + "'" +
             ", timeOnCase='" + timeOnCase + "'" +
+            ", estimateLog='" + estimateLog + "'" +
+            ", isResolved='" + isResolved + "'" +
+            ", isRated='" + isRated + "'" +
             '}';
     }
 }

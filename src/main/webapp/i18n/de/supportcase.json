@@ -27,8 +27,11 @@
             "estimateComment": "Estimate Comment",
             "isApproved": "Is Approved",
             "timeOnCase": "Time On Case",
+            "estimateLog": "Estimate Log",
+            "isResolved": "Is Resolved",
+            "isRated": "Is Rated",
             "user": "User",
-            "expert": "Expert",
+            "expertaccount": "Expertaccount",
             "technology": "Technology",
             "status": "Status",
             "issue": "Issue"

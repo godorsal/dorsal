@@ -12,4 +12,6 @@ import java.util.List;
 @SuppressWarnings("unused")
 public interface ExpertAccountRepository extends JpaRepository<ExpertAccount,Long> {
 
+    List<ExpertAccount>findOneByFirstTechnologyPreference(String technology);
+
 }

@@ -30,8 +30,11 @@
                     <th><span translate="dorsalApp.supportcase.estimateComment">Estimate Comment</span></th>
                     <th><span translate="dorsalApp.supportcase.isApproved">Is Approved</span></th>
                     <th><span translate="dorsalApp.supportcase.timeOnCase">Time On Case</span></th>
+                    <th><span translate="dorsalApp.supportcase.estimateLog">Estimate Log</span></th>
+                    <th><span translate="dorsalApp.supportcase.isResolved">Is Resolved</span></th>
+                    <th><span translate="dorsalApp.supportcase.isRated">Is Rated</span></th>
                     <th><span translate="dorsalApp.supportcase.user">User</span></th>
-                    <th><span translate="dorsalApp.supportcase.expert">Expert</span></th>
+                    <th><span translate="dorsalApp.supportcase.expertaccount">Expertaccount</span></th>
                     <th><span translate="dorsalApp.supportcase.technology">Technology</span></th>
                     <th><span translate="dorsalApp.supportcase.status">Status</span></th>
                     <th><span translate="dorsalApp.supportcase.issue">Issue</span></th>
@@ -52,11 +55,14 @@
                     <td>{{supportcase.estimateComment}}</td>
                     <td>{{supportcase.isApproved}}</td>
                     <td>{{supportcase.timeOnCase}}</td>
+                    <td>{{supportcase.estimateLog}}</td>
+                    <td>{{supportcase.isResolved}}</td>
+                    <td>{{supportcase.isRated}}</td>
                     <td>
                         {{supportcase.user.id}}
                     </td>
                     <td>
-                        {{supportcase.expert.id}}
+                        <a ui-sref="expert-account-detail({id:supportcase.expertaccount.id})">{{supportcase.expertaccount.id}}</a>
                     </td>
                     <td>
                         <a ui-sref="technology-detail({id:supportcase.technology.id})">{{supportcase.technology.id}}</a>

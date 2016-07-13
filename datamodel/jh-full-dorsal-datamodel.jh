@@ -125,6 +125,9 @@ relationship OneToMany {
     User{groupaccess(user)} to Groupaccess{user}
 }
 
+////////////////////////////////////////////////////
+// Entity Support Case
+//
 entity Supportcase {
 	summary String maxlength (1024),
     expectedResult String maxlength (1024),
@@ -136,7 +139,10 @@ entity Supportcase {
     estimateHours Integer,
     estimateComment String maxlength (2048)
     isApproved Boolean,
-    timeOnCase Integer
+    timeOnCase Integer,
+    estimateLog String maxlength(4096),
+    isResolved Boolean,
+    isRated Boolean
 }
 
 relationship OneToMany {
@@ -144,7 +150,7 @@ relationship OneToMany {
 }
 
 relationship OneToMany {
-    User{supportcase(expert)} to Supportcase{expert}
+    ExpertAccount{supportcase(expertaccount)} to Supportcase{expertaccount}
 }
 
 relationship OneToMany {
@@ -158,6 +164,9 @@ relationship OneToMany {
 }
 
 
+//////////////////////////////////////////////////////////
+// Entity Case Technology Property
+//
 entity Casetechnologyproperty {
 	propertyname String,
     propertyvalue String

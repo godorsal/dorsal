@@ -111,6 +111,30 @@
                     ng-model="vm.supportcase.timeOnCase"
                      />
         </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.supportcase.estimateLog" for="field_estimateLog">Estimate Log</label>
+            <input type="text" class="form-control" name="estimateLog" id="field_estimateLog"
+                    ng-model="vm.supportcase.estimateLog"
+                    ng-maxlength="4096" />
+            <div ng-show="editForm.estimateLog.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.estimateLog.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="4096">
+                    This field cannot be longer than 4096 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.supportcase.isResolved" for="field_isResolved">Is Resolved</label>
+            <input type="checkbox" class="form-control" name="isResolved" id="field_isResolved"
+                    ng-model="vm.supportcase.isResolved"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.supportcase.isRated" for="field_isRated">Is Rated</label>
+            <input type="checkbox" class="form-control" name="isRated" id="field_isRated"
+                    ng-model="vm.supportcase.isRated"
+                     />
+        </div>
 
         <div class="form-group">
             <label translate="dorsalApp.supportcase.user" for="field_user">User</label>
@@ -119,8 +143,8 @@
             </select>
         </div>
         <div class="form-group">
-            <label translate="dorsalApp.supportcase.expert" for="field_expert">Expert</label>
-            <select class="form-control" id="field_expert" name="expert" ng-model="vm.supportcase.expert" ng-options="user as user.id for user in vm.users track by user.id">
+            <label translate="dorsalApp.supportcase.expertaccount" for="field_expertaccount">Expertaccount</label>
+            <select class="form-control" id="field_expertaccount" name="expertaccount" ng-model="vm.supportcase.expertaccount" ng-options="expertAccount as expertAccount.id for expertAccount in vm.expertaccounts track by expertAccount.id">
                 <option value=""></option>
             </select>
         </div>
