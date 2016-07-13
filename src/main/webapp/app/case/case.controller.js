@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .controller('CaseController', CaseController);
 
-    CaseController.$inject = ['$scope', '$window', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', 'Supportcase', '$state', 'DrslMetadata', 'StatusModel', 'ExpertAccount', 'Rating', 'Principal'];
+    CaseController.$inject = ['$scope', '$window', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', '$state', 'StatusModel', 'Rating'];
 
-    function CaseController($scope, $window, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, Supportcase, $state, DrslMetadata, StatusModel, ExpertAccount, Rating, Principal) {
+    function CaseController($scope, $window, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, $state, StatusModel, Rating) {
         var vm = this;
         vm.init = init;
         vm.getHistory = getHistory;
@@ -20,7 +20,6 @@
         vm.passedStep = passedStep;
         vm.openChat = openChat;
         vm.isCaseExpert = isCaseExpert;
-        vm.expertUser = {};
         vm.statusStates = [];
         vm.openCaseAgreement = openCaseAgreement;
         vm.cases = [];
@@ -40,29 +39,22 @@
          * Initialize the controller's data.
          */
         function init() {
-            ExpertAccount.query(function(result){
-                vm.expertUser = result[0].user;
-            });
-
             // Make a call to get the initial data.
-            Supportcase.query(function(result) {
-                if(result.length < 1){
+            CaseService.getEntityData().then(function (data) {
+                if (data.supportCase.length < 1) {
                     $state.go('concierge')
                 } else {
-                    vm.supportcases = result.reverse();
-                    vm.setCurrentCase(result[0]);
+                    vm.supportcases = data.supportCase.reverse();
+                    vm.setCurrentCase(vm.supportcases[0]);
                 }
-            });
 
-            // Get user
-            Principal.identity().then(function (account) {
-                if (account) {
-                    vm.currentUser = account;
+                if (data.identity) {
+                    vm.currentUser = data.identity;
                 }
-            });
 
-            StatusModel.getStates().then(function(data){
-                vm.statusStates = data;
+                if (data.statusStates) {
+                    vm.statusStates = data.statusStates;
+                }
             });
         }
 
@@ -85,7 +77,7 @@
         function isCaseExpert(){
             var caseExpert = false;
 
-            if (vm.currentCase && vm.currentCase.expertaccount && vm.currentUser.email && vm.expertUser) {
+            if (vm.currentCase && vm.currentCase.expertaccount && vm.currentUser.email) {
                 caseExpert = (vm.currentCase.expertaccount.user.email === vm.currentUser.email);
             }
 
