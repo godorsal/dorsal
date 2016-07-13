@@ -73,7 +73,7 @@
             "badges": "Rating Badges",
             "badges.note": "select multiple badges to help rate your expert",
             "label": {
-                "satisfaction": "How satisfied were you with the Case Resolution?",
+                "satisfaction": "Satisfaction with case resolution",
                 "prompt": "Prompt initial response",
                 "courtesy": "Courtesy &amp; Trust",
                 "skill": "Technical Skill"

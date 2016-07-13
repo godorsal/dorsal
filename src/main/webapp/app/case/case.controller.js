@@ -135,7 +135,9 @@
                     var newRating = {
                         id: null,
                         dateRated: null,
-                        score: data.combinedAverage,
+                        score: data.score,
+                        rateDetails: data.rateDetails,
+                        hasExpertExceeded: data.hasExpertExceeded,
                         supportcase: vm.currentCase
                     };
 
