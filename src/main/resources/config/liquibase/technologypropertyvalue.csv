@@ -40,22 +40,4 @@ id;technology_id;technologyproperty_id;value
 39;4;5;Slow Queries
 40;4;5;HighCPU/Memory
 41;4;5;Query Timeout
-42;5;1;none
-43;5;2;VMware
-44;5;2;Open Stack
-45;5;2;Bare Metal
-46;5;4;Timeout
-47;5;4;Connection Drop
-48;5;5;Slow Queries
-49;5;5;HighCPU/Memory
-50;5;5;Query Timeout
-51;6;1;none
-52;6;2;VMware
-53;6;2;Open Stack
-54;6;2;Bare Metal
-55;6;4;Timeout
-56;6;4;Connection Drop
-57;6;5;Slow Queries
-58;6;5;HighCPU/Memory
-59;6;5;Query Timeout
-60;1;5;HighCPU/Memory
+42;1;5;HighCPU/Memory
