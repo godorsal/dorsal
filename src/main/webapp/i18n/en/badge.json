@@ -18,6 +18,7 @@
             },
             "name": "Name",
             "code": "Code",
+            "ordinal": "Ordinal",
             "expertbadge": "Expertbadge"
         }
     }

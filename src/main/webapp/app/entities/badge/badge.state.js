@@ -73,6 +73,7 @@
                             return {
                                 name: null,
                                 code: null,
+                                ordinal: null,
                                 id: null
                             };
                         }

@@ -32,6 +32,9 @@ public class Badge implements Serializable {
     @Column(name = "code")
     private String code;
 
+    @Column(name = "ordinal")
+    private Integer ordinal;
+
     @OneToMany(mappedBy = "badge")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -59,6 +62,14 @@ public class Badge implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public Integer getOrdinal() {
+        return ordinal;
+    }
+
+    public void setOrdinal(Integer ordinal) {
+        this.ordinal = ordinal;
     }
 
     public Set<Expertbadge> getExpertbadges() {
@@ -95,6 +106,7 @@ public class Badge implements Serializable {
             "id=" + id +
             ", name='" + name + "'" +
             ", code='" + code + "'" +
+            ", ordinal='" + ordinal + "'" +
             '}';
     }
 }
