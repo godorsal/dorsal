@@ -4,7 +4,7 @@
             <div>
                 <!-- Dialog Header -->
                 <div class="drsl-dialog-header">
-                    <div><h2>CASE DETAILS: <span>ID: {{vm.case.id}} &nbsp; START: {{vm.case.dateCreated | date:"MM/dd/yy h:mm a"}}</span><div class="pull-right"><span class="drsl-header-status">Status: {{vm.case.status.name}}</span></div></h2></div>
+                    <div><h2>CASE DETAILS: <span>{{vm.case.technology.name}}&nbsp; START: {{vm.case.dateCreated | date:"MM/dd/yy h:mm a"}}</span><div class="pull-right"><span class="drsl-header-status">Status: {{vm.case.status.name}}</span></div></h2></div>
                 </div>
                 <!-- <div class="drsl-dialog-header">
                 <div><h2>CASE DETAILS: <span>ID: {{vm.case.id}} &nbsp; START: {{vm.case.startDate | date:"MM/dd/yy h:mm a"}}</span><div class="pull-right"><span class="drsl-header-status">Status: {{vm.case.status}}</span></div></h2></div>
@@ -46,38 +46,31 @@
             <!-- <div><input type="text" class="form-control" ng-model="vm.summary"></div> -->
         </div>
         <div class="drsl-form-grid">
-                <div translate="case.details.technology">Technology</div>
-                <div>{{vm.case.technology.name}}</div>
+            <div translate="case.details.technology">Technology</div>
+            <div>{{vm.case.technology.name}}</div>
         </div>
 
         <!-- Incident Details -->
-        <div class="drsl-form-grid">
-            <!-- <div translate="case.details.responseTime">Response Time</div> -->
-            <div>
-                <div class="drsl-incident-items">
-                    <!-- <div>{{vm.case.urgency}}</div> -->
-                    <div><span translate="case.details.issue">Issue:</span><span>{{vm.case.issue.name}}</span></div>
-                    <!-- <div><span translate="case.details.technology">Technology:</span><span>{{vm.case.technology.name}}</span></div> -->
-                    <div  style="text-align: left;"><span>Technology Properties:</span><br><span ng-repeat="property in vm.technologyProps">{{property.propertyname}}: {{property.propertyvalue}}<br></span></div>
-                </div>
+        <div class="drsl-incident-items">
+            <div style="text-align: left; margin-left: 134px;">
+                <span>Issue</span>
+                <span>
+                    {{vm.case.issue.name}}<br>
+                </span>
+            </div>
+            <div style="text-align: left;">
+                <span>Technology Properties</span>
+                <br>
+                <span ng-repeat="property in vm.technologyProps">
+                    {{property.propertyname}} {{property.propertyvalue}}<br>
+                </span>
             </div>
         </div>
-
-        <!-- Detailed Resolution -->
-        <div class="drsl-form-grid">
-            <div translate="case.details.detailedResolution">Detailed Resolution</div>
-            <div><textarea class="form-control" name="detailedResolution" id="detailedResolution" cols="30" rows="5"></textarea></div>
-        </div>
-
         <!-- Uploaded Files -->
         <div class="drsl-form-grid">
             <div translate="case.details.uploadedFiles">Uploaded Files</div>
             <div>
                 <div class="drsl-file-upload-section">
-                    <div>
-                        <div>config_5916.cfg</div>
-                        <div>logfile_5916.txt</div>
-                    </div>
                     <div>
                         <file-upload></file-upload>
                     </div>
@@ -87,41 +80,51 @@
 
         <!-- Dowloaded Files -->
         <!-- <div class="drsl-form-grid">
-            <div translate="case.details.downloadedFiles">Downloaded Files</div>
-            <div><i class="fa fa-minus"></i></div>
-        </div> -->
-
-        <div class="drsl-form-grid" style="width: 864px;">
-            <div>Update History</div>
-            <!-- <div class="historyBox"> -->
-                <table class="scroll table-striped" style="margin-left: 10px;">
-                    <thead style="height: 30px; line-height: 30px;">
-                        <tr>
-                            <th style="width: 70%;">Message</th>
-                            <th style="width: 20%; padding-left: 10px;">Date</th>
-                            <th style="width: 10%; padding-left: 23px;">User</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="update in vm.updates track by $index" >
-                            <td style="width: 60%; max-width: 375px;">{{update.updateMsg}}</td>
-                            <td style="width: 25%; text-align: center;">{{update.dateUpdated | date:"MM/dd/yy h:mm a"}}</td>
-                            <td style="width: 15%; text-align: center;">{{update.user.login}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            <!-- </div> -->
-        </div>
-        <!-- Chat Log -->
-        <div class="drsl-form-grid" >
-            <div>Update Message</div>
-            <div><textarea class="form-control" name="updateHistory" id="updateHistory" cols="30" rows="5" ng-model="vm.updatemsg"></textarea></div>
-        </div>
-
-        <!-- <div class="drsl-form-grid">
-        <div translate="case.details.chatLog">Chat Log</div>
-        <div><textarea class="form-control" name="chatLog" id="chatLog" cols="30" rows="10"></textarea></div>
+        <div translate="case.details.downloadedFiles">Downloaded Files</div>
+        <div><i class="fa fa-minus"></i></div>
     </div> -->
+
+    <div class="drsl-form-grid">
+        <div>Update History</div>
+        <!-- <div class="historyBox"> -->
+        <div>
+            <table class="scroll table-striped">
+                <thead>
+                    <tr>
+                        <th>Message</th>
+                        <th style="padding-left: 135px;">Date</th>
+                        <th style="padding-left: 192px;">User/Expert</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="update in vm.updates track by $index" >
+                        <td>{{update.updateMsg}}</td>
+                        <td style="padding-left: 70px;">{{update.dateUpdated | date:"MM/dd/yy h:mm a"}}</td>
+                        <td style="padding-left: 70px; width: 180px !important; text-align: right;">{{update.user.login}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- </div> -->
+    </div>
+    <!-- Chat Log -->
+    <div class="drsl-form-grid" >
+        <div>Update Message</div>
+        <div><textarea class="form-control" name="updateHistory" id="updateHistory" cols="30" rows="5" ng-model="vm.updatemsg"></textarea></div>
+    </div>
+
+
+    <!-- Detailed Resolution -->
+    <div class="drsl-form-grid" ng-if="vm.case.status.id == 4 || vm.case.status.id == 5">
+        <div translate="case.details.detailedResolution">Detailed Resolution</div>
+        <div><textarea class="form-control" name="detailedResolution" id="detailedResolution" cols="30" rows="5"></textarea></div>
+    </div>
+
+    <!-- <div class="drsl-form-grid">
+    <div translate="case.details.chatLog">Chat Log</div>
+    <div><textarea class="form-control" name="chatLog" id="chatLog" cols="30" rows="10"></textarea></div>
+</div> -->
 </div>
 </div>
 </div>

@@ -255,20 +255,18 @@ body {
 //     overflow-x: hidden;
 // }
 
-
-table.scroll tbody,
 table.scroll {
-    display: block;
-    padding-bottom: 20px;
-    width: 630px;
+    width: 500px;
 }
-
 table.scroll tbody {
+    display: block;
     height: 120px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    width: 630px;
-    padding-right: 20px;
+    // width: 445px;
+    overflow-y: scroll;
+}
+table.scroll thead > tr {
+    display: block;
+    position: relative;
 }
 .drsl-form-grid {
     display: flex;

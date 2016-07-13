@@ -323,12 +323,17 @@ Cases
 
         .drsl-badges {
             padding-top: $default-half-padding;
+
+            > div > span:first-child {
+                margin-left: -10px;
+            }
         }
 
         .drsl-contact-wrapper {
             display: flex;
             flex-flow: row;
             align-items: flex-start;
+            min-height: 119px;
 
             > div {
                 flex: inherit;
