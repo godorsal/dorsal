@@ -15,7 +15,7 @@
         vm.submit = submit;
 
         vm.radios = [
-            {
+            [{
                 "id": "satisfaction",
                 "label": "case.rating.label.satisfaction",
                 "values": [
@@ -37,8 +37,8 @@
                     }
                 ],
                 "selectedValue": "100"
-            },
-            {
+            }],
+            [{
                 "id": "prompt",
                 "label": "case.rating.label.prompt",
                 "values": [
@@ -60,8 +60,8 @@
                     }
                 ],
                 "selectedValue": "100"
-            },
-            {
+            }],
+            [{
                 "id": "courtesy",
                 "label": "case.rating.label.courtesy",
                 "values": [
@@ -83,8 +83,8 @@
                     }
                 ],
                 "selectedValue": "100"
-            },
-            {
+            }],
+            [{
                 "id": "skill",
                 "label": "case.rating.label.skill",
                 "values": [
@@ -106,7 +106,7 @@
                     }
                 ],
                 "selectedValue": "100"
-            }
+            }]
         ];
 
         function cancel() {
@@ -116,15 +116,20 @@
         function submit() {
             var combinedTotal = 0, combinedAverage = 0, csv = [], i;
 
-            for (i=0; i<vm.radios.length; i++) {
-                var radio = vm.radios[i];
+            for (i = 0; i < vm.radios.length; i++) {
+                var radio = vm.radios[i][0];
                 combinedTotal += Number(radio.selectedValue);
-                csv.push(radio.id +' '+  radio.selectedValue);
+                csv.push(radio.id + ' ' + radio.selectedValue);
             }
 
-            combinedAverage = Math.round(combinedTotal/vm.radios.length);
+            combinedAverage = Math.round(combinedTotal / vm.radios.length);
 
-            $uibModalInstance.close({"rated": true, "combinedAverage":combinedAverage, "csv": csv.join(',')});
+            $uibModalInstance.close({
+                "rated": true,
+                "score": combinedAverage,
+                "rateDetails": csv.join(','),
+                "hasExpertExceeded": false
+            });
         }
     }
 })();

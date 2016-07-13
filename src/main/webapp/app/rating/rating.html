@@ -27,10 +27,25 @@
                         </div>
 
                         <!-- Radio Selections -->
-                        <div>
-                            <div ng-repeat="radio in vm.radios">
-                                <h3 translate="{{radio.label}}"></h3>
-                                <linear-radio target-data="radio.selectedValue" technology-properties="vm.technologyProperties" radio-data="radio"></linear-radio>
+                        <div class="drsl-rating-grid">
+                            <div class="drsl-rating-grid-label">&nbsp;</div>
+                            <div class="drsl-rating-grid-values">
+                                <div class="drsl-rating-grid-values-header">
+                                    <div translate="case.rating.value.poor">poor</div>
+                                    <div translate="case.rating.value.average">average</div>
+                                    <div translate="case.rating.value.good">good</div>
+                                    <div translate="case.rating.value.excellent">excellent</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="drsl-rating-grid" ng-repeat="radio in vm.radios">
+                            <div class="drsl-rating-grid-label">
+                                <h3 translate="{{radio[0].label}}"></h3>
+                            </div>
+                            <div class="drsl-rating-grid-values">
+                                <div ng-repeat="radioItem in radio">
+                                    <linear-radio target-data="radioItem.selectedValue" technology-properties="vm.technologyProperties" radio-data="radioItem"></linear-radio>
+                                </div>
                             </div>
                         </div>
 

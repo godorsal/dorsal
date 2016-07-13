@@ -409,7 +409,7 @@ Cases
     flex-flow: row;
     z-index: 1;
 }
-input[type="radio"] + label span, input[type="checkbox"] + label span {
+input[type="radio"] + label span:last-child, input[type="checkbox"] + label span:last-child {
     display: inline-block;
     width: 17px;
     height: 17px;
