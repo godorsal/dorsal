@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .factory('CaseService', CaseService);
 
-    CaseService.$inject = ['$q', 'Supportcase', 'StatusModel', 'Principal', 'Badge', 'Expertbadge'];
+    CaseService.$inject = ['$q', 'Supportcase', 'StatusModel', 'Principal', 'Badge', 'Expertbadge', 'DrslMetadata'];
 
-    function CaseService($q, Supportcase, StatusModel, Principal, Badge, Expertbadge) {
+    function CaseService($q, Supportcase, StatusModel, Principal, Badge, Expertbadge, DrslMetadata) {
         var service = {};
 
         service.getEntityData = function () {
@@ -32,7 +32,8 @@
                 var i, badges = [];
 
                 for (i=0; i<data.length; i++) {
-                    if (data[i].expertaccount.id === expertAccountID){
+                    if (data[i].expertaccount.id === expertAccountID &&
+                        data[i].expertBadgeCount >= DrslMetadata.expertBadgeCount){
                         badges.push(data[i].badge);
                     }
                 }
