@@ -5,11 +5,12 @@
         .module('dorsalApp')
         .controller('DrslRatingController', DrslRatingController);
 
-    DrslRatingController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase'];
+    DrslRatingController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase', 'drslBadges'];
 
-    function DrslRatingController($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase) {
+    function DrslRatingController($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase, drslBadges) {
         var vm = this;
         vm.case = drslCase;
+        vm.badges = drslBadges;
         vm.technologyProperties = {};
         vm.cancel = cancel;
         vm.submit = submit;

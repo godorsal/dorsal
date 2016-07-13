@@ -19,7 +19,7 @@
 
         return service;
 
-        function open (drslCase) {
+        function open (drslCase, drslBadges) {
             if (modalInstance !== null) return;
             modalInstance = $uibModal.open({
                 animation: true,
@@ -29,6 +29,7 @@
                 size:'sm',
                 resolve: {
                     drslCase: function(){ return drslCase; },
+                    drslBadges: function(){ return drslBadges; },
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('rating');
                         return $translate.refresh();
