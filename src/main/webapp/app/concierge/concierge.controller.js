@@ -14,7 +14,6 @@
         vm.createCase = createCase;
         vm.getCurrentUser = getCurrentUser;
         vm.startChat = startChat;
-        vm.getExpert = getExpert;
         vm.currentPlan = '';
         vm.selectPlan = selectPlan;
         vm.setClass = setClass;
@@ -30,16 +29,6 @@
             description: '',
             radios: []
         };
-        function getExpert(tech) {
-            console.log(tech);
-            if(tech.id === 1 || tech.id === 2){
-                return 5;
-            } else if(tech.id === 3){
-                return 6;
-            } else {
-                return 7;
-            }
-        }
         function getUser(user) {
             switch(user.login) {
                 case 'system':
@@ -69,8 +58,6 @@
             brandNewCase.chaturl = null;
             brandNewCase.user = {};
             brandNewCase.user.id = getUser(vm.currentUser);
-            brandNewCase.expert = {};
-            brandNewCase.expert.id = getExpert(brandNewCase.technology);
             brandNewCase.etacompletion = "4 hours";
             brandNewCase.statusmsg = 'Case Created';
             brandNewCase.summary = vm.caseDetails.summary;

@@ -23,7 +23,6 @@
 
         Caseupdate.query(function(result){
             result.reverse().forEach(function(update){
-                console.log(update);
                 if(update.supportcase.id === vm.case.id){
                     vm.updates.push(update)
                 }

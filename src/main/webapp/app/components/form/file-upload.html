@@ -1,9 +1,9 @@
-<!-- <div class="drsl-file-upload-component" class="form-group">
+<div class="drsl-file-upload-component" class="form-group">
+	<div ng-if="attachment.dataStreamContentType">
+		{{attachment.dataStreamContentType}}
+	</div>
+	<img data-ng-src="data:image/png;base64,{{attachment.dataStream}}" alt="" ng-if="attachment.dataStream">
 	<i class="fa fa-cloud-upload fa-lg"></i>
 	{{"global.form.fileupload.drop" | translate}}
-	<span type="file" ngf-select ngf-change="vm.setDataStream($file, vm.attachment)">{{"global.form.fileupload.browse" | translate}}</span>
-</div> -->
-<button type="file" ngf-select class="btn btn-default btn-block"
-		ngf-change="vm.setDataStream($file, vm.attachment)" translate="entity.action.addblob">
-	Add blob
-</button>
+	<span type="file" ngf-select ngf-change="setDataStream($file, vm.attachment)">{{"global.form.fileupload.browse" | translate}}</span>
+</div>

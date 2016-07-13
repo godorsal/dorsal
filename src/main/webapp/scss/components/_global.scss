@@ -261,10 +261,10 @@ table.scroll {
 table.scroll tbody {
     display: block;
     height: 120px;
-    // width: 445px;
     overflow-y: scroll;
 }
 table.scroll thead > tr {
+    color: #666666;
     display: block;
     position: relative;
 }
@@ -275,8 +275,6 @@ table.scroll thead > tr {
     > div {
         flex: 1;
         text-align: right;
-        // margin-left: 45px;
-        // margin-right: 20px;
         margin-bottom: 15px;
 
         &:last-child {
