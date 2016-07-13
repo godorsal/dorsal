@@ -5,12 +5,12 @@
         .module('dorsalApp')
         .controller('ExpertbadgeDialogController', ExpertbadgeDialogController);
 
-    ExpertbadgeDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Expertbadge', 'User', 'Badge'];
+    ExpertbadgeDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Expertbadge', 'ExpertAccount', 'Badge'];
 
-    function ExpertbadgeDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Expertbadge, User, Badge) {
+    function ExpertbadgeDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Expertbadge, ExpertAccount, Badge) {
         var vm = this;
         vm.expertbadge = entity;
-        vm.users = User.query();
+        vm.expertaccounts = ExpertAccount.query();
         vm.badges = Badge.query();
 
         $timeout(function (){

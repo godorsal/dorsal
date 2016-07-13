@@ -82,6 +82,9 @@
                                 estimateComment: null,
                                 isApproved: null,
                                 timeOnCase: null,
+                                estimateLog: null,
+                                isResolved: null,
+                                isRated: null,
                                 id: null
                             };
                         }

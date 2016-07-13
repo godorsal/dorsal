@@ -1,7 +1,9 @@
 package com.dorsal.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.dorsal.domain.ExpertAccount;
 import com.dorsal.domain.Supportcase;
+import com.dorsal.repository.ExpertAccountRepository;
 import com.dorsal.repository.SupportcaseRepository;
 import com.dorsal.repository.UserRepository;
 import com.dorsal.repository.UserRepository;
@@ -38,6 +40,9 @@ public class SupportcaseResource {
     @Inject
     private UserRepository userRepository;
 
+    @Inject
+    private ExpertAccountRepository expertAccountRepository;
+
 
     /**
      * POST  /supportcases : Create a new supportcase.
@@ -61,6 +66,21 @@ public class SupportcaseResource {
         // Update the date fields
         supportcase.setDateCreated( ZonedDateTime.now() );
         supportcase.setDateLastUpdate( ZonedDateTime.now() );
+
+        //
+        // Set the Expert for this account
+        // This is the placeholder for the matching algorithm
+        //
+        List expertList = expertAccountRepository.findOneByFirstTechnologyPreference(supportcase.getTechnology().getName());
+        if (expertList.size() > 0) {
+            log.info("Expert Found for Technology [" + supportcase.getTechnology().getName() + "]");
+            supportcase.setExpertaccount((ExpertAccount)expertList.get(0));
+        }
+        else
+        {
+            // No match found -- need to address it to a concierge
+            log.info("No expert available to work on the case. We keep searching...");
+        }
 
         Supportcase result = supportcaseRepository.save(supportcase);
         return ResponseEntity.created(new URI("/api/supportcases/" + result.getId()))
@@ -88,7 +108,7 @@ public class SupportcaseResource {
         }
         // Adjust time
         supportcase.setDateLastUpdate( ZonedDateTime.now() );
-        
+
         Supportcase result = supportcaseRepository.save(supportcase);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("supportcase", supportcase.getId().toString()))

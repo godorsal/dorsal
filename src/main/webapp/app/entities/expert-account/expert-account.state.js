@@ -82,6 +82,10 @@
                                 firstTechnologyPreference: null,
                                 secondTechnologyPreference: null,
                                 thirdTechnologyPreference: null,
+                                isAvailable: null,
+                                expertBio: null,
+                                expertSince: null,
+                                numberOfCases: null,
                                 id: null
                             };
                         }

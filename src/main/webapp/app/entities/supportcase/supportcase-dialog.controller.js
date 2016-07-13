@@ -5,12 +5,13 @@
         .module('dorsalApp')
         .controller('SupportcaseDialogController', SupportcaseDialogController);
 
-    SupportcaseDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Supportcase', 'User', 'Technology', 'Status', 'Issue'];
+    SupportcaseDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Supportcase', 'User', 'ExpertAccount', 'Technology', 'Status', 'Issue'];
 
-    function SupportcaseDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Supportcase, User, Technology, Status, Issue) {
+    function SupportcaseDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Supportcase, User, ExpertAccount, Technology, Status, Issue) {
         var vm = this;
         vm.supportcase = entity;
         vm.users = User.query();
+        vm.expertaccounts = ExpertAccount.query();
         vm.technologies = Technology.query();
         vm.statuses = Status.query();
         vm.issues = Issue.query();

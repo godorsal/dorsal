@@ -42,6 +42,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class ExpertbadgeResourceIntTest {
 
 
+    private static final Integer DEFAULT_EXPERT_BADGE_COUNT = 1;
+    private static final Integer UPDATED_EXPERT_BADGE_COUNT = 2;
+
     @Inject
     private ExpertbadgeRepository expertbadgeRepository;
 
@@ -68,6 +71,7 @@ public class ExpertbadgeResourceIntTest {
     @Before
     public void initTest() {
         expertbadge = new Expertbadge();
+        expertbadge.setExpertBadgeCount(DEFAULT_EXPERT_BADGE_COUNT);
     }
 
     @Test
@@ -86,6 +90,7 @@ public class ExpertbadgeResourceIntTest {
         List<Expertbadge> expertbadges = expertbadgeRepository.findAll();
         assertThat(expertbadges).hasSize(databaseSizeBeforeCreate + 1);
         Expertbadge testExpertbadge = expertbadges.get(expertbadges.size() - 1);
+        assertThat(testExpertbadge.getExpertBadgeCount()).isEqualTo(DEFAULT_EXPERT_BADGE_COUNT);
     }
 
     @Test
@@ -98,7 +103,8 @@ public class ExpertbadgeResourceIntTest {
         restExpertbadgeMockMvc.perform(get("/api/expertbadges?sort=id,desc"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.[*].id").value(hasItem(expertbadge.getId().intValue())));
+                .andExpect(jsonPath("$.[*].id").value(hasItem(expertbadge.getId().intValue())))
+                .andExpect(jsonPath("$.[*].expertBadgeCount").value(hasItem(DEFAULT_EXPERT_BADGE_COUNT)));
     }
 
     @Test
@@ -111,7 +117,8 @@ public class ExpertbadgeResourceIntTest {
         restExpertbadgeMockMvc.perform(get("/api/expertbadges/{id}", expertbadge.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$.id").value(expertbadge.getId().intValue()));
+            .andExpect(jsonPath("$.id").value(expertbadge.getId().intValue()))
+            .andExpect(jsonPath("$.expertBadgeCount").value(DEFAULT_EXPERT_BADGE_COUNT));
     }
 
     @Test
@@ -132,6 +139,7 @@ public class ExpertbadgeResourceIntTest {
         // Update the expertbadge
         Expertbadge updatedExpertbadge = new Expertbadge();
         updatedExpertbadge.setId(expertbadge.getId());
+        updatedExpertbadge.setExpertBadgeCount(UPDATED_EXPERT_BADGE_COUNT);
 
         restExpertbadgeMockMvc.perform(put("/api/expertbadges")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -142,6 +150,7 @@ public class ExpertbadgeResourceIntTest {
         List<Expertbadge> expertbadges = expertbadgeRepository.findAll();
         assertThat(expertbadges).hasSize(databaseSizeBeforeUpdate);
         Expertbadge testExpertbadge = expertbadges.get(expertbadges.size() - 1);
+        assertThat(testExpertbadge.getExpertBadgeCount()).isEqualTo(UPDATED_EXPERT_BADGE_COUNT);
     }
 
     @Test

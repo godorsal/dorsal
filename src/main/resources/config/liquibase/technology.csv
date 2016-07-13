@@ -3,5 +3,3 @@ id;name;code
 2;MariaDB;mariadb
 3;PostgreSQL;postgresql
 4;MongoDB;mongodb
-5;HBase;apache_hbase
-6;CassandraDB;apache_cassandra

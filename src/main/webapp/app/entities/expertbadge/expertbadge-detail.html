@@ -3,9 +3,13 @@
     <h2><span translate="dorsalApp.expertbadge.detail.title">Expertbadge</span> {{vm.expertbadge.id}}</h2>
     <hr>
     <dl class="dl-horizontal jh-entity-details">
-        <dt><span translate="dorsalApp.expertbadge.user">User</span></dt>
+        <dt><span translate="dorsalApp.expertbadge.expertBadgeCount">Expert Badge Count</span></dt>
         <dd>
-            {{vm.expertbadge.user.id}}
+            <span>{{vm.expertbadge.expertBadgeCount}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.expertbadge.expertaccount">Expertaccount</span></dt>
+        <dd>
+            <a ui-sref="expert-account-detail({id:vm.expertbadge.expertaccount.id})">{{vm.expertbadge.expertaccount.id}}</a>
         </dd>
         <dt><span translate="dorsalApp.expertbadge.badge">Badge</span></dt>
         <dd>

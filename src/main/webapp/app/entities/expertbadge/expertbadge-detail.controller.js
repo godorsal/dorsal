@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .controller('ExpertbadgeDetailController', ExpertbadgeDetailController);
 
-    ExpertbadgeDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'entity', 'Expertbadge', 'User', 'Badge'];
+    ExpertbadgeDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'entity', 'Expertbadge', 'ExpertAccount', 'Badge'];
 
-    function ExpertbadgeDetailController($scope, $rootScope, $stateParams, entity, Expertbadge, User, Badge) {
+    function ExpertbadgeDetailController($scope, $rootScope, $stateParams, entity, Expertbadge, ExpertAccount, Badge) {
         var vm = this;
         vm.expertbadge = entity;
         

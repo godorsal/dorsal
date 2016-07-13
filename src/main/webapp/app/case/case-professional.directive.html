@@ -2,7 +2,7 @@
     <!-- Name -->
     <div>
         <span class="drsl-label">Expert:</span>
-        {{expert.firstName}} {{expert.lastName}}
+        {{expert.user.firstName}} {{expert.user.lastName}}
     </div>
     <!-- <div>
         <span class="drsl-label" translate="case.professional.expert">Expert:</span>
@@ -26,18 +26,18 @@
 
     <!-- Location -->
     <div>
-        <span><span class="drsl-label">Location</span> NYC</span>
+        <span><span class="drsl-label">Location</span> {{expert.location}}</span>
     </div>
 
     <!-- Languages -->
     <div>
-        <span class="drsl-label">Languages</span> English, German, French, Italian, Farsi
+        <span class="drsl-label">Languages</span> {{expert.languages}}
     </div>
 
     <!-- Score -->
     <div>
         <!--<span class="drsl-label" translate="case.professional.score">Score</span> {{expert.score}} out of 100-->
-        <span class="drsl-label" translate="case.professional.score">Score</span> 92 out of 100
+        <span class="drsl-label" translate="case.professional.score">Score</span> {{expert.expertScore}} out of 100
     </div>
 
     <!-- Badges -->

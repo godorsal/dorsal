@@ -57,8 +57,44 @@ Case Rating
                 }
             }
 
-            .drsl-scrolling-container {
-                text-align: center;
+        }
+
+        .drsl-rating-grid {
+            display: flex;
+            flex-flow: row;
+            text-align: center;
+
+            .drsl-rating-grid-label {
+                flex: 1;
+                h3 {
+                    text-align: left;
+                }
+            }
+
+            .drsl-rating-grid-values {
+                flex: 3;
+
+                .drsl-rating-grid-values-header {
+                    display: flex;
+                    flex-flow: row;
+                    margin-left: 20px;
+                    font-weight: $default-weight;
+
+                    div {
+                        flex: 1;
+                    }
+                }
+            }
+        }
+
+        .drsl-linear-radio {
+            height: auto;
+            .drsl-radio-set {
+                overflow: hidden;
+
+                label span:first-child {
+                    display: none;
+                }
             }
         }
 

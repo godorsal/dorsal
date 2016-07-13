@@ -58,7 +58,11 @@ entity ExpertAccount  {
     imagePath String maxlength(512),
     firstTechnologyPreference String,
     secondTechnologyPreference String,
-    thirdTechnologyPreference String
+    thirdTechnologyPreference String,
+    isAvailable Boolean,
+    expertBio String maxlength(4096),
+    expertSince ZonedDateTime,
+    numberOfCases Integer
 }
 
 relationship OneToOne {
@@ -177,8 +181,12 @@ relationship OneToMany {
     User{payment(user)} to Payment{user}
 }
 
+/////////////////////////////////////
 // Entity Badge and ExpertBadge
-entity Expertbadge {}
+//
+entity Expertbadge {
+    expertBadgeCount Integer
+}
 
 entity Badge {
 	name String required,
@@ -186,7 +194,7 @@ entity Badge {
 }
 
 relationship OneToMany {
-    User{expertbadge(user)} to Expertbadge{user}
+    ExpertAccount{expertbadge(expertaccount)} to Expertbadge{expertaccount}
 }
 
 relationship OneToMany {

@@ -1,0 +1,9 @@
+<!-- <div class="drsl-file-upload-component" class="form-group">
+	<i class="fa fa-cloud-upload fa-lg"></i>
+	{{"global.form.fileupload.drop" | translate}}
+	<span type="file" ngf-select ngf-change="vm.setDataStream($file, vm.attachment)">{{"global.form.fileupload.browse" | translate}}</span>
+</div> -->
+<button type="file" ngf-select class="btn btn-default btn-block"
+		ngf-change="vm.setDataStream($file, vm.attachment)" translate="entity.action.addblob">
+	Add blob
+</button>

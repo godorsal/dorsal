@@ -27,10 +27,10 @@ import java.util.Optional;
 public class ExpertAccountResource {
 
     private final Logger log = LoggerFactory.getLogger(ExpertAccountResource.class);
-
+        
     @Inject
     private ExpertAccountRepository expertAccountRepository;
-
+    
     /**
      * POST  /expert-accounts : Create a new expertAccount.
      *
@@ -88,7 +88,7 @@ public class ExpertAccountResource {
     @Timed
     public List<ExpertAccount> getAllExpertAccounts() {
         log.debug("REST request to get all ExpertAccounts");
-        List<ExpertAccount> expertAccounts = expertAccountRepository.findByUserIsCurrentUser(); //.findAll();
+        List<ExpertAccount> expertAccounts = expertAccountRepository.findAll();
         return expertAccounts;
     }
 

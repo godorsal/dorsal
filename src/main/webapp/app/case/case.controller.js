@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .controller('CaseController', CaseController);
 
-    CaseController.$inject = ['$scope', '$window', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', 'Supportcase', '$state', 'DrslMetadata', 'StatusModel', 'ExpertAccount', 'Rating'];
+    CaseController.$inject = ['$scope', '$window', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', 'Supportcase', '$state', 'DrslMetadata', 'StatusModel', 'ExpertAccount', 'Rating', 'Principal'];
 
-    function CaseController($scope, $window, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, Supportcase, $state, DrslMetadata, StatusModel, ExpertAccount, Rating) {
+    function CaseController($scope, $window, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, Supportcase, $state, DrslMetadata, StatusModel, ExpertAccount, Rating, Principal) {
         var vm = this;
         vm.init = init;
         vm.getHistory = getHistory;
@@ -32,10 +32,7 @@
             resolved: 'case.details.status.resolved',
             completed: 'case.details.status.completed'
         };
-        vm.currentUser = {
-            id: 'userForeignKey',
-            name: 'Joe Doe'
-        };
+        vm.currentUser = {};
         vm.experts = {};
         vm.init();
 
@@ -54,6 +51,13 @@
                 } else {
                     vm.supportcases = result.reverse();
                     vm.setCurrentCase(result[0]);
+                }
+            });
+
+            // Get user
+            Principal.identity().then(function (account) {
+                if (account) {
+                    vm.currentUser = account;
                 }
             });
 
@@ -81,8 +85,8 @@
         function isCaseExpert(){
             var caseExpert = false;
 
-            if (vm.currentCase && vm.currentCase.expert && vm.expertUser && vm.expertUser.id) {
-                caseExpert = (vm.currentCase.expert.id === vm.expertUser.id);
+            if (vm.currentCase && vm.currentCase.expertaccount && vm.currentUser.email && vm.expertUser) {
+                caseExpert = (vm.currentCase.expertaccount.user.email === vm.currentUser.email);
             }
 
             return caseExpert;
@@ -135,7 +139,9 @@
                     var newRating = {
                         id: null,
                         dateRated: null,
-                        score: data.combinedAverage,
+                        score: data.score,
+                        rateDetails: data.rateDetails,
+                        hasExpertExceeded: data.hasExpertExceeded,
                         supportcase: vm.currentCase
                     };
 

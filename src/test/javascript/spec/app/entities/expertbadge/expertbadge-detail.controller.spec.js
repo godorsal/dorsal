@@ -4,7 +4,7 @@ describe('Controller Tests', function() {
 
     describe('Expertbadge Management Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockExpertbadge, MockUser, MockBadge;
+        var MockEntity, MockExpertbadge, MockExpertAccount, MockBadge;
         var createController;
 
         beforeEach(inject(function($injector) {
@@ -12,7 +12,7 @@ describe('Controller Tests', function() {
             $scope = $rootScope.$new();
             MockEntity = jasmine.createSpy('MockEntity');
             MockExpertbadge = jasmine.createSpy('MockExpertbadge');
-            MockUser = jasmine.createSpy('MockUser');
+            MockExpertAccount = jasmine.createSpy('MockExpertAccount');
             MockBadge = jasmine.createSpy('MockBadge');
             
 
@@ -21,7 +21,7 @@ describe('Controller Tests', function() {
                 '$rootScope': $rootScope,
                 'entity': MockEntity ,
                 'Expertbadge': MockExpertbadge,
-                'User': MockUser,
+                'ExpertAccount': MockExpertAccount,
                 'Badge': MockBadge
             };
             createController = function() {

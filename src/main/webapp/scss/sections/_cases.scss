@@ -323,12 +323,17 @@ Cases
 
         .drsl-badges {
             padding-top: $default-half-padding;
+
+            > div > span:first-child {
+                margin-left: -10px;
+            }
         }
 
         .drsl-contact-wrapper {
             display: flex;
             flex-flow: row;
             align-items: flex-start;
+            min-height: 119px;
 
             > div {
                 flex: inherit;
@@ -409,7 +414,7 @@ Cases
     flex-flow: row;
     z-index: 1;
 }
-input[type="radio"] + label span, input[type="checkbox"] + label span {
+input[type="radio"] + label span:last-child, input[type="checkbox"] + label span:last-child {
     display: inline-block;
     width: 17px;
     height: 17px;

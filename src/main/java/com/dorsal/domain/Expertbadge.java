@@ -21,8 +21,11 @@ public class Expertbadge implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "expert_badge_count")
+    private Integer expertBadgeCount;
+
     @ManyToOne
-    private User user;
+    private ExpertAccount expertaccount;
 
     @ManyToOne
     private Badge badge;
@@ -35,12 +38,20 @@ public class Expertbadge implements Serializable {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public Integer getExpertBadgeCount() {
+        return expertBadgeCount;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setExpertBadgeCount(Integer expertBadgeCount) {
+        this.expertBadgeCount = expertBadgeCount;
+    }
+
+    public ExpertAccount getExpertaccount() {
+        return expertaccount;
+    }
+
+    public void setExpertaccount(ExpertAccount expertAccount) {
+        this.expertaccount = expertAccount;
     }
 
     public Badge getBadge() {
@@ -75,6 +86,7 @@ public class Expertbadge implements Serializable {
     public String toString() {
         return "Expertbadge{" +
             "id=" + id +
+            ", expertBadgeCount='" + expertBadgeCount + "'" +
             '}';
     }
 }

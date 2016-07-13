@@ -12,7 +12,6 @@ import java.util.List;
 @SuppressWarnings("unused")
 public interface ExpertAccountRepository extends JpaRepository<ExpertAccount,Long> {
 
-    @Query("select expert_account from ExpertAccount expert_account where expert_account.user.login = ?#{principal.username}")
-    List<ExpertAccount> findByUserIsCurrentUser();
+    List<ExpertAccount>findOneByFirstTechnologyPreference(String technology);
 
 }
