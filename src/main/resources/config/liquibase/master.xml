@@ -10,7 +10,6 @@
     <include file="classpath:config/liquibase/changelog/20160623155304_added_entity_Groupaccess.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160623155306_added_entity_Casetechnologyproperty.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160623155307_added_entity_Payment.xml" relativeToChangelogFile="false"/>
-    <include file="classpath:config/liquibase/changelog/20160623155309_added_entity_Badge.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160623155310_added_entity_Updatetype.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160623155357_added_entity_Technology.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160623155358_added_entity_Technologyproperty.xml" relativeToChangelogFile="false"/>
@@ -24,6 +23,7 @@
     <include file="classpath:config/liquibase/changelog/20160712221458_added_entity_ExpertAccount.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160713000113_added_entity_Supportcase.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160713145657_added_entity_Expertbadge.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160713171732_added_entity_Badge.xml" relativeToChangelogFile="false"/>
   <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="classpath:config/liquibase/changelog/20160623155303_added_entity_constraints_Referencedoc.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160623155304_added_entity_constraints_Groupaccess.xml" relativeToChangelogFile="false"/>

@@ -46,6 +46,9 @@ public class BadgeResourceIntTest {
     private static final String DEFAULT_CODE = "AAAAA";
     private static final String UPDATED_CODE = "BBBBB";
 
+    private static final Integer DEFAULT_ORDINAL = 1;
+    private static final Integer UPDATED_ORDINAL = 2;
+
     @Inject
     private BadgeRepository badgeRepository;
 
@@ -74,6 +77,7 @@ public class BadgeResourceIntTest {
         badge = new Badge();
         badge.setName(DEFAULT_NAME);
         badge.setCode(DEFAULT_CODE);
+        badge.setOrdinal(DEFAULT_ORDINAL);
     }
 
     @Test
@@ -94,6 +98,7 @@ public class BadgeResourceIntTest {
         Badge testBadge = badges.get(badges.size() - 1);
         assertThat(testBadge.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testBadge.getCode()).isEqualTo(DEFAULT_CODE);
+        assertThat(testBadge.getOrdinal()).isEqualTo(DEFAULT_ORDINAL);
     }
 
     @Test
@@ -126,7 +131,8 @@ public class BadgeResourceIntTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(badge.getId().intValue())))
                 .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-                .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE.toString())));
+                .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE.toString())))
+                .andExpect(jsonPath("$.[*].ordinal").value(hasItem(DEFAULT_ORDINAL)));
     }
 
     @Test
@@ -141,7 +147,8 @@ public class BadgeResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(badge.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.code").value(DEFAULT_CODE.toString()));
+            .andExpect(jsonPath("$.code").value(DEFAULT_CODE.toString()))
+            .andExpect(jsonPath("$.ordinal").value(DEFAULT_ORDINAL));
     }
 
     @Test
@@ -164,6 +171,7 @@ public class BadgeResourceIntTest {
         updatedBadge.setId(badge.getId());
         updatedBadge.setName(UPDATED_NAME);
         updatedBadge.setCode(UPDATED_CODE);
+        updatedBadge.setOrdinal(UPDATED_ORDINAL);
 
         restBadgeMockMvc.perform(put("/api/badges")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -176,6 +184,7 @@ public class BadgeResourceIntTest {
         Badge testBadge = badges.get(badges.size() - 1);
         assertThat(testBadge.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testBadge.getCode()).isEqualTo(UPDATED_CODE);
+        assertThat(testBadge.getOrdinal()).isEqualTo(UPDATED_ORDINAL);
     }
 
     @Test

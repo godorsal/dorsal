@@ -68,7 +68,7 @@ class BadgeGatlingTest extends Simulation {
             .exec(http("Create new badge")
             .post("/api/badges")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "code":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "code":"SAMPLE_TEXT", "ordinal":"0"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_badge_url"))).exitHereIfFailed
             .pause(10)

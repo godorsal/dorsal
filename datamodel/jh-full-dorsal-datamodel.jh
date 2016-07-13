@@ -190,7 +190,8 @@ entity Expertbadge {
 
 entity Badge {
 	name String required,
-    code String
+    code String,
+    ordinal Integer
 }
 
 relationship OneToMany {
