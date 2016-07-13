@@ -13,9 +13,9 @@
                 chatRoom: '='
             },
             template:   '<div class="drsl-contact-info">' +
-                            '<div ng-show="contact.email">' +
+                            '<div ng-show="contact.user.email">' +
                                 '<i class="fa fa-envelope" tooltip-placement="left" uib-tooltip="{{\'case.professional.contact.email\' | translate}}" ></i> ' +
-                                '{{contact.email}}' +
+                                '{{contact.user.email}}' +
                             '</div>' +
                             '<div ng-show="contact.phone">' +
                                 '<i class="fa fa-phone" tooltip-placement="left" uib-tooltip="{{\'case.professional.contact.phone\' | translate}}"></i> ' +
