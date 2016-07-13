@@ -20,7 +20,7 @@
                 <tr>
                     <th><span translate="global.field.id">ID</span></th>
                     <th><span translate="dorsalApp.expertbadge.expertBadgeCount">Expert Badge Count</span></th>
-                    <th><span translate="dorsalApp.expertbadge.user">User</span></th>
+                    <th><span translate="dorsalApp.expertbadge.expertaccount">Expertaccount</span></th>
                     <th><span translate="dorsalApp.expertbadge.badge">Badge</span></th>
                     <th></th>
                 </tr>
@@ -30,7 +30,7 @@
                     <td><a ui-sref="expertbadge-detail({id:expertbadge.id})">{{expertbadge.id}}</a></td>
                     <td>{{expertbadge.expertBadgeCount}}</td>
                     <td>
-                        {{expertbadge.user.id}}
+                        <a ui-sref="expert-account-detail({id:expertbadge.expertaccount.id})">{{expertbadge.expertaccount.id}}</a>
                     </td>
                     <td>
                         <a ui-sref="badge-detail({id:expertbadge.badge.id})">{{expertbadge.badge.id}}</a>

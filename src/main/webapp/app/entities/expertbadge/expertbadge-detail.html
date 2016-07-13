@@ -7,9 +7,9 @@
         <dd>
             <span>{{vm.expertbadge.expertBadgeCount}}</span>
         </dd>
-        <dt><span translate="dorsalApp.expertbadge.user">User</span></dt>
+        <dt><span translate="dorsalApp.expertbadge.expertaccount">Expertaccount</span></dt>
         <dd>
-            {{vm.expertbadge.user.id}}
+            <a ui-sref="expert-account-detail({id:vm.expertbadge.expertaccount.id})">{{vm.expertbadge.expertaccount.id}}</a>
         </dd>
         <dt><span translate="dorsalApp.expertbadge.badge">Badge</span></dt>
         <dd>

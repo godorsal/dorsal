@@ -12,7 +12,4 @@ import java.util.List;
 @SuppressWarnings("unused")
 public interface ExpertbadgeRepository extends JpaRepository<Expertbadge,Long> {
 
-    @Query("select expertbadge from Expertbadge expertbadge where expertbadge.user.login = ?#{principal.username}")
-    List<Expertbadge> findByUserIsCurrentUser();
-
 }

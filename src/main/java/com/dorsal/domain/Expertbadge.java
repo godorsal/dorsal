@@ -25,7 +25,7 @@ public class Expertbadge implements Serializable {
     private Integer expertBadgeCount;
 
     @ManyToOne
-    private User user;
+    private ExpertAccount expertaccount;
 
     @ManyToOne
     private Badge badge;
@@ -46,12 +46,12 @@ public class Expertbadge implements Serializable {
         this.expertBadgeCount = expertBadgeCount;
     }
 
-    public User getUser() {
-        return user;
+    public ExpertAccount getExpertaccount() {
+        return expertaccount;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setExpertaccount(ExpertAccount expertAccount) {
+        this.expertaccount = expertAccount;
     }
 
     public Badge getBadge() {
