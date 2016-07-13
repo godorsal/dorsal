@@ -20,6 +20,7 @@
                 if ($file) {
                     DataUtils.toBase64($file, function(base64Data) {
                         $scope.$apply(function() {
+                            $scope.attachment.name = $file.name;
                             $scope.attachment.dataStream = base64Data;
                             $scope.attachment.dataStreamContentType = $file.type;
                             console.log("ATTACCHMENT", $scope.attachment);
