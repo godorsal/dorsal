@@ -61,6 +61,11 @@
             };
 
             scope.cycleStatus = function () {
+                // Exit if demoModeEnabled is not enabled
+                if (!DrslMetadata.demoModeEnabled){
+                    return;
+                }
+
                 scope.caseIndex = StatusModel.getStatusIndex(scope.case.status);
 
                 if (scope.caseIndex < scope.statusOptions.length - 1) {
@@ -85,7 +90,6 @@
                     case 4:
                         break;
                 }
-
 
                 scope.case.status = StatusModel.getState(scope.statusOptions[scope.caseIndex].value);
             };
