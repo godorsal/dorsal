@@ -10,16 +10,32 @@
     function CaseService($q, Supportcase, StatusModel, Principal, Badge, Expertbadge, DrslMetadata) {
         var service = {};
 
-        service.getEntityData = function () {
+        service.getEntityData = function (config) {
             var deferred = $q.defer(),
-                supportCase = Supportcase.query().$promise,
-                identity = Principal.identity(),
-                badges = Badge.query().$promise,
-                statusStates = StatusModel.getStates();
+                dataToFetch = [],
+                dataToTypes = [];
+
+            dataToFetch.push(Supportcase.query().$promise);
+            dataToTypes.push('supportCase');
+
+            if (config.getCurrentUser) {
+                dataToFetch.push(Principal.identity());
+                dataToTypes.push('identity');
+            }
+
+            if (config.getStatusStates) {
+                dataToFetch.push(StatusModel.getStates());
+                dataToTypes.push('statusStates');
+            }
+
+            if (config.getBadges) {
+                dataToFetch.push(Badge.query().$promise);
+                dataToTypes.push('badges');
+            }
 
             // Combine multiple requests into one
-            $q.all([supportCase, identity, statusStates, badges]).then(function (data) {
-                deferred.resolve(processEntityData(data));
+            $q.all(dataToFetch).then(function (data) {
+                deferred.resolve(processEntityData(data, dataToTypes));
             });
 
             return deferred.promise;
@@ -47,13 +63,21 @@
 
         return service;
 
-        function processEntityData(entityData) {
-            return {
-                "supportCase": entityData[0],
-                "identity": entityData[1],
-                "statusStates": entityData[2],
-                "badges": entityData[3].sort(sortBadges)
-            };
+        function processEntityData(entityData, dataToTypes) {
+            var dataOut = {}, dataType, i;
+
+            for (i = 0; i<dataToTypes.length; i++){
+                dataType = dataToTypes[i];
+
+                if (dataType === 'badges') {
+                    dataOut[dataToTypes[i]] = entityData[i].sort(sortBadges);
+                } else {
+                    dataOut[dataToTypes[i]] = entityData[i];
+                }
+                dataOut[dataToTypes[i]] = entityData[i];
+            }
+
+            return dataOut;
         }
 
         function sortBadges(a, b) {
