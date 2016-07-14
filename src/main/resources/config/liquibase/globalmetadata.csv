@@ -5,3 +5,4 @@ id;name;value;value_type
 4;upload-base-url;https%3A%2F%2Fs3-us-west-1.amazonaws.com%2Fdorsal-attachment-upload;ISSTRING
 5;demo-mode-enabled;0;ISINTEGER
 6;case-polling-rate-seconds;30;ISINTEGER
+7;show-case-chat;0;ISINTEGER

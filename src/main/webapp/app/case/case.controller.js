@@ -5,11 +5,13 @@
         .module('dorsalApp')
         .controller('CaseController', CaseController);
 
-    CaseController.$inject = ['$scope', '$window', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', '$state', 'StatusModel', 'Rating', 'Expertbadge'];
+    CaseController.$inject = ['$scope', '$window', '$interval', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', '$state', 'StatusModel', 'Rating', 'Expertbadge', 'DrslMetadata'];
 
-    function CaseController($scope, $window, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, $state, StatusModel, Rating, Expertbadge) {
-        var vm = this;
+    function CaseController($scope, $window, $interval, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, $state, StatusModel, Rating, Expertbadge, DrslMetadata) {
+        var vm = this, casePoll;
         vm.init = init;
+        vm.DrslMetadata = DrslMetadata;
+        vm.pollForCaseUpdates = pollForCaseUpdates;
         vm.getHistory = getHistory;
         vm.getCurrentCase = getCurrentCase;
         vm.setCurrentCase = setCurrentCase;
@@ -42,8 +44,14 @@
          * Initialize the controller's data.
          */
         function init() {
+            var getCurrentUser = (typeof(vm.currentUser.email) === 'undefined'),
+                getStatusStates = (vm.statusStates.length === 0),
+                getBadges = (vm.badges.length === 0);
+
             // Make a call to get the initial data.
-            CaseService.getEntityData().then(function (data) {
+            CaseService.getEntityData({'getCurrentUser': getCurrentUser, 'getStatusStates': getStatusStates, 'getBadges': getBadges}).then(function (data) {
+                var i, currentCaseIndex = 0;;
+
                 if (data.badges) {
                     vm.badges = data.badges;
                 }
@@ -52,11 +60,17 @@
                     $state.go('concierge')
                 } else {
                     vm.supportcases = data.supportCase.reverse();
-                    vm.setCurrentCase(vm.supportcases[0]);
-                    CaseService.getExpertBadges(vm.currentCase.expertaccount.id).then(function(data){
-                        vm.expertBadges = data.badges;
-                        vm.expertBadgeResources = data.expertBadgeResources;
-                    });
+
+                    if (vm.currentCase && vm.currentCase.id){
+                        for (i=0; i<vm.supportcases.length; i++) {
+                            if (vm.currentCase.id === vm.supportcases[i].id) {
+                                currentCaseIndex = i;
+                                break;
+                            }
+                        }
+                    }
+
+                    vm.setCurrentCase(vm.supportcases[currentCaseIndex]);
                 }
 
                 if (data.identity) {
@@ -66,7 +80,17 @@
                 if (data.statusStates) {
                     vm.statusStates = data.statusStates;
                 }
+
+                if (!casePoll) {
+                    vm.pollForCaseUpdates();
+                }
             });
+        }
+
+        function pollForCaseUpdates() {
+            casePoll = $interval(function () {
+                vm.init();
+            }, vm.DrslMetadata.casePollingRateSeconds * 1000);
         }
 
         /**
@@ -82,6 +106,13 @@
                 if (foundExpert) {
                     vm.experts[expert] = foundExpert;
                 }
+            });
+        }
+
+        function getCaseExpertBadges() {
+            CaseService.getExpertBadges(vm.currentCase.expertaccount.id).then(function(data){
+                vm.expertBadges = data.badges;
+                vm.expertBadgeResources = data.expertBadgeResources;
             });
         }
 
@@ -129,6 +160,7 @@
          */
         function setCurrentCase(targetCase) {
             vm.currentCase = targetCase;
+            getCaseExpertBadges();
         }
 
         /**
@@ -276,6 +308,13 @@
         $scope.$on('openCaseAgreement', function (event) {
             event.stopPropagation();
             vm.openCaseAgreement();
+        });
+
+        $scope.$on('$destroy', function() {
+            if (angular.isDefined(casePoll)) {
+                $interval.cancel(casePoll);
+                casePoll = undefined;
+            }
         });
     }
 })();
