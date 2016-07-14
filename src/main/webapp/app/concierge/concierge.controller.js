@@ -83,6 +83,9 @@
                     Casetechnologyproperty.save(brandNewProperty);
                 }
             }
+            vm.technologyProperties = null;
+            vm.technology = null;
+            vm.issue = null;
             vm.isSaving = false;
             $scope.$emit('dorsalApp:supportcaseUpdate', result);
             $state.go('case');
@@ -157,12 +160,14 @@
                 LoginService.open()
                 $rootScope.$on('authenticationSuccess', function(){
                     Principal.identity().then(function(account){
+                        console.log("MODAL");
                         vm.currentUser = account;
                         vm.createCase();
                     })
                 })
             } else {
                 Principal.identity().then(function(account){
+                    console.log("NO MODAL");
                     vm.currentUser = account;
                     vm.createCase();
                 })
