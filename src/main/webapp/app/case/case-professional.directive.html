@@ -5,32 +5,40 @@
         {{expert.user.firstName}} {{expert.user.lastName}}
     </div>
 
+    <!-- Desired Outcome -->
+    <div class="drsl-label-value-row">
+        <div><span class="drsl-label" translate="case.professional.input.desiredOutcome">Desired<br/>Outcome</span></div>
+        <div><div class="drsl-scrolling-container">{{case.expectedResult}}</div></div>
+    </div>
+
     <!-- Contact -->
     <div class="drsl-contact-wrapper">
         <div><span class="drsl-label" translate="case.professional.contact.main">Contact:</span></div>
         <contact-info contact="expert" chat-room="chatRoom"></contact-info>
     </div>
 
-    <!-- Profile Photo -->
+    <!-- Profile Photo & Score -->
     <div class="drsl-profile-photo">
+        <!-- Photo -->
         <a href="#" ng-click="$event.preventDefault()">
             <img ng-src="{{expert.imagePath}}" />
         </a>
+        <!-- Score -->
+        <div class="drsl-profile-score">
+            <span class="drsl-label" translate="case.professional.score">Score</span> {{expert.expertScore}} out of 100
+        </div>
     </div>
 
-    <!-- Location -->
-    <div>
-        <span><span class="drsl-label">Location</span> {{expert.location}}</span>
-    </div>
-
-    <!-- Languages -->
-    <div>
-        <span class="drsl-label">Languages</span> {{expert.languages}}
-    </div>
-
-    <!-- Score -->
-    <div>
-        <span class="drsl-label" translate="case.professional.score">Score</span> {{expert.expertScore}} out of 100
+    <!-- Location & Languages -->
+    <div class="drsl-locale-wrapper">
+        <!-- Location -->
+        <div>
+            <span><span class="drsl-label">Location</span> {{expert.location}}</span>
+        </div>
+        <!-- Languages -->
+        <div>
+            <span class="drsl-label">Languages</span> {{expert.languages}}
+        </div>
     </div>
 
     <!-- Badges -->

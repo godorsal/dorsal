@@ -322,6 +322,11 @@ Cases
                 border-radius: 50%;
                 max-width: 175px;
             }
+
+            .drsl-profile-score {
+                text-align: center;
+                margin-top: 20px;
+            }
         }
 
         .drsl-badges {
@@ -332,11 +337,15 @@ Cases
             }
         }
 
+        .drsl-label-value-row > div .drsl-scrolling-container {
+            width: 275px;
+        }
+
         .drsl-contact-wrapper {
             display: flex;
             flex-flow: row;
             align-items: flex-start;
-            min-height: 119px;
+            min-height: 122px;
 
             > div {
                 flex: inherit;
@@ -345,6 +354,15 @@ Cases
                     font-size: $medium-font-size;
                     margin-right: 5px;
                 }
+            }
+        }
+
+        .drsl-locale-wrapper {
+            display: flex;
+            flex-flow: row;
+
+            > div {
+                flex: 1;
             }
         }
     }
