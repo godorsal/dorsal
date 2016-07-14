@@ -32,8 +32,8 @@
                 var i, badges = [];
 
                 for (i=0; i<data.length; i++) {
-                    if (data[i].expertaccount.id === expertAccountID &&
-                        data[i].expertBadgeCount >= DrslMetadata.expertBadgeCount){
+                    if (data[i].expertaccount.id === expertAccountID){
+                        data[i].badge.hide = (DrslMetadata.expertBadgeCount > data[i].expertBadgeCount);
                         badges.push(data[i].badge);
                     }
                 }

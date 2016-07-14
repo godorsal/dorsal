@@ -115,7 +115,7 @@
         }
 
         function submit() {
-            var combinedTotal = 0, combinedAverage = 0, csv = [], i;
+            var combinedTotal = 0, combinedAverage, csv = [], selectedBadges = [], i, badge;
 
             for (i = 0; i < vm.radios.length; i++) {
                 var radio = vm.radios[i][0];
@@ -125,11 +125,21 @@
 
             combinedAverage = Math.round(combinedTotal / vm.radios.length);
 
+            for (i = 0; i < vm.badges.length; i++) {
+                badge = vm.badges[i];
+
+                if (badge.selected) {
+                    delete badge.selected;
+                    selectedBadges.push(badge);
+                }
+            }
+
             $uibModalInstance.close({
                 "rated": true,
                 "score": combinedAverage,
                 "rateDetails": csv.join(','),
-                "hasExpertExceeded": false
+                "hasExpertExceeded": false,
+                "selectedBadges": selectedBadges
             });
         }
     }
