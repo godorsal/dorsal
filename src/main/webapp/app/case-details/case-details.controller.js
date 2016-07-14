@@ -16,9 +16,10 @@
         vm.summary = vm.case.summary.toString();
         vm.technologyProps = [];
         vm.updates = [];
+        vm.updatemsg = '';
         vm.caseupdate = {
             user: vm.case.user,
-            supportcase: vm.case
+            supportcase: vm.case,
         };
         vm.attachment = {
             name: null,
@@ -57,7 +58,7 @@
             console.log("COMPLETE FAILURE");
         }
         function submit() {
-            vm.caseupdate.updateMsg = vm.updatemsg;
+            vm.caseupdate.updateMsg = vm.attachment.name + " Was uploaded. " + vm.updatemsg;
             console.log("Case", vm.caseupdate);
             if (vm.caseupdate.id !== null) {
                 Caseupdate.update(vm.caseupdate, onSaveSuccess, onSaveError);
