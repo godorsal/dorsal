@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .controller('CaseController', CaseController);
 
-    CaseController.$inject = ['$scope', '$window', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', '$state', 'StatusModel', 'Rating'];
+    CaseController.$inject = ['$scope', '$window', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', '$state', 'StatusModel', 'Rating', 'Expertbadge'];
 
-    function CaseController($scope, $window, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, $state, StatusModel, Rating) {
+    function CaseController($scope, $window, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, $state, StatusModel, Rating, Expertbadge) {
         var vm = this;
         vm.init = init;
         vm.getHistory = getHistory;
@@ -21,6 +21,8 @@
         vm.openChat = openChat;
         vm.isCaseExpert = isCaseExpert;
         vm.badges = [];
+        vm.expertBadges = [];
+        vm.expertBadgeResources = [];
         vm.statusStates = [];
         vm.openCaseAgreement = openCaseAgreement;
         vm.cases = [];
@@ -51,6 +53,10 @@
                 } else {
                     vm.supportcases = data.supportCase.reverse();
                     vm.setCurrentCase(vm.supportcases[0]);
+                    CaseService.getExpertBadges(vm.currentCase.expertaccount.id).then(function(data){
+                        vm.expertBadges = data.badges;
+                        vm.expertBadgeResources = data.expertBadgeResources;
+                    });
                 }
 
                 if (data.identity) {
@@ -144,9 +150,64 @@
 
                     vm.currentCase.status = StatusModel.getState('closed');
 
+                    updateExpertBadges(data.selectedBadges);
                     Rating.save(newRating);
                     vm.currentCase.$update();
                 });
+            }
+        }
+
+        /**
+         * Updates expertbadge records, increases badge counts and/or adds new records.
+         * @param selectedBadges An array of selected badges.
+         */
+        function updateExpertBadges(selectedBadges) {
+            var badgesToUpdate, badgesToAdd, newExpertBadge, i;
+
+            // get the badges to update
+            badgesToUpdate = vm.expertBadgeResources.filter(function(expertBadgeResource){
+                var found = false, i;
+
+                for (i = 0; i< selectedBadges.length; i++) {
+                    if (selectedBadges[i].id === expertBadgeResource.badge.id) {
+                        expertBadgeResource.expertBadgeCount++;
+                        found = true;
+                        break;
+                    }
+                }
+
+                return found;
+            });
+
+            // get the badges to add
+            badgesToAdd = selectedBadges.filter(function(badge){
+                var found = false, i;
+
+                for (i = 0; i< vm.expertBadgeResources.length; i++) {
+                    if (badge.id === vm.expertBadgeResources[i].badge.id) {
+                        found = true;
+                        break;
+                    }
+                }
+
+                return !found;
+            });
+
+            // update badges
+            for (i=0; i<badgesToUpdate.length; i++){
+                badgesToUpdate[i].$update();
+            }
+
+            // add badges
+            for (i=0; i<badgesToAdd.length; i++){
+                newExpertBadge = {
+                    id: null,
+                    expertBadgeCount: 1,
+                    expertaccount: vm.currentCase.expertaccount,
+                    badge: badgesToAdd[i]
+                };
+
+                Expertbadge.save(newExpertBadge);
             }
         }
 
