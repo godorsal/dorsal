@@ -17,11 +17,16 @@
                     }
                 })
             })
+            $scope.download = function(){
+                console.log("HELLLLLO?");
+                // console.log(stream);
+                // window.open(stream)
+            }
             $scope.setDataStream = function ($file, attachment) {
                 if ($file) {
                     DataUtils.toBase64($file, function(base64Data) {
                         $scope.$apply(function() {
-                            $scope.attachment.name = $file.name;
+                            $scope.attachment.name = $file.name.replace(/\s|,|-/g, '');
                             $scope.attachment.dataStream = base64Data;
                             $scope.attachment.dataStreamContentType = $file.type;
                             console.log("ATTACCHMENT", $scope.attachment);
@@ -39,17 +44,23 @@
                 currentcase: '='
             },
             controller: controller,
-            template: '<div ng-repeat="attachment in attachments" style="padding-bottom: 20px; display: inline-block;">{{attachment.name}}' +
+            template: '<div style="overflow-y: scroll; max-height: 318px;">' + '<div ng-repeat="attachment in attachments" style="display: inline-block;" class="attachmentItem">' +
+            '<div uib-tooltip="{{attachment.name}}">{{attachment.name.substring(0, 10)}}' + '<span ng-if="attachment.name.length > 10">...</span>' + '</div>' +
+            '<a ng-click="openFile(attachment.dataStreamContentType, attachment.dataStream)" style="font-size: 20px;">' +
+            '<i class="fa fa-search fa-lg" aria-hidden="true"></i>' +
+            '</a>' +
+            '<a href="data:application/octet-stream;charset=utf-16le;base64,{{attachment.dataStream}}" download="{{attachment.name}}" style="font-size: 20px;">' +
+            '<i class="fa fa-download fa-lg" aria-hidden="true"></i>' +
+            '</a>' +
             '<br>' +
-            '{{attachment.dataStreamContentType}}' +
-            '<a class="pull-left" ng-click="openFile(attachment.dataStreamContentType, attachment.dataStream)">' +
-            '<img data-ng-src="data:image/png;base64,{{attachment.dataStream}}" alt="" style="width: 100px;" ng-if="attachment.dataStreamContentType.split(\'/\')[0] == \'image\'">' +
-            '<img src="http://neowin.s3.amazonaws.com/forum/uploads/monthly_04_2013/post-360412-0-09676400-1365986245.png" style="width: 100px;" alt="" ng-if="attachment.dataStreamContentType.split(\'/\')[0] !== \'image\' && attachment.dataStreamContentType">'
-            + '</a>'
+            '<img data-ng-src="data:image/png;base64,{{attachment.dataStream}}" alt="" style="width: 75px;max-height: 50px;" ng-if="attachment.dataStreamContentType.split(\'/\')[0] == \'image\'">' +
+            // '<img data-ng-src="data:image/png;base64,{{attachment.dataStream}}" alt="" style="width: 150px;max-height: 103px;" ng-if="attachment.dataStreamContentType.split(\'/\')[0] == \'image\'">' +
+            '<img src="http://neowin.s3.amazonaws.com/forum/uploads/monthly_04_2013/post-360412-0-09676400-1365986245.png" style="width: 50px; height: 45px;" alt="" ng-if="attachment.dataStreamContentType.split(\'/\')[0] !== \'image\' && attachment.dataStreamContentType">'
+            + '</div>'
             + '</div>'
             + '<div class="drsl-file-upload-component" class="form-group">'
             + '{{attachment.name}}'
-            + '<img data-ng-src="data:image/png;base64,{{attachment.dataStream}}" alt="" style="width: 100px;" ng-if="attachment.dataStreamContentType.split(\'/\')[0] == \'image\'">'
+            + '<img data-ng-src="data:image/png;base64,{{attachment.dataStream}}" alt="" style="width: 150px;max-height: 103px;" ng-if="attachment.dataStreamContentType.split(\'/\')[0] == \'image\'">'
             + '<img src="http://neowin.s3.amazonaws.com/forum/uploads/monthly_04_2013/post-360412-0-09676400-1365986245.png" style="width: 100px;" alt="" ng-if="attachment.dataStreamContentType.split(\'/\')[0] !== \'image\' && attachment.dataStreamContentType">'
             + '<i class="fa fa-cloud-upload fa-lg"></i>'
             + '{{"global.form.fileupload.drop" | translate}}'
