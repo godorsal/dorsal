@@ -17,7 +17,7 @@
                             '<span class="drsl-badge-sprites {{badge.code}}" uib-tooltip="{{\'case.professional.badges.\' + badge.code | translate}}" ng-class="{selected: badge.selected, selectable: badgeSelect}" ng-click="toggleBadgeSelection(badge)" ng-repeat="badge in badges"></span>' +
                         '</div>' +
                         '<div ng-if="badgeSelect !== \'true\'">' +
-                            '<span class="drsl-badge-sprites {{badge.code}} selected" uib-tooltip="{{\'case.professional.badges.\' + badge.code | translate}}" ng-class="{selected: badge.selected, selectable: badgeSelect}" ng-repeat="badge in badges" ></span>' +
+                            '<span class="drsl-badge-sprites {{badge.code}} selected" uib-tooltip="{{\'case.professional.badges.\' + badge.code | translate}}" ng-class="{selected: badge.selected, selectable: badgeSelect}" ng-hide="badge.hide" ng-repeat="badge in badges" ></span>' +
                         '</div>'
             ,
             link: linkFunc

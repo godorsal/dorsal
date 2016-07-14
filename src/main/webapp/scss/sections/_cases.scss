@@ -190,11 +190,13 @@ Cases
                 padding: 12px;
                 height: 40px;
                 border-radius: 0;
+                border-color: $form-field-border-color;
             }
             textarea.form-control {
                 height: 80px;
                 margin-top: -5px;
                 border-radius: 0;
+                border-color: $form-field-border-color;
             }
 
             .drsl-case-resolved-wrapper {
@@ -212,6 +214,7 @@ Cases
                 background-color: $content-background-color;
                 border-radius: 50%;
                 margin-top: 5px;
+                border-color: $form-field-border-color;
             }
             input[type="checkbox"] + label span {
                 border-radius: 25%;

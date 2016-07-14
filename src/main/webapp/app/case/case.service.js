@@ -29,16 +29,17 @@
             var deferred = $q.defer();
 
             Expertbadge.query().$promise.then(function(data){
-                var i, badges = [];
+                var i, badges = [], expertBadgeResources = [];
 
                 for (i=0; i<data.length; i++) {
-                    if (data[i].expertaccount.id === expertAccountID &&
-                        data[i].expertBadgeCount >= DrslMetadata.expertBadgeCount){
+                    if (data[i].expertaccount.id === expertAccountID){
+                        expertBadgeResources.push(data[i]);
+                        data[i].badge.hide = (DrslMetadata.expertBadgeCount > data[i].expertBadgeCount);
                         badges.push(data[i].badge);
                     }
                 }
 
-                deferred.resolve(badges.sort(sortBadges));
+                deferred.resolve({'badges': badges.sort(sortBadges), 'expertBadgeResources': expertBadgeResources});
             });
 
             return deferred.promise;
