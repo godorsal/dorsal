@@ -55,9 +55,13 @@
             },
             "input": {
                 "desiredOutcome": "Desired <br/> Outcome",
+                "desiredOutcome.placeholder": "Please define the expert deliverable to resolve the case",
                 "estimatedHours": "Estimated<br/># hours",
+                "estimatedHours.placeholder": "Estimate for the number of hours it takes to resolve the case",
                 "estimateComment": "Estimate<br/>Comment",
+                "estimateComment.placeholder": "Comments regarding the estimated hours",
                 "timeOnCase": "Total time<br/>on case",
+                "timeOnCase.placeholder": "Total Hours expert has worked on the case",
                 "resolved": "Resolved",
                 "lastUpdate": "Last update/action "
             }
