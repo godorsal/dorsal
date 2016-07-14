@@ -21,14 +21,14 @@
                         <!--Desired Outcome-->
                         <div class="drsl-form-grid">
                             <div translate="case.details.desiredOutcome">Desired Outcome</div>
-                            <div><textarea class="form-control" name="detailedResolution" id="detailedResolution" cols="30" rows="5" readonly>Database should meet the reported baseline metrics prior to the migration.</textarea></div>
+                            <div><textarea class="form-control" name="detailedResolution" id="detailedResolution" ng-model="vm.case.expectedResult" cols="30" rows="5" readonly></textarea></div>
                         </div>
 
                         <!-- Expert -->
                         <div class="drsl-form-grid">
                             <div translate="case.professional.expert">Expert</div>
                             <div>
-                                <div>{{vm.expert.firstName}} {{vm.expert.lastName}}</div>
+                                <div>{{vm.case.expertaccount.user.firstName}} {{vm.case.expertaccount.user.lastName}}</div>
                             </div>
                         </div>
 
