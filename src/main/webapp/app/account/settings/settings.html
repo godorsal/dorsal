@@ -1,9 +1,10 @@
-<div class="drsl-account-settings">
+<div class="drsl-account-settings" style="height: 1147px;">
     <div class="row">
         <div class="col-md-12">
             <div class="drsl-settings-wrapper">
                 <div class="drsl-sub-header">
-                    <h2 translate="settings.title" translate-values="{username: '{{vm.settingsAccount.login}}'}">User settings for *** [<b>{{vm.settingsAccount.login}}</b>]</h2>
+                    <h2>User settings for  {{vm.settingsAccount.login}}</h2>
+                    <h2 style="margin-left: 300px;">Payment Method</h2>
                 </div>
                 <div class="drsl-panels">
                     <div class="alert alert-success" ng-show="vm.success" translate="settings.messages.success">
@@ -17,7 +18,7 @@
                     <div class="alert alert-danger" ng-show="vm.error" translate="settings.messages.error.fail">
                         <strong>An error has occurred!</strong> Settings could not be saved.
                     </div>
-                    <div class="" style="background: white; padding: 10px; height: 250px; margin-bottom: 20px;">
+                    <div class="" style="background: white; padding: 10px; height: 306px; margin-bottom: 20px; display: inline-block; float: left; width: 564px;">
                         <form name="form" role="form" novalidate ng-submit="vm.save()" show-validation>
 
                             <div class="form-group">
@@ -85,7 +86,103 @@ Your e-mail cannot be longer than 100 characters.
     <!-- <label for="langKey" translate="settings.form.language">Language</label> -->
     <select id="langKey" name="langKey" class="form-control" ng-model="vm.settingsAccount.langKey" ng-controller="JhiLanguageController as languageVm" ng-options="code as (code | findLanguageFromKey) for code in languageVm.languages"></select>
 </div>
-<button type="submit" ng-disabled="form.$invalid" class="btn btn-success" translate="settings.form.button" style="float: right;">Update</button>
+<button type="submit" ng-disabled="form.$invalid" class="btn btn-success" translate="settings.form.button" style="float: right; margin-top: 55px;">Update</button>
+</div>
+<div class="drsl-payment-content" style="display: inline-block; float: right; width: 588px;">
+    <div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span>
+                    Authorized Credit Card
+                </span>
+                <span class="cards">
+                    <img src="https://www.braintreepayments.com/images/visa-logo-8ea8a4fc.svg" alt="" style="width: 55px;">
+                    <img src="https://www.braintreepayments.com/images/mastercard-logo-2a82d596.svg" alt="" style="width: 55px;">
+                    <img src="https://www.braintreepayments.com/images/maestro-logo-db229f9d.svg" alt="" style="width: 55px;">
+                    <img src="https://www.braintreepayments.com/images/jcb-logo-62a7882e.svg" alt="" style="width: 55px;">
+                    <img src="https://www.braintreepayments.com/images/discover-logo-d781232e.svg" alt="" style="width: 55px;">
+                    <img src="https://www.braintreepayments.com/images/amex-logo-e238f7a3.svg" alt="" style="width: 55px;">
+                    <img src="https://www.braintreepayments.com/images/diners-club-logo-cd0de029.svg" alt="" style="width: 55px;">
+                </span>
+            </div>
+            <div class="panel-body">
+                <form ng-submit="vm.addCard()">
+                    <div class="form-group">
+                        <label class="control-label sr-only" for="ccName">Name on Card</label>
+                        <input type="text" class="form-control" id="ccName" name="ccName" placeholder="Card Holder's Name"
+                        ng-minlength=1  ng-model="vm.creditCard.name" required style="width: 75%; display: inline-block;">
+                        <span ng-if="vm.error && vm.creditCard.name === undefined" style="color: red; display: inline-block;">Invalid Name</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label sr-only" for="text">Card Number</label>
+                        <input type="number" class="form-control" id="ccNumber1" name="ccNumber" placeholder="Credit"
+                        ng-model="vm.creditCard.number.one" required style="width: 100px; display: inline-block;" ng-keypress="vm.numberTab($event)" maxlength="4">
+                        -
+                        <input type="number" class="form-control" id="ccNumber2" name="ccNumber" placeholder="Card" ng-keypress="vm.numberTab($event)"
+                        ng-model="vm.creditCard.number.two" required style="width: 100px; display: inline-block;" maxlength="4">
+                        -
+                        <input type="number" class="form-control" id="ccNumber3" name="ccNumber" placeholder="Number" ng-keypress="vm.numberTab($event)"
+                        ng-model="vm.creditCard.number.three" required style="width: 100px; display: inline-block;" maxlength="4">
+                        -
+                        <input type="number" class="form-control" id="ccNumber4" name="ccNumber"  ng-keypress="vm.numberTab($event)"
+                        ng-model="vm.creditCard.number.four" required style="width: 100px; display: inline-block;" maxlength="4">
+                        <span ng-if="vm.error && vm.number.join('').length != 16" style="color: red;">Invalid Card Number</span>
+                    </div>
+                    <div class="form-group">
+
+                        <label class="control-label sr-only" for="ccName">Expiration Date</label>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <select class="form-control" name="expiry-month" ng-model="vm.creditCard.month" required>
+                                    <option value="">Month</option>
+                                    <option value="01">Jan (01)</option>
+                                    <option value="02">Feb (02)</option>
+                                    <option value="03">Mar (03)</option>
+                                    <option value="04">Apr (04)</option>
+                                    <option value="05">May (05)</option>
+                                    <option value="06">June (06)</option>
+                                    <option value="07">July (07)</option>
+                                    <option value="08">Aug (08)</option>
+                                    <option value="09">Sep (09)</option>
+                                    <option value="10">Oct (10)</option>
+                                    <option value="11">Nov (11)</option>
+                                    <option value="12">Dec (12)</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <select class="form-control" name="expiry-year" ng-model="vm.creditCard.year" required>
+                                    <option value="">Year</option>
+                                    <option value="13">2013</option>
+                                    <option value="14">2014</option>
+                                    <option value="15">2015</option>
+                                    <option value="16">2016</option>
+                                    <option value="17">2017</option>
+                                    <option value="18">2018</option>
+                                    <option value="19">2019</option>
+                                    <option value="20">2020</option>
+                                    <option value="21">2021</option>
+                                    <option value="22">2022</option>
+                                    <option value="23">2023</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class="control-label sr-only" for="cvv">Card CVV</label>
+                                <input ng-keypress="vm.numberTab($event)" type="number" class="form-control" id="cvv" name="cvv" placeholder="CVV"
+                                ng-minlength=1 ng-maxlength=4  maxlength="3" ng-model="vm.creditCard.cvv" required  style="width: 100px; display: inline-block;">
+                                <span ng-if="vm.error && vm.creditCard.cvv.toString().length != 3" style="color: red; display: inline-block;">Invalid CVV Number</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" ng-disabled="form.$invalid" class="btn btn-success" translate="settings.form.button" style="float: right;">Update</button>
+                    <!-- <div><button class="btn btn-primary">Update</button></div> -->
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 </div>
 </div>
@@ -94,140 +191,85 @@ Your e-mail cannot be longer than 100 characters.
 
 </div>
 <div class="drsl-settings-wrapper" ng-if="!vm.isAlreadyAuthorized">
-    <div class="drsl-sub-header drsl-sub-sub-header">
-        <span>Manage Payments</span>
+    <!-- <div class="drsl-sub-header drsl-sub-sub-header">
+    <span>Manage Payments</span>
+</div> -->
+<div ng-if="!vm.isAlreadyAuthorized">
+    <div class="drsl-sub-header">
+        Manage Authorized Users
     </div>
-
-    <div class="drsl-payment-content">
-        <div >
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <span>
-                        Authorized Credit Card
-                    </span>
-                    <span class="cards">
-                        <img src="https://www.braintreepayments.com/images/visa-logo-8ea8a4fc.svg" alt="" style="width: 55px;">
-                        <img src="https://www.braintreepayments.com/images/mastercard-logo-2a82d596.svg" alt="" style="width: 55px;">
-                        <img src="https://www.braintreepayments.com/images/maestro-logo-db229f9d.svg" alt="" style="width: 55px;">
-                        <img src="https://www.braintreepayments.com/images/jcb-logo-62a7882e.svg" alt="" style="width: 55px;">
-                        <img src="https://www.braintreepayments.com/images/discover-logo-d781232e.svg" alt="" style="width: 55px;">
-                        <img src="https://www.braintreepayments.com/images/amex-logo-e238f7a3.svg" alt="" style="width: 55px;">
-                        <img src="https://www.braintreepayments.com/images/diners-club-logo-cd0de029.svg" alt="" style="width: 55px;">
-                    </span>
-                </div>
-                <div class="panel-body">
-                    <form ng-submit="vm.addCard()">
-                        <div class="form-group">
-                            <label class="control-label sr-only" for="ccName">Name on Card</label>
-                            <input type="text" class="form-control" id="ccName" name="ccName" placeholder="Card Holder's Name"
-                            ng-minlength=1  ng-model="vm.creditCard.name" required style="width: 75%; display: inline-block;">
-                            <span ng-if="vm.error && vm.creditCard.name === undefined" style="color: red; display: inline-block;">Invalid Name</span>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label sr-only" for="text">Card Number</label>
-                            <input type="number" class="form-control" id="ccNumber1" name="ccNumber" placeholder="Credit"
-                            ng-model="vm.creditCard.number.one" required style="width: 100px; display: inline-block;" ng-keypress="vm.numberTab($event)" maxlength="4">
-                            -
-                            <input type="number" class="form-control" id="ccNumber2" name="ccNumber" placeholder="Card" ng-keypress="vm.numberTab($event)"
-                            ng-model="vm.creditCard.number.two" required style="width: 100px; display: inline-block;" maxlength="4">
-                            -
-                            <input type="number" class="form-control" id="ccNumber3" name="ccNumber" placeholder="Number" ng-keypress="vm.numberTab($event)"
-                            ng-model="vm.creditCard.number.three" required style="width: 100px; display: inline-block;" maxlength="4">
-                            -
-                            <input type="number" class="form-control" id="ccNumber4" name="ccNumber"  ng-keypress="vm.numberTab($event)"
-                            ng-model="vm.creditCard.number.four" required style="width: 100px; display: inline-block;" maxlength="4">
-                            <span ng-if="vm.error && vm.number.join('').length != 16" style="color: red;">Invalid Card Number</span>
-                        </div>
-                        <div class="form-group">
-
-                            <label class="control-label sr-only" for="ccName">Expiration Date</label>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <select class="form-control" name="expiry-month" ng-model="vm.creditCard.month" required>
-                                        <option value="">Month</option>
-                                        <option value="01">Jan (01)</option>
-                                        <option value="02">Feb (02)</option>
-                                        <option value="03">Mar (03)</option>
-                                        <option value="04">Apr (04)</option>
-                                        <option value="05">May (05)</option>
-                                        <option value="06">June (06)</option>
-                                        <option value="07">July (07)</option>
-                                        <option value="08">Aug (08)</option>
-                                        <option value="09">Sep (09)</option>
-                                        <option value="10">Oct (10)</option>
-                                        <option value="11">Nov (11)</option>
-                                        <option value="12">Dec (12)</option>
-                                    </select>
-                                </div>
-                                <div class="col-sm-6">
-                                    <select class="form-control" name="expiry-year" ng-model="vm.creditCard.year" required>
-                                        <option value="">Year</option>
-                                        <option value="13">2013</option>
-                                        <option value="14">2014</option>
-                                        <option value="15">2015</option>
-                                        <option value="16">2016</option>
-                                        <option value="17">2017</option>
-                                        <option value="18">2018</option>
-                                        <option value="19">2019</option>
-                                        <option value="20">2020</option>
-                                        <option value="21">2021</option>
-                                        <option value="22">2022</option>
-                                        <option value="23">2023</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <label class="control-label sr-only" for="cvv">Card CVV</label>
-                                    <input ng-keypress="vm.numberTab($event)" type="number" class="form-control" id="cvv" name="cvv" placeholder="CVV"
-                                    ng-minlength=1 ng-maxlength=4  maxlength="3" ng-model="vm.creditCard.cvv" required  style="width: 100px; display: inline-block;">
-                                    <span ng-if="vm.error && vm.creditCard.cvv.toString().length != 3" style="color: red; display: inline-block;">Invalid CVV Number</span>
-                                </div>
-                            </div>
-                        </div>
-                        <button type="submit" ng-disabled="form.$invalid" class="btn btn-success" translate="settings.form.button" style="float: right;">Update</button>
-                        <!-- <div><button class="btn btn-primary">Update</button></div> -->
-                    </form>
-                </div>
-            </div>
+    <div class="panel panel-default drsl-user-managment" style="width: 566px; height: 612px; float: left; display: inline-block;">
+        <div class="panel-heading">
+            <form class="drsl-user-add-form" name="addUserForm" ng-submit="vm.addAuthorizedUser()">
+                <label class="control-label" for="uEmail">Add Users</label>
+                <input type="text" class="form-control" id="uEmail" ng-model="vm.invitedUser" style="width: 384px;
+                display: inline-block;" name="uEmail" placeholder="User's email address; multiple users separated by commas"
+                ng-minlength=1 ng-maxlength=50 maxlength="50">
+                <button type="submit" ng-disabled="form.$invalid" class="btn btn-success" translate="settings.form.button">Update</button>
+            </form>
         </div>
-        <div ng-if="!vm.isAlreadyAuthorized">
-            <div class="panel panel-default drsl-user-managment">
-                <div class="panel-heading">Authorized Users</div>
-                <div class="panel-body">
-                    <label class="control-label sr-only" for="uEmail">Add User</label>
-                    <form class="drsl-user-add-form" name="addUserForm" ng-submit="vm.addAuthorizedUser()">
-                        <div>
-                            <div>
-                                <input type="text" class="form-control" id="uEmail" ng-model="vm.authorizedUser" name="uEmail" placeholder="User's email address; multiple users separated by commas"
-                                ng-minlength=1 ng-maxlength=50 maxlength="50">
-                            </div>
-                            <div>
-                                <button type="submit" ng-disabled="form.$invalid" class="btn btn-success" translate="settings.form.button" style="float: right;">Update</button>
-                                <!-- <button type="submit" class="btn btn-primary">add</button> -->
-                            </div>
-                        </div>
-                    </form>
-
-                    <!-- <div class="drsl-user-list empty" ng-hide="vm.getAuthorizedUsers().length">
-                    <div>No Authorized Users</div>
-                </div> -->
-                <div class="drsl-user-list empty" ng-hide="vm.authorizedUsers.length">
-                    <div>No Authorized Users</div>
-                </div>
-
-                <!-- <div class="drsl-user-list" ng-show="vm.getAuthorizedUsers().length">
-                <div>
-                <button class="btn btn-success" ng-click="vm.removeAuthorizedUsers(user)" ng-repeat="user in vm.getAuthorizedUsers()" uib-tooltip="remove user">{{user}} <i class="fa fa-times-circle fa-lg"></i></button>
+        <div class="panel-body">
+            <div class="drsl-user-list empty" ng-hide="vm.invitedUsers.length">
+                <div>No Authorized Users</div>
             </div>
-        </div> -->
+            <div class="drsl-user-list" ng-show="vm.invitedUsers.length">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Invited Users</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="invitedUser in vm.invitedUsers track by $index">
+                            <td>
+                                {{invitedUser.email}}
+                            </td>
+                            <td>
+                                <input ng-click="vm.removeInvitedUsers(user.id, $index)" type="checkbox">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <div>
+                <button class="btn btn-success" ng-click="vm.removeAuthorizedUsers(user.id, $index)" ng-repeat="user in vm.invitedUsers track by $index" uib-tooltip="remove user" style="display: block; margin-top: 10px; margin-bottom: 10px;">{{user.authorizeduser.email}} <i class="fa fa-times-circle fa-lg"></i></button>
+            </div> -->
+        </div>
+    </div>
+</div>
+<div class="panel panel-default drsl-user-managment" style="width: 566px; height: 612px; float: right; display: inline-block;">
+    <div class="panel-heading">
+        <div style="font-size: 16px;
+    height: 35px;">(Invited Users automatically join Authorized Users once they registered)</div>
+    </div>
+    <div class="panel-body">
+        <div class="drsl-user-list empty" ng-hide="vm.authorizedUsers.length">
+            <div>No Invited Users</div>
+        </div>
         <div class="drsl-user-list" ng-show="vm.authorizedUsers.length">
-            <div>
-                <button class="btn btn-success" ng-click="vm.removeAuthorizedUsers(user.id, $index)" ng-repeat="user in vm.authorizedUsers track by $index" uib-tooltip="remove user" style="display: block; margin-top: 10px; margin-bottom: 10px;">{{user.authorizeduser.email}} <i class="fa fa-times-circle fa-lg"></i></button>
-            </div>
-        </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Authorized Users</th>
+                        <th>Remove</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in vm.authorizedUsers track by $index">
+                        <td>
+                            {{user.authorizeduser.firstName}}
+                            {{user.authorizeduser.lastName}}
+                            {{user.authorizeduser.email}}
+                        </td>
+                        <td>
+                            <button ng-click="vm.removeAuthorizedUsers(user.id, $index)" type="checkbox">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- <div>
+            <button class="btn btn-success" ng-click="vm.removeAuthorizedUsers(user.id, $index)" ng-repeat="user in vm.authorizedUsers track by $index" uib-tooltip="remove user" style="display: block; margin-top: 10px; margin-bottom: 10px;">{{user.authorizeduser.email}} <i class="fa fa-times-circle fa-lg"></i></button>
+        </div> -->
     </div>
 </div>
 </div>

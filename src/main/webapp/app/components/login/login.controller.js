@@ -2,8 +2,8 @@
     'use strict';
 
     angular
-        .module('dorsalApp')
-        .controller('LoginController', LoginController);
+    .module('dorsalApp')
+    .controller('LoginController', LoginController);
 
     LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate'];
 
@@ -54,12 +54,12 @@
                 vm.authenticationError = false;
                 $uibModalInstance.close();
                 if ($state.current.name === 'register' || $state.current.name === 'activate' ||
-                    $state.current.name === 'finishReset' || $state.current.name === 'requestReset') {
+                $state.current.name === 'finishReset' || $state.current.name === 'requestReset') {
                     $state.go('home');
                 }
 
                 $rootScope.$broadcast('authenticationSuccess');
-                
+
                 // previousState was set in the authExpiredInterceptor before being redirected to login modal.
                 // since login is succesful, go to stored previousState and clear previousState
                 if (Auth.getPreviousState()) {
@@ -83,7 +83,7 @@
                 vm.error = null;
                 vm.errorUserExists = null;
                 vm.errorEmailExists = null;
-
+                console.log(vm.registerAccount);
                 Auth.createAccount(vm.registerAccount).then(function () {
                     vm.success = 'OK';
                 }).catch(function (response) {

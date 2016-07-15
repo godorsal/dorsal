@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('SettingsController', SettingsController);
 
-    SettingsController.$inject = ['Principal', 'Auth', 'JhiLanguageService', '$translate', 'Payment', 'Groupaccess', 'Useraccount', 'User', 'Focus'];
+    SettingsController.$inject = ['Principal', 'Auth', 'JhiLanguageService', '$translate', 'Payment', 'Groupaccess', 'Useraccount', 'User', 'Focus', 'Register'];
 
-    function SettingsController(Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, Useraccount, User, focus) {
+    function SettingsController(Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, Useraccount, User, focus, Register) {
         var vm = this;
 
         vm.error = null;
@@ -17,16 +17,18 @@
         vm.creditCard = null;
         vm.success = null;
         vm.authorizedUsers = [];
+        vm.invitedUsers = [];
         vm.isAlreadyAuthorized;
         vm.getAuthorizedUsers = getAuthorizedUsers;
         vm.numberTab = numberTab;
-        vm.checkAuthorized = checkAuthorized;
+        // vm.checkAuthorized = checkAuthorized;
         vm.addAuthorizedUser = addAuthorizedUser;
         vm.removeAuthorizedUsers = removeAuthorizedUsers;
+        vm.removeInvitedUsers = removeInvitedUsers;
         vm.authorizedUser = '';
         vm.number = 0;
         getAuthorizedUsers()
-        checkAuthorized();
+        // checkAuthorized();
         Payment.query(function(result){
             result.find(function(ccdata){
                 if(ccdata.user.login === vm.settingsAccount.login){ var data = ccdata.ccdata.split('##')
@@ -44,7 +46,6 @@
                         id: ccdata.id,
                         user: ccdata.user
                     }
-                    console.log(vm.creditCard);
                 }
             })
         })
@@ -75,19 +76,19 @@
         Principal.identity().then(function (account) {
             vm.settingsAccount = copyAccount(account);
         });
-        function checkAuthorized(){
-            Groupaccess.query(function(result){
-                result.find(function(user){
-                    if(user.authorizeduser.login === vm.settingsAccount.login){
-                        console.log("AUTHORISED");
-                        vm.isAlreadyAuthorized = true;
-                    } else {
-                        console.log("NOPE");
-                        vm.isAlreadyAuthorized = false;
-                    }
-                })
-            })
-        }
+        // function checkAuthorized(){
+        //     Groupaccess.query(function(result){
+        //         result.find(function(user){
+        //             if(user.authorizeduser.login === vm.settingsAccount.login){
+        //                 console.log("AUTHORISED");
+        //                 vm.isAlreadyAuthorized = true;
+        //             } else {
+        //                 console.log("NOPE");
+        //                 vm.isAlreadyAuthorized = false;
+        //             }
+        //         })
+        //     })
+        // }
         function save() {
             Auth.updateAccount(vm.settingsAccount).then(function () {
                 vm.error = null;
@@ -108,8 +109,6 @@
         function addCard() {
             vm.number = Object.keys(vm.creditCard.number).map(function(k) { return vm.creditCard.number[k] });
             if(vm.number.join('').length != 16 || vm.creditCard.cvv.toString().length != 3 || vm.creditCard.user === undefined) {
-                console.log("NUMBER", vm.number);
-                console.log("CVV", vm.creditCard.cvv.length);
                 vm.error = 'ERROR';
                 return;
             }
@@ -117,7 +116,6 @@
             var arr = Object.keys(vm.creditCard).map(function(k) { return vm.creditCard[k] });
 
             var data = arr.slice(0, 5).join("##")
-            console.log("NO ID?", vm.creditCard.id);
             var payment = {
                 id: vm.creditCard.id,
                 ccdata: data,
@@ -127,50 +125,178 @@
                 Payment.update(payment, onSaveSuccess, onSaveError);
             } else {
                 payment.user = vm.creditCard.user
-                console.log(payment);
                 Payment.save(payment, onSaveSuccess, onSaveError);
             }
-            console.log(arr.join("##"));
         }
         function onSaveSuccess(payment){
-            console.log(payment);
             vm.creditCard.id = payment.id;
             vm.creditCard.user = payment.user;
             vm.error = null;
             vm.success = 'OK';
         }
         function onSaveError(error){
-            console.log(error);
             vm.error = 'ERROR';
             vm.success = null;
         }
-        function addAuthorizedUser(){
-            var newUsers = vm.authorizedUser.split(',');
+        function onUserSaveSuccess(user){
+            var group = {
+                authorizeduser: user,
+            }
+            Groupaccess.save(group, function(data){
+                vm.authorizedUsers.push(data)
+                vm.authorizedUser = '';
+            })
+        }
+        function onUserSaveError(error){
+            console.log("NEW ERROR", error);
+        }
+        function isActivated(user) {
+            var currentEmail = vm.invitedUser;
+            return user.email == currentEmail && user.activated;
+        }
+        function makeUser(email){
+            var newUser = {
+                email: email,
+                langKey: $translate.use(),
+                login: email.split('@')[0],
+                password: 'placeholderPass'
+            }
+            Register.save(newUser, invitedGroup)
+        }
+        function authorizedGroup(user){
+            var group = {
+                authorizeduser: user,
+            }
+            Groupaccess.save(group, function(data){
+                vm.authorizedUsers.push(data)
+                vm.authorizedUser = '';
+            })
+        }
+        function invitedGroup(newUser){
             User.query(function(result){
-                result.find(function(user){
-                    newUsers.forEach(function(newUser){
-                        if(user.email === newUser){
-                            console.log(user);
-                            var group = {
-                                authorizeduser: user,
-                            }
-                            Groupaccess.save(group, function(data){
-                                vm.authorizedUsers.push(data)
-                                vm.authorizedUser = '';
-                            })
-                        }
-                    })
+                var userWithId = result.find(function(user){
+                    return user.login == newUser.login;
+                })
+                var group = {
+                    authorizeduser: userWithId,
+                }
+                Groupaccess.save(group, function(data){
+                    vm.invitedUsers.push(data.authorizeduser)
+                    vm.invitedUser = '';
                 })
             })
         }
+        function addAuthorizedUser(){
+            var currentEmail = vm.invitedUser;
+            User.query(function(result){
+                var newUser = result.find(isActivated)
+                if(newUser){
+                    authorizedGroup(newUser);
+                } else {
+                    makeUser(currentEmail);
+                }
+                // console.log(result.find(isActivated));
+                // result.find(function(user, index){
+                //     if(user.email == currentEmail && user.activated){
+                //         var group = {
+                //             authorizeduser: user,
+                //         }
+                //         Groupaccess.save(group, function(data){
+                //             vm.authorizedUsers.push(data)
+                //             vm.authorizedUser = '';
+                //         })
+                //     } else if(user.email != currentEmail && index == result.length-1) {
+                //         var newUser = {
+                //             email: currentEmail,
+                //             langKey: $translate.use(),
+                //             login: currentEmail.split('@')[0],
+                //             password: 'placeholderPass'
+                //         }
+                //         Register.save(newUser, onUserSaveSuccess)
+                //     } else {
+                //         console.log("Keep going");
+                //     }
+                // })
+            })
+        }
+        // var inputtedEmails = vm.authorizedUser.split(',');
+        // console.log(inputtedEmails);
+        // User.query(function(result){
+        //     result.find(function(user){
+        //         inputtedEmails.forEach(function(email, index){
+        //             if(email == user.email){
+        //                 console.log("Good");
+        //             } else if(index == result.length) {
+        //                 console.log("End");
+        //             } else {
+        //                 console.log("FORK");
+        //             }
+        //             console.log(user);
+        //             console.log(email, index);
+        //         })
+        // if (inputtedEmails[i] == user.email) {
+        //     console.log("Success");
+        //     inputtedEmails.splice(i, 1);
+        // } else if(inputtedEmails.length == len && i == len){
+        //     console.log("END OF THE LINE, CRIMINAL SCUM!");
+        // } else {
+        //     console.log("End");
+        // }
+        // })
+        // inputtedEmails.forEach(function(email){
+        //     if (email == user.email) {
+        //         console.log("Success");
+        //     } else {
+        //         console.log("Fail");
+        //     }
+        // })
+        // })
+        // })
+        // var newUsers = vm.authorizedUser.split(',');
+        // var newInvitations = [];
+        // User.query(function(result){
+        //     result.find(function(user){
+        //         if(user.email === vm.authorizedUser.email && user.activated){
+        //             console.log("Good");
+        //         } else if (!created) {
+        //             var created = true;
+        //             console.log("Bad");
+        //         }
+        //     })
+        // for(var i = 0, len = newUsers.length; i < len; i++){
+        //     if(user.email === newUsers[i] && user.activated){
+        //         console.log(user);
+        //         var group = {
+        //             authorizeduser: user,
+        //         }
+        //         Groupaccess.save(group, function(data){
+        //             newInvitations.push(data)
+        //             // vm.authorizedUsers.push(data)
+        //             vm.authorizedUser = '';
+        //         })
+        //     } else if(i == len) {
+        //         var newUserObject = {
+        //             email: newUser,
+        //             langKey: $translate.use(),
+        //             login: newUser.split('@')[0],
+        //             password: 'placeholderPass'
+        //         };
+        //         Register.save(newUserObject)
+        //         vm.invitedUsers.push(newUser)
+        //     }
+        // }
+        // })
+        // }
+        // }
 
         function getAuthorizedUsers() {
             vm.authorizedUsers = [];
             Groupaccess.query(function(result){
                 result.find(function(user){
-                    if(user.user.login === vm.settingsAccount.login){
+                    if(user.user.login === vm.settingsAccount.login && user.authorizeduser.activated){
                         vm.authorizedUsers.push(user);
-                        console.log("current", vm.authorizedUsers);
+                    } else if(user.user.login === vm.settingsAccount.login && !user.authorizeduser.activated){
+                        vm.invitedUsers.push(user.authorizeduser);
                     }
                 })
             })
@@ -179,6 +305,10 @@
         function removeAuthorizedUsers(id, index) {
             Groupaccess.delete({id: id})
             vm.authorizedUsers.splice(index, 1)
+        }
+        function removeInvitedUsers(id, index) {
+            Groupaccess.delete({id: id})
+            vm.invitedUsers.splice(index, 1)
         }
     }
 })();
