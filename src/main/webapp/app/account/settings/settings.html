@@ -18,7 +18,7 @@
                     <div class="alert alert-danger" ng-show="vm.error" translate="settings.messages.error.fail">
                         <strong>An error has occurred!</strong> Settings could not be saved.
                     </div>
-                    <div class="" style="background: white; padding: 10px; height: 306px; margin-bottom: 20px; display: inline-block; float: left; width: 564px;">
+                    <div class="" style="background: white; padding: 10px; height: 363px; margin-bottom: 20px; display: inline-block; float: left; width: 564px;">
                         <form name="form" role="form" novalidate ng-submit="vm.save()" show-validation>
 
                             <div class="form-group">
@@ -88,7 +88,9 @@ Your e-mail cannot be longer than 100 characters.
     <!-- <label for="langKey" translate="settings.form.language">Language</label> -->
     <select id="langKey" name="langKey" class="form-control" ng-model="vm.settingsAccount.langKey" ng-controller="JhiLanguageController as languageVm" ng-options="code as (code | findLanguageFromKey) for code in languageVm.languages"></select>
 </div>
-<button type="submit" ng-disabled="form.$invalid" class="btn btn-success" translate="settings.form.button" style="float: right; margin-top: 55px;">Update</button>
+<button type="submit" ng-disabled="form.$invalid" class="btn btn-success" translate="settings.form.button" style="float: right; margin-top: 110px;">Update</button>
+</form>
+
 </div>
 <div class="drsl-payment-content" style="display: inline-block; float: right; width: 588px;">
     <div>
@@ -179,8 +181,7 @@ Your e-mail cannot be longer than 100 characters.
                             </div>
                         </div>
                     </div>
-                    <button type="submit" ng-disabled="form.$invalid" class="btn btn-success" translate="settings.form.button" style="float: right;">Update</button>
-                    <!-- <div><button class="btn btn-primary">Update</button></div> -->
+                    <button type="submit" ng-disabled="form.$invalid" class="btn btn-success" translate="settings.form.button" style="float: right; margin-top: 55px;">Update</button>
                 </form>
             </div>
         </div>
@@ -188,9 +189,7 @@ Your e-mail cannot be longer than 100 characters.
 </div>
 </div>
 </div>
-</form>
 </div>
-
 </div>
 <div class="drsl-settings-wrapper" ng-if="!vm.isAlreadyAuthorized">
     <!-- <div class="drsl-sub-header drsl-sub-sub-header">

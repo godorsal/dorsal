@@ -25,10 +25,6 @@
             $uibModalInstance.dismiss('cancel');
         }
 
-        function submit() {
-            // vm.case.summary = vm.summary.toString();
-            // $uibModalInstance.close({"updated": true});
-        }
         function addUser() {
             console.log(vm.emailInput);
             var newUsers = vm.emailInput.split(',');
@@ -66,10 +62,5 @@
             SharedCase.delete({id: id})
             vm.sharedUsers.splice(index, 1)
         }
-        // function updateUser(index, user) {
-        //     vm.sharedUsers.splice(index, 1, user);
-        //     localStorage.setItem('sharedUsers', JSON.stringify(vm.sharedUsers));
-        //     console.log(vm.sharedUsers);
-        // }
     }
 })();
