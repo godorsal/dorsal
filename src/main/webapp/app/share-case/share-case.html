@@ -8,14 +8,18 @@
                 <thead>
                     <th><h3 ng-if="vm.sharedUsers.length">Users</h3></th>
                     <th><h3 ng-if="vm.sharedUsers.length"  style="padding-left: 5px;">Permissions</h3></th>
+                    <th><h3 ng-if="vm.sharedUsers.length"  style="padding-left: 5px;">Activated</h3></th>
                 </thead>
                 <tbody>
                     <tr ng-repeat="share in vm.sharedUsers track by $index">
                         <td>
-                            <button class="btn btn-success" ng-click="vm.removeSharedUser(share.id, $index)" uib-tooltip="remove user" style="display: block; margin-top: 10px; margin-bottom: 10px;">{{share.user.email}}<i class="fa fa-times-circle fa-lg"></i></button>
+                            <button class="btn btn-success" ng-click="vm.removeSharedUser(share.id, $index)" style="display: block; margin-top: 10px; margin-bottom: 10px;">{{share.user.email}}<i class="fa fa-times-circle fa-lg"></i></button>
                         </td>
                         <td style="padding-left: 10px;">
                             Full Access
+                        </td>
+                        <td style="padding-left: 10px;">
+                            {{share.user.activated}}
                         </td>
                     </tr>
                 </tbody>
