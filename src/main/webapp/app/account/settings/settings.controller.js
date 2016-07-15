@@ -148,8 +148,7 @@
             })
         }
         function onUserSaveError(error){
-            console.log("NEW ERROR", error.config.data);
-            invitedGroup(error.config.data);
+            console.log("NEW ERROR", error);
         }
         function makeUser(email){
             var newUser = {
@@ -164,10 +163,17 @@
             var group = {
                 authorizeduser: user,
             }
-            Groupaccess.save(group, function(data){
-                vm.authorizedUsers.push(data)
-                vm.authorizedUser = '';
-            })
+            if (user.activated) {
+                Groupaccess.save(group, function(data){
+                    vm.authorizedUsers.push(data)
+                    vm.invitedUser = '';
+                })
+            } else {
+                Groupaccess.save(group, function(data){
+                    vm.invitedUsers.push(data)
+                    vm.invitedUser = '';
+                })
+            }
         }
         function invitedGroup(newUser){
             User.query(function(result){
@@ -189,7 +195,8 @@
                 User.query(function(result){
                     var newUser = result.find(function (user) {
                         // var currentEmail = vm.invitedUser;
-                        return user.email == currentEmail && user.activated;
+                        // return user.email == currentEmail && user.activated;
+                        return user.email == currentEmail;
                     })
                     if(newUser){
                         authorizedGroup(newUser);

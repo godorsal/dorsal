@@ -198,13 +198,13 @@ Your e-mail cannot be longer than 100 characters.
     <div class="drsl-sub-header">
         Manage Authorized Users
     </div>
-    <div class="panel panel-default drsl-user-managment" style="width: 566px; height: 612px; float: left; display: inline-block;">
+    <div class="panel panel-default drsl-user-managment" style="width: 566px; height: 500px; float: left; display: inline-block;">
         <div class="panel-heading">
             <form class="drsl-user-add-form" name="addUserForm" ng-submit="vm.addAuthorizedUser()">
                 <label class="control-label" for="uEmail">Add Users</label>
                 <input type="text" class="form-control" id="uEmail" ng-model="vm.invitedUser" style="width: 384px;
                 display: inline-block;" name="uEmail" placeholder="User's email address; multiple users separated by commas"
-                ng-minlength=1 ng-maxlength=50 maxlength="50">
+                ng-minlength=1 >
                 <button type="submit" ng-disabled="form.$invalid" class="btn btn-success" translate="settings.form.button">Update</button>
             </form>
         </div>
@@ -237,7 +237,7 @@ Your e-mail cannot be longer than 100 characters.
         </div>
     </div>
 </div>
-<div class="panel panel-default drsl-user-managment" style="width: 566px; height: 612px; float: right; display: inline-block;">
+<div class="panel panel-default drsl-user-managment" style="width: 566px; height: 500px; float: right; display: inline-block;">
     <div class="panel-heading">
         <div style="font-size: 16px;
     height: 35px;">(Invited Users automatically join Authorized Users once they registered)</div>
