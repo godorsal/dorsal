@@ -105,7 +105,7 @@
             }).catch(function () {
                 vm.success = null;
                 // vm.error = 'ERROR';
-                toastr["error"](data.authorizeduser.email, "Saving Error")
+                toastr["error"]("Saving Error")
             });
         }
         function addCard() {
@@ -156,14 +156,14 @@
         }
         function onUserSaveError(error){
             console.log("NEW ERROR", error);
-            toastr["error"](data.authorizeduser.email, "Invited")
+            toastr["error"]("Incorrect " + error.data.fieldErrors[0].field + " input")
         }
         function makeUser(email){
             var newUser = {
                 email: email,
                 langKey: $translate.use(),
-                login: email.split('@')[0],
-                password: 'placeholderPass'
+                login: email,
+                password: 'myDorsal'
             }
             Register.save(newUser, invitedGroup,  onUserSaveError)
         }

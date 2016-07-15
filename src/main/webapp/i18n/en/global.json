@@ -58,7 +58,8 @@
         },
         "form": {
             "username": "Username",
-            "username.placeholder": "User",
+            "username.placeholder.login": "Email or Login",
+            "username.placeholder.register": "Login",
             "newpassword": "New password",
             "newpassword.placeholder": "New password",
             "confirmpassword": "New password confirmation",
