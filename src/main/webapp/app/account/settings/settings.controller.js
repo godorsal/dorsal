@@ -194,8 +194,6 @@
             currentEmails.forEach(function(currentEmail){
                 User.query(function(result){
                     var newUser = result.find(function (user) {
-                        // var currentEmail = vm.invitedUser;
-                        // return user.email == currentEmail && user.activated;
                         return user.email == currentEmail;
                     })
                     if(newUser){
