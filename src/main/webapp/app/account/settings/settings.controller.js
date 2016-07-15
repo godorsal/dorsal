@@ -150,10 +150,6 @@
         function onUserSaveError(error){
             console.log("NEW ERROR", error);
         }
-        function isActivated(user) {
-            var currentEmail = vm.invitedUser;
-            return user.email == currentEmail && user.activated;
-        }
         function makeUser(email){
             var newUser = {
                 email: email,
@@ -187,107 +183,22 @@
             })
         }
         function addAuthorizedUser(){
-            var currentEmail = vm.invitedUser;
-            User.query(function(result){
-                var newUser = result.find(isActivated)
-                if(newUser){
-                    authorizedGroup(newUser);
-                } else {
-                    makeUser(currentEmail);
-                }
-                // console.log(result.find(isActivated));
-                // result.find(function(user, index){
-                //     if(user.email == currentEmail && user.activated){
-                //         var group = {
-                //             authorizeduser: user,
-                //         }
-                //         Groupaccess.save(group, function(data){
-                //             vm.authorizedUsers.push(data)
-                //             vm.authorizedUser = '';
-                //         })
-                //     } else if(user.email != currentEmail && index == result.length-1) {
-                //         var newUser = {
-                //             email: currentEmail,
-                //             langKey: $translate.use(),
-                //             login: currentEmail.split('@')[0],
-                //             password: 'placeholderPass'
-                //         }
-                //         Register.save(newUser, onUserSaveSuccess)
-                //     } else {
-                //         console.log("Keep going");
-                //     }
-                // })
+            var currentEmails = vm.invitedUser.split(',');
+            currentEmails.forEach(function(currentEmail){
+                User.query(function(result){
+                    var newUser = result.find(function (user) {
+                        // var currentEmail = vm.invitedUser;
+                        return user.email == currentEmail && user.activated;
+                    })
+                    if(newUser){
+                        authorizedGroup(newUser);
+                    } else {
+                        makeUser(currentEmail);
+                    }
+                })
             })
         }
-        // var inputtedEmails = vm.authorizedUser.split(',');
-        // console.log(inputtedEmails);
-        // User.query(function(result){
-        //     result.find(function(user){
-        //         inputtedEmails.forEach(function(email, index){
-        //             if(email == user.email){
-        //                 console.log("Good");
-        //             } else if(index == result.length) {
-        //                 console.log("End");
-        //             } else {
-        //                 console.log("FORK");
-        //             }
-        //             console.log(user);
-        //             console.log(email, index);
-        //         })
-        // if (inputtedEmails[i] == user.email) {
-        //     console.log("Success");
-        //     inputtedEmails.splice(i, 1);
-        // } else if(inputtedEmails.length == len && i == len){
-        //     console.log("END OF THE LINE, CRIMINAL SCUM!");
-        // } else {
-        //     console.log("End");
-        // }
-        // })
-        // inputtedEmails.forEach(function(email){
-        //     if (email == user.email) {
-        //         console.log("Success");
-        //     } else {
-        //         console.log("Fail");
-        //     }
-        // })
-        // })
-        // })
-        // var newUsers = vm.authorizedUser.split(',');
-        // var newInvitations = [];
-        // User.query(function(result){
-        //     result.find(function(user){
-        //         if(user.email === vm.authorizedUser.email && user.activated){
-        //             console.log("Good");
-        //         } else if (!created) {
-        //             var created = true;
-        //             console.log("Bad");
-        //         }
-        //     })
-        // for(var i = 0, len = newUsers.length; i < len; i++){
-        //     if(user.email === newUsers[i] && user.activated){
-        //         console.log(user);
-        //         var group = {
-        //             authorizeduser: user,
-        //         }
-        //         Groupaccess.save(group, function(data){
-        //             newInvitations.push(data)
-        //             // vm.authorizedUsers.push(data)
-        //             vm.authorizedUser = '';
-        //         })
-        //     } else if(i == len) {
-        //         var newUserObject = {
-        //             email: newUser,
-        //             langKey: $translate.use(),
-        //             login: newUser.split('@')[0],
-        //             password: 'placeholderPass'
-        //         };
-        //         Register.save(newUserObject)
-        //         vm.invitedUsers.push(newUser)
-        //     }
-        // }
-        // })
-        // }
-        // }
+
 
         function getAuthorizedUsers() {
             vm.authorizedUsers = [];
