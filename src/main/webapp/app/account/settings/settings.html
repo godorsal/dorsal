@@ -223,10 +223,10 @@ Your e-mail cannot be longer than 100 characters.
                     <tbody>
                         <tr ng-repeat="invitedUser in vm.invitedUsers track by $index">
                             <td>
-                                {{invitedUser.email}}
+                                {{invitedUser.authorizeduser.email}}
                             </td>
                             <td>
-                                <input ng-click="vm.removeInvitedUsers(user.id, $index)" type="checkbox">
+                                <button ng-click="vm.removeInvitedUsers(invitedUser.id, $index)" type="checkbox">
                             </td>
                         </tr>
                     </tbody>

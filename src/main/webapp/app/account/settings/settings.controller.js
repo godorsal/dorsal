@@ -148,7 +148,8 @@
             })
         }
         function onUserSaveError(error){
-            console.log("NEW ERROR", error);
+            console.log("NEW ERROR", error.config.data);
+            invitedGroup(error.config.data);
         }
         function makeUser(email){
             var newUser = {
@@ -157,7 +158,7 @@
                 login: email.split('@')[0],
                 password: 'placeholderPass'
             }
-            Register.save(newUser, invitedGroup)
+            Register.save(newUser, invitedGroup,  onUserSaveError)
         }
         function authorizedGroup(user){
             var group = {
@@ -177,7 +178,7 @@
                     authorizeduser: userWithId,
                 }
                 Groupaccess.save(group, function(data){
-                    vm.invitedUsers.push(data.authorizeduser)
+                    vm.invitedUsers.push(data)
                     vm.invitedUser = '';
                 })
             })
@@ -207,7 +208,7 @@
                     if(user.user.login === vm.settingsAccount.login && user.authorizeduser.activated){
                         vm.authorizedUsers.push(user);
                     } else if(user.user.login === vm.settingsAccount.login && !user.authorizeduser.activated){
-                        vm.invitedUsers.push(user.authorizeduser);
+                        vm.invitedUsers.push(user);
                     }
                 })
             })
