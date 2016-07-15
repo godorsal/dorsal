@@ -26,7 +26,7 @@
                 templateUrl: 'app/rating/rating.html',
                 controller: 'DrslRatingController',
                 controllerAs: 'vm',
-                size:'sm',
+                size:'md',
                 resolve: {
                     drslCase: function(){ return drslCase; },
                     drslBadges: function(){ return drslBadges; },

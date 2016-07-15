@@ -73,13 +73,13 @@
             }
         },
         "rating": {
-            "header": "Rating for:",
+            "header": "Rating for",
             "badges": "Rating Badges",
-            "badges.note": "select multiple badges to help rate your expert",
+            "badges.note": "select multiple badges to rate your expert’s technical and personal skills",
             "label": {
-                "satisfaction": "Satisfaction with case resolution",
-                "prompt": "Prompt initial response",
-                "courtesy": "Courtesy &amp; Trust",
+                "satisfaction": "Overall Result",
+                "prompt": "Responsiveness",
+                "courtesy": "Professionalism",
                 "skill": "Technical Skill"
             },
             "value": {

@@ -10,6 +10,7 @@
             restrict: 'E',
             scope:  {
                 expert: '=',
+                case: '=',
                 expertBadges: '=',
                 chatRoom: '='
             },

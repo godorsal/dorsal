@@ -5,55 +5,83 @@
                 <!-- Dialog Header -->
                 <div>
                     <div class="drsl-dialog-header">
-                        <div><h2>{{'case.rating.header' | translate}} {{'case.details.caseID' | translate}} {{vm.case.id}}</h2></div>
+                        <div><h2>{{'case.rating.header' | translate}} {{'case.details.caseID' | translate}} {{vm.case.technology.name}} {{vm.case.id}}</h2></div>
                     </div>
                 </div>
 
                 <!-- Dialog Content -->
                 <div>
                     <div class="drsl-dialog-content">
-                        <!-- Expert -->
-                        <h3>
-                            <span>{{'case.professional.expert' | translate}}: {{vm.case.expertaccount.user.firstName}} {{vm.case.expertaccount.user.lastName}}</span>
-                            <div class="pull-right">{{'case.details.caseCompleted' | translate}} {{vm.case.dateLastUpdate | date:"MM/dd/yy h:mm a"}}</div>
-                        </h3>
 
-                        <!-- Case Resolution Details -->
-                        <div class="drsl-rating-section">
-                            <h3 translate="case.details.resolutionDetails">Case Resolution Details</h3>
-                            <div class="drsl-scrolling-container">Database config files were carried over from MySQL v3.4.1 after version upgrade.
-                                Performance of the output was sub-optimal/unacceptable.  Review of log file and
-                                config yielded the info I needed to update config options to v3.7.51.</div>
+                        <!-- Expert and Case Resolution Details -->
+                        <div class="drsl-rating-row">
+                            <div>
+                                <img src="content/images/global/easy_as_1.png" />
+                                <h3>Review</h3>
+                            </div>
+                            <div>
+                                <!-- Expert -->
+                                <h3>
+                                    <span>{{'case.professional.expert' | translate}}: {{vm.case.expertaccount.user.firstName}} {{vm.case.expertaccount.user.lastName}}</span>
+                                    <div class="pull-right">{{'case.details.caseCompleted' | translate}} {{vm.case.dateLastUpdate | date:"MM/dd/yy h:mm a"}}</div>
+                                </h3>
+
+                                <!-- Case Resolution Details -->
+                                <div class="drsl-rating-section">
+                                    <h3 translate="case.details.resolutionDetails">Case Resolution Details</h3>
+                                    <div class="drsl-scrolling-container">{{vm.case.expectedResult}}</div>
+                                </div>
+                            </div>
                         </div>
+
 
                         <!-- Radio Selections -->
-                        <div class="drsl-rating-grid">
-                            <div class="drsl-rating-grid-label">&nbsp;</div>
-                            <div class="drsl-rating-grid-values">
-                                <div class="drsl-rating-grid-values-header">
-                                    <div translate="case.rating.value.poor">poor</div>
-                                    <div translate="case.rating.value.average">average</div>
-                                    <div translate="case.rating.value.good">good</div>
-                                    <div translate="case.rating.value.excellent">excellent</div>
+                        <div class="drsl-rating-row">
+                            <div>
+                                <img src="content/images/global/easy_as_2.png" />
+                                <h3>Rate</h3>
+                            </div>
+                            <div>
+                                <!-- Radio Selections -->
+                                <div class="drsl-rating-grid">
+                                    <div class="drsl-rating-grid-label">&nbsp;</div>
+                                    <div class="drsl-rating-grid-values">
+                                        <div class="drsl-rating-grid-values-header">
+                                            <div translate="case.rating.value.poor">poor</div>
+                                            <div translate="case.rating.value.average">average</div>
+                                            <div translate="case.rating.value.good">good</div>
+                                            <div translate="case.rating.value.excellent">excellent</div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="drsl-rating-grid" ng-repeat="radio in vm.radios">
-                            <div class="drsl-rating-grid-label">
-                                <h3 translate="{{radio[0].label}}"></h3>
-                            </div>
-                            <div class="drsl-rating-grid-values">
-                                <div ng-repeat="radioItem in radio">
-                                    <linear-radio target-data="radioItem.selectedValue" technology-properties="vm.technologyProperties" radio-data="radioItem"></linear-radio>
+                                <div class="drsl-rating-grid" ng-repeat="radio in vm.radios">
+                                    <div class="drsl-rating-grid-label">
+                                        <h3 translate="{{radio[0].label}}"></h3>
+                                    </div>
+                                    <div class="drsl-rating-grid-values">
+                                        <div ng-repeat="radioItem in radio">
+                                            <linear-radio target-data="radioItem.selectedValue" technology-properties="vm.technologyProperties" radio-data="radioItem"></linear-radio>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Badge Selection -->
-                        <div class="drsl-rating-section">
-                            <h3>{{'case.rating.badges' | translate}} <span>({{'case.rating.badges.note' | translate}})</span></h3>
-                            <div class="drsl-scrolling-container">
-                                <expert-badges badges="vm.badges" badge-select="true"></expert-badges>
+
+                        <!-- Badge Selections -->
+                        <div class="drsl-rating-row">
+                            <div>
+                                <img src="content/images/global/easy_as_3.png" />
+                                <h3>Reward</h3>
+                            </div>
+                            <div>
+                                <!-- Badge Selection -->
+                                <div class="drsl-rating-section">
+                                    <h3>{{'case.rating.badges' | translate}} <span>({{'case.rating.badges.note' | translate}})</span></h3>
+                                    <div class="drsl-scrolling-container">
+                                        <expert-badges badges="vm.badges" badge-select="true"></expert-badges>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
