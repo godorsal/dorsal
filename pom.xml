@@ -825,7 +825,7 @@
             </build>
             <properties>
                 <!-- log configuration -->
-                <logback.loglevel>INFO</logback.loglevel>
+                <logback.loglevel>WARN</logback.loglevel>
             </properties>
         </profile>
     </profiles>
