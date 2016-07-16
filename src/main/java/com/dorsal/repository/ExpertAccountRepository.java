@@ -14,4 +14,6 @@ public interface ExpertAccountRepository extends JpaRepository<ExpertAccount,Lon
 
     List<ExpertAccount>findOneByFirstTechnologyPreference(String technology);
 
+    @Query("select expert_account from ExpertAccount expert_account where expert_account.user.login = ?#{principal.username}")
+    List<ExpertAccount> findByUserIsCurrentUser();
 }
