@@ -17,6 +17,9 @@
         vm.sharedUsers = [];
         vm.summary = vm.case.summary.toString();
         console.log(vm.case);
+        User.query(function(results){
+            console.log(results);
+        })
         getSharedUsers();
         function cancel(e) {
             e.preventDefault();
@@ -100,7 +103,7 @@
         function getSharedUsers() {
             SharedCase.query(function(result){
                 result.find(function(user){
-                    if(user.owner.login === vm.case.user.login){
+                    if(user.supportcase.id === vm.case.id){
                         vm.sharedUsers.push(user);
                         console.log("current", vm.sharedUsers);
                     }
