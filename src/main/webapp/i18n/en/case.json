@@ -21,10 +21,15 @@
             "status": {
                 "main": "Status",
                 "created": "Created",
+                "created.info": "This case has been created and is being estimated by an expert.",
                 "estimated": "Estimated",
+                "estimated.info": "This case has been estimated and is awaiting your approval.",
                 "working": "Working",
+                "working.info": "An expert is currently working on this issue.",
                 "completed": "Completed",
-                "closed": "Closed"
+                "completed.info": "The expert has marked this issue as resolved.",
+                "closed": "Closed",
+                "closed.info": "This case is closed."
             },
             "chatRoom": "chat",
             "viewDetails": "details",
