@@ -1,6 +1,6 @@
 <div class="drsl-product-details-wrapper" ng-show="canShowProductDetails()">
     <div class="btn-group" uib-dropdown ng-repeat="rootType in getAllIncidentTypes()">
-        <button type="button" class="btn btn-default" uib-dropdown-toggle>
+        <button type="button" class="btn btn-default" ng-class="{selected: rootType.selectedValue}" uib-dropdown-toggle>
             <span ng-if="rootTranslationWorks(rootType) && !rootType.selectedValue"> {{rootType.description | translate}}</span>
             <span ng-if="!rootTranslationWorks(rootType) && !rootType.selectedValue">{{rootType.name}}</span>
             <span ng-if="rootType.selectedValue">{{getLabelForTypeValue(rootType) | translate}}</span>
@@ -12,7 +12,7 @@
                     <span ng-if="incidentTranslationWorks(incidentType)">{{incidentType.label | translate}}</span>
                     <span ng-if="!incidentTranslationWorks(incidentType)">{{incidentType.value}}</span>
                 </a>
-                <div ng-show="incidentType.type && incidentType.type === 'field' && (rootType.name.toLowerCase() == 'version' || rootType.name.toLowerCase() == 'other')" style="padding-left: 5px; padding-right: 5px;">
+                <div class="drsl-menuitem-field-type" ng-show="incidentType.type && incidentType.type === 'field' && (rootType.name.toLowerCase() == 'version' || rootType.name.toLowerCase() == 'other')">
                     <form ng-submit="setIncidentTypeValue(rootType, incidentType)">
                         <div ng-if="rootType.name.toLowerCase() === 'version'">
                             <input ng-click="textFieldClick($event)" maxlength="128"

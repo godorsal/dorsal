@@ -135,19 +135,47 @@ Concierge
         bottom: -50px;
         left: 20px;
         min-height: 70px;
+        white-space: nowrap;
 
         .btn-group {
             margin-right: 5px;
             margin-bottom: 5px;
             &:last-child {
                 margin-right: 0;
+                .dropdown-menu {
+                    left: initial;
+                    right: 0;
+                }
             }
 
             .btn {
-                width: 105px;
+                width: 106px;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
+                text-align: left;
+
+                span {
+                    opacity: .7;
+                }
+
+                .caret {
+                    opacity: .5;
+                    position: absolute;
+                    top: 45%;
+                    left: initial;
+                    right: 5px;
+                }
+
+                &.selected {
+                    span {
+                        opacity: 1;
+                    }
+
+                    .caret {
+                        display: none;
+                    }
+                }
             }
         }
     }
@@ -156,6 +184,11 @@ Concierge
         li.selected {
             background: #f5f5f5;
         }
+    }
+
+    .drsl-menuitem-field-type {
+        padding-left: 5px;
+        padding-right: 5px;
     }
 
     .drsl-radio-desc {
