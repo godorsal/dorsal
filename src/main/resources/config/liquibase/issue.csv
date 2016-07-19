@@ -1,5 +1,5 @@
 id;name;code
-1;Performance;performance_issue
-2;Availability;availability_not_running_or_not_reachable
-3;Security;security_issue
-4;Other;other_issue_details_in_summary
+1;Coding_Design;coding_design
+2;Performance;performance_issue
+3;Availability;availability_not_running_or_not_reachable
+4;Security;security_issue

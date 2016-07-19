@@ -1,0 +1,37 @@
+<div class="drsl-product-details-wrapper" ng-show="canShowProductDetails()">
+    <div class="btn-group" uib-dropdown ng-repeat="rootType in getAllIncidentTypes()">
+        <button type="button" class="btn btn-default" uib-dropdown-toggle>
+            <span ng-if="rootTranslationWorks(rootType) && !rootType.selectedValue"> {{rootType.description | translate}}</span>
+            <span ng-if="!rootTranslationWorks(rootType) && !rootType.selectedValue">{{rootType.name}}</span>
+            <span ng-if="rootType.selectedValue">{{getLabelForTypeValue(rootType) | translate}}</span>
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+            <li role="menuitem" ng-repeat="incidentType in rootType.types" ng-class="{'selected': (incidentType.value == rootType.selectedValue && incidentType.type !== 'field')}">
+                <a ng-hide="incidentType.type || incidentType.value.toLowerCase() === 'text_field' || incidentType.value.toLowerCase() === 'other_field'" href="#" ng-click="setIncidentTypeValue(rootType, incidentType)" ng-model="superScope">
+                    <span ng-if="incidentTranslationWorks(incidentType)">{{incidentType.label | translate}}</span>
+                    <span ng-if="!incidentTranslationWorks(incidentType)">{{incidentType.value}}</span>
+                </a>
+                <div ng-show="incidentType.type && incidentType.type === 'field' && (rootType.name.toLowerCase() == 'version' || rootType.name.toLowerCase() == 'other')" style="padding-left: 5px; padding-right: 5px;">
+                    <form ng-submit="setIncidentTypeValue(rootType, incidentType)">
+                        <div ng-if="rootType.name.toLowerCase() === 'version'">
+                            <input ng-click="textFieldClick($event)" maxlength="128"
+                                   ng-blur="setIncidentTypeValue(rootType, incidentType)"
+                                   type="text"
+                                   class="form-control"
+                                   placeholder="{{rootType.name.toLowerCase()}} here"
+                                   ng-model="incidentType.value">
+                        </div>
+                        <div ng-if="rootType.name.toLowerCase() === 'other'">
+                            <textarea ng-click="textFieldClick($event)" maxlength="128"
+                                      ng-blur="setIncidentTypeValue(rootType, incidentType)"
+                                      class="form-control"
+                                      placeholder="{{'concierge.caseDetails.incidentTypes.other.placeholder' | translate}}"
+                                      ng-model="incidentType.value"></textarea>
+                        </div>
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

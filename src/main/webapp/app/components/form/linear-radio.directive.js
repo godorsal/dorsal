@@ -46,7 +46,7 @@
                     // console.log($scope.technology);
                 });
             },
-            template:   '<div class="drsl-linear-radio">' +
+            template:   '<div class="drsl-linear-radio-wrapper"><div class="drsl-linear-radio">' +
             '<div class="drsl-radio-desc" tooltip-placement="left" uib-tooltip="{{radioData.tooltip | translate}}" translate="{{radioData.label}}"></div>' +
             '<div class="drsl-radio-wrapper">' +
             '<div class="drsl-radio-set">' +
@@ -64,7 +64,7 @@
             '<hr />' +
             '</div>' +
             '</div>' +
-            '<div ng-if="radioData.type === \'complex\'"><product-details product="radioData" selected-values="technology" technology-properties="technologyProperties" technology="technology" issue="issue"></product-details></div>'
+            '<div ng-if="radioData.type === \'complex\'"><product-details product="radioData" selected-values="technology" technology-properties="technologyProperties" technology="technology" issue="issue"></product-details></div></div>'
         };
 
         return directive;

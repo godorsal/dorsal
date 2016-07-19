@@ -89,7 +89,7 @@
 
         function pollForCaseUpdates() {
             casePoll = $interval(function () {
-                vm.init();
+                //vm.init();
             }, vm.DrslMetadata.casePollingRateSeconds * 1000);
         }
 

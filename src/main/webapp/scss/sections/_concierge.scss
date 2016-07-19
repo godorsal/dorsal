@@ -3,8 +3,15 @@ Concierge
 ========================================================================== */
 
 .drsl-concierge-wrapper {
+    background-color: #FFFFFF;
+    padding: 20px;
+    min-height: 625px;
     display: flex;
     flex-flow: row;
+
+    > div {
+        flex: 1;
+    }
 
     .drsl-chat-wrapper {
         flex: auto;
@@ -121,6 +128,127 @@ Concierge
             }
         }
 
+    }
+
+    .drsl-product-details-wrapper {
+        position: absolute;
+        bottom: -50px;
+        left: 20px;
+        min-height: 70px;
+
+        .btn-group {
+            margin-right: 5px;
+            margin-bottom: 5px;
+            &:last-child {
+                margin-right: 0;
+            }
+
+            .btn {
+                width: 105px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+
+    .dropdown-menu {
+        li.selected {
+            background: #f5f5f5;
+        }
+    }
+
+    .drsl-radio-desc {
+        display: none;
+    }
+
+    .drsl-linear-radio-wrapper {
+        position: relative;
+
+        .drsl-linear-radio {
+            margin-top:20px;
+
+            &:first-child {
+                margin-top:10px;
+                margin-bottom: 40px;
+            }
+
+            .drsl-radio-set {
+                overflow: visible;
+                max-width: none;
+            }
+
+            .drsl-radio-item {
+                font-size: $default-font-size;
+            }
+        }
+    }
+
+    .drsl-field-seciton {
+        margin-left: 20px;
+        margin-top: 80px;
+    }
+
+    .drsl-one-two-three-lg {
+        position: relative;
+        left: 20px;
+        min-width: 485px;
+        min-height: 488px;
+
+        .drsl-one-two-three-img {
+            width: 485px;
+        }
+
+        > div {
+            div {
+                position: absolute;
+                left: 24%;
+                font-size: 20px;
+                font-weight: 200;
+
+                &:first-child {
+                    top: 9%;
+                }
+
+                &:nth-child(2) {
+                    top: 38%;
+                }
+
+                &:nth-child(3) {
+                    top: 68%;
+                }
+
+                &:nth-child(4) {
+                    margin-left: -12px;
+                    padding: 12px;
+                    background-color: #FFFFFF;
+                    top: 90%;
+                }
+
+                &:last-child {
+                    position: absolute;
+                    top: 86%;
+                    left: 86%;
+                }
+            }
+        }
+
+        .drsl-custom-button {
+            width: 125px;
+            height: 125px;
+            padding: 0;
+
+            &:focus {
+                outline: 0;
+            }
+
+            img {
+                width: 107%;
+                position: relative;
+                top: -5px;
+                left: -5px;
+            }
+        }
     }
 }
 .chatrooms{

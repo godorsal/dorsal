@@ -2,6 +2,7 @@
     "concierge": {
         "pageTitles": {
             "connect": "Connect Now",
+            "createCase": "Create your case",
             "incident": "Incident Support",
             "proActive": "pro-active support",
             "onDemand": "on-demand pros"
@@ -17,6 +18,12 @@
         "caseDetails": {
             "header": "Create Your Case",
             "button": "go",
+            "one_two_three": {
+                "one": "tell us what kind of issue you are having",
+                "two": "what technology you are using",
+                "three": "a problem description helps us help you",
+                "go": "we'll connect you with the right<br/>expert and get your case going"
+            },
             "summary": {
                 "main": "Summary",
                 "placeholder": "describe your problem"
@@ -39,19 +46,21 @@
                 "scheduled": "Scheduled"
             },
             "problem": {
-                "main": "Issue",
+                "main": "Issue*",
+                "coding_design": "Coding/Design",
                 "performance": "Performance",
                 "availability": "Availability",
                 "security": "Security",
                 "other": "Other"
             },
             "product": {
-                "main": "Technology",
+                "main": "Technology*",
                 "tooltip": "Select a technology and define some additional details which are optional",
                 "mysql": "MySQL",
                 "postgresql": "PostgreSQL",
                 "mongodb": "MongoDB",
                 "mariadb": "MariaDB",
+                "other": "Other",
                 "apache_cassandra": "CassandraDB",
                 "apache_hbase": "HBase"
             },
@@ -71,14 +80,26 @@
             },
             "incidentTypes": {
                 "version": "Version",
+                "other": "Other",
+                "other.placeholder": "other details",
                 "environment": "Environment",
                 "cluster_type": "Cluster Type",
+                "os": "OS",
+                "host": "Host",
+                "configuration": "Config",
                 "connectivity": "Connectivity",
                 "performance": "Performance",
                 "values": {
                     "vmware": "VMware",
                     "open_stack": "Open Stack",
                     "bare_metal": "Bare Metal",
+                    "amazon_web": "Amazon Web",
+                    "azure": "Azure",
+                    "google": "Google",
+                    "rhel": "RHEL",
+                    "centos": "CentOS",
+                    "ubuntu": "Ubuntu",
+                    "windows": "Windows",
                     "tungsten_cluster": "Tungsten Cluster",
                     "percona_xtradb_cluster": "Percona XtraDB Cluster",
                     "timeout": "Timeout",
@@ -86,6 +107,10 @@
                     "slow_queries": "Slow Queries",
                     "resources": "HighCPU/Mem",
                     "query_timeout": "Query Timeout",
+                    "highcpu_memory": "HighCPU",
+                    "option_1": "Option 1",
+                    "option_2": "Option 2",
+                    "option_3": "Option 3",
                     "none": "None"
                 }
             }

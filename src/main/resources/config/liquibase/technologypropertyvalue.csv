@@ -1,43 +1,61 @@
-id;technology_id;technologyproperty_id;value
-1;1;1;none
-2;1;2;VMware
-3;1;2;Open Stack
-4;1;2;Bare Metal
-5;1;3;Tungsten Cluster
-6;1;3;Percona XtraDB Cluster
-7;1;3;None
-8;1;4;Timeout
-9;1;4;Connection Drop
-10;1;5;Slow Queries
-11;1;5;Query Timeout
-12;2;1;none
-13;2;2;VMware
-14;2;2;Open Stack
-15;2;2;Bare Metal
-16;2;3;Tungsten Cluster
-17;2;3;Percona XtraDB Cluster
-18;2;3;None
-19;2;4;Timeout
-20;2;4;Connection Drop
-21;2;5;Slow Queries
-22;2;5;HighCPU/Memory
-23;2;5;Query Timeout
-24;3;1;none
-25;3;2;VMware
-26;3;2;Open Stack
-27;3;2;Bare Metal
-28;3;4;Timeout
-29;3;4;Connection Drop
-30;3;5;Slow Queries
-31;3;5;HighCPU/Memory
-32;3;5;Query Timeout
-33;4;1;none
-34;4;2;VMware
-35;4;2;Open Stack
-36;4;2;Bare Metal
-37;4;4;Timeout
-38;4;4;Connection Drop
-39;4;5;Slow Queries
-40;4;5;HighCPU/Memory
-41;4;5;Query Timeout
-42;1;5;HighCPU/Memory
+id;value;technology_id;technologyproperty_id
+1;"text_field";1;1
+2;"Option 1";1;2
+3;"Option 2";1;2
+4;"Option 3";1;2
+5;"RHEL";1;3
+6;"CentOS";1;3
+7;"Ubuntu";1;3
+8;"Windows";1;3
+9;"VMware";1;4
+10;"Bare Metal";1;4
+11;"Amazon Web";1;4
+12;"Azure";1;4
+13;"Google";1;4
+14;"Open Stack";1;4
+15;"other_field";1;5
+16;"text_field";2;1
+17;"Option 1";2;2
+18;"Option 2";2;2
+19;"Option 3";2;2
+20;"RHEL";2;3
+21;"CentOS";2;3
+22;"Ubuntu";2;3
+23;"Windows";2;3
+24;"VMware";2;4
+25;"Bare Metal";2;4
+26;"Amazon Web";2;4
+27;"Azure";2;4
+28;"Google";2;4
+29;"Open Stack";2;4
+30;"other_field";2;5
+31;"text_field";3;1
+32;"Option 1";3;2
+33;"Option 2";3;2
+34;"Option 3";3;2
+35;"RHEL";3;3
+36;"CentOS";3;3
+37;"Ubuntu";3;3
+38;"Windows";3;3
+39;"VMware";3;4
+40;"Bare Metal";3;4
+41;"Amazon Web";3;4
+42;"Azure";3;4
+43;"Google";3;4
+44;"Open Stack";3;4
+45;"other_field";3;5
+46;"text_field";4;1
+47;"Option 1";4;2
+48;"Option 2";4;2
+49;"Option 3";4;2
+50;"RHEL";4;3
+51;"CentOS";4;3
+52;"Ubuntu";4;3
+53;"Windows";4;3
+54;"VMware";4;4
+55;"Bare Metal";4;4
+56;"Amazon Web";4;4
+57;"Azure";4;4
+58;"Google";4;4
+59;"Open Stack";4;4
+60;"other_field";4;5

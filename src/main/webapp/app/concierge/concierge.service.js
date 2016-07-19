@@ -61,9 +61,9 @@
                     if (byProp.length) {
                         types = [];
 
-                        if (propItemCode === 'version') {
+                        if (propItemCode === 'version' || propItemCode === 'other') {
                             types.push({
-                                id: 'version',
+                                id: propItemCode,
                                 value: '',
                                 type: 'field',
                                 label: ''
@@ -116,17 +116,15 @@
                 "summary": "",
                 radios: [
                     {
-                        "id": "product",
-                        "label": "concierge.caseDetails.product.main",
-                        "tooltip": "concierge.caseDetails.product.tooltip",
-                        "type": "complex",
-                        "values": techData,
+                        "id": "problem",
+                        "values": issueData,
                         "selectedValue": ""
                     },
                     {
-                        "id": "problem",
-                        "label": "concierge.caseDetails.problem.main",
-                        "values": issueData,
+                        "id": "product",
+                        "tooltip": "concierge.caseDetails.product.tooltip",
+                        "type": "complex",
+                        "values": techData,
                         "selectedValue": ""
                     }
                 ]
