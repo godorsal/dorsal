@@ -102,6 +102,7 @@
                     "windows": "Windows",
                     "tungsten_cluster": "Tungsten Cluster",
                     "percona_xtradb_cluster": "Percona XtraDB Cluster",
+                    "galera_cluster": "Galera Cluster",
                     "timeout": "Timeout",
                     "connection_drop": "Connection Drop",
                     "slow_queries": "Slow Queries",
