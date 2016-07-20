@@ -27,7 +27,7 @@
                 <div class="drsl-form-grid">
                     <div translate="case.professional.expert">Expert</div>
                     <div>
-                        <div>{{vm.case.expert.firstName}} {{vm.case.expert.lastName}}</div>
+                        <div>{{vm.case.expertaccount.user.firstName}} {{vm.case.expertaccount.user.lastName}}</div>
                         <contact-info contact="vm.expert.contact" chat-room="vm.case.chatRoom"></contact-info>
                     </div>
                 </div>
@@ -114,12 +114,25 @@
         <div>Update Message</div>
         <div><textarea class="form-control" name="updateHistory" id="updateHistory" cols="30" rows="5" ng-model="vm.updatemsg"></textarea></div>
     </div>
+    <div class="drsl-form-grid" ng-if="vm.isExpert">
+        <div>Update Type</div>
+        <div class="escalation-form-grid">
+            <div class="drsl-linear-radio">
+                    <div class="drsl-linear-radio">
+                        <div class="drsl-radio-set tier-list">
+                            <div class="ng-scope request" ng-repeat="type in vm.updateTypes"><input name="{{type.name}}" id="{{type.name}}" type="radio" class="ng-pristine ng-untouched ng-valid ng-empty" aria-invalid="false" ng-model="vm.updateType" value="{{type}}"><label for="{{type.name}}" class="ng-binding">{{vm.capitalizeFirstLetter(type.name)}}<br><span></span></label></div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <!-- Detailed Resolution -->
     <div class="drsl-form-grid" ng-if="vm.case.status.id == 4 || vm.case.status.id == 5">
         <div translate="case.details.detailedResolution">Detailed Resolution</div>
-        <div><textarea class="form-control" name="detailedResolution" id="detailedResolution" cols="30" rows="5"></textarea></div>
+        <div ng-if="vm.isExpert"><textarea class="form-control" name="detailedResolution" id="detailedResolution" cols="30" rows="5" ng-model="vm.detailedResolutions[0].updateMsg"></textarea></div>
+        <div ng-if="!vm.isExpert">{{vm.detailedResolutions[0].updateMsg}}</div>
     </div>
 
     <!-- <div class="drsl-form-grid">

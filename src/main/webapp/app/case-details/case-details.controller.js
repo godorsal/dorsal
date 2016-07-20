@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('CaseDetailsController', CaseDetailsController);
 
-    CaseDetailsController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase', 'expert', 'Casetechnologyproperty', 'Caseupdate', 'Attachment'];
+    CaseDetailsController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase', 'expert', 'Casetechnologyproperty', 'Caseupdate', 'Attachment', 'Principal', 'Updatetype', 'Supportcase'];
 
-    function CaseDetailsController($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase, expert, Casetechnologyproperty, Caseupdate, Attachment) {
+    function CaseDetailsController($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase, expert, Casetechnologyproperty, Caseupdate, Attachment, Principal, Updatetype, Supportcase) {
         var vm = this;
         vm.cancel = cancel;
         vm.submit = submit;
@@ -16,7 +16,9 @@
         vm.summary = vm.case.summary.toString();
         vm.technologyProps = [];
         vm.updates = [];
+        vm.detailedResolutions = [];
         vm.updatemsg = '';
+        vm.capitalizeFirstLetter = capitalizeFirstLetter;
         vm.caseupdate = {
             user: vm.case.user,
             supportcase: vm.case,
@@ -28,9 +30,31 @@
             dataStreamContentType: null,
             id: null
         };
+        getCurrentUser()
+        Updatetype.query(function(result){
+            vm.updateTypes = result;
+        })
+        function capitalizeFirstLetter(string) {
+            string = string.toLowerCase().replace('_', ' ');
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+        function getCurrentUser(){
+            Principal.identity().then(function(account) {
+                console.log(account);
+                if(vm.case.expertaccount.user.email == account.email){
+                    vm.isExpert = true;
+                } else {
+                    vm.isExpert = false;
+                }
+            });
+        }
         Caseupdate.query(function(result){
             result.reverse().forEach(function(update){
                 if(update.supportcase.id === vm.case.id){
+                    console.log(update);
+                    if(update.updatetype.id == 2){
+                        vm.detailedResolutions.push(update);
+                    }
                     vm.updates.push(update)
                 }
             })
@@ -54,11 +78,28 @@
             console.log(vm.attachment);
             Attachment.save(vm.attachment);
         }
-        function onSaveError (){
+        function onSaveError (error){
+            console.log(error);
             console.log("COMPLETE FAILURE");
         }
         function submit() {
-            vm.caseupdate.updateMsg = vm.attachment.name + " Was uploaded. " + vm.updatemsg;
+            if (vm.attachment.name) {
+                vm.caseupdate.updateMsg = vm.attachment.name + " Was uploaded. " + vm.updatemsg;
+            } else {
+                vm.caseupdate.updateMsg = vm.updatemsg;
+            }
+            if(!vm.updateType){
+                vm.caseupdate.updatetype = {
+                    id: 1
+                }
+            } else {
+                vm.updateType = JSON.parse(vm.updateType);
+                vm.caseupdate.updatetype = vm.updateType;
+                if (vm.updateType.id == 2) {
+                    vm.case.status.id = 4;
+                    Supportcase.update(vm.case);
+                }
+            }
             console.log("Case", vm.caseupdate);
             if (vm.caseupdate.id !== null) {
                 Caseupdate.update(vm.caseupdate, onSaveSuccess, onSaveError);

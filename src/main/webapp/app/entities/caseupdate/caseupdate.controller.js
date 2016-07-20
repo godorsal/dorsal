@@ -12,11 +12,12 @@
         vm.caseupdates = [];
         vm.loadAll = function() {
             Caseupdate.query(function(result) {
+                console.log(result);
                 vm.caseupdates = result;
             });
         };
 
         vm.loadAll();
-        
+
     }
 })();
