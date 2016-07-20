@@ -61,22 +61,6 @@
                     if (byProp.length) {
                         types = [];
 
-                        if (propItemCode === 'version' || propItemCode === 'other') {
-                            types.push({
-                                id: propItemCode,
-                                value: '',
-                                type: 'field',
-                                label: ''
-                            });
-                        } else {
-                            types.unshift({
-                                id: '',
-                                value: '',
-                                type: 'field',
-                                label: ''
-                            });
-                        }
-
                         // Iterate over Technology Property Value belonging to the current type
                         for (j = 0; j < byProp.length; j++) {
                             propVal = byProp[j];
@@ -88,6 +72,22 @@
                                 value: propVal.value,
                                 code: propVal.code,
                                 label: 'concierge.caseDetails.incidentTypes.values.' + propVal.code
+                            });
+                        }
+
+                        if (propItemCode === 'version' || propItemCode === 'other') {
+                            types.push({
+                                id: propItemCode,
+                                value: '',
+                                type: 'field',
+                                label: ''
+                            });
+                        } else {
+                            types.push({
+                                id: '',
+                                value: '',
+                                type: 'field',
+                                label: ''
                             });
                         }
 

@@ -5,7 +5,9 @@
     .module('dorsalApp')
     .directive('productDetails', productDetails);
 
-    function productDetails($translate, $locale, tmhDynamicLocale) {
+    productDetails.$inject = ['$translate'];
+
+    function productDetails($translate) {
         var directive = {
             restrict: 'E',
             scope:  {
@@ -141,6 +143,16 @@
 
                 return label;
             };
+
+            /**
+             * On 'enter/return' keypress a body click event is triggered, hiding the active dropdown menu
+             * @param event
+             */
+            scope.handelEnter = function(event) {
+                if (event.which === 13) {
+                    angular.element('body').click();
+                }
+            }
         }
     }
 })();

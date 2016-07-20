@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('ConciergeController', ConciergeController);
 
-    ConciergeController.$inject = ['$rootScope', '$scope', '$state', 'LoginService', 'Principal', 'ConciergeService', '$translate', '$http', 'Supportcase', 'Casetechnologyproperty'];
+    ConciergeController.$inject = ['$rootScope', '$scope', '$state', 'LoginService', 'Principal', 'ConciergeService', '$translate', '$http', 'Supportcase', 'Casetechnologyproperty', 'toastr'];
 
-    function ConciergeController($rootScope, $scope, $state, LoginService, Principal, ConciergeService, $translate, $http, Supportcase, Casetechnologyproperty) {
+    function ConciergeController($rootScope, $scope, $state, LoginService, Principal, ConciergeService, $translate, $http, Supportcase, Casetechnologyproperty, toastr) {
         var vm = this;
         vm.init = init;
         vm.submitForm = submitForm;
@@ -24,6 +24,9 @@
         vm.isAuthenticated = Principal.isAuthenticated;
         $scope.checkAuth = Principal.isAuthenticated;
         vm.product = null;
+        vm.errorMissingTech = $translate.instant('concierge.errors.missing.tech')
+        vm.errorMissingIssue = $translate.instant('concierge.errors.missing.issue')
+        vm.errorMissingAll = $translate.instant('concierge.errors.missing.all')
         vm.caseDetails = {
             summary: '',
             description: '',
@@ -96,11 +99,11 @@
         };
         function checkError(){
             if (Object.keys(vm.technology).length === 0 && Object.keys(vm.issue).length === 0) {
-                alert('You forgot the technology and the issue')
+                toastr.warning(vm.errorMissingAll);
             } else if(Object.keys(vm.technology).length === 0){
-                alert('You forgot the technology')
+                toastr.warning(vm.errorMissingTech);
             } else if(Object.keys(vm.issue).length === 0){
-                alert('You forgot the issue')
+                toastr.warning(vm.errorMissingIssue);
             }
         }
         function getCurrentUser(){
@@ -157,7 +160,7 @@
         */
         function submitForm() {
             if (!vm.isAuthenticated()) {
-                LoginService.open()
+                LoginService.open();
                 $rootScope.$on('authenticationSuccess', function(){
                     Principal.identity().then(function(account){
                         console.log("MODAL");
