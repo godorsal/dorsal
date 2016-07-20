@@ -498,3 +498,60 @@ table.scroll thead > tr {
 .attachmentItem {
     margin-right: 10px;
 }
+
+// Fonts
+@font-face {
+    font-family: 'Work Sans';
+    font-weight: 200;
+    font-style: normal;
+    src: url('../fonts/Work-Sans-200/Work-Sans-200.eot');
+    src: url('../fonts/Work-Sans-200/Work-Sans-200.eot?#iefix') format('embedded-opentype'),
+    local('Work Sans ExtraLight'),
+    local('Work-Sans-200'),
+    url('../fonts/Work-Sans-200/Work-Sans-200.woff2') format('woff2'),
+    url('../fonts/Work-Sans-200/Work-Sans-200.woff') format('woff'),
+    url('../fonts/Work-Sans-200/Work-Sans-200.ttf') format('truetype'),
+    url('../fonts/Work-Sans-200/Work-Sans-200.svg#WorkSans') format('svg');
+}
+
+@font-face {
+    font-family: 'Work Sans';
+    font-weight: 400;
+    font-style: normal;
+    src: url('../fonts/Work-Sans-regular/Work-Sans-regular.eot');
+    src: url('../fonts/Work-Sans-regular/Work-Sans-regular.eot?#iefix') format('embedded-opentype'),
+    local('Work Sans'),
+    local('Work-Sans-regular'),
+    url('../fonts/Work-Sans-regular/Work-Sans-regular.woff2') format('woff2'),
+    url('../fonts/Work-Sans-regular/Work-Sans-regular.woff') format('woff'),
+    url('../fonts/Work-Sans-regular/Work-Sans-regular.ttf') format('truetype'),
+    url('../fonts/Work-Sans-regular/Work-Sans-regular.svg#WorkSans') format('svg');
+}
+
+@font-face {
+    font-family: 'Work Sans';
+    font-weight: 600;
+    font-style: normal;
+    src: url('../fonts/Work-Sans-600/Work-Sans-600.eot');
+    src: url('../fonts/Work-Sans-600/Work-Sans-600.eot?#iefix') format('embedded-opentype'),
+    local('Work Sans SemiBold'),
+    local('Work-Sans-600'),
+    url('../fonts/Work-Sans-600/Work-Sans-600.woff2') format('woff2'),
+    url('../fonts/Work-Sans-600/Work-Sans-600.woff') format('woff'),
+    url('../fonts/Work-Sans-600/Work-Sans-600.ttf') format('truetype'),
+    url('../fonts/Work-Sans-600/Work-Sans-600.svg#WorkSans') format('svg');
+}
+
+@font-face {
+    font-family: 'Work Sans';
+    font-weight: 700;
+    font-style: normal;
+    src: url('../fonts/Work-Sans-700/Work-Sans-700.eot');
+    src: url('../fonts/Work-Sans-700/Work-Sans-700.eot?#iefix') format('embedded-opentype'),
+    local('Work Sans Bold'),
+    local('Work-Sans-700'),
+    url('../fonts/Work-Sans-700/Work-Sans-700.woff2') format('woff2'),
+    url('../fonts/Work-Sans-700/Work-Sans-700.woff') format('woff'),
+    url('../fonts/Work-Sans-700/Work-Sans-700.ttf') format('truetype'),
+    url('../fonts/Work-Sans-700/Work-Sans-700.svg#WorkSans') format('svg');
+}

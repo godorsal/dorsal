@@ -30,9 +30,9 @@ id;value;technology_id;technologyproperty_id
 29;"Open Stack";2;4
 30;"other_field";2;5
 31;"text_field";3;1
-32;"Tungsten Cluster";3;2
-33;"Percona XtraDB Cluster";3;2
-34;"Galera Cluster";3;2
+32;"PGCluster";3;2
+33;"PGPool";3;2
+34;"Postgres-XL";3;2
 35;"RHEL";3;3
 36;"CentOS";3;3
 37;"Ubuntu";3;3
@@ -45,9 +45,8 @@ id;value;technology_id;technologyproperty_id
 44;"Open Stack";3;4
 45;"other_field";3;5
 46;"text_field";4;1
-47;"Tungsten Cluster";4;2
-48;"Percona XtraDB Cluster";4;2
-49;"Galera Cluster";4;2
+47;"Single Node";4;2
+48;"Multi Node Clustering";4;2
 50;"RHEL";4;3
 51;"CentOS";4;3
 52;"Ubuntu";4;3

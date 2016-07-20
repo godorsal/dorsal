@@ -18,11 +18,11 @@
         <div>
             <span class="drsl-label" translate="case.details.status.main" ng-click="cycleStatus()">Current Status:</span>
             <span>
-                <span ng-show="case.status.name.toLowerCase() == 'created'">This case has been created and is currently being estimated by an expert.</span>
-                <span ng-show="case.status.name.toLowerCase() == 'estimated'">This case has been estimated and is awaiting your approval.</span>
-                <span ng-show="case.status.name.toLowerCase() == 'working'">An expert is currently working on this issue.</span>
-                <span ng-show="case.status.name.toLowerCase() == 'completed'">The expert has marked this issue as resolved.</span>
-                <span ng-show="case.status.name.toLowerCase() == 'closed'">This case is closed.</span>
+                <span ng-show="case.status.name.toLowerCase() == 'created'" translate="case.details.status.created.info"></span>
+                <span ng-show="case.status.name.toLowerCase() == 'estimated'" translate="case.details.status.estimated.info"></span>
+                <span ng-show="case.status.name.toLowerCase() == 'working'" translate="case.details.status.working.info"></span>
+                <span ng-show="case.status.name.toLowerCase() == 'completed'" translate="case.details.status.completed.info"></span>
+                <span ng-show="case.status.name.toLowerCase() == 'closed'" translate="case.details.status.closed.info"></span>
             </span>
         </div>
     </div>

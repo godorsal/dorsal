@@ -2,5 +2,5 @@ id;name;code
 1;Version;version
 2;Configuration;configuration
 3;OS;os
-4;Host;host
+4;Environment;environment
 5;Other;other
