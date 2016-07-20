@@ -16,18 +16,22 @@
                     <form ng-submit="setIncidentTypeValue(rootType, incidentType)">
                         <div ng-if="rootType.name.toLowerCase() === 'version'">
                             <input ng-click="textFieldClick($event)" maxlength="128"
-                                   ng-blur="setIncidentTypeValue(rootType, incidentType)"
-                                   type="text"
-                                   class="form-control"
-                                   placeholder="{{rootType.name.toLowerCase()}} here"
-                                   ng-model="incidentType.value">
+                            ng-blur="setIncidentTypeValue(rootType, incidentType)"
+                            type="text"
+                            class="form-control"
+                            placeholder="{{rootType.name.toLowerCase()}} here"
+                            ng-model="incidentType.value">
                         </div>
                         <div ng-if="rootType.name.toLowerCase() === 'other'">
                             <textarea ng-click="textFieldClick($event)" maxlength="128"
-                                      ng-blur="setIncidentTypeValue(rootType, incidentType)"
-                                      class="form-control"
-                                      placeholder="{{'concierge.caseDetails.incidentTypes.other.placeholder' | translate}}"
-                                      ng-model="incidentType.value"></textarea>
+                            ng-blur="setIncidentTypeValue(rootType, incidentType)"
+                            class="form-control"
+                            placeholder="{{'concierge.caseDetails.incidentTypes.other.placeholder' | translate}}"
+                            ng-model="incidentType.value"></textarea>
+                            <button class="btn btn-success" style="float: right;
+                            margin: 5px; width: 75px;">Confirm</button>
+                            <button class="btn btn-default" style="float: right;
+                            margin: 5px; width: 70px;" ng-click="incidentType.value = ''">Cancel</button>
                         </div>
                     </form>
                 </div>

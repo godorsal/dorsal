@@ -88,7 +88,7 @@ Your e-mail cannot be longer than 100 characters.
     <!-- <label for="langKey" translate="settings.form.language">Language</label> -->
     <select id="langKey" name="langKey" class="form-control" ng-model="vm.settingsAccount.langKey" ng-controller="JhiLanguageController as languageVm" ng-options="code as (code | findLanguageFromKey) for code in languageVm.languages"></select>
 </div>
-<button type="submit" ng-disabled="form.$invalid" class="btn btn-success" translate="settings.form.button" style="float: right; margin-top: 110px;">Update</button>
+<button type="submit" ng-disabled="form.$invalid" class="btn btn-success" translate="settings.form.button" style="float: right; margin-top: 110px; margin-right: 10px;">Update</button>
 </form>
 
 </div>
@@ -96,7 +96,7 @@ Your e-mail cannot be longer than 100 characters.
     <div>
         <div class="panel panel-default">
             <div class="panel-heading">
-                <span>
+                <span style="font-size: 12px;">
                     Authorized Credit Card
                 </span>
                 <span class="cards">
@@ -203,7 +203,7 @@ Your e-mail cannot be longer than 100 characters.
         <div class="panel-heading">
             <form class="drsl-user-add-form" name="addUserForm" ng-submit="vm.addAuthorizedUser()">
                 <label class="control-label" for="uEmail">Add User</label>
-                <input type="email" class="form-control" id="uEmail" ng-model="vm.invitedUser" style="width: 384px; display: inline-block; padding-top: 5px;" name="uEmail" placeholder="User's email address; multiple users separated by commas"
+                <input type="email" class="form-control" id="uEmail" ng-model="vm.invitedUser" style="width: 375px; display: inline-block; padding-top: 5px;" name="uEmail" placeholder="Email address; multiple users separated by commas"
                 ng-minlength=1 >
                 <button type="submit" class="btn btn-success" translate="settings.form.button" style="margin-left: 8px;">Update</button>
             </form>

@@ -74,7 +74,7 @@
             },
             "version": {
                 "main": "Version",
-                "prefix": "v.",
+                "prefix": "Ver.",
                 "add": "add",
                 "noVersion": "No version"
             },
@@ -93,7 +93,7 @@
                     "vmware": "VMware",
                     "open_stack": "Open Stack",
                     "bare_metal": "Bare Metal",
-                    "amazon_web": "Amazon Web",
+                    "amazon_web": "Amazon Web Services",
                     "azure": "Azure",
                     "google": "Google",
                     "rhel": "RHEL",

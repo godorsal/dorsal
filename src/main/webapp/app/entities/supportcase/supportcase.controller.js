@@ -12,11 +12,12 @@
         vm.supportcases = [];
         vm.loadAll = function() {
             Supportcase.query(function(result) {
+                console.log(result);
                 vm.supportcases = result;
             });
         };
 
         vm.loadAll();
-        
+
     }
 })();

@@ -232,7 +232,9 @@ Landing Page
         cursor: pointer;
     }
 }
-
+* {
+    // font-family: "Raleway";
+}
 .drsl-home-view .tooltip {
     font-size: $default-font-size;
 }

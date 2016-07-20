@@ -20,8 +20,8 @@
                             Full Access
                         </td>
                         <td style="padding-left: 60px; padding-right: 40px;">
-                            <span ng-if="share.user.activated">Invited</span>
-                            <span ng-if="!share.user.activated">Authorized</span>
+                            <span ng-if="!share.user.activated">Invited</span>
+                            <span ng-if="share.user.activated">Authorized</span>
                         </td>
                         <td style="padding-left: 15px;">
                             <button class="btn btn-success" ng-click="vm.removeSharedUser(share.id, $index)" style="display: block; margin-top: 10px; margin-bottom: 10px;"><i class="fa fa-times-circle fa-lg"></i></button>
@@ -32,19 +32,19 @@
             <hr style="height:2px;border:none;color:#E2E2E2;background-color:#E2E2E2;" />
             <form ng-submit="vm.addUser()" style="margin: 0px 20px 0px 20px;">
                 <input type="text" id="emailInput" name="emailInput"
-                ng-model="vm.emailInput" ng-minlength=4 ng-maxlength=50 required placeholder="  Email address" style="width: 386px; height: 33px;">
+                ng-model="vm.emailInput" ng-minlength=4 ng-maxlength=50 required placeholder=" Email address" style="width: 385px; height: 33px;">
                 <select class="form-control" ng-model="vm.permissions" id="permissionInput" style="width: 168px; display: inline-block;" required disabled>
-                <option value="">Full Access</option>
-                <option value="read">read</option>
-                <option value="write">write</option>
-            </select>
-            <br>
-            <br>
-            <div style="text-align: right;">
-                <button class="btn btn-default" ng-click="vm.cancel($event)">Cancel</button>
-                <button type="submit" class="btn btn-success">Add User</button>
-            </div>
+                    <option value="">Full Access</option>
+                    <option value="read">read</option>
+                    <option value="write">write</option>
+                </select>
+                <br>
+                <br>
+        </form>
+        <div style="text-align: right; margin-right: 20px;">
+            <button class="btn btn-default" ng-click="vm.cancel($event)">Cancel</button>
+            <button type="submit" class="btn btn-success">Add User</button>
         </div>
-    </form>
-</div>
+        </div>
+    </div>
 </div>

@@ -35,7 +35,7 @@
             "viewDetails": "details",
             "rateCase": "rate this case",
             "id": "ID:",
-            "caseID": "Case ID:",
+            "caseID": "CASE ID:",
             "lastUpdate": "Last Update:"
         },
         "professional": {
@@ -96,7 +96,7 @@
             }
         },
         "agreement": {
-            "header": "Agreement for:",
+            "header": "AGREEMENT FOR:",
             "agreementLabel": "Agreement",
             "checkboxMsg": "I ({{username}}) agree to the provided estimate and the suggested resolution."
         }

@@ -84,8 +84,11 @@
         <div translate="case.details.downloadedFiles">Downloaded Files</div>
         <div><i class="fa fa-minus"></i></div>
     </div> -->
-
     <div class="drsl-form-grid">
+        <div>Estimate Log</div>
+        <div>{{vm.case.estimateLog}}</div>
+    </div>
+    <div class="drsl-form-grid" style="width: 688px;">
         <div>Update History</div>
         <!-- <div class="historyBox"> -->
         <div>
@@ -99,7 +102,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="update in vm.updates track by $index" >
-                        <td style="max-width: 164px; word-wrap: break-word;">{{update.updateMsg}}</td>
+                        <td style="max-width: 170px; word-wrap: break-word;">{{update.updateMsg}}</td>
                         <td style="padding-left: 70px; white-space: nowrap;">{{update.dateUpdated | date:"MM/dd/yy h:mm a"}}</td>
                         <td style="padding-left: 70px; width: 180px !important; text-align: right;">{{update.user.login}}</td>
                     </tr>
@@ -118,10 +121,10 @@
         <div>Update Type</div>
         <div class="escalation-form-grid">
             <div class="drsl-linear-radio">
-                    <div class="drsl-linear-radio">
-                        <div class="drsl-radio-set tier-list">
-                            <div class="ng-scope request" ng-repeat="type in vm.updateTypes"><input name="{{type.name}}" id="{{type.name}}" type="radio" class="ng-pristine ng-untouched ng-valid ng-empty" aria-invalid="false" ng-model="vm.updateType" value="{{type}}"><label for="{{type.name}}" class="ng-binding">{{vm.capitalizeFirstLetter(type.name)}}<br><span></span></label></div>
-                        </div>
+                <div class="drsl-linear-radio">
+                    <div class="drsl-radio-set tier-list" style="overflow-x: hidden;">
+                        <div class="ng-scope request" ng-repeat="type in vm.updateTypes"><input name="{{type.name}}" id="{{type.name}}" type="radio" class="ng-pristine ng-untouched ng-valid ng-empty" aria-invalid="false" ng-model="vm.updateType" value="{{type}}"><label for="{{type.name}}" class="ng-binding" style="font-weight: normal;">{{vm.capitalizeFirstLetter(type.name)}}<br><span></span></label></div>
+                    </div>
                 </div>
             </div>
         </div>
