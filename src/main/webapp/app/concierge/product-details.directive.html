@@ -12,9 +12,9 @@
                     <span ng-if="incidentTranslationWorks(incidentType)">{{incidentType.label | translate}}</span>
                     <span ng-if="!incidentTranslationWorks(incidentType)">{{incidentType.value}}</span>
                 </a>
-                <div class="drsl-menuitem-field-type" ng-show="incidentType.type && incidentType.type === 'field' && (rootType.name.toLowerCase() == 'version' || rootType.name.toLowerCase() == 'other')">
+                <div class="drsl-menuitem-field-type" ng-show="incidentType.type && incidentType.type === 'field'">
                     <form ng-submit="setIncidentTypeValue(rootType, incidentType)">
-                        <div ng-if="rootType.name.toLowerCase() === 'version'">
+                        <div ng-if="rootType.name.toLowerCase() !== 'other'">
                             <input ng-click="textFieldClick($event)" maxlength="128"
                             ng-blur="setIncidentTypeValue(rootType, incidentType)"
                             type="text"

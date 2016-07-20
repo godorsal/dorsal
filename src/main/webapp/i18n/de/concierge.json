@@ -74,26 +74,30 @@
             },
             "version": {
                 "main": "Version",
-                "prefix": "v.",
+                "prefix": "Ver.",
                 "add": "add",
                 "noVersion": "No version"
             },
             "incidentTypes": {
                 "version": "Version",
+                "version.placeholder": "version here",
                 "other": "Other",
-                "other.placeholder": "other details",
+                "other.placeholder": "any other technical detail",
                 "environment": "Environment",
+                "environment.placeholder": "other",
                 "cluster_type": "Cluster Type",
                 "os": "OS",
+                "os.placeholder": "other",
                 "host": "Host",
                 "configuration": "Config",
+                "configuration.placeholder": "other",
                 "connectivity": "Connectivity",
                 "performance": "Performance",
                 "values": {
                     "vmware": "VMware",
                     "open_stack": "Open Stack",
                     "bare_metal": "Bare Metal",
-                    "amazon_web": "Amazon Web",
+                    "aws": "AWS",
                     "azure": "Azure",
                     "google": "Google",
                     "rhel": "RHEL",
@@ -120,6 +124,11 @@
                     "none": "None"
                 }
             }
+        },
+        "errors": {
+            "missing.tech": "You forgot the technology",
+            "missing.issue": "You forgot the issue",
+            "missing.all": "You forgot the technology and the issue"
         }
     }
 }

@@ -24,7 +24,7 @@ id;value;technology_id;technologyproperty_id
 23;"Windows";2;3
 24;"VMware";2;4
 25;"Bare Metal";2;4
-26;"Amazon Web";2;4
+26;"AWS";2;4
 27;"Azure";2;4
 28;"Google";2;4
 29;"Open Stack";2;4
