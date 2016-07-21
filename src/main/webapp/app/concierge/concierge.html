@@ -16,8 +16,9 @@
                 <!-- Action Bar -->
                 <div class="drsl-action-bar">
                     <i class="glyphicon glyphicon-menu-right"></i>
-                    <a ng-class="{'drsl-link-disabled': !vm.isAuthenticated(), 'drsl-link-inactive': !vm.isAuthenticated()}" ui-sref="case">manage cases</a>
-                    <a ng-class="{'drsl-link-disabled': !vm.passedStep(3), 'drsl-link-inactive': vm.currentCase.status == 'completed'}" ng-click="vm.openRating()">clone a case</a>
+                    <a ng-show="vm.isAuthenticated()" ui-sref="case" translate="concierge.activityBar.manageCases">manage cases</a>
+                    <a ng-hide="vm.isAuthenticated()" class="drsl-link-disabled drsl-link-inactive">manage cases</a>
+                    <a ng-class="{'drsl-link-disabled': !vm.passedStep(3), 'drsl-link-inactive': vm.currentCase.status == 'completed'}" ng-click="vm.openRating()" translate="concierge.activityBar.cloneCase">clone a case</a>
                 </div>
 
                 <!-- Main Content -->
