@@ -5,13 +5,14 @@
         .module('dorsalApp')
         .controller('DrslRatingController', DrslRatingController);
 
-    DrslRatingController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase', 'drslBadges'];
+    DrslRatingController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase', 'drslBadges', 'Caseupdate'];
 
-    function DrslRatingController($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase, drslBadges) {
+    function DrslRatingController($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase, drslBadges, Caseupdate) {
         var vm = this;
         vm.case = drslCase;
         vm.badges = drslBadges;
         vm.technologyProperties = {};
+        vm.detailedResolutions = '';
         vm.techBadges = vm.badges.filter(function (badge) {
             var searchString = 'tech_';
             return (badge.name.substr(0, searchString.length) === searchString);
@@ -22,6 +23,15 @@
         });
         vm.cancel = cancel;
         vm.submit = submit;
+
+        // TODO: shouldn't be pulling back every case update record. After API is updated fix here as well.
+        Caseupdate.query(function(result){
+            result.reverse().forEach(function(update){
+                if(update.supportcase.id === vm.case.id && update.updatetype.id == 2){
+                    vm.detailedResolutions = update.updateMsg;
+                }
+            })
+        });
 
         vm.radios = [
             [{
