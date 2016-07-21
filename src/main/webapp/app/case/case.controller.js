@@ -2,12 +2,12 @@
     'use strict';
 
     angular
-        .module('dorsalApp')
-        .controller('CaseController', CaseController);
+    .module('dorsalApp')
+    .controller('CaseController', CaseController);
 
-    CaseController.$inject = ['$scope', '$window', '$interval', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', '$state', 'StatusModel', 'Rating', 'Expertbadge', 'DrslMetadata'];
+    CaseController.$inject = ['$scope', '$window', '$interval', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', '$state', 'StatusModel', 'Rating', 'Expertbadge', 'DrslMetadata', 'Caseupdate'];
 
-    function CaseController($scope, $window, $interval, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, $state, StatusModel, Rating, Expertbadge, DrslMetadata) {
+    function CaseController($scope, $window, $interval, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, $state, StatusModel, Rating, Expertbadge, DrslMetadata, Caseupdate) {
         var vm = this, casePoll;
         vm.init = init;
         vm.DrslMetadata = DrslMetadata;
@@ -28,6 +28,7 @@
         vm.statusStates = [];
         vm.openCaseAgreement = openCaseAgreement;
         vm.cases = [];
+        vm.updates = [];
         vm.currentCase = {};
         vm.status = {
             created: 'case.details.status.created',
@@ -38,15 +39,16 @@
         };
         vm.currentUser = {};
         vm.experts = {};
+        vm.showNotifications = false;
         vm.init();
 
         /**
-         * Initialize the controller's data.
-         */
+        * Initialize the controller's data.
+        */
         function init() {
             var getCurrentUser = (typeof(vm.currentUser.email) === 'undefined'),
-                getStatusStates = (vm.statusStates.length === 0),
-                getBadges = (vm.badges.length === 0);
+            getStatusStates = (vm.statusStates.length === 0),
+            getBadges = (vm.badges.length === 0);
 
             // Make a call to get the initial data.
             CaseService.getEntityData({'getCurrentUser': getCurrentUser, 'getStatusStates': getStatusStates, 'getBadges': getBadges}).then(function (data) {
@@ -92,11 +94,23 @@
                 //vm.init();
             }, vm.DrslMetadata.casePollingRateSeconds * 1000);
         }
-
+        function getCaseUpdates(){
+            Caseupdate.query(function(result){
+                result.reverse().forEach(function(update){
+                    if(update.supportcase.id === vm.currentCase.id){
+                        console.log(update);
+                        if(update.updatetype.id == 2){
+                            vm.detailedResolutions.push(update);
+                        }
+                        vm.updates.push(update)
+                    }
+                })
+            })
+        }
         /**
-         * Call getExpert in CaseService and set the result on the vm for the given expert id.
-         * @param expert
-         */
+        * Call getExpert in CaseService and set the result on the vm for the given expert id.
+        * @param expert
+        */
         function getExpert(expert) {
             CaseService.getExpert(function (data) {
                 var foundExpert = data.filter(function (o) {
@@ -127,9 +141,9 @@
         }
 
         /**
-         * Get the current case.
-         * @returns {Array}
-         */
+        * Get the current case.
+        * @returns {Array}
+        */
         function getCurrentCase() {
             var cases = [];
 
@@ -141,9 +155,9 @@
         }
 
         /**
-         * Get the history cases as an array of case objects.
-         * @returns {Array}
-         */
+        * Get the history cases as an array of case objects.
+        * @returns {Array}
+        */
         function getHistory() {
             var history = [];
 
@@ -155,17 +169,18 @@
         }
 
         /**
-         * Sets the currentCase reference to the given case object.
-         * @param targetCase
-         */
+        * Sets the currentCase reference to the given case object.
+        * @param targetCase
+        */
         function setCurrentCase(targetCase) {
             vm.currentCase = targetCase;
             getCaseExpertBadges();
+            getCaseUpdates();
         }
 
         /**
-         * Opens the rating dialog.
-         */
+        * Opens the rating dialog.
+        */
         function openRating() {
             if (StatusModel.checkCaseStatus(vm.currentCase.status, 'completed') && !vm.isCaseExpert()) {
                 var modalInstance = DrslRatingService.open(vm.currentCase, vm.badges);
@@ -190,9 +205,9 @@
         }
 
         /**
-         * Updates expertbadge records, increases badge counts and/or adds new records.
-         * @param selectedBadges An array of selected badges.
-         */
+        * Updates expertbadge records, increases badge counts and/or adds new records.
+        * @param selectedBadges An array of selected badges.
+        */
         function updateExpertBadges(selectedBadges) {
             var badgesToUpdate, badgesToAdd, newExpertBadge, i;
 
@@ -244,8 +259,8 @@
         }
 
         /**
-         * Opens the case details dialog.
-         */
+        * Opens the case details dialog.
+        */
         function openDetails() {
             var modalInstance = CaseDetailsService.open(vm.currentCase, vm.experts[vm.currentCase.expert]);
 
@@ -267,8 +282,8 @@
 
 
         /**
-         * Opens the chat dialog.
-         */
+        * Opens the chat dialog.
+        */
         function openChat() {
             if (vm.passedStep(1)) {
                 $window.open(vm.currentCase.chatRoom.link, '_blank');
@@ -276,8 +291,8 @@
         }
 
         /**
-         * Opens the Case Agreement dialog.
-         */
+        * Opens the Case Agreement dialog.
+        */
         function openCaseAgreement() {
             if (!vm.isCaseExpert()){
                 var modalInstance = CaseAgreementService.open(vm.currentCase, vm.currentCase.expert);
@@ -291,10 +306,10 @@
         }
 
         /**
-         * Checks to see if the provided index is less than or equal to the current step/status index.
-         * @param step
-         * @returns {boolean}
-         */
+        * Checks to see if the provided index is less than or equal to the current step/status index.
+        * @param step
+        * @returns {boolean}
+        */
         function passedStep(step) {
             var stepIndex = StatusModel.getStatusIndex(vm.currentCase.status);
 

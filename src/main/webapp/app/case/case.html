@@ -9,10 +9,37 @@
                         <span class="drsl-understated">ID: {{vm.currentCase.technology.name}} {{vm.currentCase.id}}</span>
                     </div>
                     <div></div>
-                    <!-- <div>
-                        {{'case.details.status.main' | translate}}:
-                        <span>{{'case.details.status.'+vm.currentCase.status.name.toLowerCase() | translate}}</span>
-                    </div> -->
+                    <div>
+                        <div class="btn-group" uib-dropdown is-open="status.isopen">
+                            <a id="single-button" type="button" uib-dropdown-toggle ng-disabled="disabled">
+                                {{vm.updates.length}} Notifications <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="single-button" style="width: 540px;">
+                                <table class="scroll table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th style="font-weight: normal;">Message</th>
+                                            <th style="padding-left: 177px; font-weight: normal;">Date</th>
+                                            <th style="padding-left: 161px; font-weight: normal;">User/Expert</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="height: 300px;">
+                                        <tr ng-repeat="update in vm.updates track by $index" >
+                                            <td style="max-width: 170px; word-wrap: break-word;">{{update.updateMsg}}</td>
+                                            <td style="padding-left: 70px; white-space: nowrap;">{{update.dateUpdated | date:"MM/dd/yy h:mm a"}}</td>
+                                            <td style="padding-left: 70px; width: 180px !important; text-align: right;">{{update.user.login}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- <li ng-repeat="update in vm.updates">
+                                    {{update.dateUpdated | date:"MM/dd/yy h:mm a"}}
+                                    {{update.updateMsg}}
+                                    {{update.user.login}}
+                                </li> -->
+                                <!-- <li role="menuitem"><a href="#">Action</a></li> -->
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Action Bar -->
@@ -32,7 +59,9 @@
                     <div><case-summary case="vm.currentCase" expert="vm.experts[vm.currentCase.expert]" status="vm.status" passed-step="vm.passedStep"></case-summary></div>
 
                     <!-- Case Professional -->
+
                     <div ng-hide="vm.isCaseExpert()"><case-professional expert="vm.currentCase.expertaccount" case="vm.currentCase" expert-badges="vm.expertBadges" chat-room="vm.currentCase.chatRoom"></case-professional></div>
+
                     <div ng-show="vm.isCaseExpert()"><case-professional-form expert="vm.currentCase.expertaccount" case="vm.currentCase"></case-professional-form></div>
                 </div>
             </div>
