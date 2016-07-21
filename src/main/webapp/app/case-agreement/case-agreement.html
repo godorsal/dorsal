@@ -5,7 +5,7 @@
                 <!-- Dialog Header -->
                 <div>
                     <div class="drsl-dialog-header">
-                        <div><h2>{{'case.agreement.header' | translate}} <span>{{'case.details.caseID' | translate}} {{vm.case.id}}</span></h2></div>
+                        <div><h2><span>{{'case.details.caseID' | translate}} {{vm.case.id}}</span></h2></div>
                     </div>
                 </div>
 
@@ -43,7 +43,7 @@
                         <!-- Agreement -->
                         <div class="drsl-form-grid">
                             <div translate="case.agreement.agreementLabel">Agreement</div>
-                            <div><label><input type="checkbox" ng-model="vm.agreeToEstimate"> <span translate="case.agreement.checkboxMsg" translate-values="{username: vm.case.user.firstName}"></span></label></div>
+                            <div><label><input type="checkbox" ng-model="vm.agreeToEstimate"> <span translate="case.agreement.checkboxMsg" translate-values="{username: vm.case.user.firstName}" style="font-weight: normal;"></span></label></div>
                         </div>
                     </div>
                 </div>
