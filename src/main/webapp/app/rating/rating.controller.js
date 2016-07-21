@@ -12,6 +12,14 @@
         vm.case = drslCase;
         vm.badges = drslBadges;
         vm.technologyProperties = {};
+        vm.techBadges = vm.badges.filter(function (badge) {
+            var searchString = 'tech_';
+            return (badge.name.substr(0, searchString.length) === searchString);
+        });
+        vm.personalBadges = vm.badges.filter(function (badge) {
+            var searchString = 'personal_';
+            return (badge.name.substr(0, searchString.length) === searchString);
+        });
         vm.cancel = cancel;
         vm.submit = submit;
 

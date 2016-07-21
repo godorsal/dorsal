@@ -30,6 +30,9 @@ Case Rating
 
     h2 {
         margin-bottom: $default-padding;
+        span {
+            text-transform: uppercase;
+        }
     }
 
     h3 {
@@ -84,6 +87,25 @@ Case Rating
                     }
                     &:last-child {
                         flex: 4;
+                    }
+                }
+
+                &.drsl-rating-reward {
+                    .drsl-scrolling-container {
+                        > div {
+                            display: flex;
+                            flex-flow: row;
+                            align-items: center;
+
+                            > div {
+                                flex: auto;
+
+                                &:first-child {
+                                    padding: 10px;
+                                    max-width: 100px;
+                                }
+                            }
+                        }
                     }
                 }
             }

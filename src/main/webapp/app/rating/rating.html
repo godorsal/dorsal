@@ -5,7 +5,7 @@
                 <!-- Dialog Header -->
                 <div>
                     <div class="drsl-dialog-header">
-                        <div><h2>{{'case.rating.header' | translate}} {{'case.details.caseID' | translate}} {{vm.case.technology.name}} {{vm.case.id}}</h2></div>
+                        <div><h2><span>{{'case.rating.header' | translate}} {{'case.details.caseID' | translate}}</span> {{vm.case.technology.name}} {{vm.case.id}}</h2></div>
                     </div>
                 </div>
 
@@ -69,7 +69,7 @@
 
 
                         <!-- Badge Selections -->
-                        <div class="drsl-rating-row">
+                        <div class="drsl-rating-row drsl-rating-reward">
                             <div>
                                 <img src="content/images/global/easy_as_3.png" />
                                 <h3>Reward</h3>
@@ -79,7 +79,18 @@
                                 <div class="drsl-rating-section">
                                     <h3>{{'case.rating.badges' | translate}} <span>({{'case.rating.badges.note' | translate}})</span></h3>
                                     <div class="drsl-scrolling-container">
-                                        <expert-badges badges="vm.badges" badge-select="true"></expert-badges>
+                                        <div>
+                                            <div translate="case.professional.badges.group.techBadges">Technical Skill</div>
+                                            <div>
+                                                <expert-badges badges="vm.techBadges" badge-select="true"></expert-badges>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div translate="case.professional.badges.group.personalBadges">Personal Qualities</div>
+                                            <div>
+                                                <expert-badges badges="vm.personalBadges" badge-select="true"></expert-badges>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
