@@ -557,6 +557,34 @@ table.scroll thead > tr {
 }
 
 @font-face {
+    font-family: 'Raleway';
+    font-weight: 800;
+    font-style: normal;
+    src: url('/fonts/Raleway-800/Raleway-800.eot');
+    src: url('/fonts/Raleway-800/Raleway-800.eot?#iefix') format('embedded-opentype'),
+    local('Raleway ExtraBold'),
+    local('Raleway-800'),
+    url('/fonts/Raleway-800/Raleway-800.woff2') format('woff2'),
+    url('/fonts/Raleway-800/Raleway-800.woff') format('woff'),
+    url('/fonts/Raleway-800/Raleway-800.ttf') format('truetype'),
+    url('/fonts/Raleway-800/Raleway-800.svg#Raleway') format('svg');
+}
+
+@font-face {
+    font-family: 'Raleway';
+    font-weight: 900;
+    font-style: normal;
+    src: url('/fonts/Raleway-900/Raleway-900.eot');
+    src: url('/fonts/Raleway-900/Raleway-900.eot?#iefix') format('embedded-opentype'),
+    local('Raleway Black'),
+    local('Raleway-900'),
+    url('/fonts/Raleway-900/Raleway-900.woff2') format('woff2'),
+    url('/fonts/Raleway-900/Raleway-900.woff') format('woff'),
+    url('/fonts/Raleway-900/Raleway-900.ttf') format('truetype'),
+    url('/fonts/Raleway-900/Raleway-900.svg#Raleway') format('svg');
+}
+
+@font-face {
     font-family: 'Work Sans';
     font-weight: 200;
     font-style: normal;
