@@ -21,4 +21,7 @@ public interface SupportcaseRepository extends JpaRepository<Supportcase,Long> {
     @Query("select supportcase from Supportcase supportcase, SharedCase sharedcase where (supportcase.id = sharedcase.supportcase.id) AND (sharedcase.user.login = ?#{principal.username})")
     List<Supportcase> findBySharedIsCurrentUser();
 
+    @Query("select supportcase from Supportcase supportcase, Groupaccess groupaccess where (supportcase.user.id = groupaccess.authorizeduser.id) AND (groupaccess.user.login = ?#{principal.username})")
+    List<Supportcase> findGroupAccessUser();
+
 }

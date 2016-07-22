@@ -78,8 +78,17 @@ public class SupportcaseResource {
         }
         else
         {
-            // No match found -- need to address it to a concierge
-            log.info("No expert available to work on the case. We keep searching...");
+            // Get secondary preference
+            expertList = expertAccountRepository.findOneBySecondTechnologyPreference(supportcase.getTechnology().getName());
+            if (expertList.size() > 0) {
+                log.info("Expert Found for 2nd preferred Technology [" + supportcase.getTechnology().getName() + "]");
+                supportcase.setExpertaccount((ExpertAccount) expertList.get(0));
+            }
+            else {
+
+                // No match found -- need to address it to a concierge
+                log.info("No expert available to work on the case. We keep searching...");
+            }
         }
 
         Supportcase result = supportcaseRepository.save(supportcase);
@@ -142,6 +151,12 @@ public class SupportcaseResource {
         log.info("Support cases shared to user " + (supportcases.size() - numCases) );
         numCases = supportcases.size();
 
+        // Get all support cases for users that in the authorized group for the logged in user
+        List<Supportcase> groupAuthorizedCases = supportcaseRepository.findGroupAccessUser();
+
+        // For now add the list to the result
+        supportcases.addAll(groupAuthorizedCases);
+        log.info("Support by authorized users by this user " + groupAuthorizedCases.size()  );
 
         // Return the combined list
         return supportcases;
