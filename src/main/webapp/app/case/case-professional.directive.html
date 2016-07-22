@@ -20,9 +20,13 @@
     <!-- Profile Photo & Score -->
     <div class="drsl-profile-photo">
         <!-- Photo -->
+        <div class="drsl-expert-msg">
+            <div uib-popover="{{expert.welcomeMessage}}" popover-placement="bottom" popover-trigger="none" popover-is-open="(expert.welcomeMessage && case.status.name.toLowerCase() === 'created' || case.status.name.toLowerCase() === 'estimated')"></div>
+        </div>
         <a href="#" ng-click="$event.preventDefault()">
             <img ng-src="{{expert.imagePath}}" />
         </a>
+
         <!-- Score -->
         <div class="drsl-profile-score">
             <span class="drsl-label" translate="case.professional.score">Score</span> {{expert.expertScore}} out of 100
