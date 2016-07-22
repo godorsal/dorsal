@@ -175,7 +175,7 @@
                 Groupaccess.save(group, function(data){
                     vm.authorizedUsers.push(data)
                     vm.invitedUser = '';
-                    toastr["success"](data.authorizeduser.email, "Added Authorized User")
+                    toastr["success"](data.authorizeduser.email, "Added Activated User")
                 })
             } else {
                 Groupaccess.save(group, function(data){
