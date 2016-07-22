@@ -36,7 +36,7 @@
 
 
                         <!-- Radio Selections -->
-                        <div class="drsl-rating-row">
+                        <div class="drsl-rating-row drsl-rating-radios">
                             <div>
                                 <img src="content/images/global/easy_as_2.png" />
                                 <h3>Rate</h3>
@@ -63,6 +63,9 @@
                                             <linear-radio target-data="radioItem.selectedValue" technology-properties="vm.technologyProperties" radio-data="radioItem"></linear-radio>
                                         </div>
                                     </div>
+                                </div>
+                                <div>
+                                    <textarea class="form-control" name="ratingComments" id="ratingComments" ng-model="vm.ratingComments" cols="30" rows="3" placeholder="{{'case.rating.ratingComments.placeholder' | translate}}"></textarea>
                                 </div>
                             </div>
                         </div>

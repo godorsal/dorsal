@@ -192,6 +192,7 @@
                         dateRated: null,
                         score: data.score,
                         rateDetails: data.rateDetails,
+                        ratingComments: data.ratingComments,
                         hasExpertExceeded: data.hasExpertExceeded,
                         supportcase: vm.currentCase
                     };

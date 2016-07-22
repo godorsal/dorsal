@@ -13,6 +13,7 @@
         vm.badges = drslBadges;
         vm.technologyProperties = {};
         vm.detailedResolutions = '';
+        vm.ratingComments = null;
         vm.techBadges = vm.badges.filter(function (badge) {
             var searchString = 'tech_';
             return (badge.name.substr(0, searchString.length) === searchString);
@@ -156,6 +157,7 @@
                 "rated": true,
                 "score": combinedAverage,
                 "rateDetails": csv.join(','),
+                "ratingComments": vm.ratingComments,
                 "hasExpertExceeded": false,
                 "selectedBadges": selectedBadges
             });
