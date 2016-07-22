@@ -27,11 +27,16 @@
         vm.removeInvitedUsers = removeInvitedUsers;
         vm.authorizedUser = '';
         vm.number = 0;
+        vm.isExpert = false;
+
         getAuthorizedUsers()
         // checkAuthorized();
-        console.log(ExpertAccount.query(function(data){
-            console.log(data.length);
-        }));
+
+        ExpertAccount.query(function(data){
+            if(data[0]){
+                vm.currentExpert = data[0];
+            }
+        });
         Payment.query(function(result){
             result.find(function(ccdata){
                 if(ccdata.user.login === vm.settingsAccount.login){ var data = ccdata.ccdata.split('##')
@@ -94,10 +99,24 @@
         //     })
         // }
         function save() {
+            if(vm.updatingUser && vm.updatingExpert){
+                toastr["success"]("User and Expert Info Saved")
+                updateExpert();
+                updateUser();
+            } else if(vm.updatingUser){
+                updateUser();
+            } else if(vm.updatingExpert){
+                updateExpert();
+            }
+        }
+        function updateUser() {
             Auth.updateAccount(vm.settingsAccount).then(function () {
                 vm.error = null;
                 // vm.success = 'OK';
-                toastr["success"]("Saving Successful")
+                if (!vm.updatingExpert) {
+                    toastr["success"]("User Info Saved")
+                }
+                // toastr["success"]("Saving Successful")
                 Principal.identity(true).then(function (account) {
                     vm.settingsAccount = copyAccount(account);
                 });
@@ -110,6 +129,13 @@
                 vm.success = null;
                 // vm.error = 'ERROR';
                 toastr["error"]("Saving Error")
+            });
+        }
+        function updateExpert(){
+            ExpertAccount.update(vm.currentExpert, function(){
+                if(!vm.updatingUser){
+                    toastr["success"]("Expert Info Saved")
+                }
             });
         }
         function addCard() {

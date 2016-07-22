@@ -11,6 +11,9 @@ Account Settings
         float: left;
         display: inline-block !important;
     }
+    .updating{
+        border: 10px solid black;
+    }
     .drsl-settings-wrapper {
         box-shadow: $content-box-shadow;
         margin-bottom: $default-padding;

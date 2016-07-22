@@ -21,10 +21,10 @@
                     <div class="" style="background: white; padding: 10px; height: 363px; margin-bottom: 20px; display: inline-block; float: left; width: 564px;">
                         <form name="form" role="form" novalidate ng-submit="vm.save()" show-validation>
 
-                            <div class="form-group">
+                            <div class="form-group" >
                                 <!-- <label class="control-label" for="firstName" translate="settings.form.firstname">First Name</label> -->
                                 <input type="text" class="form-control" id="firstName" name="firstName"
-                                ng-model="vm.settingsAccount.firstName" ng-minlength=1 ng-maxlength=50 required maxlength="50">
+                                ng-model="vm.settingsAccount.firstName" ng-minlength=1 ng-maxlength=50 required maxlength="50" ng-class="{updating: vm.updatingUser}" ng-change="vm.updatingUser = true">
                                 <!-- <input type="text" class="form-control" id="firstName" name="firstName" placeholder="{{'settings.form.firstname.placeholder' | translate}}"
                                 ng-model="vm.settingsAccount.firstName" ng-minlength=1 ng-maxlength=50 required maxlength="50"> -->
                                 <div ng-show="form.firstName.$dirty && form.firstName.$invalid">
@@ -85,10 +85,12 @@ Your e-mail cannot be longer than 100 characters.
 </div>
 </div>
 <div class="form-group">
-    <!-- <label for="langKey" translate="settings.form.language">Language</label> -->
     <select id="langKey" name="langKey" class="form-control" ng-model="vm.settingsAccount.langKey" ng-controller="JhiLanguageController as languageVm" ng-options="code as (code | findLanguageFromKey) for code in languageVm.languages"></select>
 </div>
-<button type="submit" ng-disabled="form.$invalid" class="btn btn-success" translate="settings.form.button" style="float: right; margin-top: 110px; margin-right: 10px;">Update</button>
+<div class="form-group" ng-if="vm.currentExpert">
+    <textarea name="name" rows="4" cols="20" class="form-control" ng-model="vm.currentExpert.welcomeMessage" ng-change="vm.updatingExpert = true"></textarea>
+</div>
+<button type="submit" ng-disabled="form.$invalid" class="btn btn-success" translate="settings.form.button" style="float: right; margin-right: 10px;">Update</button>
 </form>
 
 </div>
@@ -227,51 +229,51 @@ Your e-mail cannot be longer than 100 characters.
                             </td>
                             <td>
                                 <button ng-click="vm.removeInvitedUsers(invitedUser.id, $index)" type="checkbox">
-                            </td>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- <div>
+                    <button class="btn btn-success" ng-click="vm.removeAuthorizedUsers(user.id, $index)" ng-repeat="user in vm.invitedUsers track by $index" uib-tooltip="remove user" style="display: block; margin-top: 10px; margin-bottom: 10px;">{{user.authorizeduser.email}} <i class="fa fa-times-circle fa-lg"></i></button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default drsl-user-managment" style="width: 586px; height: 500px; float: right; display: inline-block;">
+        <div class="panel-heading">
+            <div style="font-size: 14px; height: 35px; padding-top: 7px;">(Invited Users automatically join Active Users once they register)</div>
+        </div>
+        <div class="panel-body">
+            <div class="drsl-user-list empty" ng-hide="vm.authorizedUsers.length">
+                <div>No Active Users</div>
+            </div>
+            <div class="drsl-user-list" ng-show="vm.authorizedUsers.length">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Active Users</th>
+                            <th>Remove</th>
                         </tr>
-                    </tbody>
-                </table>
-                <!-- <div>
-                <button class="btn btn-success" ng-click="vm.removeAuthorizedUsers(user.id, $index)" ng-repeat="user in vm.invitedUsers track by $index" uib-tooltip="remove user" style="display: block; margin-top: 10px; margin-bottom: 10px;">{{user.authorizeduser.email}} <i class="fa fa-times-circle fa-lg"></i></button>
-            </div> -->
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="user in vm.authorizedUsers track by $index">
+                            <td>
+                                {{user.authorizeduser.firstName}}
+                                {{user.authorizeduser.lastName}}
+                                {{user.authorizeduser.email}}
+                            </td>
+                            <td>
+                                <button ng-click="vm.removeAuthorizedUsers(user.id, $index)" type="checkbox">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- <div>
+                    <button class="btn btn-success" ng-click="vm.removeAuthorizedUsers(user.id, $index)" ng-repeat="user in vm.authorizedUsers track by $index" uib-tooltip="remove user" style="display: block; margin-top: 10px; margin-bottom: 10px;">{{user.authorizeduser.email}} <i class="fa fa-times-circle fa-lg"></i></button>
+                </div> -->
+            </div>
         </div>
     </div>
-</div>
-<div class="panel panel-default drsl-user-managment" style="width: 586px; height: 500px; float: right; display: inline-block;">
-    <div class="panel-heading">
-        <div style="font-size: 14px; height: 35px; padding-top: 7px;">(Invited Users automatically join Active Users once they register)</div>
-    </div>
-    <div class="panel-body">
-        <div class="drsl-user-list empty" ng-hide="vm.authorizedUsers.length">
-            <div>No Active Users</div>
-        </div>
-        <div class="drsl-user-list" ng-show="vm.authorizedUsers.length">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Active Users</th>
-                        <th>Remove</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="user in vm.authorizedUsers track by $index">
-                        <td>
-                            {{user.authorizeduser.firstName}}
-                            {{user.authorizeduser.lastName}}
-                            {{user.authorizeduser.email}}
-                        </td>
-                        <td>
-                            <button ng-click="vm.removeAuthorizedUsers(user.id, $index)" type="checkbox">
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <!-- <div>
-            <button class="btn btn-success" ng-click="vm.removeAuthorizedUsers(user.id, $index)" ng-repeat="user in vm.authorizedUsers track by $index" uib-tooltip="remove user" style="display: block; margin-top: 10px; margin-bottom: 10px;">{{user.authorizeduser.email}} <i class="fa fa-times-circle fa-lg"></i></button>
-        </div> -->
-    </div>
-</div>
-</div>
 </div>
 </div>
 </div>
