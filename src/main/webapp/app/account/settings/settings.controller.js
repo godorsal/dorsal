@@ -189,12 +189,13 @@
             toastr["error"]("Incorrect " + error.data.fieldErrors[0].field + " input")
         }
         function makeUser(email){
+            var inviteString = "Invite:" + vm.settingsAccount.firstName + " " + vm.settingsAccount.lastName;
             var newUser = {
                 email: email,
                 langKey: $translate.use(),
                 login: email,
                 password: 'myDorsal',
-                lastName: "You have been invited by " + vm.settingsAccount.firstName + " " + vm.settingsAccount.lastName + " to join the dorsal application."
+                lastName: inviteString.substring(0, 50)
             }
             Register.save(newUser, invitedGroup,  onUserSaveError)
         }

@@ -16,26 +16,23 @@
         vm.expert = expert;
         vm.sharedUsers = [];
         vm.summary = vm.case.summary.toString();
-        console.log(vm.case);
-        User.query(function(results){
-            console.log(results);
-        })
         getSharedUsers();
         function cancel(e) {
             e.preventDefault();
             $uibModalInstance.dismiss('cancel');
         }
         Principal.identity().then(function (account) {
-            vm.currentUser = copyAccount(account);
+            vm.currentUser = account;
         });
         function makeUser(email){
+            var inviteString = "Share:" + vm.currentUser.firstName + " " + vm.currentUser.lastName;
+
             var newUser = {
                 email: email,
                 langKey: $translate.use(),
                 login: email,
                 password: 'myDorsal',
-                lastName:  vm.currentUser.firstName + " " + vm.currentUser.lastName + " shares the following support case "
-                + vm.case.id + " with you."
+                lastName: inviteString.substring(0, 50)
             }
             Register.save(newUser, shareCaseNew)
         }
