@@ -102,9 +102,9 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="update in vm.updates track by $index" >
-                        <td style="max-width: 170px; word-wrap: break-word;">{{update.updateMsg}}</td>
-                        <td style="padding-left: 70px; white-space: nowrap;">{{update.dateUpdated | date:"MM/dd/yy h:mm a"}}</td>
-                        <td style="padding-left: 70px; width: 180px !important; text-align: right;">{{update.user.login}}</td>
+                        <td style="width: 345px; max-width: 345px; word-wrap: break-word;">{{update.updateMsg}}</td>
+                        <td style="padding-left: 60px; white-space: nowrap;">{{update.dateUpdated | date:"MM/dd/yy h:mm a"}}</td>
+                        <td style="padding-left: 70px; width: 180px !important;">{{update.user.login}}</td>
                     </tr>
                 </tbody>
             </table>
