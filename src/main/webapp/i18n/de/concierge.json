@@ -125,6 +125,10 @@
                 }
             }
         },
+        "activityBar": {
+            "manageCases": "manage cases",
+            "cloneCase": "clone a case"
+        },
         "errors": {
             "missing.tech": "You forgot the technology",
             "missing.issue": "You forgot the issue",

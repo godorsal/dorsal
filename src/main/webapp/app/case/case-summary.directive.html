@@ -3,9 +3,6 @@
     <div>
         <span class="drsl-label" translate="case.details.user">User:</span> {{case.user.firstName}}
     </div>
-    <!-- <div>
-        <span class="drsl-label" translate="case.details.user">User:</span> {{case.user}}
-    </div> -->
 
     <!-- Summary -->
     <div class="drsl-label-value-row">
@@ -16,13 +13,10 @@
     <!-- Status -->
     <div class="drsl-case-status-wrapper">
         <div>
-            <span class="drsl-label" translate="case.details.status.main" ng-click="cycleStatus()">Current Status:</span>
+            <span ng-show="DrslMetadata.demoModeEnabled" class="drsl-label" translate="case.details.status.main" ng-click="cycleStatus()">Status</span>
+            <span ng-hide="DrslMetadata.demoModeEnabled" class="drsl-label" translate="case.details.status.main">Status</span>
             <span>
-                <span ng-show="case.status.name.toLowerCase() == 'created'" translate="case.details.status.created.info"></span>
-                <span ng-show="case.status.name.toLowerCase() == 'estimated'" translate="case.details.status.estimated.info"></span>
-                <span ng-show="case.status.name.toLowerCase() == 'working'" translate="case.details.status.working.info"></span>
-                <span ng-show="case.status.name.toLowerCase() == 'completed'" translate="case.details.status.completed.info"></span>
-                <span ng-show="case.status.name.toLowerCase() == 'closed'" translate="case.details.status.closed.info"></span>
+                <span>{{'case.details.status.' + case.status.name.toLowerCase() + '.info' | translate}}</span>
             </span>
         </div>
     </div>
@@ -33,10 +27,6 @@
         <div class="pull-right" ng-show="case.estimateHours && !case.timeOnCase"><span class="drsl-label" translate="case.details.resolutionETA">ETA to Completion</span> {{case.estimateHours}} hr<span ng-show="(case.estimateHours) > 1">s</span></div>
         <div class="pull-right" ng-show="case.estimateHours && case.timeOnCase"><span class="drsl-label" translate="case.details.resolutionETA">ETA to Completion</span> {{case.estimateHours - case.timeOnCase}} hr<span ng-show="(case.estimateHours - case.timeOnCase) > 1">s</span></div>
     </div>
-    <!-- <div>
-        <span><span class="drsl-label">Start</span> {{case.startDate | date:"MM/dd/yy h:mm a"}}</span>
-        <div class="pull-right"><span class="drsl-label" translate="case.details.resolutionETA">ETA to Completion</span> {{case.resolutionETA}}</div>
-    </div> -->
 
     <!-- Estimate -->
     <div>
