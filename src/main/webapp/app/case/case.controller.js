@@ -95,6 +95,7 @@
             }, vm.DrslMetadata.casePollingRateSeconds * 1000);
         }
         function getCaseUpdates(){
+            vm.updates = [];
             Caseupdate.query(function(result){
                 result.reverse().forEach(function(update){
                     if(update.supportcase.id === vm.currentCase.id){
