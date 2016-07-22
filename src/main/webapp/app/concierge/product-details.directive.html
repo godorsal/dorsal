@@ -3,7 +3,7 @@
         <button type="button" class="btn btn-default" ng-class="{selected: rootType.selectedValue}" uib-dropdown-toggle>
             <span ng-if="rootTranslationWorks(rootType) && !rootType.selectedValue"> {{rootType.description | translate}}</span>
             <span ng-if="!rootTranslationWorks(rootType) && !rootType.selectedValue">{{rootType.name}}</span>
-            <span ng-if="rootType.selectedValue">{{getLabelForTypeValue(rootType) | translate}}</span>
+            <span ng-if="rootType.selectedValue">{{getLabelForTypeValue(rootType)}}</span>
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">

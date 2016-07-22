@@ -31,7 +31,9 @@
             "expertBio": "Expert Bio",
             "expertSince": "Expert Since",
             "numberOfCases": "Number Of Cases",
-            "user": "User"
+            "welcomeMessage": "Welcome Message",
+            "user": "User",
+            "expertbadge": "Expertbadge"
         }
     }
 }

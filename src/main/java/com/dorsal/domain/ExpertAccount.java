@@ -1,5 +1,6 @@
 package com.dorsal.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -7,6 +8,8 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -70,9 +73,18 @@ public class ExpertAccount implements Serializable {
     @Column(name = "number_of_cases")
     private Integer numberOfCases;
 
+    @Size(max = 2048)
+    @Column(name = "welcome_message", length = 2048)
+    private String welcomeMessage;
+
     @OneToOne
     @JoinColumn(unique = true)
     private User user;
+
+    @OneToMany(mappedBy = "expertaccount")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Expertbadge> expertbadges = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -202,12 +214,28 @@ public class ExpertAccount implements Serializable {
         this.numberOfCases = numberOfCases;
     }
 
+    public String getWelcomeMessage() {
+        return welcomeMessage;
+    }
+
+    public void setWelcomeMessage(String welcomeMessage) {
+        this.welcomeMessage = welcomeMessage;
+    }
+
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<Expertbadge> getExpertbadges() {
+        return expertbadges;
+    }
+
+    public void setExpertbadges(Set<Expertbadge> expertbadges) {
+        this.expertbadges = expertbadges;
     }
 
     @Override
@@ -249,6 +277,7 @@ public class ExpertAccount implements Serializable {
             ", expertBio='" + expertBio + "'" +
             ", expertSince='" + expertSince + "'" +
             ", numberOfCases='" + numberOfCases + "'" +
+            ", welcomeMessage='" + welcomeMessage + "'" +
             '}';
     }
 }

@@ -86,6 +86,7 @@
                                 expertBio: null,
                                 expertSince: null,
                                 numberOfCases: null,
+                                welcomeMessage: null,
                                 id: null
                             };
                         }

@@ -133,12 +133,12 @@
                     label = $translate.instant('concierge.caseDetails.version.prefix') + ' ' + selectedType.label;
                 } else if (selectedType) {
                     if(selectedType.value.match(/[^a-zA-Z\d\-_\s\/]/)){
-                        label = null;
+                        label = type.selectedValue;
                     } else {
-                        label = selectedType.label;
+                        label = $translate.instant(selectedType.label);
                     }
                 } else {
-                    label = type.description;
+                    label = $translate.instant(type.description);
                 }
 
                 return label;

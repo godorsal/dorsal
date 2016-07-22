@@ -119,6 +119,18 @@
                     ng-model="vm.expertAccount.numberOfCases"
                      />
         </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.expertAccount.welcomeMessage" for="field_welcomeMessage">Welcome Message</label>
+            <input type="text" class="form-control" name="welcomeMessage" id="field_welcomeMessage"
+                    ng-model="vm.expertAccount.welcomeMessage"
+                    ng-maxlength="2048" />
+            <div ng-show="editForm.welcomeMessage.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.welcomeMessage.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="2048">
+                    This field cannot be longer than 2048 characters.
+                </p>
+            </div>
+        </div>
 
         <div class="form-group">
             <label translate="dorsalApp.expertAccount.user" for="field_user">User</label>
