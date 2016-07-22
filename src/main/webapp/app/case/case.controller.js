@@ -301,6 +301,8 @@
                 modalInstance.result.then(function () {
                     vm.currentCase.isApproved = true;
                     vm.currentCase.status = StatusModel.getState('working');
+                    vm.currentCase.estimateLog = (vm.currentCase.estimateLog) ? vm.currentCase.estimateLog : '';
+                    vm.currentCase.estimateLog += new Date().toISOString().slice(0, 19).replace('T', ' ') + ' ' + vm.currentCase.estimateComment + '\n';
                     vm.currentCase.$update();
                 });
             }
