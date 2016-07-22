@@ -210,7 +210,7 @@ Your e-mail cannot be longer than 100 characters.
         </div>
         <div class="panel-body">
             <div class="drsl-user-list empty" ng-hide="vm.invitedUsers.length">
-                <div>No Authorized Users</div>
+                <div>No Invited Users</div>
             </div>
             <div class="drsl-user-list" ng-show="vm.invitedUsers.length">
                 <table class="table">
@@ -239,17 +239,17 @@ Your e-mail cannot be longer than 100 characters.
 </div>
 <div class="panel panel-default drsl-user-managment" style="width: 586px; height: 500px; float: right; display: inline-block;">
     <div class="panel-heading">
-        <div style="font-size: 14px; height: 35px; padding-top: 7px;">(Invited Users automatically join Authorized Users once they register)</div>
+        <div style="font-size: 14px; height: 35px; padding-top: 7px;">(Invited Users automatically join Active Users once they register)</div>
     </div>
     <div class="panel-body">
         <div class="drsl-user-list empty" ng-hide="vm.authorizedUsers.length">
-            <div>No Invited Users</div>
+            <div>No Active Users</div>
         </div>
         <div class="drsl-user-list" ng-show="vm.authorizedUsers.length">
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Authorized Users</th>
+                        <th>Active Users</th>
                         <th>Remove</th>
                     </tr>
                 </thead>
