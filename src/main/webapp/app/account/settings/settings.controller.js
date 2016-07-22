@@ -193,7 +193,8 @@
                 email: email,
                 langKey: $translate.use(),
                 login: email,
-                password: 'myDorsal'
+                password: 'myDorsal',
+                lastName: "You have been invited by " + vm.settingsAccount.firstName + " " + vm.settingsAccount.lastName + " to join the dorsal application."
             }
             Register.save(newUser, invitedGroup,  onUserSaveError)
         }

@@ -21,17 +21,18 @@ Landing Page
         font-size: 22px;
     }
     .home-connect-button{
-        display: inline-block;
-        color: #fff;
-        background: #f38c20;
+        // display: inline-block;
+        // color: #fff;
+        // background: #f38c20;
         border-radius: 100%;
-        padding: 40px 7px 55px 8px;
-        font-weight: 800;
-        font-size: 22px;
-        line-height: 0.75;
-        -webkit-transition: all 0.3s ease-in-out;
-        transition: all 0.3s ease-in-out;
-        cursor: pointer;
+        border: 0px;
+        // padding: 40px 7px 55px 8px;
+        // font-weight: 800;
+        // font-size: 22px;
+        // line-height: 0.75;
+        // -webkit-transition: all 0.3s ease-in-out;
+        // transition: all 0.3s ease-in-out;
+        // cursor: pointer;
         width: 110px;
         height: 110px;
     }
@@ -49,7 +50,7 @@ Landing Page
     }
     .buttonAndJoin{
         padding-top: 50px;
-        // padding-bottom: 50px;
+        padding-bottom: 60px;
     }
     h4{
         font-weight: 300;

@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('ShareCaseController', ShareCaseController);
 
-    ShareCaseController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase', 'expert', 'User', 'SharedCase', 'Register'];
+    ShareCaseController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase', 'expert', 'User', 'SharedCase', 'Register', 'Principal'];
 
-    function ShareCaseController($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase, expert, User, SharedCase, Register) {
+    function ShareCaseController($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase, expert, User, SharedCase, Register, Principal) {
         var vm = this;
         vm.cancel = cancel;
         vm.addUser = addUser;
@@ -25,12 +25,17 @@
             e.preventDefault();
             $uibModalInstance.dismiss('cancel');
         }
+        Principal.identity().then(function (account) {
+            vm.currentUser = copyAccount(account);
+        });
         function makeUser(email){
             var newUser = {
                 email: email,
                 langKey: $translate.use(),
                 login: email,
-                password: 'myDorsal'
+                password: 'myDorsal',
+                lastName:  vm.currentUser.firstName + " " + vm.currentUser.lastName + " shares the following support case "
+                + vm.case.id + " with you."
             }
             Register.save(newUser, shareCaseNew)
         }
