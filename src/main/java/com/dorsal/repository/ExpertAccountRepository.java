@@ -13,6 +13,7 @@ import java.util.List;
 public interface ExpertAccountRepository extends JpaRepository<ExpertAccount,Long> {
 
     List<ExpertAccount>findOneByFirstTechnologyPreference(String technology);
+    List<ExpertAccount>findOneBySecondTechnologyPreference(String technology);
 
     @Query("select expert_account from ExpertAccount expert_account where expert_account.user.login = ?#{principal.username}")
     List<ExpertAccount> findByUserIsCurrentUser();
