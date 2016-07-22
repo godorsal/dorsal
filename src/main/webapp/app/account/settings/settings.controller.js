@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('SettingsController', SettingsController);
 
-    SettingsController.$inject = ['Principal', 'Auth', 'JhiLanguageService', '$translate', 'Payment', 'Groupaccess', 'Useraccount', 'User', 'Focus', 'Register', 'toastr'];
+    SettingsController.$inject = ['Principal', 'Auth', 'JhiLanguageService', '$translate', 'Payment', 'Groupaccess', 'Useraccount', 'User', 'Focus', 'Register', 'toastr', 'ExpertAccount'];
 
-    function SettingsController(Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, Useraccount, User, focus, Register, toastr) {
+    function SettingsController(Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, Useraccount, User, focus, Register, toastr, ExpertAccount) {
         var vm = this;
 
         vm.error = null;
@@ -29,6 +29,9 @@
         vm.number = 0;
         getAuthorizedUsers()
         // checkAuthorized();
+        console.log(ExpertAccount.query(function(data){
+            console.log(data.length);
+        }));
         Payment.query(function(result){
             result.find(function(ccdata){
                 if(ccdata.user.login === vm.settingsAccount.login){ var data = ccdata.ccdata.split('##')
@@ -74,6 +77,7 @@
         };
 
         Principal.identity().then(function (account) {
+            console.log(account);
             vm.settingsAccount = copyAccount(account);
         });
         // function checkAuthorized(){
