@@ -45,7 +45,7 @@
                     updatetype: {
                         id: 1
                     },
-                    updateMsg: `${attachment.name} was deleted.`
+                    updateMsg: attachment.name + 'was deleted.'
                 }
                 Caseupdate.save(deleteUpdate);
             }
