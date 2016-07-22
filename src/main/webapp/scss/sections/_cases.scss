@@ -327,6 +327,17 @@ Cases
                 text-align: center;
                 margin-top: 20px;
             }
+
+            .drsl-expert-msg {
+                position: absolute;
+                right: 5px;
+                top: 200px;
+                width: 135px;
+
+                .popover-content {
+                    text-align: center;
+                }
+            }
         }
 
         .drsl-badges {
