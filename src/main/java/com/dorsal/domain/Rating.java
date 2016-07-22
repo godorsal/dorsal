@@ -4,6 +4,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.Objects;
@@ -33,6 +34,10 @@ public class Rating implements Serializable {
 
     @Column(name = "has_expert_exceeded")
     private Boolean hasExpertExceeded;
+
+    @Size(max = 1024)
+    @Column(name = "rating_comments", length = 1024)
+    private String ratingComments;
 
     @ManyToOne
     private Supportcase supportcase;
@@ -77,6 +82,14 @@ public class Rating implements Serializable {
         this.hasExpertExceeded = hasExpertExceeded;
     }
 
+    public String getRatingComments() {
+        return ratingComments;
+    }
+
+    public void setRatingComments(String ratingComments) {
+        this.ratingComments = ratingComments;
+    }
+
     public Supportcase getSupportcase() {
         return supportcase;
     }
@@ -113,6 +126,7 @@ public class Rating implements Serializable {
             ", score='" + score + "'" +
             ", rateDetails='" + rateDetails + "'" +
             ", hasExpertExceeded='" + hasExpertExceeded + "'" +
+            ", ratingComments='" + ratingComments + "'" +
             '}';
     }
 }

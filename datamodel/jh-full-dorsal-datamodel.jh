@@ -62,7 +62,8 @@ entity ExpertAccount  {
     isAvailable Boolean,
     expertBio String maxlength(4096),
     expertSince ZonedDateTime,
-    numberOfCases Integer
+    numberOfCases Integer,
+    welcomeMessage String maxlength(2048)
 }
 
 relationship OneToOne {
@@ -92,7 +93,8 @@ entity Useraccount  {
     location String,
     preferlocalexpert Boolean,
     handle String,
-    companyname String
+    companyname String,
+    inviteContext String maxlength(512)
 }
 
 relationship OneToOne {
@@ -241,7 +243,8 @@ entity Rating {
 	dateRated ZonedDateTime,
     score Integer,
     rateDetails String,
-    hasExpertExceeded Boolean
+    hasExpertExceeded Boolean,
+    ratingComments String maxlength(1024)
 }
 
 relationship OneToMany {

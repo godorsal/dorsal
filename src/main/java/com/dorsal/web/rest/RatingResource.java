@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.ZonedDateTime;
@@ -42,7 +43,7 @@ public class RatingResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Rating> createRating(@RequestBody Rating rating) throws URISyntaxException {
+    public ResponseEntity<Rating> createRating(@Valid @RequestBody Rating rating) throws URISyntaxException {
         log.debug("REST request to save Rating : {}", rating);
         if (rating.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("rating", "idexists", "A new rating cannot already have an ID")).body(null);
@@ -69,7 +70,7 @@ public class RatingResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Rating> updateRating(@RequestBody Rating rating) throws URISyntaxException {
+    public ResponseEntity<Rating> updateRating(@Valid @RequestBody Rating rating) throws URISyntaxException {
         log.debug("REST request to update Rating : {}", rating);
         if (rating.getId() == null) {
             return createRating(rating);

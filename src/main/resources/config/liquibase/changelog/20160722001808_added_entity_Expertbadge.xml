@@ -16,7 +16,7 @@
     <!--
         Added the entity Expertbadge.
     -->
-    <changeSet id="20160712221459-1" author="jhipster">
+    <changeSet id="20160722001808-1" author="jhipster">
         <createTable tableName="expertbadge">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
@@ -24,8 +24,8 @@
             <column name="expert_badge_count" type="integer">
                 <constraints nullable="true" />
             </column>
-            
-            <column name="user_id" type="bigint">
+
+            <column name="expertaccount_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
@@ -35,6 +35,10 @@
 
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
-        
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/expertbadge.csv"
+                  separator=";"
+                  tableName="expertbadge"/>
+
     </changeSet>
 </databaseChangeLog>

@@ -4,7 +4,7 @@ describe('Controller Tests', function() {
 
     describe('ExpertAccount Management Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockExpertAccount, MockUser;
+        var MockEntity, MockExpertAccount, MockUser, MockExpertbadge;
         var createController;
 
         beforeEach(inject(function($injector) {
@@ -13,6 +13,7 @@ describe('Controller Tests', function() {
             MockEntity = jasmine.createSpy('MockEntity');
             MockExpertAccount = jasmine.createSpy('MockExpertAccount');
             MockUser = jasmine.createSpy('MockUser');
+            MockExpertbadge = jasmine.createSpy('MockExpertbadge');
             
 
             var locals = {
@@ -20,7 +21,8 @@ describe('Controller Tests', function() {
                 '$rootScope': $rootScope,
                 'entity': MockEntity ,
                 'ExpertAccount': MockExpertAccount,
-                'User': MockUser
+                'User': MockUser,
+                'Expertbadge': MockExpertbadge
             };
             createController = function() {
                 $injector.get('$controller')("ExpertAccountDetailController", locals);

@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -41,7 +42,7 @@ public class UseraccountResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Useraccount> createUseraccount(@RequestBody Useraccount useraccount) throws URISyntaxException {
+    public ResponseEntity<Useraccount> createUseraccount(@Valid @RequestBody Useraccount useraccount) throws URISyntaxException {
         log.debug("REST request to save Useraccount : {}", useraccount);
         if (useraccount.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("useraccount", "idexists", "A new useraccount cannot already have an ID")).body(null);
@@ -65,7 +66,7 @@ public class UseraccountResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Useraccount> updateUseraccount(@RequestBody Useraccount useraccount) throws URISyntaxException {
+    public ResponseEntity<Useraccount> updateUseraccount(@Valid @RequestBody Useraccount useraccount) throws URISyntaxException {
         log.debug("REST request to update Useraccount : {}", useraccount);
         if (useraccount.getId() == null) {
             return createUseraccount(useraccount);

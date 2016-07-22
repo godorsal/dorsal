@@ -75,6 +75,7 @@
                                 score: null,
                                 rateDetails: null,
                                 hasExpertExceeded: null,
+                                ratingComments: null,
                                 id: null
                             };
                         }
