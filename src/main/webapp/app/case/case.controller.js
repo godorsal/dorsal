@@ -12,6 +12,7 @@
         vm.init = init;
         vm.DrslMetadata = DrslMetadata;
         vm.pollForCaseUpdates = pollForCaseUpdates;
+        vm.pausePollForCaseUpdates = false;
         vm.getHistory = getHistory;
         vm.getCurrentCase = getCurrentCase;
         vm.setCurrentCase = setCurrentCase;
@@ -91,7 +92,9 @@
 
         function pollForCaseUpdates() {
             casePoll = $interval(function () {
-                //vm.init();
+                if (!vm.pausePollForCaseUpdates){
+                    vm.init();
+                }
             }, vm.DrslMetadata.casePollingRateSeconds * 1000);
         }
         function getCaseUpdates(){
@@ -203,6 +206,14 @@
                     Rating.save(newRating);
                     vm.currentCase.$update();
                 });
+
+                modalInstance.opened.then(function(){
+                    vm.pausePollForCaseUpdates = true;
+                });
+
+                modalInstance.closed.then(function(){
+                    vm.pausePollForCaseUpdates = false;
+                });
             }
         }
 
@@ -269,6 +280,14 @@
             modalInstance.result.then(function (result) {
                 // console.log(result);
             });
+
+            modalInstance.opened.then(function(){
+                vm.pausePollForCaseUpdates = true;
+            });
+
+            modalInstance.closed.then(function(){
+                vm.pausePollForCaseUpdates = false;
+            });
         }
 
         function openEscalation() {
@@ -328,6 +347,11 @@
         $scope.$on('openCaseAgreement', function (event) {
             event.stopPropagation();
             vm.openCaseAgreement();
+        });
+
+        $scope.$on('pauseOrResumeCasePolling', function (event, data) {
+            event.stopPropagation();
+            vm.pausePollForCaseUpdates = data.pause;
         });
 
         $scope.$on('$destroy', function() {

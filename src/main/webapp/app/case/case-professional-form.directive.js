@@ -40,9 +40,14 @@
 
                 scope.case.$update(function(){
                     toastr.success('This case has been updated', 'Success');
+                    scope.$emit('pauseOrResumeCasePolling', {'pause': false});
                 },function(){
                     toastr.error('The case has failed to update.<br/> Please report the error and try again.', 'Error');
                 });
+            };
+
+            scope.fieldTouched = function () {
+                scope.$emit('pauseOrResumeCasePolling', {'pause': true});
             };
 
             scope.$watch('case.estimateHours', function(newValue, oldValue) {
