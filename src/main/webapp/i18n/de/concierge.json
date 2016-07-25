@@ -130,9 +130,10 @@
             "cloneCase": "clone a case"
         },
         "errors": {
-            "missing.tech": "You forgot the technology",
-            "missing.issue": "You forgot the issue",
-            "missing.all": "You forgot the technology and the issue"
+            "missing.tech": "Please select a technology.",
+            "missing.issue": "Please select an issue type.",
+            "missing.description": "Please enter a brief description.",
+            "missing.all": "Please select an issue type, technology and add a brief description before continuing."
         }
     }
 }

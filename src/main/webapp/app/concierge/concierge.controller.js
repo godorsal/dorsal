@@ -24,9 +24,10 @@
         vm.isAuthenticated = Principal.isAuthenticated;
         $scope.checkAuth = Principal.isAuthenticated;
         vm.product = null;
-        vm.errorMissingTech = $translate.instant('concierge.errors.missing.tech')
-        vm.errorMissingIssue = $translate.instant('concierge.errors.missing.issue')
-        vm.errorMissingAll = $translate.instant('concierge.errors.missing.all')
+        vm.errorMissingTech = $translate.instant('concierge.errors.missing.tech');
+        vm.errorMissingIssue = $translate.instant('concierge.errors.missing.issue');
+        vm.errorMissingDescription = $translate.instant('concierge.errors.missing.description');
+        vm.errorMissingAll = $translate.instant('concierge.errors.missing.all');
         vm.caseDetails = {
             summary: '',
             description: '',
@@ -52,6 +53,12 @@
         vm.technology = {};
         vm.issue = {};
         function createCase(){
+            // Exit/Return if we already know we have errors
+            if (hasErrors()) {
+                checkError();
+                return;
+            }
+
             var brandNewCase = {};
             brandNewCase.technology = vm.technology;
             brandNewCase.issue = vm.issue;
@@ -72,7 +79,7 @@
             }
         }
         var onSaveSuccess = function (result) {
-            console.log("RESULT", result);
+            // console.log("RESULT", result);
             for (var key in vm.technologyProperties) {
                 if (vm.technologyProperties.hasOwnProperty(key)) {
                     var brandNewProperty = {};
@@ -82,7 +89,7 @@
                     // brandNewProperty.supportcase = result.id;
                     brandNewProperty.propertyname = key;
                     brandNewProperty.propertyvalue = vm.technologyProperties[key];
-                    console.log(brandNewProperty);
+                    // console.log(brandNewProperty);
                     Casetechnologyproperty.save(brandNewProperty);
                 }
             }
@@ -97,18 +104,38 @@
             vm.isSaving = false;
             checkError()
         };
+
+        function hasErrors() {
+            return (Object.keys(vm.technology).length === 0 ||
+                Object.keys(vm.issue).length === 0 ||
+                vm.caseDetails.summary.length === 0);
+        }
         function checkError(){
-            if (Object.keys(vm.technology).length === 0 && Object.keys(vm.issue).length === 0) {
-                toastr.warning(vm.errorMissingAll);
-            } else if(Object.keys(vm.technology).length === 0){
-                toastr.warning(vm.errorMissingTech);
-            } else if(Object.keys(vm.issue).length === 0){
-                toastr.warning(vm.errorMissingIssue);
+            var messages = [];
+
+            if (Object.keys(vm.technology).length === 0 && Object.keys(vm.issue).length === 0 && vm.caseDetails.summary.length === 0) {
+                messages.push(vm.errorMissingAll);
+            } else {
+                if(Object.keys(vm.issue).length === 0){
+                    messages.push(vm.errorMissingIssue);
+                }
+
+                if(Object.keys(vm.technology).length === 0){
+                    messages.push(vm.errorMissingTech);
+                }
+
+                if(vm.caseDetails.summary.length === 0){
+                    messages.push(vm.errorMissingDescription);
+                }
+            }
+
+            if (messages.length) {
+                toastr.warning(messages.join('<br/>'), {timeOut: 5000});
             }
         }
         function getCurrentUser(){
             Principal.identity().then(function(account) {
-                console.log(account);
+                // console.log(account);
                 return account
             });
         }
@@ -116,8 +143,7 @@
         * Initialize the controller's data.
         */
         function init(){
-
-            console.log(vm.getCurrentUser());
+            // console.log(vm.getCurrentUser());
             vm.pageTitle = '';
 
             // Make a call to get the initial data.
@@ -163,14 +189,14 @@
                 LoginService.open();
                 $rootScope.$on('authenticationSuccess', function(){
                     Principal.identity().then(function(account){
-                        console.log("MODAL");
+                        // console.log("MODAL");
                         vm.currentUser = account;
                         vm.createCase();
                     })
                 })
             } else {
                 Principal.identity().then(function(account){
-                    console.log("NO MODAL");
+                    // console.log("NO MODAL");
                     vm.currentUser = account;
                     vm.createCase();
                 })
