@@ -25,7 +25,7 @@
             Principal.identity().then(function(account) {
                 vm.account = account;
                 vm.isAuthenticated = Principal.isAuthenticated;
-                if(!account.firstName.length && !account.lastName.length){
+                if(account && !account.firstName.length && !account.lastName.length){
                     $state.go('settings')
                 } else if(account){
                     $state.go('case')
