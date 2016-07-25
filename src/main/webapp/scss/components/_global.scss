@@ -498,7 +498,9 @@ table.scroll thead > tr {
 .attachmentItem {
     margin-right: 10px;
 }
-
+.uploadLink:hover{
+    cursor: pointer;
+}
 // Fonts
 @font-face {
     font-family: 'Raleway';

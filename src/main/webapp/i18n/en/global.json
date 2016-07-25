@@ -68,7 +68,7 @@
             "email.placeholder": "Your e-mail",
             "fileupload": {
                 "drop": "Drop files to attach, or ",
-                "browse": "browse"
+                "browse": "Click here to select a file"
             }
         },
         "messages": {

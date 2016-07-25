@@ -87,8 +87,7 @@
             + '<img data-ng-src="data:image/png;base64,{{attachment.dataStream}}" alt="" style="width: 150px;max-height: 103px;" ng-if="attachment.dataStreamContentType.split(\'/\')[0] == \'image\'">'
             + '<img src="http://neowin.s3.amazonaws.com/forum/uploads/monthly_04_2013/post-360412-0-09676400-1365986245.png" style="width: 100px;" alt="" ng-if="attachment.dataStreamContentType.split(\'/\')[0] !== \'image\' && attachment.dataStreamContentType">'
             + '<i class="fa fa-cloud-upload fa-lg" style="margin-right: 5px;"></i>'
-            + '{{"global.form.fileupload.drop" | translate}}'
-            + '<span type="file" ngf-select ngf-change="setDataStream($file, attachment)">{{"global.form.fileupload.browse" | translate}}</span>'
+            + '<span type="file" ngf-select ngf-change="setDataStream($file, attachment)" class="uploadLink">{{"global.form.fileupload.browse" | translate}}</span>'
             + '</div>'
         };
 
