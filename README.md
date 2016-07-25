@@ -2,6 +2,8 @@
 
 This application was generated using JHipster, you can find documentation and help at [https://jhipster.github.io](https://jhipster.github.io).
 
+## System requirements
+The development environment requires Java JDK 8.x and NodeJS 4.x
 
 ## Development
 
