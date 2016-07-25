@@ -11,12 +11,13 @@
                     <div style="background-color: white;padding: 20px;margin-bottom: 10px;">
                         <div class="drsl-form-grid">
                             <div>User</div>
-                            <div>{{vm.case.user.firstName}}</div>
+                            <div ng-if="vm.case.user.firstName && vm.case.user.lastName">{{vm.case.user.firstName}} {{vm.case.user.lastName}}</div>
+                            <div ng-if="!vm.case.user.firstName || !vm.case.user.lastName">{{vm.case.user.email}}</div>
                         </div>
                         <div class="drsl-form-grid">
                             <div>Expert</div>
                             <div>
-                                <div>{{vm.case.expert.firstName}} {{vm.case.expert.lastName}}</div>
+                                <div>{{vm.case.expertaccount.user.firstName}} {{vm.case.expertaccount.user.lastName}}</div>
                                 <div>
                                     <div ng-show="vm.case.chatRoom"><i class="fa fa-comments-o" tooltip-placement="left" uib-tooltip="{{'case.professional.contact.chat' | translate}}"></i> <a ng-href="{{chatRoom.link}}" target="_blank">{{vm.case.chatRoom.id}}</a></div>
                                 </div>
