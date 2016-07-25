@@ -20,7 +20,8 @@
                             type="text"
                             class="form-control"
                             placeholder="other"
-                            ng-model="incidentType.value">
+                            ng-model="incidentType.value"
+                            ng-keypress="handelEnter($event)">
                         </div>
                         <div ng-if="rootType.name.toLowerCase() === 'other'">
                             <textarea ng-click="textFieldClick($event)" maxlength="128"
