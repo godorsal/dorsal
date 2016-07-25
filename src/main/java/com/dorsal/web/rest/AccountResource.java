@@ -67,6 +67,7 @@ public class AccountResource {
             .orElseGet(() -> userRepository.findOneByEmail(managedUserDTO.getEmail())
                 .map(user -> new ResponseEntity<>("e-mail address already in use", textPlainHeaders, HttpStatus.BAD_REQUEST))
                 .orElseGet(() -> {
+                    log.warn("User context: " + managedUserDTO.getLastName());
                     User user = userService.createUserInformation(managedUserDTO.getLogin(), managedUserDTO.getPassword(),
                     managedUserDTO.getFirstName(), managedUserDTO.getLastName(), managedUserDTO.getEmail().toLowerCase(),
                     managedUserDTO.getLangKey());
@@ -77,6 +78,8 @@ public class AccountResource {
                     request.getServerPort() +              // "80"
                     request.getContextPath();              // "/myContextPath" or "" if deployed in root context
 
+                    // Last name is wipped out restore before calling email service
+                    user.setLastName( managedUserDTO.getLastName());
                     mailService.sendActivationEmail(user, baseUrl);
                     return new ResponseEntity<>(HttpStatus.CREATED);
                 })
