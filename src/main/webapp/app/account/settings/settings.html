@@ -24,7 +24,7 @@
                             <div class="form-group" >
                                 <!-- <label class="control-label" for="firstName" translate="settings.form.firstname">First Name</label> -->
                                 <input type="text" class="form-control" id="firstName" name="firstName"
-                                ng-model="vm.settingsAccount.firstName" ng-minlength=1 ng-maxlength=50 required maxlength="50" ng-class="{updating: vm.updatingUser}" ng-change="vm.updatingUser = true">
+                                ng-model="vm.settingsAccount.firstName" ng-minlength=1 ng-maxlength=50 required maxlength="50" ng-class="{updating: vm.updatingUser}" ng-change="vm.updatingUser = true" placeholder="First Name">
                                 <!-- <input type="text" class="form-control" id="firstName" name="firstName" placeholder="{{'settings.form.firstname.placeholder' | translate}}"
                                 ng-model="vm.settingsAccount.firstName" ng-minlength=1 ng-maxlength=50 required maxlength="50"> -->
                                 <div ng-show="form.firstName.$dirty && form.firstName.$invalid">
@@ -45,7 +45,7 @@
                 <div class="form-group">
                     <!-- <label class="control-label" for="lastName" translate="settings.form.lastname">Last Name</label> -->
                     <input type="text" class="form-control" id="lastName" name="lastName"
-                    ng-model="vm.settingsAccount.lastName" ng-minlength=1 ng-maxlength=50 required maxlength="50">
+                    ng-model="vm.settingsAccount.lastName" ng-minlength=1 ng-maxlength=50 required maxlength="50" placeholder="Last Name">
                     <div ng-show="form.lastName.$dirty && form.lastName.$invalid">
                         <p class="help-block"
                         ng-show="form.lastName.$error.required" translate="settings.messages.validate.lastname.required">
