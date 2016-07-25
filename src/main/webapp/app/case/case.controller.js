@@ -292,6 +292,7 @@
         function openEscalation() {
             if (StatusModel.checkCaseStatus(vm.currentCase.status, 'working') && !vm.isCaseExpert()) {
                 var modalInstance = EscalationFormService.open(vm.currentCase, vm.experts[vm.currentCase.expert]);
+                // TODO: add polling pause here
             }
         }
 
