@@ -82,7 +82,6 @@
         };
 
         Principal.identity().then(function (account) {
-            console.log(account);
             vm.settingsAccount = copyAccount(account);
         });
         // function checkAuthorized(){
@@ -143,7 +142,6 @@
             if(vm.number.join('').length != 16 || vm.creditCard.cvv.toString().length != 3) {
                 toastr["error"]("Saving Error")
                 // vm.error = 'ERROR';
-                console.log("DANG");
                 return;
             }
             vm.creditCard.number = vm.number.join('');
@@ -185,7 +183,6 @@
             })
         }
         function onUserSaveError(error){
-            console.log("NEW ERROR", error);
             toastr["error"]("Incorrect " + error.data.fieldErrors[0].field + " input")
         }
         function makeUser(email){
@@ -227,8 +224,6 @@
                 Groupaccess.save(group, function(data){
                     vm.invitedUsers.push(data)
                     vm.invitedUser = '';
-                    console.log(data);
-                    console.log(data.authorizeduser.email);
                     toastr["success"](data.authorizeduser.email, "Invited User")
                 })
             })

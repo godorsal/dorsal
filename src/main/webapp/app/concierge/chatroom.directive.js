@@ -69,7 +69,6 @@
             }
 
             vm.join = function () {
-                console.log("Join?");
                 ChatService.connect(vm.person, vm.notify, function (error, info) {
                     if (error) {
                         toastr.error('Failed to connect ' + error, 'Error');
@@ -81,7 +80,6 @@
                     ChatService.createChatRoom(roomName, vm.person, function (response) {
                         vm.joined = true;
                         vm.roomInfo = response.room;
-                        console.log("RESP", response);
                         //console.log('--- connected ' + JSON.stringify(vm.roomInfo));
                     })
                 })

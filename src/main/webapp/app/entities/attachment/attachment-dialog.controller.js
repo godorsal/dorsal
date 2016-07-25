@@ -40,9 +40,7 @@
         };
 
         vm.setDataStream = function ($file, attachment) {
-            console.log("DATA STREAM HIT");
             if ($file) {
-                console.log("FILE FOUND");
                 DataUtils.toBase64($file, function(base64Data) {
                     $scope.$apply(function() {
                         attachment.dataStream = base64Data;

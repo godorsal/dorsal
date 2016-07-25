@@ -30,20 +30,11 @@
                         if(newValue === value.name){
                             if($scope.radioData.id === 'product'){
                                 $scope.technology = value;
-                                console.log($scope.technology);
                             } else {
                                 $scope.issue = value;
-                                console.log($scope.issue);
                             }
-                            // console.log(value.id);
                         }
                     })
-                    // if($scope.radioData.id === 'product'){
-                    //     $scope.technology.Technology = newValue;
-                    // } else {
-                    //     $scope.technology.Issue = newValue;
-                    // }
-                    // console.log($scope.technology);
                 });
             },
             template:   '<div class="drsl-linear-radio-wrapper"><div class="drsl-linear-radio">' +

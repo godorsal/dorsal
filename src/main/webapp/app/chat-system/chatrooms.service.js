@@ -39,7 +39,6 @@
         .then(complete, failure)
 
       function complete(response) {
-          console.log("GOOD?", response);
         return response.data.rooms; //[{room: 'room-100'}, {room: 'room-101'}]
       }
 

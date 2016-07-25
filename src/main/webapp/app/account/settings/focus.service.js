@@ -12,10 +12,8 @@
 			$timeout(function() {
 				var element = $window.document.getElementById(id);
 				if(element){
-					console.log("WORKING!!!");
 					element.focus();
 				} else {
-					console.log('GODANGIT');
 				}
 			});
 		}

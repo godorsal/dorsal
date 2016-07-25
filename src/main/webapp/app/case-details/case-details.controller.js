@@ -40,7 +40,6 @@
         }
         function getCurrentUser(){
             Principal.identity().then(function(account) {
-                console.log(account);
                 if(vm.case.expertaccount.user.email == account.email){
                     vm.isExpert = true;
                 } else {
@@ -51,7 +50,6 @@
         Caseupdate.query(function(result){
             result.reverse().forEach(function(update){
                 if(update.supportcase.id === vm.case.id){
-                    console.log(update);
                     if(update.updatetype.id == 2){
                         vm.detailedResolutions.push(update);
                     }
@@ -75,12 +73,10 @@
             vm.attachment.supportcase = {
                 id: vm.case.id
             }
-            console.log(vm.attachment);
             Attachment.save(vm.attachment);
         }
         function onSaveError (error){
             console.log(error);
-            console.log("COMPLETE FAILURE");
         }
         function submit() {
             if (vm.attachment.name) {
@@ -100,7 +96,6 @@
                     Supportcase.update(vm.case);
                 }
             }
-            console.log("Case", vm.caseupdate);
             if (vm.caseupdate.id !== null) {
                 Caseupdate.update(vm.caseupdate, onSaveSuccess, onSaveError);
             } else {

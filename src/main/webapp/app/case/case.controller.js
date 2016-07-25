@@ -102,7 +102,6 @@
             Caseupdate.query(function(result){
                 result.reverse().forEach(function(update){
                     if(update.supportcase.id === vm.currentCase.id){
-                        console.log(update);
                         if(update.updatetype.id == 2){
                             vm.detailedResolutions.push(update);
                         }
@@ -291,7 +290,6 @@
         }
 
         function openEscalation() {
-            console.log("OEPN");
             if (StatusModel.checkCaseStatus(vm.currentCase.status, 'working') && !vm.isCaseExpert()) {
                 var modalInstance = EscalationFormService.open(vm.currentCase, vm.experts[vm.currentCase.expert]);
             }

@@ -46,7 +46,6 @@
                     supportcase: vm.case
                 }
                 SharedCase.save(newSharedCase, function(data){
-                    console.log(data);
                     vm.sharedUsers.push(data)
                     vm.emailInput = '';
                 })
@@ -58,13 +57,11 @@
                 supportcase: vm.case
             }
             SharedCase.save(newSharedCase, function(data){
-                console.log(data);
                 vm.sharedUsers.push(data)
                 vm.emailInput = '';
             })
         }
         function addUser() {
-            console.log(vm.emailInput);
             var newUsers = vm.emailInput.split(',');
             newUsers.forEach(function(currentEmail){
                 User.query(function(result){
@@ -107,7 +104,6 @@
                 result.find(function(user){
                     if(user.supportcase.id === vm.case.id){
                         vm.sharedUsers.push(user);
-                        console.log("current", vm.sharedUsers);
                     }
                 })
             })
