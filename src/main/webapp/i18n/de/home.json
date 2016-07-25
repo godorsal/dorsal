@@ -13,16 +13,16 @@
         },
         "additionalInfo": {
             "slot_1": {
-                "title": "FAST, EASY ACCESS",
-                "description": "Describe your problem in seconds, get the right Experts started on your case and keep everyone on your team in the loop. The Dorsal web service makes it easy, fast and secure."
+                "title": "Fast, Easy Access",
+                "description": "Describe your problem in seconds, get the right experts started on the case and keep your team in the loop."
             },
             "slot_2": {
-                "title": "COMMUNITY POWER",
-                "description": "Share, solve and collaborate on your case with the Dorsal community experts and anyone on your team"
+                "title": "Personalized for You",
+                "description": "Tune the Dorsal service to your technical interests, enterprise standards and security policies."
             },
             "slot_3": {
-                "title": "PERSONALIZED TO YOU",
-                "description": "Tune the Dorsal service to meet your technology interests, company best practices and technical standards."
+                "title": "Certified Professionals",
+                "description": "Our experts are vetted to maintain the highest standards of expertise, quality and security."
             }
         }
     }
