@@ -292,12 +292,27 @@
         function openEscalation() {
             if (StatusModel.checkCaseStatus(vm.currentCase.status, 'working') && !vm.isCaseExpert()) {
                 var modalInstance = EscalationFormService.open(vm.currentCase, vm.experts[vm.currentCase.expert]);
-                // TODO: add polling pause here
+
+                modalInstance.opened.then(function(){
+                    vm.pausePollForCaseUpdates = true;
+                });
+
+                modalInstance.closed.then(function(){
+                    vm.pausePollForCaseUpdates = false;
+                });
             }
         }
 
         function openShare() {
             var modalInstance = ShareCaseService.open(vm.currentCase, vm.experts[vm.currentCase.expert]);
+
+            modalInstance.opened.then(function(){
+                vm.pausePollForCaseUpdates = true;
+            });
+
+            modalInstance.closed.then(function(){
+                vm.pausePollForCaseUpdates = false;
+            });
         }
 
 
@@ -323,6 +338,14 @@
                     vm.currentCase.estimateLog = (vm.currentCase.estimateLog) ? vm.currentCase.estimateLog : '';
                     vm.currentCase.estimateLog += new Date().toISOString().slice(0, 19).replace('T', ' ') + ' ' + vm.currentCase.estimateComment + '\n';
                     vm.currentCase.$update();
+                });
+
+                modalInstance.opened.then(function(){
+                    vm.pausePollForCaseUpdates = true;
+                });
+
+                modalInstance.closed.then(function(){
+                    vm.pausePollForCaseUpdates = false;
                 });
             }
         }
