@@ -346,6 +346,7 @@ Cases
                 width: 135px;
 
                 .popover-content {
+                    @extend .drsl-value;
                     text-align: center;
                 }
             }
