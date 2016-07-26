@@ -211,7 +211,17 @@
                 });
 
                 modalInstance.closed.then(function(){
+                    var i, badge;
+
                     vm.pausePollForCaseUpdates = false;
+
+                    for (i = 0; i < vm.badges.length; i++) {
+                        badge = vm.badges[i];
+
+                        if (badge.selected) {
+                            delete badge.selected;
+                        }
+                    }
                 });
             }
         }
