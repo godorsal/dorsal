@@ -28,6 +28,7 @@
                 "userAccount": "User Account",
                 "sharedCase": "Shared Case",
                 "attachment": "Anhang",
+                "escalateCase": "Escalate Case",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

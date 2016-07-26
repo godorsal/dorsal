@@ -281,4 +281,23 @@ relationship OneToMany {
     User{sharedcase(owner)} to SharedCase{owner}
 }
 
+////////////////////////////////////
+// Entity EscalateCase
+//
+
+entity EscalateCase {
+    reason String maxlength(4096),
+	dateEscalated ZonedDateTime,
+    escalationType String
+}
+
+relationship OneToMany {
+	Supportcase{EscalateCase(supportcase)} to EscalateCase{supportcase}
+}
+
+relationship OneToMany {
+	User{EscalateCase(user)} to EscalateCase{user}
+}
+
+
 
