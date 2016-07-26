@@ -46,6 +46,7 @@ public class AccountResource {
     @Inject
     private MailService mailService;
 
+
     /**
      * POST  /register : register the user.
      *
@@ -67,20 +68,31 @@ public class AccountResource {
             .orElseGet(() -> userRepository.findOneByEmail(managedUserDTO.getEmail())
                 .map(user -> new ResponseEntity<>("e-mail address already in use", textPlainHeaders, HttpStatus.BAD_REQUEST))
                 .orElseGet(() -> {
-                    log.warn("User context: " + managedUserDTO.getLastName());
+                    String registartionMessage = managedUserDTO.getLastName();
+                    log.info("Registration message:" + registartionMessage);
+
                     User user = userService.createUserInformation(managedUserDTO.getLogin(), managedUserDTO.getPassword(),
                     managedUserDTO.getFirstName(), managedUserDTO.getLastName(), managedUserDTO.getEmail().toLowerCase(),
                     managedUserDTO.getLangKey());
+
+                    // Read the server name from the configuration application-{dev|prod}.yml file
+                    String serverURL = mailService.getDeploymentServerURL();
+                    if (serverURL == null || serverURL.length() == 0) {
+                        // If property is not defined fall back to localhost
+                        serverURL = request.getServerName() +      // "myhost"
+                            ":" +                                  // ":"
+                            request.getServerPort();
+                    }
+
+
                     String baseUrl = request.getScheme() + // "http"
                     "://" +                                // "://"
-                    request.getServerName() +              // "myhost"
-                    ":" +                                  // ":"
-                    request.getServerPort() +              // "80"
+                    serverURL +                             // generated above with the properties setting
                     request.getContextPath();              // "/myContextPath" or "" if deployed in root context
 
                     // Last name is wipped out restore before calling email service
-                    user.setLastName( managedUserDTO.getLastName());
-                    mailService.sendActivationEmail(user, baseUrl);
+                    user.setLastName( registartionMessage );
+                    mailService.sendActivationEmail(user, baseUrl, registartionMessage);
 
                     // Clear last name with was just a transient setting
                     user.setLastName("");

@@ -12,11 +12,15 @@
             Your JHipster account has been created, please click on the URL below to activate it:
         </p>
         <p>
-            Login with the password: myDorsal
+            If you were invited to join use the email to login with the default password: <b>myDorsal</b>><br>
+            Make sure that after login go to your Account Settings and change the password.
+        </p>
+        <p>
+            If ou went through the registration process use the credential that you have created to login.
         </p>
         <p>
             <a th:href="@{|${baseUrl}/#/activate?key=${user.activationKey}|}"
-               th:text="|${user.login}|">Activation Link</a>
+               th:text="|Activation Link for user ${user.login}|">Activation Link</a>
         </p>
         <p>
             <span th:text="#{email.activation.text2}">Regards, </span>

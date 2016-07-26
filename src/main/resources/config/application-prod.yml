@@ -10,6 +10,12 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
+dorsal:
+    support:
+        mail: support@godorsal.com
+
+    application:
+        url: app.godorsal.com
 
 spring:
     devtools:
@@ -18,7 +24,7 @@ spring:
         livereload:
             enabled: false
     datasource:
-        url: jdbc:postgresql://dorsal-db-prod-1.cjigsiwzvxbf.us-west-1.rds.amazonaws.com:5432/dorsalprod
+        url: jdbc:postgresql://psqldb:5432/dorsalprod
         name:
         username: dorsal
         password: dorsal
