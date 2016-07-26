@@ -1,0 +1,26 @@
+{
+    "dorsalApp": {
+        "escalateCase" : {
+            "home": {
+                "title": "Escalate Cases",
+                "createLabel": "Escalate Case erstellen",
+                "createOrEditLabel": "Escalate Case erstellen oder bearbeiten",
+                "search": "Suche nach Escalate Case"
+            },
+            "created": "Escalate Case erstellt mit ID {{ param }}",
+            "updated": "Escalate Case aktualisiert mit ID {{ param }}",
+            "deleted": "Escalate Case gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Escalate Case {{ id }} wirklich dauerhaft gejöscht werden?"
+            },
+            "detail": {
+                "title": "Escalate Case"
+            },
+            "reason": "Reason",
+            "dateEscalated": "Date Escalated",
+            "escalationType": "Escalation Type",
+            "supportcase": "Supportcase",
+            "user": "User"
+        }
+    }
+}

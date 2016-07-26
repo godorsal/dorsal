@@ -1,0 +1,33 @@
+
+<div>
+    <h2><span translate="dorsalApp.escalateCase.detail.title">Escalate Case</span> {{vm.escalateCase.id}}</h2>
+    <hr>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span translate="dorsalApp.escalateCase.reason">Reason</span></dt>
+        <dd>
+            <span>{{vm.escalateCase.reason}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.escalateCase.dateEscalated">Date Escalated</span></dt>
+        <dd>
+            <span>{{vm.escalateCase.dateEscalated | date:'medium'}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.escalateCase.escalationType">Escalation Type</span></dt>
+        <dd>
+            <span>{{vm.escalateCase.escalationType}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.escalateCase.supportcase">Supportcase</span></dt>
+        <dd>
+            <a ui-sref="supportcase-detail({id:vm.escalateCase.supportcase.id})">{{vm.escalateCase.supportcase.id}}</a>
+        </dd>
+        <dt><span translate="dorsalApp.escalateCase.user">User</span></dt>
+        <dd>
+            {{vm.escalateCase.user.id}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

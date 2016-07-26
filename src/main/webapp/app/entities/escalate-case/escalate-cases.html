@@ -1,0 +1,68 @@
+<div>
+    <h2 translate="dorsalApp.escalateCase.home.title">Escalate Cases</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="escalate-case.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  translate="dorsalApp.escalateCase.home.createLabel">
+                        Create new Escalate Case
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span translate="global.field.id">ID</span></th>
+                    <th><span translate="dorsalApp.escalateCase.reason">Reason</span></th>
+                    <th><span translate="dorsalApp.escalateCase.dateEscalated">Date Escalated</span></th>
+                    <th><span translate="dorsalApp.escalateCase.escalationType">Escalation Type</span></th>
+                    <th><span translate="dorsalApp.escalateCase.supportcase">Supportcase</span></th>
+                    <th><span translate="dorsalApp.escalateCase.user">User</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="escalateCase in vm.escalateCases track by escalateCase.id">
+                    <td><a ui-sref="escalate-case-detail({id:escalateCase.id})">{{escalateCase.id}}</a></td>
+                    <td>{{escalateCase.reason}}</td>
+                    <td>{{escalateCase.dateEscalated | date:'medium'}}</td>
+                    <td>{{escalateCase.escalationType}}</td>
+                    <td>
+                        <a ui-sref="supportcase-detail({id:escalateCase.supportcase.id})">{{escalateCase.supportcase.id}}</a>
+                    </td>
+                    <td>
+                        {{escalateCase.user.id}}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="escalate-case-detail({id:escalateCase.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="escalate-case.edit({id:escalateCase.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="escalate-case.delete({id:escalateCase.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
