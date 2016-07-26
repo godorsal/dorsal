@@ -11,10 +11,10 @@ Landing Page
         display: none;
     }
     .home-title{
+        font-family: "Raleway";
         font-size: 49px;
-        font-weight: 800;
+        font-weight: 900;
         text-decoration: none;
-        // color: #1A1A1A;
         color: rgb(25%, 25%, 25%)
     }
     .home-subtitle{
@@ -227,9 +227,6 @@ Landing Page
         padding-top: 5px;
         cursor: pointer;
     }
-}
-* {
-    // font-family: "Raleway";
 }
 .drsl-home-view .tooltip {
     font-size: $default-font-size;
