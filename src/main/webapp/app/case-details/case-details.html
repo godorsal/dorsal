@@ -15,9 +15,9 @@
                 <div class="drsl-dialog-content">
                     <!-- User -->
                     <div class="drsl-form-grid" style="text-align: right;">
-                        <div translate="case.details.user">User</div>
-                        <div ng-if="vm.case.user.firstName && vm.case.user.lastName">{{vm.case.user.firstName}} {{vm.case.user.lastName}}</div>
-                        <div ng-if="!vm.case.user.firstName || !vm.case.user.lastName">{{vm.case.user.email}}</div>
+                        <div class="drsl-label" translate="case.details.user">User</div>
+                        <div class="drsl-value"  ng-if="vm.case.user.firstName && vm.case.user.lastName">{{vm.case.user.firstName}} {{vm.case.user.lastName}}</div>
+                        <div class="drsl-value" ng-if="!vm.case.user.firstName || !vm.case.user.lastName">{{vm.case.user.email}}</div>
                     </div>
                     <!-- <div class="drsl-form-grid">
                     <div translate="case.details.user">User</div>
@@ -26,10 +26,10 @@
 
                 <!-- Expert -->
                 <div class="drsl-form-grid">
-                    <div translate="case.professional.expert">Expert</div>
-                    <div>
+                    <div class="drsl-label" translate="case.professional.expert">Expert</div>
+                    <div class="drsl-value">
                         <div>{{vm.case.expertaccount.user.firstName}} {{vm.case.expertaccount.user.lastName}}</div>
-                        <contact-info contact="vm.expert.contact" chat-room="vm.case.chatRoom"></contact-info>
+                        <contact-info contact="vm.case.expertaccount" chat-room="vm.case.chatRoom"></contact-info>
                     </div>
                 </div>
                 <!-- <div class="drsl-form-grid">
@@ -42,35 +42,35 @@
 
         <!-- Summary -->
         <div class="drsl-form-grid">
-            <div translate="case.details.summary">Summary</div>
-            <div>{{vm.summary}}</div>
+            <div class="drsl-label" translate="case.details.summary">Summary</div>
+            <div class="drsl-value">{{vm.summary}}</div>
             <!-- <div><input type="text" class="form-control" ng-model="vm.summary"></div> -->
         </div>
         <div class="drsl-form-grid">
-            <div translate="case.details.technology">Technology</div>
-            <div>{{vm.case.technology.name}}</div>
+            <div class="drsl-label" translate="case.details.technology">Technology</div>
+            <div class="drsl-value">{{vm.case.technology.name}}</div>
         </div>
 
         <!-- Incident Details -->
         <div class="drsl-incident-items">
             <div style="text-align: left; margin-left: 134px;">
-                <span style="padding-right: 6px;">Issue</span>
-                <span style="margin-left: 1px;">
+                <span class="drsl-label" style="padding-right: 6px;">Issue</span>
+                <span class="drsl-value" style="margin-left: 1px;">
                     {{vm.case.issue.name}}<br>
                 </span>
             </div>
             <div style="text-align: left;">
-                <span>Technology Properties</span>
+                <span class="drsl-label">Technology Properties</span>
                 <br>
                 <span ng-repeat="property in vm.technologyProps">
-                    {{property.propertyname}} {{property.propertyvalue}}<br>
+                    <span class="drsl-label">{{property.propertyname}}</span> <span class="drsl-value">{{property.propertyvalue}}</span><br>
                 </span>
             </div>
         </div>
         <br>
         <!-- Uploaded Files -->
         <div class="drsl-form-grid">
-            <div translate="case.details.uploadedFiles">Uploaded Files</div>
+            <div class="drsl-label" translate="case.details.uploadedFiles">Uploaded Files</div>
             <div>
                 <div class="drsl-file-upload-section">
                     <div>
@@ -86,19 +86,19 @@
         <div><i class="fa fa-minus"></i></div>
     </div> -->
     <div class="drsl-form-grid">
-        <div>Estimate History</div>
-        <div>{{vm.case.estimateLog}}</div>
+        <div class="drsl-label">Estimate History</div>
+        <div class="drsl-value">{{vm.case.estimateLog}}</div>
     </div>
     <div class="drsl-form-grid" style="width: 688px;">
-        <div>Update History</div>
+        <div class="drsl-label">Update History</div>
         <!-- <div class="historyBox"> -->
         <div>
             <table class="scroll table-striped">
                 <thead>
                     <tr>
-                        <th style="font-weight: normal;">Message</th>
-                        <th style="padding-left: 177px; font-weight: normal;">Date</th>
-                        <th style="padding-left: 161px; font-weight: normal;">User/Expert</th>
+                        <th class="drsl-label">Message</th>
+                        <th class="drsl-label" style="padding-left: 177px;">Date</th>
+                        <th class="drsl-label" style="padding-left: 161px;">User/Expert</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -115,8 +115,8 @@
     </div>
     <!-- Chat Log -->
     <div class="drsl-form-grid" >
-        <div>Update Message</div>
-        <div><textarea class="form-control" name="updateHistory" id="updateHistory" cols="30" rows="5" ng-model="vm.updatemsg"></textarea></div>
+        <div class="drsl-label">Update Message</div>
+        <div><textarea class="form-control drsl-value" name="updateHistory" id="updateHistory" cols="30" rows="5" ng-model="vm.updatemsg"></textarea></div>
     </div>
     <div class="drsl-form-grid" ng-if="vm.isExpert">
         <div>Update Type</div>
