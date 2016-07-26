@@ -202,9 +202,9 @@ Your e-mail cannot be longer than 100 characters.
         Manage Authorized Users
     </div>
     <div class="panel panel-default drsl-user-managment" style="width: 566px; height: 500px; float: left; display: inline-block;">
-        <div class="panel-heading">
+        <div class="panel-heading" style="padding-left: 10px;">
             <form class="drsl-user-add-form" name="addUserForm" ng-submit="vm.addAuthorizedUser()">
-                <label class="control-label" for="uEmail">Add User</label>
+                <label class="control-label" for="uEmail" style="padding-right: 10px;">Add User</label>
                 <input type="email" class="form-control" id="uEmail" ng-model="vm.invitedUser" style="width: 375px; display: inline-block; padding-top: 5px;" name="uEmail" placeholder="Email address; multiple users separated by commas"
                 ng-minlength=1 >
                 <button type="submit" class="btn btn-success" translate="settings.form.button" style="margin-left: 8px;">Update</button>
