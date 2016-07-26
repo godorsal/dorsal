@@ -6,6 +6,7 @@ import com.dorsal.domain.Supportcase;
 import com.dorsal.repository.ExpertAccountRepository;
 import com.dorsal.repository.SupportcaseRepository;
 import com.dorsal.repository.UserRepository;
+import com.dorsal.service.emailNotificationUtility;
 import com.dorsal.repository.UserRepository;
 import com.dorsal.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
@@ -16,12 +17,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 /**
@@ -42,6 +45,9 @@ public class SupportcaseResource {
 
     @Inject
     private ExpertAccountRepository expertAccountRepository;
+
+    @Inject
+    private emailNotificationUtility notificationService;
 
 
     /**
@@ -92,6 +98,12 @@ public class SupportcaseResource {
         }
 
         Supportcase result = supportcaseRepository.save(supportcase);
+
+        /*
+            Notification
+         */
+        notificationService.createSupportCaseNotifications(supportcase);
+
         return ResponseEntity.created(new URI("/api/supportcases/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("supportcase", result.getId().toString()))
             .body(result);
@@ -119,6 +131,23 @@ public class SupportcaseResource {
         supportcase.setDateLastUpdate( ZonedDateTime.now() );
 
         Supportcase result = supportcaseRepository.save(supportcase);
+
+        // Send out notification depending on the status and action
+        if (   (supportcase.getEstimateHours() != null)
+            && (supportcase.getExpectedResult() !=null)
+            && (supportcase.isIsApproved() == false)
+            && (supportcase.getStatus().getName().equalsIgnoreCase("ESTIMATED"))) {
+            log.warn("Expert Estimated Support case");
+            notificationService.createSupportCaseEstimate(supportcase);
+        } else if (   (supportcase.getEstimateHours() != null)
+                    && (supportcase.getExpectedResult() !=null)
+                    && (supportcase.isIsApproved() == false)
+                    && (supportcase.getStatus().getName().equalsIgnoreCase("WORKING"))) {
+            log.warn("Expert re-Estimated Support case");
+            notificationService.updateSupportCaseEstimate(supportcase);
+        }
+
+
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("supportcase", supportcase.getId().toString()))
             .body(result);

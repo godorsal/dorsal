@@ -81,6 +81,10 @@ public class AccountResource {
                     // Last name is wipped out restore before calling email service
                     user.setLastName( managedUserDTO.getLastName());
                     mailService.sendActivationEmail(user, baseUrl);
+
+                    // Clear last name with was just a transient setting
+                    user.setLastName("");
+                    userRepository.save(user);
                     return new ResponseEntity<>(HttpStatus.CREATED);
                 })
         );
