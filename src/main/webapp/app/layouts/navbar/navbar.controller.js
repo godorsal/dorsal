@@ -68,7 +68,7 @@
         function getIdentity() {
             Principal.identity().then(function (account) {
                 if (account) {
-                    vm.accountFirstName = account.firstName;
+                    vm.accountFirstName = (account.firstName) ? account.firstName : account.email;
                 }
             });
         }
