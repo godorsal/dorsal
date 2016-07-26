@@ -1,7 +1,7 @@
 <div class="drsl-case-summary">
     <!-- User Name -->
     <div>
-        <span class="drsl-label" translate="case.details.user">User:</span> {{case.user.firstName}}
+        <span class="drsl-label" translate="case.details.user">User:</span> {{case.user.firstName || case.user.email}}
     </div>
 
     <!-- Summary -->
