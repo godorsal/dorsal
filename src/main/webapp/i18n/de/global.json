@@ -33,6 +33,7 @@
             "account": {
                 "main": "Your Account",
                 "hello": "Hello,",
+                "mycases": "My Cases",
                 "settings": "Einstellungen",
                 "password": "Passwort",
                 "sessions": "Sitzungen",
