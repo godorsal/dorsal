@@ -10,6 +10,12 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
+dorsal:
+    support:
+        mail: support@godorsal.com
+
+    application:
+        url: localhost:8080
 
 spring:
     devtools:

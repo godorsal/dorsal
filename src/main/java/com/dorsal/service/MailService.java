@@ -1,5 +1,6 @@
 package com.dorsal.service;
 
+import com.dorsal.config.DorsalProperties;
 import com.dorsal.config.JHipsterProperties;
 import com.dorsal.domain.User;
 
@@ -46,6 +47,9 @@ public class MailService {
     @Inject
     private SpringTemplateEngine templateEngine;
 
+    @Inject
+    private DorsalProperties dorsalProperties;
+
     @Async
     public void sendEmail(String to, String subject, String content, boolean isMultipart, boolean isHtml) {
         log.debug("Send e-mail[multipart '{}' and html '{}'] to '{}' with subject '{}' and content={}",
@@ -67,7 +71,7 @@ public class MailService {
     }
 
     @Async
-    public void sendActivationEmail(User user, String baseUrl) {
+    public void sendActivationEmail(User user, String baseUrl, String actionMessage) {
         log.debug("Sending activation e-mail to '{}'", user.getEmail());
         Locale locale = Locale.forLanguageTag(user.getLangKey());
         Context context = new Context(locale);
@@ -79,7 +83,6 @@ public class MailService {
             or if a case is shared.
          */
         String      subject        = "";
-        String      actionMessage  = user.getLastName();
         String[]    args           = {""};
 
         log.info("sendActivation Email() Last Name entry " + actionMessage);
@@ -127,6 +130,10 @@ public class MailService {
         String content = templateEngine.process("passwordResetEmail", context);
         String subject = messageSource.getMessage("email.reset.title", null, locale);
         sendEmail(user.getEmail(), subject, content, false, true);
+    }
+
+    public String getDeploymentServerURL() {
+        return dorsalProperties.getApplication().getUrl();
     }
 
 }
