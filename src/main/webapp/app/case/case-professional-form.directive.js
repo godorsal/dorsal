@@ -37,13 +37,14 @@
                 if (scope.case.isApproved && scope.resolved && StatusModel.checkCaseStatus(scope.case.status, 'working')) {
                     scope.case.status = StatusModel.getState('completed');
                 }
-
-                scope.case.$update(function(){
+                scope.case.$update(caseUpdateSuccess, caseUpdateError);
+                function caseUpdateSuccess(){
                     toastr.success('This case has been updated', 'Success');
                     scope.$emit('pauseOrResumeCasePolling', {'pause': false});
-                },function(){
+                }
+                function caseUpdateError(error){
                     toastr.error('The case has failed to update.<br/> Please report the error and try again.', 'Error');
-                });
+                }
             };
 
             scope.fieldTouched = function () {
