@@ -14,42 +14,42 @@
                     <div class="drsl-dialog-content">
                         <!-- Summary -->
                         <div class="drsl-form-grid">
-                            <div translate="case.details.summary">Summary</div>
-                            <div><textarea class="form-control" name="detailedResolution" id="detailedResolution" ng-model="vm.case.summary" cols="30" rows="5" readonly></textarea></div>
+                            <div class="drsl-label" translate="case.details.summary">Summary</div>
+                            <div><textarea class="form-control drsl-value" name="detailedResolution" id="detailedResolution" ng-model="vm.case.summary" cols="30" rows="5" readonly></textarea></div>
                         </div>
 
                         <!-- Desired Outcome -->
                         <div class="drsl-form-grid">
-                            <div translate="case.details.desiredOutcome">Desired Outcome</div>
-                            <div><textarea class="form-control" name="detailedResolution" id="detailedResolution" ng-model="vm.case.expectedResult" cols="30" rows="5" readonly></textarea></div>
+                            <div class="drsl-label" translate="case.details.desiredOutcome">Desired Outcome</div>
+                            <div><textarea class="form-control drsl-value" name="detailedResolution" id="detailedResolution" ng-model="vm.case.expectedResult" cols="30" rows="5" readonly></textarea></div>
                         </div>
 
                         <!-- Estimate Comment -->
                         <div class="drsl-form-grid">
-                            <div translate="case.professional.input.estimateComment.noBR">Estimate Comment</div>
-                            <div><textarea class="form-control" name="detailedResolution" id="detailedResolution" ng-model="vm.case.estimateComment" cols="30" rows="5" readonly></textarea></div>
+                            <div class="drsl-label" translate="case.professional.input.estimateComment.noBR">Estimate Comment</div>
+                            <div><textarea class="form-control drsl-value" name="detailedResolution" id="detailedResolution" ng-model="vm.case.estimateComment" cols="30" rows="5" readonly></textarea></div>
                         </div>
 
                         <!-- Expert -->
                         <div class="drsl-form-grid">
-                            <div translate="case.professional.expert">Expert</div>
+                            <div class="drsl-label" translate="case.professional.expert">Expert</div>
                             <div>
-                                <div>{{vm.case.expertaccount.user.firstName}} {{vm.case.expertaccount.user.lastName}}</div>
+                                <div class="drsl-value">{{vm.case.expertaccount.user.firstName}} {{vm.case.expertaccount.user.lastName}}</div>
                             </div>
                         </div>
 
                         <!-- Estimate -->
                         <div class="drsl-form-grid">
-                            <div translate="case.details.estimate">Estimate</div>
+                            <div class="drsl-label" translate="case.details.estimate">Estimate</div>
                             <div>
-                                <div><case-estimate hours="{{vm.case.estimateHours}}"></case-estimate></div>
+                                <div class="drsl-value"><case-estimate hours="{{vm.case.estimateHours}}"></case-estimate></div>
                             </div>
                         </div>
 
                         <!-- Agreement -->
                         <div class="drsl-form-grid">
                             <div translate="case.agreement.agreementLabel">Agreement</div>
-                            <div><label><input type="checkbox" ng-model="vm.agreeToEstimate"> <span translate="case.agreement.checkboxMsg" translate-values="{username: vm.case.user.firstName || vm.case.user.email}" style="font-weight: normal;"></span></label></div>
+                            <div><label><input type="checkbox" ng-model="vm.agreeToEstimate"> <span translate="case.agreement.checkboxMsg" translate-values="{username: vm.case.user.firstName || vm.case.user.email}"></span></label></div>
                         </div>
                     </div>
                 </div>

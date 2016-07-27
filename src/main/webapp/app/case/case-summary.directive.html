@@ -1,13 +1,13 @@
 <div class="drsl-case-summary">
     <!-- User Name -->
     <div>
-        <span class="drsl-label" translate="case.details.user">User:</span> {{case.user.firstName || case.user.email}}
+        <span class="drsl-label" translate="case.details.user">User:</span> <span class="drsl-value">{{case.user.firstName || case.user.email}}</span>
     </div>
 
     <!-- Summary -->
     <div class="drsl-label-value-row">
         <div><span class="drsl-label" translate="case.details.summary">Summary:</span></div>
-        <div><div class="drsl-scrolling-container">{{case.summary}}</div></div>
+        <div><div class="drsl-scrolling-container drsl-value">{{case.summary}}</div></div>
     </div>
 
     <!-- Status -->
@@ -16,23 +16,23 @@
             <span ng-show="DrslMetadata.demoModeEnabled" class="drsl-label" translate="case.details.status.main" ng-click="cycleStatus()">Status</span>
             <span ng-hide="DrslMetadata.demoModeEnabled" class="drsl-label" translate="case.details.status.main">Status</span>
             <span>
-                <span>{{'case.details.status.' + case.status.name.toLowerCase() + '.info' | translate}}</span>
+                <span class="drsl-value">{{'case.details.status.' + case.status.name.toLowerCase() + '.info' | translate}}</span>
             </span>
         </div>
     </div>
 
     <!-- Start / ETA to Completion -->
     <div>
-        <span><span class="drsl-label">Start</span> {{case.dateCreated | date:"MM/dd/yy h:mm a"}}</span>
-        <div class="pull-right" ng-show="case.estimateHours && !case.timeOnCase"><span class="drsl-label" translate="case.details.resolutionETA">ETA to Completion</span> {{case.estimateHours}} hr<span ng-show="(case.estimateHours) > 1">s</span></div>
-        <div class="pull-right" ng-show="case.estimateHours && case.timeOnCase"><span class="drsl-label" translate="case.details.resolutionETA">ETA to Completion</span> {{case.estimateHours - case.timeOnCase}} hr<span ng-show="(case.estimateHours - case.timeOnCase) > 1">s</span></div>
+        <span><span class="drsl-label">Start</span> <span class="drsl-value">{{case.dateCreated | date:"MM/dd/yy h:mm a"}}</span></span>
+        <div class="pull-right drsl-value" ng-show="case.estimateHours && !case.timeOnCase"><span class="drsl-label" translate="case.details.resolutionETA">ETA to Completion</span> {{case.estimateHours}} hr<span ng-show="(case.estimateHours) > 1">s</span></div>
+        <div class="pull-right drsl-value" ng-show="case.estimateHours && case.timeOnCase"><span class="drsl-label" translate="case.details.resolutionETA">ETA to Completion</span> {{case.estimateHours - case.timeOnCase}} hr<span ng-show="(case.estimateHours - case.timeOnCase) > 1">s</span></div>
     </div>
 
     <!-- Estimate -->
     <div>
         <span>
             <span class="drsl-label" translate="case.details.estimate">Estimate</span>
-            <case-estimate hours="{{case.estimateHours}}"></case-estimate>
+            <span class="drsl-value"><case-estimate hours="{{case.estimateHours}}"></case-estimate></span>
         </span>
     </div>
 

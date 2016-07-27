@@ -11,7 +11,7 @@
                     <div></div>
                     <div>
                         <div class="btn-group" uib-dropdown is-open="status.isopen" ng-if="vm.updates.length > 0">
-                            <a id="single-button" type="button" uib-dropdown-toggle ng-disabled="disabled" style="color: white;">
+                            <a id="single-button" type="button" uib-dropdown-toggle ng-disabled="disabled">
                                 <span ng-if="vm.updates.length > 1">
                                     {{vm.updates.length}} Updates
                                 </span>
@@ -20,12 +20,12 @@
                                 </span>
                                  <span class="caret"></span>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="single-button" style="width: 560px; background: rgba(255, 255, 255, 0.9); color: black; margin-top: 20px; border-radius: 0px;">
+                            <ul class="dropdown-menu dropdown-menu-right updatesDropdown" uib-dropdown-menu role="menu" aria-labelledby="single-button" >
                                 <table class="scroll">
-                                    <tbody style="height: 380px; width: 557px;">
-                                        <tr ng-repeat="update in vm.updates track by $index" style="border-bottom: 1px solid black;">
-                                                <td style="padding: 10px; font-weight: normal;">{{update.updateMsg}}</td>
-                                                <td style="padding: 10px; font-weight: normal;">{{update.dateUpdated | date:"MM/dd/yy h:mm a"}}</td>
+                                    <tbody class="updatesTbody">
+                                        <tr ng-repeat="update in vm.updates track by $index" class="updatesTrow">
+                                                <td class="updatesTdata">{{update.updateMsg}}</td>
+                                                <td class="updatesTdata">{{update.dateUpdated | date:"MM/dd/yy h:mm a"}}</td>
                                         </tr>
                                     </tbody>
                                 </table>

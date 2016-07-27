@@ -30,7 +30,7 @@
 
   <div class="container grid-container no-padding">
     <uib-accordion close-others="false">
-      <uib-accordion-group ng-repeat="room in crc.rooms track by $index" heading="{{room.room}}" is-open="crc._isopen[room.room]" is-disabled="!crc.isMemberOfRoom(room.room)" style="width: 570px; margin-left: 300px;">
+      <uib-accordion-group ng-repeat="room in crc.rooms track by $index" heading="{{room.room}}" is-open="crc._isopen[room.room]" is-disabled="!crc.isMemberOfRoom(room.room)" class="chatAccord">
         <uib-accordion-heading>
           Name: {{room.room}}&nbsp;&nbsp;
           <span ng-if="room.membersCount === 2">Concierge is present</span>
@@ -39,7 +39,7 @@
           &nbsp;<i class="pull-right glyphicon glyphicon glyphicon-remove" ng-click="crc.deleteRoom(room, $index)"></i>
         </uib-accordion-heading>
 
-        <div class="chat" style="min-height: 150px; max-height: 150px;">
+        <div class="chat">
           <p class="phrase" ng-repeat="phrase in crc.phrases[room.room]"><span class="name">{{phrase.username}}</span><br><span class="text">{{phrase.message}}</span></p>
         </div>
         <hr>

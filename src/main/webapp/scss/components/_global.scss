@@ -281,7 +281,7 @@ table.scroll thead > tr {
             flex: 3;
             margin-left: 10px;
             text-align: left;
-            font-weight: 500;
+            // font-weight: 500;
         }
     }
 }
@@ -305,6 +305,12 @@ table.scroll thead > tr {
 
 .drsl-label {
     color: #c0c0c0;
+    font-weight: $default-weight;
+}
+
+.drsl-value {
+    color: #333;
+    font-weight: 500;
 }
 
 .drsl-badge-sprites {
@@ -501,6 +507,49 @@ table.scroll thead > tr {
 .uploadLink:hover{
     cursor: pointer;
 }
+.shareCaseTop{
+    padding: 20px 0px 20px 0px;
+}
+.shareCaseHead{
+    margin: 0px 20px 0px 20px;
+}
+.permStatus{
+    padding-left: 60px;
+}
+.fullAccess{
+    padding-left: 60px;
+    padding-right: 20px;
+}
+.statusBool{
+    padding-left: 60px;
+    padding-right: 40px;
+}
+.removeButton{
+    padding-left: 15px;
+    button{
+        display: block;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+}
+.shareHr{
+    height:2px;
+    border:none;
+    color:#E2E2E2;
+    background-color:#E2E2E2;
+}
+.shareInput{
+    width: 345px;
+    height: 33px;
+}
+.shareSelect{
+    width: 168px;
+    display: inline-block;
+}
+.decisionButtons{
+    text-align: right;
+    margin-right: 20px;
+}
 // Fonts
 @font-face {
     font-family: 'Raleway';
@@ -528,6 +577,20 @@ table.scroll thead > tr {
     url('../fonts/Raleway-regular.woff') format('woff'),
     url('../fonts/Raleway-regular.ttf') format('truetype'),
     url('../fonts/Raleway-regular.svg#Raleway') format('svg');
+}
+
+@font-face {
+    font-family: 'Raleway';
+    font-weight: 500;
+    font-style: normal;
+    src: url('../fonts/Raleway-500.eot');
+    src: url('../fonts/Raleway-500.eot?#iefix') format('embedded-opentype'),
+    local('Raleway Medium'),
+    local('Raleway-500'),
+    url('../fonts/Raleway-500.woff2') format('woff2'),
+    url('../fonts/Raleway-500.woff') format('woff'),
+    url('../fonts/Raleway-500.ttf') format('truetype'),
+    url('../fonts/Raleway-500.svg#Raleway') format('svg');
 }
 
 @font-face {
