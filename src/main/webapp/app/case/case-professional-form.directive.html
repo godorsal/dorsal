@@ -1,5 +1,5 @@
 <div class="drsl-case-expert-form">
-    <form ng-submit="submit()">
+    <form name="expertForm" ng-submit="submit()">
         <!-- Name -->
         <div>
             <span class="drsl-label">Expert</span>
@@ -15,7 +15,7 @@
         <!-- Estimated # hours -->
         <div class="drsl-label-value-row">
             <div><span  class="drsl-label" translate="case.professional.input.estimatedHours">Estimated<br/># hours</span></div>
-            <div><input class="form-control drsl-value" type="number" ng-model="case.estimateHours" ng-keydown="fieldTouched()" placeholder="{{'case.professional.input.estimatedHours.placeholder' | translate}}"/></div>
+            <div><input name="estimateHours" class="form-control drsl-value" type="number" ng-model="case.estimateHours" ng-keydown="fieldTouched()" placeholder="{{'case.professional.input.estimatedHours.placeholder' | translate}}"/></div>
         </div>
 
         <!-- Estimate Comment -->
