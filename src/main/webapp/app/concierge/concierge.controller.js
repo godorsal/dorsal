@@ -22,7 +22,7 @@
         vm.isSaving = false;
         vm.chatName = '';
         vm.isAuthenticated = Principal.isAuthenticated;
-        $scope.checkAuth = Principal.isAuthenticated;
+        vm.hasCases = false;
         vm.product = null;
         vm.errorMissingTech = $translate.instant('concierge.errors.missing.tech');
         vm.errorMissingIssue = $translate.instant('concierge.errors.missing.issue');
@@ -49,6 +49,17 @@
                     break;
             }
         }
+        function hasCases(){
+            Principal.identity().then(function (account) {
+                Supportcase.query(function(cases){
+                    cases.find(function(supportCase){
+                        console.log(supportCase.user.login == account.login);
+                        vm.hasCases = supportCase.user.login == account.login;
+                    })
+                })
+            });
+        }
+        hasCases()
         vm.technologyProperties = {};
         vm.technology = {};
         vm.issue = {};
