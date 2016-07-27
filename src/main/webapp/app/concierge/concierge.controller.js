@@ -53,8 +53,12 @@
             Principal.identity().then(function (account) {
                 Supportcase.query(function(cases){
                     cases.find(function(supportCase){
-                        console.log(supportCase.user.login == account.login);
-                        vm.hasCases = supportCase.user.login == account.login;
+                        if(supportCase.user.login == account.login || supportCase.expertaccount.user.login == account.login){
+                            vm.hasCases = true;
+                        } else{
+                            vm.hasCases = false;
+                        }
+                        // vm.hasCases = supportCase.user.login == account.login;
                     })
                 })
             });

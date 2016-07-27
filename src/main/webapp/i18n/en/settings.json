@@ -1,6 +1,6 @@
 {
     "settings": {
-        "title": "User settings for [<b>{{username}}</b>]",
+        "title": "User settings for [<b>{{vm.settingsAccount.login}}</b>]",
         "form": {
             "firstname": "First Name",
             "firstname.placeholder": "Credit Card Holder's First Name",

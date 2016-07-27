@@ -30,7 +30,9 @@
             dataStreamContentType: null,
             id: null
         };
-        vm.estimateLogs = vm.case.estimateLog.split('\n');
+        if (vm.case.estimateLog) {
+            vm.estimateLogs = vm.case.estimateLog.split('\n');
+        }
         getCurrentUser()
         Updatetype.query(function(result){
             vm.updateTypes = result;
