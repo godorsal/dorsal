@@ -26,7 +26,6 @@
         });
         function makeUser(email){
             var inviteString = "Share:" + vm.currentUser.firstName + " " + vm.currentUser.lastName;
-
             var newUser = {
                 email: email,
                 langKey: $translate.use(),
@@ -37,6 +36,7 @@
             Register.save(newUser, shareCaseNew)
         }
         function shareCaseNew(newUser){
+            console.log(newUser);
             User.query(function(users){
                 newUser = users.find(function(user){
                     return user.email === newUser.email

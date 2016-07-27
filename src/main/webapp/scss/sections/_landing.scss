@@ -37,6 +37,9 @@ Landing Page
         text-decoration: none;
     }
     .headAndTag{
+        h4{
+            font-size: 17px;
+        }
         // padding-bottom: 20px;
     }
     .buttonAndJoin{
@@ -112,6 +115,7 @@ Landing Page
             &:first-child {
                 padding-left: 0px;
                 margin-right: -15px;
+                width: 350px;
             }
             // background-color: #FEFEFE;
             // background-color: rgba(0, 0, 0, 0);

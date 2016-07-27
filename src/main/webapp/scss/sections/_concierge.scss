@@ -46,7 +46,12 @@ Concierge
         }
 
     }
-
+    .fiftyLeft{
+        margin-left: 50px;
+    }
+    .fourtyLeft{
+        margin-left: 40px;
+    }
     .drsl-chat-body {
         padding: $default-padding;
     }
@@ -197,6 +202,13 @@ Concierge
         padding-right: 5px;
     }
 
+    .detailButton{
+        float: right;
+        margin: 5px; width: 70px;
+        float: right;
+        margin: 5px; width: 70px;
+    }
+
     .drsl-radio-desc {
         display: none;
     }
@@ -307,9 +319,13 @@ Concierge
     margin-right: 10px;
     height: 34px;
 }
-
+.chatAccord{
+    width: 570px;
+     margin-left: 300px;
+}
 .chat {
-    min-height: 500px;
+    min-height: 150px;
+    max-height: 150px;
     overflow-y: scroll;
     height: 500px;
 

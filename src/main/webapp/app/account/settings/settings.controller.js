@@ -218,6 +218,7 @@
             }
         }
         function invitedGroup(newUser){
+            console.log(newUser);
             User.query(function(result){
                 var userWithId = result.find(function(user){
                     return user.login == newUser.login;

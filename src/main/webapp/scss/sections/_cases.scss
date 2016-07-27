@@ -460,3 +460,21 @@ input[type="radio"] + label span:last-child, input[type="checkbox"] + label span
     margin-left: $content-padding-side;
     margin-right: 50$content-padding-side;
 }
+.updatesDropdown{
+    width: 560px;
+    background: rgba(255, 255, 255, 0.9);
+    color: black;
+    margin-top: 20px;
+    border-radius: 0px;
+}
+.updatesTbody{
+    height: 380px;
+    width: 557px;
+}
+.updatesTrow{
+    border-bottom: 1px solid black;
+}
+.updatesTdata{
+    padding: 10px;
+    font-weight: normal;
+}
