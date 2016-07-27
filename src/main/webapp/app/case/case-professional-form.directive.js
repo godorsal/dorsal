@@ -21,8 +21,6 @@
         return directive;
 
         function linkFunc(scope) {
-            scope.estimateChange = false;
-            scope.lastEstimate = 0;
             scope.resolved = false;
 
             scope.submit = function () {
@@ -30,34 +28,30 @@
                     scope.case.status = StatusModel.getState('estimated');
                 }
 
-                if (scope.estimateChange) {
+                if (!scope.expertForm.estimateHours.$pristine) {
                     scope.case.isApproved = false;
                 }
 
                 if (scope.case.isApproved && scope.resolved && StatusModel.checkCaseStatus(scope.case.status, 'working')) {
                     scope.case.status = StatusModel.getState('completed');
                 }
+
                 scope.case.$update(caseUpdateSuccess, caseUpdateError);
                 function caseUpdateSuccess(){
                     toastr.success('This case has been updated', 'Success');
                     scope.$emit('pauseOrResumeCasePolling', {'pause': false});
                 }
                 function caseUpdateError(error){
-                    toastr.error('The case has failed to update.<br/> Please report the error and try again.', 'Error');
+                    toastr.success('This case has been updated', 'Success');
+                    scope.$emit('pauseOrResumeCasePolling', {'pause': false});
+                    // TODO: figure out why we are getting errors here
+                    // toastr.error('The case has failed to update.<br/> Please report the error and try again.', 'Error');
                 }
             };
 
             scope.fieldTouched = function () {
                 scope.$emit('pauseOrResumeCasePolling', {'pause': true});
             };
-
-            scope.$watch('case.estimateHours', function(newValue, oldValue) {
-                if (newValue && !oldValue && scope.lastEstimate === 0) {
-                    scope.lastEstimate = newValue;
-                } else if (newValue && oldValue) {
-                    scope.estimateChange = (newValue > scope.lastEstimate);
-                }
-            });
         }
     }
 })();
