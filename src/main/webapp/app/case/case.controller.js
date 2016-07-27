@@ -298,7 +298,7 @@
         }
 
         function openEscalation() {
-            if (StatusModel.checkCaseStatus(vm.currentCase.status, 'working') && !vm.isCaseExpert()) {
+            if (StatusModel.checkCaseStatus(vm.currentCase.status, 'working')) {
                 var modalInstance = EscalationFormService.open(vm.currentCase, vm.experts[vm.currentCase.expert]);
 
                 modalInstance.opened.then(function(){

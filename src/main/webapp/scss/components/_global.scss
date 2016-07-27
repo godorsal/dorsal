@@ -149,7 +149,7 @@ body {
     align-items: center;
     text-align: center;
     margin-bottom: 30px;
-    margin-left: 20px;
+    // margin-left: 20px;
     .drsl-radio-desc {
         flex: 1;
         // margin-right: $default-half-padding;
@@ -174,7 +174,7 @@ body {
 
     .drsl-radio-set {
         max-width: 400px;
-        overflow-x: scroll;
+        // overflow-x: scroll;
         overflow-y: hidden;
         position: relative;
         display: flex;
@@ -198,7 +198,17 @@ body {
             cursor: pointer;
         }
     }
-
+    .escalateRadio{
+        label{
+            width: 145px;
+        }
+        .drsl-radio-set{
+            max-width: none;
+        }
+        .drsl-linear-radio{
+            margin-left: 0px;
+        }
+    }
     input[type="radio"], input[type="checkbox"] {
         display: none;
     }
@@ -302,7 +312,9 @@ table.scroll thead > tr {
         }
     }
 }
-
+.escalation-radios{
+    overflow-x: hidden;
+}
 .drsl-label {
     color: #c0c0c0;
     font-weight: $default-weight;

@@ -15,7 +15,39 @@
         vm.expert = expert;
         vm.technologyProps = [];
         vm.summary = vm.case.summary.toString();
-
+        vm.escalationType = {};
+        vm.issue = {};
+        vm.escalationTypes = [
+            {
+                type: "escalation",
+                values: [
+                    {
+                        code: "escalation",
+                        value: "ESCALATION",
+                        id: 1,
+                        label: "Escalation",
+                        name:"Escalation",
+                        value:"Escalation"
+                    },
+                    {
+                        code: "reassign",
+                        value: "REASSIGN",
+                        id: 2,
+                        label: "Reassign",
+                        name:"Reassign",
+                        value:"Reassign"
+                    },
+                    {
+                        code: "escalate_reassign",
+                        value: "ESCALATE_REASSIGN",
+                        id: 3,
+                        label: "Escalate and Reassign",
+                        name:"Escalate and Reassign",
+                        value:"Escalate_Reassign"
+                    }
+                ]
+            }
+        ]
         function cancel(e) {
             e.preventDefault();
             $uibModalInstance.dismiss('cancel');
@@ -34,7 +66,7 @@
         });
         function submit() {
             vm.escalation = vm.thisEscalation;
-            vm.escalation.escalationType = vm.thisEscalation.escalationType
+            vm.escalation.escalationType = vm.issue.value
             vm.escalation.reason = vm.thisEscalation.reason
             vm.escalation.supportcase = vm.case
             if (vm.escalation.id !== null) {

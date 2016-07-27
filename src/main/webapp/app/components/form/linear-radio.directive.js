@@ -13,10 +13,12 @@
                 radioData: '=',
                 startLimit: '=',
                 technology: '=',
+                escalation: '=',
                 issue: '=',
                 technologyProperties: '='
             },
             link: function($scope, element, attrs) {
+                console.log($scope.escalation);
                 $scope.technologyProperties = {};
                 $scope.showAll = function(a) {
                     $scope.startLimit = 1000;
@@ -39,8 +41,8 @@
             },
             template:   '<div class="drsl-linear-radio-wrapper"><div class="drsl-linear-radio">' +
             '<div class="drsl-radio-desc" tooltip-placement="left" uib-tooltip="{{radioData.tooltip | translate}}" translate="{{radioData.label}}"></div>' +
-            '<div class="drsl-radio-wrapper">' +
-            '<div class="drsl-radio-set">' +
+            '<div class="drsl-radio-wrapper" ng-class="{escalateRadio: radioData.type == \'escalation\'}">' +
+            '<div class="drsl-radio-set" >' +
             '<div class="drsl-radio-item" ng-repeat="radio in radioData.values | limitTo: startLimit track by $index">' +
             '<div ng-if="$index === 4">' +
             '<div class="glyphicon glyphicon-chevron-left" ng-click="showLess()"ng-if="radioData.label === \'concierge.caseDetails.product.main\' && startLimit > 4"></div>' +

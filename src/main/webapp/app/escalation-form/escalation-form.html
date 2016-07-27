@@ -32,7 +32,7 @@
                             <div class="drsl-value">{{vm.case.technology.name}}</div>
                         </div>
                         <div class="drsl-form-grid">
-                            <div class="drsl-label"translate="case.details.technology">Issue</div>
+                            <div class="drsl-label"translate="case.details.issue">Issue</div>
                             <div class="drsl-value">{{vm.case.issue.name}}</div>
                         <div class="drsl-incident-items">
                             <div style="text-align: left;">
@@ -56,7 +56,15 @@
                     </div>
                 </div>
                 <div class="escalation-form-grid">
-                    <div class="drsl-linear-radio">
+                    <linear-radio target-data="radio.selectedValue"
+                                  radio-data="radio"
+                                  start-limit="15"
+                                  ng-repeat="radio in vm.escalationTypes"
+                                  issue="vm.issue"
+                                  escalation="vm.escalationType"
+                                  class="escalation-radios"
+                                  ></linear-radio>
+                    <!-- <div class="drsl-linear-radio">
                         <div class="drsl-linear-radio">
                             <div class="drsl-radio-set tier-list" style="overflow-x: hidden;">
                                 <div class="ng-scope request"><input name="urgency" id="Escalate" type="radio" aria-invalid="false"  ng-model="vm.thisEscalation.escalationType" value="escalate"><label for="Escalate" class="drsl-label" style="width: 90px;">Escalate Case<br><span></span></label></div>
@@ -64,7 +72,7 @@
                                 <div class="ng-scope request"><input name="urgency" id="EscalateAndReassign" type="radio" aria-invalid="false" ng-model="vm.thisEscalation.escalationType" value="escalate and reassign"><label for="EscalateAndReassign" class="drsl-label" style="width: 90px;">Escalate and Reassign<br><span></span></label></div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div>
                     <label for="explanation" class="drsl-label">Reason for escalation and/or reassignment</label>
