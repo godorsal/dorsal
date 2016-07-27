@@ -79,7 +79,6 @@
             }
         }
         var onSaveSuccess = function (result) {
-            // console.log("RESULT", result);
             for (var key in vm.technologyProperties) {
                 if (vm.technologyProperties.hasOwnProperty(key)) {
                     var brandNewProperty = {};
@@ -89,7 +88,6 @@
                     // brandNewProperty.supportcase = result.id;
                     brandNewProperty.propertyname = key;
                     brandNewProperty.propertyvalue = vm.technologyProperties[key];
-                    // console.log(brandNewProperty);
                     Casetechnologyproperty.save(brandNewProperty);
                 }
             }
@@ -135,7 +133,6 @@
         }
         function getCurrentUser(){
             Principal.identity().then(function(account) {
-                // console.log(account);
                 return account
             });
         }
@@ -143,7 +140,6 @@
         * Initialize the controller's data.
         */
         function init(){
-            // console.log(vm.getCurrentUser());
             vm.pageTitle = '';
 
             // Make a call to get the initial data.
@@ -189,14 +185,12 @@
                 LoginService.open();
                 $rootScope.$on('authenticationSuccess', function(){
                     Principal.identity().then(function(account){
-                        // console.log("MODAL");
                         vm.currentUser = account;
                         vm.createCase();
                     })
                 })
             } else {
                 Principal.identity().then(function(account){
-                    // console.log("NO MODAL");
                     vm.currentUser = account;
                     vm.createCase();
                 })

@@ -28,7 +28,6 @@
         };
 
         vm.save = function () {
-            console.log(vm.casetechnologyproperty);
             // vm.isSaving = true;
             // if (vm.casetechnologyproperty.id !== null) {
             //     Casetechnologyproperty.update(vm.casetechnologyproperty, onSaveSuccess, onSaveError);

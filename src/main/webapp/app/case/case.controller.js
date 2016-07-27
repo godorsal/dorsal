@@ -286,9 +286,7 @@
         function openDetails() {
             var modalInstance = CaseDetailsService.open(vm.currentCase, vm.experts[vm.currentCase.expert]);
 
-            modalInstance.result.then(function (result) {
-                // console.log(result);
-            });
+            modalInstance.result
 
             modalInstance.opened.then(function(){
                 vm.pausePollForCaseUpdates = true;

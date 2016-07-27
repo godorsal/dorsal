@@ -29,7 +29,6 @@
         vm.save = function () {
             vm.isSaving = true;
             if (vm.payment.id !== null) {
-                console.log(vm.payment);
                 Payment.update(vm.payment, onSaveSuccess, onSaveError);
             } else {
                 Payment.save(vm.payment, onSaveSuccess, onSaveError);

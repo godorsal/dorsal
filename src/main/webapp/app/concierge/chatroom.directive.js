@@ -80,7 +80,6 @@
                     ChatService.createChatRoom(roomName, vm.person, function (response) {
                         vm.joined = true;
                         vm.roomInfo = response.room;
-                        //console.log('--- connected ' + JSON.stringify(vm.roomInfo));
                     })
                 })
             };

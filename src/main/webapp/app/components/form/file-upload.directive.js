@@ -13,13 +13,10 @@
                 result.reverse().forEach(function(attachment){
                     if(attachment.supportcase.id === $scope.currentcase){
                         $scope.attachments.push(attachment)
-                        console.log($scope.attachments);
                     }
                 })
             })
             $scope.download = function(){
-                console.log("HELLLLLO?");
-                // console.log(stream);
                 // window.open(stream)
             }
             $scope.setDataStream = function ($file, attachment) {
@@ -29,7 +26,6 @@
                             $scope.attachment.name = $file.name.replace(/\s|,|-/g, '');
                             $scope.attachment.dataStream = base64Data;
                             $scope.attachment.dataStreamContentType = $file.type;
-                            console.log("ATTACCHMENT", $scope.attachment);
                         });
                     });
                 }
@@ -37,7 +33,6 @@
             $scope.deleteAttachment = function (attachment, index) {
                 Attachment.delete({id: attachment.id})
                 $scope.attachments.splice(index, 1)
-                console.log($scope.currentcase);
                 var deleteUpdate = {
                     supportcase: {
                         id: $scope.currentcase

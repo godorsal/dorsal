@@ -84,11 +84,9 @@
                     type.selectedValue = (value.value) ? value.value : '';
                     value.label = (value.value) ? value.value : '';
                     scope.technologyProperties[type.name] = type.selectedValue;
-                    // console.log(scope.technologyProperties);
                 } else {
                     type.selectedValue = (type.selectedValue === value.value) ? '' : value.value;
                     scope.technologyProperties[type.name] = type.selectedValue;
-                    // console.log(scope.technologyProperties);
                 }
 
                 type.open = false;

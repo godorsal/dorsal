@@ -92,10 +92,8 @@
         //     Groupaccess.query(function(result){
         //         result.find(function(user){
         //             if(user.authorizeduser.login === vm.settingsAccount.login){
-        //                 console.log("AUTHORISED");
         //                 vm.isAlreadyAuthorized = true;
         //             } else {
-        //                 console.log("NOPE");
         //                 vm.isAlreadyAuthorized = false;
         //             }
         //         })
@@ -218,7 +216,6 @@
             }
         }
         function invitedGroup(newUser){
-            console.log(newUser);
             User.query(function(result){
                 var userWithId = result.find(function(user){
                     return user.login == newUser.login;
@@ -287,7 +284,6 @@
         //             vm.invitedUsersToRemove.splice(index, 1);
         //         } else {
         //             vm.invitedUsersToRemove.push(userToRemove)
-        //             console.log("GOOD JOB");
         //         }
         // }
         // function addToActivatedRemove(id, index) {
@@ -303,18 +299,14 @@
         //         }
         // }
         function removeInvitedUsers(id, index) {
-            // console.log(vm.invitedUsersToRemove);
             // vm.invitedUsersToRemove.map(function(user, index){
-            //     console.log(user.index);
                 Groupaccess.delete({id: id})
                 toastr["warning"]("User Removed")
                 vm.invitedUsers.splice(index, 1)
                 // vm.invitedUsersToRemove.splice(index, 1);
-                // console.log(vm.invitedUsers);
             // })
         }
         function removeAuthorizedUsers(id, index) {
-            // console.log(vm.activatedUsersToRemove);
             // vm.activatedUsersToRemove.forEach(function(user){
                 Groupaccess.delete({id: id})
                 toastr["warning"]("User Removed")

@@ -31,7 +31,6 @@
                 ChatRoomsService.list()
                 .then(function(data) {
                     vm.rooms = data;
-                    console.log("Rooms", data);
                 });
             };
 
@@ -44,7 +43,6 @@
                     }
                     else {
                         var member = vm.roomDetails[message.room].members[message.from];
-                        console.log("HERE I AM", member);
                         name = (member) ? member.name : "Guest";
                         // name = (member) ? member.firstName : "Guest";
                     }
@@ -58,7 +56,6 @@
                     //ChatRoomsService.formatMessage(message.message, name);
                 }
                 else if (type === 'welcome') {
-                    console.log('welcome concierge');
                     if(!vm.phrases[message.room])
                     vm.phrases[message.room] = [];
 
@@ -78,11 +75,9 @@
                 if (!ChatService.isConnected()) {
                     ChatService.connect({}, vm.notify, function (error, info) {
                         vm.person.id = info.data.id;
-                        console.log('--- connected Concierge ');
                     })
                 }
                 else {
-                    console.log('--- already connected');
                 }
             };
             vm.connect();
@@ -92,8 +87,6 @@
                     if (update.room === room.room) {
                         room.members = update.members;
                         room.membersCount = update.membersCount;
-                        console.log('found: ' + room.room);
-                        console.log('member: ' + vm.isMemberOfRoom(room.room));
                     }
                 })
             }
@@ -101,7 +94,6 @@
             vm.join = function(rm, index) {
                 ChatRoomsService.lookup(rm.room).then(function(room) {
                     if (room) {
-                        console.log('--=== ROOM ' + JSON.stringify(room))
                         var info = {
                             room: rm.room,
                             name: vm.person.name,

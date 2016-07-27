@@ -76,7 +76,6 @@
             Attachment.save(vm.attachment);
         }
         function onSaveError (error){
-            console.log(error);
         }
         function submit() {
             if (vm.attachment.name) {
