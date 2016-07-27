@@ -27,16 +27,32 @@
                             <div class="drsl-label">Summary</div>
                             <div class="drsl-value">{{vm.summary}}</div>
                         </div>
-                        <div class="drsl-form-grid" style="width: 460px;">
-                            <!-- <div>Response Time</div> -->
+                        <div class="drsl-form-grid">
+                            <div class="drsl-label"translate="case.details.technology">Technology</div>
+                            <div class="drsl-value">{{vm.case.technology.name}}</div>
+                        </div>
+                        <div class="drsl-form-grid">
+                            <div class="drsl-label"translate="case.details.technology">Issue</div>
+                            <div class="drsl-value">{{vm.case.issue.name}}</div>
+                        <div class="drsl-incident-items">
+                            <div style="text-align: left;">
+                                <span class="drsl-label">Technology Properties</span>
+                                <br>
+                                <span ng-repeat="property in vm.technologyProps">
+                                    <span class="drsl-label">{{property.propertyname}}</span> <span class="drsl-value">{{property.propertyvalue}}</span><br>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                        <!-- <div class="drsl-form-grid" style="width: 460px;">
                             <div>
                                 <div style="display:flex; flex-flow: row;">
-                                    <!-- <div style="flex: .5;">{{vm.case.urgency}}</div> -->
                                     <div style="flex: 1; text-align: left; margin-left: 74px;"><span class="drsl-label" style="padding-left:10px;padding-right: 10px;">Issue</span><span class="drsl-value">{{vm.case.issue.name}}</span></div>
                                     <div style="flex: 1; text-align: center;"><span class="drsl-label" style="padding-right: 10px;">Technology</span><span class="drsl-value">{{vm.case.technology.name}}</span></div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
+
                     </div>
                 </div>
                 <div class="escalation-form-grid">
@@ -56,10 +72,10 @@
                 </div>
 
 
-                <div style="text-align: right; padding: 5px;">
-                    <button class="btn btn-default" ng-click="vm.cancel($event)">Cancel</button>
-                    <button type="submit" class="btn btn-success">Request</button>
-                </div>
+            </div>
+            <div style="text-align: right; padding: 20px;">
+                <button class="btn btn-default" ng-click="vm.cancel($event)">Cancel</button>
+                <button type="submit" class="btn btn-success">Request</button>
             </div>
         </div>
     </form>
