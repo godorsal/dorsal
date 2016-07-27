@@ -7,9 +7,9 @@
             <table class="shareCaseHead">
                 <thead>
                     <th><h3 class="drsl-label" ng-if="vm.sharedUsers.length">Users</h3></th>
-                    <th><h3 class="drsl-label" ng-if="vm.sharedUsers.length" class="permStatus">Permissions</h3></th>
-                    <th><h3 class="drsl-label" ng-if="vm.sharedUsers.length" class="permStatus">Status</h3></th>
-                    <th><h3 class="drsl-label" ng-if="vm.sharedUsers.length">Remove</h3></th>
+                    <th><h3 class="drsl-label fullAccess" ng-if="vm.sharedUsers.length" >Permissions</h3></th>
+                    <th><h3 class="drsl-label fullAccess" ng-if="vm.sharedUsers.length" >Status</h3></th>
+                    <th><h3 class="drsl-label removeHeader" ng-if="vm.sharedUsers.length">Remove</h3></th>
                 </thead>
                 <tbody>
                     <tr ng-repeat="share in vm.sharedUsers track by $index">

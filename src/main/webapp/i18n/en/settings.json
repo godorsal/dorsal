@@ -10,6 +10,17 @@
             "language": "Language",
             "button": "Update"
         },
+        "authorization":{
+            "header": "Manage Authorized Users",
+            "input": "Add User",
+            "noInvitedUsers": "No Invited Users",
+            "InvitedUsers": "Invited Users",
+            "remove": "Remove",
+            "activeHeader": "(Invited Users automatically join Active Users once they register)",
+            "noActiveUsers": "No Active Users",
+            "ActiveUsers": "Active Users"
+
+        },
         "messages": {
             "error": {
                 "fail": "<strong>An error has occurred!</strong> Settings could not be saved.",

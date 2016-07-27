@@ -531,18 +531,22 @@ table.scroll thead > tr {
     margin: 10px;
 }
 .permStatus{
-    padding-left: 60px;
+    padding-left: 20px;
+    border: 10px solid red;
 }
-.fullAccess{
-    padding-left: 60px;
-    padding-right: 20px;
+.fullAccess {
+    padding-left: 40px !important;
+    padding-right: 40px !important;
 }
 .statusBool{
-    padding-left: 60px;
+    padding-left: 40px;
     padding-right: 40px;
 }
+.removeHeader{
+    padding-left: 40px !important;
+}
 .removeButton{
-    padding-left: 15px;
+    padding-left: 40px;
     button{
         display: block;
         margin-top: 10px;
