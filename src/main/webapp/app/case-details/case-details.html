@@ -85,9 +85,13 @@
         <div translate="case.details.downloadedFiles">Downloaded Files</div>
         <div><i class="fa fa-minus"></i></div>
     </div> -->
-    <div class="drsl-form-grid">
+    <div class="drsl-form-grid estimateLogList">
         <div class="drsl-label">Estimate History</div>
-        <div class="drsl-value">{{vm.case.estimateLog}}</div>
+        <ol>
+            <li class="drsl-value eLogList" ng-repeat="log in vm.estimateLogs | limitTo: vm.estimateLogs.length - 1 ">
+                {{log}}
+            </li>
+        </ol>
     </div>
     <div class="drsl-form-grid" style="width: 688px;">
         <div class="drsl-label">Update History</div>

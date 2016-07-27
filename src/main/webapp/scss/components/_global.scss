@@ -324,7 +324,12 @@ table.scroll thead > tr {
     color: $drsl-value-color;
     font-weight: $default-medium-weight;
 }
-
+.estimateLogList{
+    width: 506px;
+    li{
+        list-style: none;
+    }
+}
 .drsl-badge-sprites {
     background: url("../images/global/badge-sprites.png") no-repeat;
     width: 75px;
