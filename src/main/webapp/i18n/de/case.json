@@ -103,7 +103,7 @@
             }
         },
         "agreement": {
-            "header": "AGREEMENT FOR:",
+            "header": "AGREEMENT FOR",
             "agreementLabel": "Agreement",
             "checkboxMsg": "I ({{username}}) agree to the provided estimate and the suggested resolution."
         }
