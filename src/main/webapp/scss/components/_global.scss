@@ -304,13 +304,13 @@ table.scroll thead > tr {
 }
 
 .drsl-label {
-    color: #c0c0c0;
+    color: $inactive-text-color;
     font-weight: $default-weight;
 }
 
 .drsl-value {
-    color: #333;
-    font-weight: 500;
+    color: $default-text-color;
+    font-weight: $default-medium-weight;
 }
 
 .drsl-badge-sprites {
