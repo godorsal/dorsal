@@ -305,6 +305,12 @@ table.scroll thead > tr {
 
 .drsl-label {
     color: #c0c0c0;
+    font-weight: $default-weight;
+}
+
+.drsl-value {
+    color: #333;
+    font-weight: 500;
 }
 
 .drsl-badge-sprites {
@@ -571,6 +577,20 @@ table.scroll thead > tr {
     url('../fonts/Raleway-regular.woff') format('woff'),
     url('../fonts/Raleway-regular.ttf') format('truetype'),
     url('../fonts/Raleway-regular.svg#Raleway') format('svg');
+}
+
+@font-face {
+    font-family: 'Raleway';
+    font-weight: 500;
+    font-style: normal;
+    src: url('../fonts/Raleway-500.eot');
+    src: url('../fonts/Raleway-500.eot?#iefix') format('embedded-opentype'),
+    local('Raleway Medium'),
+    local('Raleway-500'),
+    url('../fonts/Raleway-500.woff2') format('woff2'),
+    url('../fonts/Raleway-500.woff') format('woff'),
+    url('../fonts/Raleway-500.ttf') format('truetype'),
+    url('../fonts/Raleway-500.svg#Raleway') format('svg');
 }
 
 @font-face {

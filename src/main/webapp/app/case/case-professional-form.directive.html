@@ -9,25 +9,25 @@
         <!-- Desired Outcome-->
         <div class="drsl-label-value-row">
             <div><span  class="drsl-label" translate="case.professional.input.desiredOutcome">Desired<br/>Outcome</span></div>
-            <div><textarea class="form-control" ng-model="case.expectedResult" ng-keydown="fieldTouched()" placeholder="{{'case.professional.input.desiredOutcome.placeholder' | translate}}"></textarea></div>
+            <div><textarea class="form-control drsl-value" ng-model="case.expectedResult" ng-keydown="fieldTouched()" placeholder="{{'case.professional.input.desiredOutcome.placeholder' | translate}}"></textarea></div>
         </div>
 
         <!-- Estimated # hours -->
         <div class="drsl-label-value-row">
             <div><span  class="drsl-label" translate="case.professional.input.estimatedHours">Estimated<br/># hours</span></div>
-            <div><input class="form-control" type="number" ng-model="case.estimateHours" ng-keydown="fieldTouched()" placeholder="{{'case.professional.input.estimatedHours.placeholder' | translate}}"/></div>
+            <div><input class="form-control drsl-value" type="number" ng-model="case.estimateHours" ng-keydown="fieldTouched()" placeholder="{{'case.professional.input.estimatedHours.placeholder' | translate}}"/></div>
         </div>
 
         <!-- Estimate Comment -->
         <div class="drsl-label-value-row">
             <div><span  class="drsl-label" translate="case.professional.input.estimateComment">Estimate<br/>Comment</span></div>
-            <div><textarea class="form-control" ng-model="case.estimateComment" ng-keydown="fieldTouched()" placeholder="{{'case.professional.input.estimateComment.placeholder' | translate}}"></textarea></div>
+            <div><textarea class="form-control drsl-value" ng-model="case.estimateComment" ng-keydown="fieldTouched()" placeholder="{{'case.professional.input.estimateComment.placeholder' | translate}}"></textarea></div>
         </div>
 
         <!-- Total Time on Case -->
         <div class="drsl-label-value-row">
             <div><span  class="drsl-label" translate="case.professional.input.timeOnCase">Total time<br/>on case</span></div>
-            <div><input class="form-control" type="number" ng-model="case.timeOnCase" ng-keydown="fieldTouched()" placeholder="{{'case.professional.input.timeOnCase.placeholder' | translate}}"/></div>
+            <div><input class="form-control drsl-value" type="number" ng-model="case.timeOnCase" ng-keydown="fieldTouched()" placeholder="{{'case.professional.input.timeOnCase.placeholder' | translate}}"/></div>
         </div>
 
         <!-- Resolved -->
@@ -43,7 +43,7 @@
         <div>
             <div>
                 <span class="drsl-label" translate="case.professional.input.lastUpdate">Last update/action </span>
-                <span> {{case.dateLastUpdate | date:"MM/dd/yy h:mm a"}}</span>
+                <span class="drsl-value"> {{case.dateLastUpdate | date:"MM/dd/yy h:mm a"}}</span>
             </div>
             <div><button type="submit" class="btn btn-success" translate="entity.action.update">update</button></div>
         </div>

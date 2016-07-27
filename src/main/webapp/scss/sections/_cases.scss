@@ -165,6 +165,10 @@ Cases
 
                 &:first-child {
                     border-bottom: 2px solid $horizontal-separator-color;
+                    .drsl-label {
+                        width: auto;
+                        margin-right: 5px;
+                    }
                 }
 
                 &:last-child {
@@ -177,6 +181,7 @@ Cases
 
                         .drsl-label {
                             margin-right: 5px;
+                            width: auto;
                         }
                     }
 
@@ -185,6 +190,12 @@ Cases
                         text-align: right;
                     }
                 }
+
+                .drsl-label {
+                    width: 75px;
+                    display: inline-block;
+                }
+
             }
             input[type="text"].form-control, input[type="number"].form-control {
                 padding: 12px;
@@ -335,6 +346,7 @@ Cases
                 width: 135px;
 
                 .popover-content {
+                    @extend .drsl-value;
                     text-align: center;
                 }
             }

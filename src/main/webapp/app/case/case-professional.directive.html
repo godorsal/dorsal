@@ -1,20 +1,20 @@
 <div class="drsl-case-expert">
     <!-- Name -->
     <div>
-        <span class="drsl-label">Expert:</span>
-        {{expert.user.firstName}} {{expert.user.lastName}}
+        <span class="drsl-label" translate="case.professional.expert">Expert</span>
+        <span class="drsl-value">{{expert.user.firstName}} {{expert.user.lastName}}</span>
     </div>
 
     <!-- Desired Outcome -->
     <div class="drsl-label-value-row">
         <div><span class="drsl-label" translate="case.professional.input.desiredOutcome">Desired<br/>Outcome</span></div>
-        <div><div class="drsl-scrolling-container">{{case.expectedResult}}</div></div>
+        <div><div class="drsl-scrolling-container drsl-value">{{case.expectedResult}}</div></div>
     </div>
 
     <!-- Contact -->
     <div class="drsl-contact-wrapper">
         <div><span class="drsl-label" translate="case.professional.contact.main">Contact:</span></div>
-        <contact-info contact="expert" chat-room="chatRoom"></contact-info>
+        <div class="drsl-value"><contact-info contact="expert" chat-room="chatRoom"></contact-info></div>
     </div>
 
     <!-- Profile Photo & Score -->
@@ -37,11 +37,11 @@
     <div class="drsl-locale-wrapper">
         <!-- Location -->
         <div>
-            <span><span class="drsl-label">Location</span> {{expert.location}}</span>
+            <span><span class="drsl-label">Location</span> <span class="drsl-value">{{expert.location}}</span></span>
         </div>
         <!-- Languages -->
         <div>
-            <span class="drsl-label">Languages</span> {{expert.languages}}
+            <span class="drsl-label">Languages</span> <span class="drsl-value">{{expert.languages}}</span>
         </div>
     </div>
 

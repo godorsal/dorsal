@@ -45,6 +45,7 @@
                     user: newUser,
                     supportcase: vm.case
                 }
+                console.log(newSharedCase);
                 SharedCase.save(newSharedCase, function(data){
                     vm.sharedUsers.push(data)
                     vm.emailInput = '';
@@ -52,13 +53,17 @@
             })
         }
         function shareCase(newUser){
+            console.log(newUser);
             var newSharedCase = {
                 user: newUser,
                 supportcase: vm.case
             }
+            console.log(newSharedCase);
             SharedCase.save(newSharedCase, function(data){
                 vm.sharedUsers.push(data)
                 vm.emailInput = '';
+            }, function(error){
+                console.log(error);
             })
         }
         function addUser() {
