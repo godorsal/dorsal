@@ -6,24 +6,24 @@
             </div>
             <table style="margin: 0px 20px 0px 20px;">
                 <thead>
-                    <th><h3 ng-if="vm.sharedUsers.length">Users</h3></th>
-                    <th><h3 ng-if="vm.sharedUsers.length"  style="padding-left: 60px;">Permissions</h3></th>
-                    <th><h3 ng-if="vm.sharedUsers.length"  style="padding-left: 60px;">Status</h3></th>
-                    <th><h3 ng-if="vm.sharedUsers.length"  style="">Remove</h3></th>
+                    <th><h3 class="drsl-label" ng-if="vm.sharedUsers.length">Users</h3></th>
+                    <th><h3 class="drsl-label" ng-if="vm.sharedUsers.length"  style="padding-left: 60px;">Permissions</h3></th>
+                    <th><h3 class="drsl-label" ng-if="vm.sharedUsers.length"  style="padding-left: 60px;">Status</h3></th>
+                    <th><h3 class="drsl-label" ng-if="vm.sharedUsers.length"  style="">Remove</h3></th>
                 </thead>
                 <tbody>
                     <tr ng-repeat="share in vm.sharedUsers track by $index">
-                        <td>
+                        <td class="drsl-value">
                             {{share.user.email}}
                         </td>
-                        <td style="padding-left: 60px; padding-right: 20px;">
+                        <td class="drsl-value" style="padding-left: 60px; padding-right: 20px;">
                             Full Access
                         </td>
-                        <td style="padding-left: 60px; padding-right: 40px;">
+                        <td class="drsl-value" style="padding-left: 60px; padding-right: 40px;">
                             <span ng-if="!share.user.activated">Invited</span>
                             <span ng-if="share.user.activated">Authorized</span>
                         </td>
-                        <td style="padding-left: 15px;">
+                        <td class="drsl-value" style="padding-left: 15px;">
                             <button class="btn btn-success" ng-click="vm.removeSharedUser(share.id, $index)" style="display: block; margin-top: 10px; margin-bottom: 10px;"><i class="fa fa-times-circle fa-lg"></i></button>
                         </td>
                     </tr>
@@ -31,7 +31,7 @@
             </table>
             <hr style="height:2px;border:none;color:#E2E2E2;background-color:#E2E2E2;" />
             <form ng-submit="vm.addUser()" style="margin: 0px 20px 0px 20px;">
-                <input type="text" id="emailInput" name="emailInput"
+                <input class="drsl-value" type="text" id="emailInput" name="emailInput"
                 ng-model="vm.emailInput" ng-minlength=4 ng-maxlength=50 required placeholder=" Email address" style="width: 385px; height: 33px;">
                 <select class="form-control" ng-model="vm.permissions" id="permissionInput" style="width: 168px; display: inline-block;" required disabled>
                     <option value="">Full Access</option>
