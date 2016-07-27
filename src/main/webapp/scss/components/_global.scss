@@ -520,10 +520,10 @@ table.scroll thead > tr {
     cursor: pointer;
 }
 .shareCaseTop{
-    padding: 20px 0px 20px 0px;
+    padding: 10px !important;
 }
 .shareCaseHead{
-    margin: 0px 20px 0px 20px;
+    margin: 10px;
 }
 .permStatus{
     padding-left: 60px;
@@ -551,7 +551,8 @@ table.scroll thead > tr {
     background-color:#E2E2E2;
 }
 .shareInput{
-    width: 345px;
+    margin-right: 10px;
+    width: 376px;
     height: 33px;
 }
 .shareSelect{
@@ -560,7 +561,9 @@ table.scroll thead > tr {
 }
 .decisionButtons{
     text-align: right;
-    margin-right: 20px;
+    button:first-child{
+        margin-right: 5px !important;
+    }
 }
 // Fonts
 @font-face {
