@@ -58,7 +58,6 @@
                         } else{
                             vm.hasCases = false;
                         }
-                        // vm.hasCases = supportCase.user.login == account.login;
                     })
                 })
             });

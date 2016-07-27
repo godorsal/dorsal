@@ -15,20 +15,12 @@
                 <!-- Header -->
                 <div class="headAndTag">
                     <h2 translate="home.header" class="home-title">Connect, Solve, Deliver</h2>
-                    <!-- <h2 translate="home.header" class="home-title">Connect, Solve, Deliver.</h2> -->
-                    <!-- <h1 translate="home.header" class="home-title">Connect, Solve, Deliver</h1> -->
                     <!-- Tagline -->
                     <h4 translate="home.tagline">Fast, reliable open source support without subscriptions or license fees</h4>
                 </div>
                 <!-- Button -->
                 <p class="buttonAndJoin">
-                    <!-- <a class="home-connect-button" ui-sref="concierge">
-                        connect
-                        <br>
-                        now
-                    </a> -->
                     <img src="content/images/landing-page/connect.png" ui-sref="concierge" class="drsl-custom-button home-connect-button">
-                    <!-- <img src="src/main/webapp/content/images/global//connect_now_button_Raleway.png" alt=""> -->
                     <br>
                 </p>
             </div>
@@ -41,19 +33,14 @@
         <li translate="home.tech.mariadb">MariaDB</li>
         <li translate="home.tech.postgresql">PostgreSQL</li>
         <li translate="home.tech.mongodb">MongoDB</li>
-        <!-- <li translate="home.tech.hbase">HBase</li> -->
-        <!-- <li translate="home.tech.cassandradb">CassandraDB</li> -->
     </ul>
 
     <!-- Additional-Information -->
     <div class="row drsl-home-additional-info-wrapper">
         <div class="col-md-4" ng-repeat="slot in [1, 2, 3] track by $index" style="">
             <div class="drsl-home-additional-info-item" ng-class="quoteSize($index)">
-                <!-- <p>{{'home.additionalInfo.slot_'+slot+'.title' | translate}}</p> -->
                 <h4>{{'home.additionalInfo.slot_'+slot+'.title' | translate}}</h4>
-                <!-- <h3>{{'home.additionalInfo.slot_'+slot+'.title' | translate}}</h3> -->
-                <div>{{'home.additionalInfo.slot_'+slot+'.description' | translate}}</div>
-                <!-- <p>{{'home.additionalInfo.slot_'+slot+'.description' | translate}}</p> -->
+                <div>{{'home.additionalInfo.slot_'+slot+'.description' | translate}}</div> -->
             </div>
         </div>
     </div>

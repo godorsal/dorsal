@@ -23,18 +23,14 @@
         vm.isAlreadyAuthorized;
         vm.getAuthorizedUsers = getAuthorizedUsers;
         vm.numberTab = numberTab;
-        // vm.checkAuthorized = checkAuthorized;
         vm.addAuthorizedUser = addAuthorizedUser;
         vm.removeAuthorizedUsers = removeAuthorizedUsers;
         vm.removeInvitedUsers = removeInvitedUsers;
-        // vm.addToInvitedRemove = addToInvitedRemove;
-        // vm.addToActivatedRemove = addToActivatedRemove;
         vm.authorizedUser = '';
         vm.number = 0;
         vm.isExpert = false;
 
         getAuthorizedUsers()
-        // checkAuthorized();
 
         ExpertAccount.query(function(data){
             if(data[0]){
@@ -88,17 +84,6 @@
         Principal.identity().then(function (account) {
             vm.settingsAccount = copyAccount(account);
         });
-        // function checkAuthorized(){
-        //     Groupaccess.query(function(result){
-        //         result.find(function(user){
-        //             if(user.authorizeduser.login === vm.settingsAccount.login){
-        //                 vm.isAlreadyAuthorized = true;
-        //             } else {
-        //                 vm.isAlreadyAuthorized = false;
-        //             }
-        //         })
-        //     })
-        // }
         function save() {
             if(vm.updatingUser && vm.updatingExpert){
                 toastr["success"]("User and Expert Info Saved")
@@ -113,11 +98,9 @@
         function updateUser() {
             Auth.updateAccount(vm.settingsAccount).then(function () {
                 vm.error = null;
-                // vm.success = 'OK';
                 if (!vm.updatingExpert) {
                     toastr["success"]("User Info Saved")
                 }
-                // toastr["success"]("Saving Successful")
                 Principal.identity(true).then(function (account) {
                     vm.settingsAccount = copyAccount(account);
                 });
@@ -128,7 +111,6 @@
                 });
             }).catch(function () {
                 vm.success = null;
-                // vm.error = 'ERROR';
                 toastr["error"]("Saving Error")
             });
         }
@@ -143,7 +125,6 @@
             vm.number = Object.keys(vm.creditCard.number).map(function(k) { return vm.creditCard.number[k] });
             if(vm.number.join('').length != 16 || vm.creditCard.cvv.toString().length != 3) {
                 toastr["error"]("Saving Error")
-                // vm.error = 'ERROR';
                 return;
             }
             vm.creditCard.number = vm.number.join('');
@@ -166,11 +147,9 @@
             vm.creditCard.id = payment.id;
             vm.creditCard.user = payment.user;
             vm.error = null;
-            // vm.success = 'OK';
             toastr["success"]("Saving Successful")
         }
         function onSaveError(error){
-            // vm.error = 'ERROR';
             vm.success = null;
             toastr["error"](data.authorizeduser.email, "Saving Error")
 
@@ -274,45 +253,15 @@
             })
         }
 
-        // function addToInvitedRemove(id, index) {
-        //     var userToRemove = {
-        //         id: id,
-        //         index: index
-        //     }
-        //     if(vm.invitedUsersToRemove.find(function(user, index){
-        //         return user.id == id;})){
-        //             vm.invitedUsersToRemove.splice(index, 1);
-        //         } else {
-        //             vm.invitedUsersToRemove.push(userToRemove)
-        //         }
-        // }
-        // function addToActivatedRemove(id, index) {
-        //     var userToRemove = {
-        //         id: id,
-        //         index: index
-        //     }
-        //     if(vm.activatedUsersToRemove.find(function(user, index){
-        //         return user.id == id;})){
-        //             vm.activatedUsersToRemove.splice(index, 1);
-        //         } else {
-        //             vm.activatedUsersToRemove.push(userToRemove)
-        //         }
-        // }
         function removeInvitedUsers(id, index) {
-            // vm.invitedUsersToRemove.map(function(user, index){
                 Groupaccess.delete({id: id})
                 toastr["warning"]("User Removed")
                 vm.invitedUsers.splice(index, 1)
-                // vm.invitedUsersToRemove.splice(index, 1);
-            // })
         }
         function removeAuthorizedUsers(id, index) {
-            // vm.activatedUsersToRemove.forEach(function(user){
                 Groupaccess.delete({id: id})
                 toastr["warning"]("User Removed")
-                // vm.activatedUsersToRemove.splice(index, 1);
                 vm.authorizedUsers.splice(index, 1)
-            // })
         }
     }
 })();
