@@ -520,7 +520,7 @@ table.scroll thead > tr {
     cursor: pointer;
 }
 .shareCaseTop{
-    padding: 10px !important;
+    padding: 5px 10px 5px 10px !important;
 }
 .shareCaseHead{
     margin: 10px;
@@ -549,20 +549,22 @@ table.scroll thead > tr {
     border:none;
     color:#E2E2E2;
     background-color:#E2E2E2;
+    width: 555px;
+    margin-left: 11.5px;
 }
 .shareInput{
     margin-right: 10px;
-    width: 376px;
+    width: 377px;
     height: 33px;
 }
 .shareSelect{
-    width: 168px;
+    width: 167px;
     display: inline-block;
 }
 .decisionButtons{
     text-align: right;
     button:first-child{
-        margin-right: 5px !important;
+        margin-right: 7px !important;
     }
 }
 // Fonts
