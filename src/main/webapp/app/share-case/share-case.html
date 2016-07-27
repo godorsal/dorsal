@@ -6,20 +6,20 @@
             </div>
             <table class="shareCaseHead">
                 <thead>
-                    <th><h3 ng-if="vm.sharedUsers.length">Users</h3></th>
-                    <th><h3 ng-if="vm.sharedUsers.length" class="permStatus">Permissions</h3></th>
-                    <th><h3 ng-if="vm.sharedUsers.length" class="permStatus">Status</h3></th>
-                    <th><h3 ng-if="vm.sharedUsers.length">Remove</h3></th>
+                    <th><h3 class="drsl-label" ng-if="vm.sharedUsers.length">Users</h3></th>
+                    <th><h3 class="drsl-label" ng-if="vm.sharedUsers.length" class="permStatus">Permissions</h3></th>
+                    <th><h3 class="drsl-label" ng-if="vm.sharedUsers.length" class="permStatus">Status</h3></th>
+                    <th><h3 class="drsl-label" ng-if="vm.sharedUsers.length">Remove</h3></th>
                 </thead>
                 <tbody>
                     <tr ng-repeat="share in vm.sharedUsers track by $index">
-                        <td>
+                        <td class="drsl-value">
                             {{share.user.email}}
                         </td>
-                        <td class="fullAccess">
+                        <td class="drsl-value fullAccess">
                             Full Access
                         </td>
-                        <td class="statusBool">
+                        <td class="drsl-value statusBool">
                             <span ng-if="!share.user.activated">Invited</span>
                             <span ng-if="share.user.activated">Authorized</span>
                         </td>
@@ -32,7 +32,7 @@
             <hr class="shareHr" />
             <form ng-submit="vm.addUser()" class="shareCaseHead">
                 <input type="text" id="emailInput" name="emailInput"
-                ng-model="vm.emailInput" ng-minlength=4 ng-maxlength=50 required placeholder=" Email address" class="shareInput">
+                ng-model="vm.emailInput" ng-minlength=4 ng-maxlength=50 required placeholder=" Email address" class="shareInput drsl-value">
                 <select class="form-control shareSelect" ng-model="vm.permissions" id="permissionInput" required disabled>
                     <option value="">Full Access</option>
                     <option value="read">read</option>
