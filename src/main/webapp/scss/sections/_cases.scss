@@ -164,6 +164,7 @@ Cases
                 padding-bottom: 10px;
 
                 &:first-child {
+                    padding-bottom: $default-padding;
                     border-bottom: 2px solid $horizontal-separator-color;
                     .drsl-label {
                         width: auto;
@@ -172,6 +173,7 @@ Cases
                 }
 
                 &:last-child {
+                    padding-bottom: $default-padding;
                     display: flex;
                     flex-flow: row;
                     align-items: center;
@@ -205,7 +207,6 @@ Cases
             }
             textarea.form-control {
                 height: 80px;
-                margin-top: -5px;
                 border-radius: 0;
                 border-color: $form-field-border-color;
             }
@@ -257,7 +258,6 @@ Cases
             .drsl-scrolling-container {
                 width: 450px;
                 height: 81px;
-                margin-top: -5px;
             }
         }
     }
