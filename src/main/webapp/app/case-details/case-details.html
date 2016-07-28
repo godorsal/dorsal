@@ -62,7 +62,7 @@
             <div style="text-align: left;">
                 <span class="drsl-label">Technology Properties</span>
                 <br>
-                <span ng-repeat="property in vm.technologyProps">
+                <span ng-repeat="property in vm.technologyProps | orderBy: 'tagNO'">
                     <span class="drsl-label">{{property.propertyname}}</span> <span class="drsl-value">{{property.propertyvalue}}</span><br>
                 </span>
             </div>
@@ -85,29 +85,35 @@
         <div translate="case.details.downloadedFiles">Downloaded Files</div>
         <div><i class="fa fa-minus"></i></div>
     </div> -->
-    <div class="drsl-form-grid estimateLogList">
+    <div class="drsl-form-grid">
         <div class="drsl-label">Estimate History</div>
-        <ol>
-            <li class="drsl-value eLogList" ng-repeat="log in vm.estimateLogs | limitTo: vm.estimateLogs.length - 1 ">
-                {{log}}
-            </li>
-        </ol>
+        <div>
+            <ol ng-show="vm.estimateLogs">
+                <li class="drsl-value eLogList" ng-repeat="log in vm.estimateLogs | limitTo: vm.estimateLogs.length - 1 ">
+                    {{log}}
+                </li>
+            </ol>
+        </div>
     </div>
     <div class="drsl-form-grid" style="width: 688px;">
         <div class="drsl-label">Update History</div>
-        <!-- <div class="historyBox"> -->
         <div>
-            <table class="scroll table-striped">
+            <div class="noUpdates" ng-hide="vm.updates.length > 0">
+                <div>
+                    Updates for your case will be displayed here
+                </div>
+            </div>
+            <table class="scroll table-striped" ng-show="vm.updates.length > 0">
                 <thead>
                     <tr>
                         <th class="drsl-label">Message</th>
                         <th class="drsl-label" style="padding-left: 177px;">Date</th>
-                        <th class="drsl-label" style="padding-left: 161px;">User/Expert</th>
+                        <th class="drsl-label" style="padding-left: 130px;">User/Expert</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="update in vm.updates track by $index" >
-                        <td style="width: 345px; max-width: 345px; word-wrap: break-word;">{{update.updateMsg}}</td>
+                    <tr ng-repeat="update in vm.updates track by $index" style="font-weight: 500; color: #404040">
+                        <td style="max-width: 177px; word-wrap: break-word;">{{update.updateMsg}}</td>
                         <td style="padding-left: 60px; white-space: nowrap;">{{update.dateUpdated | date:"MM/dd/yy h:mm a"}}</td>
                         <td style="padding-left: 70px; width: 180px !important;">{{update.user.login}}</td>
                     </tr>

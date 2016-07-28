@@ -271,12 +271,22 @@ table.scroll {
 table.scroll tbody {
     display: block;
     height: 95px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 table.scroll thead > tr {
     color: #666666;
     display: block;
     position: relative;
+}
+.noUpdates{
+    width: 500px;
+    height: 114px;
+    border: 1px solid #E5E5E5;
+    div{
+        padding: 5px 0px 0px 10px;
+        font-weight: 400;
+        color: #999999;
+    }
 }
 .drsl-form-grid {
     display: flex;
@@ -325,7 +335,7 @@ table.scroll thead > tr {
     font-weight: $default-medium-weight;
 }
 .estimateLogList{
-    width: 506px;
+    // width: 506px;
     li{
         list-style: none;
     }

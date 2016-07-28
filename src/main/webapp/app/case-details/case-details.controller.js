@@ -14,8 +14,8 @@
         vm.case = drslCase;
         vm.expert = expert;
         vm.summary = vm.case.summary.toString();
+        vm.technologyProps = {};
         vm.technologyProps = [];
-        vm.updates = [];
         vm.detailedResolutions = [];
         vm.updatemsg = '';
         vm.capitalizeFirstLetter = capitalizeFirstLetter;
@@ -51,6 +51,7 @@
             });
         }
         Caseupdate.query(function(result){
+            vm.updates = [];
             result.reverse().forEach(function(update){
                 if(update.supportcase.id === vm.case.id){
                     if(update.updatetype.id == 2){
@@ -63,7 +64,36 @@
         Casetechnologyproperty.query(function(result) {
             result.forEach(function(property){
                 if(property.supportcase.id === vm.case.id){
-                    vm.technologyProps.push(property)
+                    switch (property.propertyname) {
+                        case 'Version':
+                        property.tagNO = 1;
+                        vm.technologyProps.push(property)
+                        console.log(vm.technologyProps);
+                        break;
+                        case 'Configuration':
+                        property.tagNO = 2;
+                        vm.technologyProps.push(property)
+                        console.log(vm.technologyProps);
+                        break;
+                        case 'OS':
+                        property.tagNO = 3;
+                        vm.technologyProps.push(property)
+                        console.log(vm.technologyProps);
+                        break;
+                        case 'Environment':
+                        property.tagNO = 4;
+                        vm.technologyProps.push(property)
+                        console.log(vm.technologyProps);
+                        break;
+                        case 'Other':
+                        property.tagNO = 5;
+                        vm.technologyProps.other = property
+                        vm.technologyProps.push(property)
+                        console.log(vm.technologyProps);
+                        break;
+
+                    }
+                    console.log(property);
                 }
             })
         });
@@ -73,10 +103,12 @@
             $uibModalInstance.dismiss('cancel');
         }
         function onSaveSuccess (result){
-            vm.attachment.supportcase = {
-                id: vm.case.id
+            if(vm.attachment.name){
+                vm.attachment.supportcase = {
+                    id: vm.case.id
+                }
+                Attachment.save(vm.attachment);
             }
-            Attachment.save(vm.attachment);
         }
         function onSaveError (error){
         }
