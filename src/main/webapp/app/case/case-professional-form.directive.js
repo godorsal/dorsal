@@ -54,6 +54,10 @@
             scope.fieldTouched = function () {
                 scope.$emit('pauseOrResumeCasePolling', {'pause': true});
             };
+
+            scope.$on('currentCaseSet', function(){
+                scope.resolved = false;
+            });
         }
     }
 })();
