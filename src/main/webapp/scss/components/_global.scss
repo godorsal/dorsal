@@ -604,6 +604,21 @@ table.scroll thead > tr {
         font-size: 20px;
     }
 }
+.activatePage{
+    background-color: #F48B3D;
+    border-color: #d6e9c6;
+    color: white;
+    height: 60px; font-weight: 400;
+    font-size: 25px;
+    font-family: 'Raleway'
+}
+.activateText{
+    font-weight: 400;
+    padding: 10px;
+    a{
+        color: white;
+    }
+}
 // Fonts
 @font-face {
     font-family: 'Raleway';
