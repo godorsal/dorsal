@@ -30,6 +30,7 @@
         vm.openCaseAgreement = openCaseAgreement;
         vm.cases = [];
         vm.updates = [];
+        vm.detailedResolutions = [];
         vm.currentCase = {};
         vm.status = {
             created: 'case.details.status.created',
