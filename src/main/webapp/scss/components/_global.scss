@@ -586,6 +586,24 @@ table.scroll thead > tr {
         margin-right: 7px !important;
     }
 }
+.magicPasswordBox{
+    border: 1px solid #D8D8D8;
+    box-shadow: -1px 1px 5px 9px rgba(0,0,0,0.3);
+    background: rgba(255,255,255,.9);
+    input{
+        background: #E5E5E5;
+    }
+    .goLeft{
+        float: left;
+    }
+    .goRight{
+        float: right;
+    }
+    h2, b{
+        font-weight: 400;
+        font-size: 20px;
+    }
+}
 // Fonts
 @font-face {
     font-family: 'Raleway';
