@@ -23,27 +23,24 @@
                 values: [
                     {
                         code: "escalation",
-                        value: "ESCALATION",
+                        value: "Escalation",
                         id: 1,
                         label: "Escalation",
-                        name:"Escalation",
-                        value:"Escalation"
+                        name:"Escalation"
                     },
                     {
                         code: "reassign",
-                        value: "REASSIGN",
+                        value: "Reassign",
                         id: 2,
                         label: "Reassign",
-                        name:"Reassign",
-                        value:"Reassign"
+                        name:"Reassign"
                     },
                     {
                         code: "escalate_reassign",
-                        value: "ESCALATE_REASSIGN",
+                        value: "Escalate_Reassign",
                         id: 3,
                         label: "Escalate and Reassign",
-                        name:"Escalate and Reassign",
-                        value:"Escalate_Reassign"
+                        name:"Escalate and Reassign"
                     }
                 ]
             }
