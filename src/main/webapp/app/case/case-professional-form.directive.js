@@ -34,8 +34,10 @@
 
                 if (scope.case.isApproved && scope.resolved && StatusModel.checkCaseStatus(scope.case.status, 'working')) {
                     scope.case.status = StatusModel.getState('completed');
+                    scope.case.isResolved = true;
                 }
 
+                scope.expertForm.estimateHours.$pristine = true;
                 scope.case.$update(caseUpdateSuccess, caseUpdateError);
                 function caseUpdateSuccess(){
                     toastr.success('This case has been updated', 'Success');
@@ -52,6 +54,10 @@
             scope.fieldTouched = function () {
                 scope.$emit('pauseOrResumeCasePolling', {'pause': true});
             };
+
+            scope.$on('currentCaseSet', function(){
+                scope.resolved = false;
+            });
         }
     }
 })();

@@ -180,6 +180,7 @@
             vm.currentCase = targetCase;
             getCaseExpertBadges();
             getCaseUpdates();
+            $scope.$broadcast('currentCaseSet');
         }
 
         /**
