@@ -3,7 +3,7 @@
         "title": "Activation",
         "messages": {
             "success": "<div class=\"activateText\">Your user has been activated. Please <a href=\"\" ng-click=\"vm.login()\">sign in</a>.</div> ",
-            "error": "<strong>Your user could not be activated.</strong> Please use the registration form to sign up."
+            "error": "<div class=\"activateText\">Your user could not be activated. Please use the registration form to sign up.</div>"
         }
     }
 }
