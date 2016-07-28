@@ -168,11 +168,17 @@
         }
         function makeUser(email){
             var inviteString = "Invite:" + vm.settingsAccount.firstName + " " + vm.settingsAccount.lastName;
+            var charSet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+            var randomNewPassword = '';
+            for(var i = 0; i < 5; i++){
+        		var randomIndex = Math.floor(Math.random() * charSet.length);
+        		randomNewPassword += charSet.substring(randomIndex,randomIndex+1);
+        	}
             var newUser = {
                 email: email,
                 langKey: $translate.use(),
                 login: email,
-                password: 'myDorsal',
+                password: randomNewPassword + Math.floor(Math.random() * 9),
                 lastName: inviteString.substring(0, 50)
             }
             Register.save(newUser, invitedGroup,  onUserSaveError)
