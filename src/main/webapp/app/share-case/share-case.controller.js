@@ -38,7 +38,7 @@
                 email: email,
                 langKey: $translate.use(),
                 login: email,
-                password: randomNewPassword),
+                password: randomNewPassword,
                 lastName: inviteString.substring(0, 50)
             }
             Register.save(newUser, shareCaseNew)
