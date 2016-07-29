@@ -3,8 +3,9 @@
         <div class="col-md-12">
             <div class="drsl-settings-wrapper">
                 <div class="drsl-sub-header">
-                    <h2 >User settings for  {{vm.settingsAccount.login}}</h2>
-                    <h2 style="text-align: right; margin-right: 0;flex: 2;">Payment Method</h2>
+                    <h2 ng-if="!vm.currentExpert">User settings for  {{vm.settingsAccount.login}}</h2>
+                    <h2 ng-if="vm.currentExpert">Expert Settings</h2>
+                    <h2 style="text-align: right; margin-right: 0;flex: 2;" ng-if="!vm.currentExpert">Payment Method</h2>
                 </div>
                 <div class="drsl-panels">
                     <div class="alert alert-success" ng-show="vm.success" translate="settings.messages.success">
@@ -18,7 +19,7 @@
                     <div class="alert alert-danger" ng-show="vm.error" translate="settings.messages.error.fail">
                         <strong>An error has occurred!</strong> Settings could not be saved.
                     </div>
-                    <div class="" style="background: white; padding: 10px; height: 363px; margin-bottom: 20px; display: inline-block; float: left; width: 564px;">
+                    <div ng-class="{'drsl-expert-info-content': vm.currentExpert}">
                         <form name="form" role="form" novalidate ng-submit="vm.save()" show-validation>
 
                             <div class="form-group" >
@@ -59,7 +60,7 @@
     </div>
     <div class="form-group">
         <input type="email" class="form-control" id="email" name="email" placeholder=""
-        ng-model="vm.settingsAccount.email" disabled ng-minlength=5 ng-maxlength=100 required maxlength="100" style="background: white; font-size: 13px;">
+        ng-model="vm.settingsAccount.email" disabled ng-minlength=5 ng-maxlength=100 required maxlength="100" >
         <div ng-show="form.email.$dirty && form.email.$invalid">
             <p class="help-block"
             ng-show="form.email.$error.required" translate="global.messages.validate.email.required">
@@ -82,14 +83,28 @@ Your e-mail cannot be longer than 100 characters.
 <div class="form-group">
     <select id="langKey" name="langKey" class="form-control" ng-model="vm.settingsAccount.langKey" ng-controller="JhiLanguageController as languageVm" ng-options="code as (code | findLanguageFromKey) for code in languageVm.languages"></select>
 </div>
-<div class="form-group" ng-if="vm.currentExpert">
-    <textarea name="name" rows="4" cols="20" class="form-control" ng-model="vm.currentExpert.welcomeMessage" ng-change="vm.updatingExpert = true"></textarea>
+<div class="form-group">
+    <input type="contact" class="form-control" id="contact" name="contact" placeholder="Preferred contact method"
+    ng-model="vm.currentExpert.contact" ng-minlength=5 ng-maxlength=100 required maxlength="100">
 </div>
-<button type="submit" ng-disabled="form.$invalid" class="btn btn-success" translate="settings.form.button" style="float: right; margin-right: 10px;">Update</button>
+<div class="form-group">
+    <input type="timezone" class="form-control" id="timezone" name="timezone" placeholder="Timezone"
+    ng-model="vm.currentExpert.timezone" ng-minlength=5 ng-maxlength=100 required maxlength="100">
+</div>
+<button type="submit" ng-disabled="form.$invalid" class="btn btn-success" translate="settings.form.button" style="float: right; margin-right: 10px;" ng-if="!vm.currentExpert">Update</button>
 </form>
 
 </div>
-<div class="drsl-payment-content" style="display: inline-block; float: right; width: 588px;">
+<div class="drsl-expert-message-content" ng-if="vm.currentExpert">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <textarea name="name" rows="4" cols="20" class="form-control" ng-model="vm.currentExpert.welcomeMessage" ng-change="vm.updatingExpert = true" placeholder="Greeting Message"></textarea>
+            <textarea name="name" rows="4" cols="20" class="form-control" ng-model="vm.currentExpert.workmessage" ng-change="vm.updatingExpert = true" placeholder="Working Message"></textarea>
+            <button type="submit" ng-disabled="form.$invalid" class="btn btn-success" translate="settings.form.button" >Update</button>
+        </div>
+    </div>
+</div>
+<div class="drsl-payment-content" style="display: inline-block; float: right; width: 588px;" ng-if="!vm.currentExpert">
     <div>
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -188,7 +203,7 @@ Your e-mail cannot be longer than 100 characters.
 </div>
 </div>
 </div>
-<div class="drsl-settings-wrapper" ng-if="!vm.isAlreadyAuthorized">
+<div class="drsl-settings-wrapper" ng-if="!vm.isAlreadyAuthorized && !vm.currentExpert">
     <div ng-if="!vm.isAlreadyAuthorized">
         <div class="drsl-sub-header" translate="settings.authorization.header">
             Manage Authorized Users
@@ -199,7 +214,7 @@ Your e-mail cannot be longer than 100 characters.
                     <label class="control-label" for="uEmail" style="padding-right: 10px;" translate="settings.authorization.input">Add User</label>
                     <input type="text" class="form-control" id="uEmail" ng-model="vm.invitedUser" style="width: 375px; display: inline-block; padding-top: 5px;" name="uEmail" placeholder="Email address; multiple users separated by commas"
                     ng-minlength=1 >
-                    <button type="submit" class="btn btn-success" translate="settings.form.button" style="margin-left: 8px;">Update</button>
+                    <button type="submit" class="btn btn-success" translate="settings.form.button" style="margin-left: 8px; ">Update</button>
                 </form>
             </div>
             <div class="panel-body">
