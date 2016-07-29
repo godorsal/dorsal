@@ -34,6 +34,8 @@ public class MailService {
 
     private static final String USER = "user";
     private static final String BASE_URL = "baseUrl";
+    private static final String LOGIN_INFO = "loginInfo";
+    private static final String EXT_LOGIN_INFO = "extLoginInfo";
 
     @Inject
     private JHipsterProperties jHipsterProperties;
@@ -74,25 +76,27 @@ public class MailService {
     public void sendActivationEmail(User user, String baseUrl, String actionMessage) {
         log.debug("Sending activation e-mail to '{}'", user.getEmail());
         Locale locale = Locale.forLanguageTag(user.getLangKey());
-        Context context = new Context(locale);
-        context.setVariable(USER, user);
-        context.setVariable(BASE_URL, baseUrl);
-        String content = templateEngine.process("activationEmail", context);
+
         /*
             The email subject line depends if the user is invited to join the platform
             or if a case is shared.
          */
-        String      subject        = "";
-        String[]    args           = {""};
+        String  subject     = "";
+        String  tempPWD     = "";
+        String  loginInfo   = "";
+        String  extLogInfo  = "";
+        String[]    args    = {""};
 
         log.info("sendActivation Email() Last Name entry " + actionMessage);
         if (actionMessage != null) {
             if (actionMessage.startsWith("Invite:") ) {
-                args[0] = actionMessage.substring(actionMessage.lastIndexOf(':') + 1);
+                args[0] = actionMessage.substring(actionMessage.indexOf(':', 0) +1, actionMessage.lastIndexOf(':') -1 );
+                tempPWD = actionMessage.substring(actionMessage.lastIndexOf(':') + 1);
                 subject = messageSource.getMessage("email.activation.invite.title", args, locale);
                 log.info("Subject message: " + subject);
             } else if (actionMessage.startsWith("Share:") ) {
-                args[0] = actionMessage.substring(actionMessage.lastIndexOf(':') + 1);
+                args[0] = actionMessage.substring(actionMessage.indexOf(':', 0) +1, actionMessage.lastIndexOf(':') -1 );
+                tempPWD = actionMessage.substring(actionMessage.lastIndexOf(':') + 1);
                 subject = messageSource.getMessage("email.activation.share.title", args, locale);
                 log.info("Subject message: " + subject);
             }else {
@@ -105,6 +109,27 @@ public class MailService {
             subject = messageSource.getMessage("email.activation.title", null, locale);
             log.info("Default Subject message: " + subject);
         }
+        // Email text depends if a temporary password was provided or if user has created account
+        if (tempPWD.length() > 0 ) {
+            args[0] = tempPWD;
+            loginInfo =  messageSource.getMessage("email.text.nextstep.pwd", args, locale);
+            extLogInfo = messageSource.getMessage("email.text.nextstep.pwd.upd", null, locale);
+        }
+        else
+        {
+            loginInfo =  messageSource.getMessage("email.text.nextstep.nopwd", null, locale);
+
+        }
+        log.info("Email message about login [" + loginInfo + "]");
+
+        // Generate Email
+        Context context = new Context(locale);
+        context.setVariable(USER, user);
+        context.setVariable(BASE_URL, baseUrl);
+        context.setVariable(LOGIN_INFO, loginInfo);
+        context.setVariable(EXT_LOGIN_INFO, extLogInfo);
+        String content = templateEngine.process("activationEmail", context);
+
         sendEmail(user.getEmail(), subject, content, false, true);
     }
 
