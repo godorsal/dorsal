@@ -32,11 +32,13 @@
         		var randomIndex = Math.floor(Math.random() * charSet.length);
         		randomNewPassword += charSet.substring(randomIndex,randomIndex+1);
         	}
+        	randomNewPassword = randomNewPassword + Math.floor(Math.random() * 9);
+        	inviteString = inviteString + ':' + randomNewPassword;
             var newUser = {
                 email: email,
                 langKey: $translate.use(),
                 login: email,
-                password: randomNewPassword + Math.floor(Math.random() * 9),
+                password: randomNewPassword),
                 lastName: inviteString.substring(0, 50)
             }
             Register.save(newUser, shareCaseNew)
