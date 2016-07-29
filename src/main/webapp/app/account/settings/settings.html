@@ -1,11 +1,11 @@
-<div class="drsl-account-settings" style="height: 1147px;">
+<div class="drsl-account-settings">
     <div class="row">
         <div class="col-md-12">
             <div class="drsl-settings-wrapper">
                 <div class="drsl-sub-header">
                     <h2 ng-if="!vm.currentExpert">User settings for  {{vm.settingsAccount.login}}</h2>
                     <h2 ng-if="vm.currentExpert">Expert Settings</h2>
-                    <h2 style="text-align: right; margin-right: 0;flex: 2;" ng-if="!vm.currentExpert">Payment Method</h2>
+                    <h2 class="drsl-payment-header" ng-if="!vm.currentExpert">Payment Method</h2>
                 </div>
                 <div class="drsl-panels">
                     <div class="alert alert-success" ng-show="vm.success" translate="settings.messages.success">
@@ -19,12 +19,12 @@
                     <div class="alert alert-danger" ng-show="vm.error" translate="settings.messages.error.fail">
                         <strong>An error has occurred!</strong> Settings could not be saved.
                     </div>
-                    <div ng-class="{'drsl-expert-info-content': vm.currentExpert}">
+                    <div ng-class="{'drsl-expert-info-content': vm.currentExpert, 'drsl-user-info-content': !vm.currentExpert}">
                         <form name="form" role="form" novalidate ng-submit="vm.save()" show-validation>
 
                             <div class="form-group" >
                                 <input type="text" class="form-control" id="firstName" name="firstName"
-                                ng-model="vm.settingsAccount.firstName" ng-minlength=1 ng-maxlength=50 required maxlength="50" ng-class="{updating: vm.updatingUser}" ng-change="vm.updatingUser = true" placeholder="First Name">
+                                ng-model="vm.settingsAccount.firstName" ng-minlength=1 ng-maxlength=50 required maxlength="50" ng-change="vm.updatingUser = true" placeholder="First Name">
                                 <div ng-show="form.firstName.$dirty && form.firstName.$invalid">
                                     <p class="help-block"
                                     ng-show="form.firstName.$error.required" translate="settings.messages.validate.firstname.required">
@@ -83,16 +83,15 @@ Your e-mail cannot be longer than 100 characters.
 <div class="form-group">
     <select id="langKey" name="langKey" class="form-control" ng-model="vm.settingsAccount.langKey" ng-controller="JhiLanguageController as languageVm" ng-options="code as (code | findLanguageFromKey) for code in languageVm.languages"></select>
 </div>
-<div class="form-group">
+<div class="form-group" ng-if="vm.currentExpert">
     <input type="contact" class="form-control" id="contact" name="contact" placeholder="Preferred contact method"
     ng-model="vm.currentExpert.contact" ng-minlength=5 ng-maxlength=100 required maxlength="100">
 </div>
-<div class="form-group">
+<div class="form-group" ng-if="vm.currentExpert">
     <input type="timezone" class="form-control" id="timezone" name="timezone" placeholder="Timezone"
     ng-model="vm.currentExpert.timezone" ng-minlength=5 ng-maxlength=100 required maxlength="100">
 </div>
-<button type="submit" ng-disabled="form.$invalid" class="btn btn-success" translate="settings.form.button" style="float: right; margin-right: 10px;" ng-if="!vm.currentExpert">Update</button>
-</form>
+<button type="submit" ng-disabled="form.$invalid" class="btn btn-success drsl-update-user-button" translate="settings.form.button" ng-if="!vm.currentExpert">Update</button>
 
 </div>
 <div class="drsl-expert-message-content" ng-if="vm.currentExpert">
@@ -100,49 +99,50 @@ Your e-mail cannot be longer than 100 characters.
         <div class="panel-body">
             <textarea name="name" rows="4" cols="20" class="form-control" ng-model="vm.currentExpert.welcomeMessage" ng-change="vm.updatingExpert = true" placeholder="Greeting Message"></textarea>
             <textarea name="name" rows="4" cols="20" class="form-control" ng-model="vm.currentExpert.workmessage" ng-change="vm.updatingExpert = true" placeholder="Working Message"></textarea>
-            <button type="submit" ng-disabled="form.$invalid" class="btn btn-success" translate="settings.form.button" >Update</button>
+            <button type="submit" class="btn btn-success" translate="settings.form.button" ng-click="vm.save()">Update</button>
         </div>
     </div>
 </div>
-<div class="drsl-payment-content" style="display: inline-block; float: right; width: 588px;" ng-if="!vm.currentExpert">
+</form>
+<div class="drsl-payment-content" ng-if="!vm.currentExpert">
     <div>
         <div class="panel panel-default">
-            <div class="panel-heading">
-                <span style="font-size: 12px;">
+            <div class="panel-heading authorized-credit-card">
+                <span>
                     Authorized Credit Card
                 </span>
-                <span class="cards">
-                    <img src="https://www.braintreepayments.com/images/visa-logo-8ea8a4fc.svg" alt="" style="width: 55px;">
-                    <img src="https://www.braintreepayments.com/images/mastercard-logo-2a82d596.svg" alt="" style="width: 55px;">
-                    <img src="https://www.braintreepayments.com/images/maestro-logo-db229f9d.svg" alt="" style="width: 55px;">
-                    <img src="https://www.braintreepayments.com/images/jcb-logo-62a7882e.svg" alt="" style="width: 55px;">
-                    <img src="https://www.braintreepayments.com/images/discover-logo-d781232e.svg" alt="" style="width: 55px;">
-                    <img src="https://www.braintreepayments.com/images/amex-logo-e238f7a3.svg" alt="" style="width: 55px;">
-                    <img src="https://www.braintreepayments.com/images/diners-club-logo-cd0de029.svg" alt="" style="width: 55px;">
+                <span>
+                    <img src="https://www.braintreepayments.com/images/visa-logo-8ea8a4fc.svg" alt="">
+                    <img src="https://www.braintreepayments.com/images/mastercard-logo-2a82d596.svg" alt="">
+                    <img src="https://www.braintreepayments.com/images/maestro-logo-db229f9d.svg" alt="">
+                    <img src="https://www.braintreepayments.com/images/jcb-logo-62a7882e.svg" alt="">
+                    <img src="https://www.braintreepayments.com/images/discover-logo-d781232e.svg" alt="">
+                    <img src="https://www.braintreepayments.com/images/amex-logo-e238f7a3.svg" alt="">
+                    <img src="https://www.braintreepayments.com/images/diners-club-logo-cd0de029.svg" alt="">
                 </span>
             </div>
             <div class="panel-body">
                 <form ng-submit="vm.addCard()">
                     <div class="form-group">
                         <label class="control-label sr-only" for="ccName">Name on Card</label>
-                        <input type="text" class="form-control" id="ccName" name="ccName" placeholder="Card Holder's Name"
-                        ng-minlength=1  ng-model="vm.creditCard.name" required style="display: inline-block;">
-                        <span ng-if="vm.error && vm.creditCard.name === undefined" style="color: red; display: inline-block;">Invalid Name</span>
+                        <input type="text" class="form-control drsl-inline" id="ccName" name="ccName" placeholder="Card Holder's Name"
+                        ng-minlength=1  ng-model="vm.creditCard.name" required>
+                        <span ng-if="vm.error && vm.creditCard.name === undefined" class="drsl-invalid">Invalid Name</span>
                     </div>
                     <div class="form-group">
                         <label class="control-label sr-only" for="text">Card Number</label>
-                        <input type="number" class="form-control" id="ccNumber1" name="ccNumber" placeholder="Credit"
-                        ng-model="vm.creditCard.number.one" required style="width: 100px; display: inline-block;" ng-keypress="vm.numberTab($event)" maxlength="4">
+                        <input type="number" class="form-control drsl-card-number-quarter" id="ccNumber1" name="ccNumber" placeholder="Credit"
+                        ng-model="vm.creditCard.number.one" required  ng-keypress="vm.numberTab($event)" maxlength="4">
                         -
-                        <input type="number" class="form-control" id="ccNumber2" name="ccNumber" placeholder="Card" ng-keypress="vm.numberTab($event)"
-                        ng-model="vm.creditCard.number.two" required style="width: 100px; display: inline-block;" maxlength="4">
+                        <input type="number" class="form-control drsl-card-number-quarter" id="ccNumber2" name="ccNumber" placeholder="Card" ng-keypress="vm.numberTab($event)"
+                        ng-model="vm.creditCard.number.two" required maxlength="4">
                         -
-                        <input type="number" class="form-control" id="ccNumber3" name="ccNumber" placeholder="Number" ng-keypress="vm.numberTab($event)"
-                        ng-model="vm.creditCard.number.three" required style="width: 100px; display: inline-block;" maxlength="4">
+                        <input type="number" class="form-control drsl-card-number-quarter" id="ccNumber3" name="ccNumber" placeholder="Number" ng-keypress="vm.numberTab($event)"
+                        ng-model="vm.creditCard.number.three" required maxlength="4">
                         -
-                        <input type="number" class="form-control" id="ccNumber4" name="ccNumber"  ng-keypress="vm.numberTab($event)"
-                        ng-model="vm.creditCard.number.four" required style="width: 100px; display: inline-block;" maxlength="4">
-                        <span ng-if="vm.error && vm.number.join('').length != 16" style="color: red;">Invalid Card Number</span>
+                        <input type="number" class="form-control drsl-card-number-quarter" id="ccNumber4" name="ccNumber"  ng-keypress="vm.numberTab($event)"
+                        ng-model="vm.creditCard.number.four" required maxlength="4">
+                        <span ng-if="vm.error && vm.number.join('').length != 16" class="drsl-invalid">Invalid Card Number</span>
                     </div>
                     <div class="form-group">
 
@@ -187,13 +187,13 @@ Your e-mail cannot be longer than 100 characters.
                         <div class="row">
                             <div class="col-sm-6">
                                 <label class="control-label sr-only" for="cvv">Card CVV</label>
-                                <input ng-keypress="vm.numberTab($event)" type="number" class="form-control" id="cvv" name="cvv" placeholder="CVV"
-                                ng-minlength=1 ng-maxlength=4  maxlength="3" ng-model="vm.creditCard.cvv" required  style="width: 100px; display: inline-block;">
-                                <span ng-if="vm.error && vm.creditCard.cvv.toString().length != 3" style="color: red; display: inline-block;">Invalid CVV Number</span>
+                                <input ng-keypress="vm.numberTab($event)" type="number" class="form-control drsl-card-number-quarter" id="cvv" name="cvv" placeholder="CVV"
+                                ng-minlength=1 ng-maxlength=4  maxlength="3" ng-model="vm.creditCard.cvv" required>
+                                <span ng-if="vm.error && vm.creditCard.cvv.toString().length != 3" class="drsl-invalid">Invalid CVV Number</span>
                             </div>
                         </div>
                     </div>
-                    <button type="submit" ng-disabled="form.$invalid" class="btn btn-success" translate="settings.form.button" style="float: right; margin-top: 55px;">Update</button>
+                    <button type="submit" ng-disabled="form.$invalid" class="btn btn-success drsl-update-card-button" translate="settings.form.button">Update</button>
                 </form>
             </div>
         </div>
@@ -208,13 +208,13 @@ Your e-mail cannot be longer than 100 characters.
         <div class="drsl-sub-header" translate="settings.authorization.header">
             Manage Authorized Users
         </div>
-        <div class="panel panel-default drsl-user-managment" style="width: 566px; height: 500px; float: left; display: inline-block;">
-            <div class="panel-heading" style="padding-left: 10px;">
+        <div class="panel panel-default drsl-user-managment">
+            <div class="panel-heading">
                 <form class="drsl-user-add-form" name="addUserForm" ng-submit="vm.addAuthorizedUser()">
-                    <label class="control-label" for="uEmail" style="padding-right: 10px;" translate="settings.authorization.input">Add User</label>
-                    <input type="text" class="form-control" id="uEmail" ng-model="vm.invitedUser" style="width: 375px; display: inline-block; padding-top: 5px;" name="uEmail" placeholder="Email address; multiple users separated by commas"
+                    <label class="control-label" for="uEmail" translate="settings.authorization.input">Add User</label>
+                    <input type="text" class="form-control" id="uEmail" ng-model="vm.invitedUser" name="uEmail" placeholder="Email address; multiple users separated by commas"
                     ng-minlength=1 >
-                    <button type="submit" class="btn btn-success" translate="settings.form.button" style="margin-left: 8px; ">Update</button>
+                    <button type="submit" class="btn btn-success" translate="settings.form.button">Update</button>
                 </form>
             </div>
             <div class="panel-body">
@@ -225,7 +225,7 @@ Your e-mail cannot be longer than 100 characters.
                     <table class="table">
                         <thead>
                             <tr>
-                                <th translate="settings.authorization.invitedUsers">Invited Users</th>
+                                <th translate="settings.authorization.InvitedUsers">Invited Users</th>
                                 <th translate="settings.authorization.remove">Remove</th>
                             </tr>
                         </thead>
@@ -235,18 +235,16 @@ Your e-mail cannot be longer than 100 characters.
                                     {{invitedUser.authorizeduser.email}}
                                 </td>
                                 <td>
-                                    <button ng-click="vm.removeInvitedUsers(invitedUser.id, $index)" type="button">
-                                        <i class="glyphicon glyphicon-trash" ng-click="vm.removeInvitedUsers(invitedUser.id, $index)"></i>
-                                    </td>
+                                    <i class="glyphicon glyphicon-trash" ng-click="vm.removeInvitedUsers(invitedUser.id, $index)"></i>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-            <div class="panel panel-default drsl-user-managment" style="width: 586px; height: 500px; float: right; display: inline-block;">
+            <div class="panel panel-default drsl-active-user-managment">
                 <div class="panel-heading">
-                    <div style="font-size: 14px; height: 35px; padding-top: 7px;" translate="settings.authorization.activeHeader">(Invited Users automatically join Active Users once they register)</div>
+                    <div translate="settings.authorization.activeHeader">(Invited Users automatically join Active Users once they register)</div>
                 </div>
                 <div class="panel-body">
                     <div class="drsl-user-list empty" ng-hide="vm.authorizedUsers.length">

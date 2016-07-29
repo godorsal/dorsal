@@ -3,12 +3,7 @@ Account Settings
 ========================================================================== */
 
 .drsl-account-settings {
-    .drsl-regular-user-background{
-        height: 1147px;
-    }
-    .drsl-expert-background{
-        height: 500px;
-    }
+    height: 1147px;
     .drsl-expert-info-content{
         background: white;
         padding: 15px;
@@ -21,10 +16,55 @@ Account Settings
             margin-bottom: 25px;
         }
     }
+    .drsl-user-info-content{
+        background: white;
+        padding: 15px;
+        height: 363px;
+        margin-bottom: 20px;
+        display: inline-block;
+        float: left;
+        width: 564px;
+        input{
+            margin-bottom: 25px;
+        }
+    }
+    .drsl-payment-header{
+        text-align: right;
+        margin-right: 0;
+        flex: 2;
+    }
+    .drsl-update-user-button{
+        float: right;
+        margin-right: 10px;
+        margin-top: 70px;
+    }
+    .authorized-credit-card{
+        span{
+            font-size: 12px;
+        }
+        > span > img{
+            width: 55px;
+            width: 55px;
+        }
+    }
+    .drsl-inline{
+        display: inline-block;
+    }
+    .drsl-invalid{
+        color: red;
+        display: inline-block;
+    }
+    .drsl-card-number-quarter{
+        width: 100px;
+        display: inline-block;
+    }
+    .drsl-update-card-button{
+        float: right;
+        margin-top: 55px;
+    }
     textarea{
         resize: none;
     }
-
     #contactMe {
         height: 50px;
     }
@@ -50,7 +90,10 @@ Account Settings
 
     .drsl-payment-content {
         // padding: 20px;
-        display: flex;
+        // display: flex;
+        display: inline-block;
+        float: right;
+        width: 588px;
         flex-flow: row;
         > div {
             height: 363px;
@@ -83,6 +126,27 @@ Account Settings
     }
 
     .drsl-user-managment {
+        width: 566px;
+        height: 500px;
+        float: left;
+        display: inline-block;
+        i {
+            padding-left: 20px;
+        }
+        .panel-heading{
+            padding-left: 10px;
+            .control-label {
+                padding-right: 10px;
+            }
+            .form-control{
+                width: 375px;
+                display: inline-block;
+                padding-top: 5px;
+            }
+            .btn{
+                margin-left: 8px;
+            }
+        }
         .drsl-user-add-form {
             > div {
                 display: flex;
@@ -103,8 +167,62 @@ Account Settings
             display: flex;
             flex-flow: row;
             height: 180px;
-            background-color: #F5F5F5;
-            border: 1px solid #DDDDDD;
+            margin-top: 15px;
+
+            &.empty {
+                align-items: center;
+                > div {
+                    text-align: center;
+                }
+            }
+
+            > div {
+                flex: 1;
+                color: #c0c0c0;
+                padding: 5px;
+                overflow: auto;
+            }
+
+            button {
+                margin: 5px;
+            }
+        }
+    }
+    .drsl-active-user-managment {
+        width: 586px;
+        height: 500px;
+        float: right;
+        display: inline-block;
+        i {
+            padding-left: 20px;
+        }
+        .panel-heading{
+            > div {
+                font-size: 14px;
+                height: 35px; 
+                padding-top: 7px;
+            }
+        }
+        .drsl-user-add-form {
+            > div {
+                display: flex;
+                flex-flow: row;
+
+                > div {
+                    flex: 1;
+
+                    &:first-child {
+                        flex: 3;
+                        padding-right: 15px;
+                    }
+                }
+            }
+        }
+
+        .drsl-user-list {
+            display: flex;
+            flex-flow: row;
+            height: 180px;
             margin-top: 15px;
 
             &.empty {

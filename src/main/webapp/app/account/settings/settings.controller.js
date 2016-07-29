@@ -35,6 +35,7 @@
         ExpertAccount.query(function(data){
             if(data[0]){
                 vm.currentExpert = data[0];
+                console.log(data);
             }
         });
         Payment.query(function(result){
