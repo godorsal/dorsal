@@ -10,8 +10,10 @@
     function stateConfig($stateProvider) {
         $stateProvider.state('activate', {
             parent: 'account',
-            url: '/activate',
-            // url: '/activate?key',
+            // 9e7ed03 commit broke activation by changing URL
+            // Query string is required by REST API
+            // url: '/activate',
+            url: '/activate?key',
             data: {
                 authorities: [],
                 pageTitle: 'activate.title'
