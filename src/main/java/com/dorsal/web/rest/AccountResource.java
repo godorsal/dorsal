@@ -72,7 +72,7 @@ public class AccountResource {
                     log.info("Registration message:" + registartionMessage);
 
                     User user = userService.createUserInformation(managedUserDTO.getLogin(), managedUserDTO.getPassword(),
-                    managedUserDTO.getFirstName(), managedUserDTO.getLastName(), managedUserDTO.getEmail().toLowerCase(),
+                    managedUserDTO.getFirstName(), "" /*managedUserDTO.getLastName()*/, managedUserDTO.getEmail().toLowerCase(),
                     managedUserDTO.getLangKey());
 
                     // Read the server name from the configuration application-{dev|prod}.yml file
@@ -84,19 +84,13 @@ public class AccountResource {
                             request.getServerPort();
                     }
 
-
                     String baseUrl = request.getScheme() + // "http"
                     "://" +                                // "://"
                     serverURL +                             // generated above with the properties setting
                     request.getContextPath();              // "/myContextPath" or "" if deployed in root context
 
-                    // Last name is wipped out restore before calling email service
-                    user.setLastName( registartionMessage );
                     mailService.sendActivationEmail(user, baseUrl, registartionMessage);
 
-                    // Clear last name with was just a transient setting
-                    user.setLastName("");
-                    userRepository.save(user);
                     return new ResponseEntity<>(HttpStatus.CREATED);
                 })
         );
@@ -113,6 +107,7 @@ public class AccountResource {
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<String> activateAccount(@RequestParam(value = "key") String key) {
+        log.debug("Activation Key: " + key);
         return userService.activateRegistration(key)
             .map(user -> new ResponseEntity<String>(HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));

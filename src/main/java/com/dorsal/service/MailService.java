@@ -90,12 +90,12 @@ public class MailService {
         log.info("sendActivation Email() Last Name entry " + actionMessage);
         if (actionMessage != null) {
             if (actionMessage.startsWith("Invite:") ) {
-                args[0] = actionMessage.substring(actionMessage.indexOf(':', 0) +1, actionMessage.lastIndexOf(':') -1 );
+                args[0] = actionMessage.substring(actionMessage.indexOf(':', 0) +1, actionMessage.lastIndexOf(':')  );
                 tempPWD = actionMessage.substring(actionMessage.lastIndexOf(':') + 1);
                 subject = messageSource.getMessage("email.activation.invite.title", args, locale);
                 log.info("Subject message: " + subject);
             } else if (actionMessage.startsWith("Share:") ) {
-                args[0] = actionMessage.substring(actionMessage.indexOf(':', 0) +1, actionMessage.lastIndexOf(':') -1 );
+                args[0] = actionMessage.substring(actionMessage.indexOf(':', 0) +1, actionMessage.lastIndexOf(':')  );
                 tempPWD = actionMessage.substring(actionMessage.lastIndexOf(':') + 1);
                 subject = messageSource.getMessage("email.activation.share.title", args, locale);
                 log.info("Subject message: " + subject);
