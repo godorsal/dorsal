@@ -85,6 +85,15 @@ public class SupportcaseResourceIntTest {
     private static final Boolean DEFAULT_IS_RATED = false;
     private static final Boolean UPDATED_IS_RATED = true;
 
+    private static final ZonedDateTime DEFAULT_EXPECTED_COMPLETION_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
+    private static final ZonedDateTime UPDATED_EXPECTED_COMPLETION_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final String DEFAULT_EXPECTED_COMPLETION_DATE_STR = dateTimeFormatter.format(DEFAULT_EXPECTED_COMPLETION_DATE);
+    private static final String DEFAULT_EXPERT_MESSAGE = "AAAAA";
+    private static final String UPDATED_EXPERT_MESSAGE = "BBBBB";
+
+    private static final Integer DEFAULT_NUMBER_OF_UPDATES = 1;
+    private static final Integer UPDATED_NUMBER_OF_UPDATES = 2;
+
     @Inject
     private SupportcaseRepository supportcaseRepository;
 
@@ -125,6 +134,9 @@ public class SupportcaseResourceIntTest {
         supportcase.setEstimateLog(DEFAULT_ESTIMATE_LOG);
         supportcase.setIsResolved(DEFAULT_IS_RESOLVED);
         supportcase.setIsRated(DEFAULT_IS_RATED);
+        supportcase.setExpectedCompletionDate(DEFAULT_EXPECTED_COMPLETION_DATE);
+        supportcase.setExpertMessage(DEFAULT_EXPERT_MESSAGE);
+        supportcase.setNumberOfUpdates(DEFAULT_NUMBER_OF_UPDATES);
     }
 
     @Test
@@ -134,7 +146,7 @@ public class SupportcaseResourceIntTest {
 
         // Create the Supportcase
 
-     /*   restSupportcaseMockMvc.perform(post("/api/supportcases")
+/*        restSupportcaseMockMvc.perform(post("/api/supportcases")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
                 .content(TestUtil.convertObjectToJsonBytes(supportcase)))
                 .andExpect(status().isCreated());
@@ -156,8 +168,11 @@ public class SupportcaseResourceIntTest {
         assertThat(testSupportcase.getTimeOnCase()).isEqualTo(DEFAULT_TIME_ON_CASE);
         assertThat(testSupportcase.getEstimateLog()).isEqualTo(DEFAULT_ESTIMATE_LOG);
         assertThat(testSupportcase.isIsResolved()).isEqualTo(DEFAULT_IS_RESOLVED);
-        assertThat(testSupportcase.isIsRated()).isEqualTo(DEFAULT_IS_RATED);*/
-    }
+        assertThat(testSupportcase.isIsRated()).isEqualTo(DEFAULT_IS_RATED);
+        assertThat(testSupportcase.getExpectedCompletionDate()).isEqualTo(DEFAULT_EXPECTED_COMPLETION_DATE);
+        assertThat(testSupportcase.getExpertMessage()).isEqualTo(DEFAULT_EXPERT_MESSAGE);
+        assertThat(testSupportcase.getNumberOfUpdates()).isEqualTo(DEFAULT_NUMBER_OF_UPDATES);
+  */  }
 
     @Test
     @Transactional
@@ -183,8 +198,11 @@ public class SupportcaseResourceIntTest {
                 .andExpect(jsonPath("$.[*].timeOnCase").value(hasItem(DEFAULT_TIME_ON_CASE)))
                 .andExpect(jsonPath("$.[*].estimateLog").value(hasItem(DEFAULT_ESTIMATE_LOG.toString())))
                 .andExpect(jsonPath("$.[*].isResolved").value(hasItem(DEFAULT_IS_RESOLVED.booleanValue())))
-                .andExpect(jsonPath("$.[*].isRated").value(hasItem(DEFAULT_IS_RATED.booleanValue())));*/
-    }
+                .andExpect(jsonPath("$.[*].isRated").value(hasItem(DEFAULT_IS_RATED.booleanValue())))
+                .andExpect(jsonPath("$.[*].expectedCompletionDate").value(hasItem(DEFAULT_EXPECTED_COMPLETION_DATE_STR)))
+                .andExpect(jsonPath("$.[*].expertMessage").value(hasItem(DEFAULT_EXPERT_MESSAGE.toString())))
+                .andExpect(jsonPath("$.[*].numberOfUpdates").value(hasItem(DEFAULT_NUMBER_OF_UPDATES)));
+  */  }
 
     @Test
     @Transactional
@@ -210,7 +228,10 @@ public class SupportcaseResourceIntTest {
             .andExpect(jsonPath("$.timeOnCase").value(DEFAULT_TIME_ON_CASE))
             .andExpect(jsonPath("$.estimateLog").value(DEFAULT_ESTIMATE_LOG.toString()))
             .andExpect(jsonPath("$.isResolved").value(DEFAULT_IS_RESOLVED.booleanValue()))
-            .andExpect(jsonPath("$.isRated").value(DEFAULT_IS_RATED.booleanValue()));
+            .andExpect(jsonPath("$.isRated").value(DEFAULT_IS_RATED.booleanValue()))
+            .andExpect(jsonPath("$.expectedCompletionDate").value(DEFAULT_EXPECTED_COMPLETION_DATE_STR))
+            .andExpect(jsonPath("$.expertMessage").value(DEFAULT_EXPERT_MESSAGE.toString()))
+            .andExpect(jsonPath("$.numberOfUpdates").value(DEFAULT_NUMBER_OF_UPDATES));
     }
 
     @Test
@@ -245,6 +266,9 @@ public class SupportcaseResourceIntTest {
         updatedSupportcase.setEstimateLog(UPDATED_ESTIMATE_LOG);
         updatedSupportcase.setIsResolved(UPDATED_IS_RESOLVED);
         updatedSupportcase.setIsRated(UPDATED_IS_RATED);
+        updatedSupportcase.setExpectedCompletionDate(UPDATED_EXPECTED_COMPLETION_DATE);
+        updatedSupportcase.setExpertMessage(UPDATED_EXPERT_MESSAGE);
+        updatedSupportcase.setNumberOfUpdates(UPDATED_NUMBER_OF_UPDATES);
 
         restSupportcaseMockMvc.perform(put("/api/supportcases")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -269,6 +293,9 @@ public class SupportcaseResourceIntTest {
         assertThat(testSupportcase.getEstimateLog()).isEqualTo(UPDATED_ESTIMATE_LOG);
         assertThat(testSupportcase.isIsResolved()).isEqualTo(UPDATED_IS_RESOLVED);
         assertThat(testSupportcase.isIsRated()).isEqualTo(UPDATED_IS_RATED);
+        assertThat(testSupportcase.getExpectedCompletionDate()).isEqualTo(UPDATED_EXPECTED_COMPLETION_DATE);
+        assertThat(testSupportcase.getExpertMessage()).isEqualTo(UPDATED_EXPERT_MESSAGE);
+        assertThat(testSupportcase.getNumberOfUpdates()).isEqualTo(UPDATED_NUMBER_OF_UPDATES);
     }
 
     @Test

@@ -4,7 +4,6 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -34,13 +33,12 @@ public class Useraccount implements Serializable {
     @Column(name = "companyname")
     private String companyname;
 
-    @Size(max = 512)
-    @Column(name = "invite_context", length = 512)
-    private String inviteContext;
-
     @OneToOne
     @JoinColumn(unique = true)
     private User user;
+
+    @ManyToOne
+    private ExpertAccount preferredexpert;
 
     public Long getId() {
         return id;
@@ -82,20 +80,20 @@ public class Useraccount implements Serializable {
         this.companyname = companyname;
     }
 
-    public String getInviteContext() {
-        return inviteContext;
-    }
-
-    public void setInviteContext(String inviteContext) {
-        this.inviteContext = inviteContext;
-    }
-
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public ExpertAccount getPreferredexpert() {
+        return preferredexpert;
+    }
+
+    public void setPreferredexpert(ExpertAccount expertAccount) {
+        this.preferredexpert = expertAccount;
     }
 
     @Override
@@ -126,7 +124,6 @@ public class Useraccount implements Serializable {
             ", preferlocalexpert='" + preferlocalexpert + "'" +
             ", handle='" + handle + "'" +
             ", companyname='" + companyname + "'" +
-            ", inviteContext='" + inviteContext + "'" +
             '}';
     }
 }

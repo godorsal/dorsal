@@ -12,6 +12,10 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 
+import com.dorsal.domain.enumeration.Availability;
+
+import com.dorsal.domain.enumeration.ProfileVisability;
+
 /**
  * A ExpertAccount.
  */
@@ -51,15 +55,6 @@ public class ExpertAccount implements Serializable {
     @Column(name = "image_path", length = 512)
     private String imagePath;
 
-    @Column(name = "first_technology_preference")
-    private String firstTechnologyPreference;
-
-    @Column(name = "second_technology_preference")
-    private String secondTechnologyPreference;
-
-    @Column(name = "third_technology_preference")
-    private String thirdTechnologyPreference;
-
     @Column(name = "is_available")
     private Boolean isAvailable;
 
@@ -77,14 +72,39 @@ public class ExpertAccount implements Serializable {
     @Column(name = "welcome_message", length = 2048)
     private String welcomeMessage;
 
+    @Column(name = "expert_timezone")
+    private String expertTimezone;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "expert_availability")
+    private Availability expertAvailability;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "profile_visibility")
+    private ProfileVisability profileVisibility;
+
     @OneToOne
     @JoinColumn(unique = true)
     private User user;
 
+    @OneToMany(mappedBy = "preferredexpert")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Useraccount> useraccounts = new HashSet<>();
+
     @OneToMany(mappedBy = "expertaccount")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Expertbadge> expertbadges = new HashSet<>();
+    private Set<Supportcase> supportcases = new HashSet<>();
+
+    @ManyToOne
+    private Technology firsttechnology;
+
+    @ManyToOne
+    private Technology secondtechnology;
+
+    @ManyToOne
+    private Issue issueexpertise;
 
     public Long getId() {
         return id;
@@ -158,30 +178,6 @@ public class ExpertAccount implements Serializable {
         this.imagePath = imagePath;
     }
 
-    public String getFirstTechnologyPreference() {
-        return firstTechnologyPreference;
-    }
-
-    public void setFirstTechnologyPreference(String firstTechnologyPreference) {
-        this.firstTechnologyPreference = firstTechnologyPreference;
-    }
-
-    public String getSecondTechnologyPreference() {
-        return secondTechnologyPreference;
-    }
-
-    public void setSecondTechnologyPreference(String secondTechnologyPreference) {
-        this.secondTechnologyPreference = secondTechnologyPreference;
-    }
-
-    public String getThirdTechnologyPreference() {
-        return thirdTechnologyPreference;
-    }
-
-    public void setThirdTechnologyPreference(String thirdTechnologyPreference) {
-        this.thirdTechnologyPreference = thirdTechnologyPreference;
-    }
-
     public Boolean isIsAvailable() {
         return isAvailable;
     }
@@ -222,6 +218,30 @@ public class ExpertAccount implements Serializable {
         this.welcomeMessage = welcomeMessage;
     }
 
+    public String getExpertTimezone() {
+        return expertTimezone;
+    }
+
+    public void setExpertTimezone(String expertTimezone) {
+        this.expertTimezone = expertTimezone;
+    }
+
+    public Availability getExpertAvailability() {
+        return expertAvailability;
+    }
+
+    public void setExpertAvailability(Availability expertAvailability) {
+        this.expertAvailability = expertAvailability;
+    }
+
+    public ProfileVisability getProfileVisibility() {
+        return profileVisibility;
+    }
+
+    public void setProfileVisibility(ProfileVisability profileVisibility) {
+        this.profileVisibility = profileVisibility;
+    }
+
     public User getUser() {
         return user;
     }
@@ -230,12 +250,44 @@ public class ExpertAccount implements Serializable {
         this.user = user;
     }
 
-    public Set<Expertbadge> getExpertbadges() {
-        return expertbadges;
+    public Set<Useraccount> getUseraccounts() {
+        return useraccounts;
     }
 
-    public void setExpertbadges(Set<Expertbadge> expertbadges) {
-        this.expertbadges = expertbadges;
+    public void setUseraccounts(Set<Useraccount> useraccounts) {
+        this.useraccounts = useraccounts;
+    }
+
+    public Set<Supportcase> getSupportcases() {
+        return supportcases;
+    }
+
+    public void setSupportcases(Set<Supportcase> supportcases) {
+        this.supportcases = supportcases;
+    }
+
+    public Technology getFirsttechnology() {
+        return firsttechnology;
+    }
+
+    public void setFirsttechnology(Technology technology) {
+        this.firsttechnology = technology;
+    }
+
+    public Technology getSecondtechnology() {
+        return secondtechnology;
+    }
+
+    public void setSecondtechnology(Technology technology) {
+        this.secondtechnology = technology;
+    }
+
+    public Issue getIssueexpertise() {
+        return issueexpertise;
+    }
+
+    public void setIssueexpertise(Issue issue) {
+        this.issueexpertise = issue;
     }
 
     @Override
@@ -270,14 +322,14 @@ public class ExpertAccount implements Serializable {
             ", handle='" + handle + "'" +
             ", languages='" + languages + "'" +
             ", imagePath='" + imagePath + "'" +
-            ", firstTechnologyPreference='" + firstTechnologyPreference + "'" +
-            ", secondTechnologyPreference='" + secondTechnologyPreference + "'" +
-            ", thirdTechnologyPreference='" + thirdTechnologyPreference + "'" +
             ", isAvailable='" + isAvailable + "'" +
             ", expertBio='" + expertBio + "'" +
             ", expertSince='" + expertSince + "'" +
             ", numberOfCases='" + numberOfCases + "'" +
             ", welcomeMessage='" + welcomeMessage + "'" +
+            ", expertTimezone='" + expertTimezone + "'" +
+            ", expertAvailability='" + expertAvailability + "'" +
+            ", profileVisibility='" + profileVisibility + "'" +
             '}';
     }
 }

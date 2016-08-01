@@ -50,8 +50,6 @@ public class UseraccountResourceIntTest {
     private static final String UPDATED_HANDLE = "BBBBB";
     private static final String DEFAULT_COMPANYNAME = "AAAAA";
     private static final String UPDATED_COMPANYNAME = "BBBBB";
-    private static final String DEFAULT_INVITE_CONTEXT = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
-    private static final String UPDATED_INVITE_CONTEXT = "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB";
 
     @Inject
     private UseraccountRepository useraccountRepository;
@@ -83,7 +81,6 @@ public class UseraccountResourceIntTest {
         useraccount.setPreferlocalexpert(DEFAULT_PREFERLOCALEXPERT);
         useraccount.setHandle(DEFAULT_HANDLE);
         useraccount.setCompanyname(DEFAULT_COMPANYNAME);
-        useraccount.setInviteContext(DEFAULT_INVITE_CONTEXT);
     }
 
     @Test
@@ -106,7 +103,6 @@ public class UseraccountResourceIntTest {
         assertThat(testUseraccount.isPreferlocalexpert()).isEqualTo(DEFAULT_PREFERLOCALEXPERT);
         assertThat(testUseraccount.getHandle()).isEqualTo(DEFAULT_HANDLE);
         assertThat(testUseraccount.getCompanyname()).isEqualTo(DEFAULT_COMPANYNAME);
-        assertThat(testUseraccount.getInviteContext()).isEqualTo(DEFAULT_INVITE_CONTEXT);
     }
 
     @Test
@@ -116,17 +112,15 @@ public class UseraccountResourceIntTest {
         useraccountRepository.saveAndFlush(useraccount);
 
         // Get all the useraccounts
-        /*restUseraccountMockMvc.perform(get("/api/useraccounts?sort=id,desc"))
+/*        restUseraccountMockMvc.perform(get("/api/useraccounts?sort=id,desc"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(useraccount.getId().intValue())))
                 .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION.toString())))
                 .andExpect(jsonPath("$.[*].preferlocalexpert").value(hasItem(DEFAULT_PREFERLOCALEXPERT.booleanValue())))
                 .andExpect(jsonPath("$.[*].handle").value(hasItem(DEFAULT_HANDLE.toString())))
-                .andExpect(jsonPath("$.[*].companyname").value(hasItem(DEFAULT_COMPANYNAME.toString())))
-                .andExpect(jsonPath("$.[*].inviteContext").value(hasItem(DEFAULT_INVITE_CONTEXT.toString())));
-    */
-    }
+                .andExpect(jsonPath("$.[*].companyname").value(hasItem(DEFAULT_COMPANYNAME.toString())));
+ */   }
 
     @Test
     @Transactional
@@ -142,8 +136,7 @@ public class UseraccountResourceIntTest {
             .andExpect(jsonPath("$.location").value(DEFAULT_LOCATION.toString()))
             .andExpect(jsonPath("$.preferlocalexpert").value(DEFAULT_PREFERLOCALEXPERT.booleanValue()))
             .andExpect(jsonPath("$.handle").value(DEFAULT_HANDLE.toString()))
-            .andExpect(jsonPath("$.companyname").value(DEFAULT_COMPANYNAME.toString()))
-            .andExpect(jsonPath("$.inviteContext").value(DEFAULT_INVITE_CONTEXT.toString()));
+            .andExpect(jsonPath("$.companyname").value(DEFAULT_COMPANYNAME.toString()));
     }
 
     @Test
@@ -168,7 +161,6 @@ public class UseraccountResourceIntTest {
         updatedUseraccount.setPreferlocalexpert(UPDATED_PREFERLOCALEXPERT);
         updatedUseraccount.setHandle(UPDATED_HANDLE);
         updatedUseraccount.setCompanyname(UPDATED_COMPANYNAME);
-        updatedUseraccount.setInviteContext(UPDATED_INVITE_CONTEXT);
 
         restUseraccountMockMvc.perform(put("/api/useraccounts")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -183,7 +175,6 @@ public class UseraccountResourceIntTest {
         assertThat(testUseraccount.isPreferlocalexpert()).isEqualTo(UPDATED_PREFERLOCALEXPERT);
         assertThat(testUseraccount.getHandle()).isEqualTo(UPDATED_HANDLE);
         assertThat(testUseraccount.getCompanyname()).isEqualTo(UPDATED_COMPANYNAME);
-        assertThat(testUseraccount.getInviteContext()).isEqualTo(UPDATED_INVITE_CONTEXT);
     }
 
     @Test

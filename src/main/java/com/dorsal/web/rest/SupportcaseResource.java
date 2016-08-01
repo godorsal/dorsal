@@ -17,7 +17,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
 import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
@@ -77,7 +76,7 @@ public class SupportcaseResource {
         // Set the Expert for this account
         // This is the placeholder for the matching algorithm
         //
-        List expertList = expertAccountRepository.findOneByFirstTechnologyPreference(supportcase.getTechnology().getName());
+        List expertList = expertAccountRepository.findOneByFirsttechnology(supportcase.getTechnology());
         if (expertList.size() > 0) {
             log.info("Expert Found for Technology [" + supportcase.getTechnology().getName() + "]");
             supportcase.setExpertaccount((ExpertAccount)expertList.get(0));
@@ -85,7 +84,7 @@ public class SupportcaseResource {
         else
         {
             // Get secondary preference
-            expertList = expertAccountRepository.findOneBySecondTechnologyPreference(supportcase.getTechnology().getName());
+            expertList = expertAccountRepository.findOneBySecondtechnology(supportcase.getTechnology());
             if (expertList.size() > 0) {
                 log.info("Expert Found for 2nd preferred Technology [" + supportcase.getTechnology().getName() + "]");
                 supportcase.setExpertaccount((ExpertAccount) expertList.get(0));

@@ -26,6 +26,8 @@
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('expertAccount');
+                    $translatePartialLoader.addPart('availability');
+                    $translatePartialLoader.addPart('profileVisability');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
@@ -48,6 +50,8 @@
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('expertAccount');
+                    $translatePartialLoader.addPart('availability');
+                    $translatePartialLoader.addPart('profileVisability');
                     return $translate.refresh();
                 }],
                 entity: ['$stateParams', 'ExpertAccount', function($stateParams, ExpertAccount) {
@@ -79,14 +83,14 @@
                                 handle: null,
                                 languages: null,
                                 imagePath: null,
-                                firstTechnologyPreference: null,
-                                secondTechnologyPreference: null,
-                                thirdTechnologyPreference: null,
                                 isAvailable: null,
                                 expertBio: null,
                                 expertSince: null,
                                 numberOfCases: null,
                                 welcomeMessage: null,
+                                expertTimezone: null,
+                                expertAvailability: null,
+                                profileVisibility: null,
                                 id: null
                             };
                         }

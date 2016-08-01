@@ -70,6 +70,15 @@ public class Supportcase implements Serializable {
     @Column(name = "is_rated")
     private Boolean isRated;
 
+    @Column(name = "expected_completion_date")
+    private ZonedDateTime expectedCompletionDate;
+
+    @Column(name = "expert_message")
+    private String expertMessage;
+
+    @Column(name = "number_of_updates")
+    private Integer numberOfUpdates;
+
     @ManyToOne
     private User user;
 
@@ -205,6 +214,30 @@ public class Supportcase implements Serializable {
         this.isRated = isRated;
     }
 
+    public ZonedDateTime getExpectedCompletionDate() {
+        return expectedCompletionDate;
+    }
+
+    public void setExpectedCompletionDate(ZonedDateTime expectedCompletionDate) {
+        this.expectedCompletionDate = expectedCompletionDate;
+    }
+
+    public String getExpertMessage() {
+        return expertMessage;
+    }
+
+    public void setExpertMessage(String expertMessage) {
+        this.expertMessage = expertMessage;
+    }
+
+    public Integer getNumberOfUpdates() {
+        return numberOfUpdates;
+    }
+
+    public void setNumberOfUpdates(Integer numberOfUpdates) {
+        this.numberOfUpdates = numberOfUpdates;
+    }
+
     public User getUser() {
         return user;
     }
@@ -283,6 +316,9 @@ public class Supportcase implements Serializable {
             ", estimateLog='" + estimateLog + "'" +
             ", isResolved='" + isResolved + "'" +
             ", isRated='" + isRated + "'" +
+            ", expectedCompletionDate='" + expectedCompletionDate + "'" +
+            ", expertMessage='" + expertMessage + "'" +
+            ", numberOfUpdates='" + numberOfUpdates + "'" +
             '}';
     }
 }

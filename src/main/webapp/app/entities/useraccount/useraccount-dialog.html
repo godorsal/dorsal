@@ -1,5 +1,5 @@
 
-<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
 
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
@@ -37,22 +37,16 @@
                     ng-model="vm.useraccount.companyname"
                      />
         </div>
-        <div class="form-group">
-            <label class="control-label" translate="dorsalApp.useraccount.inviteContext" for="field_inviteContext">Invite Context</label>
-            <input type="text" class="form-control" name="inviteContext" id="field_inviteContext"
-                    ng-model="vm.useraccount.inviteContext"
-                    ng-maxlength="512" />
-            <div ng-show="editForm.inviteContext.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.inviteContext.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="512">
-                    This field cannot be longer than 512 characters.
-                </p>
-            </div>
-        </div>
 
         <div class="form-group">
             <label translate="dorsalApp.useraccount.user" for="field_user">User</label>
             <select class="form-control" id="field_user" name="user" ng-model="vm.useraccount.user" ng-options="user as user.id for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="dorsalApp.useraccount.preferredexpert" for="field_preferredexpert">Preferredexpert</label>
+            <select class="form-control" id="field_preferredexpert" name="preferredexpert" ng-model="vm.useraccount.preferredexpert" ng-options="expertAccount as expertAccount.id for expertAccount in vm.expertaccounts track by expertAccount.id">
                 <option value=""></option>
             </select>
         </div>

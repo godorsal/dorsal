@@ -16,7 +16,7 @@
     <!--
         Added the entity Useraccount.
     -->
-    <changeSet id="20160721211338-1" author="jhipster">
+    <changeSet id="20160801160055-1" author="jhipster">
         <createTable tableName="useraccount">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
@@ -36,13 +36,13 @@
             <column name="companyname" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-
-            <column name="invite_context" type="varchar(512)">
-                <constraints nullable="true" />
-            </column>
                         <column name="user_id" type="bigint">
                 <constraints unique="true" nullable="true" />
             </column>
+            <column name="preferredexpert_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         <loadData encoding="UTF-8"

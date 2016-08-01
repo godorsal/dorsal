@@ -5,12 +5,13 @@
         .module('dorsalApp')
         .controller('UseraccountDialogController', UseraccountDialogController);
 
-    UseraccountDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'Useraccount', 'User'];
+    UseraccountDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'Useraccount', 'User', 'ExpertAccount'];
 
-    function UseraccountDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, entity, Useraccount, User) {
+    function UseraccountDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, entity, Useraccount, User, ExpertAccount) {
         var vm = this;
         vm.useraccount = entity;
         vm.users = User.query();
+        vm.expertaccounts = ExpertAccount.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

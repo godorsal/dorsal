@@ -68,24 +68,6 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label" translate="dorsalApp.expertAccount.firstTechnologyPreference" for="field_firstTechnologyPreference">First Technology Preference</label>
-            <input type="text" class="form-control" name="firstTechnologyPreference" id="field_firstTechnologyPreference"
-                    ng-model="vm.expertAccount.firstTechnologyPreference"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" translate="dorsalApp.expertAccount.secondTechnologyPreference" for="field_secondTechnologyPreference">Second Technology Preference</label>
-            <input type="text" class="form-control" name="secondTechnologyPreference" id="field_secondTechnologyPreference"
-                    ng-model="vm.expertAccount.secondTechnologyPreference"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" translate="dorsalApp.expertAccount.thirdTechnologyPreference" for="field_thirdTechnologyPreference">Third Technology Preference</label>
-            <input type="text" class="form-control" name="thirdTechnologyPreference" id="field_thirdTechnologyPreference"
-                    ng-model="vm.expertAccount.thirdTechnologyPreference"
-                     />
-        </div>
-        <div class="form-group">
             <label class="control-label" translate="dorsalApp.expertAccount.isAvailable" for="field_isAvailable">Is Available</label>
             <input type="checkbox" class="form-control" name="isAvailable" id="field_isAvailable"
                     ng-model="vm.expertAccount.isAvailable"
@@ -131,10 +113,51 @@
                 </p>
             </div>
         </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.expertAccount.expertTimezone" for="field_expertTimezone">Expert Timezone</label>
+            <input type="text" class="form-control" name="expertTimezone" id="field_expertTimezone"
+                    ng-model="vm.expertAccount.expertTimezone"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.expertAccount.expertAvailability" for="field_expertAvailability">Expert Availability</label>
+            <select class="form-control" name="expertAvailability" ng-model="vm.expertAccount.expertAvailability" id="field_expertAvailability">
+                <option value="FULL_TIME" translate="dorsalApp.Availability.FULL_TIME">FULL_TIME</option>
+                <option value="MON_FRI" translate="dorsalApp.Availability.MON_FRI">MON_FRI</option>
+                <option value="EVENING" translate="dorsalApp.Availability.EVENING">EVENING</option>
+                <option value="WEEKEND" translate="dorsalApp.Availability.WEEKEND">WEEKEND</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.expertAccount.profileVisibility" for="field_profileVisibility">Profile Visibility</label>
+            <select class="form-control" name="profileVisibility" ng-model="vm.expertAccount.profileVisibility" id="field_profileVisibility">
+                <option value="PUBLIC" translate="dorsalApp.ProfileVisability.PUBLIC">PUBLIC</option>
+                <option value="INTERN" translate="dorsalApp.ProfileVisability.INTERN">INTERN</option>
+                <option value="HIDDEN" translate="dorsalApp.ProfileVisability.HIDDEN">HIDDEN</option>
+            </select>
+        </div>
 
         <div class="form-group">
             <label translate="dorsalApp.expertAccount.user" for="field_user">User</label>
             <select class="form-control" id="field_user" name="user" ng-model="vm.expertAccount.user" ng-options="user as user.id for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="dorsalApp.expertAccount.firsttechnology" for="field_firsttechnology">Firsttechnology</label>
+            <select class="form-control" id="field_firsttechnology" name="firsttechnology" ng-model="vm.expertAccount.firsttechnology" ng-options="technology as technology.id for technology in vm.technologies track by technology.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="dorsalApp.expertAccount.secondtechnology" for="field_secondtechnology">Secondtechnology</label>
+            <select class="form-control" id="field_secondtechnology" name="secondtechnology" ng-model="vm.expertAccount.secondtechnology" ng-options="technology as technology.id for technology in vm.technologies track by technology.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="dorsalApp.expertAccount.issueexpertise" for="field_issueexpertise">Issueexpertise</label>
+            <select class="form-control" id="field_issueexpertise" name="issueexpertise" ng-model="vm.expertAccount.issueexpertise" ng-options="issue as issue.id for issue in vm.issues track by issue.id">
                 <option value=""></option>
             </select>
         </div>

@@ -85,6 +85,9 @@
                                 estimateLog: null,
                                 isResolved: null,
                                 isRated: null,
+                                expectedCompletionDate: null,
+                                expertMessage: null,
+                                numberOfUpdates: null,
                                 id: null
                             };
                         }

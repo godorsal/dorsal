@@ -5,13 +5,16 @@
         .module('dorsalApp')
         .controller('ExpertAccountDialogController', ExpertAccountDialogController);
 
-    ExpertAccountDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'ExpertAccount', 'User', 'Expertbadge'];
+    ExpertAccountDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'ExpertAccount', 'User', 'Useraccount', 'Supportcase', 'Technology', 'Issue'];
 
-    function ExpertAccountDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, entity, ExpertAccount, User, Expertbadge) {
+    function ExpertAccountDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, entity, ExpertAccount, User, Useraccount, Supportcase, Technology, Issue) {
         var vm = this;
         vm.expertAccount = entity;
         vm.users = User.query();
-        vm.expertbadges = Expertbadge.query();
+        vm.useraccounts = Useraccount.query();
+        vm.supportcases = Supportcase.query();
+        vm.technologies = Technology.query();
+        vm.issues = Issue.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

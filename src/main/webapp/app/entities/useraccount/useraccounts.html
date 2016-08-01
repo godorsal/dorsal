@@ -23,8 +23,8 @@
                     <th><span translate="dorsalApp.useraccount.preferlocalexpert">Preferlocalexpert</span></th>
                     <th><span translate="dorsalApp.useraccount.handle">Handle</span></th>
                     <th><span translate="dorsalApp.useraccount.companyname">Companyname</span></th>
-                    <th><span translate="dorsalApp.useraccount.inviteContext">Invite Context</span></th>
                     <th><span translate="dorsalApp.useraccount.user">User</span></th>
+                    <th><span translate="dorsalApp.useraccount.preferredexpert">Preferredexpert</span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -35,9 +35,11 @@
                     <td>{{useraccount.preferlocalexpert}}</td>
                     <td>{{useraccount.handle}}</td>
                     <td>{{useraccount.companyname}}</td>
-                    <td>{{useraccount.inviteContext}}</td>
                     <td>
                         {{useraccount.user.id}}
+                    </td>
+                    <td>
+                        <a ui-sref="expert-account-detail({id:useraccount.preferredexpert.id})">{{useraccount.preferredexpert.id}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

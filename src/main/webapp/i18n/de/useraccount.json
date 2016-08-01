@@ -20,8 +20,8 @@
             "preferlocalexpert": "Preferlocalexpert",
             "handle": "Handle",
             "companyname": "Companyname",
-            "inviteContext": "Invite Context",
-            "user": "User"
+            "user": "User",
+            "preferredexpert": "Preferredexpert"
         }
     }
 }

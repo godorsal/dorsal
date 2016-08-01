@@ -59,6 +59,18 @@
         <dd>
             <span>{{vm.supportcase.isRated}}</span>
         </dd>
+        <dt><span translate="dorsalApp.supportcase.expectedCompletionDate">Expected Completion Date</span></dt>
+        <dd>
+            <span>{{vm.supportcase.expectedCompletionDate | date:'medium'}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.supportcase.expertMessage">Expert Message</span></dt>
+        <dd>
+            <span>{{vm.supportcase.expertMessage}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.supportcase.numberOfUpdates">Number Of Updates</span></dt>
+        <dd>
+            <span>{{vm.supportcase.numberOfUpdates}}</span>
+        </dd>
         <dt><span translate="dorsalApp.supportcase.user">User</span></dt>
         <dd>
             {{vm.supportcase.user.id}}

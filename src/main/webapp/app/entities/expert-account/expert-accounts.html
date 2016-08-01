@@ -27,15 +27,18 @@
                     <th><span translate="dorsalApp.expertAccount.handle">Handle</span></th>
                     <th><span translate="dorsalApp.expertAccount.languages">Languages</span></th>
                     <th><span translate="dorsalApp.expertAccount.imagePath">Image Path</span></th>
-                    <th><span translate="dorsalApp.expertAccount.firstTechnologyPreference">First Technology Preference</span></th>
-                    <th><span translate="dorsalApp.expertAccount.secondTechnologyPreference">Second Technology Preference</span></th>
-                    <th><span translate="dorsalApp.expertAccount.thirdTechnologyPreference">Third Technology Preference</span></th>
                     <th><span translate="dorsalApp.expertAccount.isAvailable">Is Available</span></th>
                     <th><span translate="dorsalApp.expertAccount.expertBio">Expert Bio</span></th>
                     <th><span translate="dorsalApp.expertAccount.expertSince">Expert Since</span></th>
                     <th><span translate="dorsalApp.expertAccount.numberOfCases">Number Of Cases</span></th>
                     <th><span translate="dorsalApp.expertAccount.welcomeMessage">Welcome Message</span></th>
+                    <th><span translate="dorsalApp.expertAccount.expertTimezone">Expert Timezone</span></th>
+                    <th><span translate="dorsalApp.expertAccount.expertAvailability">Expert Availability</span></th>
+                    <th><span translate="dorsalApp.expertAccount.profileVisibility">Profile Visibility</span></th>
                     <th><span translate="dorsalApp.expertAccount.user">User</span></th>
+                    <th><span translate="dorsalApp.expertAccount.firsttechnology">Firsttechnology</span></th>
+                    <th><span translate="dorsalApp.expertAccount.secondtechnology">Secondtechnology</span></th>
+                    <th><span translate="dorsalApp.expertAccount.issueexpertise">Issueexpertise</span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -50,16 +53,25 @@
                     <td>{{expertAccount.handle}}</td>
                     <td>{{expertAccount.languages}}</td>
                     <td>{{expertAccount.imagePath}}</td>
-                    <td>{{expertAccount.firstTechnologyPreference}}</td>
-                    <td>{{expertAccount.secondTechnologyPreference}}</td>
-                    <td>{{expertAccount.thirdTechnologyPreference}}</td>
                     <td>{{expertAccount.isAvailable}}</td>
                     <td>{{expertAccount.expertBio}}</td>
                     <td>{{expertAccount.expertSince | date:'medium'}}</td>
                     <td>{{expertAccount.numberOfCases}}</td>
                     <td>{{expertAccount.welcomeMessage}}</td>
+                    <td>{{expertAccount.expertTimezone}}</td>
+                    <td translate="{{'dorsalApp.Availability.' + expertAccount.expertAvailability}}">{{expertAccount.expertAvailability}}</td>
+                    <td translate="{{'dorsalApp.ProfileVisability.' + expertAccount.profileVisibility}}">{{expertAccount.profileVisibility}}</td>
                     <td>
                         {{expertAccount.user.id}}
+                    </td>
+                    <td>
+                        <a ui-sref="technology-detail({id:expertAccount.firsttechnology.id})">{{expertAccount.firsttechnology.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="technology-detail({id:expertAccount.secondtechnology.id})">{{expertAccount.secondtechnology.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="issue-detail({id:expertAccount.issueexpertise.id})">{{expertAccount.issueexpertise.id}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

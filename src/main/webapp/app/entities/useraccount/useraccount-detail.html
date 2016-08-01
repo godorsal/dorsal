@@ -19,13 +19,13 @@
         <dd>
             <span>{{vm.useraccount.companyname}}</span>
         </dd>
-        <dt><span translate="dorsalApp.useraccount.inviteContext">Invite Context</span></dt>
-        <dd>
-            <span>{{vm.useraccount.inviteContext}}</span>
-        </dd>
         <dt><span translate="dorsalApp.useraccount.user">User</span></dt>
         <dd>
             {{vm.useraccount.user.id}}
+        </dd>
+        <dt><span translate="dorsalApp.useraccount.preferredexpert">Preferredexpert</span></dt>
+        <dd>
+            <a ui-sref="expert-account-detail({id:vm.useraccount.preferredexpert.id})">{{vm.useraccount.preferredexpert.id}}</a>
         </dd>
     </dl>
 

@@ -35,18 +35,6 @@
         <dd>
             <span>{{vm.expertAccount.imagePath}}</span>
         </dd>
-        <dt><span translate="dorsalApp.expertAccount.firstTechnologyPreference">First Technology Preference</span></dt>
-        <dd>
-            <span>{{vm.expertAccount.firstTechnologyPreference}}</span>
-        </dd>
-        <dt><span translate="dorsalApp.expertAccount.secondTechnologyPreference">Second Technology Preference</span></dt>
-        <dd>
-            <span>{{vm.expertAccount.secondTechnologyPreference}}</span>
-        </dd>
-        <dt><span translate="dorsalApp.expertAccount.thirdTechnologyPreference">Third Technology Preference</span></dt>
-        <dd>
-            <span>{{vm.expertAccount.thirdTechnologyPreference}}</span>
-        </dd>
         <dt><span translate="dorsalApp.expertAccount.isAvailable">Is Available</span></dt>
         <dd>
             <span>{{vm.expertAccount.isAvailable}}</span>
@@ -67,9 +55,33 @@
         <dd>
             <span>{{vm.expertAccount.welcomeMessage}}</span>
         </dd>
+        <dt><span translate="dorsalApp.expertAccount.expertTimezone">Expert Timezone</span></dt>
+        <dd>
+            <span>{{vm.expertAccount.expertTimezone}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.expertAccount.expertAvailability">Expert Availability</span></dt>
+        <dd>
+            <span translate="{{'dorsalApp.Availability.' + vm.expertAccount.expertAvailability}}">{{vm.expertAccount.expertAvailability}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.expertAccount.profileVisibility">Profile Visibility</span></dt>
+        <dd>
+            <span translate="{{'dorsalApp.ProfileVisability.' + vm.expertAccount.profileVisibility}}">{{vm.expertAccount.profileVisibility}}</span>
+        </dd>
         <dt><span translate="dorsalApp.expertAccount.user">User</span></dt>
         <dd>
             {{vm.expertAccount.user.id}}
+        </dd>
+        <dt><span translate="dorsalApp.expertAccount.firsttechnology">Firsttechnology</span></dt>
+        <dd>
+            <a ui-sref="technology-detail({id:vm.expertAccount.firsttechnology.id})">{{vm.expertAccount.firsttechnology.id}}</a>
+        </dd>
+        <dt><span translate="dorsalApp.expertAccount.secondtechnology">Secondtechnology</span></dt>
+        <dd>
+            <a ui-sref="technology-detail({id:vm.expertAccount.secondtechnology.id})">{{vm.expertAccount.secondtechnology.id}}</a>
+        </dd>
+        <dt><span translate="dorsalApp.expertAccount.issueexpertise">Issueexpertise</span></dt>
+        <dd>
+            <a ui-sref="issue-detail({id:vm.expertAccount.issueexpertise.id})">{{vm.expertAccount.issueexpertise.id}}</a>
         </dd>
     </dl>
 

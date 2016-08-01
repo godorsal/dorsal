@@ -24,16 +24,20 @@
             "handle": "Handle",
             "languages": "Languages",
             "imagePath": "Image Path",
-            "firstTechnologyPreference": "First Technology Preference",
-            "secondTechnologyPreference": "Second Technology Preference",
-            "thirdTechnologyPreference": "Third Technology Preference",
             "isAvailable": "Is Available",
             "expertBio": "Expert Bio",
             "expertSince": "Expert Since",
             "numberOfCases": "Number Of Cases",
             "welcomeMessage": "Welcome Message",
+            "expertTimezone": "Expert Timezone",
+            "expertAvailability": "Expert Availability",
+            "profileVisibility": "Profile Visibility",
             "user": "User",
-            "expertbadge": "Expertbadge"
+            "useraccount": "Useraccount",
+            "supportcase": "Supportcase",
+            "firsttechnology": "Firsttechnology",
+            "secondtechnology": "Secondtechnology",
+            "issueexpertise": "Issueexpertise"
         }
     }
 }

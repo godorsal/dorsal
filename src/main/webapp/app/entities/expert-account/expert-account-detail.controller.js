@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .controller('ExpertAccountDetailController', ExpertAccountDetailController);
 
-    ExpertAccountDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'entity', 'ExpertAccount', 'User', 'Expertbadge'];
+    ExpertAccountDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'entity', 'ExpertAccount', 'User', 'Useraccount', 'Supportcase', 'Technology', 'Issue'];
 
-    function ExpertAccountDetailController($scope, $rootScope, $stateParams, entity, ExpertAccount, User, Expertbadge) {
+    function ExpertAccountDetailController($scope, $rootScope, $stateParams, entity, ExpertAccount, User, Useraccount, Supportcase, Technology, Issue) {
         var vm = this;
         vm.expertAccount = entity;
         

@@ -6,13 +6,19 @@
     <!--
         Added the constraints for entity Useraccount.
     -->
-    <changeSet id="20160721211338-2" author="jhipster">
+    <changeSet id="20160801160055-2" author="jhipster">
         
         <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="useraccount"
                                  constraintName="fk_useraccount_user_id"
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="preferredexpert_id"
+                                 baseTableName="useraccount"
+                                 constraintName="fk_useraccount_preferredexpert_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="expert_account"/>
 
     </changeSet>
 </databaseChangeLog>

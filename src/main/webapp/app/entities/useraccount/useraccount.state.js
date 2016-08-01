@@ -75,7 +75,6 @@
                                 preferlocalexpert: null,
                                 handle: null,
                                 companyname: null,
-                                inviteContext: null,
                                 id: null
                             };
                         }

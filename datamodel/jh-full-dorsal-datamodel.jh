@@ -44,6 +44,22 @@ relationship OneToMany {
 dto Technology with mapstruct
 service Technology with serviceClass
 
+////////////////////////////////
+// Entity Profile Visability
+////////////////////////////////
+enum ProfileVisability {
+    PUBLIC, INTERN, HIDDEN
+}
+
+///////////////////////////////////////////
+// Entity Availability
+//
+// FullTime, Mon-Fri/8-5, Evening, Weekend
+///////////////////////////////////////////
+enum Availability {
+    FULL_TIME, MON_FRI, EVENING, WEEKEND
+}
+
 //////////////////////////
 // Entity Expert Account
 
@@ -56,18 +72,36 @@ entity ExpertAccount  {
     handle String,
     languages String,
     imagePath String maxlength(512),
-    firstTechnologyPreference String,
-    secondTechnologyPreference String,
-    thirdTechnologyPreference String,
     isAvailable Boolean,
     expertBio String maxlength(4096),
     expertSince ZonedDateTime,
     numberOfCases Integer,
-    welcomeMessage String maxlength(2048)
+    welcomeMessage String maxlength(2048),
+    expertTimezone String,
+    expertAvailability Availability,
+    profileVisibility ProfileVisability
 }
 
 relationship OneToOne {
 	ExpertAccount{user} to User{expertaccount}
+}
+
+///////////////////////////////////////
+// Technologies preferences
+
+relationship OneToMany {
+    Technology{ExpertAccount(firsttechnology)} to ExpertAccount{firsttechnology}
+}
+
+relationship OneToMany {
+    Technology{ExpertAccount(secondtechnology)} to ExpertAccount{secondtechnology}
+}
+
+////////////////////////////
+// Issue preference
+
+relationship OneToMany {
+    Issue{ExpertAccount(issueexpertise)} to ExpertAccount{issueexpertise}
 }
 
 ///////////////////////////////////////
@@ -93,12 +127,15 @@ entity Useraccount  {
     location String,
     preferlocalexpert Boolean,
     handle String,
-    companyname String,
-    inviteContext String maxlength(512)
+    companyname String
 }
 
 relationship OneToOne {
 	Useraccount{user} to User{useraccount}
+}
+
+relationship OneToMany {
+    ExpertAccount{Useraccount(preferredexpert)} to Useraccount{preferredexpert}
 }
 
 //////////////////////
@@ -127,6 +164,9 @@ relationship OneToMany {
     User{groupaccess(user)} to Groupaccess{user}
 }
 
+////////////////////////////////////////////
+// Entity Supportcase
+////////////////////////////////////////////
 entity Supportcase {
 	summary String maxlength (1024),
     expectedResult String maxlength (1024),
@@ -138,7 +178,13 @@ entity Supportcase {
     estimateHours Integer,
     estimateComment String maxlength (2048)
     isApproved Boolean,
-    timeOnCase Integer
+    timeOnCase Integer,
+    estimateLog String maxlength(4096),
+    isResolved Boolean,
+    isRated Boolean,
+    expectedCompletionDate ZonedDateTime,
+    expertMessage String,
+    numberOfUpdates Integer
 }
 
 relationship OneToMany {
@@ -146,7 +192,7 @@ relationship OneToMany {
 }
 
 relationship OneToMany {
-    User{supportcase(expert)} to Supportcase{expert}
+    ExpertAccount{supportcase(expertaccount)} to Supportcase{expertaccount}
 }
 
 relationship OneToMany {

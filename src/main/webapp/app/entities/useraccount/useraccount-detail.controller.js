@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .controller('UseraccountDetailController', UseraccountDetailController);
 
-    UseraccountDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'entity', 'Useraccount', 'User'];
+    UseraccountDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'entity', 'Useraccount', 'User', 'ExpertAccount'];
 
-    function UseraccountDetailController($scope, $rootScope, $stateParams, entity, Useraccount, User) {
+    function UseraccountDetailController($scope, $rootScope, $stateParams, entity, Useraccount, User, ExpertAccount) {
         var vm = this;
         vm.useraccount = entity;
         

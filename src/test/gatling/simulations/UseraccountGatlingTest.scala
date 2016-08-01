@@ -68,7 +68,7 @@ class UseraccountGatlingTest extends Simulation {
             .exec(http("Create new useraccount")
             .post("/api/useraccounts")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "location":"SAMPLE_TEXT", "preferlocalexpert":null, "handle":"SAMPLE_TEXT", "companyname":"SAMPLE_TEXT", "inviteContext":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "location":"SAMPLE_TEXT", "preferlocalexpert":null, "handle":"SAMPLE_TEXT", "companyname":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_useraccount_url"))).exitHereIfFailed
             .pause(10)

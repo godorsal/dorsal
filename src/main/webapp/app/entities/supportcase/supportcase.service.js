@@ -17,6 +17,7 @@
                     data = angular.fromJson(data);
                     data.dateCreated = DateUtils.convertDateTimeFromServer(data.dateCreated);
                     data.dateLastUpdate = DateUtils.convertDateTimeFromServer(data.dateLastUpdate);
+                    data.expectedCompletionDate = DateUtils.convertDateTimeFromServer(data.expectedCompletionDate);
                     return data;
                 }
             },
