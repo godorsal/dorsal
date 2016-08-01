@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .directive('caseProfessionalForm', caseProfessionalForm);
 
-    caseProfessionalForm.$inject = ['StatusModel', 'toastr'];
+    caseProfessionalForm.$inject = ['StatusModel', 'toastr', 'CaseCompleteService'];
 
-    function caseProfessionalForm(StatusModel, toastr) {
+    function caseProfessionalForm(StatusModel, toastr, CaseCompleteService) {
         var directive = {
             restrict: 'E',
             scope:  {
@@ -21,7 +21,7 @@
         return directive;
 
         function linkFunc(scope) {
-            scope.resolved = false;
+            scope.StatusModel = StatusModel;
 
             scope.submit = function () {
                 if (StatusModel.checkCaseStatus(scope.case.status, 'created') && scope.case.estimateHours) {
@@ -30,11 +30,6 @@
 
                 if (!scope.expertForm.estimateHours.$pristine) {
                     scope.case.isApproved = false;
-                }
-
-                if (scope.case.isApproved && scope.resolved && StatusModel.checkCaseStatus(scope.case.status, 'working')) {
-                    scope.case.status = StatusModel.getState('completed');
-                    scope.case.isResolved = true;
                 }
 
                 scope.expertForm.estimateHours.$pristine = true;
@@ -51,13 +46,23 @@
                 }
             };
 
+            scope.openCompleteCase = function(event) {
+                event.preventDefault();
+
+                var modalInstance = CaseCompleteService.open(scope.case);
+
+                modalInstance.opened.then(function(){
+                    scope.$emit('pauseOrResumeCasePolling', {'pause': true});
+                });
+
+                modalInstance.closed.then(function(){
+                    scope.$emit('pauseOrResumeCasePolling', {'pause': false});
+                });
+            };
+
             scope.fieldTouched = function () {
                 scope.$emit('pauseOrResumeCasePolling', {'pause': true});
             };
-
-            scope.$on('currentCaseSet', function(){
-                scope.resolved = false;
-            });
         }
     }
 })();

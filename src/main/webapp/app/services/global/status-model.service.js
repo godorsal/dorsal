@@ -30,8 +30,12 @@
         };
 
         service.checkCaseStatus = function (caseStatus, statusName) {
-            var status = _.filter(service.__states, {'name': statusName.toUpperCase()})[0];
-            return (status && (caseStatus.name.toUpperCase() === statusName.toUpperCase()));
+            if (caseStatus && caseStatus.name) {
+                var status = _.filter(service.__states, {'name': statusName.toUpperCase()})[0];
+                return (status && (caseStatus.name.toUpperCase() === statusName.toUpperCase()));
+            }
+
+            return false;
         };
 
         service.getStatusIndex = function (caseStatus) {

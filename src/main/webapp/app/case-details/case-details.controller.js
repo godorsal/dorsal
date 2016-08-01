@@ -34,9 +34,6 @@
             vm.estimateLogs = vm.case.estimateLog.split('\n');
         }
         getCurrentUser()
-        Updatetype.query(function(result){
-            vm.updateTypes = result;
-        })
         function capitalizeFirstLetter(string) {
             string = string.toLowerCase().replace('_', ' ');
             return string.charAt(0).toUpperCase() + string.slice(1);
@@ -118,18 +115,11 @@
             } else {
                 vm.caseupdate.updateMsg = vm.updatemsg;
             }
-            if(!vm.updateType){
-                vm.caseupdate.updatetype = {
-                    id: 1
-                }
-            } else {
-                vm.updateType = JSON.parse(vm.updateType);
-                vm.caseupdate.updatetype = vm.updateType;
-                if (vm.updateType.id == 2) {
-                    vm.case.status.id = 4;
-                    Supportcase.update(vm.case);
-                }
-            }
+
+            vm.caseupdate.updatetype = {
+                id: 1
+            };
+
             if (vm.caseupdate.id !== null) {
                 Caseupdate.update(vm.caseupdate, onSaveSuccess, onSaveError);
             } else {

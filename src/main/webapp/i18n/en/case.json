@@ -73,7 +73,9 @@
                 "estimateComment.placeholder": "Comments regarding the estimated hours",
                 "timeOnCase": "Total time<br/>on case",
                 "timeOnCase.placeholder": "Total Hours expert has worked on the case",
-                "resolved": "Resolved",
+                "resolved": "Finalize",
+                "resolved.action": "Complete this Case",
+                "resolved.complete": "This case has been completed",
                 "lastUpdate": "Last update/action "
             }
         },
@@ -106,6 +108,12 @@
             "header": "AGREEMENT FOR",
             "agreementLabel": "Agreement",
             "checkboxMsg": "I ({{username}}) agree to the provided estimate and the suggested resolution."
+        },
+        "complete": {
+            "header": "Complete Case",
+            "info": "Make sure you enter the total time on the case and a detailed resolution description. This will help the users rate our service and help us build a better service as well.",
+            "timeOnCase.placeholder": "Total time on case",
+            "detailedResolution.placeholder": "Detailed case resolution"
         }
     }
 }

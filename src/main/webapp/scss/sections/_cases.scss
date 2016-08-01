@@ -241,6 +241,10 @@ Cases
                 margin: 0;
             }
         }
+
+        .drsl-complete-lnk.disabled {
+            color: $inactive-text-color;
+        }
     }
 
     .drsl-label-value-row {
@@ -430,6 +434,38 @@ Cases
 .drsl-case-agreement-view {
     .drsl-dialog-content {
         padding-top: $default-padding;;
+    }
+}
+.drsl-case-complete-view {
+    .drsl-dialog-content {
+        > div, > p {
+            margin-bottom: 20px;
+        }
+
+        > div {
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .form-control {
+        border-radius: 0;
+    }
+
+    .close-case-btn-wrapper {
+        text-align:  center;
+        margin-top: 20px;
+
+        button {
+            background: transparent;
+            border: 0;
+        }
+
+        img {
+            width: 100px;
+            height: auto;
+        }
     }
 }
 .alignRight{
