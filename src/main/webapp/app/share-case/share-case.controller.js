@@ -36,6 +36,7 @@
         	inviteString = inviteString + ':' + randomNewPassword;
             var newUser = {
                 email: email,
+                firstName: email,
                 langKey: $translate.use(),
                 login: email,
                 password: randomNewPassword,
