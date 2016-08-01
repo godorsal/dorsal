@@ -1,0 +1,25 @@
+<div class="drsl-dialog drsl-share-case">
+    <div class="modal-body">
+        <div class="shareCaseTop">
+            <div class="drsl-dialog-header shareCaseHead">
+                <div><h2>ATTACH FILES TO: <span>{{vm.case.technology.name}} {{vm.case.id}}</span></h2></div>
+            </div>
+            <form ng-submit="vm.submit()">
+                <div class="drsl-label">Attach Files</div>
+                <div class="drsl-form-grid">
+                    <div>
+                        <div class="drsl-file-upload-section">
+                            <div>
+                                <file-upload attachment="vm.attachment" currentcase="vm.case.id" modal-type="vm.modalType"></file-upload>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="drsl-dialog-buttons">
+                    <button class="btn btn-default" ng-click="vm.cancel($event)" translate="entity.action.cancel">Cancel</button>
+                    <button type="submit" class="btn btn-success" translate="entity.action.update">Update</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
