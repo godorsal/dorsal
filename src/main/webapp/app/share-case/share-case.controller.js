@@ -25,7 +25,11 @@
             vm.currentUser = account;
         });
         function makeUser(email){
-            var inviteString = "Share:" + vm.currentUser.firstName + " " + vm.currentUser.lastName;
+            if(vm.currentUser.firstName &&  vm.currentUser.lastName){
+                var inviteString = "Share:" + vm.currentUser.firstName + " " + vm.currentUser.lastName;
+            } else {
+                var inviteString = "Share:" + vm.currentUser.email;
+            }
             var charSet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
             var randomNewPassword = '';
             for(var i = 0; i < 5; i++){
@@ -36,7 +40,6 @@
         	inviteString = inviteString + ':' + randomNewPassword;
             var newUser = {
                 email: email,
-                firstName: email,
                 langKey: $translate.use(),
                 login: email,
                 password: randomNewPassword,

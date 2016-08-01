@@ -2,22 +2,41 @@
     'use strict';
 
     angular
-        .module('dorsalApp')
-        .directive('fileUpload', fileUpload);
+    .module('dorsalApp')
+    .directive('fileUpload', fileUpload);
 
     function fileUpload() {
-        var controller = ['$timeout', '$scope', '$stateParams', 'DataUtils', 'Attachment', 'Supportcase', 'Caseupdate', function($timeout, $scope, $stateParams, DataUtils, Attachment, Supportcase, Caseupdate){
+        var controller = ['$timeout', '$scope', '$stateParams', 'DataUtils', 'Attachment', 'Supportcase', 'Caseupdate', '$rootScope', function($timeout, $scope, $stateParams, DataUtils, Attachment, Supportcase, Caseupdate, $rootScope){
             var vm = this;
-            $scope.attachments = [];
-            Attachment.query(function(result){
-                result.reverse().forEach(function(attachment){
-                    if(attachment.supportcase.id === $scope.currentcase){
-                        $scope.attachments.push(attachment)
-                    }
+            console.log($scope.modalType);
+            $scope.filesToDelete = [];
+            $scope.getAttachments = function(){
+                $scope.attachment = {};
+                Attachment.query(function(result){
+                    $scope.attachments = [];
+                    result.reverse().forEach(function(attachment){
+                        if(attachment.supportcase.id === $scope.currentcase){
+                            $scope.attachments.push(attachment)
+                            console.log($scope.attachments);
+                        }
+                    })
                 })
-            })
+            }
+            $scope.getAttachments();
             $scope.download = function(){
                 // window.open(stream)
+            }
+            $rootScope.$on("fileuploaded", function(){
+                $scope.getAttachments();
+            })
+            $scope.addToDelete = function(attachment){
+                $scope.filesToDelete.push(attachment);
+            }
+            $scope.deleteItems = function(attachment, index){
+                // $scope.filesToDelete.forEach(function(dAttachment){
+                    Attachment.delete({id: attachment.id})
+                    $scope.attachments.splice(index, 1)
+                // })
             }
             $scope.setDataStream = function ($file, attachment) {
                 if ($file) {
@@ -51,39 +70,58 @@
             restrict: 'E',
             scope: {
                 attachment: '=',
-                currentcase: '='
+                currentcase: '=',
+                modalType: '='
             },
             controller: controller,
-            template: '<div style="overflow-y: scroll; max-height: 58px;">' + '<li ng-repeat="attachment in attachments track by $index" style="outline: none; display: block;" class="attachmentItem" ng-click="options = !options">' +
+            template: '<div style="overflow-y: auto; max-height: 58px;" ng-if="modalType != \'attachment\'">' + '<li ng-repeat="attachment in attachments track by $index" style="outline: none; display: block;" class="attachmentItem" ng-click="options = !options">' +
             '<div style="display: inline-block;">{{attachment.name}}' + '</div>' +
             '<div style="display: inline-block; margin-left: 10px;" ng-if="options">' +
-            // '<div uib-tooltip="{{attachment.name}}" style="display: inline-block;">{{attachment.name.substring(0, 10)}}' + '<span ng-if="attachment.name.length > 10">...</span>' + '</div>' + '<div style="display: inline-block;" ng-if="options">' +
             '<a ng-click="openFile(attachment.dataStreamContentType, attachment.dataStream); $event.stopPropagation();" style="font-size: 14px; margin-right: 7px;">' +
-            // '<i class="fa fa-search fa-lg" aria-hidden="true"></i>' +
             'view' +
             '</a>' +
             '<a ng-click="$event.stopPropagation();" href="data:application/octet-stream;charset=utf-16le;base64,{{attachment.dataStream}}" download="{{attachment.name}}" style="font-size: 14px; margin-right: 7px;">' +
-            // '<i class="fa fa-download fa-lg" aria-hidden="true"></i>' +
             'download' +
 
             '</a>' +
             '<a ng-click="deleteAttachment(attachment, $index)" style="font-size: 14px; margin-right: 7px;">' +
-            // '<i class="fa fa-times-circle" aria-hidden="true"></i>' +
             'delete' +
 
             '</a>' +
             '</div>' +
-            // '<img data-ng-src="data:image/png;base64,{{attachment.dataStream}}" alt="" style="width: 75px;max-height: 50px;" ng-if="attachment.dataStreamContentType.split(\'/\')[0] == \'image\'">' +
-            // '<img src="http://neowin.s3.amazonaws.com/forum/uploads/monthly_04_2013/post-360412-0-09676400-1365986245.png" style="width: 50px; height: 45px;" alt="" ng-if="attachment.dataStreamContentType.split(\'/\')[0] !== \'image\' && attachment.dataStreamContentType">'
             '</li>'
             + '</div>'
             + '<div class="drsl-file-upload-component" class="form-group">'
             + '{{attachment.name}}'
             + '<img data-ng-src="data:image/png;base64,{{attachment.dataStream}}" alt="" style="width: 150px;max-height: 103px;" ng-if="attachment.dataStreamContentType.split(\'/\')[0] == \'image\'">'
             + '<img src="http://neowin.s3.amazonaws.com/forum/uploads/monthly_04_2013/post-360412-0-09676400-1365986245.png" style="width: 100px;" alt="" ng-if="attachment.dataStreamContentType.split(\'/\')[0] !== \'image\' && attachment.dataStreamContentType">'
+            +'<span ng-if="modalType != \'attachment\'">'
             + '<i class="fa fa-cloud-upload fa-lg" style="margin-right: 5px;"></i>'
             + '<span type="file" ngf-select ngf-change="setDataStream($file, attachment)" class="uploadLink">{{"global.form.fileupload.browse" | translate}}</span>'
+            +'</span>'
+            +'<span ng-if="modalType == \'attachment\'" style="color: black;">'
+            + '<i class="fa fa-cloud-upload fa-lg" style="margin-right: 5px;"></i>'
+            + '<br />'
+            + '<span type="file" ngf-select ngf-change="setDataStream($file, attachment)" class="uploadLink">Click here to select files, or drag and drop them here</span>'
+            + '<br />'
+            + '<strong>The more we know about your case, the better we can serve you!</strong>'
+            +'</span>'
             + '</div>'
+            + '<br />'
+            + '<table class="table-striped" ng-if="modalType == \'attachment\'"style="width: 570px;">'
+            + '<thead>'
+            + '<tr>'
+            + '<th >Manage attached files</th>'
+            + '<th>Remove</th>'
+            + '</tr>'
+            + '</thead>'
+            + '<tbody style="border: 1px solid #999999;">'
+            + '<tr ng-repeat="attachment in attachments track by $index">'
+            + '<td>{{attachment.name}}</td>'
+            + '<td><i class="glyphicon glyphicon-trash" ng-click="deleteItems(attachment, $index)"></i></td>'
+            + '</tr>'
+            + '</tbody>'
+            + '</table>'
         };
 
         return directive;

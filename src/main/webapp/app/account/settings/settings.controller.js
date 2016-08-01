@@ -168,7 +168,11 @@
             toastr["error"]("Incorrect " + error.data.fieldErrors[0].field + " input")
         }
         function makeUser(email){
-            var inviteString = "Invite:" + vm.settingsAccount.firstName + " " + vm.settingsAccount.lastName;
+            if(vm.settingsAccount.firstName && vm.settingsAccount.lastName){
+                var inviteString = "Invite:" + vm.settingsAccount.firstName + " " + vm.settingsAccount.lastName;
+            } else {
+                var inviteString = "Invite:" + vm.settingsAccount.email;
+            }
             var charSet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
             var randomNewPassword = '';
             for(var i = 0; i < 5; i++){
@@ -179,7 +183,6 @@
         	inviteString = inviteString + ':' + randomNewPassword;
         	var newUser = {
                 email: email,
-                firstName: email,
                 langKey: $translate.use(),
                 login: email,
                 password: randomNewPassword,

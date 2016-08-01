@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('CaseController', CaseController);
 
-    CaseController.$inject = ['$scope', '$window', '$interval', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', '$state', 'StatusModel', 'Rating', 'Expertbadge', 'DrslMetadata', 'Caseupdate'];
+    CaseController.$inject = ['$scope', '$window', '$interval', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', '$state', 'StatusModel', 'Rating', 'Expertbadge', 'DrslMetadata', 'Caseupdate', 'AttachmentModalService'];
 
-    function CaseController($scope, $window, $interval, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, $state, StatusModel, Rating, Expertbadge, DrslMetadata, Caseupdate) {
+    function CaseController($scope, $window, $interval, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, $state, StatusModel, Rating, Expertbadge, DrslMetadata, Caseupdate, AttachmentModalService) {
         var vm = this, casePoll;
         vm.init = init;
         vm.DrslMetadata = DrslMetadata;
@@ -20,6 +20,7 @@
         vm.openDetails = openDetails;
         vm.openEscalation = openEscalation;
         vm.openShare = openShare;
+        vm.openAttachment = openAttachment;
         vm.passedStep = passedStep;
         vm.openChat = openChat;
         vm.isCaseExpert = isCaseExpert;
@@ -315,6 +316,17 @@
 
         function openShare() {
             var modalInstance = ShareCaseService.open(vm.currentCase, vm.experts[vm.currentCase.expert]);
+
+            modalInstance.opened.then(function(){
+                vm.pausePollForCaseUpdates = true;
+            });
+
+            modalInstance.closed.then(function(){
+                vm.pausePollForCaseUpdates = false;
+            });
+        }
+        function openAttachment() {
+            var modalInstance = AttachmentModalService.open(vm.currentCase, vm.experts[vm.currentCase.expert]);
 
             modalInstance.opened.then(function(){
                 vm.pausePollForCaseUpdates = true;
