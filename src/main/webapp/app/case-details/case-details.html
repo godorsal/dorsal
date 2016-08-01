@@ -108,14 +108,14 @@
                     <tr>
                         <th class="drsl-label">Message</th>
                         <th class="drsl-label" style="padding-left: 177px;">Date</th>
-                        <th class="drsl-label" style="padding-left: 130px;">User/Expert</th>
+                        <th class="drsl-label" style="padding-left: 152px;">User/Expert</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="update in vm.updates track by $index" style="font-weight: 500; color: #404040">
-                        <td style="max-width: 177px; word-wrap: break-word;">{{update.updateMsg}}</td>
-                        <td style="padding-left: 60px; white-space: nowrap;">{{update.dateUpdated | date:"MM/dd/yy h:mm a"}}</td>
-                        <td style="padding-left: 70px; width: 180px !important;">{{update.user.login}}</td>
+                        <td style="width: 200px; max-width: 330px; word-wrap: break-word;">{{update.updateMsg}}</td>
+                        <td style="white-space: nowrap;">{{update.dateUpdated | date:"MM/dd/yy h:mm a"}}</td>
+                        <td style="width: 180px !important;">{{update.user.login}}</td>
                     </tr>
                 </tbody>
             </table>

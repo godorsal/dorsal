@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('ShareCaseController', ShareCaseController);
 
-    ShareCaseController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase', 'expert', 'User', 'SharedCase', 'Register', 'Principal'];
+    ShareCaseController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase', 'expert', 'User', 'SharedCase', 'Register', 'Principal', 'toastr'];
 
-    function ShareCaseController($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase, expert, User, SharedCase, Register, Principal) {
+    function ShareCaseController($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase, expert, User, SharedCase, Register, Principal, toastr) {
         var vm = this;
         vm.cancel = cancel;
         vm.addUser = addUser;
@@ -59,8 +59,12 @@
                 SharedCase.save(newSharedCase, function(data){
                     vm.sharedUsers.push(data)
                     vm.emailInput = '';
-                })
+                }, shareCaseFail)
             })
+        }
+        function shareCaseFail(error){
+            console.log(error);
+            toastr["error"]("Case sharing failure")
         }
         function shareCase(newUser){
             var newSharedCase = {
@@ -70,8 +74,7 @@
             SharedCase.save(newSharedCase, function(data){
                 vm.sharedUsers.push(data)
                 vm.emailInput = '';
-            }, function(error){
-            })
+            }, shareCaseFail)
         }
         function addUser() {
             var newUsers = vm.emailInput.split(',');
@@ -87,27 +90,6 @@
                     }
                 })
             })
-            // User.query(function(result){
-            //     result.find(function(user){
-            //         newUsers.forEach(function(newUser){
-            //             var isAlreadyShared = vm.sharedUsers.find(function(shared){
-            //                 if(shared.user.email == newUser){
-            //                     return true;
-            //                 }
-            //             })
-            //             if(user.email === newUser){
-            //                 var newSharedCase = {
-            //                     user: user,
-            //                     supportcase: vm.case
-            //                 }
-            //                 SharedCase.save(newSharedCase, function(data){
-            //                     vm.sharedUsers.push(data)
-            //                     vm.emailInput = '';
-            //                 })
-            //             }
-            //         })
-            //     })
-            // })
         }
         function getSharedUsers() {
             SharedCase.query(function(result){

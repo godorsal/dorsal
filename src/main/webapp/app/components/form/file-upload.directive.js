@@ -91,6 +91,7 @@
             '</div>' +
             '</li>'
             + '</div>'
+            + '<br />'
             + '<div class="drsl-file-upload-component" class="form-group">'
             + '{{attachment.name}}'
             + '<img data-ng-src="data:image/png;base64,{{attachment.dataStream}}" alt="" style="width: 150px;max-height: 103px;" ng-if="attachment.dataStreamContentType.split(\'/\')[0] == \'image\'">'

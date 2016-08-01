@@ -91,6 +91,10 @@ Your e-mail cannot be longer than 100 characters.
     <input type="timezone" class="form-control" id="timezone" name="timezone" placeholder="Timezone"
     ng-model="vm.currentExpert.timezone" ng-minlength=5 ng-maxlength=100 required maxlength="100">
 </div>
+<div class="form-group" ng-if="vm.currentExpert">
+    <input type="telephone" class="form-control" id="telephone" name="telephone" placeholder="Telephone"
+    ng-model="vm.currentExpert.telephone" ng-minlength=5 ng-maxlength=100 required maxlength="100">
+</div>
 <button type="submit" ng-disabled="form.$invalid" class="btn btn-success drsl-update-user-button" translate="settings.form.button" ng-if="!vm.currentExpert">Update</button>
 
 </div>
