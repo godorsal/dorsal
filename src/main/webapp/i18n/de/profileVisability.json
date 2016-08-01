@@ -1,0 +1,10 @@
+{
+    "dorsalApp": {
+        "ProfileVisability" : {
+            "null": "",
+            "PUBLIC": "PUBLIC",
+            "INTERN": "INTERN",
+            "HIDDEN": "HIDDEN"
+        }
+    }
+}

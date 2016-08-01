@@ -1,0 +1,11 @@
+{
+    "dorsalApp": {
+        "Availability" : {
+            "null": "",
+            "FULL_TIME": "FULL_TIME",
+            "MON_FRI": "MON_FRI",
+            "EVENING": "EVENING",
+            "WEEKEND": "WEEKEND"
+        }
+    }
+}
