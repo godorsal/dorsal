@@ -1,0 +1,39 @@
+<div class="drsl-case-complete-view drsl-dialog">
+    <form ng-submit="vm.submit()">
+        <div class="modal-body">
+            <div>
+                <!-- Dialog Header -->
+                <div>
+                    <div class="drsl-dialog-header">
+                        <div><h2><span>{{'case.complete.header' | translate}}</span></h2></div>
+                    </div>
+                </div>
+
+                <!-- Dialog Content -->
+                <div>
+                    <div class="drsl-dialog-content">
+                        <!-- Info Text -->
+                        <p translate="case.complete.info"></p>
+
+                        <!-- Time on Case -->
+                        <div>
+                            <div class="drsl-label" translate="case.complete.timeOnCase.placeholder"></div>
+                            <input type="number" class="form-control" ng-model="vm.case.timeOnCase">
+                        </div>
+
+                        <!-- Resolution -->
+                        <div>
+                            <div class="drsl-label" translate="case.complete.detailedResolution.placeholder"></div>
+                            <textarea class="form-control drsl-value" cols="30" rows="5" ng-model="vm.caseUpdate.updateMsg"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Main Buttons -->
+                    <div class="close-case-btn-wrapper">
+                        <button type="submit"><img src="content/images/close_case_button.png"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
