@@ -18,6 +18,7 @@
             "caseCompleted": "Case completed",
             "estimate": "Estimate",
             "estimateTotal": "${{total}} ({{hours}} hrs @ ${{rate}}/hr)",
+            "timeOnCaseTotal": "{{hours}} hours @ ${{rate}}/hour = ${{total}}",
             "status": {
                 "main": "Status",
                 "created": "Created",
@@ -90,6 +91,8 @@
             "badges": "Rating Badges",
             "badges.note": "select multiple badges to rate your expert’s technical and personal skills",
             "ratingComments.placeholder": "Please provide additional feedback on the case rating (optional)",
+            "ratingComments.error": "Please provide additional feedback",
+            "timeOnCase": "Total time on case",
             "label": {
                 "satisfaction": "Overall Result",
                 "prompt": "Responsiveness",

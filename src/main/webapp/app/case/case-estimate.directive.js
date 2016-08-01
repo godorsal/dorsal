@@ -11,9 +11,11 @@
         var directive = {
             restrict: 'E',
             scope: {
-                hours: '@'
+                hours: '@',
+                displayByTime: '@'
             },
-            template: '<span translate="case.details.estimateTotal" translate-values="{total:DrslMetadata.getTotalForRateAtHours(hours), hours:hours, rate:DrslMetadata.expertRate}"></span>',
+            template: '<span ng-hide="displayByTime" translate="case.details.estimateTotal" translate-values="{total:DrslMetadata.getTotalForRateAtHours(hours), hours:hours, rate:DrslMetadata.expertRate}"></span>' +
+                        '<span ng-show="displayByTime" translate="case.details.timeOnCaseTotal" translate-values="{total:DrslMetadata.getTotalForRateAtHours(hours), hours:hours, rate:DrslMetadata.expertRate}"></span>',
             link: linkFunc
         };
 

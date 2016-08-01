@@ -1,5 +1,5 @@
 <div class="drsl-case-rating-view drsl-dialog">
-    <form ng-submit="vm.submit()">
+    <form ng-submit="vm.submit()" name="ratingForm" novalidate>
         <div class="modal-body">
             <div>
                 <!-- Dialog Header -->
@@ -24,6 +24,13 @@
                                 <h3>
                                     <span>{{'case.professional.expert' | translate}}: {{vm.case.expertaccount.user.firstName}} {{vm.case.expertaccount.user.lastName}}</span>
                                     <div class="pull-right">{{'case.details.caseCompleted' | translate}} {{vm.case.dateLastUpdate | date:"MM/dd/yy h:mm a"}}</div>
+                                </h3>
+
+                                <!-- Time on Case -->
+                                <h3>
+                                    <span>
+                                        {{'case.rating.timeOnCase' | translate}}: <case-estimate hours="{{vm.case.timeOnCase}}" display-by-time="true"></case-estimate>
+                                    </span>
                                 </h3>
 
                                 <!-- Case Resolution Details -->
@@ -64,8 +71,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div>
-                                    <textarea class="form-control drsl-value" name="ratingComments" id="ratingComments" ng-model="vm.ratingComments" cols="30" rows="3" placeholder="{{'case.rating.ratingComments.placeholder' | translate}}"></textarea>
+                                <div ng-class="{'has-error': ratingForm.ratingComments.$error.required && vm.formSubmitted}">
+                                    <textarea class="form-control drsl-value" name="ratingComments" id="ratingComments" ng-model="vm.ratingComments" cols="30" rows="3" placeholder="{{'case.rating.ratingComments.placeholder' | translate}}" required></textarea>
                                 </div>
                             </div>
                         </div>

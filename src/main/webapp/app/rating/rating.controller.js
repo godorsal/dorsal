@@ -5,15 +5,17 @@
         .module('dorsalApp')
         .controller('DrslRatingController', DrslRatingController);
 
-    DrslRatingController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase', 'drslBadges', 'Caseupdate'];
+    DrslRatingController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase', 'drslBadges', 'Caseupdate', 'toastr'];
 
-    function DrslRatingController($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase, drslBadges, Caseupdate) {
+    function DrslRatingController($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase, drslBadges, Caseupdate, toastr) {
         var vm = this;
         vm.case = drslCase;
         vm.badges = drslBadges;
         vm.technologyProperties = {};
         vm.detailedResolutions = '';
+        vm.formSubmitted = false;
         vm.ratingComments = null;
+        vm.ratingCommentsError = $translate.instant('case.rating.ratingComments.error');
         vm.techBadges = vm.badges.filter(function (badge) {
             var searchString = 'tech_';
             return (badge.name.substr(0, searchString.length) === searchString);
@@ -135,6 +137,14 @@
 
         function submit() {
             var combinedTotal = 0, combinedAverage, csv = [], selectedBadges = [], i, badge;
+
+            vm.formSubmitted = true;
+
+            if (!vm.ratingComments || vm.ratingComments.replace(/\s/g, '').length === 0) {
+                ratingForm.ratingComments.focus();
+                toastr.error(vm.ratingCommentsError, 'Error');
+                return;
+            }
 
             for (i = 0; i < vm.radios.length; i++) {
                 var radio = vm.radios[i][0];

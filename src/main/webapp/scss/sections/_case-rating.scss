@@ -127,7 +127,7 @@ Case Rating
         }
 
         .drsl-rating-section {
-            margin-bottom: $default-padding;
+            margin-bottom: 0;
 
             h3 {
                 padding-bottom: 5px;
@@ -137,6 +137,10 @@ Case Rating
                     font-size: $default-font-size;
                     color: $inactive-text-color;
                 }
+            }
+
+            .drsl-scrolling-container {
+                margin-bottom: 0;
             }
 
         }
@@ -159,7 +163,7 @@ Case Rating
                 .drsl-rating-grid-values-header {
                     display: flex;
                     flex-flow: row;
-                    margin: 0 20px;
+                    margin: 0;
                     font-weight: $default-weight;
 
                     div {
@@ -173,6 +177,7 @@ Case Rating
             height: auto;
             .drsl-radio-set {
                 overflow: hidden;
+                max-width: none;
 
                 label span:first-child {
                     display: none;
