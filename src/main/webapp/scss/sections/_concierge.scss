@@ -250,7 +250,7 @@ Concierge
         }
 
         > div {
-            div {
+            > div {
                 position: absolute;
                 left: 24%;
                 font-size: 20px;
@@ -272,13 +272,57 @@ Concierge
                     margin-left: -12px;
                     padding: 12px;
                     background-color: #FFFFFF;
-                    top: 90%;
+                    top: 92%;
+
+                    .drsl-date-picker-btn {
+                        margin-top: -5px;
+                        margin-right: -10px;
+                    }
+
+                    .btn-info:active, .btn-info.active, .open > .btn-info.dropdown-toggle {
+                        color: #fff;
+                        background-color: $brand-color;
+                        border-color: $brand-color;
+                    }
+
+                    .uib-title {
+                        strong {
+                            @extend .drsl-label;
+                            font-weight: $thin-weight;
+                            font-size: 18px;
+                        }
+                    }
+
+                    .drsl-date-widget-wrapper {
+                        position: absolute;
+                        bottom: -90px;
+                        left: 20px;
+                    }
+
+                    .drsl-date-display-wrapper {
+                        width: 280px;
+                        background: #FFFFFF;
+
+                        span {
+                            font-weight: $default-weight;
+                        }
+
+                        .drsl-date-display-label {
+                            margin-right: 5px;
+                        }
+                    }
                 }
 
                 &:last-child {
                     position: absolute;
                     top: 86%;
                     left: 86%;
+                }
+
+                &.uib-datepicker {
+                    position: relative;
+                    top: initial;
+                    left: initial;
                 }
             }
         }
