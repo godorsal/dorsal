@@ -12,7 +12,6 @@
         vm.cancel = cancel;
         vm.case = drslCase;
         vm.submit = submit;
-        vm.summary = vm.case.summary.toString();
         vm.attachment = {
             name: null,
             url: null,
@@ -21,8 +20,11 @@
             id: null
         };
         vm.modalType = "attachment";
+        vm.savingFile = false;
         function submit() {
-            if(vm.attachment.dataStream){
+            if(vm.attachment.dataStream && vm.savingFile == false){
+                $rootScope.$broadcast("savingFile")
+                vm.savingFile = true;
                 vm.attachment.supportcase = {
                     id: vm.case.id
                 }
@@ -30,8 +32,8 @@
             }
         }
         function onSaveSuccess(data){
-            console.log(data);
             $rootScope.$broadcast("fileuploaded")
+            vm.savingFile = false;
         }
         function onSaveError(error){
             console.log(error);

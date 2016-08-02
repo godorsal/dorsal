@@ -531,9 +531,63 @@ table.scroll thead > tr {
 }
 .attachmentItem {
     margin-right: 10px;
+    outline: none;
+    display: block;
 }
 .uploadLink:hover{
     cursor: pointer;
+}
+.caseDetailsFileList{
+    overflow-y: auto;
+    max-height: 58px;
+    .name{
+        display: inline-block;
+    }
+    .options{
+        display: inline-block;
+        margin-left: 10px;
+        a {
+            font-size: 14px;
+            margin-right: 7px;
+        }
+    }
+}
+.saveload {
+    text-align: center;
+}
+.thumbnail {
+    width: 150px;
+    max-height: 103px;
+}
+.placeholderIcon {
+    width: 100px;
+}
+.cloudIcon {
+    margin-right: 5px;
+}
+.attachmentModalInput{
+    color: black !important;
+    i {
+        margin-right: 5px;
+    }
+}
+.attachmentModalTable {
+    width: 570px;
+    th:first-child{
+        float: left;
+    }
+    th:last-child{
+        float: right;
+    }
+    tbody{
+        border: 1px solid #999999;
+        height: 100px;
+        > tr {
+            td:first-child{
+                min-width: 554px;
+            }
+        }
+    }
 }
 .shareCaseTop{
     padding: 5px 10px 5px 10px !important;

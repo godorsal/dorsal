@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('CaseController', CaseController);
 
-    CaseController.$inject = ['$scope', '$window', '$interval', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', '$state', 'StatusModel', 'Rating', 'Expertbadge', 'DrslMetadata', 'Caseupdate', 'AttachmentModalService'];
+    CaseController.$inject = ['$scope', '$window', '$interval', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', '$state', 'StatusModel', 'Rating', 'Expertbadge', 'DrslMetadata', 'Caseupdate', 'AttachmentModalService', 'Attachment'];
 
-    function CaseController($scope, $window, $interval, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, $state, StatusModel, Rating, Expertbadge, DrslMetadata, Caseupdate, AttachmentModalService) {
+    function CaseController($scope, $window, $interval, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, $state, StatusModel, Rating, Expertbadge, DrslMetadata, Caseupdate, AttachmentModalService, Attachment) {
         var vm = this, casePoll;
         vm.init = init;
         vm.DrslMetadata = DrslMetadata;
@@ -55,7 +55,7 @@
 
             // Make a call to get the initial data.
             CaseService.getEntityData({'getCurrentUser': getCurrentUser, 'getStatusStates': getStatusStates, 'getBadges': getBadges}).then(function (data) {
-                var i, currentCaseIndex = 0;;
+                var i, currentCaseIndex = 0;
 
                 if (data.badges) {
                     vm.badges = data.badges;
@@ -89,6 +89,16 @@
                 if (!casePoll) {
                     vm.pollForCaseUpdates();
                 }
+                Attachment.query(function(result){
+                    var anyAttachments= result.find(function(attachment){
+                        return attachment.supportcase.id === vm.currentCase.id
+                    })
+                    if(!anyAttachments){
+                        openAttachment();
+                    } else {
+                        console.log("DON't OPEN MODAL");
+                    }
+                })
             });
         }
 
