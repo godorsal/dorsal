@@ -132,8 +132,13 @@ Your e-mail cannot be longer than 100 characters.
         </div>
     </div>
     <div class="form-group">
-        <input type="hours" class="form-control" id="hours" name="hours" placeholder="Preffered working hours"
-        ng-model="vm.currentExpert.hours" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true">
+        <select class="form-control" name="expertAvailability" ng-model="vm.currentExpert.expertAvailability" id="field_expertAvailability" ng-change="vm.updatingExpert = true">
+            <option value="">Availability</option>
+            <option value="FULL_TIME">Full Time</option>
+            <option value="MON_FRI">Monday Through Friday</option>
+            <option value="EVENING">Evenings</option>
+            <option value="WEEKEND">Weekends</option>
+        </select>
     </div>
     <div>
         <div class="twoInputs">
