@@ -80,21 +80,88 @@ Your e-mail cannot be longer than 100 characters.
 </p>
 </div>
 </div>
-<div class="form-group">
-    <select id="langKey" name="langKey" class="form-control" ng-model="vm.settingsAccount.langKey" ng-controller="JhiLanguageController as languageVm" ng-options="code as (code | findLanguageFromKey) for code in languageVm.languages"></select>
+<div class="form-group" ng-if="!vm.currentExpert">
+    <select id="langKey" name="langKey" class="form-control" ng-model="vm.settingsAccount.langKey" ng-controller="JhiLanguageController as languageVm" ng-options="code as (code | findLanguageFromKey) for code in languageVm.languages">
+        <option value="">Language(s)</option>
+    </select>
 </div>
-<div class="form-group" ng-if="vm.currentExpert">
-    <input type="contact" class="form-control" id="contact" name="contact" placeholder="Preferred contact method"
-    ng-model="vm.currentExpert.contact" ng-minlength=5 ng-maxlength=100 required maxlength="100">
+<div ng-if="vm.currentExpert">
+    <div class="twoInputs">
+        <div class="form-group">
+            <input type="telephone" class="form-control" id="telephone" name="telephone" placeholder="Telephone"
+            ng-model="vm.currentExpert.phone" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true">
+        </div>
+        <div class="form-group">
+            <input type="mobile" class="form-control" id="mobile" name="mobile" placeholder="Mobile"
+            ng-model="vm.currentExpert.mobile" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true">
+        </div>
+    </div>
+    <div class="twoInputs">
+        <div class="form-group">
+            <input type="skype" class="form-control" id="skype" name="skype" placeholder="Skype"
+            ng-model="vm.currentExpert.skype" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true">
+        </div>
+        <div class="form-group">
+            <input type="drslChatHandle" class="form-control" id="drslChatHandle" name="drslChatHandle" placeholder="Dorsal Chat Handle"
+            ng-model="vm.currentExpert.handle" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true">
+        </div>
+    </div>
+    <div class="twoInputs">
+        <div class="form-group">
+            <input type="preffered" class="form-control" id="preffered" name="preffered" placeholder="Preffered contact method"
+            ng-model="vm.currentExpert.preffered" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true">
+        </div>
+        <div class="form-group">
+            <input type="other" class="form-control" id="other" name="other" placeholder="Other Comms"
+            ng-model="vm.currentExpert.other" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true">
+        </div>
+    </div>
+    <div class="form-group">
+        <select id="langKey" name="langKey" class="form-control" ng-model="vm.settingsAccount.langKey" ng-controller="JhiLanguageController as languageVm" ng-options="code as (code | findLanguageFromKey) for code in languageVm.languages" ng-change="vm.updatingExpert = true">
+            <option value="">Language(s)</option>
+        </select>
+    </div>
+    <div class="twoInputs">
+        <div class="form-group">
+            <input type="location" class="form-control" id="location" name="location" placeholder="Location"
+            ng-model="vm.currentExpert.location" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true">
+        </div>
+        <div class="form-group">
+            <input type="timezone" class="form-control" id="timezone" name="timezone" placeholder="Timezone"
+            ng-model="vm.currentExpert.expertTimezone" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true">
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="hours" class="form-control" id="hours" name="hours" placeholder="Preffered working hours"
+        ng-model="vm.currentExpert.hours" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true">
+    </div>
+    <div>
+        <div class="twoInputs">
+            <div>
+                Expert Score: {{vm.currentExpert.expertScore}} out of 100
+            </div>
+            <div>
+                Profile Visibility:
+                <select class="form-control privacySelect" name="profileVisibility" ng-model="vm.currentExpert.profileVisibility" id="field_profileVisibility" ng-change="vm.updatingExpert = true">
+                    <option value="PUBLIC">Public</option>
+                    <option value="INTERN">Intern</option>
+                    <option value="HIDDEN">Hidden</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="twoInputs">
+            <div>
+                Total Number of Cases: {{vm.currentExpert.numberOfCases}}
+            </div>
+            <div>
+                Expert since: {{vm.currentExpert.expertSince}}
+            </div>
+        </div>
+    </div>
+
 </div>
-<div class="form-group" ng-if="vm.currentExpert">
-    <input type="timezone" class="form-control" id="timezone" name="timezone" placeholder="Timezone"
-    ng-model="vm.currentExpert.timezone" ng-minlength=5 ng-maxlength=100 required maxlength="100">
-</div>
-<div class="form-group" ng-if="vm.currentExpert">
-    <input type="telephone" class="form-control" id="telephone" name="telephone" placeholder="Telephone"
-    ng-model="vm.currentExpert.telephone" ng-minlength=5 ng-maxlength=100 required maxlength="100">
-</div>
+
 <button type="submit" ng-disabled="form.$invalid" class="btn btn-success drsl-update-user-button" translate="settings.form.button" ng-if="!vm.currentExpert">Update</button>
 
 </div>
@@ -102,7 +169,16 @@ Your e-mail cannot be longer than 100 characters.
     <div class="panel panel-default">
         <div class="panel-body">
             <textarea name="name" rows="4" cols="20" class="form-control" ng-model="vm.currentExpert.welcomeMessage" ng-change="vm.updatingExpert = true" placeholder="Greeting Message"></textarea>
-            <textarea name="name" rows="4" cols="20" class="form-control" ng-model="vm.currentExpert.workmessage" ng-change="vm.updatingExpert = true" placeholder="Working Message"></textarea>
+            <textarea name="name" rows="4" cols="20" class="form-control" ng-model="vm.currentExpert.expertBio" ng-change="vm.updatingExpert = true" placeholder="Expert Bio"></textarea>
+            <select class="form-control" id="field_issue" name="Issue" ng-model="vm.currentExpert.issueexpertise" ng-options="issue as issue.name for issue in vm.issues track by issue.id" ng-change="vm.updatingExpert = true">
+                <option value="">Issue Expertise</option>
+            </select>
+            <select class="form-control" id="field_technology" name="Technology" ng-model="vm.currentExpert.firsttechnology" ng-options="technology as technology.name for technology in vm.technologies track by technology.id" ng-change="vm.updatingExpert = true">
+                <option value="">Technology Expertise</option>
+            </select>
+            <select class="form-control" id="field_technology2" name="Technology2" ng-model="vm.currentExpert.secondtechnology" ng-options="technology as technology.name for technology in vm.technologies track by technology.id" ng-change="vm.updatingExpert = true">
+                <option value="">Technology Expertise 2</option>
+            </select>
             <button type="submit" class="btn btn-success" translate="settings.form.button" ng-click="vm.save()">Update</button>
         </div>
     </div>

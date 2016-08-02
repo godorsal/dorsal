@@ -588,7 +588,7 @@ table.scroll thead > tr {
         width: 558px;
         > tr {
             td:first-child{
-                min-width: 554px;
+                min-width: 542px;
             }
         }
     }
@@ -662,6 +662,24 @@ table.scroll thead > tr {
         font-weight: 400;
         font-size: 20px;
     }
+}
+.twoInputs{
+    div:first-child {
+        float: left;
+        width: 49%;
+    }
+    div:last-child {
+        float: right;
+        width: 49%;
+    }
+}
+.extraInfo{
+
+}
+.privacySelect{
+    width: 50%;
+    height: 50%;
+    display: inline-block;
 }
 .activatePage{
     background-color: #F48B3D;

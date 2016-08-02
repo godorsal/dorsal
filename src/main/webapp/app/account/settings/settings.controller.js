@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('SettingsController', SettingsController);
 
-    SettingsController.$inject = ['Principal', 'Auth', 'JhiLanguageService', '$translate', 'Payment', 'Groupaccess', 'Useraccount', 'User', 'Focus', 'Register', 'toastr', 'ExpertAccount'];
+    SettingsController.$inject = ['Principal', 'Auth', 'JhiLanguageService', '$translate', 'Payment', 'Groupaccess', 'Useraccount', 'User', 'Focus', 'Register', 'toastr', 'ExpertAccount', 'Issue', 'Technology'];
 
-    function SettingsController(Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, Useraccount, User, focus, Register, toastr, ExpertAccount) {
+    function SettingsController(Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, Useraccount, User, focus, Register, toastr, ExpertAccount, Issue, Technology) {
         var vm = this;
 
         vm.error = null;
@@ -29,6 +29,8 @@
         vm.authorizedUser = '';
         vm.number = 0;
         vm.isExpert = false;
+        vm.issues = Issue.query();
+        vm.technologies = Technology.query();
 
         getAuthorizedUsers()
 
