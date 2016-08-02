@@ -39,6 +39,7 @@
             console.log(error);
         }
         function cancel(e) {
+            $rootScope.$broadcast("doneUploading");
             e.preventDefault();
             $uibModalInstance.dismiss('cancel');
         }

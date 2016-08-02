@@ -45,7 +45,7 @@
                 <i class="glyphicon glyphicon-menu-right"></i>
                 <a ng-click="vm.openDetails()" uib-tooltip="view case details" translate="case.details.viewDetails">details</a>
                 <a ng-click="vm.openShare()" uib-tooltip="share this case" ng-hide="vm.isCaseExpert()">share</a>
-                <a ng-click="vm.openAttachment()" uib-tooltip="add and attachment" ng-hide="vm.isCaseExpert()">attach files</a>
+                <a ng-click="vm.openAttachment()" uib-tooltip="add an attachment" ng-hide="vm.isCaseExpert()">attach files</a>
                 <a ng-show="vm.DrslMetadata.showCaseChat !== 0" ng-click="vm.openChat()" uib-tooltip="chat with expert" ng-class="{'drsl-link-disabled': !vm.passedStep(1)}" class="drsl-link-disabled" translate="case.details.chatRoom">chat</a>
                 <a ui-sref="concierge" uib-tooltip="create a new case">new</a>
                 <!-- <a class="alignRight" ng-click="vm.openEscalation()">escalate or reassign this case</a> -->

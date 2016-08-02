@@ -529,6 +529,9 @@ table.scroll thead > tr {
         color: #F48B3D
     }
 }
+.drsl-file-upload-component-attachment {
+    width: 558px;
+}
 .attachmentItem {
     margin-right: 10px;
     outline: none;
@@ -582,6 +585,7 @@ table.scroll thead > tr {
     tbody{
         border: 1px solid #999999;
         height: 100px;
+        width: 558px;
         > tr {
             td:first-child{
                 min-width: 554px;
