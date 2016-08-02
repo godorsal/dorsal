@@ -78,6 +78,9 @@
                 "add": "add",
                 "noVersion": "No version"
             },
+            "date": {
+                "main": "Requested delivery:"
+            },
             "incidentTypes": {
                 "version": "Version",
                 "version.placeholder": "version here",
