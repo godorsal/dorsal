@@ -141,7 +141,7 @@ Your e-mail cannot be longer than 100 characters.
         </select>
     </div>
     <div>
-        <div class="twoInputs">
+        <div class="twoItems">
             <div>
                 Expert Score: {{vm.currentExpert.expertScore}} out of 100
             </div>
@@ -155,7 +155,7 @@ Your e-mail cannot be longer than 100 characters.
             </div>
         </div>
         <br>
-        <div class="twoInputs">
+        <div class="twoItems">
             <div>
                 Total Number of Cases: {{vm.currentExpert.numberOfCases}}
             </div>
@@ -173,7 +173,7 @@ Your e-mail cannot be longer than 100 characters.
 <div class="drsl-expert-message-content" ng-if="vm.currentExpert">
     <div class="panel panel-default">
         <div class="panel-body">
-            <textarea name="name" rows="4" cols="20" class="form-control" ng-model="vm.currentExpert.welcomeMessage" ng-change="vm.updatingExpert = true" placeholder="Greeting Message"></textarea>
+            <textarea name="name" rows="4" cols="20" class="form-control welcome" ng-model="vm.currentExpert.welcomeMessage" ng-change="vm.updatingExpert = true" placeholder="Greeting Message"></textarea>
             <textarea name="name" rows="4" cols="20" class="form-control" ng-model="vm.currentExpert.expertBio" ng-change="vm.updatingExpert = true" placeholder="Expert Bio"></textarea>
             <select class="form-control" id="field_issue" name="Issue" ng-model="vm.currentExpert.issueexpertise" ng-options="issue as issue.name for issue in vm.issues track by issue.id" ng-change="vm.updatingExpert = true">
                 <option value="">Issue Expertise</option>

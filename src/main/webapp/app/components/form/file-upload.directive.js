@@ -41,6 +41,7 @@
             }
             $scope.setDataStream = function ($file, attachment) {
                 if ($file) {
+                    console.log($file);
                     $scope.loadingFile = true;
                     DataUtils.toBase64($file, function(base64Data) {
                         $scope.$apply(function() {

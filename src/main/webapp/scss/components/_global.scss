@@ -673,6 +673,18 @@ table.scroll thead > tr {
         width: 49%;
     }
 }
+.twoItems{
+    div:first-child {
+        float: left;
+        width: 49%;
+        margin-bottom: 25px;
+    }
+    div:last-child {
+        float: right;
+        width: 49%;
+        margin-bottom: 25px;
+    }
+}
 .extraInfo{
 
 }
