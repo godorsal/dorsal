@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('ConciergeController', ConciergeController);
 
-    ConciergeController.$inject = ['$rootScope', '$scope', '$state', 'LoginService', 'Principal', 'ConciergeService', '$translate', '$http', 'Supportcase', 'Casetechnologyproperty', 'toastr', 'AttachmentModalService'];
+    ConciergeController.$inject = ['$rootScope', '$scope', '$state', 'LoginService', 'Principal', 'ConciergeService', '$translate', '$http', 'Supportcase', 'Casetechnologyproperty', 'toastr', 'AttachmentModalService', 'DateUtils'];
 
-    function ConciergeController($rootScope, $scope, $state, LoginService, Principal, ConciergeService, $translate, $http, Supportcase, Casetechnologyproperty, toastr, AttachmentModalService) {
+    function ConciergeController($rootScope, $scope, $state, LoginService, Principal, ConciergeService, $translate, $http, Supportcase, Casetechnologyproperty, toastr, AttachmentModalService, DateUtils) {
         var vm = this;
         vm.init = init;
         vm.submitForm = submitForm;
@@ -100,6 +100,7 @@
             brandNewCase.user.id = getUser(vm.currentUser);
             brandNewCase.etacompletion = "4 hours";
             brandNewCase.statusmsg = 'Case Created';
+            brandNewCase.expectedCompletionDate = DateUtils.convertDateTimeFromServer(vm.defaultDate);
             brandNewCase.summary = vm.caseDetails.summary;
             vm.isSaving = true;
             if (brandNewCase.id !== null) {
