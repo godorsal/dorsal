@@ -33,6 +33,21 @@
             description: '',
             radios: []
         };
+
+        vm.openDatePopup = openDatePopup;
+        vm.datePopup = {
+            opened: false
+        };
+        vm.defaultDate = new Date();
+        vm.defaultDate.setDate(vm.defaultDate.getDate()+7);
+        vm.dateOptions = {
+            formatYear: 'yy',
+            maxDate: new Date(2020, 5, 22),
+            minDate: new Date(),
+            startingDay: 1,
+            showWeeks: false
+        };
+
         function getUser(user) {
             switch(user.login) {
                 case 'system':
@@ -230,6 +245,9 @@
             } else {
                 return 'plan';
             }
+        }
+        function openDatePopup() {
+            vm.datePopup.opened = true;
         }
         // Call to initialize the controller.
         vm.init();

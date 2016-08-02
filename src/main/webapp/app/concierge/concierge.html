@@ -28,10 +28,20 @@
                         <div class="drsl-one-two-three-lg">
                             <img class="drsl-one-two-three-img" src="content/images/dorsal_case_intake_123.png">
                             <div>
-                                <div translate="concierge.caseDetails.one_two_three.one"></div>
-                                <div translate="concierge.caseDetails.one_two_three.two"></div>
-                                <div translate="concierge.caseDetails.one_two_three.three"></div>
-                                <div translate="concierge.caseDetails.one_two_three.go"></div>
+                                <div class="drsl-step-one" translate="concierge.caseDetails.one_two_three.one"></div>
+                                <div class="drsl-step-two" translate="concierge.caseDetails.one_two_three.two"></div>
+                                <div class="drsl-step-three" translate="concierge.caseDetails.one_two_three.three"></div>
+                                <div>
+                                    <div class="drsl-date-widget-wrapper">
+                                        <span uib-datepicker-popup="{{format}}" ng-model="vm.defaultDate" is-open="vm.datePopup.opened" popup-placement="top-left" datepicker-options="vm.dateOptions" show-button-bar="false" ></span>
+                                    </div>
+                                    <div class="form-control drsl-date-display-wrapper" ng-click="vm.openDatePopup()">
+                                        <span class="drsl-date-display-label" translate="concierge.caseDetails.date.main">Requested delivery:</span><span>{{vm.defaultDate | date:'M/d/yyyy'}}</span>
+                                        <span class="pull-right">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
                                 <div><button type="submit" class="drsl-custom-button" ng-click="vm.submitForm()"><img src="content/images/global/go.png" /></button></div>
                             </div>
                         </div>
