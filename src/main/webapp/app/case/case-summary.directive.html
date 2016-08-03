@@ -24,16 +24,17 @@
     <!-- Start / ETA to Completion -->
     <div>
         <span><span class="drsl-label">Start</span> <span class="drsl-value">{{case.dateCreated | date:"MM/dd/yy h:mm a"}}</span></span>
-        <div class="pull-right drsl-value" ng-show="case.estimateHours && !case.timeOnCase"><span class="drsl-label" translate="case.details.resolutionETA">ETA to Completion</span> {{case.estimateHours}} hr<span ng-show="(case.estimateHours) > 1">s</span></div>
-        <div class="pull-right drsl-value" ng-show="case.estimateHours && case.timeOnCase"><span class="drsl-label" translate="case.details.resolutionETA">ETA to Completion</span> {{case.estimateHours - case.timeOnCase}} hr<span ng-show="(case.estimateHours - case.timeOnCase) > 1">s</span></div>
+        <div class="pull-right drsl-value" ng-show="case.estimateHours && !case.timeOnCase"><span class="drsl-label" translate="case.details.resolutionETA">ETA to Completion</span><span class="drsl-eta-date"> {{case.estimateHours}} hr<span ng-show="(case.estimateHours) > 1">s</span></span></div>
+        <div class="pull-right drsl-value" ng-show="case.estimateHours && case.timeOnCase"><span class="drsl-label" translate="case.details.resolutionETA">ETA to Completion</span><span class="drsl-eta-date"> {{case.estimateHours - case.timeOnCase}} hr<span ng-show="(case.estimateHours - case.timeOnCase) > 1">s</span></span></div>
     </div>
 
-    <!-- Estimate -->
+    <!-- Estimate / Requested Delivery -->
     <div>
         <span>
             <span class="drsl-label" translate="case.details.estimate">Estimate</span>
             <span class="drsl-value"><case-estimate hours="{{case.estimateHours}}"></case-estimate></span>
         </span>
+        <div class="pull-right drsl-value"><span class="drsl-label" translate="case.details.requestedDate">Requested Delivery</span><span class="drsl-eta-date"> {{case.expectedCompletionDate | date:"M/d/yyyy"}}</span></div>
     </div>
 
     <!-- Timeline -->

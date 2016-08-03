@@ -24,6 +24,18 @@
             scope.StatusModel = StatusModel;
             scope.localEstimateHours = null;
 
+            scope.datePopup = {
+                opened: false
+            };
+
+            scope.dateOptions = {
+                formatYear: 'yy',
+                maxDate: new Date(2020, 5, 22),
+                minDate: new Date(),
+                startingDay: 1,
+                showWeeks: false
+            };
+
             scope.submit = function () {
 
                 scope.case.estimateLog = (scope.case.estimateLog) ? scope.case.estimateLog : '';
@@ -68,6 +80,10 @@
 
             scope.fieldTouched = function () {
                 scope.$emit('pauseOrResumeCasePolling', {'pause': true});
+            };
+
+            scope.openDatePopup = function () {
+                scope.datePopup.opened = true;
             };
 
             scope.$on('currentCaseSet', function(){
