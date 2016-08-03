@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.dorsal.domain.EscalateCase;
 import com.dorsal.repository.EscalateCaseRepository;
 import com.dorsal.repository.UserRepository;
+import com.dorsal.service.emailNotificationUtility;
 import com.dorsal.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +38,9 @@ public class EscalateCaseResource {
     @Inject
     private UserRepository userRepository;
 
+    @Inject
+    private emailNotificationUtility notificationService;
+
     /**
      * POST  /escalate-cases : Create a new escalateCase.
      *
@@ -61,6 +65,16 @@ public class EscalateCaseResource {
         escalateCase.setDateEscalated(ZonedDateTime.now());
 
         EscalateCase result = escalateCaseRepository.save(escalateCase);
+
+        /*
+            Send out notifications for the escalation
+         */
+
+        notificationService.escalateEmailNotifications( userRepository.findLoggedInUser(),
+                                                        escalateCase.getSupportcase(),
+                                                        escalateCase.getReason(),
+                                                        escalateCase.getEscalationType() );
+
         return ResponseEntity.created(new URI("/api/escalate-cases/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("escalateCase", result.getId().toString()))
             .body(result);

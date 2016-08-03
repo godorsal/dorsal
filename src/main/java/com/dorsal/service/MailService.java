@@ -161,4 +161,6 @@ public class MailService {
         return dorsalProperties.getApplication().getUrl();
     }
 
+    public String getDorsalSupportEmail() { return dorsalProperties.getSupport().getMail(); }
+
 }

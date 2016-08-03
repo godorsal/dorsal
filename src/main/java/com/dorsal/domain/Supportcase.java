@@ -48,27 +48,27 @@ public class Supportcase implements Serializable {
     private String etaCompletion;
 
     @Column(name = "estimate_hours")
-    private Integer estimateHours;
+    private Integer estimateHours = 0;
 
     @Size(max = 2048)
     @Column(name = "estimate_comment", length = 2048)
     private String estimateComment;
 
     @Column(name = "is_approved")
-    private Boolean isApproved;
+    private Boolean isApproved = false;
 
     @Column(name = "time_on_case")
-    private Integer timeOnCase;
+    private Integer timeOnCase = 0;
 
     @Size(max = 4096)
     @Column(name = "estimate_log", length = 4096)
     private String estimateLog;
 
     @Column(name = "is_resolved")
-    private Boolean isResolved;
+    private Boolean isResolved = false;
 
     @Column(name = "is_rated")
-    private Boolean isRated;
+    private Boolean isRated = false;
 
     @Column(name = "expected_completion_date")
     private ZonedDateTime expectedCompletionDate;
@@ -77,7 +77,7 @@ public class Supportcase implements Serializable {
     private String expertMessage;
 
     @Column(name = "number_of_updates")
-    private Integer numberOfUpdates;
+    private Integer numberOfUpdates = 0;
 
     @ManyToOne
     private User user;

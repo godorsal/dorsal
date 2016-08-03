@@ -54,9 +54,15 @@ public class SharedCaseResource {
         sharedCase.setOwner(userRepository.findLoggedInUser());
 
         // Make sure user only shares cases that he owns
-        if (sharedCase.getOwner().getId() != sharedCase.getSupportcase().getUser().getId())
+        if (sharedCase.getOwner().getId().equals(sharedCase.getSupportcase().getUser().getId() ))
         {
-            log.error("User [" + sharedCase.getOwner().getLogin() + "] tries to share case ID[" + sharedCase.getSupportcase().getId() + "] that is not owned by user");
+            log.debug("Success Share owner and support owner match. Owner ID [" + sharedCase.getOwner().getId() + "] support case user ID [" + sharedCase.getSupportcase().getUser().getId() +"]");
+
+        }
+        else
+        {
+            // No match somebody tries to share a case that is not owned by same user
+            log.error("Error: User not owner of the case. User [" + sharedCase.getOwner().getLogin() + "] tries to share case ID[" + sharedCase.getSupportcase().getId() + "] owned by user [" + sharedCase.getSupportcase().getUser().getLogin() +"]" );
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("sharedCase", "notowned", "Shared case is not owned by user")).body(null);
 
         }

@@ -2,7 +2,9 @@ package com.dorsal.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.dorsal.domain.Caseupdate;
+import com.dorsal.domain.Supportcase;
 import com.dorsal.repository.CaseupdateRepository;
+import com.dorsal.repository.SupportcaseRepository;
 import com.dorsal.repository.UserRepository;
 import com.dorsal.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
@@ -37,6 +39,10 @@ public class CaseupdateResource {
     @Inject
     private UserRepository userRepository;
 
+    @Inject
+    private SupportcaseRepository supportcaseRepository;
+
+
     /**
      * POST  /caseupdates : Create a new caseupdate.
      *
@@ -58,8 +64,25 @@ public class CaseupdateResource {
 
         // Adjust time
         caseupdate.setDateUpdated(ZonedDateTime.now());
+        long supportCaseID = caseupdate.getSupportcase().getId();
+
+        try {
+            //Supportcase supportcase = supportcaseRepository.findOne(supportCaseID);
+            Supportcase supportcase = caseupdate.getSupportcase();
+            if (supportcase != null ) {
+                /* Increment counter for support case updates */
+                int updates = supportcase.getNumberOfUpdates();
+                supportcase.setNumberOfUpdates(++updates);
+                /* persists */
+                supportcaseRepository.save(supportcase);
+            }
+        } catch (Exception e) {
+            log.error("CaseUpdate entity. Could not update Number Of Updates in Supportcase. Reason " + e);
+        }
 
         Caseupdate result = caseupdateRepository.save(caseupdate);
+
+
         return ResponseEntity.created(new URI("/api/caseupdates/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("caseupdate", result.getId().toString()))
             .body(result);

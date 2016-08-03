@@ -1,7 +1,9 @@
 package com.dorsal.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.dorsal.domain.ExpertAccount;
 import com.dorsal.domain.Rating;
+import com.dorsal.repository.ExpertAccountRepository;
 import com.dorsal.repository.RatingRepository;
 import com.dorsal.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
@@ -32,6 +34,9 @@ public class RatingResource {
     @Inject
     private RatingRepository ratingRepository;
 
+    @Inject
+    private ExpertAccountRepository expertAccountRepository;
+
     /**
      * POST  /ratings : Create a new rating.
      *
@@ -48,10 +53,38 @@ public class RatingResource {
         if (rating.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("rating", "idexists", "A new rating cannot already have an ID")).body(null);
         }
+
         // Adjust time
         rating.setDateRated(ZonedDateTime.now());
 
         Rating result = ratingRepository.save(rating);
+
+        /* Update Expert Account with adjusted score */
+        try {
+            // Adjust Expert score
+            ExpertAccount expert = rating.getSupportcase().getExpertaccount();
+
+            /* Running average */
+            int nbOfCases = expert.getNumberOfCases();
+            int runningScore = expert.getExpertScore();
+            log.info("Expert running score before case rating: " + runningScore + " for number of cases: " + nbOfCases);
+            log.info("Expert rating for this case: " + rating.getScore() );
+
+            nbOfCases++;
+            runningScore = runningScore + rating.getScore();
+
+            /* Adjusted average */
+            log.info("Adjusted Expert average  " + (runningScore / nbOfCases) );
+
+            log.info("Expert adjusted running score: " + runningScore + " for number of cases: " + nbOfCases);
+            expert.setExpertScore(runningScore);
+            expert.setNumberOfCases(nbOfCases);
+
+            expertAccountRepository.save(expert);
+        } catch (Exception e) {
+            log.error("Expert score update failed with error: " +e);
+        }
+
         return ResponseEntity.created(new URI("/api/ratings/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("rating", result.getId().toString()))
             .body(result);

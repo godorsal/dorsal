@@ -23,7 +23,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 /**
@@ -96,6 +95,12 @@ public class SupportcaseResource {
             }
         }
 
+        // Initialize counters
+        supportcase.setIsRated(false);
+        supportcase.setIsResolved(false);
+        supportcase.setNumberOfUpdates(0);
+        supportcase.setIsApproved(false);
+
         Supportcase result = supportcaseRepository.save(supportcase);
 
         /*
@@ -129,23 +134,53 @@ public class SupportcaseResource {
         // Adjust time
         supportcase.setDateLastUpdate( ZonedDateTime.now() );
 
-        Supportcase result = supportcaseRepository.save(supportcase);
+        /*
+            Notifications of (re)-approval of estimate depends on state change and approval flag.
+         */
+        boolean isNotified = false;
+        Supportcase currentCase = supportcaseRepository.findOne(supportcase.getId());
 
-        // Send out notification depending on the status and action
-        if (   (supportcase.getEstimateHours() != null)
-            && (supportcase.getExpectedResult() !=null)
-            && (supportcase.isIsApproved() == false)
-            && (supportcase.getStatus().getName().equalsIgnoreCase("ESTIMATED"))) {
-            log.warn("Expert Estimated Support case");
-            notificationService.createSupportCaseEstimate(supportcase);
-        } else if (   (supportcase.getEstimateHours() != null)
-                    && (supportcase.getExpectedResult() !=null)
-                    && (supportcase.isIsApproved() == false)
-                    && (supportcase.getStatus().getName().equalsIgnoreCase("WORKING"))) {
-            log.warn("Expert re-Estimated Support case");
-            notificationService.updateSupportCaseEstimate(supportcase);
+        try {
+                isNotified = notificationService.supportCaseReEstimateApproved(currentCase, supportcase);
+                /* Check if estimate approval took place -- trigger increment of updates for the case */
+                if (isNotified) {
+                    int updates = supportcase.getNumberOfUpdates();
+                    supportcase.setNumberOfUpdates(++updates);
+                    log.info("Incremented Number of updates for case: " + updates);
+                }
+
+        } catch (Exception e) {
+                log.error("Case Estimate notification -- Failed to call notification service. Error " +e);
         }
 
+        /*
+            When a case is rated the support case needs to be marked as rated (supportcase.is_rated)
+            The running average for the expert score needs to be adjusted as well
+         */
+        try {
+            if ((supportcase.getStatus().getName().equalsIgnoreCase("CLOSED"))
+                && (supportcase.isIsResolved())) {
+                supportcase.setIsRated(true);
+            }
+        }catch (Exception e) {
+            log.error("Failed to set support case to resolved. Error " +e);
+        }
+
+        // Persist update
+        Supportcase result = supportcaseRepository.save(supportcase);
+
+        /*
+            Check for other type of Notifications
+         */
+        if ( !isNotified ) {
+            try {
+                if (!notificationService.stateChangeNotifications(supportcase))
+                    log.info("No notification send out for support case update");
+
+            } catch (Exception e) {
+                log.error("State Change estimate -- Failed to call notification service. Error " + e);
+            }
+        }
 
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("supportcase", supportcase.getId().toString()))
