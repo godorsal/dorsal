@@ -198,6 +198,15 @@ Cases
                     display: inline-block;
                 }
 
+                .uib-title {
+                    strong {
+                        @extend .drsl-label;
+                        font-weight: $thin-weight;
+                        font-size: 18px;
+                        text-align: center;
+                        width: initial;
+                    }
+                }
             }
             input[type="text"].form-control, input[type="number"].form-control {
                 padding: 12px;
