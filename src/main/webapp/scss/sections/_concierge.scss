@@ -138,7 +138,7 @@ Concierge
     .drsl-product-details-wrapper {
         position: absolute;
         bottom: -50px;
-        left: 20px;
+        left: 0px;
         min-height: 70px;
         white-space: nowrap;
 
@@ -154,7 +154,7 @@ Concierge
             }
 
             .btn {
-                width: 106px;
+                width: 104px;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
@@ -193,6 +193,36 @@ Concierge
             textarea {
                 width: 300px;
                 height: 125px;
+            }
+        }
+
+        .drsl-detail-attachment-wrapper {
+            .btn.btn-default.drsl-attach-btn {
+                padding: 2px;
+                font-size: 23px;
+                width: 25px;
+                height: 31px;
+
+                .fa-paperclip {
+                    position: absolute;
+                    top: 3px;
+                    left: 2px;
+                    display: inline-block
+                }
+            }
+
+            .drsl-menuitem-field-type {
+                outline: none;
+                cursor: default;
+            }
+
+            .drsl-attachment-items-wrapper {
+                margin-left: -5px;
+                margin-right: -5px;
+                width: 570px;
+                height: 150px;
+                box-shadow: 0px 6px 5px rgba(0, 0, 0, 0.15);
+                margin-bottom: 10px;
             }
         }
     }

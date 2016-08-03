@@ -1,5 +1,25 @@
 <div class="drsl-product-details-wrapper" ng-show="canShowProductDetails()">
-    <div class="btn-group" uib-dropdown ng-repeat="rootType in getAllIncidentTypes()">
+    <!-- Attachment Menu Button Group -->
+    <div class="btn-group drsl-detail-attachment-wrapper" uib-dropdown>
+        <!-- Icon and Button -->
+        <button type="button" class="btn btn-default drsl-attach-btn" uib-dropdown-toggle>
+            <span class="fa fa-paperclip"></span>
+        </button>
+        <!-- Menu Dropdown -->
+        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+            <li role="menuitem">
+                <div class="drsl-menuitem-field-type" ng-click="textFieldClick($event)">
+                    <form ng-submit="">
+                        <div class="drsl-attachment-items-wrapper">
+                        </div>
+                        <button class="btn btn-success detailButton" translate="concierge.buttons.done">Done</button>
+                        <button class="btn btn-success detailButton" translate="concierge.buttons.attach">Attach</button>
+                        <button class="btn btn-default detailButton" translate="concierge.buttons.later">Later</button>
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </div><div class="btn-group" uib-dropdown ng-repeat="rootType in getAllIncidentTypes()">
         <button type="button" class="btn btn-default" ng-class="{selected: rootType.selectedValue}" uib-dropdown-toggle>
             <span ng-if="rootTranslationWorks(rootType) && !rootType.selectedValue"> {{rootType.description | translate}}</span>
             <span ng-if="!rootTranslationWorks(rootType) && !rootType.selectedValue">{{rootType.name}}</span>
