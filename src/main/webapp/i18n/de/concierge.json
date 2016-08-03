@@ -141,7 +141,8 @@
         "buttons": {
             "later": "Later",
             "attach": "Attach",
-            "done": "Done"
+            "done": "Done",
+            "remove": "remove"
         }
     }
 }

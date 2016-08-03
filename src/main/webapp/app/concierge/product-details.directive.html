@@ -11,6 +11,10 @@
                 <div class="drsl-menuitem-field-type" ng-click="textFieldClick($event)">
                     <form ng-submit="">
                         <div class="drsl-attachment-items-wrapper">
+                            <div class="drsl-attachment-item" ng-class-odd="'drsl-attachment-item-odd'" ng-repeat="file in ['error_log-vx398611.txt', 'config.bat', 'Screenshot_2.png']">
+                                <span>{{file}}</span>
+                                <span class="pull-right" translate="concierge.buttons.remove">remove</span>
+                            </div>
                         </div>
                         <button class="btn btn-success detailButton" translate="concierge.buttons.done">Done</button>
                         <button class="btn btn-success detailButton" translate="concierge.buttons.attach">Attach</button>
