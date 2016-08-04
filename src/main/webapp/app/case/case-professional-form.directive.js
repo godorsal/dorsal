@@ -37,8 +37,9 @@
             };
 
             scope.submit = function () {
-
                 scope.case.estimateLog = (scope.case.estimateLog) ? scope.case.estimateLog : '';
+                scope.expertForm.estimateHours.$pristine = true;
+                scope.case.estimateHours = scope.localEstimateHours;
 
                 if (StatusModel.checkCaseStatus(scope.case.status, 'created') && scope.case.estimateHours) {
                     scope.case.status = StatusModel.getState('estimated');
@@ -48,9 +49,6 @@
                     scope.case.estimateLog += 'UPDATED ' + new Date().toISOString().slice(0, 19).replace('T', ' ') + ' ' + scope.case.estimateHours +  'hrs ' + scope.case.estimateComment + '\n';
                 }
 
-                scope.expertForm.estimateHours.$pristine = true;
-
-                scope.case.estimateHours = scope.localEstimateHours;
                 scope.case.$update(caseUpdateSuccess, caseUpdateError);
                 function caseUpdateSuccess(){
                     toastr.success('This case has been updated', 'Success');
@@ -87,9 +85,7 @@
             };
 
             scope.$on('currentCaseSet', function(){
-                if (scope.case.estimateHours) {
-                    scope.localEstimateHours = scope.case.estimateHours/1;
-                }
+                scope.localEstimateHours = scope.case.estimateHours/1;
             });
         }
     }

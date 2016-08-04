@@ -385,6 +385,21 @@ Concierge
                 left: -5px;
             }
         }
+
+        .drsl-step-go-dots {
+            position: absolute;
+            top: 44px;
+            left: 42px;
+        }
+
+        .drsl-step-go-text {
+            position: absolute;
+            min-width: 350px;
+            top: 20px;
+            left: 230px;
+            background-color: #fff;
+            padding: 10px;
+        }
     }
 }
 .chatrooms{

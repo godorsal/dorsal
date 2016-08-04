@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('CaseController', CaseController);
 
-    CaseController.$inject = ['$scope', '$window', '$interval', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', '$state', 'StatusModel', 'Rating', 'Expertbadge', 'DrslMetadata', 'Caseupdate', 'AttachmentModalService', 'DrslAttachFileService'];
+    CaseController.$inject = ['$scope', '$window', '$interval', '$timeout', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', '$state', 'StatusModel', 'Rating', 'Expertbadge', 'DrslMetadata', 'Caseupdate', 'AttachmentModalService', 'DrslAttachFileService'];
 
-    function CaseController($scope, $window, $interval, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, $state, StatusModel, Rating, Expertbadge, DrslMetadata, Caseupdate, AttachmentModalService, DrslAttachFileService) {
+    function CaseController($scope, $window, $interval, $timeout, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, $state, StatusModel, Rating, Expertbadge, DrslMetadata, Caseupdate, AttachmentModalService, DrslAttachFileService) {
         var vm = this, casePoll;
         vm.init = init;
         vm.DrslMetadata = DrslMetadata;
@@ -186,7 +186,9 @@
             vm.currentCase = targetCase;
             getCaseExpertBadges();
             getCaseUpdates();
-            $scope.$broadcast('currentCaseSet');
+            $timeout(function () {
+                $scope.$broadcast('currentCaseSet');
+            }, 1);
         }
 
         /**
