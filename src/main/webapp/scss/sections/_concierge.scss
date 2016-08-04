@@ -333,8 +333,12 @@ Concierge
 
                     .drsl-date-widget-wrapper {
                         position: absolute;
-                        bottom: -90px;
-                        left: 20px;
+                        bottom: -110px;
+                        left: 10px;
+
+                        .uib-datepicker {
+                            padding: 10px;
+                        }
                     }
 
                     .drsl-date-display-wrapper {

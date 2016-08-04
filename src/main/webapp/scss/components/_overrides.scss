@@ -193,3 +193,12 @@ a, a:hover, a:focus {
         cursor: default;
     }
 }
+/* ==========================================================================
+Date Picker
+========================================================================== */
+.uib-daypicker {
+    th {
+        font-weight: $default-medium-weight;
+        color: $drsl-label-color;
+    }
+}
