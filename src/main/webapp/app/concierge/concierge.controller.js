@@ -106,7 +106,6 @@
             if (brandNewCase.id !== null) {
                 Supportcase.update(brandNewCase, onSaveSuccess, onSaveError);
             } else {
-              console.log("HELLLO");
                 Supportcase.save(brandNewCase, onSaveSuccess, onSaveError);
             }
         }
@@ -223,14 +222,12 @@
                 LoginService.open();
                 $rootScope.$on('authenticationSuccess', function(){
                     Principal.identity().then(function(account){
-                      console.log("DONE DEAL NOT LOGGED IN");
                         vm.currentUser = account;
                         vm.createCase();
                     })
                 })
             } else {
                 Principal.identity().then(function(account){
-                  console.log("DONE DEAL LOGGED IN");
                     vm.currentUser = account;
                     vm.createCase();
                 })

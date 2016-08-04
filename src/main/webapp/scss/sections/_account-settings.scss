@@ -123,8 +123,9 @@ Account Settings
         height: 500px;
         float: left;
         display: inline-block;
-        i {
-            padding-left: 20px;
+        img {
+          width: 34px;
+          padding-left: 20px;
         }
         .panel-heading{
             padding-left: 10px;
@@ -186,7 +187,8 @@ Account Settings
         height: 500px;
         float: right;
         display: inline-block;
-        i {
+        img {
+            width: 33px;
             padding-left: 20px;
         }
         .panel-heading{
