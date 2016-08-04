@@ -1,8 +1,8 @@
 <div class="drsl-product-details-wrapper" ng-show="canShowProductDetails()">
     <!-- Attachment Menu Button Group -->
-    <div class="btn-group drsl-detail-attachment-wrapper" uib-dropdown>
+    <div class="btn-group drsl-detail-attachment-wrapper" uib-dropdown auto-close="disabled" is-open="attachmentsOpen">
         <!-- Icon and Button -->
-        <button type="button" class="btn btn-default drsl-attach-btn" uib-dropdown-toggle>
+        <button type="button" class="btn btn-default drsl-attach-btn" ng-click="attachmentsOpen = true">
             <span class="fa fa-paperclip"></span>
         </button>
         <!-- Menu Dropdown -->
@@ -16,8 +16,8 @@
                                 <span class="pull-right" translate="concierge.buttons.remove">remove</span>
                             </div>
                         </div>
-                        <button class="btn btn-success detailButton" translate="concierge.buttons.done">Done</button>
-                        <button class="btn btn-success detailButton" translate="concierge.buttons.attach">Attach</button>
+                        <button class="btn btn-success detailButton" translate="concierge.buttons.done" ng-click="closeAttachments()">Done</button>
+                        <div class="btn btn-success detailButton" translate="concierge.buttons.attach" ngf-select ng-model="file">Attach</div>
                         <button class="btn btn-default detailButton" translate="concierge.buttons.later">Later</button>
                     </form>
                 </div>

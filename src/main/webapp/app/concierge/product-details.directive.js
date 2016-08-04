@@ -21,6 +21,8 @@
         return directive;
 
         function linkFunc(scope) {
+            scope.attachmentsOpen = false;
+
             /**
              * Stop text field clicks from closing the dropdown menu.
              * @param event
@@ -150,6 +152,13 @@
                 if (event.which === 13) {
                     angular.element('body').click();
                 }
+            }
+
+            /**
+             * Close the Attachments dropdown on click of the 'Done' button.
+             */
+            scope.closeAttachments = function(){
+                scope.attachmentsOpen = false;
             }
         }
     }
