@@ -84,7 +84,13 @@ public class AccountResource {
                             request.getServerPort();
                     }
 
-                    String baseUrl = request.getScheme() + // "http"
+                    // Get the Dorsal property for the protocol: either http or https
+                    String protocol = mailService.getDorsalApplicationProtocol();
+                    if (protocol == null || protocol.length() == 0) {
+                        protocol = request.getScheme();
+                    }
+
+                    String baseUrl = protocol +             // "http" or "https"
                     "://" +                                // "://"
                     serverURL +                             // generated above with the properties setting
                     request.getContextPath();              // "/myContextPath" or "" if deployed in root context
