@@ -29,7 +29,7 @@
                     <!-- Date Picker -->
                     <div class="drsl-expert-date-controls" ng-click="fieldTouched()">
                         <div class="drsl-date-widget-wrapper">
-                            <span uib-datepicker-popup="{{format}}" ng-model="case.expectedCompletionDate" is-open="datePopup.opened" popup-placement="bottom-left" datepicker-options="dateOptions" show-button-bar="false" ></span>
+                            <span uib-datepicker-popup="{{format}}" ng-model="case.expectedCompletionDate" is-open="datePopup.opened" popup-placement="bottom-left" datepicker-options="dateOptions" show-button-bar="false" show-weeks="false"></span>
                         </div>
                         <div class="form-control drsl-value drsl-date-display-wrapper" ng-click="openDatePopup()">
                             <span>{{case.expectedCompletionDate | date:'MMMM d, yyyy'}}</span>
