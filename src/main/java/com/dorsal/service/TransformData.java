@@ -41,13 +41,11 @@ public class TransformData {
     /**
      * Takes an incoming string and encrypts it to a string value with valid characters. Simplifies storage of data not
      * being concerned about special characters.
-     * @param clearText
+     * @param clearText Value to encrypr
      * @return encrypted input value
      */
 
     public String transformToSecure(String clearText) {
-        String encrypted = "";
-
         // Do the magic
         int len = clearText.length();
         int bufferLength = len * 2;
@@ -74,13 +72,12 @@ public class TransformData {
         }
 
         return new String(buf);
-
     }
 
     /**
      * Decrypts input value to clear text value
-     * @param encrypted
-     * @return
+     * @param encrypted String that has been encrypted
+     * @return decrypted value
      */
     public String transformFromSecure (String encrypted) {
 

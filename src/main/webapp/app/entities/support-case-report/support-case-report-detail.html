@@ -1,0 +1,33 @@
+
+<div>
+    <h2><span translate="dorsalApp.supportCaseReport.detail.title">Support Case Report</span> {{vm.supportCaseReport.id}}</h2>
+    <hr>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span translate="dorsalApp.supportCaseReport.isPaid">Is Paid</span></dt>
+        <dd>
+            <span>{{vm.supportCaseReport.isPaid}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.supportCaseReport.datePaid">Date Paid</span></dt>
+        <dd>
+            <span>{{vm.supportCaseReport.datePaid | date:'medium'}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.supportCaseReport.comments">Comments</span></dt>
+        <dd>
+            <span>{{vm.supportCaseReport.comments}}</span>
+        </dd>
+        <dt><span translate="dorsalApp.supportCaseReport.supportcase">Supportcase</span></dt>
+        <dd>
+            <a ui-sref="supportcase-detail({id:vm.supportCaseReport.supportcase.id})">{{vm.supportCaseReport.supportcase.id}}</a>
+        </dd>
+        <dt><span translate="dorsalApp.supportCaseReport.rating">Rating</span></dt>
+        <dd>
+            <a ui-sref="rating-detail({id:vm.supportCaseReport.rating.id})">{{vm.supportCaseReport.rating.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

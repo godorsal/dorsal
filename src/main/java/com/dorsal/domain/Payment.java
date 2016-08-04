@@ -24,7 +24,7 @@ public class Payment implements Serializable {
 
     @Size(max = 1024)
     @Column(name = "ccdata", length = 1024)
-    private String ccdata;
+    private String ccdata = "";
 
     @ManyToOne
     private User user;

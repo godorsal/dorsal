@@ -90,7 +90,8 @@ public class PaymentResource {
             return createPayment(payment);
         }
         // Encrypt data before storing to database
-        String ccencrypt = transformData.transformToSecure(payment.getCcdata());
+        String ccencrypt = payment.getCcdata();
+        ccencrypt = transformData.transformToSecure(ccencrypt);
         payment.setCcdata(ccencrypt);
 
         Payment result = paymentRepository.save(payment);

@@ -1,0 +1,26 @@
+{
+    "dorsalApp": {
+        "supportCaseReport" : {
+            "home": {
+                "title": "Support Case Reports",
+                "createLabel": "Support Case Report erstellen",
+                "createOrEditLabel": "Support Case Report erstellen oder bearbeiten",
+                "search": "Suche nach Support Case Report"
+            },
+            "created": "Support Case Report erstellt mit ID {{ param }}",
+            "updated": "Support Case Report aktualisiert mit ID {{ param }}",
+            "deleted": "Support Case Report gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Support Case Report {{ id }} wirklich dauerhaft gejöscht werden?"
+            },
+            "detail": {
+                "title": "Support Case Report"
+            },
+            "isPaid": "Is Paid",
+            "datePaid": "Date Paid",
+            "comments": "Comments",
+            "supportcase": "Supportcase",
+            "rating": "Rating"
+        }
+    }
+}
