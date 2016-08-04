@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('CaseController', CaseController);
 
-    CaseController.$inject = ['$scope', '$window', '$interval', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', '$state', 'StatusModel', 'Rating', 'Expertbadge', 'DrslMetadata', 'Caseupdate', 'AttachmentModalService'];
+    CaseController.$inject = ['$scope', '$window', '$interval', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', '$state', 'StatusModel', 'Rating', 'Expertbadge', 'DrslMetadata', 'Caseupdate', 'AttachmentModalService', 'DrslAttachFileService'];
 
-    function CaseController($scope, $window, $interval, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, $state, StatusModel, Rating, Expertbadge, DrslMetadata, Caseupdate, AttachmentModalService) {
+    function CaseController($scope, $window, $interval, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, $state, StatusModel, Rating, Expertbadge, DrslMetadata, Caseupdate, AttachmentModalService, DrslAttachFileService) {
         var vm = this, casePoll;
         vm.init = init;
         vm.DrslMetadata = DrslMetadata;
@@ -76,6 +76,7 @@
                     }
 
                     vm.setCurrentCase(vm.supportcases[currentCaseIndex]);
+                    DrslAttachFileService.uploadAttachFileList(vm.supportcases[currentCaseIndex]);
                 }
 
                 if (data.identity) {

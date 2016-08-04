@@ -11,14 +11,14 @@
                 <div class="drsl-menuitem-field-type" ng-click="textFieldClick($event)">
                     <form ng-submit="">
                         <div class="drsl-attachment-items-wrapper">
-                            <div class="drsl-attachment-item" ng-class-odd="'drsl-attachment-item-odd'" ng-repeat="file in ['error_log-vx398611.txt', 'config.bat', 'Screenshot_2.png']">
-                                <span>{{file}}</span>
-                                <span class="pull-right" translate="concierge.buttons.remove">remove</span>
+                            <div class="drsl-attachment-item" ng-class-odd="'drsl-attachment-item-odd'" ng-repeat="file in attachFileList">
+                                <span>{{file.name}}</span>
+                                <span class="pull-right" translate="concierge.buttons.remove" ng-click="removeAttachment($index);">remove</span>
                             </div>
                         </div>
                         <button class="btn btn-success detailButton" translate="concierge.buttons.done" ng-click="closeAttachments()">Done</button>
-                        <div class="btn btn-success detailButton" translate="concierge.buttons.attach" ngf-select ng-model="file">Attach</div>
-                        <button class="btn btn-default detailButton" translate="concierge.buttons.later">Later</button>
+                        <div class="btn btn-success detailButton" translate="concierge.buttons.attach" ngf-select="attachFiles($files, $invalidFiles)" ngf-multiple="true">Attach</div>
+                        <button class="btn btn-default detailButton" translate="concierge.buttons.later" ng-click="closeAttachments()">Later</button>
                     </form>
                 </div>
             </li>
