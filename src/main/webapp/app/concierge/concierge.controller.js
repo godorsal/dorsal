@@ -14,7 +14,7 @@
         vm.createCase = createCase;
         vm.getCurrentUser = getCurrentUser;
         vm.startChat = startChat;
-        vm.openAttachment = openAttachment;
+        // vm.openAttachment = openAttachment;
         vm.currentPlan = '';
         vm.selectPlan = selectPlan;
         vm.setClass = setClass;
@@ -127,11 +127,12 @@
             vm.issue = null;
             vm.isSaving = false;
             $scope.$emit('dorsalApp:supportcaseUpdate', result);
-            openAttachment(result)
+            // openAttachment(result)
+            $state.go('case')
         };
-        $rootScope.$on('doneUploading', function(){
-            $state.go('case');
-        })
+        // $rootScope.$on('doneUploading', function(){
+        //     $state.go('case');
+        // })
         var onSaveError = function (err) {
             vm.isSaving = false;
             checkError()
@@ -210,9 +211,9 @@
                 break;
             }
         }
-        function openAttachment(newCase) {
-            var modalInstance = AttachmentModalService.open(newCase);
-        }
+        // function openAttachment(newCase) {
+        //     var modalInstance = AttachmentModalService.open(newCase);
+        // }
         /**
         * Submits the form, or opens the login dialog if the user isn't logged in.
         */

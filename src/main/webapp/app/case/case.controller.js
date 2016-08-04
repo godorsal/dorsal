@@ -90,6 +90,9 @@
                 if (!casePoll) {
                     vm.pollForCaseUpdates();
                 }
+                if (vm.currentCase.estimateLog) {
+                  vm.estimateLogs = vm.currentCase.estimateLog.split('\n');
+                }
             });
 
         }
