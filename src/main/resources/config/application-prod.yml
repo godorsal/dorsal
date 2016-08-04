@@ -16,6 +16,7 @@ dorsal:
 
     application:
         url: app.godorsal.com
+        protocol: https
 
 spring:
     devtools:
@@ -60,6 +61,10 @@ server:
         enabled: true
         mime-types: text/html,text/xml,text/plain,text/css, application/javascript, application/json
         min-response-size: 1024
+    tomcat:
+            remote_ip_header: x-forwarded-for
+            protocol_header: x-forwarded-proto
+
 
 # ===================================================================
 # JHipster specific properties
