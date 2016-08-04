@@ -76,17 +76,17 @@ public class emailNotificationUtility {
             && (updatedSupportCase.getExpectedResult() != null)
             && (!updatedSupportCase.isIsApproved())
             && (updatedSupportCase.getStatus().getName().equalsIgnoreCase("ESTIMATED"))) {
-            log.warn("Expert Estimated Support case");
+            log.info("Expert Estimated Support case");
             isNotified = createSupportCaseEstimate(updatedSupportCase);
         } else if ((updatedSupportCase.getEstimateHours() != null)
             && (updatedSupportCase.getExpectedResult() != null)
             && (!updatedSupportCase.isIsApproved() )
             && (updatedSupportCase.getStatus().getName().equalsIgnoreCase("WORKING"))) {
-            log.warn("Expert re-Estimated Support case");
+            log.info("Expert re-Estimated Support case");
             isNotified = updateSupportCaseEstimate(updatedSupportCase);
         } else if ((updatedSupportCase.isIsResolved())
             && (updatedSupportCase.getStatus().getName().equalsIgnoreCase("COMPLETED"))) {
-            log.warn("Expert Completed Support case");
+            log.info("Expert Completed Support case");
             isNotified = supportCaseCompleted(updatedSupportCase);
         } else if ((updatedSupportCase.isIsResolved())
             && (updatedSupportCase.isIsRated())
