@@ -2,6 +2,7 @@ package com.dorsal.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.dorsal.domain.ExpertAccount;
+import com.dorsal.domain.Rating;
 import com.dorsal.domain.SupportCaseReport;
 import com.dorsal.domain.Supportcase;
 import com.dorsal.repository.*;
@@ -48,6 +49,9 @@ public class SupportcaseResource {
 
     @Inject
     private SupportCaseReportRepository supportCaseReportRepository;
+
+    @Inject
+    private RatingRepository ratingRepository;
 
 
     /**
@@ -165,13 +169,6 @@ public class SupportcaseResource {
             if ((supportcase.getStatus().getName().equalsIgnoreCase("CLOSED"))
                 && (supportcase.isIsResolved())) {
                 supportcase.setIsRated(true);
-
-                // Create a new entry for the reporting
-                SupportCaseReport reportEntry = new SupportCaseReport();
-                reportEntry.setIsPaid(false);
-                reportEntry.setSupportcase(supportcase);
-
-                supportCaseReportRepository.save(reportEntry);
             }
         }catch (Exception e) {
             log.error("Failed to set support case to resolved. Error " +e);

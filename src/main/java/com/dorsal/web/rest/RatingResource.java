@@ -3,8 +3,10 @@ package com.dorsal.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.dorsal.domain.ExpertAccount;
 import com.dorsal.domain.Rating;
+import com.dorsal.domain.SupportCaseReport;
 import com.dorsal.repository.ExpertAccountRepository;
 import com.dorsal.repository.RatingRepository;
+import com.dorsal.repository.SupportCaseReportRepository;
 import com.dorsal.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +39,9 @@ public class RatingResource {
     @Inject
     private ExpertAccountRepository expertAccountRepository;
 
+    @Inject
+    private SupportCaseReportRepository supportCaseReportRepository;
+
     /**
      * POST  /ratings : Create a new rating.
      *
@@ -58,6 +63,20 @@ public class RatingResource {
         rating.setDateRated(ZonedDateTime.now());
 
         Rating result = ratingRepository.save(rating);
+
+        /* Create SupportCaseReport entry since case is rated and completed */
+        try {
+
+            SupportCaseReport reportEntry = new SupportCaseReport();
+            reportEntry.setIsPaid(false);
+            reportEntry.setSupportcase(rating.getSupportcase());
+            reportEntry.setRating(rating);
+
+            supportCaseReportRepository.save(reportEntry);
+            log.info("SupportCaseReport record creation successful");
+        } catch (Exception e) {
+            log.error("SupportCaseReport record creation failed with error: " +e);
+        }
 
         /* Update Expert Account with adjusted score */
         try {
