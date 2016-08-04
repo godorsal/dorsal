@@ -14,7 +14,7 @@
         vm.createCase = createCase;
         vm.getCurrentUser = getCurrentUser;
         vm.startChat = startChat;
-        vm.openAttachment = openAttachment;
+        // vm.openAttachment = openAttachment;
         vm.currentPlan = '';
         vm.selectPlan = selectPlan;
         vm.setClass = setClass;
@@ -106,6 +106,7 @@
             if (brandNewCase.id !== null) {
                 Supportcase.update(brandNewCase, onSaveSuccess, onSaveError);
             } else {
+              console.log("HELLLO");
                 Supportcase.save(brandNewCase, onSaveSuccess, onSaveError);
             }
         }
@@ -127,11 +128,12 @@
             vm.issue = null;
             vm.isSaving = false;
             $scope.$emit('dorsalApp:supportcaseUpdate', result);
-            openAttachment(result)
+            // openAttachment(result)
+            $state.go('case')
         };
-        $rootScope.$on('doneUploading', function(){
-            $state.go('case');
-        })
+        // $rootScope.$on('doneUploading', function(){
+        //     $state.go('case');
+        // })
         var onSaveError = function (err) {
             vm.isSaving = false;
             checkError()
@@ -210,9 +212,9 @@
                 break;
             }
         }
-        function openAttachment(newCase) {
-            var modalInstance = AttachmentModalService.open(newCase);
-        }
+        // function openAttachment(newCase) {
+        //     var modalInstance = AttachmentModalService.open(newCase);
+        // }
         /**
         * Submits the form, or opens the login dialog if the user isn't logged in.
         */
@@ -221,12 +223,14 @@
                 LoginService.open();
                 $rootScope.$on('authenticationSuccess', function(){
                     Principal.identity().then(function(account){
+                      console.log("DONE DEAL NOT LOGGED IN");
                         vm.currentUser = account;
                         vm.createCase();
                     })
                 })
             } else {
                 Principal.identity().then(function(account){
+                  console.log("DONE DEAL LOGGED IN");
                     vm.currentUser = account;
                     vm.createCase();
                 })

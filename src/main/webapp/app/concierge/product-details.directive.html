@@ -2,7 +2,7 @@
     <!-- Attachment Menu Button Group -->
     <div class="btn-group drsl-detail-attachment-wrapper" uib-dropdown auto-close="disabled" is-open="attachmentsOpen">
         <!-- Icon and Button -->
-        <button type="button" class="btn btn-default drsl-attach-btn" ng-click="attachmentsOpen = true">
+        <button type="button" class="btn btn-default drsl-attach-btn" ng-click="attachmentsOpen = true" ng-disabled="!isAuthenticated">
             <span class="fa fa-paperclip"></span>
         </button>
         <!-- Menu Dropdown -->
@@ -16,7 +16,7 @@
                                 <span class="pull-right" translate="concierge.buttons.remove" ng-click="removeAttachment($index);">remove</span>
                             </div>
                         </div>
-                        <button class="btn btn-success detailButton" translate="concierge.buttons.done" ng-click="closeAttachments()">Done</button>
+                        <button class="btn detailButton" translate="concierge.buttons.done" ng-click="closeAttachments()" ng-class="{'btn-inactive': !attachFileList.length, 'btn-success': attachFileList.length}">Done</button>
                         <div class="btn btn-success detailButton" translate="concierge.buttons.attach" ngf-select="attachFiles($files, $invalidFiles)" ngf-multiple="true">Attach</div>
                         <button class="btn btn-default detailButton" translate="concierge.buttons.later" ng-click="closeAttachments()">Later</button>
                     </form>

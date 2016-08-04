@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .directive('productDetails', productDetails);
 
-    productDetails.$inject = ['$translate', 'DrslAttachFileService'];
+    productDetails.$inject = ['$translate', 'DrslAttachFileService', 'Principal'];
 
-    function productDetails($translate, DrslAttachFileService) {
+    function productDetails($translate, DrslAttachFileService, Principal) {
         var directive = {
             restrict: 'E',
             scope:  {
@@ -24,7 +24,7 @@
             scope.attachmentsOpen = false;
             scope.attachFileList = [];
             scope.attachErrFileList = [];
-
+            scope.isAuthenticated = Principal.isAuthenticated();
             /**
              * Stop text field clicks from closing the dropdown menu.
              * @param event
@@ -173,6 +173,7 @@
             scope.attachFiles = function (files, errFiles) {
                 scope.attachFileList = scope.attachFileList.concat(files);
                 scope.attachErrFileList = scope.attachErrFileList.concat(errFiles);
+                DrslAttachFileService.setAttachments(scope.attachFileList, scope.attachErrFileList);
             };
 
             /**
