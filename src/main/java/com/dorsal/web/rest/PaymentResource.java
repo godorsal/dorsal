@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.dorsal.domain.Payment;
 import com.dorsal.repository.PaymentRepository;
 import com.dorsal.repository.UserRepository;
+import com.dorsal.service.TransformData;
 import com.dorsal.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +38,10 @@ public class PaymentResource {
     @Inject
     private UserRepository userRepository;
 
+    // Encryption/Decryption of data
+    @Inject
+    private TransformData transformData;
+
     /**
      * POST  /payments : Create a new payment.
      *
@@ -52,6 +58,11 @@ public class PaymentResource {
         if (payment.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("payment", "idexists", "A new payment cannot already have an ID")).body(null);
         }
+
+        // Encrypt data before storing to database
+        String ccencrypt = transformData.transformToSecure(payment.getCcdata());
+        payment.setCcdata(ccencrypt);
+
         // Get the current logged in user to be used as the case creator
         payment.setUser(userRepository.findLoggedInUser());
         Payment result = paymentRepository.save(payment);
@@ -78,6 +89,10 @@ public class PaymentResource {
         if (payment.getId() == null) {
             return createPayment(payment);
         }
+        // Encrypt data before storing to database
+        String ccencrypt = transformData.transformToSecure(payment.getCcdata());
+        payment.setCcdata(ccencrypt);
+
         Payment result = paymentRepository.save(payment);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("payment", payment.getId().toString()))
@@ -96,6 +111,16 @@ public class PaymentResource {
     public List<Payment> getAllPayments() {
         log.debug("REST request to get all Payments");
         List<Payment> payments = paymentRepository.findByUserIsCurrentUser();
+
+        // Iterate ovver records and decode results
+        Payment paymentRecord = null;
+        String decryptValue = "";
+        Iterator<Payment> itPayment = payments.iterator();
+        while (itPayment.hasNext()) {
+            paymentRecord = itPayment.next();
+            decryptValue = transformData.transformFromSecure(paymentRecord.getCcdata());
+            paymentRecord.setCcdata(decryptValue);
+        }
         return payments;
     }
 
@@ -112,6 +137,11 @@ public class PaymentResource {
     public ResponseEntity<Payment> getPayment(@PathVariable Long id) {
         log.debug("REST request to get Payment : {}", id);
         Payment payment = paymentRepository.findOne(id);
+
+        if (payment != null) {
+            String decryptValue = transformData.transformFromSecure(payment.getCcdata());
+            payment.setCcdata(decryptValue);
+        }
         return Optional.ofNullable(payment)
             .map(result -> new ResponseEntity<>(
                 result,
