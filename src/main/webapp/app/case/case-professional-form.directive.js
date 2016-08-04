@@ -81,7 +81,9 @@
             };
 
             scope.openDatePopup = function () {
-                scope.datePopup.opened = true;
+                if (!scope.case.isResolved) {
+                    scope.datePopup.opened = true;
+                }
             };
 
             scope.$on('currentCaseSet', function(){
