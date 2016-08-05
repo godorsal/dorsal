@@ -663,18 +663,39 @@ table.scroll thead > tr {
         font-size: 20px;
     }
 }
+
 .twoInputs{
-    div:first-child {
-        float: left;
-        width: 49%;
+  div:first-child {
+    display: inline-block;
+    > div{
+      > input {
+      width: 265px;
     }
-    div:last-child {
-        float: right;
-        width: 49%;
     }
+  }
+  div:last-child {
+    display: inline-block;
+    > div{
+      > input {
+      width: 265px;
+    }
+  }
+  }
 }
 .extraInfo{
-
+  div {
+    > div:first-child {
+      // padding-right:15px;
+      // padding-left: 70px;
+      width: 245px;
+      display: inline-block;
+    }
+    > div:last-child {
+      padding-left: 20px;
+      width: 285px;
+      display: inline-block;
+    }
+}
 }
 .privacySelect{
     width: 50%;

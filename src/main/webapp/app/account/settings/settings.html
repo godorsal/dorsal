@@ -23,8 +23,10 @@
                         <form name="form" role="form" novalidate ng-submit="vm.save()" show-validation>
 
                             <div class="form-group" >
-                                <input type="text" class="form-control" id="firstName" name="firstName"
-                                ng-model="vm.settingsAccount.firstName" ng-minlength=1 ng-maxlength=50 required maxlength="50" ng-change="vm.updatingUser = true" placeholder="First Name">
+                              <div class="drsl-placeholder-label" type="text">
+                                <input type="text" id="firstName" name="firstName" value="" ng-model="vm.settingsAccount.firstName" ng-minlength=1 ng-maxlength=50 required maxlength="50" ng-change="vm.updatingUser = true">
+                                <span class="unit" translate="settings.form.firstname">First Name</span>
+                              </div>
                                 <div ng-show="form.firstName.$dirty && form.firstName.$invalid">
                                     <p class="help-block"
                                     ng-show="form.firstName.$error.required" translate="settings.messages.validate.firstname.required">
@@ -41,8 +43,10 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="lastName" name="lastName"
-                    ng-model="vm.settingsAccount.lastName" ng-minlength=1 ng-maxlength=50 required maxlength="50" placeholder="Last Name">
+                  <div class="drsl-placeholder-label" type="text">
+                    <input type="text" id="lastName" name="lastName" value="" ng-model="vm.settingsAccount.lastName" ng-minlength=1 ng-maxlength=50 required maxlength="50" ng-change="vm.updatingUser = true">
+                    <span class="unit" translate="settings.form.lastname">Last Name</span>
+                  </div>
                     <div ng-show="form.lastName.$dirty && form.lastName.$invalid">
                         <p class="help-block"
                         ng-show="form.lastName.$error.required" translate="settings.messages.validate.lastname.required">
@@ -59,8 +63,10 @@
         </div>
     </div>
     <div class="form-group">
-        <input type="email" class="form-control" id="email" name="email" placeholder=""
-        ng-model="vm.settingsAccount.email" disabled ng-minlength=5 ng-maxlength=100 required maxlength="100" >
+      <div class="drsl-placeholder-label" type="text">
+        <input type="text" id="email" name="email" disabled ng-model="vm.settingsAccount.email" ng-minlength=1 ng-maxlength=50 required maxlength="50" ng-change="vm.updatingUser = true">
+        <span class="unit" translate="settings.form.email">Email Address</span>
+      </div>
         <div ng-show="form.email.$dirty && form.email.$invalid">
             <p class="help-block"
             ng-show="form.email.$error.required" translate="global.messages.validate.email.required">
@@ -86,62 +92,89 @@ Your e-mail cannot be longer than 100 characters.
     </select>
 </div>
 <div ng-if="vm.currentExpert">
+  <div class="twoInputs">
+      <div class="form-group">
+        <div class="drsl-placeholder-label" type="text">
+          <input type="tel" class="form-control" id="telephone" name="telephone"
+          ng-model="vm.currentExpert.phone" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true">
+          <span class="unit" translate="settings.form.phone">Telephone Number</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="drsl-placeholder-label" type="text">
+          <input type="tel" class="form-control" id="mobile" name="mobile"
+          ng-model="vm.currentExpert.mobile" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true">
+          <span class="unit" translate="settings.form.mobile">Mobile Number</span>
+        </div>
+      </div>
+  </div>
     <div class="twoInputs">
-        <div class="form-group">
-            <input type="telephone" class="form-control" id="telephone" name="telephone" placeholder="Telephone"
-            ng-model="vm.currentExpert.phone" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true">
+      <div class="form-group">
+        <div class="drsl-placeholder-label" type="text">
+          <input type="text" class="form-control" id="skype" name="skype"
+          ng-model="vm.currentExpert.skype" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true">
+          <span class="unit" translate="settings.form.skype">Skype</span>
         </div>
-        <div class="form-group">
-            <input type="mobile" class="form-control" id="mobile" name="mobile" placeholder="Mobile"
-            ng-model="vm.currentExpert.mobile" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true">
+      </div>
+      <div class="form-group">
+        <div class="drsl-placeholder-label" type="text">
+          <input type="text" class="form-control" id="drslChatHandle" name="drslChatHandle"
+          ng-model="vm.currentExpert.drslChatHandle" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true">
+          <span class="unit" translate="settings.form.drslChatHandle">Dorsal Chat Handl</span>
         </div>
+      </div>
     </div>
     <div class="twoInputs">
         <div class="form-group">
-            <input type="skype" class="form-control" id="skype" name="skype" placeholder="Skype"
-            ng-model="vm.currentExpert.skype" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true">
+          <div class="drsl-placeholder-label" type="text">
+            <input type="text" class="form-control" id="preferred" name="preferred"
+            ng-model="vm.currentExpert.preferred" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true">
+            <span class="unit" translate="settings.form.preferred">(Preffered Contact Method)</span>
+          </div>
         </div>
         <div class="form-group">
-            <input type="drslChatHandle" class="form-control" id="drslChatHandle" name="drslChatHandle" placeholder="Dorsal Chat Handle"
-            ng-model="vm.currentExpert.handle" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true">
-        </div>
-    </div>
-    <div class="twoInputs">
-        <div class="form-group">
-            <input type="preffered" class="form-control" id="preffered" name="preffered" placeholder="Preffered contact method"
-            ng-model="vm.currentExpert.preffered" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true">
-        </div>
-        <div class="form-group">
-            <input type="other" class="form-control" id="other" name="other" placeholder="Other Comms"
+          <div class="drsl-placeholder-label" type="text">
+            <input type="text" class="form-control" id="other" name="other"
             ng-model="vm.currentExpert.other" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true">
+            <span class="unit" translate="settings.form.other">(Other Comms)</span>
+          </div>
         </div>
     </div>
     <div class="form-group">
-        <select id="langKey" name="langKey" class="form-control" ng-model="vm.settingsAccount.langKey" ng-controller="JhiLanguageController as languageVm" ng-options="code as (code | findLanguageFromKey) for code in languageVm.languages" ng-change="vm.updatingExpert = true">
-            <option value="">Language(s)</option>
-        </select>
+      <div class="drsl-placeholder-label" type="text">
+        <select id="langKey" name="langKey" class="form-control" ng-model="vm.settingsAccount.langKey" ng-controller="JhiLanguageController as languageVm" ng-options="code as (code | findLanguageFromKey) for code in languageVm.languages" ng-change="vm.updatingExpert = true"></select>
+        <span class="select unit" translate="settings.form.language">(Language)</span>
+      </div>
     </div>
     <div class="twoInputs">
         <div class="form-group">
-            <input type="location" class="form-control" id="location" name="location" placeholder="Location"
+          <div class="drsl-placeholder-label" type="text">
+            <input type="text" class="form-control" id="location" name="location"
             ng-model="vm.currentExpert.location" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true">
+            <span class="unit" translate="settings.form.location">(Location)</span>
+          </div>
         </div>
         <div class="form-group">
-            <input type="timezone" class="form-control" id="timezone" name="timezone" placeholder="Timezone"
-            ng-model="vm.currentExpert.expertTimezone" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true">
+          <div class="drsl-placeholder-label" type="text">
+            <input type="text" class="form-control" id="timezone" name="timezone"
+            ng-model="vm.currentExpert.timezone" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true">
+            <span class="unit" translate="settings.form.timezone">(Timezone)</span>
+          </div>
         </div>
     </div>
     <div class="form-group">
+      <div class="drsl-placeholder-label">
         <select class="form-control" name="expertAvailability" ng-model="vm.currentExpert.expertAvailability" id="field_expertAvailability" ng-change="vm.updatingExpert = true">
-            <option value="">Availability</option>
             <option value="FULL_TIME">Full Time</option>
             <option value="MON_FRI">Monday Through Friday</option>
             <option value="EVENING">Evenings</option>
             <option value="WEEKEND">Weekends</option>
         </select>
+        <span class="select unit" translate="settings.form.availability">(Availability)</span>
+      </div>
     </div>
-    <div>
-        <div class="twoInputs">
+    <div class="extraInfo">
+        <div>
             <div>
                 Expert Score: {{vm.currentExpert.expertScore}} out of 100
             </div>
@@ -160,7 +193,8 @@ Your e-mail cannot be longer than 100 characters.
                 Total Number of Cases: {{vm.currentExpert.numberOfCases}}
             </div>
             <div>
-                Expert since: {{vm.currentExpert.expertSince}}
+                <!-- Expert since: {{vm.currentExpert.expertSince}} -->
+                Expert since: {{vm.currentExpert.expertSince | date:'yyyy-MM-dd'}}
             </div>
         </div>
     </div>
@@ -173,17 +207,22 @@ Your e-mail cannot be longer than 100 characters.
 <div class="drsl-expert-message-content" ng-if="vm.currentExpert">
     <div class="panel panel-default">
         <div class="panel-body">
-            <textarea name="name" rows="4" cols="20" class="form-control" ng-model="vm.currentExpert.welcomeMessage" ng-change="vm.updatingExpert = true" placeholder="Greeting Message"></textarea>
-            <textarea name="name" rows="4" cols="20" class="form-control" ng-model="vm.currentExpert.expertBio" ng-change="vm.updatingExpert = true" placeholder="Expert Bio"></textarea>
-            <select class="form-control" id="field_issue" name="Issue" ng-model="vm.currentExpert.issueexpertise" ng-options="issue as issue.name for issue in vm.issues track by issue.id" ng-change="vm.updatingExpert = true">
-                <option value="">Issue Expertise</option>
-            </select>
-            <select class="form-control" id="field_technology" name="Technology" ng-model="vm.currentExpert.firsttechnology" ng-options="technology as technology.name for technology in vm.technologies track by technology.id" ng-change="vm.updatingExpert = true">
-                <option value="">Technology Expertise</option>
-            </select>
-            <select class="form-control" id="field_technology2" name="Technology2" ng-model="vm.currentExpert.secondtechnology" ng-options="technology as technology.name for technology in vm.technologies track by technology.id" ng-change="vm.updatingExpert = true">
-                <option value="">Technology Expertise 2</option>
-            </select>
+          <label for="welcome" translate="settings.form.welcome" class="expertTextareaLabel">Welcome Message</label>
+            <textarea name="welcome" rows="4" cols="20" class="form-control" ng-model="vm.currentExpert.welcomeMessage" ng-change="vm.updatingExpert = true" placeholder="Greeting Message"></textarea>
+            <label for="bio" translate="settings.form.bio" class="expertTextareaLabel">Bio</label>
+            <textarea name="bio" rows="4" cols="20" class="form-control" ng-model="vm.currentExpert.expertBio" ng-change="vm.updatingExpert = true" placeholder="Expert Bio"></textarea>
+            <div class="drsl-placeholder-label">
+              <select class="form-control" id="field_issue" name="Issue" ng-model="vm.currentExpert.issueexpertise" ng-options="issue as issue.name for issue in vm.issues track by issue.id" ng-change="vm.updatingExpert = true"></select>
+              <span class="select unit" translate="settings.form.issue">(Issue)</span>
+            </div>
+            <div class="drsl-placeholder-label">
+              <select class="form-control" id="field_technology" name="Technology" ng-model="vm.currentExpert.firsttechnology" ng-options="technology as technology.name for technology in vm.technologies track by technology.id" ng-change="vm.updatingExpert = true"></select>
+              <span class="select unit" translate="settings.form.technology">(1st Technology Focus)</span>
+            </div>
+            <div class="drsl-placeholder-label">
+              <select class="form-control" id="field_technology2" name="Technology2" ng-model="vm.currentExpert.secondtechnology" ng-options="technology as technology.name for technology in vm.technologies track by technology.id" ng-change="vm.updatingExpert = true"></select>
+              <span class="select unit" translate="settings.form.technology2">(2nd Technology Focus)</span>
+            </div>
             <button type="submit" class="btn btn-success" translate="settings.form.button" ng-click="vm.save()">Update</button>
         </div>
     </div>
