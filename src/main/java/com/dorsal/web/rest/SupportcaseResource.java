@@ -2,8 +2,6 @@ package com.dorsal.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.dorsal.domain.ExpertAccount;
-import com.dorsal.domain.Rating;
-import com.dorsal.domain.SupportCaseReport;
 import com.dorsal.domain.Supportcase;
 import com.dorsal.repository.*;
 import com.dorsal.service.emailNotificationUtility;
@@ -11,6 +9,7 @@ import com.dorsal.repository.UserRepository;
 import com.dorsal.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,6 +21,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.ZonedDateTime;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -81,25 +81,47 @@ public class SupportcaseResource {
         // Set the Expert for this account
         // This is the placeholder for the matching algorithm
         //
-        List expertList = expertAccountRepository.findOneByFirsttechnology(supportcase.getTechnology());
-        if (expertList.size() > 0) {
-            log.info("Expert Found for Technology [" + supportcase.getTechnology().getName() + "]");
-            supportcase.setExpertaccount((ExpertAccount)expertList.get(0));
-        }
-        else
-        {
-            // Get secondary preference
-            expertList = expertAccountRepository.findOneBySecondtechnology(supportcase.getTechnology());
-            if (expertList.size() > 0) {
-                log.info("Expert Found for 2nd preferred Technology [" + supportcase.getTechnology().getName() + "]");
-                supportcase.setExpertaccount((ExpertAccount) expertList.get(0));
+        try {
+            // First technology preference, is available and ordered by score
+            List experts = expertAccountRepository.findFirstTechnologyPreference(supportcase.getTechnology().getId(),new PageRequest(0,5));
+            log.info("First Technology choice: Number of Experts: " + experts.size());
+            Iterator itExperts = experts.iterator();
+            ExpertAccount expert =  null;
+            while (itExperts.hasNext()){
+                expert = (ExpertAccount)itExperts.next();
+                log.info("Expert " + expert.getUser().getFirstName() + " has score " + expert.getExpertScore());
             }
-            else {
 
-                // No match found -- need to address it to a concierge
-                log.info("No expert available to work on the case. We keep searching...");
+            if (experts.size() > 0) {
+                log.info("Expert Found for Technology [" + supportcase.getTechnology().getName() + "]");
+                supportcase.setExpertaccount((ExpertAccount)experts.get(0));
             }
+            else
+            {
+                // Second technology preference, is available and ordered by score
+                experts = expertAccountRepository.findSecondTechnologyPreference(supportcase.getTechnology().getId(),new PageRequest(0,5));
+                log.info("Second Technology choice: Number of Experts: " + experts.size());
+                if (experts.size() > 0) {
+                    log.info("Expert Found for Technology [" + supportcase.getTechnology().getName() + "]");
+                    supportcase.setExpertaccount((ExpertAccount)experts.get(0));
+                } else {
+                    // Find any expert that is available ordered by score
+                    experts = expertAccountRepository.findExpertThatIsAvailable(new PageRequest(0,5));
+                    log.info("Any Expert available: Number of Experts: " + experts.size());
+                    if (experts.size() > 0) {
+                        supportcase.setExpertaccount((ExpertAccount)experts.get(0));
+                        log.info("Found available Expert ");
+                    } else {
+                        // No match found -- need to address it to a concierge
+                        log.warn("No expert available to work on the case. We keep searching...");
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            log.error("Error calling into expertAccountRepository. Reason: " +e );
         }
+
 
         // Initialize counters
         supportcase.setIsRated(false);
