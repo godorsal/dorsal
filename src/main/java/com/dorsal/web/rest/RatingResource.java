@@ -99,6 +99,9 @@ public class RatingResource {
             expert.setExpertScore(runningScore);
             expert.setNumberOfCases(nbOfCases);
 
+            // Mark expert available again for taking in new cases.
+            expert.setIsAvailable(true);
+
             expertAccountRepository.save(expert);
         } catch (Exception e) {
             log.error("Expert score update failed with error: " +e);

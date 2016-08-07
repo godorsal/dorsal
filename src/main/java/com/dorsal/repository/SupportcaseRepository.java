@@ -12,16 +12,16 @@ import java.util.List;
 @SuppressWarnings("unused")
 public interface SupportcaseRepository extends JpaRepository<Supportcase,Long> {
 
-    @Query("select supportcase from Supportcase supportcase where supportcase.user.login = ?#{principal.username}")
+    @Query("select supportcase from Supportcase supportcase where supportcase.user.login = ?#{principal.username} ORDER BY supportcase.dateCreated ASC")
     List<Supportcase> findByUserIsCurrentUser();
 
-    @Query("select supportcase from Supportcase supportcase where supportcase.expertaccount.user.login = ?#{principal.username}")
+    @Query("select supportcase from Supportcase supportcase where supportcase.expertaccount.user.login = ?#{principal.username}  ORDER BY supportcase.dateCreated ASC")
     List<Supportcase> findByExpertIsCurrentUser();
 
-    @Query("select supportcase from Supportcase supportcase, SharedCase sharedcase where (supportcase.id = sharedcase.supportcase.id) AND (sharedcase.user.login = ?#{principal.username})")
+    @Query("select supportcase from Supportcase supportcase, SharedCase sharedcase where (supportcase.id = sharedcase.supportcase.id) AND (sharedcase.user.login = ?#{principal.username})  ORDER BY supportcase.dateCreated ASC")
     List<Supportcase> findBySharedIsCurrentUser();
 
-    @Query("select supportcase from Supportcase supportcase, Groupaccess groupaccess where (supportcase.user.id = groupaccess.authorizeduser.id) AND (groupaccess.user.login = ?#{principal.username})")
+    @Query("select supportcase from Supportcase supportcase, Groupaccess groupaccess where (supportcase.user.id = groupaccess.authorizeduser.id) AND (groupaccess.user.login = ?#{principal.username})  ORDER BY supportcase.dateCreated ASC")
     List<Supportcase> findGroupAccessUser();
 
 }

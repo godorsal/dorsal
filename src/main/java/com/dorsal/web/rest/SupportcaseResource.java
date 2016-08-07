@@ -2,8 +2,10 @@ package com.dorsal.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.dorsal.domain.ExpertAccount;
+import com.dorsal.domain.Status;
 import com.dorsal.domain.Supportcase;
 import com.dorsal.repository.*;
+import com.dorsal.service.DorsalExpertMatchService;
 import com.dorsal.service.emailNotificationUtility;
 import com.dorsal.repository.UserRepository;
 import com.dorsal.web.rest.util.HeaderUtil;
@@ -53,6 +55,9 @@ public class SupportcaseResource {
     @Inject
     private RatingRepository ratingRepository;
 
+    @Inject
+    private DorsalExpertMatchService dorsalExpertMatchService;
+
 
     /**
      * POST  /supportcases : Create a new supportcase.
@@ -81,53 +86,25 @@ public class SupportcaseResource {
         // Set the Expert for this account
         // This is the placeholder for the matching algorithm
         //
-        try {
-            // First technology preference, is available and ordered by score
-            List experts = expertAccountRepository.findFirstTechnologyPreference(supportcase.getTechnology().getId(),new PageRequest(0,5));
-            log.info("First Technology choice: Number of Experts: " + experts.size());
-            Iterator itExperts = experts.iterator();
-            ExpertAccount expert =  null;
-            while (itExperts.hasNext()){
-                expert = (ExpertAccount)itExperts.next();
-                log.info("Expert " + expert.getUser().getFirstName() + " has score " + expert.getExpertScore());
-            }
+        ExpertAccount expert = dorsalExpertMatchService.findExpertForSupportcase(supportcase);
+        if (expert != null) {
+            // Mark Expert as no longer available
+            expert.setIsAvailable(false);
+            expertAccountRepository.save(expert);
 
-            if (experts.size() > 0) {
-                log.info("Expert Found for Technology [" + supportcase.getTechnology().getName() + "]");
-                supportcase.setExpertaccount((ExpertAccount)experts.get(0));
-            }
-            else
-            {
-                // Second technology preference, is available and ordered by score
-                experts = expertAccountRepository.findSecondTechnologyPreference(supportcase.getTechnology().getId(),new PageRequest(0,5));
-                log.info("Second Technology choice: Number of Experts: " + experts.size());
-                if (experts.size() > 0) {
-                    log.info("Expert Found for Technology [" + supportcase.getTechnology().getName() + "]");
-                    supportcase.setExpertaccount((ExpertAccount)experts.get(0));
-                } else {
-                    // Find any expert that is available ordered by score
-                    experts = expertAccountRepository.findExpertThatIsAvailable(new PageRequest(0,5));
-                    log.info("Any Expert available: Number of Experts: " + experts.size());
-                    if (experts.size() > 0) {
-                        supportcase.setExpertaccount((ExpertAccount)experts.get(0));
-                        log.info("Found available Expert ");
-                    } else {
-                        // No match found -- need to address it to a concierge
-                        log.warn("No expert available to work on the case. We keep searching...");
-                    }
-                }
-            }
-
-        } catch (Exception e) {
-            log.error("Error calling into expertAccountRepository. Reason: " +e );
+            // Assign Expert to support case
+            supportcase.setExpertaccount(expert);
+            log.info("Expert [" + expert.getId() + "] assigned to support case: [" + supportcase.getSummary() + "]");
         }
 
-
-        // Initialize counters
+        // Initialize other members
         supportcase.setIsRated(false);
         supportcase.setIsResolved(false);
         supportcase.setNumberOfUpdates(0);
         supportcase.setIsApproved(false);
+        supportcase.setEstimateLog("");
+        supportcase.setEstimateHours(0);
+        supportcase.setEstimateComment("");
 
         Supportcase result = supportcaseRepository.save(supportcase);
 
@@ -167,6 +144,15 @@ public class SupportcaseResource {
          */
         boolean isNotified = false;
         Supportcase currentCase = supportcaseRepository.findOne(supportcase.getId());
+
+        /* If estimate hours changed trigger re-approval request */
+        if (   currentCase.getStatus().getName().equalsIgnoreCase("WORKING")
+            && supportcase.getStatus().getName().equalsIgnoreCase("WORKING")
+            && currentCase.getEstimateHours() != supportcase.getEstimateHours()) {
+            supportcase.setIsApproved(false);
+            supportcase.setEstimateLog( supportcase.getEstimateLog() + "UPDATED " + supportcase.getEstimateHours() + "hrs " +supportcase.getEstimateComment()+"\n");
+            log.info("Supportcase estimate changed. Request re-approval");
+        }
 
         try {
                 isNotified = notificationService.supportCaseReEstimateApproved(currentCase, supportcase);
@@ -232,16 +218,16 @@ public class SupportcaseResource {
         // Get support cases by currently logged in user
         List<Supportcase> supportcases = supportcaseRepository.findByUserIsCurrentUser(); //.findAll();
         numCases = supportcases.size();
-        log.info("Support cases owned by user " + numCases);
+        log.debug("Support cases owned by user " + numCases);
 
         // Get support cases for where currently logged in user is expert
         supportcases.addAll(supportcaseRepository.findByExpertIsCurrentUser());
-        log.info("Support cases user is expert " + (supportcases.size() - numCases) );
+        log.debug("Support cases user is expert " + (supportcases.size() - numCases) );
         numCases = supportcases.size();
 
         // Get support cases tat are shared to user
         supportcases.addAll(supportcaseRepository.findBySharedIsCurrentUser());
-        log.info("Support cases shared to user " + (supportcases.size() - numCases) );
+        log.debug("Support cases shared to user " + (supportcases.size() - numCases) );
         numCases = supportcases.size();
 
         // Get all support cases for users that in the authorized group for the logged in user
@@ -249,7 +235,7 @@ public class SupportcaseResource {
 
         // For now add the list to the result
         supportcases.addAll(groupAuthorizedCases);
-        log.info("Support by authorized users by this user " + groupAuthorizedCases.size()  );
+        log.debug("Support by authorized users by this user " + groupAuthorizedCases.size()  );
 
         // Return the combined list
         return supportcases;
