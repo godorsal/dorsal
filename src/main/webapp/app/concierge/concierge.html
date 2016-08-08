@@ -61,8 +61,11 @@
 
                         <!-- Summary -->
                         <div class="drsl-field-seciton">
-                            <div class="drsl-field-input">
-                                <input type="text" class="form-control" ng-model="vm.caseDetails.summary" placeholder="{{'concierge.caseDetails.summary.placeholder' | translate}}">
+                            <div class="input-group">
+                                <input type="text" class="form-control drsl-summary-field" ng-model="vm.caseDetails.summary" placeholder="{{'concierge.caseDetails.summary.placeholder' | translate}}">
+                                <div class="input-group-btn">
+                                    <drsl-attach-files></drsl-attach-files>
+                                </div>
                             </div>
                         </div>
                     </div>
