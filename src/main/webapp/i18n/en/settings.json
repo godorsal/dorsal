@@ -2,6 +2,7 @@
     "settings": {
         "title": "User settings for [<b>{{vm.settingsAccount.login}}</b>]",
         "form": {
+            "login": "(Login)",
             "firstname": "(First Name)",
             "firstname.placeholder": "Credit Card Holder's First Name",
             "lastname": "(Last Name)",
