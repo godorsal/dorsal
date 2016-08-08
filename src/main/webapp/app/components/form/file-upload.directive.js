@@ -101,8 +101,6 @@
             + '<br />'
             + '<div class="drsl-file-upload-component" class="form-group" ng-class="{\'drsl-file-upload-component-attachment\': modalType == \'attachment\'}" type="file" ngf-select ngf-change="setDataStream($file, attachment)" class="uploadLink">'
             + '{{attachment.name}}'
-            + '<img data-ng-src="data:image/png;base64,{{attachment.dataStream}}" alt="" class="thumbnail" ng-if="attachment.dataStreamContentType.split(\'/\')[0] == \'image\'">'
-            + '<img src="http://neowin.s3.amazonaws.com/forum/uploads/monthly_04_2013/post-360412-0-09676400-1365986245.png" class="placeholderIcon" alt="" ng-if="attachment.dataStreamContentType.split(\'/\')[0] !== \'image\' && attachment.dataStreamContentType">'
             +'<span ng-if="modalType != \'attachment\'">'
             + '<i class="fa fa-cloud-upload fa-lg cloudIcon"></i>'
             + '<span type="file" ngf-select ngf-change="setDataStream($file, attachment)" class="uploadLink">{{"global.form.fileupload.browse" | translate}}</span>'
