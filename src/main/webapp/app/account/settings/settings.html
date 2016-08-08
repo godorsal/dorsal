@@ -181,7 +181,7 @@ Your e-mail cannot be longer than 100 characters.
     <div class="extraInfo">
         <div>
             <div>
-                Expert Score: {{vm.currentExpert.expertScore}} out of 100
+                Expert Score: {{(vm.currentExpert.expertScore / vm.currentExpert.numberOfCases) | number:0}} out of 100
             </div>
             <div>
                 Profile Visibility:
