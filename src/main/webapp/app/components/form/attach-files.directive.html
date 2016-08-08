@@ -1,9 +1,11 @@
 <div class="btn-group drsl-detail-attachment-wrapper" uib-dropdown auto-close="disabled" is-open="attachmentsOpen">
     <!-- Icon and Button -->
-    <button type="button" class="btn btn-default drsl-attach-btn"  ng-class="{'btn-success': attachFileList.length > 0, 'drsl-no-attachments': attachFileList.length === 0}" ng-click="attachmentsOpen = true" ng-disabled="!isAuthenticated">
-        <span class="fa fa-paperclip"></span>
-        <span ng-show="attachFileList.length > 0" class="drsl-attachment-count">{{attachFileList.length}}</span>
-    </button>
+    <div uib-tooltip-html="((isAuthenticated())? attachmentMessageLoggedIn: attachmentMessageLoggedOut)" tooltip-append-to-body="true" tooltip-placement="top">
+        <button type="button" class="btn btn-default drsl-attach-btn" ng-class="{'btn-success': attachFileList.length > 0, 'drsl-no-attachments': attachFileList.length === 0, 'disabled':!isAuthenticated()}" ng-click="openAttachments($event)">
+            <span class="fa fa-paperclip"></span>
+            <span ng-show="attachFileList.length > 0" class="drsl-attachment-count">{{attachFileList.length}}</span>
+        </button>
+    </div>
     <!-- Menu Dropdown -->
     <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
         <li role="menuitem">
