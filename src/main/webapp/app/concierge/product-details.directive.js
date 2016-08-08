@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .directive('productDetails', productDetails);
 
-    productDetails.$inject = ['$translate'];
+    productDetails.$inject = ['$translate', 'DrslAttachFileService', 'Principal'];
 
-    function productDetails($translate) {
+    function productDetails($translate, DrslAttachFileService, Principal) {
         var directive = {
             restrict: 'E',
             scope:  {
@@ -21,6 +21,10 @@
         return directive;
 
         function linkFunc(scope) {
+            scope.attachmentsOpen = false;
+            scope.attachFileList = [];
+            scope.attachErrFileList = [];
+            scope.isAuthenticated = Principal.isAuthenticated();
             /**
              * Stop text field clicks from closing the dropdown menu.
              * @param event
@@ -150,7 +154,35 @@
                 if (event.which === 13) {
                     angular.element('body').click();
                 }
-            }
+            };
+
+            /**
+             * Close the Attachments dropdown on click of the 'Done' button and set the attachments in
+             * the DrslAttachFileService
+             */
+            scope.closeAttachments = function () {
+                scope.attachmentsOpen = false;
+                DrslAttachFileService.setAttachments(scope.attachFileList, scope.attachErrFileList);
+            };
+
+            /**
+             * Attach files to the local file list
+             * @param files
+             * @param errFiles
+             */
+            scope.attachFiles = function (files, errFiles) {
+                scope.attachFileList = scope.attachFileList.concat(files);
+                scope.attachErrFileList = scope.attachErrFileList.concat(errFiles);
+                DrslAttachFileService.setAttachments(scope.attachFileList, scope.attachErrFileList);
+            };
+
+            /**
+             * Remove files (by index) from the local file list
+             * @param fileIndex
+             */
+            scope.removeAttachment = function (fileIndex) {
+                scope.attachFileList.splice(fileIndex, 1);
+            };
         }
     }
 })();

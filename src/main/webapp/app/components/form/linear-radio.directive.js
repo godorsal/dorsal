@@ -18,7 +18,6 @@
                 technologyProperties: '='
             },
             link: function($scope, element, attrs) {
-                console.log($scope.escalation);
                 $scope.technologyProperties = {};
                 $scope.showAll = function(a) {
                     $scope.startLimit = 1000;

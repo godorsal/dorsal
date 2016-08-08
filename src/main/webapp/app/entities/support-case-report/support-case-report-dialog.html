@@ -1,0 +1,66 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="mySupportCaseReportLabel" translate="dorsalApp.supportCaseReport.home.createOrEditLabel">Create or edit a Support Case Report</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.supportCaseReport.id">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.supportCaseReport.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.supportCaseReport.isPaid" for="field_isPaid">Is Paid</label>
+            <input type="checkbox" class="form-control" name="isPaid" id="field_isPaid"
+                    ng-model="vm.supportCaseReport.isPaid"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.supportCaseReport.datePaid" for="field_datePaid">Date Paid</label>
+                <div class="input-group">
+                    <input id="field_datePaid" type="text" class="form-control" name="datePaid" datetime-picker="{{dateformat}}" ng-model="vm.supportCaseReport.datePaid" is-open="vm.datePickerOpenStatus.datePaid"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('datePaid')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="dorsalApp.supportCaseReport.comments" for="field_comments">Comments</label>
+            <input type="text" class="form-control" name="comments" id="field_comments"
+                    ng-model="vm.supportCaseReport.comments"
+                    ng-maxlength="4096" />
+            <div ng-show="editForm.comments.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.comments.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="4096">
+                    This field cannot be longer than 4096 characters.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label translate="dorsalApp.supportCaseReport.supportcase" for="field_supportcase">Supportcase</label>
+            <select class="form-control" id="field_supportcase" name="supportcase" ng-model="vm.supportCaseReport.supportcase" ng-options="supportcase as supportcase.id for supportcase in vm.supportcases track by supportcase.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="dorsalApp.supportCaseReport.rating" for="field_rating">Rating</label>
+            <select class="form-control" id="field_rating" name="rating" ng-model="vm.supportCaseReport.rating" ng-options="rating as rating.id for rating in vm.ratings track by rating.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -25,6 +25,7 @@
     <include file="classpath:config/liquibase/changelog/20160801160054_added_entity_ExpertAccount.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160801160055_added_entity_Useraccount.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160801160056_added_entity_Supportcase.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160804193843_added_entity_SupportCaseReport.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="classpath:config/liquibase/changelog/20160623155303_added_entity_constraints_Referencedoc.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160623155304_added_entity_constraints_Groupaccess.xml" relativeToChangelogFile="false"/>
@@ -40,5 +41,6 @@
     <include file="classpath:config/liquibase/changelog/20160801160054_added_entity_constraints_ExpertAccount.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160801160055_added_entity_constraints_Useraccount.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160801160056_added_entity_constraints_Supportcase.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160804193843_added_entity_constraints_SupportCaseReport.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

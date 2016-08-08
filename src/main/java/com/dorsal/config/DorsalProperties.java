@@ -38,9 +38,13 @@ public class DorsalProperties {
 
     public static class Application {
         private String url = "localhost:8080";
+        private String protocol = "http";
 
         public String getUrl() { return url;}
-
         public void setUrl(String url) { this.url = url;}
+
+        public String getProtocol() { return protocol; }
+        public void setProtocol(String protocol) {this. protocol = protocol;}
+
     }
 }

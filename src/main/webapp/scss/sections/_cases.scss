@@ -198,6 +198,15 @@ Cases
                     display: inline-block;
                 }
 
+                .uib-title {
+                    strong {
+                        @extend .drsl-label;
+                        font-weight: $thin-weight;
+                        font-size: 18px;
+                        text-align: center;
+                        width: initial;
+                    }
+                }
             }
             input[type="text"].form-control, input[type="number"].form-control {
                 padding: 12px;
@@ -244,6 +253,37 @@ Cases
 
         .drsl-complete-lnk.disabled {
             color: $inactive-text-color;
+        }
+
+        .drsl-hours-date-wrapper {
+            display: flex;
+            flex-flow: row;
+
+            .drsl-expert-hours-wrapper {
+                flex: 1;
+                margin-right: 20px;
+            }
+
+            .drsl-expert-date-wrapper {
+                flex: 3;
+                display: flex;
+                flex-flow: row;
+
+                .drsl-expert-date-label {
+                    flex: auto;
+                    max-width: 55px;
+                }
+
+                .drsl-expert-date-controls {
+                    flex: auto;
+
+                    .form-control.drsl-value.drsl-date-display-wrapper {
+                        border-radius: 0;
+                        padding: 12px;
+                        height: 40px;
+                    }
+                }
+            }
         }
     }
 
@@ -318,6 +358,11 @@ Cases
                     max-width: 350px;
                 }
             }
+        }
+
+        .drsl-eta-date {
+            min-width: 75px;
+            display: inline-block;
         }
     }
 

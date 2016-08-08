@@ -29,6 +29,7 @@
                 "sharedCase": "Shared Case",
                 "attachment": "Attachment",
                 "escalateCase": "Escalate Case",
+                "supportCaseReport": "Support Case Report",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

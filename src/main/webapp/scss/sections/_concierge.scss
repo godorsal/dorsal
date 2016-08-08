@@ -154,7 +154,7 @@ Concierge
             }
 
             .btn {
-                width: 106px;
+                width: 100px;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
@@ -193,6 +193,44 @@ Concierge
             textarea {
                 width: 300px;
                 height: 125px;
+            }
+        }
+
+        .drsl-detail-attachment-wrapper {
+            .btn.btn-default.drsl-attach-btn {
+                padding: 2px;
+                font-size: 23px;
+                width: 25px;
+                height: 31px;
+
+                .fa-paperclip {
+                    position: absolute;
+                    top: 3px;
+                    left: 2px;
+                    display: inline-block;
+                    transform: rotate(45deg);
+                }
+            }
+
+            .drsl-menuitem-field-type {
+                outline: none;
+                cursor: default;
+            }
+
+            .drsl-attachment-items-wrapper {
+                width: 550px;
+                height: 90px;
+                overflow-y: auto;
+                box-shadow: 0px 6px 5px rgba(0, 0, 0, 0.15);
+                margin: -5px -5px 10px -5px;
+
+                .drsl-attachment-item-odd {
+                    background-color: #E5E5E5;
+                }
+
+                .drsl-attachment-item {
+                    padding: 2px 5px;
+                }
             }
         }
     }
@@ -295,8 +333,12 @@ Concierge
 
                     .drsl-date-widget-wrapper {
                         position: absolute;
-                        bottom: -90px;
-                        left: 20px;
+                        bottom: -110px;
+                        left: 10px;
+
+                        .uib-datepicker {
+                            padding: 10px;
+                        }
                     }
 
                     .drsl-date-display-wrapper {
@@ -342,6 +384,21 @@ Concierge
                 top: -5px;
                 left: -5px;
             }
+        }
+
+        .drsl-step-go-dots {
+            position: absolute;
+            top: 44px;
+            left: 42px;
+        }
+
+        .drsl-step-go-text {
+            position: absolute;
+            min-width: 350px;
+            top: 20px;
+            left: 230px;
+            background-color: #fff;
+            padding: 10px;
         }
     }
 }

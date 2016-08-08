@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('CaseController', CaseController);
 
-    CaseController.$inject = ['$scope', '$window', '$interval', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', '$state', 'StatusModel', 'Rating', 'Expertbadge', 'DrslMetadata', 'Caseupdate', 'AttachmentModalService'];
+    CaseController.$inject = ['$scope', '$window', '$interval', '$timeout', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', '$state', 'StatusModel', 'Rating', 'Expertbadge', 'DrslMetadata', 'Caseupdate', 'AttachmentModalService', 'DrslAttachFileService'];
 
-    function CaseController($scope, $window, $interval, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, $state, StatusModel, Rating, Expertbadge, DrslMetadata, Caseupdate, AttachmentModalService) {
+    function CaseController($scope, $window, $interval, $timeout, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, $state, StatusModel, Rating, Expertbadge, DrslMetadata, Caseupdate, AttachmentModalService, DrslAttachFileService) {
         var vm = this, casePoll;
         vm.init = init;
         vm.DrslMetadata = DrslMetadata;
@@ -76,6 +76,7 @@
                     }
 
                     vm.setCurrentCase(vm.supportcases[currentCaseIndex]);
+                    DrslAttachFileService.uploadAttachFileList(vm.supportcases[currentCaseIndex]);
                 }
 
                 if (data.identity) {
@@ -88,6 +89,9 @@
 
                 if (!casePoll) {
                     vm.pollForCaseUpdates();
+                }
+                if (vm.currentCase.estimateLog) {
+                  vm.estimateLogs = vm.currentCase.estimateLog.split('\n');
                 }
             });
 
@@ -182,7 +186,9 @@
             vm.currentCase = targetCase;
             getCaseExpertBadges();
             getCaseUpdates();
-            $scope.$broadcast('currentCaseSet');
+            $timeout(function () {
+                $scope.$broadcast('currentCaseSet');
+            }, 1);
         }
 
         /**
@@ -302,7 +308,7 @@
         }
 
         function openEscalation() {
-            if (StatusModel.checkCaseStatus(vm.currentCase.status, 'working')) {
+            if (!StatusModel.checkCaseStatus(vm.currentCase.status, 'closed')) {
                 var modalInstance = EscalationFormService.open(vm.currentCase, vm.experts[vm.currentCase.expert]);
 
                 modalInstance.opened.then(function(){

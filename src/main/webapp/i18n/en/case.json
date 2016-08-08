@@ -37,7 +37,8 @@
             "rateCase": "rate this case",
             "id": "ID:",
             "caseID": "CASE ID:",
-            "lastUpdate": "Last Update:"
+            "lastUpdate": "Last Update:",
+            "requestedDate": "Requested Delivery"
         },
         "professional": {
             "header": "Support Professional",
@@ -68,7 +69,7 @@
                 "desiredOutcome": "Desired <br/> Outcome",
                 "desiredOutcome.placeholder": "Please define the expert deliverable to resolve the case",
                 "estimatedHours": "Estimated<br/># hours",
-                "estimatedHours.placeholder": "Estimate for the number of hours it takes to resolve the case",
+                "estimatedHours.placeholder": "hours",
                 "estimateComment": "Estimate<br/>Comment",
                 "estimateComment.noBR": "Estimate Comment",
                 "estimateComment.placeholder": "Comments regarding the estimated hours",
@@ -77,7 +78,8 @@
                 "resolved": "Finalize",
                 "resolved.action": "Complete this Case",
                 "resolved.complete": "This case has been completed",
-                "lastUpdate": "Last update/action "
+                "lastUpdate": "Last update/action ",
+                "deliverDate": "Deliver Date"
             }
         },
         "history": {

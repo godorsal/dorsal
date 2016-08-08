@@ -29,7 +29,7 @@
 
         <!-- Score -->
         <div class="drsl-profile-score">
-            <span class="drsl-label" translate="case.professional.score">Score</span> {{expert.expertScore}} out of 100
+            <span class="drsl-label" translate="case.professional.score">Score</span> {{(expert.expertScore / expert.numberOfCases) | number:0}} out of 100
         </div>
     </div>
 

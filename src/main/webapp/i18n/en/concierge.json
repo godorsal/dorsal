@@ -137,6 +137,12 @@
             "missing.issue": "Please select an issue type.",
             "missing.description": "Please enter a brief description.",
             "missing.all": "Please select an issue type, technology and add a brief description before continuing."
+        },
+        "buttons": {
+            "later": "Later",
+            "attach": "Attach",
+            "done": "Done",
+            "remove": "remove"
         }
     }
 }

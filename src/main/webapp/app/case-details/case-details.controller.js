@@ -65,32 +65,26 @@
                         case 'Version':
                         property.tagNO = 1;
                         vm.technologyProps.push(property)
-                        console.log(vm.technologyProps);
                         break;
                         case 'Configuration':
                         property.tagNO = 2;
                         vm.technologyProps.push(property)
-                        console.log(vm.technologyProps);
                         break;
                         case 'OS':
                         property.tagNO = 3;
                         vm.technologyProps.push(property)
-                        console.log(vm.technologyProps);
                         break;
                         case 'Environment':
                         property.tagNO = 4;
                         vm.technologyProps.push(property)
-                        console.log(vm.technologyProps);
                         break;
                         case 'Other':
                         property.tagNO = 5;
                         vm.technologyProps.other = property
                         vm.technologyProps.push(property)
-                        console.log(vm.technologyProps);
                         break;
 
                     }
-                    console.log(property);
                 }
             })
         });

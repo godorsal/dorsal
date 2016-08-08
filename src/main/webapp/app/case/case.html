@@ -10,13 +10,13 @@
                     </div>
                     <div></div>
                     <div>
-                        <div class="btn-group" uib-dropdown is-open="status.isopen" ng-if="vm.updates.length > 0">
+                        <div class="btn-group" uib-dropdown is-open="status.isopen" ng-if="vm.currentCase.numberOfUpdates">
                             <a id="single-button" type="button" uib-dropdown-toggle ng-disabled="disabled">
-                                <span ng-if="vm.updates.length > 1">
-                                    {{vm.updates.length}} Updates
+                                <span ng-if="vm.currentCase.numberOfUpdates > 1">
+                                    {{vm.currentCase.numberOfUpdates}} Updates
                                 </span>
-                                <span ng-if="vm.updates.length < 2">
-                                    {{vm.updates.length}} Update
+                                <span ng-if="vm.currentCase.numberOfUpdates < 2">
+                                    {{vm.currentCase.numberOfUpdates}} Update
                                 </span>
                                  <span class="caret"></span>
                             </a>
@@ -29,12 +29,6 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <!-- <li ng-repeat="update in vm.updates">
-                                {{update.dateUpdated | date:"MM/dd/yy h:mm a"}}
-                                {{update.updateMsg}}
-                                {{update.user.login}}
-                            </li> -->
-                            <!-- <li role="menuitem"><a href="#">Action</a></li> -->
                         </ul>
                     </div>
                 </div>
@@ -48,8 +42,7 @@
                 <a ng-click="vm.openAttachment()" uib-tooltip="add an attachment" ng-hide="vm.isCaseExpert()">attach files</a>
                 <a ng-show="vm.DrslMetadata.showCaseChat !== 0" ng-click="vm.openChat()" uib-tooltip="chat with expert" ng-class="{'drsl-link-disabled': !vm.passedStep(1)}" class="drsl-link-disabled" translate="case.details.chatRoom">chat</a>
                 <a ui-sref="concierge" uib-tooltip="create a new case">new</a>
-                <!-- <a class="alignRight" ng-click="vm.openEscalation()">escalate or reassign this case</a> -->
-                <a class="alignRight" ng-click="vm.openEscalation()" ng-class="{'drsl-link-disabled': !vm.passedStep(2)}">escalate or reassign this case</a>
+                <a class="alignRight" ng-click="vm.openEscalation()" ng-class="{'drsl-link-disabled': vm.passedStep(4)}">escalate or reassign this case</a>
             </div>
 
             <!-- Current Case -->
@@ -79,6 +72,9 @@
                                 <div>
                                     <span class="drsl-case-list-id">{{case.technology.name}} {{case.id}}</span>
                                     <span>{{case.dateCreated | date:'MMMM dd, yyyy'}}</span>
+                                </div>
+                                <div ng-if="case.numberOfUpdates">
+                                    <div>Updates: {{case.numberOfUpdates}}</div>
                                 </div>
                                 <div>
                                     <div>{{case.status.name}}</div>

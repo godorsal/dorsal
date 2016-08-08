@@ -193,3 +193,29 @@ a, a:hover, a:focus {
         cursor: default;
     }
 }
+/* ==========================================================================
+Date Picker
+========================================================================== */
+.uib-daypicker, .uib-monthpicker {
+    th {
+        font-weight: $default-medium-weight;
+        color: $drsl-label-color;
+    }
+
+    .uib-title {
+        strong {
+            @extend .drsl-label;
+            font-weight: $thin-weight;
+            font-size: 18px;
+            text-align: center;
+            width: initial;
+        }
+    }
+
+    .btn-info:active, .btn-info.active, .open > .btn-info.dropdown-toggle {
+        color: #fff;
+        background-color: $brand-color;
+        border-color: $brand-color;
+    }
+}
+

@@ -1,5 +1,29 @@
 <div class="drsl-product-details-wrapper" ng-show="canShowProductDetails()">
-    <div class="btn-group" uib-dropdown ng-repeat="rootType in getAllIncidentTypes()">
+    <!-- Attachment Menu Button Group -->
+    <div class="btn-group drsl-detail-attachment-wrapper" uib-dropdown auto-close="disabled" is-open="attachmentsOpen">
+        <!-- Icon and Button -->
+        <button type="button" class="btn btn-default drsl-attach-btn" ng-click="attachmentsOpen = true" ng-disabled="!isAuthenticated">
+            <span class="fa fa-paperclip"></span>
+        </button>
+        <!-- Menu Dropdown -->
+        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+            <li role="menuitem">
+                <div class="drsl-menuitem-field-type" ng-click="textFieldClick($event)">
+                    <form ng-submit="">
+                        <div class="drsl-attachment-items-wrapper">
+                            <div class="drsl-attachment-item" ng-class-odd="'drsl-attachment-item-odd'" ng-repeat="file in attachFileList">
+                                <span>{{file.name}}</span>
+                                <span class="pull-right" translate="concierge.buttons.remove" ng-click="removeAttachment($index);">remove</span>
+                            </div>
+                        </div>
+                        <button class="btn detailButton" translate="concierge.buttons.done" ng-click="closeAttachments()" ng-class="{'btn-inactive': !attachFileList.length, 'btn-success': attachFileList.length}">Done</button>
+                        <div class="btn btn-success detailButton" translate="concierge.buttons.attach" ngf-select="attachFiles($files, $invalidFiles)" ngf-multiple="true">Attach</div>
+                        <button class="btn btn-default detailButton" translate="concierge.buttons.later" ng-click="closeAttachments()">Later</button>
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </div><div class="btn-group" uib-dropdown ng-repeat="rootType in getAllIncidentTypes()">
         <button type="button" class="btn btn-default" ng-class="{selected: rootType.selectedValue}" uib-dropdown-toggle>
             <span ng-if="rootTranslationWorks(rootType) && !rootType.selectedValue"> {{rootType.description | translate}}</span>
             <span ng-if="!rootTranslationWorks(rootType) && !rootType.selectedValue">{{rootType.name}}</span>

@@ -2,15 +2,16 @@ package com.dorsal.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.dorsal.domain.ExpertAccount;
+import com.dorsal.domain.Status;
 import com.dorsal.domain.Supportcase;
-import com.dorsal.repository.ExpertAccountRepository;
-import com.dorsal.repository.SupportcaseRepository;
-import com.dorsal.repository.UserRepository;
+import com.dorsal.repository.*;
+import com.dorsal.service.DorsalExpertMatchService;
 import com.dorsal.service.emailNotificationUtility;
 import com.dorsal.repository.UserRepository;
 import com.dorsal.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,8 +23,8 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.ZonedDateTime;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 /**
@@ -47,6 +48,15 @@ public class SupportcaseResource {
 
     @Inject
     private emailNotificationUtility notificationService;
+
+    @Inject
+    private SupportCaseReportRepository supportCaseReportRepository;
+
+    @Inject
+    private RatingRepository ratingRepository;
+
+    @Inject
+    private DorsalExpertMatchService dorsalExpertMatchService;
 
 
     /**
@@ -76,25 +86,25 @@ public class SupportcaseResource {
         // Set the Expert for this account
         // This is the placeholder for the matching algorithm
         //
-        List expertList = expertAccountRepository.findOneByFirsttechnology(supportcase.getTechnology());
-        if (expertList.size() > 0) {
-            log.info("Expert Found for Technology [" + supportcase.getTechnology().getName() + "]");
-            supportcase.setExpertaccount((ExpertAccount)expertList.get(0));
-        }
-        else
-        {
-            // Get secondary preference
-            expertList = expertAccountRepository.findOneBySecondtechnology(supportcase.getTechnology());
-            if (expertList.size() > 0) {
-                log.info("Expert Found for 2nd preferred Technology [" + supportcase.getTechnology().getName() + "]");
-                supportcase.setExpertaccount((ExpertAccount) expertList.get(0));
-            }
-            else {
+        ExpertAccount expert = dorsalExpertMatchService.findExpertForSupportcase(supportcase);
+        if (expert != null) {
+            // Mark Expert as no longer available
+            expert.setIsAvailable(false);
+            expertAccountRepository.save(expert);
 
-                // No match found -- need to address it to a concierge
-                log.info("No expert available to work on the case. We keep searching...");
-            }
+            // Assign Expert to support case
+            supportcase.setExpertaccount(expert);
+            log.info("Expert [" + expert.getId() + "] assigned to support case: [" + supportcase.getSummary() + "]");
         }
+
+        // Initialize other members
+        supportcase.setIsRated(false);
+        supportcase.setIsResolved(false);
+        supportcase.setNumberOfUpdates(0);
+        supportcase.setIsApproved(false);
+        supportcase.setEstimateLog("");
+        supportcase.setEstimateHours(0);
+        supportcase.setEstimateComment("");
 
         Supportcase result = supportcaseRepository.save(supportcase);
 
@@ -129,23 +139,64 @@ public class SupportcaseResource {
         // Adjust time
         supportcase.setDateLastUpdate( ZonedDateTime.now() );
 
-        Supportcase result = supportcaseRepository.save(supportcase);
+        /*
+            Notifications of (re)-approval of estimate depends on state change and approval flag.
+         */
+        boolean isNotified = false;
+        Supportcase currentCase = supportcaseRepository.findOne(supportcase.getId());
 
-        // Send out notification depending on the status and action
-        if (   (supportcase.getEstimateHours() != null)
-            && (supportcase.getExpectedResult() !=null)
-            && (supportcase.isIsApproved() == false)
-            && (supportcase.getStatus().getName().equalsIgnoreCase("ESTIMATED"))) {
-            log.warn("Expert Estimated Support case");
-            notificationService.createSupportCaseEstimate(supportcase);
-        } else if (   (supportcase.getEstimateHours() != null)
-                    && (supportcase.getExpectedResult() !=null)
-                    && (supportcase.isIsApproved() == false)
-                    && (supportcase.getStatus().getName().equalsIgnoreCase("WORKING"))) {
-            log.warn("Expert re-Estimated Support case");
-            notificationService.updateSupportCaseEstimate(supportcase);
+        /* If estimate hours changed trigger re-approval request */
+        if (   currentCase.getStatus().getName().equalsIgnoreCase("WORKING")
+            && supportcase.getStatus().getName().equalsIgnoreCase("WORKING")
+            && currentCase.getEstimateHours() != supportcase.getEstimateHours()) {
+            supportcase.setIsApproved(false);
+            supportcase.setEstimateLog( supportcase.getEstimateLog() + "UPDATED " + supportcase.getEstimateHours() + "hrs " +supportcase.getEstimateComment()+"\n");
+            log.info("Supportcase estimate changed. Request re-approval");
         }
 
+        try {
+                isNotified = notificationService.supportCaseReEstimateApproved(currentCase, supportcase);
+                /* Check if estimate approval took place -- trigger increment of updates for the case */
+                if (isNotified) {
+                    int updates = supportcase.getNumberOfUpdates();
+                    supportcase.setNumberOfUpdates(++updates);
+                    log.info("Incremented Number of updates for case: " + updates);
+                }
+
+        } catch (Exception e) {
+                log.error("Case Estimate notification -- Failed to call notification service. Error " +e);
+        }
+
+        /*
+            When a case is rated the support case needs to be marked as rated (supportcase.is_rated)
+            The running average for the expert score needs to be adjusted as well
+
+            In addition a new entry needs to be added to the SupportCaseReport
+         */
+        try {
+            if ((supportcase.getStatus().getName().equalsIgnoreCase("CLOSED"))
+                && (supportcase.isIsResolved())) {
+                supportcase.setIsRated(true);
+            }
+        }catch (Exception e) {
+            log.error("Failed to set support case to resolved. Error " +e);
+        }
+
+        // Persist update
+        Supportcase result = supportcaseRepository.save(supportcase);
+
+        /*
+            Check for other type of Notifications
+         */
+        if ( !isNotified ) {
+            try {
+                if (!notificationService.stateChangeNotifications(supportcase))
+                    log.info("No notification send out for support case update");
+
+            } catch (Exception e) {
+                log.error("State Change estimate -- Failed to call notification service. Error " + e);
+            }
+        }
 
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("supportcase", supportcase.getId().toString()))
@@ -167,16 +218,16 @@ public class SupportcaseResource {
         // Get support cases by currently logged in user
         List<Supportcase> supportcases = supportcaseRepository.findByUserIsCurrentUser(); //.findAll();
         numCases = supportcases.size();
-        log.info("Support cases owned by user " + numCases);
+        log.debug("Support cases owned by user " + numCases);
 
         // Get support cases for where currently logged in user is expert
         supportcases.addAll(supportcaseRepository.findByExpertIsCurrentUser());
-        log.info("Support cases user is expert " + (supportcases.size() - numCases) );
+        log.debug("Support cases user is expert " + (supportcases.size() - numCases) );
         numCases = supportcases.size();
 
         // Get support cases tat are shared to user
         supportcases.addAll(supportcaseRepository.findBySharedIsCurrentUser());
-        log.info("Support cases shared to user " + (supportcases.size() - numCases) );
+        log.debug("Support cases shared to user " + (supportcases.size() - numCases) );
         numCases = supportcases.size();
 
         // Get all support cases for users that in the authorized group for the logged in user
@@ -184,7 +235,7 @@ public class SupportcaseResource {
 
         // For now add the list to the result
         supportcases.addAll(groupAuthorizedCases);
-        log.info("Support by authorized users by this user " + groupAuthorizedCases.size()  );
+        log.debug("Support by authorized users by this user " + groupAuthorizedCases.size()  );
 
         // Return the combined list
         return supportcases;
