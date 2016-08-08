@@ -207,19 +207,6 @@ Your e-mail cannot be longer than 100 characters.
 <div class="drsl-expert-message-content" ng-if="vm.currentExpert">
     <div class="panel panel-default">
         <div class="panel-body">
-<<<<<<< HEAD
-            <textarea name="name" rows="4" cols="20" class="form-control welcome" ng-model="vm.currentExpert.welcomeMessage" ng-change="vm.updatingExpert = true" placeholder="Greeting Message"></textarea>
-            <textarea name="name" rows="4" cols="20" class="form-control" ng-model="vm.currentExpert.expertBio" ng-change="vm.updatingExpert = true" placeholder="Expert Bio"></textarea>
-            <select class="form-control" id="field_issue" name="Issue" ng-model="vm.currentExpert.issueexpertise" ng-options="issue as issue.name for issue in vm.issues track by issue.id" ng-change="vm.updatingExpert = true">
-                <option value="">Issue Expertise</option>
-            </select>
-            <select class="form-control" id="field_technology" name="Technology" ng-model="vm.currentExpert.firsttechnology" ng-options="technology as technology.name for technology in vm.technologies track by technology.id" ng-change="vm.updatingExpert = true">
-                <option value="">Technology Expertise</option>
-            </select>
-            <select class="form-control" id="field_technology2" name="Technology2" ng-model="vm.currentExpert.secondtechnology" ng-options="technology as technology.name for technology in vm.technologies track by technology.id" ng-change="vm.updatingExpert = true">
-                <option value="">Technology Expertise 2</option>
-            </select>
-=======
           <label for="welcome" translate="settings.form.welcome" class="expertTextareaLabel">Welcome Message</label>
             <textarea name="welcome" rows="4" cols="20" class="form-control" ng-model="vm.currentExpert.welcomeMessage" ng-change="vm.updatingExpert = true" placeholder="Greeting Message"></textarea>
             <label for="bio" translate="settings.form.bio" class="expertTextareaLabel">Bio</label>
@@ -236,7 +223,6 @@ Your e-mail cannot be longer than 100 characters.
               <select class="form-control" id="field_technology2" name="Technology2" ng-model="vm.currentExpert.secondtechnology" ng-options="technology as technology.name for technology in vm.technologies track by technology.id" ng-change="vm.updatingExpert = true"></select>
               <span class="select unit" translate="settings.form.technology2">(2nd Technology Focus)</span>
             </div>
->>>>>>> fc38d327595df29561f919df0a8da26bbab17178
             <button type="submit" class="btn btn-success" translate="settings.form.button" ng-click="vm.save()">Update</button>
         </div>
     </div>
