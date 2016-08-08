@@ -330,7 +330,14 @@ table.scroll thead > tr {
     color: $drsl-label-color;
     font-weight: $default-weight;
 }
-
+.drsl-tech-props{
+width: 200px;
+display: inline-block;
+}
+.drsl-case-props{
+width: 314px;
+display: inline-block;
+}
 .drsl-value {
     color: $drsl-value-color;
     font-weight: $default-medium-weight;
@@ -566,7 +573,7 @@ table.scroll thead > tr {
     width: 100px;
 }
 .cloudIcon {
-    margin-right: 5px;
+    margin-right: 10px;
 }
 .attachmentModalInput{
     color: black !important;

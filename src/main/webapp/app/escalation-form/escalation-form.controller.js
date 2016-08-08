@@ -54,10 +54,40 @@
                 return escalation.supportcase.id == vm.case.id;
             })
         })
+        // Casetechnologyproperty.query(function(result) {
+        //     result.forEach(function(property){
+        //         if(property.supportcase.id === vm.case.id){
+        //             vm.technologyProps.push(property)
+        //         }
+        //     })
+        // });
         Casetechnologyproperty.query(function(result) {
             result.forEach(function(property){
                 if(property.supportcase.id === vm.case.id){
-                    vm.technologyProps.push(property)
+                    switch (property.propertyname) {
+                        case 'Version':
+                        property.tagNO = 1;
+                        vm.technologyProps.push(property)
+                        break;
+                        case 'Configuration':
+                        property.tagNO = 2;
+                        vm.technologyProps.push(property)
+                        break;
+                        case 'OS':
+                        property.tagNO = 3;
+                        vm.technologyProps.push(property)
+                        break;
+                        case 'Environment':
+                        property.tagNO = 4;
+                        vm.technologyProps.push(property)
+                        break;
+                        case 'Other':
+                        property.tagNO = 5;
+                        vm.technologyProps.other = property
+                        vm.technologyProps.push(property)
+                        break;
+
+                    }
                 }
             })
         });

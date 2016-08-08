@@ -449,20 +449,21 @@ Cases
     .drsl-incident-items {
         display: flex;
         flex-flow: row;
+        // float: right;
         > div {
             flex: 1;
-            // text-align: left;
             text-align: center;
-
-            &:first-child {
-                // flex: .5;
-                // text-align: left;
-            }
-
             span {
                 padding-right: $default-half-padding;
             }
         }
+    }.drsl-tech-props{
+        width: 245px;
+        display: inline-block;
+    }
+    .drsl-case-props{
+        width: 420px;
+        display: inline-block;
     }
     .drsl-file-upload-section {
         display: flex;
