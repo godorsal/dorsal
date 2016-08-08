@@ -154,7 +154,7 @@ Concierge
             }
 
             .btn {
-                width: 100px;
+                width: 106px;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
@@ -195,42 +195,77 @@ Concierge
                 height: 125px;
             }
         }
+    }
 
-        .drsl-detail-attachment-wrapper {
-            .btn.btn-default.drsl-attach-btn {
-                padding: 2px;
-                font-size: 23px;
-                width: 25px;
-                height: 31px;
+    .input-group .drsl-summary-field {
+        border-radius: 4px;
+    }
 
+    .drsl-detail-attachment-wrapper {
+        .dropdown-menu {
+            left: initial;
+            right: 0;
+        }
+
+        .btn.btn-default.drsl-attach-btn {
+            font-family: $numbers-font;
+            font-size: 20px;
+            height: 34px;
+            border-radius: 4px;
+            padding: 2px;
+            min-width: 38px;
+
+            &.drsl-no-attachments {
                 .fa-paperclip {
-                    position: absolute;
-                    top: 3px;
-                    left: 2px;
-                    display: inline-block;
-                    transform: rotate(45deg);
+                    left: 10px;
                 }
             }
 
-            .drsl-menuitem-field-type {
-                outline: none;
-                cursor: default;
+            .fa-paperclip {
+                position: absolute;
+                top: 6px;
+                left: 2px;
+                display: inline-block;
+                transform: rotate(45deg);
+                opacity: .7;
             }
 
-            .drsl-attachment-items-wrapper {
-                width: 550px;
-                height: 90px;
-                overflow-y: auto;
-                box-shadow: 0px 6px 5px rgba(0, 0, 0, 0.15);
-                margin: -5px -5px 10px -5px;
+            .drsl-attachment-count {
+                position: relative;
+                padding-left: 18px;
+                padding-right: 2px;
+                top: 0px;
+                font-weight: 200;
+                font-size: 20px;
+                opacity: .7;
+            }
+        }
 
-                .drsl-attachment-item-odd {
-                    background-color: #E5E5E5;
-                }
+        .drsl-menuitem-field-type {
+            outline: none;
+            cursor: default;
+        }
 
-                .drsl-attachment-item {
-                    padding: 2px 5px;
-                }
+        .drsl-attachment-items-wrapper {
+            width: 490px;
+            height: 95px;
+            overflow-y: auto;
+            box-shadow: 0px 6px 5px rgba(0, 0, 0, 0.15);
+            margin: -5px -5px 10px -5px;
+
+            .drsl-attachment-item-odd {
+                background-color: #E5E5E5;
+            }
+
+            .drsl-attachment-item {
+                padding: 2px 5px;
+            }
+        }
+
+        form {
+            > .btn {
+                float:right;
+                margin-left: 5px;
             }
         }
     }
@@ -275,6 +310,10 @@ Concierge
     .drsl-field-seciton {
         margin-left: 20px;
         margin-top: 80px;
+
+        .input-group-btn {
+            padding-left: 5px;
+        }
     }
 
     .drsl-one-two-three-lg {
