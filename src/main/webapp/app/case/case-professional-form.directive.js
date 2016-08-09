@@ -37,7 +37,7 @@
             };
 
             scope.submit = function () {
-                var logDate = $filter('date')(new Date(), 'MMM dd, yyyy');
+                var logDate = $filter('date')(new Date(), 'MMM dd, yyyy HH:mm');
 
                 scope.case.estimateLog = (scope.case.estimateLog) ? scope.case.estimateLog : '';
 
