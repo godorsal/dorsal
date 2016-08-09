@@ -26,14 +26,17 @@ public class DorsalProperties {
 
     public static class Support {
         private String mail = "support@godorsal.com";
+        private String concierge = "dorsal-concierge";
 
         public String getMail() {
             return mail;
         }
-
         public void setMail(String mail) {
             this.mail = mail;
         }
+
+        public String getConcierge() {return concierge; }
+        public void setConcierge(String concierge) {this.concierge = concierge;}
     }
 
     public static class Application {
