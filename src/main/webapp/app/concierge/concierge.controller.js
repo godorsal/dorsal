@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('ConciergeController', ConciergeController);
 
-    ConciergeController.$inject = ['$rootScope', '$scope', '$state', 'LoginService', 'Principal', 'ConciergeService', '$translate', '$http', 'Supportcase', 'Casetechnologyproperty', 'toastr', 'AttachmentModalService', 'DateUtils', 'CaseService'];
+    ConciergeController.$inject = ['$rootScope', '$scope', '$state', 'LoginService', 'Principal', 'ConciergeService', '$translate', '$http', 'Supportcase', 'Casetechnologyproperty', 'toastr', 'AttachmentModalService', 'DateUtils', 'CaseService', 'DrslNewCaseService'];
 
-    function ConciergeController($rootScope, $scope, $state, LoginService, Principal, ConciergeService, $translate, $http, Supportcase, Casetechnologyproperty, toastr, AttachmentModalService, DateUtils, CaseService) {
+    function ConciergeController($rootScope, $scope, $state, LoginService, Principal, ConciergeService, $translate, $http, Supportcase, Casetechnologyproperty, toastr, AttachmentModalService, DateUtils, CaseService, DrslNewCaseService) {
         var vm = this;
         vm.init = init;
         vm.submitForm = submitForm;
@@ -111,6 +111,7 @@
             }
         }
         var onSaveSuccess = function (result) {
+            DrslNewCaseService.setNewCaseId(result.id);
             for (var key in vm.technologyProperties) {
                 if (vm.technologyProperties.hasOwnProperty(key)) {
                     var brandNewProperty = {};
