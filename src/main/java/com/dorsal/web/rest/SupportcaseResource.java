@@ -146,7 +146,6 @@ public class SupportcaseResource {
             && supportcase.getStatus().getName().equalsIgnoreCase("WORKING")
             && currentCase.getEstimateHours() != supportcase.getEstimateHours()) {
             supportcase.setIsApproved(false);
-            supportcase.setEstimateLog( supportcase.getEstimateLog() + "UPDATED " + supportcase.getEstimateHours() + "hrs " +supportcase.getEstimateComment()+"\n");
             log.info("Supportcase estimate changed. Request re-approval");
         }
 
