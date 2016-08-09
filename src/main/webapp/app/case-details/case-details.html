@@ -103,7 +103,7 @@
                         <tbody>
                             <tr ng-repeat="update in vm.updates track by $index" style="font-weight: 500; color: #404040">
                                 <td style="max-width: 200px; word-break: break-all;">{{update.updateMsg}}</td>
-                                <td style="white-space: nowrap; width: 213px; padding-left: 35px; padding-bottom: 35px;">{{update.dateUpdated | date:"MM/dd/yy h:mm a"}}</td>
+                                <td style="white-space: nowrap; width: 213px; padding-left: 35px; padding-bottom: 35px;">{{update.dateUpdated | date:"MMM dd, yyyy h:mm a"}}</td>
                                 <td style="width: 87px; padding-bottom: 35px; padding-left: 8px;">{{update.user.login}}</td>
                             </tr>
                         </tbody>
