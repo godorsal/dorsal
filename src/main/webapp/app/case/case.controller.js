@@ -44,7 +44,6 @@
         vm.experts = {};
         vm.showNotifications = false;
         vm.init();
-
         /**
         * Initialize the controller's data.
         */
@@ -81,6 +80,9 @@
                 }
                 if(vm.currentCase.user.login === vm.currentUser.login){
                     vm.isCreator = true;
+                    vm.shareMessage = "share this case";
+                } else {
+                    vm.shareMessage = "only the case creator can share the case"
                 }
                 if (data.statusStates) {
                     vm.statusStates = data.statusStates;
@@ -90,7 +92,7 @@
                     vm.pollForCaseUpdates();
                 }
                 if (vm.currentCase.estimateLog) {
-                  vm.estimateLogs = vm.currentCase.estimateLog.split('\n');
+                    vm.estimateLogs = vm.currentCase.estimateLog.split('\n');
                 }
             });
 
@@ -323,15 +325,9 @@
         }
 
         function openShare() {
-            var modalInstance = ShareCaseService.open(vm.currentCase, vm.experts[vm.currentCase.expert]);
-
-            modalInstance.opened.then(function(){
-                vm.pausePollForCaseUpdates = true;
-            });
-
-            modalInstance.closed.then(function(){
-                vm.pausePollForCaseUpdates = false;
-            });
+            if (vm.isCreator) {
+                var modalInstance = ShareCaseService.open(vm.currentCase, vm.experts[vm.currentCase.expert]);
+            }
         }
         function openAttachment() {
             var modalInstance = AttachmentModalService.open(vm.currentCase, vm.experts[vm.currentCase.expert]);
