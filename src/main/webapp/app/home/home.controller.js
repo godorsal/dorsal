@@ -23,11 +23,13 @@
 
         function getAccount() {
             Principal.identity().then(function(account) {
+                console.log(account);
+                debugger;
                 vm.account = account;
                 vm.isAuthenticated = Principal.isAuthenticated;
-                if(account && !account.firstName.length && !account.lastName.length){
+                if(vm.account && !vm.account.firstName && !vm.account.lastName.length){
                     $state.go('settings')
-                } else if(account){
+                } else if(vm.account){
                     $state.go('case')
                 }
             });

@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('ConciergeController', ConciergeController);
 
-    ConciergeController.$inject = ['$rootScope', '$scope', '$state', 'LoginService', 'Principal', 'ConciergeService', '$translate', '$http', 'Supportcase', 'Casetechnologyproperty', 'toastr', 'AttachmentModalService', 'DateUtils'];
+    ConciergeController.$inject = ['$rootScope', '$scope', '$state', 'LoginService', 'Principal', 'ConciergeService', '$translate', '$http', 'Supportcase', 'Casetechnologyproperty', 'toastr', 'AttachmentModalService', 'DateUtils', 'CaseService'];
 
-    function ConciergeController($rootScope, $scope, $state, LoginService, Principal, ConciergeService, $translate, $http, Supportcase, Casetechnologyproperty, toastr, AttachmentModalService, DateUtils) {
+    function ConciergeController($rootScope, $scope, $state, LoginService, Principal, ConciergeService, $translate, $http, Supportcase, Casetechnologyproperty, toastr, AttachmentModalService, DateUtils, CaseService) {
         var vm = this;
         vm.init = init;
         vm.submitForm = submitForm;
@@ -34,7 +34,6 @@
             description: '',
             radios: []
         };
-
         vm.openDatePopup = openDatePopup;
         vm.datePopup = {
             opened: false
@@ -48,35 +47,37 @@
             startingDay: 1,
             showWeeks: false
         };
-
+        vm.currentUser = {};
+        Principal.identity().then(function(account){
+            if (account) {
+                vm.currentUser = account;
+            }
+        })
         function getUser(user) {
             switch(user.login) {
                 case 'system':
-                    return 1;
-                    break;
+                return 1;
+                break;
                 case 'anonymoususer':
-                    return 2;
-                    break;
+                return 2;
+                break;
                 case 'admin':
-                    return 3;
-                    break;
+                return 3;
+                break;
                 case 'user':
-                    return 4;
-                    break;
+                return 4;
+                break;
             }
         }
         function hasCases(){
-            Principal.identity().then(function (account) {
-                Supportcase.query(function(cases){
-                    cases.find(function(supportCase){
-                        if(supportCase.user.login == account.login || supportCase.expertaccount.user.login == account.login){
-                            vm.hasCases = true;
-                        } else{
-                            vm.hasCases = false;
-                        }
-                    })
-                })
-            });
+            var getCurrentUser = (typeof(vm.currentUser.email) === 'undefined');
+            CaseService.getEntityData({'getCurrentUser': getCurrentUser}).then(function (data) {
+                if(data.supportCase.length > 0){
+                    vm.hasCases = true;
+                } else {
+                    vm.hasCases = false;
+                }
+            })
         }
         hasCases()
         vm.technologyProperties = {};
@@ -140,8 +141,8 @@
 
         function hasErrors() {
             return (Object.keys(vm.technology).length === 0 ||
-                Object.keys(vm.issue).length === 0 ||
-                vm.caseDetails.summary.length === 0);
+            Object.keys(vm.issue).length === 0 ||
+            vm.caseDetails.summary.length === 0);
         }
         function checkError(){
             var messages = [];

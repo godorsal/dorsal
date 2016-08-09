@@ -52,15 +52,12 @@
             var getCurrentUser = (typeof(vm.currentUser.email) === 'undefined'),
             getStatusStates = (vm.statusStates.length === 0),
             getBadges = (vm.badges.length === 0);
-
             // Make a call to get the initial data.
             CaseService.getEntityData({'getCurrentUser': getCurrentUser, 'getStatusStates': getStatusStates, 'getBadges': getBadges}).then(function (data) {
                 var i, currentCaseIndex = 0;
-
                 if (data.badges) {
                     vm.badges = data.badges;
                 }
-
                 if (data.supportCase.length < 1) {
                     $state.go('concierge')
                 } else {
@@ -82,7 +79,9 @@
                 if (data.identity) {
                     vm.currentUser = data.identity;
                 }
-
+                if(vm.currentCase.user.login === vm.currentUser.login){
+                    vm.isCreator = true;
+                }
                 if (data.statusStates) {
                     vm.statusStates = data.statusStates;
                 }
