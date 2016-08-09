@@ -441,6 +441,7 @@ Cases
     }
 }
 .drsl-case-details-view {
+    textarea { resize: none; }
     .drsl-header-status {
         text-transform: uppercase;
     }
@@ -476,6 +477,45 @@ Cases
                 flex: 3;
             }
         }
+    }
+}
+.drsl-details-user-view {
+    text-align: right;
+}
+.drsl-update-history-box {
+    width: 688px;
+}
+.drsl-date-header {
+    padding-left: 177px;
+}
+.drsl-user-header {
+    padding-left: 152px;
+}
+.drsl-update-trow {
+    font-weight: 500;
+    color: #404040
+}
+.drsl-update-message-tdata{
+    min-width: 200px;
+    max-width: 200px;
+    word-break: break-all;
+    padding-bottom: 35px;
+}
+.drsl-update-date-tdata{
+    white-space: nowrap;
+    width: 235px;
+    padding-left: 35px;
+    padding-bottom: 35px;
+}
+.drsl-update-user-tdata{
+    width: 87px;
+    padding-bottom: 35px;
+    padding-left: 8px;
+}
+.drsl-summary-block{
+    width: 363px;
+    .drsl-value{
+        max-width: 250px
     }
 }
 .drsl-case-agreement-view {

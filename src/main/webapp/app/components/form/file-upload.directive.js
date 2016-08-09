@@ -78,7 +78,7 @@
                 modalType: '='
             },
             controller: controller,
-            template: '<div class="caseDetailsFileList" ng-if="modalType != \'attachment\'">' + '<li ng-repeat="attachment in attachments track by $index"  class="attachmentItem" ng-click="options = !options">' +
+            template: '<div class="caseDetailsFileList" ng-if="modalType != \'attachment\' || attachments.length < 1">' + '<li ng-repeat="attachment in attachments track by $index"  class="attachmentItem" ng-click="options = !options">' +
             '<div class="name">{{attachment.name}}' + '</div>' +
             '<div class="options" ng-if="options">' +
             '<a ng-click="openFile(attachment.dataStreamContentType, attachment.dataStream); $event.stopPropagation();">' +
@@ -95,25 +95,27 @@
             '</div>' +
             '</li>'
             + '</div>'
-            + '<br />'
+            // + '<br />'
             + '<h4 ng-if="loadingFile" class="saveload">Loading File...</h4>'
             + '<h4 ng-if="savingFile" class="saveload">Saving File...</h4>'
-            + '<br />'
+            // + '<br />'
             + '<div class="drsl-file-upload-component" class="form-group" ng-class="{\'drsl-file-upload-component-attachment\': modalType == \'attachment\'}" type="file" ngf-select ngf-change="setDataStream($file, attachment)" class="uploadLink">'
             + '{{attachment.name}}'
             +'<span ng-if="modalType != \'attachment\'">'
-            + '<i class="fa fa-cloud-upload fa-lg cloudIcon"></i>'
+            + '<i class="fa fa-paperclip fa-lg paperClipIcon" aria-hidden="true"></i>'
+            // + '<i class="fa fa-cloud-upload fa-lg cloudIcon"></i>'
             + '<span type="file" ngf-select ngf-change="setDataStream($file, attachment)" class="uploadLink">{{"global.form.fileupload.browse" | translate}}</span>'
             +'</span>'
             +'<span ng-if="modalType == \'attachment\'" class="attachmentModalInput">'
-            + '<i class="fa fa-cloud-upload fa-lg" ></i>'
-            + '<br />'
+            + '<i class="fa fa-paperclip fa-lg" aria-hidden="true"></i>'
+            // + '<i class="fa fa-cloud-upload fa-lg" ></i>'
+            // + '<br />'
             + '<span>Click here to select files, or drag and drop them here</span>'
-            + '<br />'
+            // + '<br />'
             + '<strong>The more we know about your case, the better we can serve you!</strong>'
             +'</span>'
             + '</div>'
-            + '<br />'
+            // + '<br />'
             + '<span ng-if="modalType == \'attachment\' && loadingFiles">Loading Files</span>'
             + '<table class="table-striped scroll attachmentModalTable" ng-if="modalType == \'attachment\'" >'
             + '<thead>'

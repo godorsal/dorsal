@@ -15,7 +15,7 @@
                 <div class="drsl-dialog-content">
                     <div class="drsl-case-props">
                         <!-- User -->
-                        <div class="drsl-form-grid" style="text-align: right;">
+                        <div class="drsl-form-grid drsl-details-user-view">
                             <div class="drsl-label" translate="case.details.user">User</div>
                             <div class="drsl-value"  ng-if="vm.case.user.firstName && vm.case.user.lastName">{{vm.case.user.firstName}} {{vm.case.user.lastName}}</div>
                             <div class="drsl-value" ng-if="!vm.case.user.firstName || !vm.case.user.lastName">{{vm.case.user.email}}</div>
@@ -35,7 +35,7 @@
                     </div>
 
                     <!-- Summary -->
-                    <div class="drsl-form-grid">
+                    <div class="drsl-form-grid drsl-summary-block">
                         <div class="drsl-label" translate="case.details.summary">Summary</div>
                         <div class="drsl-value">{{vm.summary}}</div>
                     </div>
@@ -84,7 +84,7 @@
                     </ol>
                 </div>
             </div>
-            <div class="drsl-form-grid" style="width: 688px;">
+            <div class="drsl-form-grid drsl-update-history-box">
                 <div class="drsl-label">Update History</div>
                 <div>
                     <div class="noUpdates" ng-hide="vm.updates.length > 0">
@@ -96,15 +96,15 @@
                         <thead>
                             <tr>
                                 <th class="drsl-label">Message</th>
-                                <th class="drsl-label" style="padding-left: 177px;">Date</th>
-                                <th class="drsl-label" style="padding-left: 152px;">User/Expert</th>
+                                <th class="drsl-label drsl-date-header">Date</th>
+                                <th class="drsl-label drsl-user-header">User/Expert</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="update in vm.updates track by $index" style="font-weight: 500; color: #404040">
-                                <td style="max-width: 200px; word-break: break-all;">{{update.updateMsg}}</td>
-                                <td style="white-space: nowrap; width: 213px; padding-left: 35px; padding-bottom: 35px;">{{update.dateUpdated | date:"MMM dd, yyyy h:mm a"}}</td>
-                                <td style="width: 87px; padding-bottom: 35px; padding-left: 8px;">{{update.user.login}}</td>
+                            <tr ng-repeat="update in vm.updates track by $index" class="drsl-update-trow">
+                                <td class="drsl-update-message-tdata">{{update.updateMsg}}</td>
+                                <td class="drsl-update-date-tdata">{{update.dateUpdated | date:"MMM dd, yyyy h:mm a"}}</td>
+                                <td class="drsl-update-user-tdata">{{update.user.login}}</td>
                             </tr>
                         </tbody>
                     </table>

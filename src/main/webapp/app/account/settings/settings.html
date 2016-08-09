@@ -69,7 +69,7 @@
     </div>
     <div class="form-group">
       <div class="drsl-placeholder-label" type="text">
-        <input type="text" id="email" name="email" disabled ng-model="vm.settingsAccount.email" ng-minlength=1 ng-maxlength=50 required maxlength="50" ng-change="vm.updatingUser = true">
+        <input type="text" id="email" name="email" ng-model="vm.settingsAccount.email" ng-minlength=1 ng-maxlength=50 required maxlength="50" ng-change="vm.updatingUser = true">
         <span class="unit" translate="settings.form.email">Email Address</span>
       </div>
         <div ng-show="form.email.$dirty && form.email.$invalid">

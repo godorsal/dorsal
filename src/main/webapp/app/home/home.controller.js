@@ -23,8 +23,6 @@
 
         function getAccount() {
             Principal.identity().then(function(account) {
-                console.log(account);
-                debugger;
                 vm.account = account;
                 vm.isAuthenticated = Principal.isAuthenticated;
                 if(vm.account && !vm.account.firstName && !vm.account.lastName.length){
