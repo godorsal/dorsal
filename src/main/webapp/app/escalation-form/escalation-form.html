@@ -51,25 +51,26 @@
                     </div>
                 </div>
                 <div class="escalation-form-grid">
-                    <linear-radio target-data="radio.selectedValue"
+                    <linear-radio
+                    target-data="radio.selectedValue"
                     radio-data="radio"
                     start-limit="15"
                     ng-repeat="radio in vm.escalationTypes"
-                    issue="vm.issue"
                     escalation="vm.escalationType"
                     class="escalation-radios"
+                    issue="vm.issue"
                     ></linear-radio>
                 </div>
                 <div>
                     <label for="explanation" class="drsl-label">Reason for escalation and/or reassignment</label>
-                    <textarea name="explanation" rows="8" cols="40" class="form-control drsl-value" name="detailedResolution" id="detailedResolution" style="resize: none;" ng-model="vm.thisEscalation.reason"></textarea>
+                    <textarea name="explanation" rows="8" cols="40" class="form-control drsl-value" name="detailedResolution" id="detailedResolution" style="resize: none;" ng-model="vm.thisEscalation.reason" placeholder="Please enter a reason for this change." ng-change="vm.checkStatus()"></textarea>
                 </div>
 
 
             </div>
             <div style="text-align: right; padding: 20px;">
                 <button class="btn btn-default" ng-click="vm.cancel($event)">Cancel</button>
-                <button type="submit" class="btn btn-success">Request</button>
+                <button type="submit" class="btn btn-success" uib-tooltip="{{vm.requestMessage}}" ng-mouseover="vm.checkStatus()">Request</button>
             </div>
         </div>
     </form>
