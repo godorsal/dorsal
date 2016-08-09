@@ -76,6 +76,11 @@ public class DorsalExpertMatchService {
                 }
             }
 
+            /**
+             *  Mark an expert as busy when a case is assigned to the expert. If the expert is the default dorsal
+             *  concierge (fallback if match can't be found) don't mark it as unavailable.
+            */
+
             if (    expert != null
                 && !expert.getUser().getLogin().equalsIgnoreCase(dorsalProperties.getSupport().getConcierge()/*"dorsal-concierge"*/)) {
                 // Mark Expert as no longer available

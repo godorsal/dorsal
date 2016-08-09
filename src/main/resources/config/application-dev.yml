@@ -13,6 +13,7 @@
 dorsal:
     support:
         mail: support@godorsal.com
+        concierge: dorsal-concierge
 
     application:
         url: localhost:8080
