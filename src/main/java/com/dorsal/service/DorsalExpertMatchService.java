@@ -1,5 +1,6 @@
 package com.dorsal.service;
 
+import com.dorsal.config.DorsalProperties;
 import com.dorsal.domain.ExpertAccount;
 import com.dorsal.domain.Supportcase;
 import com.dorsal.repository.ExpertAccountRepository;
@@ -25,20 +26,24 @@ public class DorsalExpertMatchService {
     @Inject
     private ExpertAccountRepository expertAccountRepository;
 
+    @Inject
+    private DorsalProperties dorsalProperties;
+
 
     // Match expert
     public ExpertAccount findExpertForSupportcase(Supportcase supportcase) {
-
         //
         // Set the Expert for this account
         // This is the placeholder for the matching algorithm
         //
+        ExpertAccount expert = null;
+
         try {
             // First technology preference, is available and ordered by score
             List experts = expertAccountRepository.findFirstTechnologyPreference(supportcase.getTechnology().getId(),new PageRequest(0,5));
             log.info("First Technology choice: Number of Experts: " + experts.size());
             Iterator itExperts = experts.iterator();
-            ExpertAccount expert =  null;
+
             while (itExperts.hasNext()){
                 expert = (ExpertAccount)itExperts.next();
                 log.info("Expert " + expert.getUser().getFirstName() + " has score " + expert.getExpertScore());
@@ -46,7 +51,7 @@ public class DorsalExpertMatchService {
 
             if (experts.size() > 0) {
                 log.info("Expert Found for Technology [" + supportcase.getTechnology().getName() + "]");
-                return (ExpertAccount)experts.get(0);
+                expert = (ExpertAccount)experts.get(0);
             }
             else
             {
@@ -55,14 +60,14 @@ public class DorsalExpertMatchService {
                 log.info("Second Technology choice: Number of Experts: " + experts.size());
                 if (experts.size() > 0) {
                     log.info("Expert Found for Technology [" + supportcase.getTechnology().getName() + "]");
-                    return (ExpertAccount)experts.get(0);
+                    expert = (ExpertAccount)experts.get(0);
                 } else {
                     // Find any expert that is available ordered by score
                     experts = expertAccountRepository.findExpertThatIsAvailable(new PageRequest(0,5));
                     log.info("Any Expert available: Number of Experts: " + experts.size());
                     if (experts.size() > 0) {
                         log.info("Found available Expert ");
-                        return (ExpertAccount)experts.get(0);
+                        expert = (ExpertAccount)experts.get(0);
                     } else {
                         // No match found -- need to address it to a concierge
                         log.warn("No expert available to work on the case. We keep searching...");
@@ -70,6 +75,19 @@ public class DorsalExpertMatchService {
                     }
                 }
             }
+
+            if (    expert != null
+                && !expert.getUser().getLogin().equalsIgnoreCase(dorsalProperties.getSupport().getConcierge()/*"dorsal-concierge"*/)) {
+                // Mark Expert as no longer available
+                expert.setIsAvailable(false);
+                expertAccountRepository.save(expert);
+
+                // Assign Expert to support case
+                supportcase.setExpertaccount(expert);
+                log.info("Expert [" + expert.getId() + "] assigned to support case: [" + supportcase.getSummary() + "]");
+            }
+
+            return expert;
 
         } catch (Exception e) {
             log.error("Error calling into expertAccountRepository. Reason: " +e );

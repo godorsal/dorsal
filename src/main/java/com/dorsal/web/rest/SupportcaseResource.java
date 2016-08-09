@@ -87,11 +87,7 @@ public class SupportcaseResource {
         // This is the placeholder for the matching algorithm
         //
         ExpertAccount expert = dorsalExpertMatchService.findExpertForSupportcase(supportcase);
-        if (expert != null) {
-            // Mark Expert as no longer available
-            expert.setIsAvailable(false);
-            expertAccountRepository.save(expert);
-
+        if (   expert != null ) {
             // Assign Expert to support case
             supportcase.setExpertaccount(expert);
             log.info("Expert [" + expert.getId() + "] assigned to support case: [" + supportcase.getSummary() + "]");
