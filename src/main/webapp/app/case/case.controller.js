@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('CaseController', CaseController);
 
-    CaseController.$inject = ['$scope', '$window', '$interval', '$timeout', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', '$state', 'StatusModel', 'Rating', 'Expertbadge', 'DrslMetadata', 'Caseupdate', 'AttachmentModalService', 'DrslAttachFileService', 'DrslNewCaseService'];
+    CaseController.$inject = ['$scope', '$window', '$interval', '$timeout', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', '$state', 'StatusModel', 'Rating', 'Expertbadge', 'DrslMetadata', 'Caseupdate', 'AttachmentModalService', 'DrslAttachFileService', 'DrslNewCaseService', '$filter'];
 
-    function CaseController($scope, $window, $interval, $timeout, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, $state, StatusModel, Rating, Expertbadge, DrslMetadata, Caseupdate, AttachmentModalService, DrslAttachFileService, DrslNewCaseService) {
+    function CaseController($scope, $window, $interval, $timeout, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, $state, StatusModel, Rating, Expertbadge, DrslMetadata, Caseupdate, AttachmentModalService, DrslAttachFileService, DrslNewCaseService, $filter) {
 
         var vm = this, casePoll;
         vm.init = init;
