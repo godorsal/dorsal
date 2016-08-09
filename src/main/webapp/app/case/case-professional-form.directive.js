@@ -37,17 +37,23 @@
             };
 
             scope.submit = function () {
-                scope.case.estimateLog = (scope.case.estimateLog) ? scope.case.estimateLog : '';
-                scope.expertForm.estimateHours.$pristine = true;
-                scope.case.estimateHours = scope.localEstimateHours;
+                var logDate = $filter('date')(new Date(), 'MMM dd, yyyy');
 
-                if (StatusModel.checkCaseStatus(scope.case.status, 'created') && scope.case.estimateHours) {
-                    scope.case.status = StatusModel.getState('estimated');
-                    scope.case.estimateLog += 'CREATED ' + $filter('date')(new Date(), 'MMM dd, yyyy') + ' ' + scope.case.estimateHours +  'hrs ' + scope.case.estimateComment + '\n';
+                scope.case.estimateLog = (scope.case.estimateLog) ? scope.case.estimateLog : '';
+
+                if (StatusModel.checkCaseStatus(scope.case.status, 'created')) {
+                    scope.case.estimateHours = scope.localEstimateHours;
+                    if (scope.case.estimateHours) {
+                        scope.case.status = StatusModel.getState('estimated');
+                        scope.case.estimateLog += 'CREATED ' + logDate + ' ' + scope.case.estimateHours +  'hrs ' + scope.case.estimateComment + '\n';
+                    }
                 } else if (!scope.expertForm.estimateHours.$pristine && scope.localEstimateHours !== scope.case.estimateHours) {
                     scope.case.isApproved = false;
-                    scope.case.estimateLog += 'UPDATED ' + $filter('date')(new Date(), 'MMM dd, yyyy') + ' ' + scope.case.estimateHours +  'hrs ' + scope.case.estimateComment + '\n';
+                    scope.case.estimateHours = scope.localEstimateHours;
+                    scope.case.estimateLog += 'UPDATED ' + logDate + ' ' + scope.case.estimateHours +  'hrs ' + scope.case.estimateComment + '\n';
                 }
+
+                scope.expertForm.estimateHours.$pristine = true;
 
                 scope.case.$update(caseUpdateSuccess, caseUpdateError);
                 function caseUpdateSuccess(){
