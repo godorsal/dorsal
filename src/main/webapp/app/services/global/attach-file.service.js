@@ -77,7 +77,12 @@
                         id: supportCase.id
                     };
                     Attachment.save(service.attachment, function () {
+                        // on success, proceed to the next file
                         uploadFileInQueue(supportCase);
+                    }, function () {
+                        // on error, proceed to the next file
+                        uploadFileInQueue(supportCase);
+                        // TODO: add a toastr notification listing the files that failed to upload
                     });
                 });
             } else {
