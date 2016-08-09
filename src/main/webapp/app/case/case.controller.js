@@ -134,10 +134,12 @@
         }
 
         function getCaseExpertBadges() {
-            CaseService.getExpertBadges(vm.currentCase.expertaccount.id).then(function(data){
-                vm.expertBadges = data.badges;
-                vm.expertBadgeResources = data.expertBadgeResources;
-            });
+            if (vm.currentCase.expertaccount && vm.currentCase.expertaccount.id) {
+                CaseService.getExpertBadges(vm.currentCase.expertaccount.id).then(function (data) {
+                    vm.expertBadges = data.badges;
+                    vm.expertBadgeResources = data.expertBadgeResources;
+                });
+            }
         }
 
         function isCaseExpert(){
