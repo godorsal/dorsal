@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .directive('caseProfessionalForm', caseProfessionalForm);
 
-    caseProfessionalForm.$inject = ['StatusModel', 'toastr', 'CaseCompleteService'];
+    caseProfessionalForm.$inject = ['StatusModel', 'toastr', 'CaseCompleteService', '$filter'];
 
-    function caseProfessionalForm(StatusModel, toastr, CaseCompleteService) {
+    function caseProfessionalForm(StatusModel, toastr, CaseCompleteService, $filter) {
         var directive = {
             restrict: 'E',
             scope:  {
@@ -43,10 +43,10 @@
 
                 if (StatusModel.checkCaseStatus(scope.case.status, 'created') && scope.case.estimateHours) {
                     scope.case.status = StatusModel.getState('estimated');
-                    scope.case.estimateLog += 'CREATED ' + new Date().toISOString().slice(0, 19).replace('T', ' ') + ' ' + scope.case.estimateHours +  'hrs ' + scope.case.estimateComment + '\n';
+                    scope.case.estimateLog += 'CREATED ' + $filter('date')(new Date(), 'MMM dd, yyyy') + ' ' + scope.case.estimateHours +  'hrs ' + scope.case.estimateComment + '\n';
                 } else if (!scope.expertForm.estimateHours.$pristine && scope.localEstimateHours !== scope.case.estimateHours) {
                     scope.case.isApproved = false;
-                    scope.case.estimateLog += 'UPDATED ' + new Date().toISOString().slice(0, 19).replace('T', ' ') + ' ' + scope.case.estimateHours +  'hrs ' + scope.case.estimateComment + '\n';
+                    scope.case.estimateLog += 'UPDATED ' + $filter('date')(new Date(), 'MMM dd, yyyy') + ' ' + scope.case.estimateHours +  'hrs ' + scope.case.estimateComment + '\n';
                 }
 
                 scope.case.$update(caseUpdateSuccess, caseUpdateError);

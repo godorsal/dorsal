@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .factory('DrslAttachFileService', DrslAttachFileService);
 
-    DrslAttachFileService.$inject = ['Attachment', 'DataUtils', 'toastr', '$translate'];
+    DrslAttachFileService.$inject = ['Attachment', 'DataUtils', 'toastr', '$translate', 'DrslNewCaseService'];
 
-    function DrslAttachFileService(Attachment, DataUtils, toastr, $translate) {
+    function DrslAttachFileService(Attachment, DataUtils, toastr, $translate, DrslNewCaseService) {
         var service = {};
 
         service.attachFileList = [];
@@ -74,10 +74,16 @@
                     service.attachment.dataStream = base64Data;
                     service.attachment.dataStreamContentType = file.type;
                     service.attachment.supportcase = {
-                        id: supportCase.id
+                        id: DrslNewCaseService.newCaseId
+                        // id: supportCase.id
                     };
                     Attachment.save(service.attachment, function () {
+                        // on success, proceed to the next file
                         uploadFileInQueue(supportCase);
+                    }, function () {
+                        // on error, proceed to the next file
+                        uploadFileInQueue(supportCase);
+                        // TODO: add a toastr notification listing the files that failed to upload
                     });
                 });
             } else {

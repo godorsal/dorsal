@@ -5,18 +5,21 @@
     .module('dorsalApp')
     .controller('EscalationFormController', EscalationFormController);
 
-    EscalationFormController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase', 'expert', 'EscalateCase', 'Casetechnologyproperty'];
+    EscalationFormController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase', 'expert', 'EscalateCase', 'Casetechnologyproperty', '$scope'];
 
-    function EscalationFormController($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase, expert, EscalateCase, Casetechnologyproperty) {
+    function EscalationFormController($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase, expert, EscalateCase, Casetechnologyproperty, $scope) {
         var vm = this;
         vm.cancel = cancel;
         vm.submit = submit;
         vm.case = drslCase;
         vm.expert = expert;
+        vm.checkStatus = checkStatus;
         vm.technologyProps = [];
         vm.summary = vm.case.summary.toString();
         vm.escalationType = {};
         vm.issue = {};
+        vm.thisEscalation = {};
+        checkStatus();
         vm.escalationTypes = [
             {
                 type: "escalation",
@@ -37,7 +40,7 @@
                     },
                     {
                         code: "escalate_reassign",
-                        value: "Escalate_Reassign",
+                        value: "Escalate and Reassign",
                         id: 3,
                         label: "Escalate and Reassign",
                         name:"Escalate and Reassign"
@@ -50,17 +53,12 @@
             $uibModalInstance.dismiss('cancel');
         }
         EscalateCase.query(function(data){
-            vm.thisEscalation = data.find(function(escalation){
-                return escalation.supportcase.id == vm.case.id;
+            data.find(function(escalation){
+                if(escalation.supportcase.id == vm.case.id){
+                    vm.thisEscalation = escalation;
+                }
             })
         })
-        // Casetechnologyproperty.query(function(result) {
-        //     result.forEach(function(property){
-        //         if(property.supportcase.id === vm.case.id){
-        //             vm.technologyProps.push(property)
-        //         }
-        //     })
-        // });
         Casetechnologyproperty.query(function(result) {
             result.forEach(function(property){
                 if(property.supportcase.id === vm.case.id){
@@ -91,6 +89,15 @@
                 }
             })
         });
+        function checkStatus(){
+            if(!vm.thisEscalation.reason){
+                vm.requestMessage = "Reason for escalation or reassignment is required";
+            } else if(!vm.issue.value) {
+                vm.requestMessage = "Escalation type is required";
+            } else {
+                vm.requestMessage = "";
+            }
+        }
         function submit() {
             vm.escalation = vm.thisEscalation;
             vm.escalation.escalationType = vm.issue.value

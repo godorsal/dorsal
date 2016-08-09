@@ -5,9 +5,10 @@
     .module('dorsalApp')
     .controller('CaseController', CaseController);
 
-    CaseController.$inject = ['$scope', '$window', '$interval', '$timeout', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', '$state', 'StatusModel', 'Rating', 'Expertbadge', 'DrslMetadata', 'Caseupdate', 'AttachmentModalService', 'DrslAttachFileService'];
+    CaseController.$inject = ['$scope', '$window', '$interval', '$timeout', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', '$state', 'StatusModel', 'Rating', 'Expertbadge', 'DrslMetadata', 'Caseupdate', 'AttachmentModalService', 'DrslAttachFileService', 'DrslNewCaseService'];
 
-    function CaseController($scope, $window, $interval, $timeout, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, $state, StatusModel, Rating, Expertbadge, DrslMetadata, Caseupdate, AttachmentModalService, DrslAttachFileService) {
+    function CaseController($scope, $window, $interval, $timeout, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, $state, StatusModel, Rating, Expertbadge, DrslMetadata, Caseupdate, AttachmentModalService, DrslAttachFileService, DrslNewCaseService) {
+
         var vm = this, casePoll;
         vm.init = init;
         vm.DrslMetadata = DrslMetadata;
@@ -91,8 +92,8 @@
                 if (!casePoll) {
                     vm.pollForCaseUpdates();
                 }
-                if (vm.currentCase.estimateLog) {
-                    vm.estimateLogs = vm.currentCase.estimateLog.split('\n');
+                if(DrslNewCaseService.newCaseId){
+                    getCurrentCase()
                 }
             });
 
@@ -158,13 +159,17 @@
         * @returns {Array}
         */
         function getCurrentCase() {
-            var cases = [];
-
-            if (vm.cases.length > 1) {
-                cases = vm.cases.slice(0, 1);
-            }
-
-            return cases;
+            var thisCase = vm.supportcases.find(function(supportcase){
+                return DrslNewCaseService.newCaseId == supportcase.id;
+            })
+            console.log(thisCase);
+            setCurrentCase(thisCase);
+            // var cases = [];
+            // if (vm.cases.length > 1) {
+            //     cases = vm.cases.slice(0, 1);
+            // }
+            //
+            // return cases;
         }
 
         /**
@@ -187,6 +192,10 @@
         */
         function setCurrentCase(targetCase) {
             vm.currentCase = targetCase;
+            if (vm.currentCase.estimateLog) {
+                vm.estimateLogs = vm.currentCase.estimateLog.split('\n');
+                console.log(vm.estimateLogs);
+            }
             getCaseExpertBadges();
             getCaseUpdates();
             $timeout(function () {
@@ -362,7 +371,7 @@
                     vm.currentCase.isApproved = true;
                     vm.currentCase.status = StatusModel.getState('working');
                     vm.currentCase.estimateLog = (vm.currentCase.estimateLog) ? vm.currentCase.estimateLog : '';
-                    vm.currentCase.estimateLog += 'ACCEPTED ' + new Date().toISOString().slice(0, 19).replace('T', ' ') + ' ' + vm.currentCase.estimateHours +  'hrs ' + vm.currentCase.estimateComment + '\n';
+                    vm.currentCase.estimateLog += 'ACCEPTED ' + $filter('date')(new Date(), 'MMM dd, yyyy') + ' ' + vm.currentCase.estimateHours +  'hrs ' + vm.currentCase.estimateComment + '\n';
                     vm.currentCase.$update();
                 });
 
