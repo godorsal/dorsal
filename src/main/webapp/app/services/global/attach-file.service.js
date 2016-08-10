@@ -78,7 +78,7 @@
             var file = service.attachFileList.shift(),
                 caseId = (supportCase)? supportCase.id : DrslNewCaseService.newCaseId;
 
-            if (file && caseId) {
+            if (file && !file.dataStream && caseId) {
                 DataUtils.toBase64(file, function (base64Data) {
                     service.attachment.name = file.name.replace(/\s|,|-/g, '');
                     service.attachment.dataStream = base64Data;

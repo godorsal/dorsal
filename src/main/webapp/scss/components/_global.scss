@@ -821,6 +821,7 @@ display: inline-block;
     .drsl-attachment-control {
         color: $brand-color;
         text-transform: lowercase;
+        margin-left: 10px;
 
         &:hover {
             text-decoration: underline;

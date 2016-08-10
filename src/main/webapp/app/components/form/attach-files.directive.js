@@ -5,10 +5,10 @@
         .module('dorsalApp')
         .directive('drslAttachFiles', drslAttachFiles);
 
-    drslAttachFiles.$inject = ['DrslAttachFileService', 'Principal', '$sce', '$translate', 'Attachment'];
+    drslAttachFiles.$inject = ['DrslAttachFileService', 'Principal', '$sce', '$translate', 'Attachment', 'DataUtils'];
 
 
-    function drslAttachFiles(DrslAttachFileService, Principal, $sce, $translate, Attachment) {
+    function drslAttachFiles(DrslAttachFileService, Principal, $sce, $translate, Attachment, DataUtils) {
         var directive = {
             restrict: 'E',
             scope:  {
@@ -51,7 +51,6 @@
              */
             scope.closeAttachments = function () {
                 scope.attachmentsOpen = false;
-                DrslAttachFileService.setAttachments(scope.attachFileList, scope.attachErrFileList);
             };
 
             /**
@@ -62,7 +61,6 @@
             scope.attachFiles = function (files, errFiles) {
                 scope.attachFileList = scope.attachFileList.concat(files);
                 scope.attachErrFileList = scope.attachErrFileList.concat(errFiles);
-                DrslAttachFileService.setAttachments(scope.attachFileList, scope.attachErrFileList);
             };
 
             /**
@@ -86,6 +84,39 @@
                         }
                     })
                 })
+            };
+
+            /**
+             * Cancel attachments, clears local and service file lists
+             */
+            scope.cancelAttachments = function () {
+                scope.attachFileList = [];
+                scope.attachErrFileList = [];
+                DrslAttachFileService.setAttachments(scope.attachFileList, scope.attachErrFileList);
+
+                scope.closeAttachments();
+                scope.$emit('cancelAttachments');
+            };
+
+            /**
+             * Sets the attachments in the service and calls processes to close the views.
+             */
+            scope.doneWithAttachments = function () {
+                scope.attachFileList = scope.attachFileList.filter(function (file) {
+                    return !file.dataStream
+                });
+
+                DrslAttachFileService.setAttachments(scope.attachFileList, scope.attachErrFileList);
+                scope.closeAttachments();
+                scope.$emit('doneWithAttachments');
+            };
+
+            /**
+             * Views the attachment by calling DataUtils' openFile method.
+             * @param attachment
+             */
+            scope.viewAttachment = function(attachment){
+                DataUtils.openFile(attachment.dataStreamContentType, attachment.dataStream);
             };
 
             // If we have a case id, listen for events that may require another rest call
