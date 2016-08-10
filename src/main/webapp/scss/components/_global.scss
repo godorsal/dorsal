@@ -817,6 +817,15 @@ display: inline-block;
         margin-left: 5px;
     }
 
+    .drsl-attachment-control {
+        color: $brand-color;
+        text-transform: lowercase;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
     &.hide-buttons {
         .drsl-attachment-items-wrapper {
             margin: auto;
