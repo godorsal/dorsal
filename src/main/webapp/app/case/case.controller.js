@@ -73,7 +73,6 @@
                     }
 
                     vm.setCurrentCase(vm.supportcases[currentCaseIndex]);
-                    DrslAttachFileService.uploadAttachFileList(vm.supportcases[currentCaseIndex]);
                 }
 
                 if (data.identity) {
@@ -172,6 +171,9 @@
                 if (thisCase) {
                     setCurrentCase(thisCase);
                 }
+
+                // add attachments to the new case
+                DrslAttachFileService.uploadAttachFileList();
             }
         }
 

@@ -75,16 +75,16 @@
          * @param supportCase
          */
         function uploadFileInQueue(supportCase) {
-            var file = service.attachFileList.shift();
+            var file = service.attachFileList.shift(),
+                caseId = (supportCase)? supportCase.id : DrslNewCaseService.newCaseId;
 
-            if (file) {
+            if (file && caseId) {
                 DataUtils.toBase64(file, function (base64Data) {
                     service.attachment.name = file.name.replace(/\s|,|-/g, '');
                     service.attachment.dataStream = base64Data;
                     service.attachment.dataStreamContentType = file.type;
                     service.attachment.supportcase = {
-                        id: DrslNewCaseService.newCaseId
-                        // id: supportCase.id
+                        id: caseId
                     };
                     Attachment.save(service.attachment, function () {
                         // on success, proceed to the next file
