@@ -51,6 +51,7 @@
 
         $scope.$on('doneWithAttachments', function () {
             DrslAttachFileService.uploadAttachFileList(vm.case);
+            DrslAttachFileService.deleteAttachments(vm.case);
             $uibModalInstance.dismiss('cancel');
         });
 

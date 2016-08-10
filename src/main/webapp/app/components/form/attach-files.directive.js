@@ -28,6 +28,7 @@
             scope.attachmentsOpen = false;
             scope.attachFileList = [];
             scope.attachErrFileList = [];
+            scope.deleteFileList = [];
             scope.isAuthenticated = Principal.isAuthenticated;
             scope.attachmentMessageLoggedIn = $sce.trustAsHtml($translate.instant('global.messages.info.attachmentMessageLoggedIn'));
             scope.attachmentMessageLoggedOut = $sce.trustAsHtml($translate.instant('global.messages.info.attachmentMessageLoggedOut'));
@@ -68,6 +69,12 @@
              * @param fileIndex
              */
             scope.removeAttachment = function (fileIndex) {
+                var file = scope.attachFileList[fileIndex];
+
+                if (file.dataStream) {
+                    scope.deleteFileList.push(file);
+                }
+
                 scope.attachFileList.splice(fileIndex, 1);
             };
 
@@ -92,7 +99,9 @@
             scope.cancelAttachments = function () {
                 scope.attachFileList = [];
                 scope.attachErrFileList = [];
+                scope.deleteFileList = [];
                 DrslAttachFileService.setAttachments(scope.attachFileList, scope.attachErrFileList);
+                DrslAttachFileService.setDeletions(scope.deleteFileList);
 
                 scope.closeAttachments();
                 scope.$emit('cancelAttachments');
@@ -107,6 +116,7 @@
                 });
 
                 DrslAttachFileService.setAttachments(scope.attachFileList, scope.attachErrFileList);
+                DrslAttachFileService.setDeletions(scope.deleteFileList);
                 scope.closeAttachments();
                 scope.$emit('doneWithAttachments');
             };
@@ -127,6 +137,12 @@
             });
 
             scope.$on('attachmentUploadComplete', function(){
+                if (scope.caseId) {
+                    scope.getCaseAttachments();
+                }
+            });
+
+            scope.$on('attachmentsRemoved', function(){
                 if (scope.caseId) {
                     scope.getCaseAttachments();
                 }
