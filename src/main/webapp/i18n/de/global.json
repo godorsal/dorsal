@@ -126,7 +126,8 @@
             "save": "Speichern",
             "update": "Update",
             "submit": "Submit",
-            "view": "Details"
+            "view": "View",
+            "download": "Download"
         },
         "detail": {
             "field": "Feld",

@@ -15,6 +15,7 @@
                         <div class="drsl-attachment-item" ng-class-odd="'drsl-attachment-item-odd'" ng-repeat="file in attachFileList">
                             <span>{{file.name}}</span>
                             <span class="pull-right">
+                                <a ng-show="file.dataStream" class="drsl-attachment-control" ng-click="$event.stopPropagation()" href="data:application/octet-stream;charset=utf-16le;base64,{{file.dataStream}}" download="{{file.name}}" translate="entity.action.download">download</a>
                                 <span ng-show="file.dataStream" class="drsl-attachment-control" translate="entity.action.view" ng-click="viewAttachment(file);">view</span>
                                 <span class="drsl-attachment-control" translate="entity.action.delete" ng-click="removeAttachment($index);">remove</span>
                             </span>
