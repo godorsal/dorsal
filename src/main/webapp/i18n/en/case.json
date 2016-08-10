@@ -26,7 +26,7 @@
                 "estimated": "Estimated",
                 "estimated.info": "This case has been estimated and is awaiting your approval.",
                 "working": "Working",
-                "working.info": "An expert is currently working on this issue.",
+                "working.info": "Your expert is working on this issue.",
                 "completed": "Completed",
                 "completed.info": "The expert has marked this issue as resolved.",
                 "closed": "Closed",
