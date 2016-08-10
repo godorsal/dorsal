@@ -3,6 +3,7 @@ package com.dorsal.repository;
 import com.dorsal.domain.ExpertAccount;
 
 import com.dorsal.domain.Technology;
+import com.dorsal.domain.enumeration.Availability;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
@@ -32,4 +33,10 @@ public interface ExpertAccountRepository extends JpaRepository<ExpertAccount,Lon
 
     @Query("select ea from ExpertAccount ea where ea.isAvailable = true ORDER BY ea.expertScore DESC")
     List<ExpertAccount> findExpertThatIsAvailable(Pageable pageable);
+
+    @Query("select ea from ExpertAccount ea where (ea.expertAvailability = :FULLTIME OR ea.expertAvailability = :MONFRI) AND (ea.firsttechnology.id = :technologyid OR ea.secondtechnology.id = :technologyid)  ORDER BY ea.expertScore DESC")
+    List<ExpertAccount> findExpertsThatWorkFullTime(@Param("technologyid") long tecnologyid, @Param("FULLTIME") Availability fulltime, @Param("MONFRI") Availability monfri, Pageable pageable);
+
+    @Query("select ea from ExpertAccount ea where ea.user.login = :concierge")
+    ExpertAccount getDorsalConcierge(@Param("concierge") String conciergeLogin);
 }

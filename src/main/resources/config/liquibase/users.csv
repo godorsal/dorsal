@@ -3,14 +3,4 @@ id;login;password_hash;first_name;last_name;email;activated;lang_key;created_by
 2;anonymoususer;$2a$10$j8S5d7Sr7.8VTOYNviDPOeWX8KcYILUVJBsYV83Y5NtECayypx9lO;Anonymous;User;anonymous@localhost;true;en;system
 3;admin;$2a$10$C2u09zr14YApwc495/op9.bQeiuTaF.4Ua7TrMlh2NqFo2sAr7pKa;Administrator;Administrator;admin@localhost;true;en;system
 4;user;$2a$10$XZJ44WYIt9e4k6nOoiCFMOLxrJryVAVkpfcaMctpRKeXDTrJ1.r/G;User;User;user@localhost;true;en;system
-5;tom;$2a$10$poSz5Yk6X8peZkVlL6VjZOMn1SuVsTgaq.MD3gTo3xrkYYf5Izl4G;Tom;Johns;tomj@localhost;true;en;system
-6;jack;$2a$10$hOpWRSLo1M6NRPKH3.U0uePUd32wvK/QctH6..UVoEldFGXqITMma;Jack;Wolf;jackw@localhost;true;en;system
-7;olivia;$2a$10$MSGNpr0..slfnDdPQouXCu787GyThCDwsPWbe8136JUjJMvhmYMqq;Olivia;Smith;olivia@localhost;true;en;system
-8;kurt;$2a$10$poSz5Yk6X8peZkVlL6VjZOMn1SuVsTgaq.MD3gTo3xrkYYf5Izl4G;Kurt;Vancouver;kurtv@localhost;true;en;system
-9;dorsal-concierge;$2a$10$hsyWRkHY.kQWDibu.wUN0ub4KuyH410SIT5xtoTTwZYJra.zhAlCK;Dorsal;Concierge;support@godorsal.com;true;en;system
-10;mthomas;$2a$10$eyEQ7YbNv.lFVMOQuP2V9ONrHRf7iuOp02huoMfQ2wZ9C.5mrLfO2;Michael;Thomas;jobs@mikethomas.us;true;en;system
-11;rbradford;$2a$10$mdawJVdZ1aghbD4QW9Ohbu4CuzpieCH4OWl4vVuqHeikieucVC9Oa;Ronald;Bradford;me@ronaldbradford.com;true;en;system
-12;wmartin;$2a$10$YTqXaaz5C39PEL7R4i8qrOB3YvS8exdDS.x7qmLXmqwGcrcpX6Kbu;Wayne;Martin;w5martin@yahoo.com;true;en;system
-13;cyeung;$2a$10$BoWeTnNbQALI1LfUvI0fmevU3YYKP.oG1jW1bYO.3BkA4Nk4FUs8S;Christopher;Yeung;yeung.chris@gmail.com;true;en;system
-14;keppro;$2a$10$kicv4DAu571XSunA3VCkcegbepXE4iMQRi7bfjvAYQJUgzwx20Xnm;Kep;;keppro@keppro.net;true;en;system
-15;sashan;$2a$10$uw9c.oTeUhHFTr5/gZkwU.oyRW.K/IC5mRuBBOlknEjMuto.oTXPO;Alexander;Nemirovsky;sasha@sats.net;true;en;system
+5;dorsal-concierge;$2a$10$hsyWRkHY.kQWDibu.wUN0ub4KuyH410SIT5xtoTTwZYJra.zhAlCK;Dorsal;Concierge;support@godorsal.com;true;en;system
