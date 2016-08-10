@@ -465,12 +465,15 @@ Cases
                 padding-right: $default-half-padding;
             }
         }
-    }.drsl-tech-props{
-        width: 245px;
+    }
+    .drsl-tech-props{
+        margin-left: 35px;
+        width: 240px;
         display: inline-block;
     }
     .drsl-case-props{
-        width: 420px;
+        margin-left: 96px;
+        width: 298px;
         display: inline-block;
     }
     .drsl-file-upload-section {
@@ -508,14 +511,13 @@ Cases
 }
 .drsl-update-date-tdata{
     white-space: nowrap;
-    width: 260px;
+    width: 225px;
     padding-left: 15px;
     padding-bottom: 35px;
 }
 .drsl-update-user-tdata{
     width: 87px;
     padding-bottom: 35px;
-    padding-left: 3px;
 }
 .drsl-summary-block{
     width: 363px;

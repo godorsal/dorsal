@@ -35,7 +35,7 @@
                     </div>
 
                     <!-- Summary -->
-                    <div class="drsl-form-grid drsl-summary-block">
+                    <div class="drsl-form-grid">
                         <div class="drsl-label" translate="case.details.summary">Summary</div>
                         <div class="drsl-value">{{vm.summary}}</div>
                     </div>
@@ -47,15 +47,13 @@
                     </div>
                 </div>
                 <!-- Incident Details -->
-                <div class="drsl-tech-props">
-                    <div>
+                    <div class="drsl-tech-props">
                         <span class="drsl-label">Technology Properties</span>
                         <br>
                         <span ng-repeat="property in vm.technologyProps | orderBy: 'tagNO'">
                             <span class="drsl-label">{{property.propertyname}}</span> <span class="drsl-value">{{property.propertyvalue}}</span><br>
                         </span>
                     </div>
-                </div>
                 <br>
                 <!-- Uploaded Files -->
                 <div class="drsl-form-grid">
@@ -76,12 +74,15 @@
             </div> -->
             <div class="drsl-form-grid">
                 <div class="drsl-label">Estimate History</div>
-                <div class="estimateLogList">
+                <div>
+                    <div class="estimateLogList">
+
                     <ol ng-show="vm.estimateLogs">
                         <li class="drsl-value eLogList" ng-repeat="log in vm.estimateLogs | limitTo: vm.estimateLogs.length - 1">
                             {{log}}
                         </li>
                     </ol>
+                </div>
                 </div>
             </div>
             <div class="drsl-form-grid drsl-update-history-box">
