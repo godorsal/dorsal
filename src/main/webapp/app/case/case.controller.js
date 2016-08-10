@@ -376,7 +376,7 @@
                     vm.currentCase.isApproved = true;
                     vm.currentCase.status = StatusModel.getState('working');
                     vm.currentCase.estimateLog = (vm.currentCase.estimateLog) ? vm.currentCase.estimateLog : '';
-                    vm.currentCase.estimateLog += 'ACCEPTED ' + $filter('date')(new Date(), 'MMM dd, yyyy') + ' ' + vm.currentCase.estimateHours +  'hrs ' + vm.currentCase.estimateComment + '##';
+                    vm.currentCase.estimateLog += 'ACCEPTED ' + $filter('date')(new Date(), 'MMM dd, yyyy HH:MM') + ' – ' + vm.currentCase.estimateHours +  'hrs ' + vm.currentCase.estimateComment + '##';
                     vm.currentCase.$update();
                 });
 
