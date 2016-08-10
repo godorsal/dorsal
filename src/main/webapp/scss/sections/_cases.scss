@@ -615,8 +615,35 @@ input[type="radio"] + label span:last-child, input[type="checkbox"] + label span
 .updatesTrow{
     border-bottom: 1px solid black;
 }
+.labelRow{
+    background: #E6E6E6;
+}
 .updatesTdata{
     padding: 10px;
     font-weight: normal;
     text-transform: none;
+    width: 700px;
+}
+.updatesMessage{
+    padding: 10px;
+    font-weight: normal;
+    text-transform: none;
+    width: 700px;
+    min-width: 299px;
+}
+.updatesDate{
+    float: right;
+    padding: 10px;
+    font-weight: normal;
+    text-transform: none;
+}
+.updateNumber{
+    color: black !important;
+    font-weight: 700;
+}
+.logsTdata{
+    padding: 10px;
+    font-weight: normal;
+    text-transform: none;
+    width: 300px;
 }

@@ -197,7 +197,7 @@
             vm.currentCase = targetCase;
             if (vm.currentCase.estimateLog) {
                 vm.estimateLogs = vm.currentCase.estimateLog.split('\n');
-                console.log(vm.estimateLogs);
+                vm.estimateLogs.pop();
             }
             getCaseExpertBadges();
             getCaseUpdates();

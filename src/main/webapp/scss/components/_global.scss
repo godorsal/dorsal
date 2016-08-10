@@ -676,8 +676,9 @@ display: inline-block;
   div:first-child {
     display: inline-block;
     > div{
+        margin-right: 7px;
       > input {
-      width: 265px;
+      width: 260px;
     }
     }
   }
@@ -685,7 +686,7 @@ display: inline-block;
     display: inline-block;
     > div{
       > input {
-      width: 265px;
+      width: 260px;
     }
   }
   }

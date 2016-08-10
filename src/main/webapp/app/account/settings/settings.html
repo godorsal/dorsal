@@ -184,7 +184,7 @@ Your e-mail cannot be longer than 100 characters.
                 Expert Score: {{(vm.currentExpert.expertScore / vm.currentExpert.numberOfCases) | number:0}} out of 100
             </div>
             <div>
-                Profile Visibility:
+                <label for="field_profileVisibility" class="profileVisibilityLabel">Profile Visibility:</label>
                 <select class="form-control privacySelect" name="profileVisibility" ng-model="vm.currentExpert.profileVisibility" id="field_profileVisibility" ng-change="vm.updatingExpert = true">
                     <option value="PUBLIC">Public</option>
                     <option value="INTERN">Intern</option>
