@@ -12,10 +12,10 @@
                     <div>
                         <div class="btn-group" uib-dropdown is-open="status.isopen" ng-if="vm.currentCase.numberOfUpdates">
                             <a id="single-button" type="button" uib-dropdown-toggle ng-disabled="disabled">
-                                <span ng-if="vm.currentCase.numberOfUpdates > 1">
+                                <span ng-if="vm.currentCase.numberOfUpdates + vm.estimateLogs.length > 1">
                                     {{vm.currentCase.numberOfUpdates  + vm.estimateLogs.length}} Updates
                                 </span>
-                                <span ng-if="vm.currentCase.numberOfUpdates < 2">
+                                <span ng-if="vm.currentCase.numberOfUpdates + vm.estimateLogs.length < 2">
                                     {{vm.currentCase.numberOfUpdates}} Update
                                 </span>
                                  <span class="caret"></span>

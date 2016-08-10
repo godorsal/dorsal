@@ -79,7 +79,7 @@
                 "resolved.action": "Complete this Case",
                 "resolved.complete": "This case has been completed",
                 "lastUpdate": "Last update/action ",
-                "deliverDate": "Deliver Date"
+                "deliverDate": "Requested Delivery"
             }
         },
         "history": {
