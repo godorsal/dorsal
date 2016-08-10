@@ -14,6 +14,7 @@
             scope:  {
                 'attachments': '=',
                 'displayType': '@',
+                'addOnAttach': '@',
                 'hideButtons': '@',
                 'hideControls': '@',
                 'hideTooltip': '@',
@@ -63,6 +64,10 @@
             scope.attachFiles = function (files, errFiles) {
                 scope.attachFileList = scope.attachFileList.concat(files);
                 scope.attachErrFileList = scope.attachErrFileList.concat(errFiles);
+
+                if (scope.addOnAttach === 'true') {
+                    scope.updateService();
+                }
             };
 
             /**
@@ -77,6 +82,10 @@
                 }
 
                 scope.attachFileList.splice(fileIndex, 1);
+
+                if (scope.addOnAttach === 'true') {
+                    scope.updateService();
+                }
             };
 
             /**
@@ -112,14 +121,21 @@
              * Sets the attachments in the service and calls processes to close the views.
              */
             scope.doneWithAttachments = function () {
-                scope.attachFileList = scope.attachFileList.filter(function (file) {
+                scope.updateService();
+                scope.closeAttachments();
+                scope.$emit('doneWithAttachments');
+            };
+
+            /**
+             * Update the DrslAttachFileService with the local changes.
+             */
+            scope.updateService = function() {
+                var attachFileList = scope.attachFileList.filter(function (file) {
                     return !file.dataStream
                 });
 
-                DrslAttachFileService.setAttachments(scope.attachFileList, scope.attachErrFileList);
+                DrslAttachFileService.setAttachments(attachFileList, scope.attachErrFileList);
                 DrslAttachFileService.setDeletions(scope.deleteFileList);
-                scope.closeAttachments();
-                scope.$emit('doneWithAttachments');
             };
 
             /**

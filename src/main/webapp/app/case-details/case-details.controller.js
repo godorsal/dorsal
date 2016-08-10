@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('CaseDetailsController', CaseDetailsController);
 
-    CaseDetailsController.$inject = ['$rootScope', '$scope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase', 'expert', 'Casetechnologyproperty', 'Caseupdate', 'Attachment', 'Principal', 'Updatetype', 'Supportcase'];
+    CaseDetailsController.$inject = ['$rootScope', '$scope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase', 'expert', 'Casetechnologyproperty', 'Caseupdate', 'Attachment', 'Principal', 'Updatetype', 'Supportcase', 'DrslAttachFileService'];
 
-    function CaseDetailsController($rootScope, $scope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase, expert, Casetechnologyproperty, Caseupdate, Attachment, Principal, Updatetype, Supportcase) {
+    function CaseDetailsController($rootScope, $scope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase, expert, Casetechnologyproperty, Caseupdate, Attachment, Principal, Updatetype, Supportcase, DrslAttachFileService) {
         var vm = this;
         vm.cancel = cancel;
         vm.submit = submit;
@@ -116,6 +116,9 @@
             vm.caseupdate.updatetype = {
                 id: 1
             };
+
+            DrslAttachFileService.uploadAttachFileList(vm.case);
+            DrslAttachFileService.deleteAttachments(vm.case);
 
             if (vm.caseupdate.id !== null) {
                 Caseupdate.update(vm.caseupdate, onSaveSuccess, onSaveError);
