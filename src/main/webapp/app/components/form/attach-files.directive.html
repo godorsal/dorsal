@@ -1,4 +1,4 @@
-<div class="btn-group drsl-detail-attachment-wrapper" ng-class="{'hide-buttons': hideButtons, 'hide-controls': hideControls, 'drsl-no-attachments': attachFileList.length === 0, 'drsl-hide-tooltip': hideTooltip}" uib-dropdown auto-close="disabled" is-open="attachmentsOpen">
+<div class="btn-group drsl-detail-attachment-wrapper" ng-class="{'hide-buttons': hideButtons, 'hide-controls': hideControls, 'drsl-no-attachments': attachFileList.length === 0, 'drsl-hide-tooltip': hideTooltip, 'drsl-attachments-inline': displayType === 'inline'}" uib-dropdown auto-close="disabled" is-open="attachmentsOpen">
     <!-- Icon and Button -->
     <div uib-tooltip-html="((isAuthenticated())? attachmentMessageLoggedIn: attachmentMessageLoggedOut)"  tooltip-placement="top">
         <button type="button" class="btn btn-default drsl-attach-btn" ng-class="{'btn-success': attachFileList.length > 0, 'disabled':!isAuthenticated()}" ng-click="openAttachments($event)">
@@ -20,9 +20,11 @@
                             </span>
                         </div>
                     </div>
-                    <button class="btn detailButton" translate="entity.action.done" ng-click="doneWithAttachments()" ng-class="{'btn-inactive': !attachFileList.length, 'btn-success': attachFileList.length}">Done</button>
-                    <div class="btn btn-success detailButton" translate="entity.action.attach" ngf-select="attachFiles($files, $invalidFiles)" ngf-multiple="true">Attach</div>
-                    <button class="btn btn-default detailButton" translate="entity.action.later" ng-click="cancelAttachments()">Later</button>
+                    <div class="drsl-main-attachment-btns">
+                        <button class="btn detailButton drsl-main-done-btn" translate="entity.action.done" ng-click="doneWithAttachments()" ng-class="{'btn-inactive': !attachFileList.length, 'btn-success': attachFileList.length}">Done</button>
+                        <div class="btn btn-success detailButton drsl-main-attach-btn" translate="entity.action.attach" ngf-select="attachFiles($files, $invalidFiles)" ngf-multiple="true">Attach</div>
+                        <button class="btn btn-default detailButton drsl-main-later-btn" translate="entity.action.later" ng-click="cancelAttachments()">Later</button>
+                    </div>
                 </form>
             </div>
         </li>

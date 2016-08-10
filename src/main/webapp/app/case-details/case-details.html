@@ -59,11 +59,7 @@
                 <div class="drsl-form-grid">
                     <div class="drsl-label" translate="case.details.uploadedFiles">Uploaded Files</div>
                     <div>
-                        <div class="drsl-file-upload-section">
-                            <div>
-                                <file-upload attachment="vm.attachment" currentcase="vm.case.id"></file-upload>
-                            </div>
-                        </div>
+                        <drsl-attach-files hide-tooltip="true" case-id="{{vm.case.id}}" display-type="inline"></drsl-attach-files>
                     </div>
                 </div>
 
