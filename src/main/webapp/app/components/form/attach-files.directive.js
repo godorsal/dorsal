@@ -77,9 +77,9 @@
              * Get Case Attachments via rest call
              */
             scope.getCaseAttachments = function () {
-                scope.attachFileList = [];
-
                 Attachment.query(function(result){
+                    scope.attachFileList = [];
+
                     result.reverse().forEach(function(attachment){
                         if(attachment.supportcase.id == scope.caseId){
                             scope.attachFileList.push(attachment);
@@ -88,12 +88,18 @@
                 })
             };
 
-            // If we have a case id, listen for case changes
-            if (scope.caseId) {
-                scope.$on('currentCaseSet', function(){
+            // If we have a case id, listen for events that may require another rest call
+            scope.$on('currentCaseSet', function(){
+                if (scope.caseId) {
                     scope.getCaseAttachments();
-                });
-            }
+                }
+            });
+
+            scope.$on('attachmentUploadComplete', function(){
+                if (scope.caseId) {
+                    scope.getCaseAttachments();
+                }
+            });
         }
     }
 })();

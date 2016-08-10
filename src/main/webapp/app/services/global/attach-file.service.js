@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .factory('DrslAttachFileService', DrslAttachFileService);
 
-    DrslAttachFileService.$inject = ['Attachment', 'DataUtils', 'toastr', '$translate', 'DrslNewCaseService'];
+    DrslAttachFileService.$inject = ['Attachment', 'DataUtils', 'toastr', '$translate', 'DrslNewCaseService', '$rootScope', '$timeout'];
 
-    function DrslAttachFileService(Attachment, DataUtils, toastr, $translate, DrslNewCaseService) {
+    function DrslAttachFileService(Attachment, DataUtils, toastr, $translate, DrslNewCaseService, $rootScope, $timeout) {
         var service = {};
 
         service.attachFileList = [];
@@ -62,6 +62,15 @@
         };
 
         /**
+         * Broadcast an 'attachmentUploadComplete' event from the $rootScope
+         */
+        service.broadcastAttachmentUploadComplete = function (){
+            $timeout(function(){
+                $rootScope.$broadcast('attachmentUploadComplete');
+            }, 1000);
+        };
+
+        /**
          * Upload files in the attachFileList Queue
          * @param supportCase
          */
@@ -93,6 +102,7 @@
                     service.uploadingToasr = null;
                 }
                 toastr.success($translate.instant('global.messages.info.filesUploaded'));
+                service.broadcastAttachmentUploadComplete();
             }
         }
 
