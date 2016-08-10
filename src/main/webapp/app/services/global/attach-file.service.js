@@ -12,6 +12,7 @@
 
         service.attachFileList = [];
         service.attachErrFileList = [];
+        service.deleteFileList = [];
         service.attachment = {
             name: null,
             url: null,
@@ -23,7 +24,7 @@
         service.uploadingToasr = null;
 
         /**
-         * Set the setAttachFileList with the provided fileList.
+         * Set the attachFileList with the provided fileList.
          * @param fileList
          */
         service.setAttachFileList = function (fileList) {
@@ -31,7 +32,7 @@
         };
 
         /**
-         * Set the setAttachErrFileList with the provided fileList.
+         * Set the attachErrFileList with the provided fileList.
          * @param fileList
          */
         service.setAttachErrFileList = function (fileList) {
@@ -48,6 +49,13 @@
             service.setAttachErrFileList(attachErrFileList)
         };
 
+        /**
+         * Set the deleteFileList with the provided fileList.
+         * @param fileList
+         */
+        service.setDeletions = function (fileList) {
+            service.deleteFileList = fileList;
+        };
 
         /**
          * Uploads any attachments remaining in the attachFileList and associates them with the provided supportCase
@@ -62,11 +70,34 @@
         };
 
         /**
+         * Delete files in the deleteFileList Queue
+         * @param supportCase
+         */
+        service.deleteAttachments = function (supportCase) {
+            angular.forEach(service.deleteFileList, function (file) {
+                if (file.supportcase.id === supportCase.id) {
+                    Attachment.delete({id: file.id});
+                }
+            });
+            service.deleteFileList = [];
+            service.broadcastAttachmentsRemoved();
+        };
+
+        /**
          * Broadcast an 'attachmentUploadComplete' event from the $rootScope
          */
         service.broadcastAttachmentUploadComplete = function (){
             $timeout(function(){
                 $rootScope.$broadcast('attachmentUploadComplete');
+            }, 1000);
+        };
+
+        /**
+         * Broadcast an 'attachmentsRemoved' event from the $rootScope
+         */
+        service.broadcastAttachmentsRemoved = function (){
+            $timeout(function(){
+                $rootScope.$broadcast('attachmentsRemoved');
             }, 1000);
         };
 
@@ -78,7 +109,7 @@
             var file = service.attachFileList.shift(),
                 caseId = (supportCase)? supportCase.id : DrslNewCaseService.newCaseId;
 
-            if (file && caseId) {
+            if (file && !file.dataStream && caseId) {
                 DataUtils.toBase64(file, function (base64Data) {
                     service.attachment.name = file.name.replace(/\s|,|-/g, '');
                     service.attachment.dataStream = base64Data;
