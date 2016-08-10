@@ -112,7 +112,8 @@
         "agreement": {
             "header": "AGREEMENT FOR",
             "agreementLabel": "Agreement",
-            "checkboxMsg": "I ({{username}}) agree to the provided estimate and the suggested resolution."
+            "checkboxMsg": "I ({{username}}) agree to the provided estimate and the suggested resolution.",
+            "agreeAndProceed": "click to Agree and Proceed"
         },
         "complete": {
             "header": "Complete Case",
