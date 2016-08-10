@@ -265,7 +265,6 @@ body {
 //     overflow-y: auto;
 //     overflow-x: hidden;
 // }
-
 table.scroll {
     width: 500px;
 }
@@ -343,7 +342,14 @@ display: inline-block;
     font-weight: $default-medium-weight;
 }
 .estimateLogList{
-    // width: 506px;
+    overflow-y: auto;
+    height: 95px;
+    ol{
+        padding-left: 0px;
+    }
+    li:nth-child(odd){
+        background: #E6E6E6;
+    }
     li{
         list-style: none;
     }

@@ -198,7 +198,7 @@
         function setCurrentCase(targetCase) {
             vm.currentCase = targetCase;
             if (vm.currentCase.estimateLog) {
-                vm.estimateLogs = vm.currentCase.estimateLog.split('\n');
+                vm.estimateLogs = vm.currentCase.estimateLog.split('##');
                 vm.estimateLogs.pop();
             }
             getCaseExpertBadges();
@@ -376,7 +376,7 @@
                     vm.currentCase.isApproved = true;
                     vm.currentCase.status = StatusModel.getState('working');
                     vm.currentCase.estimateLog = (vm.currentCase.estimateLog) ? vm.currentCase.estimateLog : '';
-                    vm.currentCase.estimateLog += 'ACCEPTED ' + $filter('date')(new Date(), 'MMM dd, yyyy') + ' ' + vm.currentCase.estimateHours +  'hrs ' + vm.currentCase.estimateComment + '\n';
+                    vm.currentCase.estimateLog += 'ACCEPTED ' + $filter('date')(new Date(), 'MMM dd, yyyy') + ' ' + vm.currentCase.estimateHours +  'hrs ' + vm.currentCase.estimateComment + '##';
                     vm.currentCase.$update();
                 });
 

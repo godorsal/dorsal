@@ -76,9 +76,9 @@
             </div> -->
             <div class="drsl-form-grid">
                 <div class="drsl-label">Estimate History</div>
-                <div>
+                <div class="estimateLogList">
                     <ol ng-show="vm.estimateLogs">
-                        <li class="drsl-value eLogList" ng-repeat="log in vm.estimateLogs | limitTo: vm.estimateLogs.length - 1 ">
+                        <li class="drsl-value eLogList" ng-repeat="log in vm.estimateLogs | limitTo: vm.estimateLogs.length - 1">
                             {{log}}
                         </li>
                     </ol>

@@ -23,29 +23,27 @@
                             <ul class="dropdown-menu dropdown-menu-right updatesDropdown" uib-dropdown-menu role="menu" aria-labelledby="single-button" >
                                 <table class="scroll">
                                     <tbody class="updatesTbody">
-                                        <tr class="updatesTrow labelRow">
+                                        <tr class="updatesTrow labelRow" ng-if="vm.updates.length" colspan="2">
                                             <td class="updatesTdata">Case Updates
                                                 <span class="updateNumber">{{vm.updates.length}}</span>
                                             </td>
                                             <td class="updatesTdata"></td>
                                         </tr>
-                                        <tr ng-repeat="update in vm.updates track by $index" class="updatesTrow">
+                                        <tr ng-repeat="update in vm.updates track by $index" class="updatesTrow" >
                                                 <td class="updatesMessage">{{update.updateMsg}}</td>
                                                 <td class="updatesDate">
                                                         {{update.dateUpdated  | date:'MMM dd, yyyy &nbsp h:mm a'}}
                                                 </td>
                                         </tr>
-                                        <tr class="updatesTrow labelRow">
-                                            <td class="updatesTdata">Estimate Logs
+                                        <tr class="updatesTrow labelRow" ng-if="vm.estimateLogs.length">
+                                            <td class="updatesTdata" colspan="2">Estimate Logs
                                                 <span class="updateNumber">
                                                     {{vm.estimateLogs.length}}
                                                 </span>
                                             </td>
-                                            <td class="logsTdata"></td>
                                         </tr>
                                         <tr ng-repeat="log in vm.estimateLogs track by $index" class="updatesTrow">
-                                                <td class="logsTdata">{{log}}</td>
-                                                <td></td>
+                                                <td class="logsTdata" colspan="2">{{log}}</td>
                                         </tr>
                                     </tbody>
                                 </table>

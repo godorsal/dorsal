@@ -31,7 +31,7 @@
             id: null
         };
         if (vm.case.estimateLog) {
-            vm.estimateLogs = vm.case.estimateLog.split('\n');
+            vm.estimateLogs = vm.case.estimateLog.split('##');
         }
         getCurrentUser()
         function capitalizeFirstLetter(string) {
