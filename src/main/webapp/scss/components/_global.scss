@@ -738,6 +738,122 @@ display: inline-block;
         color: white;
     }
 }
+
+.drsl-detail-attachment-wrapper {
+    .dropdown-menu {
+        left: initial;
+        right: 0;
+    }
+
+    .btn.btn-default.drsl-attach-btn {
+        font-family: $numbers-font;
+        font-size: 20px;
+        height: 34px;
+        border-radius: 4px;
+        padding: 2px;
+        min-width: 38px;
+
+        .fa-paperclip {
+            position: absolute;
+            top: 6px;
+            left: 2px;
+            display: inline-block;
+            transform: rotate(45deg);
+            opacity: .7;
+        }
+
+        .drsl-attachment-count {
+            position: relative;
+            padding-left: 18px;
+            padding-right: 2px;
+            top: 0px;
+            font-weight: 200;
+            font-size: 20px;
+            opacity: .7;
+        }
+    }
+
+    &.drsl-no-attachments {
+        .btn.btn-default.drsl-attach-btn {
+            .fa-paperclip {
+                left: 10px;
+            }
+        }
+    }
+
+    .drsl-menuitem-field-type {
+        outline: none;
+        cursor: default;
+    }
+
+    .drsl-attachment-items-wrapper {
+        width: 490px;
+        height: 95px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        box-shadow: 0px 6px 5px rgba(0, 0, 0, 0.15);
+        margin: -5px -5px 10px -5px;
+
+        .drsl-attachment-item-odd {
+            background-color: #E5E5E5;
+        }
+
+        .drsl-attachment-item {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            padding: 2px 5px;
+        }
+    }
+
+    .drsl-attachment-btn-wrapper {
+        .btn.detailButton {
+            float: right;
+            margin-left: 5px;
+        }
+    }
+
+    .btn.detailButton {
+        margin-left: 5px;
+    }
+
+    &.hide-buttons {
+        .drsl-attachment-items-wrapper {
+            margin: auto;
+            box-shadow: none;
+        }
+
+        .btn.detailButton {
+            display: none;
+        }
+    }
+
+    &.hide-controls {
+        .drsl-attachment-control {
+            display: none;
+        }
+    }
+
+    &.drsl-hide-tooltip {
+        .tooltip {
+            display: none;
+        }
+    }
+
+    form {
+        > .btn {
+            float:right;
+            margin-left: 5px;
+        }
+    }
+
+    .tooltip {
+        .tooltip-inner {
+            min-width: 170px;
+        }
+    }
+}
+
 // Fonts
 @font-face {
     font-family: 'Raleway';

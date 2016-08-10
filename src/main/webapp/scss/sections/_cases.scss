@@ -128,17 +128,14 @@ Cases
         height: $default-half-padding;
     }
     .drsl-case-status-wrapper {
-        display: flex;
-        flex-flow: row;
-        align-items: center;
-
         > div {
-            flex: 2;
+            position: relative;
         }
 
-        select {
-            display: inline-block;
-            width: auto;
+        .drsl-summary-attachment-wrapper {
+            position: absolute;
+            top: -7px;
+            right: 0px;
         }
     }
 
@@ -363,6 +360,14 @@ Cases
         .drsl-eta-date {
             min-width: 75px;
             display: inline-block;
+        }
+
+        .drsl-detail-attachment-wrapper .drsl-attachment-items-wrapper {
+            width: 300px;
+        }
+
+        .drsl-detail-attachment-wrapper.drsl-no-attachments {
+            visibility: hidden;
         }
     }
 

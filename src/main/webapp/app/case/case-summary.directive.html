@@ -17,6 +17,9 @@
             <span ng-hide="DrslMetadata.demoModeEnabled" class="drsl-label" translate="case.details.status.main">Status</span>
             <span>
                 <span class="drsl-value">{{'case.details.status.' + case.status.name.toLowerCase() + '.info' | translate}}</span>
+                <div class="drsl-summary-attachment-wrapper">
+                    <drsl-attach-files hide-buttons="true" hide-controls="true" hide-tooltip="true" case-id="{{case.id}}"></drsl-attach-files>
+                </div>
             </span>
         </div>
     </div>

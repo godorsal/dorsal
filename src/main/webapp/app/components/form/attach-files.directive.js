@@ -5,14 +5,18 @@
         .module('dorsalApp')
         .directive('drslAttachFiles', drslAttachFiles);
 
-    drslAttachFiles.$inject = ['DrslAttachFileService', 'Principal', '$sce', '$translate'];
+    drslAttachFiles.$inject = ['DrslAttachFileService', 'Principal', '$sce', '$translate', 'Attachment'];
 
 
-    function drslAttachFiles(DrslAttachFileService, Principal, $sce, $translate) {
+    function drslAttachFiles(DrslAttachFileService, Principal, $sce, $translate, Attachment) {
         var directive = {
             restrict: 'E',
             scope:  {
-                'attachments': '='
+                'attachments': '=',
+                'hideButtons': '@',
+                'hideControls': '@',
+                'hideTooltip': '@',
+                'caseId': '@'
             },
             templateUrl: 'app/components/form/attach-files.directive.html',
             link: linkFunc
@@ -34,7 +38,7 @@
              */
             scope.openAttachments = function(event) {
                 if (scope.isAuthenticated()) {
-                    scope.attachmentsOpen = true
+                    scope.attachmentsOpen = !scope.attachmentsOpen;
                 } else {
                     event.preventDefault();
                     event.stopPropagation();
@@ -68,6 +72,28 @@
             scope.removeAttachment = function (fileIndex) {
                 scope.attachFileList.splice(fileIndex, 1);
             };
+
+            /**
+             * Get Case Attachments via rest call
+             */
+            scope.getCaseAttachments = function () {
+                scope.attachFileList = [];
+
+                Attachment.query(function(result){
+                    result.reverse().forEach(function(attachment){
+                        if(attachment.supportcase.id == scope.caseId){
+                            scope.attachFileList.push(attachment);
+                        }
+                    })
+                })
+            };
+
+            // If we have a case id, listen for case changes
+            if (scope.caseId) {
+                scope.$on('currentCaseSet', function(){
+                    scope.getCaseAttachments();
+                });
+            }
         }
     }
 })();
