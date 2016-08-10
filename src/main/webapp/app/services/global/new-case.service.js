@@ -10,9 +10,27 @@
     function DrslNewCaseService() {
         var service = {};
 
+        service.newCaseId = null;
+        service._hasConsumedNewCaseId = false;
+
         service.setNewCaseId = function (caseId) {
+            service._hasConsumedNewCaseId = false;
             service.newCaseId = caseId;
-            console.log(caseId);
+        };
+
+        /**
+         * Gets the new case id (string) only once, then it's consumed and a null is returned.
+         * @returns {string|null}
+         */
+        service.getConsumableNewCaseId = function () {
+            var caseId = null;
+
+            if (!service._hasConsumedNewCaseId) {
+                caseId = service.newCaseId;
+                service._hasConsumedNewCaseId = true;
+            }
+
+            return caseId;
         };
 
         return service;

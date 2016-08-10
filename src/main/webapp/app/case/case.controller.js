@@ -159,17 +159,20 @@
         * @returns {Array}
         */
         function getCurrentCase() {
-            var thisCase = vm.supportcases.find(function(supportcase){
-                return DrslNewCaseService.newCaseId == supportcase.id;
-            })
-            console.log(thisCase);
-            setCurrentCase(thisCase);
-            // var cases = [];
-            // if (vm.cases.length > 1) {
-            //     cases = vm.cases.slice(0, 1);
-            // }
-            //
-            // return cases;
+            var thisCase,
+                newCaseId = DrslNewCaseService.getConsumableNewCaseId();
+
+            // Only continue if the new case id hasn't been consumed already
+            if (newCaseId) {
+                thisCase = vm.supportcases.find(function(supportcase){
+                    return DrslNewCaseService.newCaseId == supportcase.id;
+                });
+
+                // set the current case, if we found a match
+                if (thisCase) {
+                    setCurrentCase(thisCase);
+                }
+            }
         }
 
         /**
