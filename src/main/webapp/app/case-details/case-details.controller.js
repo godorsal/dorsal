@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('CaseDetailsController', CaseDetailsController);
 
-    CaseDetailsController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase', 'expert', 'Casetechnologyproperty', 'Caseupdate', 'Attachment', 'Principal', 'Updatetype', 'Supportcase'];
+    CaseDetailsController.$inject = ['$rootScope', '$scope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase', 'expert', 'Casetechnologyproperty', 'Caseupdate', 'Attachment', 'Principal', 'Updatetype', 'Supportcase'];
 
-    function CaseDetailsController($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase, expert, Casetechnologyproperty, Caseupdate, Attachment, Principal, Updatetype, Supportcase) {
+    function CaseDetailsController($rootScope, $scope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase, expert, Casetechnologyproperty, Caseupdate, Attachment, Principal, Updatetype, Supportcase) {
         var vm = this;
         vm.cancel = cancel;
         vm.submit = submit;
@@ -34,6 +34,9 @@
             vm.estimateLogs = vm.case.estimateLog.split('##');
         }
         getCurrentUser()
+
+        $timeout(function(){$scope.$broadcast('currentCaseSet')}, 1);
+
         function capitalizeFirstLetter(string) {
             string = string.toLowerCase().replace('_', ' ');
             return string.charAt(0).toUpperCase() + string.slice(1);

@@ -13,6 +13,7 @@
             restrict: 'E',
             scope:  {
                 'attachments': '=',
+                'displayType': '@',
                 'hideButtons': '@',
                 'hideControls': '@',
                 'hideTooltip': '@',
