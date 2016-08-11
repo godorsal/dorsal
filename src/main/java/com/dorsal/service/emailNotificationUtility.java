@@ -70,19 +70,23 @@ public class emailNotificationUtility {
     public boolean stateChangeNotifications(Supportcase updatedSupportCase) {
 
         boolean isNotified = false;
-
+        int updates = 0;
         // Send out notification depending on the status and action
         if ((updatedSupportCase.getEstimateHours() != null)
             && (updatedSupportCase.getExpectedResult() != null)
             && (!updatedSupportCase.isIsApproved())
             && (updatedSupportCase.getStatus().getName().equalsIgnoreCase("ESTIMATED"))) {
             log.info("Expert Estimated Support case");
+            updates = updatedSupportCase.getNumberOfUpdates();
+            updatedSupportCase.setNumberOfUpdates(++updates);
             isNotified = createSupportCaseEstimate(updatedSupportCase);
         } else if ((updatedSupportCase.getEstimateHours() != null)
             && (updatedSupportCase.getExpectedResult() != null)
             && (!updatedSupportCase.isIsApproved() )
             && (updatedSupportCase.getStatus().getName().equalsIgnoreCase("WORKING"))) {
             log.info("Expert re-Estimated Support case");
+            updates = updatedSupportCase.getNumberOfUpdates();
+            updatedSupportCase.setNumberOfUpdates(++updates);
             isNotified = updateSupportCaseEstimate(updatedSupportCase);
         } else if ((updatedSupportCase.isIsResolved())
             && (updatedSupportCase.getStatus().getName().equalsIgnoreCase("COMPLETED"))) {

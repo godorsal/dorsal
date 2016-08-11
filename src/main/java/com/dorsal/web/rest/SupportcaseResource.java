@@ -185,8 +185,12 @@ public class SupportcaseResource {
          */
         if ( !isNotified ) {
             try {
-                if (!notificationService.stateChangeNotifications(supportcase))
+                if (!notificationService.stateChangeNotifications(supportcase)) {
                     log.info("No notification send out for support case update");
+                } else {
+                    // Updates might have incremented save
+                    result = supportcaseRepository.save(supportcase);
+                }
 
             } catch (Exception e) {
                 log.error("State Change estimate -- Failed to call notification service. Error " + e);
