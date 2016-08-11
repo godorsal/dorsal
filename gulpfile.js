@@ -190,7 +190,7 @@ gulp.task('ngconstant:dev', function () {
         name: 'dorsalApp',
         constants: {
             VERSION: util.parseVersion(),
-            DEBUG_INFO_ENABLED: true,
+            DEBUG_INFO_ENABLED: false,
             MSG: {'SERVER_DOWN': ' - the API server seems to be down.',
                 'WelcomeChatGuest1': 'Hello ',
                 'WelcomeChatGuest2': '! Welcome to the Dorsal Chat Room. A concierge will be with you momentarily...'}

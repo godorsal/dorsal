@@ -201,7 +201,6 @@
             if (targetCase.estimateLog) {
                 vm.estimateLogs = targetCase.estimateLog.split('##');
                 vm.estimateLogs.pop();
-                console.log("GOT THE LOGS!");
             }
             getCaseExpertBadges();
             getCaseUpdates();
