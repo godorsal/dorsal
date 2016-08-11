@@ -616,6 +616,7 @@ input[type="radio"] + label span:last-child, input[type="checkbox"] + label span
     margin-top: 20px;
     border-radius: 0px;
     max-height: 540px;
+    z-index: 1100;
 }
 .updatesTbody{
     height: 100% !important;
