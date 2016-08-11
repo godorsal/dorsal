@@ -5,10 +5,10 @@
         .module('dorsalApp')
         .directive('drslAttachFiles', drslAttachFiles);
 
-    drslAttachFiles.$inject = ['DrslAttachFileService', '$scope', 'Principal', '$sce', '$translate', 'Attachment', 'DataUtils'];
+    drslAttachFiles.$inject = ['DrslAttachFileService', 'Principal', '$sce', '$translate', 'Attachment', 'DataUtils'];
 
 
-    function drslAttachFiles(DrslAttachFileService, $scope, Principal, $sce, $translate, Attachment, DataUtils) {
+    function drslAttachFiles(DrslAttachFileService, Principal, $sce, $translate, Attachment, DataUtils) {
         var directive = {
             restrict: 'E',
             scope:  {
@@ -22,11 +22,6 @@
                 'caseId': '@'
             },
             templateUrl: 'app/components/form/attach-files.directive.html',
-            controller: function ($scope) {
-                if (angular.isUndefined($scope.autoClose)) {
-                    $scope.autoClose = 'disabled';
-                }
-            },
             link: linkFunc
         };
 
