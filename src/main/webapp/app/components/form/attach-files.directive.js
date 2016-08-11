@@ -5,10 +5,10 @@
         .module('dorsalApp')
         .directive('drslAttachFiles', drslAttachFiles);
 
-    drslAttachFiles.$inject = ['DrslAttachFileService', 'Principal', '$sce', '$translate', 'Attachment', 'DataUtils'];
+    drslAttachFiles.$inject = ['DrslAttachFileService', '$scope', 'Principal', '$sce', '$translate', 'Attachment', 'DataUtils'];
 
 
-    function drslAttachFiles(DrslAttachFileService, Principal, $sce, $translate, Attachment, DataUtils) {
+    function drslAttachFiles(DrslAttachFileService, $scope, Principal, $sce, $translate, Attachment, DataUtils) {
         var directive = {
             restrict: 'E',
             scope:  {
