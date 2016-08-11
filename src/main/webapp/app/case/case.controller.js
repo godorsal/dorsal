@@ -197,9 +197,11 @@
         */
         function setCurrentCase(targetCase) {
             vm.currentCase = targetCase;
-            if (vm.currentCase.estimateLog) {
-                vm.estimateLogs = vm.currentCase.estimateLog.split('##');
+            vm.estimateLogs = [];
+            if (targetCase.estimateLog) {
+                vm.estimateLogs = targetCase.estimateLog.split('##');
                 vm.estimateLogs.pop();
+                console.log("GOT THE LOGS!");
             }
             getCaseExpertBadges();
             getCaseUpdates();
