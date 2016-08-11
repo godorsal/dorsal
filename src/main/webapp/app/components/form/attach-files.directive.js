@@ -14,6 +14,7 @@
             scope:  {
                 'attachments': '=',
                 'displayType': '@',
+                'autoClose': '@',
                 'addOnAttach': '@',
                 'hideButtons': '@',
                 'hideControls': '@',
@@ -21,6 +22,11 @@
                 'caseId': '@'
             },
             templateUrl: 'app/components/form/attach-files.directive.html',
+            controller: function ($scope) {
+                if (angular.isUndefined($scope.autoClose)) {
+                    $scope.autoClose = 'disabled';
+                }
+            },
             link: linkFunc
         };
 
@@ -40,11 +46,11 @@
              * @param event
              */
             scope.openAttachments = function(event) {
+                event.stopPropagation();
+                event.preventDefault();
+
                 if (scope.isAuthenticated()) {
                     scope.attachmentsOpen = !scope.attachmentsOpen;
-                } else {
-                    event.preventDefault();
-                    event.stopPropagation();
                 }
             };
 

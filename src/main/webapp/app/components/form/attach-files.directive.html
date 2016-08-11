@@ -1,4 +1,4 @@
-<div class="btn-group drsl-detail-attachment-wrapper" ng-class="{'hide-buttons': hideButtons, 'hide-controls': hideControls, 'drsl-no-attachments': attachFileList.length === 0, 'drsl-hide-tooltip': hideTooltip, 'drsl-attachments-inline': displayType === 'inline'}" uib-dropdown auto-close="disabled" is-open="attachmentsOpen">
+<div class="btn-group drsl-detail-attachment-wrapper" ng-class="{'hide-buttons': hideButtons, 'hide-controls': hideControls, 'drsl-no-attachments': attachFileList.length === 0, 'drsl-hide-tooltip': hideTooltip, 'drsl-attachments-inline': displayType === 'inline'}" uib-dropdown auto-close="{{autoClose}}" is-open="attachmentsOpen">
     <!-- Icon and Button -->
     <div uib-tooltip-html="((isAuthenticated())? attachmentMessageLoggedIn: attachmentMessageLoggedOut)"  tooltip-placement="top">
         <button type="button" class="btn btn-default drsl-attach-btn" ng-class="{'btn-success': attachFileList.length > 0, 'disabled':!isAuthenticated()}" ng-click="openAttachments($event)">
@@ -15,6 +15,7 @@
                         <div class="drsl-attachment-item" ng-class-odd="'drsl-attachment-item-odd'" ng-repeat="file in attachFileList">
                             <span>{{file.name}}</span>
                             <span class="pull-right">
+                                <a ng-show="file.dataStream" class="drsl-attachment-control" ng-click="$event.stopPropagation()" href="data:application/octet-stream;charset=utf-16le;base64,{{file.dataStream}}" download="{{file.name}}" translate="entity.action.download">download</a>
                                 <span ng-show="file.dataStream" class="drsl-attachment-control" translate="entity.action.view" ng-click="viewAttachment(file);">view</span>
                                 <span class="drsl-attachment-control" translate="entity.action.delete" ng-click="removeAttachment($index);">remove</span>
                             </span>
