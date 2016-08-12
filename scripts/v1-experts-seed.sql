@@ -5,7 +5,7 @@
 -- ATT Administrator
 --
 INSERT INTO jhi_user(id,login,password_hash,first_name,last_name,email,activated,lang_key,created_by,created_date) VALUES
- (19,'dgonzales','$2a$10$eyEQ7YbNv.lFVMOQuP2V9ONrHRf7iuOp02huoMfQ2wZ9C.5mrLfO2','Davis','Gonzalez','dg1434@att.com',true,'en','system',now()),
+ (19,'dgonzalez','$2a$10$eyEQ7YbNv.lFVMOQuP2V9ONrHRf7iuOp02huoMfQ2wZ9C.5mrLfO2','David','Gonzalez','dg1434@att.com',true,'en','system',now());
 
 -- create the users
 INSERT INTO jhi_user(id,login,password_hash,first_name,last_name,email,activated,lang_key,created_by,created_date) VALUES
@@ -15,7 +15,7 @@ INSERT INTO jhi_user(id,login,password_hash,first_name,last_name,email,activated
  (23,'cyeung','$2a$10$BoWeTnNbQALI1LfUvI0fmevU3YYKP.oG1jW1bYO.3BkA4Nk4FUs8S','Christopher','Yeung','yeung.chris@gmail.com',true,'en','system',now()),
  (24,'keppro','$2a$10$kicv4DAu571XSunA3VCkcegbepXE4iMQRi7bfjvAYQJUgzwx20Xnm','Kep','Protopopov','keppro@keppro.net',true,'en','system',now()),
  (25,'sashan','$2a$10$uw9c.oTeUhHFTr5/gZkwU.oyRW.K/IC5mRuBBOlknEjMuto.oTXPO','Alexander','Nemirovsky','sasha@sats.net',true,'en','system',now()),
- (26,'emccormick','$2a$10$uw9c.oTeUhHFTr5/gZkwU.oyRW.K/IC5mRuBBOlknEjMuto.oTXPO','Eric','McCormick','eric@ericm.net',true,'en','system',now();
+ (26,'emccormick','$2a$10$uw9c.oTeUhHFTr5/gZkwU.oyRW.K/IC5mRuBBOlknEjMuto.oTXPO','Eric','McCormick','eric@ericm.net',true,'en','system',now());
 
 
 -- create the user permissions
