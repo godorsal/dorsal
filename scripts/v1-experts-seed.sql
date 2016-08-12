@@ -1,6 +1,11 @@
 --
 -- Loading v1 experts into system
 --
+--
+-- ATT Administrator
+--
+INSERT INTO jhi_user(id,login,password_hash,first_name,last_name,email,activated,lang_key,created_by,created_date) VALUES
+ (19,'dgonzales','$2a$10$eyEQ7YbNv.lFVMOQuP2V9ONrHRf7iuOp02huoMfQ2wZ9C.5mrLfO2','Davis','Gonzalez','dg1434@att.com',true,'en','system',now()),
 
 -- create the users
 INSERT INTO jhi_user(id,login,password_hash,first_name,last_name,email,activated,lang_key,created_by,created_date) VALUES
@@ -15,6 +20,7 @@ INSERT INTO jhi_user(id,login,password_hash,first_name,last_name,email,activated
 
 -- create the user permissions
 INSERT INTO jhi_user_authority(user_id,authority_name) VALUES
+ (19,'ROLE_USER'),
  (20,'ROLE_USER'),
  (21,'ROLE_USER'),
  (22,'ROLE_USER'),
@@ -28,10 +34,10 @@ INSERT INTO jhi_user_authority(user_id,authority_name) VALUES
 INSERT INTO expert_account(id,phone,skype,othercommunication,location,expert_score,handle,languages,image_path,firsttechnology_id,secondtechnology_id,issueexpertise_id,user_id,is_available,expert_bio,number_of_cases,expert_since,welcome_message,profile_visibility,expert_availability) VALUES
 (20,'','','none','Atlanta',2,'','English','content/images/dynamic/formal_male.png',1,2,2,20,true,'',0,now(),'Welcome my name is Michael Thomas. Best way to get in touch with me is over email.','INTERN','MON_FRI'),
 (21,'','','none','New York',5,'','English','content/images/dynamic/Ronald-Bradford.png',1,2,2,21,true,'',0,now(),'Welcome my name is Ronald Bradford. Best way to get in touch with me is over email.','INTERN','FULL_TIME'),
-(22,'','','none','Bay Area',5,'','English','content/images/dynamic/formal_male.png',1,2,2,22,true,'',0,now(),'Welcome my name is Wayne Martin. Best way to get in touch with me is over email.','INTERN','FULL_TIME'),
+(22,'','','none','Tenessee',4,'','English','content/images/dynamic/formal_male.png',1,2,2,22,true,'',0,now(),'Welcome my name is Wayne Martin. Best way to get in touch with me is over email.','INTERN','FULL_TIME'),
 (23,'','','none','New York',5,'','English','content/images/dynamic/formal_male.png',1,2,2,23,true,'',0,now(),'Welcome my name is Christopher Yeung. Best way to get in touch with me is over email.','INTERN','FULL_TIME'),
-(24,'','','none','Bay Area',5,'','English','content/images/dynamic/formal_male.png',1,2,2,24,true,'',0,now(),'Welcome my name is Kep Protopopov. Best way to get in touch with me is over email.','INTERN','FULL_TIME'),
-(26,'','','none','Bay Area',4,'','English','content/images/dynamic/formal_male.png',1,2,2,26,true,'',0,now(),'Welcome my name is Eric McCormick. Best way to get in touch with me is over email.','INTERN','FULL_TIME');
+(24,'','','none','Bay Area',4,'','English','content/images/dynamic/formal_male.png',1,2,2,24,true,'',0,now(),'Welcome my name is Kep Protopopov. Best way to get in touch with me is over email.','INTERN','FULL_TIME'),
+(26,'','','none','Bay Area',5,'','English','content/images/dynamic/formal_male.png',1,2,2,26,true,'',0,now(),'Welcome my name is Eric McCormick. Best way to get in touch with me is over email.','INTERN','FULL_TIME');
 
 
 -- On hold for now
