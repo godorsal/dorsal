@@ -48,7 +48,8 @@
                 "email": "email",
                 "phone": "phone",
                 "skype": "skype",
-                "chat": "chat"
+                "chat": "chat",
+                "other": "other"
             },
             "score": "Score",
             "badges": {

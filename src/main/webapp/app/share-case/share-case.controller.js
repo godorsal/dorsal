@@ -63,7 +63,6 @@
             })
         }
         function shareCaseFail(error){
-            console.log(error);
             toastr["error"]("Case sharing failure")
         }
         function shareCase(newUser){

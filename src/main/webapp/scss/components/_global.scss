@@ -338,10 +338,14 @@ table.scroll thead > tr {
     width: 314px;
     display: inline-block;
 }
+.drsl-case-inputs {
+    width: 570px;
+}
 .drsl-value {
     color: $drsl-value-color;
     font-weight: $default-medium-weight;
 }
+
 .estimateLogList{
     overflow-y: auto;
     height: 124px;

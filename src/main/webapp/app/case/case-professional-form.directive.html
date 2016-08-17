@@ -5,7 +5,6 @@
             <span class="drsl-label">Expert</span>
             <span class="drsl-value">{{expert.user.firstName}} {{expert.user.lastName}}</span>
         </div>
-
         <!-- Desired Outcome-->
         <div class="drsl-label-value-row">
             <div><span  class="drsl-label" translate="case.professional.input.desiredOutcome">Desired<br/>Outcome</span></div>
@@ -51,7 +50,7 @@
         <!-- Total Time on Case -->
         <div class="drsl-label-value-row">
             <div><span  class="drsl-label" translate="case.professional.input.timeOnCase">Total time<br/>on case</span></div>
-            <div><input class="form-control drsl-value" type="number" ng-model="case.timeOnCase" ng-keydown="fieldTouched()" placeholder="{{'case.professional.input.timeOnCase.placeholder' | translate}}" ng-disabled="case.isResolved"/></div>
+            <div class="drsl-time-on-case"><input class="form-control drsl-value" type="number" ng-model="case.timeOnCase" ng-keydown="fieldTouched()" placeholder="{{'case.professional.input.timeOnCase.placeholder' | translate}}" ng-disabled="case.isResolved"/></div>
         </div>
 
         <!-- Resolved -->

@@ -37,7 +37,9 @@
         ExpertAccount.query(function(data){
             if(data[0]){
                 vm.currentExpert = data[0];
-                console.log(data);
+                var othercommunication = vm.currentExpert.othercommunication.split(',');
+                vm.otherLink = othercommunication[0];
+                vm.otherTitle = othercommunication[1];
             }
         });
         Payment.query(function(result){
@@ -118,6 +120,7 @@
             });
         }
         function updateExpert(){
+            vm.currentExpert.othercommunication = vm.otherLink + ',' + vm.otherTitle;
             ExpertAccount.update(vm.currentExpert, function(){
                 if(!vm.updatingUser){
                     toastr["success"]("Expert Info Saved")
