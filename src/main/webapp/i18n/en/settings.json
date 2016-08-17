@@ -24,7 +24,8 @@
             "issue": "(Issue Focus)",
             "technology": "(1st Technology Focus)",
             "technology2": "(2nd Technology Focus)",
-            "button": "Update"
+            "button": "Update",
+            "expertScore": "Expert Score:"
         },
         "authorization":{
             "header": "Manage Authorized Users",

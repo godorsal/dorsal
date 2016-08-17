@@ -181,7 +181,7 @@ Your e-mail cannot be longer than 100 characters.
     <div class="extraInfo">
         <div>
             <div>
-                Expert Score: {{(vm.currentExpert.expertScore / vm.currentExpert.numberOfCases) | number:0}} out of 100
+                <span translate="settings.form.expertScore">Expert Score:</span> {{ 'global.messages.info.expertScoreOutOf' | translate:'{score: '+ (((expert.expertScore / expert.numberOfCases) | number:0) || 0) + '}' }}
             </div>
             <div>
                 <label for="field_profileVisibility" class="profileVisibilityLabel">Profile Visibility:</label>
