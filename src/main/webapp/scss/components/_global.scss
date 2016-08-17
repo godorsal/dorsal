@@ -334,9 +334,6 @@ table.scroll thead > tr {
     width: 240px;
     display: inline-block;
 }
-.drsl-hour-input{
-    padding: 10px !important;
-}
 .drsl-case-props{
     width: 314px;
     display: inline-block;
@@ -348,6 +345,7 @@ table.scroll thead > tr {
     color: $drsl-value-color;
     font-weight: $default-medium-weight;
 }
+
 .estimateLogList{
     overflow-y: auto;
     height: 124px;

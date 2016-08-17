@@ -17,7 +17,7 @@
             <div class="drsl-hours-date-wrapper">
                 <!-- Hours -->
                 <div class="drsl-expert-hours-wrapper">
-                    <input name="estimateHours" class="form-control drsl-value drsl-hour-input" type="number" ng-model="localEstimateHours" ng-keydown="fieldTouched()" placeholder="{{'case.professional.input.estimatedHours.placeholder' | translate}}" ng-disabled="case.isResolved"/>
+                    <input name="estimateHours" class="form-control drsl-value" type="number" ng-model="localEstimateHours" ng-keydown="fieldTouched()" placeholder="{{'case.professional.input.estimatedHours.placeholder' | translate}}" ng-disabled="case.isResolved"/>
                 </div>
                 <!-- Delivery Date -->
                 <div class="drsl-expert-date-wrapper">
@@ -50,7 +50,7 @@
         <!-- Total Time on Case -->
         <div class="drsl-label-value-row">
             <div><span  class="drsl-label" translate="case.professional.input.timeOnCase">Total time<br/>on case</span></div>
-            <div><input class="form-control drsl-value drsl-hour-input" type="number" ng-model="case.timeOnCase" ng-keydown="fieldTouched()" placeholder="{{'case.professional.input.timeOnCase.placeholder' | translate}}" ng-disabled="case.isResolved"/></div>
+            <div class="drsl-time-on-case"><input class="form-control drsl-value" type="number" ng-model="case.timeOnCase" ng-keydown="fieldTouched()" placeholder="{{'case.professional.input.timeOnCase.placeholder' | translate}}" ng-disabled="case.isResolved"/></div>
         </div>
 
         <!-- Resolved -->
