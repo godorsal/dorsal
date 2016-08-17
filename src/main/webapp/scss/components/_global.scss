@@ -334,9 +334,15 @@ table.scroll thead > tr {
     width: 240px;
     display: inline-block;
 }
+.drsl-hour-input{
+    padding: 10px !important;
+}
 .drsl-case-props{
     width: 314px;
     display: inline-block;
+}
+.drsl-case-inputs {
+    width: 570px;
 }
 .drsl-value {
     color: $drsl-value-color;
