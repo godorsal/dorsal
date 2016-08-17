@@ -30,7 +30,7 @@
                             '<a ng-href="{{chatRoom.link}}" target="_blank">{{chatRoom.id}}</a>' +
                         '</div>' +
                         '<div>' +
-                            '<i class="fa fa-comments-o" tooltip-placement="left" uib-tooltip="{{\'case.professional.contact.other\' | translate}}"></i> ' +
+                            '<i class="fa fa-arrow-right" tooltip-placement="left" uib-tooltip="{{\'case.professional.contact.other\' | translate}}"></i> ' +
                             '<a ng-href="{{otherTitle}}" target="_blank">{{otherLink}}</a>' +
                         '</div>' +
                     '</div>'
