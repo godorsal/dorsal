@@ -37,11 +37,11 @@
         }
         $scope.quoteSize = function(index){
             if(index === 0){
-                return "fastEasyAccess";
+                return "drsl-fast-easy-access";
             } else if(index === 1){
-                return "personalizedForYou"
+                return "drsl-personalized-for-you"
             } else if(index === 2){
-                return "certifiedProfessionals"
+                return "drsl-certified-professionals"
             }
         }
         function concierge(type) {
