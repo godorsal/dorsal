@@ -88,7 +88,6 @@
 
         Principal.identity().then(function (account) {
             vm.settingsAccount = copyAccount(account);
-            console.log(vm.settingsAccount);
         });
         function save() {
             if(vm.updatingUser && vm.updatingExpert){
@@ -267,7 +266,6 @@
             vm.authorizedUsers = [];
             Groupaccess.query(function(result){
                 result.find(function(user){
-                    console.log(user);
                     if(user.authorizeduser.email === vm.settingsAccount.email){
                         vm.isAlreadyAuthorized = true;
                     } else if(user.user.login === vm.settingsAccount.login && user.authorizeduser.activated){
