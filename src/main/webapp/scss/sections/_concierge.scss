@@ -3,9 +3,9 @@ Concierge
 ========================================================================== */
 
 .drsl-concierge-wrapper {
-    background-color: #FFFFFF;
-    padding: 20px;
-    min-height: 625px;
+    background-color: $background-color;
+    padding: $default-padding;
+    min-height: $concierge-min-height;
     display: flex;
     flex-flow: row;
 
@@ -13,132 +13,10 @@ Concierge
         flex: 1;
     }
 
-    .drsl-chat-wrapper {
-        flex: auto;
-        max-width: 652px;
-        max-height: 723px;
-        background-color: $content-background-color;
-        box-shadow: $content-box-shadow;
-
-        .drsl-sub-header div {
-            flex: 1;
-            &:last-child {
-                text-align: right;
-                color: $inverted-heading-right-text-color;
-            }
-        }
-
-        .drsl-chat-login-wrapper {
-            width: 652px;
-            position: relative;
-            top: 100px;
-            left: 130px;
-
-            .drsl-chat-login {
-                width: 300px;
-                // margin: auto;
-
-                .panel-body .form-group:last-child {
-                    text-align: right;
-                    margin-bottom: 0;
-                }
-            }
-        }
-
-    }
-    .fiftyLeft{
-        margin-left: 50px;
-    }
-    .fourtyLeft{
-        margin-left: 40px;
-    }
-    .drsl-chat-body {
-        padding: $default-padding;
-    }
-
-    .drsl-case-details-wrapper {
-        flex: auto;
-        height: auto;
-        // height: 642px;
-        background-color: $content-background-color;
-        box-shadow: $content-box-shadow;
-        width: 590px;
-        max-width: 590px;
-        margin-right: 20px;
-        .drsl-field-seciton {
-            display: flex;
-            flex-flow: row;
-            align-items: center;
-            text-align: center;
-            margin-bottom: 30px;
-
-            .drsl-field-label {
-                color: #5F5B5C;
-                flex: 1;
-                margin-right: $default-half-padding;
-                text-align: left;
-            }
-
-            .drsl-field-sub-label {
-                font-size: $tiny-font-size;
-            }
-
-            .drsl-field-input {
-                position: relative;
-                flex: 3;
-            }
-        }
-
-        .drsl-file-upload {
-            .drsl-field-label {
-                flex: 2;
-            }
-
-            .drsl-field-input {
-                flex: 3;
-                padding: 5px;
-            }
-        }
-
-        .drsl-product-details-wrapper {
-
-            margin-bottom: $default-double-padding;
-
-            > h4 {
-                margin-top: 0
-            }
-
-            .drsl-product-detail-selections {
-                margin-left: $default-padding;
-                margin-bottom: 4px;
-            }
-
-            .accordion-toggle i.pull-right {
-                color: $brand-color;
-            }
-
-            .drsl-product-header-selection {
-                font-weight: $thin-weight;
-                color: $brand-color;
-            }
-
-            .drsl-product-detail-input {
-                margin-bottom: 4px;
-
-                input[type="text"].form-control {
-                    display: inline-block;
-                    width: 150px;
-                    margin-right: 5px;
-                }
-            }
-        }
-
-    }
-
     .drsl-product-details-wrapper {
         position: absolute;
         bottom: -50px;
-        left: 20px;
+        left: $default-padding;
         min-height: 70px;
         white-space: nowrap;
 
@@ -185,7 +63,8 @@ Concierge
 
                 &.detailButton {
                     float: right;
-                    margin: 5px; width: 70px;
+                    margin: 5px;
+                    width: 70px;
                     text-align: center;
                 }
             }
@@ -201,11 +80,9 @@ Concierge
         border-radius: 4px;
     }
 
-
-
     .dropdown-menu {
         li.selected {
-            background: #f5f5f5;
+            background: $tech-details-dropdown-selection-background-color;
         }
     }
 
@@ -222,11 +99,11 @@ Concierge
         position: relative;
 
         .drsl-linear-radio {
-            margin-top:20px;
+            margin-top: $default-padding;
 
             &:first-child {
-                margin-top:10px;
-                margin-bottom: 40px;
+                margin-top: $default-half-padding;
+                margin-bottom: $default-double-padding;
             }
 
             .drsl-radio-set {
@@ -241,7 +118,7 @@ Concierge
     }
 
     .drsl-field-seciton {
-        margin-left: 20px;
+        margin-left: $default-padding;
         margin-top: 80px;
 
         .input-group-btn {
@@ -251,7 +128,7 @@ Concierge
 
     .drsl-one-two-three-lg {
         position: relative;
-        left: 20px;
+        left: $default-padding;
         min-width: 485px;
         min-height: 488px;
 
@@ -263,8 +140,8 @@ Concierge
             > div {
                 position: absolute;
                 left: 24%;
-                font-size: 20px;
-                font-weight: 200;
+                font-size: $large-font-size;
+                font-weight: $thin-weight;
 
                 &:first-child {
                     top: 9%;
@@ -281,7 +158,7 @@ Concierge
                 &:nth-child(4) {
                     margin-left: -12px;
                     padding: 12px;
-                    background-color: #FFFFFF;
+                    background-color: $background-color;
                     top: 92%;
 
                     .drsl-date-picker-btn {
@@ -290,7 +167,7 @@ Concierge
                     }
 
                     .btn-info:active, .btn-info.active, .open > .btn-info.dropdown-toggle {
-                        color: #fff;
+                        color: $date-picker-selected-day-text-color;
                         background-color: $brand-color;
                         border-color: $brand-color;
                     }
@@ -299,7 +176,7 @@ Concierge
                         strong {
                             @extend .drsl-label;
                             font-weight: $thin-weight;
-                            font-size: 18px;
+                            font-size: $date-picker-month-font-size;
                         }
                     }
 
@@ -309,13 +186,13 @@ Concierge
                         left: 10px;
 
                         .uib-datepicker {
-                            padding: 10px;
+                            padding: $default-half-padding;
                         }
                     }
 
                     .drsl-date-display-wrapper {
                         width: 280px;
-                        background: #FFFFFF;
+                        background: $background-color;
 
                         span {
                             font-weight: $default-weight;
@@ -342,8 +219,8 @@ Concierge
         }
 
         .drsl-custom-button {
-            width: 125px;
-            height: 125px;
+            width: $concierge-go-button-dimensions;
+            height: $concierge-go-button-dimensions;
             padding: 0;
 
             &:focus {
@@ -367,141 +244,10 @@ Concierge
         .drsl-step-go-text {
             position: absolute;
             min-width: 350px;
-            top: 20px;
+            top: $default-padding;
             left: 230px;
-            background-color: #fff;
-            padding: 10px;
+            background-color: $background-color;
+            padding: $default-half-padding;
         }
     }
-}
-.chatrooms{
-    margin-top: 100px;
-}
-.chatroom{
-    border: none;
-    width: 5px !important;
-    // width: 570px;
-    max-width: 570px;
-    min-width: 570px;
-}
-
-.btn-different{
-    background-color: #F48B3D;
-    color: white;
-    margin-right: 10px;
-    height: 34px;
-}
-.chatAccord{
-    width: 570px;
-     margin-left: 300px;
-}
-.chat {
-    min-height: 150px;
-    max-height: 150px;
-    overflow-y: scroll;
-    height: 500px;
-
-    .name {
-        color: #333;
-        font-weight: bold;
-        // color: #B4001D;
-    }
-
-    .name::after {
-        // content: ': ';
-    }
-
-    .text {
-        color: #333333;
-        // color: #3B00B2;
-    }
-
-    .phrase:last-child {
-        margin-bottom: 0;
-    }
-    .phrase{
-        border-bottom: 0.5px solid #EEEEEE;
-        margin-left: 10px;
-    }
-}
-.glyphicon-chevron-left, .glyphicon-chevron-right{
-    color: $brand-color;
-    font-size: 25px;
-}
-.drsl-case-body{
-    // text-align: center;
-    width: 580px;
-    margin-left: 20px;
-    // margin-right: 20px;
-    > div {
-        padding: 20px;
-        // border-bottom: 2px solid #E2E2E2;
-
-        &:last-child {
-            border: 0;
-        }
-    }
-}
-.chat-section{
-    width: 570px;
-    height: 642px;
-}
-.drsl-sub-header, .drsl-action-bar{
-    width: 1180px;
-    transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s;
-}
-.havle{
-    width: 590px;
-}
-.bgimg{
-    float: left;
-    margin-left: 0px;
-    width: 570px;
-    height: 642px;
-}
-.margin{
-    margin-right: 20px;
-}
-.slide{
-    // -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 2s;
-    // -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 2s;
-    // -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 2s;
-    transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 2s;
-}
-#sel1{
-    height: 50%;
-    text-align: center;
-}
-.chatBody{
-    width: 620px !important;
-}
-.plan{
-    background: rgb(53, 48, 45);
-    background: linear-gradient(to right, rgba(60, 51, 52, 1), 90%, rgba(0,0,0,0));
-    font-size: 20px;
-    color: white;
-    padding: 10px;
-    margin: 10px;
-    margin-top: 30px;
-    vertical-align: middle;
-    height: 75px;
-}
-.selectedPlan{
-    background: linear-gradient(to right, rgba(60, 51, 52, 1), rgba(0,0,0,0));
-    font-size: 20px;
-    color: #F48B3D;
-    padding: 10px;
-    margin: 10px;
-    margin-top: 30px;
-}
-.plan:hover{
-    color: #F48B3D;
-}
-.tierTitle{
-    margin-top: 15px;
-    display: inline-block;
-}
-.tierContent{
-    margin-left: 15px;
-    display: inline-block;
 }

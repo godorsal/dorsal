@@ -18,6 +18,8 @@ $home-tagline-font-size: 17px;
 $home-technology-font-size: 28px;
 $home-additional-info-heading-font-size: 25px;
 $home-additional-info-txt-font-size: 15px;
+// Date Picker
+$date-picker-month-font-size: 18px;
 
 // Font Weight ****************************
 $default-weight: 400;
@@ -46,6 +48,8 @@ $content-background-color: $background-color;
 $primary-button-background-color: #B0AFB4;
 $content-container-color: #E5E5E5;
 $home-additional-info-background-color: #fff;
+// Concierge
+$tech-details-dropdown-selection-background-color: #f5f5f5;
 
 // Text Colors *****************************
 $default-text-color: #333;
@@ -63,6 +67,8 @@ $home-additional-info-heading-color: #666666;
 // Home/Landing
 $home-main-header-text-color: rgb(25%, 25%, 25%);
 $home-additional-info-text-color: #9A9798;
+// Date Picker
+$date-picker-selected-day-text-color: #fff;
 
 // Border Colors **************************
 $form-field-border-color: #E2E2E2;
@@ -92,7 +98,8 @@ $home-view-min-height: 840px;
 $home-background-width: 1280px;
 $home-background-height: 1280px;
 $home-background-gradient-height: 840px;
-
+// Concierge
+$concierge-min-height: 625px;
 
 // Padding/Margins ************************
 $default-padding: 20px;
@@ -106,3 +113,5 @@ $nav-height: 84px;
 $custom-button-size: 150px;
 // Home/Landing
 $home-connect-button-dimensions: 110px;
+// Concierge
+$concierge-go-button-dimensions: 125px;

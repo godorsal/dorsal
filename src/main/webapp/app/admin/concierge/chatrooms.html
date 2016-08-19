@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="content/css/main.css">
-<div class="container chatrooms">
+<div class="container drsl-chat-rooms-admin">
   <div>
     <acme-navbar creation-date="main.creationDate"></acme-navbar>
   </div>
@@ -30,7 +30,7 @@
 
   <div class="container grid-container no-padding">
     <uib-accordion close-others="false">
-      <uib-accordion-group ng-repeat="room in crc.rooms track by $index" heading="{{room.room}}" is-open="crc._isopen[room.room]" is-disabled="!crc.isMemberOfRoom(room.room)" class="chatAccord">
+      <uib-accordion-group ng-repeat="room in crc.rooms track by $index" heading="{{room.room}}" is-open="crc._isopen[room.room]" is-disabled="!crc.isMemberOfRoom(room.room)" class="drsl-chat-accord">
         <uib-accordion-heading>
           Name: {{room.room}}&nbsp;&nbsp;
           <span ng-if="room.membersCount === 2">Concierge is present</span>
