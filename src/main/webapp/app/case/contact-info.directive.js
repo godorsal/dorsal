@@ -5,6 +5,7 @@
     .module('dorsalApp')
     .directive('contactInfo', contactInfo);
 
+
     function contactInfo() {
         var directive = {
             restrict: 'E',
@@ -35,22 +36,20 @@
                         '</div>' +
                     '</div>'
             ,
-            link: linkFunc,
-            controller: scopeController
+            link: linkFunc
         };
 
         return directive;
 
         function linkFunc(scope) {
-        }
-        function scopeController($scope){
-            $scope.$watch('contact', function(contact){
+            scope.$watch('contact', function(contact){
                 if (contact) {
                     var othercommunication = contact.othercommunication.split(',');
-                    $scope.otherTitle = othercommunication[0];
-                    $scope.otherLink = othercommunication[1];
+                    scope.otherTitle = othercommunication[0];
+                    scope.otherLink = othercommunication[1];
                 }
             })
         }
+
     }
 })();
