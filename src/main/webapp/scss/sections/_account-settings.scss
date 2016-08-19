@@ -9,6 +9,9 @@ Account Settings
     }
     .drsl-placeholder-label {
         position: relative;
+        .drsl-already-activated-input {
+            width: 1151px;
+        }
         input {
             padding: 10px 95px 10px 10px;
             border: 1px solid #ccc;
@@ -37,7 +40,7 @@ Account Settings
         float: left;
         width: 564px;
     }
-    .drsl-user-info-content{
+    .drsl-user-info-content {
         background: white;
         padding: 15px;
         height: 363px;
@@ -45,6 +48,15 @@ Account Settings
         display: inline-block;
         float: left;
         width: 564px;
+    }
+    .drsl-is-already-activated {
+        width: 1180px;
+        background: white;
+        padding: 15px;
+        height: 363px;
+        margin-bottom: 20px;
+        display: inline-block;
+        float: left;
     }
     .drsl-payment-header{
         text-align: right;
@@ -136,6 +148,9 @@ Account Settings
     .drsl-expert-textarea-label{
         font-weight: $medium-weight;
         color: $custom-input-unit-color;
+    }
+    .drsl-already-activated-input {
+        width: 1151px;
     }
     .drsl-user-managment {
         width: 566px;
