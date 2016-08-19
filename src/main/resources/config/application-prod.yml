@@ -25,8 +25,7 @@ spring:
         livereload:
             enabled: false
     datasource:
-        # url: jdbc:postgresql://dorsal-db-prod-1.cjigsiwzvxbf.us-west-1.rds.amazonaws.com:5432/dorsalprod
-        url: jdbc:postgresql://localhost:5432/dorsalprod
+        url: jdbc:postgresql://dorsal-db-prod-1.cjigsiwzvxbf.us-west-1.rds.amazonaws.com:5432/dorsalprod
         name:
         username: dorsal
         password: dorsal
