@@ -23,6 +23,7 @@
         function linkFunc(scope) {
             scope.StatusModel = StatusModel;
             scope.localEstimateHours = null;
+            scope.maxHoursOnCase = 0;
 
             scope.datePopup = {
                 opened: false
@@ -93,7 +94,9 @@
             };
 
             scope.$on('currentCaseSet', function(){
-                scope.localEstimateHours = scope.case.estimateHours/1;
+                var caseEstimateHours = scope.case.estimateHours/1;
+                scope.localEstimateHours = caseEstimateHours;
+                scope.maxHoursOnCase = caseEstimateHours;
             });
         }
     }
