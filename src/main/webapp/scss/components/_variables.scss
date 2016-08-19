@@ -1,59 +1,108 @@
 /* ==========================================================================
 Fonts
 ========================================================================== */
+// Font Families **************************
 $main-font: 'Raleway', 'Work Sans', Helvetica, Arial, Lucida, sans-serif;
 $numbers-font: 'Work Sans', Helvetica, Arial, Lucida, sans-serif;
+
+// Font Sizes *****************************
 $default-font-size: 14px;
 $tiny-font-size: 10px;
 $small-font-size: 11px;
 $medium-font-size: 16px;
 $large-font-size: 20px;
+$custom-button-font-size: 30px;
+// Home/Landing
+$home-title-font-size: 49px;
+$home-tagline-font-size: 17px;
+$home-technology-font-size: 28px;
+$home-additional-info-heading-font-size: 25px;
+$home-additional-info-txt-font-size: 15px;
+
+// Font Weight ****************************
 $default-weight: 400;
 $default-medium-weight: 500;
 $thin-weight: 200;
 $medium-weight: 600;
 $thick-weight: 700;
+// Home/Landing
+$home-main-header-weight: 900;
+$home-headings-weight: 300;
+$home-technology-weight: 300;
+
+// Line Height ****************************
+$custom-button-line-height: .95em;
 
 /* ==========================================================================
 Colors
 ========================================================================== */
-$background-color: #FFFFFF;
+// Brand Colors ***************************
+$brand-color: #F48B3D;
+
+// Background Colors **********************
+$background-color: #fff;
+$form-field-background-color: #DBDBDB;
+$content-background-color: $background-color;
+$primary-button-background-color: #B0AFB4;
+$content-container-color: #E5E5E5;
+$home-additional-info-background-color: #fff;
+
+// Text Colors *****************************
 $default-text-color: #333;
 $nav-text-color: #DDDCDB;
 $nav-text-active-color: #FFF;
-$form-field-placeholder-color: #F8F8F8;
-$form-field-background-color: #DBDBDB;
-$form-field-border-color: #E2E2E2;
-$content-container-color: #E5E5E5;
-$content-background-color: $background-color;
-$inverted-heading-text-color: #FFFFFF;
+$inverted-heading-text-color: #fff;
 $inverted-heading-right-text-color: #838584;
-$content-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
 $sub-header-text-color: #F5F1EE;
 $inactive-text-color: #c0c0c0;
-$brand-color: #F48B3D;
-$brand-border-color: #E58C38;
-$custom-button-color: $brand-color;
-$custom-button-size: 150px;
-$custom-button-shadow: 0px 5px 40px rgba(0, 0, 0, 0.5);
-$custom-button-text-color: #FFFFFF;
-$custom-button-font-size: 30px;
-$custom-button-line-height: .95em;
-$custom-radio-border-color: #B0AFB4;
-$primary-button-background-color: #B0AFB4;
-$primary-button-border-color: #9C9FA3;
-$horizontal-separator-color: #E2E2E2;
-$photo-border-color: #FFFFFF;
+$custom-button-text-color: #fff;
+$form-field-placeholder-color: #F8F8F8;
 $drsl-label-color: #999999;
 $drsl-value-color: #1a1a1a;
+$home-additional-info-heading-color: #666666;
+// Home/Landing
+$home-main-header-text-color: rgb(25%, 25%, 25%);
+$home-additional-info-text-color: #9A9798;
+
+// Border Colors **************************
+$form-field-border-color: #E2E2E2;
+$custom-radio-border-color: #B0AFB4;
+$primary-button-border-color: #9C9FA3;
+$brand-border-color: #E58C38;
+$photo-border-color: #fff;
+$horizontal-separator-color: #E2E2E2;
+$home-additional-info-border-color: #DCDCDC;
+
+// Shadow Colors **************************
+$content-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
+$custom-button-shadow: 0px 5px 40px rgba(0, 0, 0, 0.5);
+// Home/Landing
+$home-connect-button-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.75);
+
+// Button Colors **************************
+$custom-button-color: $brand-color;
 
 /* ==========================================================================
 Dimensions
 ========================================================================== */
+// Page ***********************************
 $site-max-width: 1280px;
-$nav-height: 84px;
+// Home/Landing
+$home-view-min-height: 840px;
+$home-background-width: 1280px;
+$home-background-height: 1280px;
+$home-background-gradient-height: 840px;
+
+
+// Padding/Margins ************************
 $default-padding: 20px;
 $default-double-padding: ($default-padding * 2);
 $default-half-padding: ($default-padding / 2);
 $content-padding-top: 25px;
 $content-padding-side: 50px;
+
+// Elements *******************************
+$nav-height: 84px;
+$custom-button-size: 150px;
+// Home/Landing
+$home-connect-button-dimensions: 110px;
