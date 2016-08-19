@@ -532,6 +532,11 @@ table.scroll thead > tr {
     }
 }
 
+.drsl-sub-header, .drsl-action-bar{
+    width: 1180px;
+    transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s;
+}
+
 .drsl-scrolling-container {
     display: block;
     overflow-y: auto;

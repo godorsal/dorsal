@@ -1,0 +1,60 @@
+/* ==========================================================================
+Chat
+========================================================================== */
+
+// Chat Admin Interface *******************
+.drsl-chat-rooms-admin {
+    margin-top: 100px;
+
+    .drsl-chat-accord {
+        width: 570px;
+        margin-left: 300px;
+    }
+}
+
+// Chat User Interface ********************
+.drsl-chat-section {
+    width: 570px;
+    height: 642px;
+
+    .drsl-chat-room {
+        border: none;
+        width: 5px !important;
+        max-width: 570px;
+        min-width: 570px;
+    }
+}
+
+// Shared Chat Styles *********************
+.drsl-chat-rooms-admin, .drsl-chat-section {
+    .chat {
+        min-height: 150px;
+        max-height: 150px;
+        overflow-y: scroll;
+        height: 500px;
+
+        .name {
+            color: #333;
+            font-weight: bold;
+        }
+
+        .text {
+            color: #333333;
+        }
+
+        .phrase:last-child {
+            margin-bottom: 0;
+        }
+        .phrase {
+            border-bottom: 0.5px solid #EEEEEE;
+            margin-left: 10px;
+        }
+    }
+
+    .btn-different {
+        background-color: #F48B3D;
+        color: white;
+        margin-right: 10px;
+        height: 34px;
+    }
+}
