@@ -147,7 +147,7 @@ Your e-mail cannot be longer than 100 characters.
     </div>
     <div class="form-group">
       <div class="drsl-placeholder-label" type="text">
-        <select id="langKey" name="langKey" class="form-control" ng-model="vm.settingsAccount.langKey" ng-controller="JhiLanguageController as languageVm" ng-options="code as (code | findLanguageFromKey) for code in languageVm.languages" ng-change="vm.updatingExpert = true"></select>
+        <select id="langKey" name="langKey" class="form-control fullSelect" ng-model="vm.settingsAccount.langKey" ng-controller="JhiLanguageController as languageVm" ng-options="code as (code | findLanguageFromKey) for code in languageVm.languages" ng-change="vm.updatingExpert = true"></select>
         <span class="select unit" translate="settings.form.language">(Language)</span>
       </div>
     </div>
@@ -169,7 +169,7 @@ Your e-mail cannot be longer than 100 characters.
     </div>
     <div class="form-group">
       <div class="drsl-placeholder-label">
-        <select class="form-control" name="expertAvailability" ng-model="vm.currentExpert.expertAvailability" id="field_expertAvailability" ng-change="vm.updatingExpert = true">
+        <select class="form-control fullSelect" name="expertAvailability" ng-model="vm.currentExpert.expertAvailability" id="field_expertAvailability" ng-change="vm.updatingExpert = true">
             <option value="FULL_TIME">Full Time</option>
             <option value="MON_FRI">Monday Through Friday</option>
             <option value="EVENING">Evenings</option>
@@ -183,7 +183,7 @@ Your e-mail cannot be longer than 100 characters.
             <div>
                 <span translate="settings.form.expertScore">Expert Score:</span> {{ 'global.messages.info.expertScoreOutOf' | translate:'{score: '+ (((expert.expertScore / expert.numberOfCases) | number:0) || 0) + '}' }}
             </div>
-            <div>
+            <div class="visibility">
                 <label for="field_profileVisibility" class="profileVisibilityLabel">Profile Visibility:</label>
                 <select class="form-control privacySelect" name="profileVisibility" ng-model="vm.currentExpert.profileVisibility" id="field_profileVisibility" ng-change="vm.updatingExpert = true">
                     <option value="PUBLIC">Public</option>

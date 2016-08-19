@@ -697,7 +697,7 @@ table.scroll thead > tr {
         display: inline-block;
         > div{
             > input {
-                width: 260px;
+                width: 263px;
             }
         }
     }
@@ -715,6 +715,9 @@ table.scroll thead > tr {
     }
 }
 .extraInfo{
+    label{
+        font-weight: normal;
+    }
     div {
         > div:first-child {
             // padding-right:15px;
@@ -727,12 +730,25 @@ table.scroll thead > tr {
             width: 285px;
             display: inline-block;
         }
+        > div {
+            .visibility{
+                width: 288px;
+            }
+        }
     }
 }
-.privacySelect{
-    width: 50%;
-    height: 50%;
-    display: inline-block;
+.visibility {
+    padding-left: 21px;
+    width: 288px;
+    .privacySelect{
+        margin-left: 10px;
+        width: 154px;
+        height: 50%;
+        display: inline-block;
+    }
+    .profileVisibilityLabel{
+        font-weight: normal;
+    }
 }
 .activatePage{
     background-color: #F48B3D;
