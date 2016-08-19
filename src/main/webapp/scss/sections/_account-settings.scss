@@ -4,7 +4,7 @@ Account Settings
 
 .drsl-account-settings {
     height: 1147px;
-    .fullSelect{
+    .drsl-fullSelect{
         width: 531px;
     }
     .drsl-placeholder-label {
@@ -15,24 +15,22 @@ Account Settings
             border-radius: 4px;
             height: 32px;
             width: 532px;
-            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: $custom-input-shadow;
         }
-        .unit { position: absolute;
+        .drsl-unit { position: absolute;
             display: block;
             right: 8px;
             top: 7px;
             z-index: 1;
-            color: #ac9999;
+            color: $custom-input-unit-color;
         }
-        .select{
-            // padding-top: 140px;
+        .drsl-select{
             padding-right: 15px;
         }
     }
     .drsl-expert-info-content{
         background: white;
         padding: 15px;
-        // height: 363px;
         height: 100%;
         margin-bottom: 20px;
         display: inline-block;
@@ -104,8 +102,6 @@ Account Settings
         background-color: #FFFFFF;
     }
     .drsl-payment-content {
-        // padding: 20px;
-        // display: flex;
         display: inline-block;
         float: right;
         width: 588px;
@@ -113,10 +109,6 @@ Account Settings
         > div {
             height: 363px;
             flex: 1;
-
-            &:first-child {
-                // margin-right: $default-padding;
-            }
         }
     }
     .drsl-expert-message-content {
@@ -141,9 +133,9 @@ Account Settings
             }
         }
     }
-    .expertTextareaLabel{
-        font-weight: 600;
-        color: #ac9999;
+    .drsl-expert-textarea-label{
+        font-weight: $medium-weight;
+        color: $custom-input-unit-color;
     }
     .drsl-user-managment {
         width: 566px;
@@ -152,7 +144,7 @@ Account Settings
         display: inline-block;
         img {
             width: 34px;
-            padding-left: 20px;
+            padding-left: $default-padding;
         }
         .panel-heading{
             padding-left: 10px;
@@ -216,7 +208,7 @@ Account Settings
         display: inline-block;
         img {
             width: 33px;
-            padding-left: 20px;
+            padding-left: $default-padding;
         }
         .panel-heading{
             > div {

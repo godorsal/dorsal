@@ -736,13 +736,13 @@ table.scroll thead > tr {
             display: inline-block;
         }
         > div {
-            .visibility{
+            .drsl-visibility{
                 width: 288px;
             }
         }
     }
 }
-.visibility {
+.drsl-visibility {
     padding-left: 21px;
     width: 288px;
     .privacySelect{
@@ -751,8 +751,8 @@ table.scroll thead > tr {
         height: 50%;
         display: inline-block;
     }
-    .profileVisibilityLabel{
-        font-weight: normal;
+    .drsl-profile-visibility-label{
+        font-weight: $default-weight;
     }
 }
 .activatePage{
