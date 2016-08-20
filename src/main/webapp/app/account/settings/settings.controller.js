@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('SettingsController', SettingsController);
 
-    SettingsController.$inject = ['Principal', 'Auth', 'JhiLanguageService', '$translate', 'Payment', 'Groupaccess', 'Useraccount', 'User', 'Focus', 'Register', 'toastr', 'ExpertAccount', 'Issue', 'Technology'];
+    SettingsController.$inject = ['Principal', 'Auth', 'JhiLanguageService', '$translate', 'Payment', 'Groupaccess', 'Useraccount', 'User', 'Focus', 'Register', 'toastr', 'ExpertAccount', 'Issue', 'Technology', '_'];
 
-    function SettingsController(Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, Useraccount, User, focus, Register, toastr, ExpertAccount, Issue, Technology) {
+    function SettingsController(Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, Useraccount, User, focus, Register, toastr, ExpertAccount, Issue, Technology, _) {
         var vm = this;
 
         vm.error = null;
@@ -43,7 +43,7 @@
             }
         });
         Payment.query(function(result){
-            result.find(function(ccdata){
+            _.find(result, function(ccdata){
                 if(ccdata.user.login === vm.settingsAccount.login){ var data = ccdata.ccdata.split('##')
                     vm.creditCard = {
                         name: data[0],
@@ -61,6 +61,7 @@
                     }
                 }
             })
+
         })
         function numberTab(event){
             if(event.target.value.length === event.target.maxLength){
@@ -214,7 +215,7 @@
         }
         function invitedGroup(newUser){
             User.query(function(result){
-                var userWithId = result.find(function(user){
+                var userWithId = _.find(result, function(user){
                     return user.login == newUser.login;
                 })
                 var group = {
@@ -234,19 +235,19 @@
                     toastr["error"]("Users cannot invite themselves")
                     return
                 }
-                var isAlreadyInvited = vm.invitedUsers.find(function(invited){
+                var isAlreadyInvited = _.find(vm.invitedUsers, function(invited){
                     if(invited.authorizeduser.email == currentEmail){
                         return true;
                     }
                 })
-                var isAlreadyAuthorized = vm.authorizedUsers.find(function(authorized){
+                var isAlreadyAuthorized = _.find(vm.authorizedUsers, function(authorized){
                     if(authorized.authorizeduser.email == currentEmail){
                         return true;
                     }
                 })
                 if(!isAlreadyInvited && !isAlreadyAuthorized){
                     User.query(function(result){
-                        var newUser = result.find(function (user) {
+                        var newUser = _.find(result, function (user) {
                             return user.email == currentEmail;
                         })
                         if(newUser){
@@ -265,7 +266,7 @@
         function getAuthorizedUsers() {
             vm.authorizedUsers = [];
             Groupaccess.query(function(result){
-                result.find(function(user){
+                _.find(result, function(user){
                     if(user.authorizeduser.email === vm.settingsAccount.email){
                         vm.isAlreadyAuthorized = true;
                     } else if(user.user.login === vm.settingsAccount.login && user.authorizeduser.activated){
