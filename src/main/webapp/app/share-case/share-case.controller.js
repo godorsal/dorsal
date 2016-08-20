@@ -49,7 +49,7 @@
         }
         function shareCaseNew(newUser){
             User.query(function(users){
-                newUser = users.find(function(user){
+                newUser = _.find(users, function(user){
                     return user.email === newUser.email
                 })
                 var newSharedCase = {
@@ -79,7 +79,7 @@
             var newUsers = vm.emailInput.split(',');
             newUsers.forEach(function(currentEmail){
                 User.query(function(result){
-                    var newUser = result.find(function (user) {
+                    var newUser = _.find(result, function (user) {
                         return user.email == currentEmail;
                     })
                     if(newUser){
@@ -92,7 +92,7 @@
         }
         function getSharedUsers() {
             SharedCase.query(function(result){
-                result.find(function(user){
+                _.find(result, function(user){
                     if(user.supportcase.id === vm.case.id){
                         vm.sharedUsers.push(user);
                     }
