@@ -5,7 +5,7 @@
                 <div class="drsl-sub-header">
                     <h2 ng-if="!vm.currentExpert">User settings for  {{vm.settingsAccount.login}}</h2>
                     <h2 ng-if="vm.currentExpert">Expert Settings</h2>
-                    <h2 class="drsl-payment-header" ng-if="!vm.currentExpert">Payment Method</h2>
+                    <h2 class="drsl-payment-header" ng-if="!vm.currentExpert && !vm.isAlreadyAuthorized">Payment Method</h2>
                 </div>
                 <div class="drsl-panels">
                     <div class="alert alert-success" ng-show="vm.success" translate="settings.messages.success">
@@ -19,17 +19,17 @@
                     <div class="alert alert-danger" ng-show="vm.error" translate="settings.messages.error.fail">
                         <strong>An error has occurred!</strong> Settings could not be saved.
                     </div>
-                    <div ng-class="{'drsl-expert-info-content': vm.currentExpert, 'drsl-user-info-content': !vm.currentExpert}">
+                    <div ng-class="{'drsl-expert-info-content': vm.currentExpert, 'drsl-user-info-content': !vm.currentExpert, 'drsl-is-already-activated': vm.isAlreadyAuthorized}">
                         <form name="form" role="form" novalidate ng-submit="vm.save()" show-validation>
                             <div class="form-group" >
                             <div class="drsl-placeholder-label" type="text">
-                              <input type="text" id="login" name="login" value="" ng-model="vm.settingsAccount.login" disabled ng-change="vm.updatingUser = true">
-                              <span class="drsl-unit" translate="settings.form.login">(First Name)</span>
+                              <input type="text" id="login" name="login" value="" ng-model="vm.settingsAccount.login" disabled ng-change="vm.updatingUser = true" ng-class="{'drsl-already-activated-input': vm.isAlreadyAuthorized}">
+                              <span class="drsl-unit" translate="settings.form.login">(Login)</span>
                             </div>
                             </div>
                             <div class="form-group" >
                               <div class="drsl-placeholder-label" type="text">
-                                <input type="text" id="firstName" name="firstName" value="" ng-model="vm.settingsAccount.firstName" ng-minlength=1 ng-maxlength=50 required maxlength="50" ng-change="vm.updatingUser = true">
+                                <input type="text" id="firstName" name="firstName" value="" ng-model="vm.settingsAccount.firstName" ng-minlength=1 ng-maxlength=50 required maxlength="50" ng-change="vm.updatingUser = true" ng-class="{'drsl-already-activated-input': vm.isAlreadyAuthorized}">
                                 <span class="drsl-unit" translate="settings.form.firstname">(First Name)</span>
                               </div>
                                 <div ng-show="form.firstName.$dirty && form.firstName.$invalid">
@@ -49,7 +49,7 @@
                 </div>
                 <div class="form-group">
                   <div class="drsl-placeholder-label" type="text">
-                    <input type="text" id="lastName" name="lastName" value="" ng-model="vm.settingsAccount.lastName" ng-minlength=1 ng-maxlength=50 required maxlength="50" ng-change="vm.updatingUser = true">
+                    <input type="text" id="lastName" name="lastName" value="" ng-model="vm.settingsAccount.lastName" ng-minlength=1 ng-maxlength=50 required maxlength="50" ng-change="vm.updatingUser = true" ng-class="{'drsl-already-activated-input': vm.isAlreadyAuthorized}">
                     <span class="drsl-unit" translate="settings.form.lastname">(Last Nam)e</span>
                   </div>
                     <div ng-show="form.lastName.$dirty && form.lastName.$invalid">
@@ -69,7 +69,7 @@
     </div>
     <div class="form-group">
       <div class="drsl-placeholder-label" type="text">
-        <input type="text" id="email" name="email" ng-model="vm.settingsAccount.email" ng-minlength=1 ng-maxlength=50 required maxlength="50" ng-change="vm.updatingUser = true">
+        <input type="text" id="email" name="email" ng-model="vm.settingsAccount.email" ng-minlength=1 ng-maxlength=50 required maxlength="50" ng-change="vm.updatingUser = true" ng-class="{'drsl-already-activated-input': vm.isAlreadyAuthorized}">
         <span class="drsl-unit" translate="settings.form.email">Email Address</span>
       </div>
         <div ng-show="form.email.$dirty && form.email.$invalid">
@@ -232,7 +232,7 @@ Your e-mail cannot be longer than 100 characters.
     </div>
 </div>
 </form>
-<div class="drsl-payment-content" ng-if="!vm.currentExpert">
+<div class="drsl-payment-content" ng-if="!vm.currentExpert && !vm.isAlreadyAuthorized">
     <div>
         <div class="panel panel-default">
             <div class="panel-heading authorized-credit-card">

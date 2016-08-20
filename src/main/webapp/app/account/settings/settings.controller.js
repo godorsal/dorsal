@@ -230,6 +230,10 @@
         function addAuthorizedUser(){
             var currentEmails = vm.invitedUser.split(',');
             currentEmails.forEach(function(currentEmail){
+                if(currentEmail === vm.settingsAccount.email){
+                    toastr["error"]("Users cannot invite themselves")
+                    return
+                }
                 var isAlreadyInvited = vm.invitedUsers.find(function(invited){
                     if(invited.authorizeduser.email == currentEmail){
                         return true;
@@ -262,7 +266,9 @@
             vm.authorizedUsers = [];
             Groupaccess.query(function(result){
                 result.find(function(user){
-                    if(user.user.login === vm.settingsAccount.login && user.authorizeduser.activated){
+                    if(user.authorizeduser.email === vm.settingsAccount.email){
+                        vm.isAlreadyAuthorized = true;
+                    } else if(user.user.login === vm.settingsAccount.login && user.authorizeduser.activated){
                         vm.authorizedUsers.push(user);
                     } else if(user.user.login === vm.settingsAccount.login && !user.authorizeduser.activated){
                         vm.invitedUsers.push(user);

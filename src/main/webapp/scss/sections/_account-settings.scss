@@ -9,6 +9,9 @@ Account Settings
     }
     .drsl-placeholder-label {
         position: relative;
+        .drsl-already-activated-input {
+            width: 1151px;
+        }
         input {
             padding: 10px 95px 10px 10px;
             border: 1px solid #ccc;
@@ -29,7 +32,7 @@ Account Settings
         }
     }
     .drsl-expert-info-content{
-        background: white;
+        background: $background-color;
         padding: 15px;
         height: 100%;
         margin-bottom: 20px;
@@ -37,14 +40,23 @@ Account Settings
         float: left;
         width: 564px;
     }
-    .drsl-user-info-content{
-        background: white;
+    .drsl-user-info-content {
+        background: $background-color;
         padding: 15px;
         height: 363px;
         margin-bottom: 20px;
         display: inline-block;
         float: left;
         width: 564px;
+    }
+    .drsl-is-already-activated {
+        width: 1180px;
+        background: $background-color;
+        padding: 15px;
+        height: 363px;
+        margin-bottom: 20px;
+        display: inline-block;
+        float: left;
     }
     .drsl-payment-header{
         text-align: right;
@@ -86,10 +98,10 @@ Account Settings
         height: 50px;
     }
     #email{
-        background: white; font-size: 13px;
+        background: $background-color; font-size: 13px;
     }
     .settingblock{
-        background: white;
+        background: $background-color;
         float: left;
         display: inline-block !important;
     }
@@ -136,6 +148,9 @@ Account Settings
     .drsl-expert-textarea-label{
         font-weight: $medium-weight;
         color: $custom-input-unit-color;
+    }
+    .drsl-already-activated-input {
+        width: 1151px;
     }
     .drsl-user-managment {
         width: 566px;
