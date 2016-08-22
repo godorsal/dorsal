@@ -9,7 +9,7 @@
                         <span class="drsl-understated">ID: {{vm.currentCase.technology.name}} {{vm.currentCase.id}}</span>
                     </div>
                     <div></div>
-                    <div>
+                    <div class="drsl-case-updates">
                         <div class="btn-group" uib-dropdown is-open="status.isopen" ng-if="vm.currentCase.numberOfUpdates">
                             <a id="single-button" type="button" uib-dropdown-toggle ng-disabled="disabled">
                                 <span ng-if="vm.currentCase.numberOfUpdates + vm.estimateLogs.length > 1">

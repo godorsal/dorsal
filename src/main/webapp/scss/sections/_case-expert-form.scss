@@ -1,0 +1,141 @@
+/* ==========================================================================
+Case Expert Form (seen by expert)
+========================================================================== */
+
+.drsl-case-expert-form {
+    > form {
+        > div {
+            padding: $default-padding;
+            padding-bottom: 10px;
+
+            &:first-child {
+                padding-bottom: $default-padding;
+                border-bottom: 2px solid $horizontal-separator-color;
+                .drsl-label {
+                    width: auto;
+                    margin-right: 5px;
+                }
+            }
+
+            &:last-child {
+                padding-bottom: $default-padding;
+                display: flex;
+                flex-flow: row;
+                align-items: center;
+
+                > div:first-child {
+                    flex: 3;
+
+                    .drsl-label {
+                        margin-right: 5px;
+                        width: auto;
+                    }
+                }
+
+                > div:last-child {
+                    flex: 1;
+                    text-align: right;
+                }
+            }
+
+            .drsl-label {
+                width: 75px;
+                display: inline-block;
+            }
+
+            .uib-title {
+                strong {
+                    @extend .drsl-label;
+                    font-weight: $thin-weight;
+                    font-size: 18px;
+                    text-align: center;
+                    width: initial;
+                }
+            }
+        }
+
+        input[type="text"].form-control, input[type="number"].form-control {
+            padding: 10px;
+            height: 40px;
+            border-radius: 0;
+            border-color: $form-field-border-color;
+        }
+
+        textarea.form-control {
+            height: 80px;
+            border-radius: 0;
+            border-color: $form-field-border-color;
+        }
+
+        .drsl-case-resolved-wrapper {
+            align-items: center;
+            padding-bottom: 0;
+        }
+
+        input[type="checkbox"] {
+            display: none;
+        }
+
+        input[type="checkbox"] + label span {
+            display: inline-block;
+            width: 17px;
+            height: 17px;
+            cursor: pointer;
+            background-color: $content-background-color;
+            border-radius: 50%;
+            margin-top: 5px;
+            border-color: $form-field-border-color;
+        }
+
+        input[type="checkbox"] + label span {
+            border-radius: 25%;
+        }
+
+        input[type="checkbox"]:checked + label span {
+            background-color: $brand-color;
+            border: 3px solid $brand-color;
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    }
+
+    .drsl-complete-lnk.disabled {
+        color: $inactive-text-color;
+    }
+
+    .drsl-hours-date-wrapper {
+        display: flex;
+        flex-flow: row;
+
+        .drsl-expert-hours-wrapper {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .drsl-expert-date-wrapper {
+            flex: 3;
+            display: flex;
+            flex-flow: row;
+
+            .drsl-expert-date-label {
+                flex: auto;
+                max-width: 55px;
+                margin-right: 20px;
+            }
+
+            .drsl-expert-date-controls {
+                flex: auto;
+
+                .form-control.drsl-value.drsl-date-display-wrapper {
+                    border-radius: 0;
+                    padding: 10px;
+                    height: 40px;
+                }
+            }
+        }
+    }
+}
