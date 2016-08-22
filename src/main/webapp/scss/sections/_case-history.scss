@@ -1,0 +1,48 @@
+/* ==========================================================================
+Case History
+========================================================================== */
+
+.drsl-case-history-wrapper {
+    padding: $default-padding;
+    background-color: $content-background-color;
+
+    .panel-collapse > .panel-body {
+        padding: 0;
+    }
+
+    .drsl-right-sub-header {
+        font-weight: $thin-weight;
+    }
+
+    .panel-default {
+        cursor: pointer;
+        margin-bottom: 5px;
+
+        > .panel-heading {
+            &.active {
+                background-color: $brand-color;
+                color: $inverted-heading-text-color;
+            }
+        }
+    }
+
+    .drsl-case-list {
+        display: flex;
+        flex-flow: row;
+        > div {
+            &:first-child {
+                flex: 3;
+                margin-right: $default-half-padding;
+            }
+            &:last-child {
+                flex: 1;
+                text-align: right
+            }
+        }
+
+        .drsl-case-list-id {
+            display: inline-block;
+            width: 200px;
+        }
+    }
+}

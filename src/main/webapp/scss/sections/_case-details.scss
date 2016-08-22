@@ -1,0 +1,101 @@
+/* ==========================================================================
+Case Details
+========================================================================== */
+
+.drsl-case-details-view {
+    textarea {
+        resize: none;
+    }
+
+    .drsl-header-status {
+        text-transform: uppercase;
+    }
+
+    .drsl-dialog-content {
+        padding: $default-padding;
+    }
+
+    .drsl-incident-items {
+        display: flex;
+        flex-flow: row;
+
+        > div {
+            flex: 1;
+            text-align: center;
+            span {
+                padding-right: $default-half-padding;
+            }
+        }
+    }
+
+    .drsl-tech-props {
+        margin-left: 35px;
+        width: 240px;
+        display: inline-block;
+    }
+
+    .drsl-case-props {
+        margin-left: 96px;
+        width: 298px;
+        display: inline-block;
+    }
+
+    .drsl-file-upload-section {
+        display: flex;
+        flex-flow: row;
+
+        > div {
+            flex: 1;
+            &:last-child {
+                flex: 3;
+            }
+        }
+    }
+
+    .drsl-detail-attachment-wrapper {
+        .drsl-main-attachment-btns {
+            .drsl-main-done-btn, .drsl-main-later-btn {
+                display: none;
+            }
+        }
+    }
+
+    .drsl-update-history-box {
+        width: 688px;
+    }
+
+    .drsl-date-header {
+        padding-left: 198px;
+    }
+
+    .drsl-user-header {
+        padding-left: 140px;
+    }
+
+    .drsl-update-trow {
+        font-weight: 500;
+        color: #404040
+    }
+
+    .drsl-update-message-tdata{
+        min-width: 243px;
+        max-width: 243px;
+        padding-bottom: 35px;
+    }
+
+    .drsl-update-date-tdata{
+        white-space: nowrap;
+        width: 225px;
+        padding-left: 15px;
+        padding-bottom: 35px;
+    }
+
+    .drsl-update-user-tdata{
+        width: 87px;
+        padding-bottom: 35px;
+    }
+
+    .drsl-details-user-view {
+        text-align: right;
+    }
+}

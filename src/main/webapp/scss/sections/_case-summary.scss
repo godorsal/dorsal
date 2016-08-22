@@ -1,0 +1,83 @@
+/* ==========================================================================
+Case Summary
+========================================================================== */
+
+.drsl-case-summary {
+    > div {
+        padding: $default-padding;
+        border-bottom: 2px solid $horizontal-separator-color;
+
+        &:last-child {
+            border: 0;
+        }
+    }
+
+    .drsl-label {
+        margin-right: 5px;
+    }
+
+    .drsl-timeline {
+        color: $inactive-text-color;
+
+        hr {
+            border: 0;
+            height: 2px;
+            background: $horizontal-separator-color;
+            position: absolute;
+            top: 40%;
+            width: 100%;
+            margin: 0;
+        }
+
+        .drsl-icon-sprites {
+            background-position: -65px 0;
+        }
+
+        .drsl-timeline-icon-wrapper {
+            margin-top: $default-half-padding;
+            margin-left: -$default-padding;
+            margin-right: -$default-padding;
+            position: relative;
+
+            .drsl-timeline-icons {
+                display: flex;
+                flex-flow: row;
+                text-align: center;
+
+                > div {
+                    flex: 1;
+                }
+            }
+        }
+
+        .drsl-timeline-item-done {
+            .drsl-timeline-text {
+                color: $default-text-color;
+                font-weight: $medium-weight;
+            }
+
+            .drsl-icon-sprites {
+                background-position: -4px 0;
+            }
+        }
+
+        .drsl-timeline-icons {
+            .popover {
+                max-width: 350px;
+            }
+        }
+    }
+
+    .drsl-eta-date {
+        min-width: 75px;
+        display: inline-block;
+    }
+
+    .drsl-detail-attachment-wrapper .drsl-attachment-items-wrapper {
+        width: 300px;
+    }
+
+    .drsl-detail-attachment-wrapper.drsl-no-attachments {
+        visibility: hidden;
+    }
+}
