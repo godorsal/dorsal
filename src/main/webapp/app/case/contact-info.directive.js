@@ -30,9 +30,9 @@
                             '<i class="fa fa-comments-o" tooltip-placement="left" uib-tooltip="{{\'case.professional.contact.chat\' | translate}}"></i> ' +
                             '<a ng-href="{{chatRoom.link}}" target="_blank">{{chatRoom.id}}</a>' +
                         '</div>' +
-                        '<div>' +
+                        '<div ng-show="showOther">' +
                             '<i class="fa fa-arrow-right" tooltip-placement="left" uib-tooltip="{{\'case.professional.contact.other\' | translate}}"></i> ' +
-                            '<a ng-href="{{otherTitle}}" target="_blank">{{otherLink}}</a>' +
+                            '<a ng-href="{{otherLink}}" target="_blank">{{otherTitle}}</a>' +
                         '</div>' +
                     '</div>'
             ,
@@ -45,8 +45,9 @@
             scope.$watch('contact', function(contact){
                 if (contact) {
                     var othercommunication = contact.othercommunication.split(',');
-                    scope.otherTitle = othercommunication[0];
-                    scope.otherLink = othercommunication[1];
+                    scope.otherLink = othercommunication[0];
+                    scope.otherTitle = othercommunication[1];
+                    scope.showOther = scope.otherTitle != 'undefined' && scope.otherLink != 'undefined';
                 }
             })
         }
