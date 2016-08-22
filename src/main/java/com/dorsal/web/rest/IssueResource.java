@@ -2,7 +2,9 @@ package com.dorsal.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.dorsal.domain.Issue;
+import com.dorsal.domain.User;
 import com.dorsal.repository.IssueRepository;
+import com.dorsal.repository.UserRepository;
 import com.dorsal.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,10 +29,14 @@ import java.util.Optional;
 public class IssueResource {
 
     private final Logger log = LoggerFactory.getLogger(IssueResource.class);
-        
+
     @Inject
     private IssueRepository issueRepository;
-    
+
+    // User repository functinality for finding currently logged in user
+    @Inject
+    private UserRepository userRepository;
+
     /**
      * POST  /issues : Create a new issue.
      *
@@ -44,6 +50,12 @@ public class IssueResource {
     @Timed
     public ResponseEntity<Issue> createIssue(@Valid @RequestBody Issue issue) throws URISyntaxException {
         log.debug("REST request to save Issue : {}", issue);
+        User loggedInUser = userRepository.findLoggedInUser();
+        if (loggedInUser == null) {
+            log.warn("Issue Entity: Creation attempted without being logged into system");
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("issue", "accessrefused", "No permissions for this operations")).body(null);
+        }
+
         if (issue.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("issue", "idexists", "A new issue cannot already have an ID")).body(null);
         }
@@ -68,6 +80,11 @@ public class IssueResource {
     @Timed
     public ResponseEntity<Issue> updateIssue(@Valid @RequestBody Issue issue) throws URISyntaxException {
         log.debug("REST request to update Issue : {}", issue);
+        User loggedInUser = userRepository.findLoggedInUser();
+        if (loggedInUser == null) {
+            log.warn("Issue Entity: Creation attempted without being logged into system");
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("issue", "accessrefused", "No permissions for this operations")).body(null);
+        }
         if (issue.getId() == null) {
             return createIssue(issue);
         }
@@ -124,6 +141,11 @@ public class IssueResource {
     @Timed
     public ResponseEntity<Void> deleteIssue(@PathVariable Long id) {
         log.debug("REST request to delete Issue : {}", id);
+        User loggedInUser = userRepository.findLoggedInUser();
+        if (loggedInUser == null) {
+            log.warn("Issue Entity: Creation attempted without being logged into system");
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("issue", "accessrefused", "No permissions for this operations")).body(null);
+        }
         issueRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("issue", id.toString())).build();
     }

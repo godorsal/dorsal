@@ -2,6 +2,8 @@ package com.dorsal.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.dorsal.domain.Technology;
+import com.dorsal.domain.User;
+import com.dorsal.repository.UserRepository;
 import com.dorsal.service.TechnologyService;
 import com.dorsal.web.rest.util.HeaderUtil;
 import com.dorsal.web.rest.dto.TechnologyDTO;
@@ -32,13 +34,17 @@ import java.util.stream.Collectors;
 public class TechnologyResource {
 
     private final Logger log = LoggerFactory.getLogger(TechnologyResource.class);
-        
+
     @Inject
     private TechnologyService technologyService;
-    
+
     @Inject
     private TechnologyMapper technologyMapper;
-    
+
+    // User repository functinality for finding currently logged in user
+    @Inject
+    private UserRepository userRepository;
+
     /**
      * POST  /technologies : Create a new technology.
      *
@@ -52,6 +58,13 @@ public class TechnologyResource {
     @Timed
     public ResponseEntity<TechnologyDTO> createTechnology(@Valid @RequestBody TechnologyDTO technologyDTO) throws URISyntaxException {
         log.debug("REST request to save Technology : {}", technologyDTO);
+
+        User loggedInUser = userRepository.findLoggedInUser();
+        if (loggedInUser == null) {
+            log.warn("Technology Entity: Creation attempted without being logged into system");
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("technology", "accessrefused", "No permissions for this operations")).body(null);
+        }
+
         if (technologyDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("technology", "idexists", "A new technology cannot already have an ID")).body(null);
         }
@@ -76,6 +89,13 @@ public class TechnologyResource {
     @Timed
     public ResponseEntity<TechnologyDTO> updateTechnology(@Valid @RequestBody TechnologyDTO technologyDTO) throws URISyntaxException {
         log.debug("REST request to update Technology : {}", technologyDTO);
+
+        User loggedInUser = userRepository.findLoggedInUser();
+        if (loggedInUser == null) {
+            log.warn("Technology Entity: Creation attempted without being logged into system");
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("technology", "accessrefused", "No permissions for this operations")).body(null);
+        }
+
         if (technologyDTO.getId() == null) {
             return createTechnology(technologyDTO);
         }
@@ -132,6 +152,13 @@ public class TechnologyResource {
     @Timed
     public ResponseEntity<Void> deleteTechnology(@PathVariable Long id) {
         log.debug("REST request to delete Technology : {}", id);
+
+        User loggedInUser = userRepository.findLoggedInUser();
+        if (loggedInUser == null) {
+            log.warn("Technology Entity: Creation attempted without being logged into system");
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("technology", "accessrefused", "No permissions for this operations")).body(null);
+        }
+
         technologyService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("technology", id.toString())).build();
     }

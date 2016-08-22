@@ -2,7 +2,9 @@ package com.dorsal.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.dorsal.domain.Technologyproperty;
+import com.dorsal.domain.User;
 import com.dorsal.repository.TechnologypropertyRepository;
+import com.dorsal.repository.UserRepository;
 import com.dorsal.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,10 +28,14 @@ import java.util.Optional;
 public class TechnologypropertyResource {
 
     private final Logger log = LoggerFactory.getLogger(TechnologypropertyResource.class);
-        
+
     @Inject
     private TechnologypropertyRepository technologypropertyRepository;
-    
+
+    // User repository functinality for finding currently logged in user
+    @Inject
+    private UserRepository userRepository;
+
     /**
      * POST  /technologyproperties : Create a new technologyproperty.
      *
@@ -43,6 +49,11 @@ public class TechnologypropertyResource {
     @Timed
     public ResponseEntity<Technologyproperty> createTechnologyproperty(@RequestBody Technologyproperty technologyproperty) throws URISyntaxException {
         log.debug("REST request to save Technologyproperty : {}", technologyproperty);
+        User loggedInUser = userRepository.findLoggedInUser();
+        if (loggedInUser == null) {
+            log.warn("TechnologyProperty Entity: Creation attempted without being logged into system");
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("technologyproperty", "accessrefused", "No permissions for this operations")).body(null);
+        }
         if (technologyproperty.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("technologyproperty", "idexists", "A new technologyproperty cannot already have an ID")).body(null);
         }
@@ -67,6 +78,11 @@ public class TechnologypropertyResource {
     @Timed
     public ResponseEntity<Technologyproperty> updateTechnologyproperty(@RequestBody Technologyproperty technologyproperty) throws URISyntaxException {
         log.debug("REST request to update Technologyproperty : {}", technologyproperty);
+        User loggedInUser = userRepository.findLoggedInUser();
+        if (loggedInUser == null) {
+            log.warn("TechnologyProperty Entity: Creation attempted without being logged into system");
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("technologyproperty", "accessrefused", "No permissions for this operations")).body(null);
+        }
         if (technologyproperty.getId() == null) {
             return createTechnologyproperty(technologyproperty);
         }
@@ -123,6 +139,11 @@ public class TechnologypropertyResource {
     @Timed
     public ResponseEntity<Void> deleteTechnologyproperty(@PathVariable Long id) {
         log.debug("REST request to delete Technologyproperty : {}", id);
+        User loggedInUser = userRepository.findLoggedInUser();
+        if (loggedInUser == null) {
+            log.warn("TechnologyProperty Entity: Creation attempted without being logged into system");
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("technologyproperty", "accessrefused", "No permissions for this operations")).body(null);
+        }
         technologypropertyRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("technologyproperty", id.toString())).build();
     }
