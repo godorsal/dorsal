@@ -53,7 +53,7 @@
             $uibModalInstance.dismiss('cancel');
         }
         EscalateCase.query(function(data){
-            data.find(function(escalation){
+            _.find(data, function(escalation){
                 if(escalation.supportcase.id == vm.case.id){
                     vm.thisEscalation = escalation;
                 }
