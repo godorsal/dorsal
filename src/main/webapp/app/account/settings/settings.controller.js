@@ -115,6 +115,9 @@
                         $translate.use(vm.settingsAccount.langKey);
                     }
                 });
+                if(vm.isAlreadyAuthorized){
+                    $state.go('case');
+                }
             }).catch(function () {
                 vm.success = null;
                 toastr["error"]("Saving Error")
