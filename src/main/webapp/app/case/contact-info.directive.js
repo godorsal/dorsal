@@ -45,7 +45,6 @@
             scope.$watch('contact', function(contact){
                 if (contact) {
                     var othercommunication = contact.othercommunication.split(',');
-                    console.log(othercommunication);
                     scope.otherLink = othercommunication[0];
                     scope.otherTitle = othercommunication[1];
                     scope.showOther = scope.otherTitle != 'undefined' && scope.otherLink != 'undefined' && othercommunication.length > 1;
