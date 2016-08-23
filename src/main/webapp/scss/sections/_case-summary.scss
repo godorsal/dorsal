@@ -80,4 +80,16 @@ Case Summary
     .drsl-detail-attachment-wrapper.drsl-no-attachments {
         visibility: hidden;
     }
+
+    .drsl-case-status-wrapper {
+        > div {
+            position: relative;
+        }
+
+        .drsl-summary-attachment-wrapper {
+            position: absolute;
+            top: -7px;
+            right: 0px;
+        }
+    }
 }

@@ -60,7 +60,7 @@
                 <a ng-click="vm.openAttachment()" uib-tooltip="add an attachment">attach files</a>
                 <a ng-show="vm.DrslMetadata.showCaseChat !== 0" ng-click="vm.openChat()" uib-tooltip="chat with expert" ng-class="{'drsl-link-disabled': !vm.passedStep(1)}" class="drsl-link-disabled" translate="case.details.chatRoom">chat</a>
                 <a ui-sref="concierge" uib-tooltip="create a new case">new</a>
-                <a class="alignRight" ng-click="vm.openEscalation()" ng-class="{'drsl-link-disabled': vm.passedStep(4)}">escalate or reassign this case</a>
+                <a class="pull-right" ng-click="vm.openEscalation()" ng-class="{'drsl-link-disabled': vm.passedStep(4)}">escalate or reassign this case</a>
             </div>
 
             <!-- Current Case -->
