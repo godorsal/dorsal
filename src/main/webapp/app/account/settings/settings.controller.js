@@ -137,25 +137,33 @@
                 toastr["error"]("Saving Error")
                 return;
             }
-            vm.creditCard.number = vm.number.join('');
-            var arr = Object.keys(vm.creditCard).map(function(k) { return vm.creditCard[k] });
+            vm.tempCard = {
+                name: vm.creditCard.name,
+                number: vm.number.join(''),
+                month: vm.creditCard.month,
+                year: vm.creditCard.year,
+                cvv: vm.creditCard.cvv,
+                id: vm.creditCard.id,
+                user: vm.creditCard.user
+            }
+            var arr = Object.keys(vm.tempCard).map(function(k) { return vm.tempCard[k] });
 
             var data = arr.slice(0, 5).join("##")
             var payment = {
-                id: vm.creditCard.id,
+                id: vm.tempCard.id,
                 ccdata: data,
-                user: vm.creditCard.user
+                user: vm.tempCard.user
             }
             if (payment.id !== null) {
                 Payment.update(payment, onSaveSuccess, onSaveError);
             } else {
-                payment.user = vm.creditCard.user
+                payment.user = vm.tempCard.user
                 Payment.save(payment, onSaveSuccess, onSaveError);
             }
         }
         function onSaveSuccess(payment){
-            vm.creditCard.id = payment.id;
-            vm.creditCard.user = payment.user;
+            vm.tempCard.id = payment.id;
+            vm.tempCard.user = payment.user;
             vm.error = null;
             toastr["success"]("Saving Successful")
         }
