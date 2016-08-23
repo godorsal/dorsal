@@ -72,7 +72,7 @@
                                     </div>
                                 </div>
                                 <div ng-class="{'has-error': ratingForm.ratingComments.$error.required && vm.formSubmitted}">
-                                    <textarea class="form-control drsl-value" name="ratingComments" id="ratingComments" ng-model="vm.ratingComments" cols="30" rows="3" placeholder="{{'case.rating.ratingComments.placeholder' | translate}}" required></textarea>
+                                    <textarea class="form-control drsl-value" name="ratingComments" id="ratingComments" ng-model="vm.ratingComments" cols="30" rows="3" ng-attr-placeholder="{{'case.rating.ratingComments.placeholder' | translate}}" required></textarea>
                                 </div>
                             </div>
                         </div>
