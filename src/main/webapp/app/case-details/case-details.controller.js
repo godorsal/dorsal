@@ -120,11 +120,10 @@
             DrslAttachFileService.uploadAttachFileList(vm.case);
             DrslAttachFileService.deleteAttachments(vm.case);
 
-            if (vm.caseupdate.id !== null) {
-                Caseupdate.update(vm.caseupdate, onSaveSuccess, onSaveError);
-            } else {
+            if(vm.caseupdate.updateMsg){
                 Caseupdate.save(vm.caseupdate, onSaveSuccess, onSaveError);
             }
+
             vm.case.summary = vm.summary.toString();
             $uibModalInstance.close({"updated": true});
         }
