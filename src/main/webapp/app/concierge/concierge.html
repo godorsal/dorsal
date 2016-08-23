@@ -2,70 +2,68 @@
     <!-- <div ng-cloak> -->
     <div class="row">
         <div class="col-md-12">
-            <div class="drsl-case-wrapper">
-                <!-- Main Header -->
-                <div class="drsl-sub-header">
-                    <div>
-                        <span translate="concierge.pageTitles.createCase"></span>
-                    </div>
-                    <div>
-                        <!-- Sub Head place holder -->
-                    </div>
+            <!-- Main Header -->
+            <div class="drsl-sub-header">
+                <div>
+                    <span translate="concierge.pageTitles.createCase"></span>
                 </div>
-
-                <!-- Action Bar -->
-                <div class="drsl-action-bar">
-                    <i class="glyphicon glyphicon-menu-right"></i>
-                    <a ng-show="vm.isAuthenticated() && vm.hasCases" ui-sref="case" translate="concierge.activityBar.manageCases">manage cases</a>
-                    <a ng-hide="vm.isAuthenticated() && vm.hasCases" class="drsl-link-disabled drsl-link-inactive" translate="concierge.activityBar.manageCases">manage cases</a>
-                    <a ng-class="{'drsl-link-disabled': !vm.passedStep(3), 'drsl-link-inactive': vm.currentCase.status == 'completed'}" ng-click="vm.openRating()" translate="concierge.activityBar.cloneCase">clone a case</a>
+                <div>
+                    <!-- Sub Head place holder -->
                 </div>
+            </div>
 
-                <!-- Main Content -->
-                <div class="drsl-concierge-wrapper">
-                    <!-- One, Two, Three, Go -->
-                    <div>
-                        <div class="drsl-one-two-three-lg">
-                            <img class="drsl-one-two-three-img" src="content/images/dorsal_case_intake_123.png">
+            <!-- Action Bar -->
+            <div class="drsl-action-bar">
+                <i class="glyphicon glyphicon-menu-right"></i>
+                <a ng-show="vm.isAuthenticated() && vm.hasCases" ui-sref="case" translate="concierge.activityBar.manageCases">manage cases</a>
+                <a ng-hide="vm.isAuthenticated() && vm.hasCases" class="drsl-link-disabled drsl-link-inactive" translate="concierge.activityBar.manageCases">manage cases</a>
+                <a ng-class="{'drsl-link-disabled': !vm.passedStep(3), 'drsl-link-inactive': vm.currentCase.status == 'completed'}" ng-click="vm.openRating()" translate="concierge.activityBar.cloneCase">clone a case</a>
+            </div>
+
+            <!-- Main Content -->
+            <div class="drsl-concierge-wrapper">
+                <!-- One, Two, Three, Go -->
+                <div>
+                    <div class="drsl-one-two-three-lg">
+                        <img class="drsl-one-two-three-img" src="content/images/dorsal_case_intake_123.png">
+                        <div>
+                            <div class="drsl-step-one" translate="concierge.caseDetails.one_two_three.one"></div>
+                            <div class="drsl-step-two" translate="concierge.caseDetails.one_two_three.two"></div>
+                            <div class="drsl-step-three" translate="concierge.caseDetails.one_two_three.three"></div>
                             <div>
-                                <div class="drsl-step-one" translate="concierge.caseDetails.one_two_three.one"></div>
-                                <div class="drsl-step-two" translate="concierge.caseDetails.one_two_three.two"></div>
-                                <div class="drsl-step-three" translate="concierge.caseDetails.one_two_three.three"></div>
-                                <div>
-                                    <div class="drsl-date-widget-wrapper">
-                                        <span uib-datepicker-popup="{{format}}" ng-model="vm.defaultDate" is-open="vm.datePopup.opened" popup-placement="top-left" datepicker-options="vm.dateOptions" show-button-bar="false" ></span>
-                                    </div>
-                                    <div class="form-control drsl-date-display-wrapper" ng-click="vm.openDatePopup()">
-                                        <span class="drsl-date-display-label" translate="concierge.caseDetails.date.main">Requested delivery:</span><span>{{vm.defaultDate | date:'MMM dd, yyyy'}}</span>
-                                        <span class="pull-right">
-                                            <i class="fa fa-calendar"></i>
-                                        </span>
-                                    </div>
+                                <div class="drsl-date-widget-wrapper">
+                                    <span uib-datepicker-popup="{{format}}" ng-model="vm.defaultDate" is-open="vm.datePopup.opened" popup-placement="top-left" datepicker-options="vm.dateOptions" show-button-bar="false" ></span>
                                 </div>
-                                <div>
-                                    <div class="drsl-step-go-dots"><img class="drsl-one-two-three-img" src="content/images/dorsal_case_intake_123_dots.png"></div>
-                                    <div class="drsl-step-go-text" translate="concierge.caseDetails.one_two_three.go"></div>
-                                    <button type="submit" class="drsl-custom-button" ng-click="vm.submitForm()"><img src="content/images/global/go.png" /></button>
+                                <div class="form-control drsl-date-display-wrapper" ng-click="vm.openDatePopup()">
+                                    <span class="drsl-date-display-label" translate="concierge.caseDetails.date.main">Requested delivery:</span><span>{{vm.defaultDate | date:'MMM dd, yyyy'}}</span>
+                                    <span class="pull-right">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
                                 </div>
+                            </div>
+                            <div>
+                                <div class="drsl-step-go-dots"><img class="drsl-one-two-three-img" src="content/images/dorsal_case_intake_123_dots.png"></div>
+                                <div class="drsl-step-go-text" translate="concierge.caseDetails.one_two_three.go"></div>
+                                <button type="submit" class="drsl-custom-button" ng-click="vm.submitForm()"><img src="content/images/global/go.png" /></button>
                             </div>
                         </div>
                     </div>
-                    <div class="drsl-case-inputs">
-                        <!-- Radio Buttons -->
-                        <linear-radio target-data="radio.selectedValue"
-                                      radio-data="radio"
-                                      start-limit="15"
-                                      ng-repeat="radio in vm.caseDetails.radios"
-                                      technology-properties="vm.technologyProperties"
-                                      technology="vm.technology" issue="vm.issue"></linear-radio>
+                </div>
+                <div class="drsl-case-inputs">
+                    <!-- Radio Buttons -->
+                    <linear-radio target-data="radio.selectedValue"
+                                  radio-data="radio"
+                                  start-limit="15"
+                                  ng-repeat="radio in vm.caseDetails.radios"
+                                  technology-properties="vm.technologyProperties"
+                                  technology="vm.technology" issue="vm.issue"></linear-radio>
 
-                        <!-- Summary -->
-                        <div class="drsl-field-seciton">
-                            <div class="input-group">
-                                <input type="text" class="form-control drsl-summary-field" ng-model="vm.caseDetails.summary" placeholder="{{'concierge.caseDetails.summary.placeholder' | translate}}">
-                                <div class="input-group-btn">
-                                    <drsl-attach-files></drsl-attach-files>
-                                </div>
+                    <!-- Summary -->
+                    <div class="drsl-field-seciton">
+                        <div class="input-group">
+                            <input type="text" class="form-control drsl-summary-field" ng-model="vm.caseDetails.summary" placeholder="{{'concierge.caseDetails.summary.placeholder' | translate}}">
+                            <div class="input-group-btn">
+                                <drsl-attach-files></drsl-attach-files>
                             </div>
                         </div>
                     </div>

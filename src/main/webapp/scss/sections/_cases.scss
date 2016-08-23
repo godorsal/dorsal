@@ -27,29 +27,9 @@ Cases
         }
     }
 
-    .drsl-panels {
-        background-color: $content-background-color;
-
-        .panel.drsl-panel {
-            border-radius: 0;
-            margin-bottom: 0;
-            border: 0;
-
-            > .panel-heading {
-                border-radius: 0;
-                border: 0;
-                background-color: $brand-color;
-                color: $inverted-heading-text-color;
-
-                h3 {
-                    font-weight: $thin-weight;
-                }
-            }
-        }
-    }
-
     .drsl-sub-header div {
         flex: 2;
+
         span {
             margin-right: $default-half-padding;
         }
@@ -61,35 +41,11 @@ Cases
 
             span {
                 margin-right: 0;
+                
                 &:last-child {
                     color: $inverted-heading-text-color;
                 }
             }
-        }
-    }
-
-    .drsl-sub-panel {
-        margin-bottom: $default-half-padding;
-
-        .panel-body span {
-            padding-right: $default-half-padding;
-        }
-    }
-
-    .drsl-case-separator {
-        background-color: $brand-color;
-        height: $default-half-padding;
-    }
-
-    .drsl-case-status-wrapper {
-        > div {
-            position: relative;
-        }
-
-        .drsl-summary-attachment-wrapper {
-            position: absolute;
-            top: -7px;
-            right: 0px;
         }
     }
 
@@ -111,35 +67,4 @@ Cases
             }
         }
     }
-
-    .alignRight{
-        float: right;
-    }
 }
-
-
-.drsl-radio-set {
-    max-width: 400px;
-    overflow-y: hidden;
-    position: relative;
-    display: flex;
-    flex-flow: row;
-    z-index: 1;
-}
-
-input[type="radio"] + label span:last-child, input[type="checkbox"] + label span:last-child {
-    display: inline-block;
-    width: 17px;
-    height: 17px;
-    cursor: pointer;
-    background-color: $content-background-color;
-    border: 3px solid $custom-radio-border-color;
-    border-radius: 50%;
-    margin-top: 5px;
-}
-
-.request {
-    margin-left: $content-padding-side;
-    margin-right: 50$content-padding-side;
-}
-
