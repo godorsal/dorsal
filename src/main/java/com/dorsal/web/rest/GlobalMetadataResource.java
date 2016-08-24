@@ -2,7 +2,9 @@ package com.dorsal.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.dorsal.domain.GlobalMetadata;
+import com.dorsal.domain.User;
 import com.dorsal.repository.GlobalMetadataRepository;
+import com.dorsal.repository.UserRepository;
 import com.dorsal.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,10 +28,14 @@ import java.util.Optional;
 public class GlobalMetadataResource {
 
     private final Logger log = LoggerFactory.getLogger(GlobalMetadataResource.class);
-        
+
     @Inject
     private GlobalMetadataRepository globalMetadataRepository;
-    
+
+    // User repository functinality for finding currently logged in user
+    @Inject
+    private UserRepository userRepository;
+
     /**
      * POST  /global-metadata : Create a new globalMetadata.
      *
@@ -43,6 +49,11 @@ public class GlobalMetadataResource {
     @Timed
     public ResponseEntity<GlobalMetadata> createGlobalMetadata(@RequestBody GlobalMetadata globalMetadata) throws URISyntaxException {
         log.debug("REST request to save GlobalMetadata : {}", globalMetadata);
+        User loggedInUser = userRepository.findLoggedInUser();
+        if (loggedInUser == null) {
+            log.warn("GlobalMetadata Entity: Creation attempted without being logged into system");
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("globalMetadata", "accessrefused", "No permissions for this operations")).body(null);
+        }
         if (globalMetadata.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("globalMetadata", "idexists", "A new globalMetadata cannot already have an ID")).body(null);
         }
@@ -67,6 +78,11 @@ public class GlobalMetadataResource {
     @Timed
     public ResponseEntity<GlobalMetadata> updateGlobalMetadata(@RequestBody GlobalMetadata globalMetadata) throws URISyntaxException {
         log.debug("REST request to update GlobalMetadata : {}", globalMetadata);
+        User loggedInUser = userRepository.findLoggedInUser();
+        if (loggedInUser == null) {
+            log.warn("GlobalMetadata Entity: Creation attempted without being logged into system");
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("globalMetadata", "accessrefused", "No permissions for this operations")).body(null);
+        }
         if (globalMetadata.getId() == null) {
             return createGlobalMetadata(globalMetadata);
         }
@@ -123,6 +139,11 @@ public class GlobalMetadataResource {
     @Timed
     public ResponseEntity<Void> deleteGlobalMetadata(@PathVariable Long id) {
         log.debug("REST request to delete GlobalMetadata : {}", id);
+        User loggedInUser = userRepository.findLoggedInUser();
+        if (loggedInUser == null) {
+            log.warn("GlobalMetadata Entity: Creation attempted without being logged into system");
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("globalMetadata", "accessrefused", "No permissions for this operations")).body(null);
+        }
         globalMetadataRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("globalMetadata", id.toString())).build();
     }
