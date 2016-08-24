@@ -8,8 +8,22 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="drsl-login-header">
-                    <div ng-show="vm.isLogin"><h1>Sign In or <a href="#" ng-click="vm.togglePath($event)">Register</a></h1></div>
-                    <div ng-hide="vm.isLogin"><h1>Register or <a href="#" ng-click="vm.togglePath($event)">Sign In</a></h1></div>
+                    <div ng-show="vm.isLogin">
+                        <h1>
+                            <span translate="login.title">Sign In</span>
+                            <span ng-show="vm.DrslMetadata.selfRegistrationEnabled">
+                                <span translate="login.titleSeparator">or</span>
+                                <a href="#" ng-click="vm.togglePath($event)" translate="login.register">Register</a>
+                            </span>
+                        </h1>
+                    </div>
+                    <div ng-hide="vm.isLogin">
+                        <h1>
+                            <span translate="login.register">Register</span>
+                            <span translate="login.titleSeparator">or</span>
+                            <a href="#" ng-click="vm.togglePath($event)" translate="login.title">Sign In</a>
+                        </h1>
+                    </div>
                 </div>
             </div>
             <div class="col-md-12" ng-show="vm.isLogin">

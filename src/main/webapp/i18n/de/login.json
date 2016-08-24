@@ -1,6 +1,8 @@
 {
     "login": {
         "title": "Anmeldung",
+        "register": "Register",
+        "titleSeparator": "or",
         "form": {
             "password": "Passwort",
             "password.placeholder": "Ihr Passwort",

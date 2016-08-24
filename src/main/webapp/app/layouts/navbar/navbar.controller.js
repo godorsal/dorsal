@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .controller('NavbarController', NavbarController);
 
-    NavbarController.$inject = ['$state', '$scope', 'Auth', 'Principal', 'ProfileService', 'LoginService', 'ElementFocusService'];
+    NavbarController.$inject = ['$state', '$scope', 'Auth', 'Principal', 'ProfileService', 'LoginService', 'ElementFocusService', 'DrslMetadata'];
 
-    function NavbarController($state, $scope, Auth, Principal, ProfileService, LoginService, ElementFocusService) {
+    function NavbarController($state, $scope, Auth, Principal, ProfileService, LoginService, ElementFocusService, DrslMetadata) {
         var vm = this;
 
         vm.isNavbarCollapsed = true;
@@ -31,6 +31,7 @@
         vm.getIdentity = getIdentity;
         vm.searchTerm = '';
         vm.getIdentity();
+        vm.DrslMetadata = DrslMetadata;
 
         function login() {
             collapseNavbar();
