@@ -40,6 +40,7 @@
                 "password": "Passwort",
                 "sessions": "Sitzungen",
                 "login": "Anmelden",
+                "loginOnly": "Sign in",
                 "logout": "Abmelden",
                 "register": "Registrierung"
             },
