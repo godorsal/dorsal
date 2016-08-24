@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate'];
+    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'DrslMetadata'];
 
-    function LoginController ($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate) {
+    function LoginController ($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, DrslMetadata) {
         var vm = this;
 
         vm.authenticationError = false;
@@ -23,6 +23,7 @@
         vm.altPathRegisterText = "create an account";
         vm.altPathText = vm.altPathRegisterText;
         vm.isLogin = true;
+        vm.DrslMetadata = DrslMetadata;
 
         // Register Properties
         vm.register = register;

@@ -40,6 +40,7 @@
                 "password": "Password",
                 "sessions": "Sessions",
                 "login": "Register/Sign in",
+                "loginOnly": "Sign in",
                 "logout": "Sign out",
                 "register": "Register"
             },
