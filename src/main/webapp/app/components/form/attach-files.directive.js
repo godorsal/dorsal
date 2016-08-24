@@ -5,10 +5,10 @@
         .module('dorsalApp')
         .directive('drslAttachFiles', drslAttachFiles);
 
-    drslAttachFiles.$inject = ['DrslAttachFileService', 'Principal', '$sce', '$translate', 'Attachment', 'DataUtils'];
+    drslAttachFiles.$inject = ['DrslAttachFileService', 'Principal', '$sce', '$translate', 'Attachment', 'DataUtils', 'DrslBrowserDetectService'];
 
 
-    function drslAttachFiles(DrslAttachFileService, Principal, $sce, $translate, Attachment, DataUtils) {
+    function drslAttachFiles(DrslAttachFileService, Principal, $sce, $translate, Attachment, DataUtils, DrslBrowserDetectService) {
         var directive = {
             restrict: 'E',
             scope:  {
@@ -35,6 +35,7 @@
             scope.isAuthenticated = Principal.isAuthenticated;
             scope.attachmentMessageLoggedIn = $sce.trustAsHtml($translate.instant('global.messages.info.attachmentMessageLoggedIn'));
             scope.attachmentMessageLoggedOut = $sce.trustAsHtml($translate.instant('global.messages.info.attachmentMessageLoggedOut'));
+            scope.isNotMS = DrslBrowserDetectService.isNotMS;
 
             /**
              * Opens the Attachments dropdown.

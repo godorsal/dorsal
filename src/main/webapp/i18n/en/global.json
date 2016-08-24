@@ -129,7 +129,8 @@
             "update": "Update",
             "submit": "Submit",
             "view": "View",
-            "download": "Download"
+            "download": "Download",
+            "downloadOrView": "Download/View"
         },
         "detail": {
             "field": "Field",
