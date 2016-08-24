@@ -50,7 +50,7 @@
         <!-- Total Time on Case -->
         <div class="drsl-label-value-row">
             <div><span  class="drsl-label" translate="case.professional.input.timeOnCase">Total time<br/>on case</span></div>
-            <div class="drsl-time-on-case"><input class="form-control drsl-value" type="number" ng-model="case.timeOnCase" min="0" max="{{maxHoursOnCase}}" ng-keydown="fieldTouched()" placeholder="{{'case.professional.input.timeOnCase.placeholder' | translate}}" ng-disabled="!case.isApproved || case.isResolved"/></div>
+            <div class="drsl-time-on-case"><input class="form-control drsl-value" type="number" ng-model="case.timeOnCase" min="0" max="{{maxHoursOnCase}}" ng-keydown="fieldTouched()" placeholder="{{'case.professional.input.timeOnCase.placeholder' | translate}}" ng-disabled="!case.isApproved || case.isResolved" drsl-enforce-min-max/></div>
         </div>
 
         <!-- Resolved -->
