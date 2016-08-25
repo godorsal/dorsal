@@ -87,6 +87,7 @@
             "error": {
                 "dontmatch": "The password and its confirmation do not match!"
             },
+            "pending":"You still have {{attachments}} pending attachments. <br/> Press Later to dismiss or Done to upload.",
             "validate": {
                 "newpassword": {
                     "required": "Your password is required.",

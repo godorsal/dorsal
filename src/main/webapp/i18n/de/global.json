@@ -86,6 +86,7 @@
             "error": {
                 "dontmatch": "Das bestätigte Passwort entspricht nicht dem neuen Passwort!"
             },
+            "pending":"You still have {{attachments}} pending attachments. <br/> Press Later to dismiss or Done to upload.",
             "validate": {
                 "newpassword": {
                     "required": "Ein neues Passwort wird benötigt.",

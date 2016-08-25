@@ -116,6 +116,7 @@
                     scope.pending = true;
                     scope.$emit('pendingAttachments', scope.pendingAttachments);
                 } else {
+                    scope.pending = false;
                     scope.attachFileList = [];
                     scope.attachErrFileList = [];
                     scope.deleteFileList = [];
@@ -131,6 +132,7 @@
              * Sets the attachments in the service and calls processes to close the views.
              */
             scope.doneWithAttachments = function () {
+                scope.pending = false;
                 scope.updateService();
                 scope.closeAttachments();
                 scope.$emit('doneWithAttachments');
