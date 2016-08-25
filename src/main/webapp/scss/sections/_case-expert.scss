@@ -15,7 +15,7 @@ Case Expert (seen by user)
     }
 
     .drsl-label {
-        margin-right: 5px;
+        margin-right: $horizontal-space-between-elements;
     }
 
     .drsl-profile-photo {
@@ -26,16 +26,16 @@ Case Expert (seen by user)
         border: 0;
 
         img {
-            box-shadow: 0px 5px 40px rgba(0, 0, 0, 0.5);
+            box-shadow: $custom-button-shadow;
             border: 5px solid $photo-border-color;
             border-radius: 50%;
-            width: 175px;
-            height: 175px;
+            width: $case-summary-profile-photo-dimensions;
+            height: $case-summary-profile-photo-dimensions;
         }
 
         .drsl-profile-score {
             text-align: center;
-            margin-top: 20px;
+            margin-top: $default-padding;
         }
 
         .drsl-expert-msg {
@@ -75,7 +75,7 @@ Case Expert (seen by user)
 
             i {
                 font-size: $medium-font-size;
-                margin-right: 5px;
+                margin-right: $horizontal-space-between-elements;
             }
         }
     }
