@@ -560,6 +560,10 @@ table.scroll thead > tr {
     outline: none;
     display: block;
 }
+.drsl-pending-attachments-message{
+    color: $brand-color;
+    display: inline-block;
+}
 .uploadLink:hover{
     cursor: pointer;
 }
@@ -832,6 +836,7 @@ table.scroll thead > tr {
         }
 
         .drsl-attachment-item {
+            height: 25px;
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
@@ -915,10 +920,14 @@ table.scroll thead > tr {
     }
 
 
-    .drsl-main-attachment-btns .btn {
+    .drsl-main-attachment-btns {
+        display: inline;
+
+    .btn {
         float:right;
         margin-left: 5px;
     }
+}
 
 
     .tooltip {
