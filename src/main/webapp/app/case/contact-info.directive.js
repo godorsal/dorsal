@@ -20,7 +20,8 @@
                         '</div>' +
                         '<div ng-show="contact.phone">' +
                             '<i class="fa fa-phone" tooltip-placement="left" uib-tooltip="{{\'case.professional.contact.phone\' | translate}}"></i> ' +
-                            '{{contact.phone}}' +
+                            '<span>{{aCode}}</span>' +
+                            '<span>{{theRest}}</span>' +
                         '</div>' +
                         '<div ng-show="contact.skype">' +
                             '<i class="fa fa-skype" tooltip-placement="left" uib-tooltip="{{\'case.professional.contact.skype\' | translate}}"></i> ' +
@@ -44,6 +45,8 @@
         function linkFunc(scope) {
             scope.$watch('contact', function(contact){
                 if (contact) {
+                    scope.aCode = contact.phone.substring(0, 3);
+                    scope.theRest = contact.phone.substring(3, contact.phone.length);
                     var othercommunication = contact.othercommunication.split(',');
                     scope.otherLink = othercommunication[0];
                     scope.otherTitle = othercommunication[1];
