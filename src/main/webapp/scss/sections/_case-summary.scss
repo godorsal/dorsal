@@ -13,7 +13,7 @@ Case Summary
     }
 
     .drsl-label {
-        margin-right: 5px;
+        margin-right: $horizontal-space-between-elements;
     }
 
     .drsl-timeline {
@@ -89,7 +89,7 @@ Case Summary
         .drsl-summary-attachment-wrapper {
             position: absolute;
             top: -7px;
-            right: 0px;
+            right: 0;
         }
     }
 }
