@@ -27,6 +27,8 @@
                 controller: 'AttachmentModalController',
                 controllerAs: 'vm',
                 size:'sm',
+                backdrop: 'static',
+                keyboard: false,
                 resolve: {
                     drslCase: function(){ return drslCase; },
                     expert: function(){ return expert; },

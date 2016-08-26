@@ -28,6 +28,8 @@
         return directive;
 
         function linkFunc(scope) {
+            scope.pendingAttachments = [];
+            scope.pending = false;
             scope.attachmentsOpen = false;
             scope.attachFileList = [];
             scope.attachErrFileList = [];
@@ -66,6 +68,7 @@
             scope.attachFiles = function (files, errFiles) {
                 scope.attachFileList = scope.attachFileList.concat(files);
                 scope.attachErrFileList = scope.attachErrFileList.concat(errFiles);
+                scope.pendingAttachments = files;
 
                 if (scope.addOnAttach === 'true') {
                     scope.updateService();
@@ -109,20 +112,27 @@
              * Cancel attachments, clears local and service file lists
              */
             scope.cancelAttachments = function () {
-                scope.attachFileList = [];
-                scope.attachErrFileList = [];
-                scope.deleteFileList = [];
-                DrslAttachFileService.setAttachments(scope.attachFileList, scope.attachErrFileList);
-                DrslAttachFileService.setDeletions(scope.deleteFileList);
+                if(scope.pendingAttachments.length && scope.pending == false){
+                    scope.pending = true;
+                    scope.$emit('pendingAttachments', scope.pendingAttachments);
+                } else {
+                    scope.pending = false;
+                    scope.attachFileList = [];
+                    scope.attachErrFileList = [];
+                    scope.deleteFileList = [];
+                    DrslAttachFileService.setAttachments(scope.attachFileList, scope.attachErrFileList);
+                    DrslAttachFileService.setDeletions(scope.deleteFileList);
 
-                scope.closeAttachments();
-                scope.$emit('cancelAttachments');
+                    scope.closeAttachments();
+                    scope.$emit('cancelAttachments');
+                }
             };
 
             /**
              * Sets the attachments in the service and calls processes to close the views.
              */
             scope.doneWithAttachments = function () {
+                scope.pending = false;
                 scope.updateService();
                 scope.closeAttachments();
                 scope.$emit('doneWithAttachments');

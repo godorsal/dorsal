@@ -21,10 +21,12 @@
                             </span>
                         </div>
                     </div>
+                    <div class="drsl-pending-attachments-message" ng-show="pending" translate="global.messages.info.pending" translate-values="{attachments: '{{pendingAttachments.length}}'}">
+                    </div>
                     <div class="drsl-main-attachment-btns">
-                        <button class="btn detailButton drsl-main-done-btn" translate="entity.action.done" ng-click="doneWithAttachments()" ng-class="{'btn-inactive': !attachFileList.length, 'btn-success': attachFileList.length}">Done</button>
-                        <div class="btn btn-success detailButton drsl-main-attach-btn" translate="entity.action.attach" ngf-select="attachFiles($files, $invalidFiles)" ngf-multiple="true">Attach</div>
-                        <button class="btn btn-default detailButton drsl-main-later-btn" translate="entity.action.later" ng-click="cancelAttachments()">Later</button>
+                            <button class="btn detailButton drsl-main-done-btn" translate="entity.action.done" ng-click="doneWithAttachments()" ng-class="{'btn-inactive': !attachFileList.length, 'btn-success': attachFileList.length}">Done</button>
+                            <div class="btn btn-success detailButton drsl-main-attach-btn" translate="entity.action.attach" ngf-select="attachFiles($files, $invalidFiles)" ngf-multiple="true">Attach</div>
+                            <button class="btn btn-default detailButton drsl-main-later-btn" translate="entity.action.later" ng-click="cancelAttachments()">Later</button>
                     </div>
                 </form>
             </div>

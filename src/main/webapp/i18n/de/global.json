@@ -81,7 +81,8 @@
                 "attachmentMessageLoggedOut": "You must be logged in<br/>to attach files to your case",
                 "uploadingFiles": "Uploading {{fileCount}} file(s), please wait.",
                 "filesUploaded": "File upload complete.",
-                "expertScoreOutOf": "{{score}} out of 100"
+                "expertScoreOutOf": "{{score}} out of 100",
+                "pending":"You still have {{attachments}} pending attachments. <br/> Press Later to dismiss or Done to upload."
             },
             "error": {
                 "dontmatch": "Das bestätigte Passwort entspricht nicht dem neuen Passwort!"
