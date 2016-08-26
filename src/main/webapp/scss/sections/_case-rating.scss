@@ -2,22 +2,135 @@
 Case Rating
 ========================================================================== */
 
-.drsl-dialog {
-    .modal-body {
-        padding: 0;
+.drsl-case-rating-view {
+    .drsl-dialog-content {
+        .drsl-scrolling-container {
+            margin-bottom: 25px;
+            min-height: 80px;
+        }
 
-        > div {
-            padding: $default-padding;
+        .drsl-rating-row {
+            display: flex;
+            flex-flow: row;
+            align-items: center;
+            margin-bottom: $default-double-padding;
 
             &:first-child {
-                background-color: white;
-                box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.15);
+                align-items: flex-end;
+                margin-bottom: $default-double-padding;
+            }
+
+            &:last-child {
+                align-items: center;
+                margin-bottom: 0;
+            }
+
+            > div {
+                &:first-child {
+                    flex: 1;
+                    text-align: center;
+                    margin-left: -$default-padding;
+
+                    h3 {
+                        padding-top: 5px;
+                        padding-bottom: 0;
+                        margin-bottom: 0;
+                    }
+
+                    img {
+                        max-width: 100px;
+                    }
+                }
+                &:last-child {
+                    flex: 4;
+                }
+            }
+
+            &.drsl-rating-radios {
+                > div:first-child {
+                    margin-top: 42px;
+                }
+            }
+
+            &.drsl-rating-reward {
+                > div:first-child {
+                    margin-bottom: $default-padding;
+                }
+
+                .drsl-scrolling-container {
+                    > div {
+                        display: flex;
+                        flex-flow: row;
+                        align-items: center;
+
+                        > div {
+                            flex: auto;
+
+                            &:first-child {
+                                padding: $default-half-padding;
+                                max-width: 85px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        textarea {
+            border-radius: 0;
+        }
+    }
+
+    .drsl-rating-section {
+        margin-bottom: 0;
+
+        h3 {
+            padding-bottom: 5px;
+            margin-bottom: 0;
+
+            span {
+                font-size: $default-font-size;
+                color: $inactive-text-color;
+            }
+        }
+
+        .drsl-scrolling-container {
+            margin-bottom: 0;
+        }
+
+    }
+
+    .drsl-rating-grid {
+        display: flex;
+        flex-flow: row;
+        text-align: center;
+
+        .drsl-rating-grid-label {
+            flex: 1;
+            h3 {
+                text-align: left;
+            }
+        }
+
+        .drsl-rating-grid-values {
+            flex: 3;
+
+            .drsl-rating-grid-values-header {
+                display: flex;
+                flex-flow: row;
+                margin: 0;
+                font-weight: $default-weight;
+
+                div {
+                    flex: 1;
+                }
             }
         }
     }
 
     .drsl-linear-radio {
         margin-bottom: $default-padding;
+        height: auto;
 
         .drsl-radio-desc {
             display: none;
@@ -26,171 +139,18 @@ Case Rating
         .drsl-radio-item {
             font-size: $default-font-size;
         }
-    }
 
-    h2 {
-        margin-bottom: $default-padding;
-        span {
-            text-transform: uppercase;
-        }
-    }
+        .drsl-radio-set {
+            overflow: hidden;
+            max-width: none;
 
-    h3 {
-        font-size: $medium-font-size;
-        font-weight: $thin-weight;
-        padding: $default-half-padding 0;
-        margin: 0 0 $default-half-padding;
-    }
-
-    .btn.btn-default {
-        margin-right: $default-half-padding;
-    }
-
-    &.drsl-case-rating-view {
-
-        .drsl-dialog-content {
-            .drsl-scrolling-container {
-                margin-bottom: 25px;
-                min-height: 80px;
+            label span:first-child {
+                display: none;
             }
-
-            .drsl-rating-row {
-                display: flex;
-                flex-flow: row;
-                align-items: center;
-                margin-bottom: 40px;
-
-                &:first-child {
-                    align-items: flex-end;
-                    margin-bottom: 40px;
-                }
-
-                &:last-child {
-                    align-items: center;
-                    margin-bottom: 0;
-                }
-
-                > div {
-                    &:first-child {
-                        flex: 1;
-                        text-align: center;
-                        margin-left: -20px;
-
-                        h3 {
-                            padding-top: 5px;
-                            padding-bottom: 0;
-                            margin-bottom: 0;
-                        }
-
-                        img {
-                            max-width: 100px;
-                        }
-                    }
-                    &:last-child {
-                        flex: 4;
-                    }
-                }
-
-                &.drsl-rating-radios {
-                    > div:first-child {
-                        margin-top: 42px;
-                    }
-                }
-
-                &.drsl-rating-reward {
-                    > div:first-child {
-                        margin-bottom: 20px;
-                    }
-
-                    .drsl-scrolling-container {
-                        > div {
-                            display: flex;
-                            flex-flow: row;
-                            align-items: center;
-
-                            > div {
-                                flex: auto;
-
-                                &:first-child {
-                                    padding: 10px;
-                                    max-width: 85px;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            textarea {
-                border-radius: 0;
-            }
-        }
-
-        .drsl-rating-section {
-            margin-bottom: 0;
-
-            h3 {
-                padding-bottom: 5px;
-                margin-bottom: 0;
-
-                span {
-                    font-size: $default-font-size;
-                    color: $inactive-text-color;
-                }
-            }
-
-            .drsl-scrolling-container {
-                margin-bottom: 0;
-            }
-
-        }
-
-        .drsl-rating-grid {
-            display: flex;
-            flex-flow: row;
-            text-align: center;
-
-            .drsl-rating-grid-label {
-                flex: 1;
-                h3 {
-                    text-align: left;
-                }
-            }
-
-            .drsl-rating-grid-values {
-                flex: 3;
-
-                .drsl-rating-grid-values-header {
-                    display: flex;
-                    flex-flow: row;
-                    margin: 0;
-                    font-weight: $default-weight;
-
-                    div {
-                        flex: 1;
-                    }
-                }
-            }
-        }
-
-        .drsl-linear-radio {
-            height: auto;
-            .drsl-radio-set {
-                overflow: hidden;
-                max-width: none;
-
-                label span:first-child {
-                    display: none;
-                }
-            }
-        }
-
-        .drsl-badge-sprites {
-            cursor: pointer;
         }
     }
 
-    .drsl-dialog-buttons {
-        text-align: right;
+    .drsl-badge-sprites {
+        cursor: pointer;
     }
 }
