@@ -177,7 +177,7 @@ Tables
 ========================================================================== */
 .table-striped {
   > tbody > tr:nth-of-type(odd) {
-    background-color: #e6e6e6;
+    background-color: $row-highlight-color;
   }
 }
 /* ==========================================================================
