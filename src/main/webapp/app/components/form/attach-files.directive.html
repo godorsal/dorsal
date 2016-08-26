@@ -21,7 +21,7 @@
                             </span>
                         </div>
                     </div>
-                    <div class="drsl-pending-attachments-message" ng-show="pending" translate="global.messages.pending" translate-values="{attachments: '{{pendingAttachments.length}}'}">
+                    <div class="drsl-pending-attachments-message" ng-show="pending" translate="global.messages.info.pending" translate-values="{attachments: '{{pendingAttachments.length}}'}">
                     </div>
                     <div class="drsl-main-attachment-btns">
                             <button class="btn detailButton drsl-main-done-btn" translate="entity.action.done" ng-click="doneWithAttachments()" ng-class="{'btn-inactive': !attachFileList.length, 'btn-success': attachFileList.length}">Done</button>
