@@ -5,7 +5,7 @@ Case Complete
 .drsl-case-complete-view {
     .drsl-dialog-content {
         > div, > p {
-            margin-bottom: 20px;
+            margin-bottom: $default-padding;
         }
 
         > div {
@@ -21,7 +21,7 @@ Case Complete
 
     .close-case-btn-wrapper {
         text-align: center;
-        margin-top: 20px;
+        margin-top: $default-padding;
 
         button {
             background: transparent;
@@ -29,7 +29,7 @@ Case Complete
         }
 
         img {
-            width: 100px;
+            width: $case-complete-close-case-button-dimensions;
             height: auto;
         }
     }
