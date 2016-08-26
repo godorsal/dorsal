@@ -353,7 +353,7 @@ table.scroll thead > tr {
         padding-left: 0px;
     }
     li:nth-child(odd){
-        background: #E6E6E6;
+        background: $row-highlight-color;
     }
     li{
         list-style: none;

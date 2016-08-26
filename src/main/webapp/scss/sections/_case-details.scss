@@ -15,19 +15,6 @@ Case Details
         padding: $default-padding;
     }
 
-    .drsl-incident-items {
-        display: flex;
-        flex-flow: row;
-
-        > div {
-            flex: 1;
-            text-align: center;
-            span {
-                padding-right: $default-half-padding;
-            }
-        }
-    }
-
     .drsl-tech-props {
         margin-left: 35px;
         width: 240px;
@@ -40,20 +27,9 @@ Case Details
         display: inline-block;
     }
 
-    .drsl-file-upload-section {
-        display: flex;
-        flex-flow: row;
-
-        > div {
-            flex: 1;
-            &:last-child {
-                flex: 3;
-            }
-        }
-    }
-
     .drsl-detail-attachment-wrapper {
         display: block;
+
         .drsl-main-attachment-btns {
             .drsl-main-done-btn, .drsl-main-later-btn {
                 display: none;
@@ -74,24 +50,23 @@ Case Details
     }
 
     .drsl-update-trow {
-        font-weight: 500;
-        color: #404040
+        @extend .drsl-value;
     }
 
-    .drsl-update-message-tdata{
+    .drsl-update-message-tdata {
         min-width: 243px;
         max-width: 243px;
         padding-bottom: 35px;
     }
 
-    .drsl-update-date-tdata{
+    .drsl-update-date-tdata {
         white-space: nowrap;
         width: 225px;
         padding-left: 15px;
         padding-bottom: 35px;
     }
 
-    .drsl-update-user-tdata{
+    .drsl-update-user-tdata {
         width: 87px;
         padding-bottom: 35px;
     }
