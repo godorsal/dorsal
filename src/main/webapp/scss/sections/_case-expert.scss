@@ -43,9 +43,7 @@ Case Expert (seen by user)
             right: 5px;
             top: 200px;
             width: 135px;
-            .popover{
-                left: -70px !important;
-            }
+            
             .popover-content {
                 @extend .drsl-value;
                 text-align: center;

@@ -125,6 +125,7 @@ Dialogs
 }
 
 .popover {
+    left: -70px !important;
     font-family: $main-font;
 }
 
@@ -226,4 +227,3 @@ Date Picker
         border-color: $brand-color;
     }
 }
-
