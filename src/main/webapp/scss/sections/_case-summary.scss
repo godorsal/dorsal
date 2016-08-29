@@ -67,7 +67,10 @@ Case Summary
             }
         }
     }
-
+    .drsl-eta-hour {
+        min-width: 88px;
+        display: inline-block;
+    }
     .drsl-eta-date {
         min-width: 75px;
         display: inline-block;
