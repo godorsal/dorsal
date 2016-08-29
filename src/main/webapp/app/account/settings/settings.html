@@ -169,7 +169,7 @@ Your e-mail cannot be longer than 100 characters.
     </div>
     <div class="form-group">
       <div class="drsl-placeholder-label">
-        <select class="form-control drsl-fullSelect" name="expertAvailability" ng-model="vm.currentExpert.expertAvailability" id="field_expertAvailability" ng-change="vm.updatingExpert = true">
+        <select class="form-control drsl-full-select" name="expertAvailability" ng-model="vm.currentExpert.expertAvailability" id="field_expertAvailability" ng-change="vm.updatingExpert = true">
             <option value="FULL_TIME">Full Time</option>
             <option value="MON_FRI">Monday Through Friday</option>
             <option value="EVENING">Evenings</option>
@@ -236,7 +236,7 @@ Your e-mail cannot be longer than 100 characters.
 <div class="drsl-payment-content" ng-if="!vm.currentExpert && !vm.isAlreadyAuthorized">
     <div>
         <div class="panel panel-default">
-            <div class="panel-heading authorized-credit-card">
+            <div class="panel-heading drsl-authorized-credit-card">
                 <span>
                     Authorized Credit Card
                 </span>

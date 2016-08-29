@@ -4,177 +4,197 @@ Account Settings
 
 .drsl-account-settings {
     height: 1147px;
-    .drsl-fullSelect{
+
+    .drsl-full-select {
         width: 531px;
     }
+
     .drsl-placeholder-label {
         position: relative;
+
         .drsl-already-activated-input {
             width: 1151px;
         }
+
         input {
-            padding: 10px 95px 10px 10px;
-            border: 1px solid #ccc;
+            padding: $default-half-padding 95px $default-half-padding $default-half-padding;
+            border: 1px solid $form-field-border-color;
             border-radius: 4px;
             height: 32px;
             width: 532px;
             box-shadow: $custom-input-shadow;
         }
-        .drsl-unit { position: absolute;
+
+        .drsl-unit {
+            position: absolute;
             display: block;
             right: 8px;
             top: 7px;
             z-index: 1;
             color: $custom-input-unit-color;
         }
-        .drsl-select{
+
+        .drsl-select {
             padding-right: 15px;
         }
     }
-    .drsl-expert-info-content{
+
+    .drsl-expert-info-content {
         background: $background-color;
         padding: 15px;
         height: 100%;
-        margin-bottom: 20px;
+        margin-bottom: $default-padding;
         display: inline-block;
         float: left;
         width: 564px;
     }
+
     .drsl-user-info-content {
         background: $background-color;
         padding: 15px;
         height: 363px;
-        margin-bottom: 20px;
+        margin-bottom: $default-padding;
         display: inline-block;
         float: left;
         width: 564px;
     }
+
     .drsl-is-already-activated {
         width: 1180px;
         background: $background-color;
         padding: 15px;
         height: 363px;
-        margin-bottom: 20px;
+        margin-bottom: $default-padding;
         display: inline-block;
         float: left;
     }
-    .drsl-payment-header{
+
+    .drsl-payment-header {
         text-align: right;
         margin-right: 0;
         flex: 2;
     }
-    .drsl-update-user-button{
+
+    .drsl-update-user-button {
         float: right;
         margin-top: 63px;
     }
-    .authorized-credit-card{
-        span{
-            font-size: 12px;
+
+    .drsl-authorized-credit-card {
+        span {
+            font-size: $account-settings-authorized-credit-card-font-size;
         }
-        > span > img{
-            width: 55px;
+
+        > span > img {
             width: 55px;
         }
     }
-    .drsl-inline{
+
+    .drsl-inline {
         display: inline-block;
     }
-    .drsl-invalid{
-        color: red;
+
+    .drsl-invalid {
+        color: $invalid-text-color;
         display: inline-block;
     }
-    .drsl-card-number-quarter{
+
+    .drsl-card-number-quarter {
         width: 100px;
         display: inline-block;
     }
-    .drsl-update-card-button{
+
+    .drsl-update-card-button {
         float: right;
         margin-top: 55px;
     }
-    textarea{
+
+    textarea {
         resize: none;
     }
-    #contactMe {
-        height: 50px;
-    }
-    #email{
-        background: $background-color; font-size: 13px;
-    }
-    .settingblock{
+
+    #email {
         background: $background-color;
-        float: left;
-        display: inline-block !important;
+        font-size: $account-settings-email-font-size;
     }
-    .updating{
-        border: 10px solid black;
-    }
+
     .drsl-settings-wrapper {
         box-shadow: $content-box-shadow;
         margin-bottom: $default-padding;
-        background-color: #FFFFFF;
+        background-color: $background-color;
     }
+
     .drsl-payment-content {
         display: inline-block;
         float: right;
         width: 588px;
         flex-flow: row;
+
         > div {
             height: 363px;
             flex: 1;
         }
     }
+
     .drsl-expert-message-content {
         display: inline-block;
         float: right;
         width: 527px;
         flex-flow: row;
+
         > div {
             height: 561px;
             flex: 1;
         }
-        > div > div > button{
+
+        > div > div > button {
             float: right;
             margin-top: 90px;
         }
-        > div > div > textarea, select{
+
+        > div > div > textarea, select {
             margin-bottom: 15px;
         }
-        > div > div{
-            .welcome{
-                height: 75px;
-            }
-        }
     }
-    .drsl-expert-textarea-label{
+
+    .drsl-expert-textarea-label {
         font-weight: $medium-weight;
         color: $custom-input-unit-color;
     }
+
     .drsl-already-activated-input {
         width: 1151px;
     }
+
     .drsl-user-managment {
         width: 566px;
         height: 500px;
         float: left;
         display: inline-block;
+
         img {
             width: 34px;
             padding-left: $default-padding;
         }
-        .panel-heading{
-            padding-left: 10px;
+
+        .panel-heading {
+            padding-left: $default-half-padding;
+
             .control-label {
-                padding-right: 10px;
+                padding-right: $default-half-padding;
             }
-            .form-control{
+
+            .form-control {
                 width: 375px;
                 display: inline-block;
                 padding-top: 5px;
             }
-            .btn{
-                margin-left: 10px;
+
+            .btn {
+                margin-left: $default-half-padding;
             }
         }
+
         .drsl-user-add-form {
             > div {
                 display: flex;
@@ -206,7 +226,7 @@ Account Settings
 
             > div {
                 flex: 1;
-                color: #c0c0c0;
+                color: $inactive-text-color;
                 padding: 5px;
                 overflow: auto;
             }
@@ -221,13 +241,15 @@ Account Settings
         height: 500px;
         float: right;
         display: inline-block;
+
         img {
             width: 33px;
             padding-left: $default-padding;
         }
-        .panel-heading{
+
+        .panel-heading {
             > div {
-                font-size: 14px;
+                font-size: $default-font-size;
                 height: 35px;
                 padding-top: 7px;
             }
@@ -256,6 +278,7 @@ Account Settings
 
             &.empty {
                 align-items: center;
+
                 > div {
                     text-align: center;
                 }
@@ -263,7 +286,7 @@ Account Settings
 
             > div {
                 flex: 1;
-                color: #c0c0c0;
+                color: $inactive-text-color;
                 padding: 5px;
                 overflow: auto;
             }

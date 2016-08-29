@@ -20,6 +20,9 @@ $home-additional-info-heading-font-size: 25px;
 $home-additional-info-txt-font-size: 15px;
 // Date Picker
 $date-picker-month-font-size: 18px;
+// Account Settings
+$account-settings-authorized-credit-card-font-size: 12px;
+$account-settings-email-font-size: 13px;
 
 // Font Weight ****************************
 $default-weight: 400;
@@ -68,6 +71,7 @@ $drsl-label-color: #999999;
 $drsl-value-color: #1a1a1a;
 $home-additional-info-heading-color: #666666;
 $custom-input-unit-color: #ac9999;
+$invalid-text-color: #FF0000;
 // Home/Landing
 $home-main-header-text-color: rgb(25%, 25%, 25%);
 $home-additional-info-text-color: #9A9798;
@@ -75,7 +79,7 @@ $home-additional-info-text-color: #9A9798;
 $date-picker-selected-day-text-color: #fff;
 
 // Border Colors **************************
-$form-field-border-color: #E2E2E2;
+$form-field-border-color: #CCC;
 $custom-radio-border-color: #B0AFB4;
 $primary-button-border-color: #9C9FA3;
 $brand-border-color: #E58C38;
