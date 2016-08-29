@@ -39,11 +39,15 @@ Case Expert (seen by user)
         }
 
         .drsl-expert-msg {
+            min-width: 205px;
+            min-height: 98px;
             position: absolute;
             right: 5px;
             top: 200px;
             width: 135px;
-            
+            .popover {
+                max-width: 205px;
+            }
             .popover-content {
                 @extend .drsl-value;
                 text-align: center;
