@@ -3,53 +3,58 @@ Case Updates
 ========================================================================== */
 
 .drsl-case-updates {
-    .updatesDropdown{
-        width: 560px;
-        background: rgba(255, 255, 255, 0.9);
-        color: black;
-        margin-top: 20px;
-        border-radius: 0px;
+    .drsl-updates-dropdown {
+        width: $case-summary-updates-width;
+        background: $case-summary-updates-background;
+        color: $drsl-value-color;
+        margin-top: $default-padding;
+        border-radius: 0;
         max-height: 540px;
         z-index: 1100;
-    }
-    .updatesTbody{
-        height: 100% !important;
-        max-height: 540px;
-        width: 557px;
-    }
-    .updatesTrow{
-        border-bottom: 1px solid black;
-    }
-    .labelRow{
-        background: #E6E6E6;
-    }
-    .updatesTdata{
-        padding: 10px;
-        font-weight: normal;
-        text-transform: none;
-        width: 700px;
-    }
-    .updatesMessage{
-        padding: 10px;
-        font-weight: normal;
-        text-transform: none;
-        width: 700px;
-        min-width: 299px;
-    }
-    .updatesDate{
-        float: right;
-        padding: 10px;
-        font-weight: normal;
-        text-transform: none;
-    }
-    .updateNumber{
-        color: black !important;
-        font-weight: 700;
-    }
-    .logsTdata{
-        padding: 10px;
-        font-weight: normal;
-        text-transform: none;
-        width: 300px;
+
+        .drsl-updates-tbody {
+            height: 100%;
+            max-height: 540px;
+            width: $case-summary-updates-width - 3px;
+
+            .drsl-updates-row {
+                border-bottom: 1px solid $case-summary-updates-separator-color;
+            }
+
+            .drsl-label-row {
+                background: $row-highlight-color;
+            }
+
+            .drsl-updates-content {
+                padding: $default-half-padding;
+                font-weight: $default-weight;
+                text-transform: none;
+            }
+
+            .drsl-updates-tdata {
+                @extend .drsl-updates-content;
+                width: 700px;
+            }
+
+            .drsl-updates-message {
+                @extend .drsl-updates-content;
+                width: 700px;
+                min-width: 299px;
+            }
+
+            .drsl-updates-date {
+                @extend .drsl-updates-content;
+                float: right;
+            }
+
+            .drsl-update-number {
+                font-weight: $thick-weight;
+            }
+
+            .drsl-logs-tdata {
+                @extend .drsl-updates-content;
+                width: 300px;
+            }
+        }
     }
 }

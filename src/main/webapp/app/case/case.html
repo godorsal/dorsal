@@ -20,30 +20,30 @@
                                 </span>
                                  <span class="caret"></span>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-right updatesDropdown" uib-dropdown-menu role="menu" aria-labelledby="single-button" >
+                            <ul class="dropdown-menu dropdown-menu-right drsl-updates-dropdown" uib-dropdown-menu role="menu" aria-labelledby="single-button" >
                                 <table class="scroll">
-                                    <tbody class="updatesTbody">
-                                        <tr class="updatesTrow labelRow" ng-if="vm.updates.length" colspan="2">
-                                            <td class="updatesTdata">Case Updates
-                                                <span class="updateNumber">{{vm.updates.length}}</span>
+                                    <tbody class="drsl-updates-tbody">
+                                        <tr class="drsl-updates-row drsl-label-row" ng-if="vm.updates.length" colspan="2">
+                                            <td class="drsl-updates-tdata">Case Updates
+                                                <span class="drsl-update-number">{{vm.updates.length}}</span>
                                             </td>
-                                            <td class="updatesTdata"></td>
+                                            <td class="drsl-updates-tdata"></td>
                                         </tr>
-                                        <tr ng-repeat="update in vm.updates track by $index" class="updatesTrow" >
-                                                <td class="updatesMessage">{{update.updateMsg}}</td>
-                                                <td class="updatesDate">
+                                        <tr ng-repeat="update in vm.updates track by $index" class="drsl-updates-row" >
+                                                <td class="drsl-updates-message">{{update.updateMsg}}</td>
+                                                <td class="drsl-updates-date">
                                                         {{update.dateUpdated  | date:'MMM dd, yyyy &nbsp h:mm a'}}
                                                 </td>
                                         </tr>
-                                        <tr class="updatesTrow labelRow" ng-if="vm.estimateLogs.length">
-                                            <td class="updatesTdata" colspan="2">Estimate Logs
-                                                <span class="updateNumber">
+                                        <tr class="drsl-updates-row drsl-label-row" ng-if="vm.estimateLogs.length">
+                                            <td class="drsl-updates-tdata" colspan="2">Estimate Logs
+                                                <span class="drsl-update-number">
                                                     {{vm.estimateLogs.length}}
                                                 </span>
                                             </td>
                                         </tr>
-                                        <tr ng-repeat="log in vm.estimateLogs track by $index" class="updatesTrow">
-                                                <td class="logsTdata" colspan="2">{{log}}</td>
+                                        <tr ng-repeat="log in vm.estimateLogs track by $index" class="drsl-updates-row">
+                                                <td class="drsl-logs-tdata" colspan="2">{{log}}</td>
                                         </tr>
                                     </tbody>
                                 </table>

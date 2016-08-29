@@ -27,7 +27,7 @@ Cases
         }
     }
 
-    .drsl-sub-header div {
+    .drsl-sub-header > div {
         flex: 2;
 
         span {
@@ -41,8 +41,8 @@ Cases
 
             span {
                 margin-right: 0;
-                
-                &:last-child {
+
+                &.caret {
                     color: $inverted-heading-text-color;
                 }
             }
