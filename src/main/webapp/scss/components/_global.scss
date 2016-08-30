@@ -3,7 +3,7 @@ Global
 ========================================================================== */
 
 body {
-    background: $background-color url("../images/global/bkg.jpg") repeat-x;
+    background: $background-color url("#{$image-path-global}/bkg.jpg") repeat-x;
     font-family: $main-font;
     color: $default-text-color;
     font-size: $default-font-size;
@@ -39,7 +39,7 @@ body {
             position: absolute;
             top: 0;
             left: 0;
-            background: transparent url("../images/global/nv-bkg.png") repeat-x;
+            background: transparent url("#{$image-path-global}/nv-bkg.png") repeat-x;
             width: 100%;
             height: 320px;
         }
@@ -72,7 +72,7 @@ body {
     font-size: $large-font-size;
     font-weight: $thick-weight;
     background: rgb(53, 48, 45);
-    background: linear-gradient(to bottom, rgba(53, 48, 45, 1) 0%, rgba(77, 67, 75, 1) 50%, rgba(53, 48, 45, 1) 100%);
+    background: linear-gradient(to bottom, $sub-header-background-gradient-top, $sub-header-background-gradient-middle, $sub-header-background-gradient-bottom);
 
     &.drsl-sub-sub-header {
         font-size: $medium-font-size;
@@ -103,131 +103,6 @@ body {
 
     div {
         flex: inherit
-    }
-}
-
-.drsl-expert-thumbnail {
-    margin-bottom: $default-half-padding;
-
-    .panel-body {
-        text-align: center;
-    }
-
-    .thumbnail {
-        text-align: center;
-        margin-bottom: 0
-    }
-
-    .drsl-thumbnail-badge-wrapper {
-        display: flex;
-        flex-flow: row;
-        align-items: center;
-        text-align: center;
-        color: $brand-color;
-        font-size: $large-font-size;
-        margin-top: $default-half-padding;
-
-        div {
-            flex: 1;
-            span {
-                border: 1px solid $brand-color;
-                display: inline-block;
-                width: 25px;
-                border-radius: 25%;
-            }
-        }
-    }
-}
-
-// Linear Radio Buttons
-.drsl-linear-radio {
-    // overflow-x: scroll;
-    // max-width: 100px;
-    height: 100px;
-    display: flex;
-    flex-flow: row;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 30px;
-    // margin-left: 20px;
-    .drsl-radio-desc {
-        flex: 1;
-        // margin-right: $default-half-padding;
-        color: #5F5B5C;
-        text-align: left;
-    }
-
-    .drsl-radio-wrapper {
-        position: relative;
-        top: -5px;
-        flex: 3;
-
-        hr {
-            position: absolute;
-            top: 70%;
-            left: 0;
-            width: 100%;
-            margin: 0;
-            z-index: 0;
-        }
-    }
-
-    .drsl-radio-set {
-        max-width: 400px;
-        // overflow-x: scroll;
-        overflow-y: hidden;
-        position: relative;
-        display: flex;
-        flex-flow: row;
-        z-index: 1;
-    }
-
-    .drsl-radio-item {
-        margin-right: 20px;
-        margin-left: 20px;
-        flex: 1;
-        font-size: $small-font-size;
-
-        label {
-            margin: 0;
-            cursor: pointer;
-            font-weight: $default-weight;
-        }
-
-        input {
-            cursor: pointer;
-        }
-    }
-    .escalateRadio{
-        label{
-            width: 145px;
-        }
-        .drsl-radio-set{
-            max-width: none;
-        }
-        .drsl-linear-radio{
-            margin-left: 0px;
-        }
-    }
-    input[type="radio"], input[type="checkbox"] {
-        display: none;
-    }
-    input[type="radio"] + label span:last-child, input[type="checkbox"] + label span:last-child {
-        display: inline-block;
-        width: 17px;
-        height: 17px;
-        cursor: pointer;
-        background-color: $content-background-color;
-        border: 3px solid $custom-radio-border-color;
-        border-radius: 50%;
-        margin-top: 5px;
-    }
-    input[type="checkbox"] + label span:last-child {
-        border-radius: 25%;
-    }
-    input[type="radio"]:checked + label span:last-child, input[type="checkbox"]:checked + label span:last-child {
-        background-color: $brand-color;
-        border: 3px solid $brand-color;
     }
 }
 
@@ -268,63 +143,22 @@ body {
     }
 }
 
-.modal-dialog {
-    &.modal-sm {
-        width: 600px;
-    }
-
-    &.modal-lg {
-        width: 970px;
-    }
-
-    .drsl-dialog-header {
-        h2 {
-            font-weight: 200;
-            margin-top: 0;
-            font-size: 22px;
-        }
-    }
-}
-
-// tr:nth-child(even) {
-//   background-color: #ccc;
-// }
-// tr:nth-child(odd) {
-//   background-color: white;
-// }
-// .historyBox{
-//     max-height: 95px;
-//     overflow-y: hidden;
-//     font-weight: normal !important;
-//     border: 1px solid #ccc;
-// }
-// .updatesList{
-//     overflow-y: auto;
-//     overflow-x: hidden;
-// }
-table.scroll {
+table.drsl-table-scroll {
     width: 500px;
 }
-table.scroll tbody {
+
+table.drsl-table-scroll tbody {
     display: block;
     height: 95px;
     overflow-y: auto;
 }
-table.scroll thead > tr {
-    color: #666666;
+
+table.drsl-table-scroll thead > tr {
+    color: $drsl-label-color;
     display: block;
     position: relative;
 }
-.noUpdates{
-    width: 500px;
-    height: 114px;
-    border: 1px solid #E5E5E5;
-    div{
-        padding: 5px 0px 0px 10px;
-        font-weight: 400;
-        color: #999999;
-    }
-}
+
 .drsl-form-grid {
     display: flex;
     flex-flow: row;
@@ -336,133 +170,39 @@ table.scroll thead > tr {
 
         &:last-child {
             flex: 3;
-            margin-left: 10px;
+            margin-left: $default-half-padding;
             text-align: left;
-            // font-weight: 500;
         }
     }
 }
-.escalation-form-grid {
-    // display: flex;
-    // flex-flow: row;
 
-    > div {
-        // flex: 1;
-        // text-align: right;
-        // margin-right: 20px;
-        margin-bottom: 15px;
-
-        &:last-child {
-            flex: 3;
-            text-align: left;
-            font-weight: 500;
-        }
-    }
-}
-.escalation-radios{
-    overflow-x: hidden;
-}
 .drsl-label {
     color: $drsl-label-color;
     font-weight: $default-weight;
 }
-.drsl-tech-props{
+
+.drsl-tech-props {
     margin-left: 35px;
     width: 240px;
     display: inline-block;
 }
-.drsl-case-props{
+
+.drsl-case-props {
     width: 314px;
     display: inline-block;
 }
+
 .drsl-case-inputs {
     width: 570px;
 }
+
 .drsl-value {
     color: $drsl-value-color;
     font-weight: $default-medium-weight;
 }
 
-.estimateLogList{
-    overflow-y: auto;
-    height: 124px;
-    ol{
-        padding-left: 0px;
-    }
-    li:nth-child(odd){
-        background: $row-highlight-color;
-    }
-    li{
-        list-style: none;
-    }
-}
-.drsl-badge-sprites {
-    background: url("../images/global/badge-sprites.png") no-repeat;
-    width: 75px;
-    height: 75px;
-    display: inline-block;
-    $pos-width: 75px;
-    $pos-x: 0px;
-    $pos-y: 0px;
-
-    &.badge-1 {
-        background-position: 0px 0px;
-    }
-    &.badge-2 {
-        $pos-x: ($pos-x - $pos-width);
-        background-position: $pos-x $pos-y;
-    }
-    &.badge-3 {
-        $pos-x: ($pos-x - $pos-width);
-        background-position: $pos-x $pos-y;
-    }
-    &.badge-4 {
-        $pos-x: ($pos-x - $pos-width);
-        background-position: $pos-x $pos-y;
-    }
-    &.badge-5 {
-        $pos-x: ($pos-x - $pos-width);
-        background-position: $pos-x $pos-y;
-    }
-    &.badge-6 {
-        $pos-x: ($pos-x - $pos-width);
-        background-position: $pos-x $pos-y;
-    }
-    &.badge-7 {
-        $pos-x: ($pos-x - $pos-width);
-        background-position: $pos-x $pos-y;
-    }
-    &.badge-8 {
-        $pos-x: ($pos-x - $pos-width);
-        background-position: $pos-x $pos-y;
-    }
-    &.badge-9 {
-        $pos-x: ($pos-x - $pos-width);
-        background-position: $pos-x $pos-y;
-    }
-    &.badge-10 {
-        $pos-x: ($pos-x - $pos-width);
-        background-position: $pos-x $pos-y;
-    }
-    &.badge-11 {
-        $pos-x: ($pos-x - $pos-width);
-        background-position: $pos-x $pos-y;
-    }
-    &.badge-12 {
-        $pos-x: ($pos-x - $pos-width);
-        background-position: $pos-x $pos-y;
-    }
-    &.badge-13 {
-        $pos-x: ($pos-x - $pos-width);
-        background-position: $pos-x $pos-y;
-    }
-    &.selected {
-        background-position-y: -75px;
-    }
-}
-
 .drsl-icon-sprites {
-    background: url("../images/global/icon-sprites.png") no-repeat;
+    background: url("#{$image-path-global}/icon-sprites.png") no-repeat;
     position: relative;
     width: 65px;
     height: 65px;
@@ -473,7 +213,7 @@ table.scroll thead > tr {
 }
 
 .drsl-search {
-    padding: 10px 15px 15px 5px;
+    padding: $default-half-padding 15px 15px 5px;
     cursor: default;
 
     .drsl-search-input {
@@ -482,11 +222,11 @@ table.scroll thead > tr {
 
         input {
             width: 150px;
-            color: white;
-            border: 1px solid #DDDCDB;
+            color: $search-input-text-color;
+            border: 1px solid $search-input-border-color;
             background-color: transparent;
             padding: 4px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+            box-shadow: $search-input-shadow;
 
             &:focus {
                 outline: none;
@@ -496,10 +236,10 @@ table.scroll thead > tr {
 
     .drsl-search-toggle {
         i {
-            margin: 8px 10px 10px 0;
+            margin: 8px $default-half-padding $default-half-padding 0;
         }
         &:hover, &:active, &focus {
-            color: #ffffff;
+            color: $search-input-text-color;
         }
     }
 
@@ -507,7 +247,7 @@ table.scroll thead > tr {
 
         .drsl-search-input {
             display: inline-block;
-            margin-left: 5px;
+            margin-left: $horizontal-space-between-elements;
             input {
                 animation-name: drsl-search-expand-keyframe;
                 animation-duration: .5s;
@@ -523,22 +263,19 @@ table.scroll thead > tr {
 }
 
 .drsl-custom-button {
-    // display: flex;
     flex-flow: row;
     align-items: center;
     position: relative;
     width: $custom-button-size;
     height: $custom-button-size;
     background-color: $custom-button-color;
-    // box-shadow: $custom-button-shadow;
     border-radius: 50%;
     cursor: pointer;
     text-align: center;
     color: $custom-button-text-color;
     font-size: $custom-button-font-size;
-    font-weight: bold;
+    font-weight: $thick-weight;
     line-height: $custom-button-line-height;
-    cursor: pointer;
     border: 0;
     -webkit-transition: all 0.3s ease-in-out;
 
@@ -546,30 +283,32 @@ table.scroll thead > tr {
         flex: 1;
     }
 }
+
 .drsl-custom-button:hover {
-    box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.75);
+    box-shadow: $custom-button-hover-shadow;
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
     text-decoration: none;
 }
+
 .drsl-action-bar {
-    background-color: #F48B3D;
-    padding: 5px 15px 5px 20px;
-    color: white;
-    font-size: 14px;
-    font-weight: 200;
+    background-color: $brand-color;
+    padding: 5px 15px 5px $default-padding;
+    color: $action-bar-text-color;
+    font-size: $default-font-size;
+    font-weight: $thin-weight;
 
     i {
-        margin-right: 5px;
+        margin-right: $horizontal-space-between-elements;
     }
 
     a {
-        color: white;
-        margin-right: 20px;
+        color: $action-bar-text-color;
+        margin-right: $default-padding;
     }
 }
 
-.drsl-sub-header, .drsl-action-bar{
+.drsl-sub-header, .drsl-action-bar {
     width: 1180px;
     transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s;
 }
@@ -577,552 +316,6 @@ table.scroll thead > tr {
 .drsl-scrolling-container {
     display: block;
     overflow-y: auto;
-    border: 2px solid #E2E2E2;
-    padding: 5px;
-}
-
-.drsl-file-upload-component {
-    border: 1px dashed #DBD9DA;
-    text-align: center;
-    padding: 10px;
-    > span {
-        color: #F48B3D
-    }
-}
-.drsl-file-upload-component-attachment {
-    width: 558px;
-}
-.attachmentItem {
-    margin-right: 10px;
-    outline: none;
-    display: block;
-}
-.drsl-pending-attachments-message{
-    color: $brand-color;
-    display: inline-block;
-}
-.uploadLink:hover{
-    cursor: pointer;
-}
-.caseDetailsFileList{
-    overflow-y: auto;
-    max-height: 58px;
-    .name{
-        display: inline-block;
-    }
-    .options{
-        display: inline-block;
-        margin-left: 10px;
-        a {
-            font-size: 14px;
-            margin-right: 7px;
-        }
-    }
-}
-.saveload {
-    text-align: center;
-}
-.thumbnail {
-    width: 150px;
-    max-height: 103px;
-}
-.placeholderIcon {
-    width: 100px;
-}
-.paperClipIcon {
-    margin-right: 10px;
-    color: black;
-}
-.attachmentModalInput{
-    color: black !important;
-    i {
-        margin-right: 5px;
-    }
-}
-.attachmentModalTable {
-    width: 570px;
-    th:first-child{
-        float: left;
-    }
-    th:last-child{
-        float: right;
-    }
-    tbody{
-        border: 1px solid #999999;
-        height: 100px;
-        width: 558px;
-        > tr {
-            td:first-child{
-                min-width: 542px;
-            }
-        }
-    }
-}
-.shareCaseTop{
-    padding: 5px 10px 5px 10px !important;
-}
-.shareCaseHead{
-    margin: 10px;
-}
-.permStatus{
-    padding-left: 20px;
-    border: 10px solid red;
-}
-.fullAccess {
-    padding-left: 40px !important;
-    padding-right: 40px !important;
-}
-.statusBool{
-    padding-left: 40px;
-    padding-right: 40px;
-}
-.removeHeader{
-    padding-left: 40px !important;
-}
-.removeButton{
-    padding-left: 40px;
-    button{
-        display: block;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-}
-.shareHr{
-    height:2px;
-    border:none;
-    color:#E2E2E2;
-    background-color:#E2E2E2;
-    width: 555px;
-    margin-left: 11.5px;
-}
-.shareInput{
-    margin-right: 10px;
-    width: 377px;
-    height: 33px;
-}
-.shareSelect{
-    width: 167px;
-    display: inline-block;
-}
-.decisionButtons{
-    text-align: right;
-    button:first-child{
-        margin-right: 7px !important;
-    }
-}
-.magicPasswordBox{
-    border: 1px solid #D8D8D8;
-    box-shadow: -1px 1px 5px 9px rgba(0,0,0,0.3);
-    background: rgba(255,255,255,.9);
-    input{
-        background: #E5E5E5;
-    }
-    .goLeft{
-        float: left;
-    }
-    .goRight{
-        float: right;
-    }
-    h2, b{
-        font-weight: 400;
-        font-size: 20px;
-    }
-}
-
-.twoInputs{
-    div:first-child {
-        display: inline-block;
-        > div{
-            margin-right: 7px;
-            > input {
-                width: 260px;
-            }
-        }
-    }
-    div:last-child {
-        display: inline-block;
-        > div{
-            > input {
-                width: 263px;
-            }
-        }
-    }
-}
-.twoItems{
-    div:first-child {
-        float: left;
-        width: 49%;
-        margin-bottom: 25px;
-    }
-    div:last-child {
-        float: right;
-        width: 49%;
-        margin-bottom: 25px;
-    }
-}
-.extraInfo{
-    label{
-        font-weight: $default-weight;
-    }
-    div {
-        > div:first-child {
-            // padding-right:15px;
-            // padding-left: 70px;
-            width: 245px;
-            display: inline-block;
-        }
-        > div:last-child {
-            padding-left: 20px;
-            width: 285px;
-            display: inline-block;
-        }
-        > div {
-            .drsl-visibility{
-                width: 288px;
-            }
-        }
-    }
-}
-.drsl-visibility {
-    padding-left: 21px;
-    width: 288px;
-    .privacySelect{
-        margin-left: 10px;
-        width: 154px;
-        height: 50%;
-        display: inline-block;
-    }
-    .drsl-profile-visibility-label{
-        font-weight: $default-weight;
-    }
-}
-.activatePage{
-    background-color: #F48B3D;
-    border-color: #d6e9c6;
-    color: white;
-    height: 100%;
-    font-weight: 400;
-    font-size: 25px;
-    font-family: 'Raleway'
-}
-.activateText{
-    font-weight: 400;
-    padding: 10px;
-    a{
-        color: white;
-    }
-}
-
-.drsl-detail-attachment-wrapper {
-    .dropdown-menu {
-        left: initial;
-        right: 0;
-    }
-
-    .btn.btn-default.drsl-attach-btn {
-        font-family: $numbers-font;
-        font-size: 20px;
-        height: 34px;
-        border-radius: 4px;
-        padding: 2px;
-        min-width: 38px;
-
-        .fa-paperclip {
-            position: absolute;
-            top: 6px;
-            left: 2px;
-            display: inline-block;
-            transform: rotate(45deg);
-            opacity: .7;
-        }
-
-        .drsl-attachment-count {
-            position: relative;
-            padding-left: 18px;
-            padding-right: 2px;
-            top: 0px;
-            font-weight: 200;
-            font-size: 20px;
-            opacity: .7;
-        }
-    }
-
-    &.drsl-no-attachments {
-        .btn.btn-default.drsl-attach-btn {
-            .fa-paperclip {
-                left: 10px;
-            }
-        }
-    }
-
-    .drsl-menuitem-field-type {
-        outline: none;
-        cursor: default;
-    }
-
-    .drsl-attachment-items-wrapper {
-        width: 490px;
-        height: 95px;
-        overflow-y: auto;
-        overflow-x: hidden;
-        box-shadow: 0px 6px 5px rgba(0, 0, 0, 0.15);
-        margin: -5px -5px 10px -5px;
-
-        .drsl-attachment-item-odd {
-            background-color: #E5E5E5;
-        }
-
-        .drsl-attachment-item {
-            height: 25px;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            padding: 2px 5px;
-        }
-    }
-
-    .drsl-attachment-btn-wrapper {
-        .btn.detailButton {
-            float: right;
-            margin-left: 5px;
-        }
-    }
-
-    .btn.detailButton {
-        margin-left: 5px;
-    }
-
-    .drsl-attachment-control {
-        color: $brand-color;
-        text-transform: lowercase;
-        margin-left: 10px;
-
-        &:hover {
-            text-decoration: underline;
-        }
-    }
-
-    &.hide-buttons {
-        .drsl-attachment-items-wrapper {
-            margin: auto;
-            box-shadow: none;
-        }
-
-        .btn.detailButton {
-            display: none;
-        }
-    }
-
-    &.hide-controls {
-        .drsl-attachment-control {
-            display: none;
-        }
-    }
-
-    &.drsl-hide-tooltip {
-        .tooltip {
-            display: none;
-        }
-    }
-
-    &.drsl-attachments-inline {
-        width: 100%;
-
-        .drsl-attachment-items-wrapper {
-            width: 100%;
-            box-shadow: none;
-            border: 1px solid #E2E2E2;
-            border-radius: 4px;
-            margin: 0 0 10px;
-        }
-
-        .btn.btn-default {
-            margin-right: 0;
-        }
-
-        .dropdown-menu {
-            position: relative;
-            display: block;
-            width: 100%;
-            border: 0;
-            padding: 0;
-            margin: 0;
-            border-radius: 0;
-            box-shadow: none;
-        }
-
-        .drsl-attach-btn {
-            display: none;
-        }
-    }
-
-
-    .drsl-main-attachment-btns {
-        display: inline;
-
-    .btn {
-        float:right;
-        margin-left: 5px;
-    }
-}
-
-
-    .tooltip {
-        .tooltip-inner {
-            min-width: 170px;
-        }
-    }
-}
-
-// Fonts
-@font-face {
-    font-family: 'Raleway';
-    font-weight: 200;
-    font-style: normal;
-    src: url('../fonts/Raleway-200.eot');
-    src: url('../fonts/Raleway-200.eot?#iefix') format('embedded-opentype'),
-    local('Raleway ExtraLight'),
-    local('Raleway-200'),
-    url('../fonts/Raleway-200.woff2') format('woff2'),
-    url('../fonts/Raleway-200.woff') format('woff'),
-    url('../fonts/Raleway-200.ttf') format('truetype'),
-    url('../fonts/Raleway-200.svg#Raleway') format('svg');
-}
-
-@font-face {
-    font-family: 'Raleway';
-    font-weight: 400;
-    font-style: normal;
-    src: url('../fonts/Raleway-regular.eot');
-    src: url('../fonts/Raleway-regular.eot?#iefix') format('embedded-opentype'),
-    local('Raleway'),
-    local('Raleway-regular'),
-    url('../fonts/Raleway-regular.woff2') format('woff2'),
-    url('../fonts/Raleway-regular.woff') format('woff'),
-    url('../fonts/Raleway-regular.ttf') format('truetype'),
-    url('../fonts/Raleway-regular.svg#Raleway') format('svg');
-}
-
-@font-face {
-    font-family: 'Raleway';
-    font-weight: 500;
-    font-style: normal;
-    src: url('../fonts/Raleway-500.eot');
-    src: url('../fonts/Raleway-500.eot?#iefix') format('embedded-opentype'),
-    local('Raleway Medium'),
-    local('Raleway-500'),
-    url('../fonts/Raleway-500.woff2') format('woff2'),
-    url('../fonts/Raleway-500.woff') format('woff'),
-    url('../fonts/Raleway-500.ttf') format('truetype'),
-    url('../fonts/Raleway-500.svg#Raleway') format('svg');
-}
-
-@font-face {
-    font-family: 'Raleway';
-    font-weight: 600;
-    font-style: normal;
-    src: url('../fonts/Raleway-600.eot');
-    src: url('../fonts/Raleway-600.eot?#iefix') format('embedded-opentype'),
-    local('Raleway SemiBold'),
-    local('Raleway-600'),
-    url('../fonts/Raleway-600.woff2') format('woff2'),
-    url('../fonts/Raleway-600.woff') format('woff'),
-    url('../fonts/Raleway-600.ttf') format('truetype'),
-    url('../fonts/Raleway-600.svg#Raleway') format('svg');
-}
-
-@font-face {
-    font-family: 'Raleway';
-    font-weight: 700;
-    font-style: normal;
-    src: url('../fonts/Raleway-700.eot');
-    src: url('../fonts/Raleway-700.eot?#iefix') format('embedded-opentype'),
-    local('Raleway Bold'),
-    local('Raleway-700'),
-    url('../fonts/Raleway-700.woff2') format('woff2'),
-    url('../fonts/Raleway-700.woff') format('woff'),
-    url('../fonts/Raleway-700.ttf') format('truetype'),
-    url('../fonts/Raleway-700.svg#Raleway') format('svg');
-}
-@font-face {
-    font-family: 'Raleway';
-    font-weight: 800;
-    font-style: normal;
-    src: url('../fonts/Raleway-800.eot');
-    src: url('../fonts/Raleway-800.eot?#iefix') format('embedded-opentype'),
-    local('Raleway Bold'),
-    local('Raleway-800'),
-    url('../fonts/Raleway-800.woff2') format('woff2'),
-    url('../fonts/Raleway-800.woff') format('woff'),
-    url('../fonts/Raleway-800.ttf') format('truetype'),
-    url('../fonts/Raleway-800.svg#Raleway') format('svg');
-}
-@font-face {
-    font-family: 'Raleway';
-    font-weight: 900;
-    font-style: normal;
-    src: url('../fonts/Raleway-900.eot');
-    src: url('../fonts/Raleway-900.eot?#iefix') format('embedded-opentype'),
-    local('Raleway Bold'),
-    local('Raleway-900'),
-    url('../fonts/Raleway-900.woff2') format('woff2'),
-    url('../fonts/Raleway-900.woff') format('woff'),
-    url('../fonts/Raleway-900.ttf') format('truetype'),
-    url('../fonts/Raleway-900.svg#Raleway') format('svg');
-}
-
-@font-face {
-    font-family: 'Work Sans';
-    font-weight: 200;
-    font-style: normal;
-    src: url('../fonts/Work-Sans-200.eot');
-    src: url('../fonts/Work-Sans-200.eot?#iefix') format('embedded-opentype'),
-    local('Work Sans ExtraLight'),
-    local('Work-Sans-200'),
-    url('../fonts/Work-Sans-200.woff2') format('woff2'),
-    url('../fonts/Work-Sans-200.woff') format('woff'),
-    url('../fonts/Work-Sans-200.ttf') format('truetype'),
-    url('../fonts/Work-Sans-200.svg#WorkSans') format('svg');
-}
-
-@font-face {
-    font-family: 'Work Sans';
-    font-weight: 400;
-    font-style: normal;
-    src: url('../fonts/Work-Sans-regular.eot');
-    src: url('../fonts/Work-Sans-regular.eot?#iefix') format('embedded-opentype'),
-    local('Work Sans'),
-    local('Work-Sans-regular'),
-    url('../fonts/Work-Sans-regular.woff2') format('woff2'),
-    url('../fonts/Work-Sans-regular.woff') format('woff'),
-    url('../fonts/Work-Sans-regular.ttf') format('truetype'),
-    url('../fonts/Work-Sans-regular.svg#WorkSans') format('svg');
-}
-
-@font-face {
-    font-family: 'Work Sans';
-    font-weight: 600;
-    font-style: normal;
-    src: url('../fonts/Work-Sans-600.eot');
-    src: url('../fonts/Work-Sans-600.eot?#iefix') format('embedded-opentype'),
-    local('Work Sans SemiBold'),
-    local('Work-Sans-600'),
-    url('../fonts/Work-Sans-600.woff2') format('woff2'),
-    url('../fonts/Work-Sans-600.woff') format('woff'),
-    url('../fonts/Work-Sans-600.ttf') format('truetype'),
-    url('../fonts/Work-Sans-600.svg#WorkSans') format('svg');
-}
-
-@font-face {
-    font-family: 'Work Sans';
-    font-weight: 700;
-    font-style: normal;
-    src: url('../fonts/Work-Sans-700.eot');
-    src: url('../fonts/Work-Sans-700.eot?#iefix') format('embedded-opentype'),
-    local('Work Sans Bold'),
-    local('Work-Sans-700'),
-    url('../fonts/Work-Sans-700.woff2') format('woff2'),
-    url('../fonts/Work-Sans-700.woff') format('woff'),
-    url('../fonts/Work-Sans-700.ttf') format('truetype'),
-    url('../fonts/Work-Sans-700.svg#WorkSans') format('svg');
+    border: 2px solid $scrolling-container-border-color;
+    padding: $horizontal-space-between-elements;
 }

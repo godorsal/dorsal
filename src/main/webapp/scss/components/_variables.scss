@@ -23,6 +23,8 @@ $date-picker-month-font-size: 18px;
 // Account Settings
 $account-settings-authorized-credit-card-font-size: 12px;
 $account-settings-email-font-size: 13px;
+// Account Activation
+$account-activation-font-size: 25px;
 
 // Font Weight ****************************
 $default-weight: 400;
@@ -52,10 +54,18 @@ $primary-button-background-color: #B0AFB4;
 $content-container-color: #E5E5E5;
 $row-highlight-color: #E5E5E5;
 $home-additional-info-background-color: #fff;
+
+$sub-header-background: rgb(53, 48, 45);
+$sub-header-background-gradient-top: rgba(53, 48, 45, 1) 0%;
+$sub-header-background-gradient-middle: rgba(77, 67, 75, 1) 50%;
+$sub-header-background-gradient-bottom: rgba(53, 48, 45, 1) 100%;
+
 // Concierge
 $tech-details-dropdown-selection-background-color: #f5f5f5;
 // Case Summary
 $case-summary-updates-background: rgba(255, 255, 255, 0.9);
+// Account Password
+$account-password-box-background-color: rgba(255, 255, 255, .9);
 
 // Text Colors *****************************
 $default-text-color: #333;
@@ -72,11 +82,16 @@ $drsl-value-color: #1a1a1a;
 $home-additional-info-heading-color: #666666;
 $custom-input-unit-color: #ac9999;
 $invalid-text-color: #FF0000;
+$search-input-text-color: $nav-text-active-color;
+$action-bar-text-color: #fff;
 // Home/Landing
 $home-main-header-text-color: rgb(25%, 25%, 25%);
 $home-additional-info-text-color: #9A9798;
 // Date Picker
 $date-picker-selected-day-text-color: #fff;
+// Account Activation
+$account-activation-text-color: #fff;
+$account-activation-link-text-color: #fff;
 
 // Border Colors **************************
 $form-field-border-color: #CCC;
@@ -85,16 +100,31 @@ $primary-button-border-color: #9C9FA3;
 $brand-border-color: #E58C38;
 $photo-border-color: #fff;
 $horizontal-separator-color: #E2E2E2;
+$empty-box-border-color: #E5E5E5;
+$search-input-border-color: $nav-text-color;
+$scrolling-container-border-color: $horizontal-separator-color;
+$attachments-inline-box-border-color: #E2E2E2;
+// Home/Landing
 $home-additional-info-border-color: #DCDCDC;
+// Case Summary
 $case-summary-updates-separator-color: #1a1a1a;
+// Account Password
+$account-password-box-border-color: #D8D8D8;
+// Account Activation
+$account-activation-main-border-color: #d6e9c6;
 
 // Shadow Colors **************************
 $content-box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
 $custom-button-shadow: 0 5px 40px rgba(0, 0, 0, 0.5);
+$custom-button-hover-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.75);
 $custom-input-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 $dialog-button-shelf-shadow: 3px 3px 5px rgba(0, 0, 0, 0.15);
+$search-input-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+$attachments-wrapper-shadow: 0 6px 5px rgba(0, 0, 0, 0.15);
 // Home/Landing
 $home-connect-button-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.75);
+// Account Password
+$account-password-box-shadow: -1px 1px 5px 9px rgba(0, 0, 0, 0.3);
 
 // Button Colors **************************
 $custom-button-color: $brand-color;
@@ -131,3 +161,11 @@ $concierge-go-button-dimensions: 125px;
 $case-summary-profile-photo-dimensions: 175px;
 $case-complete-close-case-button-dimensions: 100px;
 $case-summary-updates-width: 560px;
+
+/* ==========================================================================
+Paths
+========================================================================== */
+$image-path: "../images";
+$image-path-global: $image-path + "/global";
+$font-path: "../fonts";
+

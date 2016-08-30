@@ -296,4 +296,76 @@ Account Settings
             }
         }
     }
+
+    .drsl-two-inputs {
+        div:first-child {
+            display: inline-block;
+            > div {
+                margin-right: 7px;
+                > input {
+                    width: 260px;
+                }
+            }
+        }
+
+        div:last-child {
+            display: inline-block;
+            > div {
+                > input {
+                    width: 263px;
+                }
+            }
+        }
+    }
+
+    .drsl-two-items {
+        div:first-child {
+            float: left;
+            width: 49%;
+            margin-bottom: 25px;
+        }
+
+        div:last-child {
+            float: right;
+            width: 49%;
+            margin-bottom: 25px;
+        }
+    }
+
+    .drsl-extra-info {
+        label {
+            font-weight: $default-weight;
+        }
+
+        div {
+            > div:first-child {
+                width: 245px;
+                display: inline-block;
+            }
+
+            > div:last-child {
+                padding-left: $default-padding;
+                width: 285px;
+                display: inline-block;
+            }
+
+            > div {
+                .drsl-visibility {
+                    padding-left: 21px;
+                    width: 288px;
+
+                    .privacySelect {
+                        margin-left: $default-half-padding;
+                        width: 154px;
+                        height: 50%;
+                        display: inline-block;
+                    }
+
+                    .drsl-profile-visibility-label {
+                        font-weight: $default-weight;
+                    }
+                }
+            }
+        }
+    }
 }

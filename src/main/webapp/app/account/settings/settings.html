@@ -97,7 +97,7 @@ Your e-mail cannot be longer than 100 characters.
     </select>
 </div>
 <div ng-if="vm.currentExpert">
-  <div class="twoInputs">
+  <div class="drsl-two-inputs">
       <div class="form-group">
         <div class="drsl-placeholder-label" type="text">
           <input type="tel" class="form-control" id="telephone" name="telephone"
@@ -113,7 +113,7 @@ Your e-mail cannot be longer than 100 characters.
         </div>
       </div>
   </div>
-    <div class="twoInputs">
+    <div class="drsl-two-inputs">
       <div class="form-group">
         <div class="drsl-placeholder-label" type="text">
           <input type="text" class="form-control" id="skype" name="skype"
@@ -129,7 +129,7 @@ Your e-mail cannot be longer than 100 characters.
         </div>
       </div>
     </div>
-    <div class="twoInputs">
+    <div class="drsl-two-inputs">
         <div class="form-group">
           <div class="drsl-placeholder-label" type="text"  uib-tooltip="name of other contact method">
             <input type="text" class="form-control" id="preferred" name="preferred"
@@ -151,7 +151,7 @@ Your e-mail cannot be longer than 100 characters.
         <span class="drsl-select drsl-unit" translate="settings.form.language">(Language)</span>
       </div>
     </div>
-    <div class="twoInputs">
+    <div class="drsl-two-inputs">
         <div class="form-group">
           <div class="drsl-placeholder-label" type="text">
             <input type="text" class="form-control" id="location" name="location"
@@ -178,7 +178,7 @@ Your e-mail cannot be longer than 100 characters.
         <span class="drsl-select drsl-unit" translate="settings.form.availability">(Availability)</span>
       </div>
     </div>
-    <div class="extraInfo">
+    <div class="drsl-extra-info">
         <div>
             <div>
                 <span translate="settings.form.expertScore">Expert Score:</span> {{ 'global.messages.info.expertScoreOutOf' | translate:'{score: '+ (((vm.currentExpert.expertScore / vm.currentExpert.numberOfCases) | number:0) || 0) + '}' }}
@@ -194,7 +194,7 @@ Your e-mail cannot be longer than 100 characters.
             </div>
         </div>
         <br>
-        <div class="twoItems">
+        <div class="drsl-two-items">
             <div>
                 Total Number of Cases: {{vm.currentExpert.numberOfCases}}
             </div>

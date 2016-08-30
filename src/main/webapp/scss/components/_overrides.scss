@@ -112,6 +112,22 @@ Dialogs
             }
         }
     }
+
+    &.modal-sm {
+        width: 600px;
+    }
+
+    &.modal-lg {
+        width: 970px;
+    }
+
+    .drsl-dialog-header {
+        h2 {
+            font-weight: $thin-weight;
+            margin-top: 0;
+            font-size: 22px;
+        }
+    }
 }
 
 .modal-open {

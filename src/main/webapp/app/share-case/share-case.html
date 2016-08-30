@@ -1,39 +1,39 @@
 <div class="drsl-dialog drsl-share-case">
     <div class="modal-body">
-        <div class="shareCaseTop">
-            <div class="drsl-dialog-header shareCaseHead">
+        <div class="drsl-share-case-top">
+            <div class="drsl-dialog-header drsl-share-case-head">
                 <div><h2>SHARE MY CASE: <span>{{vm.case.technology.name}} {{vm.case.id}}</span></h2></div>
             </div>
-            <table class="shareCaseHead">
+            <table class="drsl-share-case-head">
                 <thead>
                     <th><h3 class="drsl-label" ng-if="vm.sharedUsers.length">Users</h3></th>
-                    <th><h3 class="drsl-label fullAccess" ng-if="vm.sharedUsers.length" >Permissions</h3></th>
-                    <th><h3 class="drsl-label fullAccess" ng-if="vm.sharedUsers.length" >Status</h3></th>
-                    <th><h3 class="drsl-label removeHeader" ng-if="vm.sharedUsers.length">Remove</h3></th>
+                    <th><h3 class="drsl-label drsl-full-access" ng-if="vm.sharedUsers.length" >Permissions</h3></th>
+                    <th><h3 class="drsl-label drsl-full-access" ng-if="vm.sharedUsers.length" >Status</h3></th>
+                    <th><h3 class="drsl-label drsl-remove-header" ng-if="vm.sharedUsers.length">Remove</h3></th>
                 </thead>
                 <tbody>
                     <tr ng-repeat="share in vm.sharedUsers track by $index">
                         <td class="drsl-value">
                             {{share.user.email}}
                         </td>
-                        <td class="drsl-value fullAccess">
+                        <td class="drsl-value drsl-full-access">
                             Full Access
                         </td>
-                        <td class="drsl-value statusBool">
+                        <td class="drsl-value drsl-status-bool">
                             <span ng-if="!share.user.activated">Invited</span>
                             <span ng-if="share.user.activated">Authorized</span>
                         </td>
-                        <td class="removeButton">
+                        <td class="drsl-remove-button">
                             <button class="btn btn-success" ng-click="vm.removeSharedUser(share.id, $index)"><i class="fa fa-times-circle fa-lg"></i></button>
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <hr class="shareHr" />
-            <form ng-submit="vm.addUser()" class="shareCaseHead">
+            <hr class="drsl-share-hr" />
+            <form ng-submit="vm.addUser()" class="drsl-share-case-head">
                 <input type="text" id="emailInput" name="emailInput"
-                ng-model="vm.emailInput" ng-minlength=4 ng-maxlength=50 required placeholder=" Email address" class="shareInput drsl-value">
-                <select class="form-control shareSelect" ng-model="vm.permissions" id="permissionInput" required disabled>
+                ng-model="vm.emailInput" ng-minlength=4 ng-maxlength=50 required placeholder=" Email address" class="drsl-share-input drsl-value">
+                <select class="form-control drsl-share-select" ng-model="vm.permissions" id="permissionInput" required disabled>
                     <option value="">Full Access</option>
                     <option value="read">read</option>
                     <option value="write">write</option>
@@ -42,7 +42,7 @@
                 <br>
         </form>
         </div>
-        <div class="decisionButtons">
+        <div class="drsl-decision-buttons">
             <button class="btn btn-default" ng-click="vm.cancel($event)">Cancel</button>
             <button type="button" ng-click="vm.addUser()" class="btn btn-success">Add User</button>
         </div>
