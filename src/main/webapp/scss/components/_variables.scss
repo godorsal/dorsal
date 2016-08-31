@@ -12,6 +12,8 @@ $small-font-size: 11px;
 $medium-font-size: 16px;
 $large-font-size: 20px;
 $custom-button-font-size: 30px;
+$dialog-header-font-size: 22px;
+$glyphicon-chevron-font-size: 25px;
 // Home/Landing
 $home-title-font-size: 49px;
 $home-tagline-font-size: 17px;
@@ -48,7 +50,11 @@ $brand-color: #F48B3D;
 
 // Background Colors **********************
 $background-color: #fff;
+$nav-dropdown-background-color: rgba(0, 0, 0, .8);
+$nav-dropdown-active-background-color: rgba(0, 0, 0, 1);
+$modal-content-background: rgba(255, 255, 255, .90);
 $form-field-background-color: #DBDBDB;
+$form-field-readonly-background: #fff;
 $content-background-color: $background-color;
 $primary-button-background-color: #B0AFB4;
 $content-container-color: #E5E5E5;
@@ -71,6 +77,7 @@ $account-password-box-background-color: rgba(255, 255, 255, .9);
 $default-text-color: #333;
 $nav-text-color: #DDDCDB;
 $nav-text-active-color: #FFF;
+$nav-text-hover-color: #000;
 $inverted-heading-text-color: #fff;
 $inverted-heading-right-text-color: #838584;
 $sub-header-text-color: #F5F1EE;
