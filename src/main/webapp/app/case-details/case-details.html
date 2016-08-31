@@ -71,7 +71,7 @@
             <div class="drsl-form-grid">
                 <div class="drsl-label">Estimate History</div>
                 <div>
-                    <div class="estimateLogList">
+                    <div class="drsl-estimate-log-list">
 
                     <ol ng-show="vm.estimateLogs">
                         <li class="drsl-value eLogList" ng-repeat="log in vm.estimateLogs | limitTo: vm.estimateLogs.length - 1">
@@ -84,12 +84,12 @@
             <div class="drsl-form-grid drsl-update-history-box">
                 <div class="drsl-label">Update History</div>
                 <div>
-                    <div class="noUpdates" ng-hide="vm.updates.length > 0">
+                    <div class="drsl-no-updates" ng-hide="vm.updates.length > 0">
                         <div>
                             Updates for your case will be displayed here
                         </div>
                     </div>
-                    <table class="scroll table-striped" ng-show="vm.updates.length > 0">
+                    <table class="drsl-table-scroll table-striped" ng-show="vm.updates.length > 0">
                         <thead>
                             <tr>
                                 <th class="drsl-label">Message</th>

@@ -1,0 +1,25 @@
+/* ==========================================================================
+Case Escalation
+========================================================================== */
+
+.drsl-case-escalation-view {
+    .escalation-form-grid {
+        > div {
+            margin-bottom: 15px;
+
+            &:last-child {
+                flex: 3;
+                text-align: left;
+                font-weight: $default-medium-weight;
+            }
+        }
+    }
+
+    .escalation-radios {
+        overflow-x: hidden;
+
+        .drsl-linear-radio .drsl-radio-item {
+            font-size: $default-font-size;
+        }
+    }
+}

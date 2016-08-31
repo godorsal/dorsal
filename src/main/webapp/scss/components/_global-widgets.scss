@@ -1,0 +1,321 @@
+/* ==========================================================================
+Global Widgets
+========================================================================== */
+
+// Linear Radio Buttons *******************
+.drsl-linear-radio {
+    height: 100px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 30px;
+
+    .drsl-radio-desc {
+        flex: 1;
+        text-align: left;
+    }
+
+    .drsl-radio-wrapper {
+        position: relative;
+        top: -5px;
+        flex: 3;
+
+        hr {
+            position: absolute;
+            top: 70%;
+            left: 0;
+            width: 100%;
+            margin: 0;
+            z-index: 0;
+        }
+    }
+
+    .drsl-radio-set {
+        max-width: 400px;
+        overflow-y: hidden;
+        position: relative;
+        display: flex;
+        flex-flow: row;
+        z-index: 1;
+    }
+
+    .drsl-radio-item {
+        margin-right: $default-padding;
+        margin-left: $default-padding;
+        flex: 1;
+        font-size: $small-font-size;
+
+        label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: $default-weight;
+        }
+
+        input {
+            cursor: pointer;
+        }
+    }
+    .escalateRadio {
+        label {
+            width: 145px;
+        }
+        .drsl-radio-set {
+            max-width: none;
+        }
+        .drsl-linear-radio {
+            margin-left: 0;
+        }
+    }
+    input[type="radio"], input[type="checkbox"] {
+        display: none;
+    }
+    input[type="radio"] + label span:last-child, input[type="checkbox"] + label span:last-child {
+        display: inline-block;
+        width: 17px;
+        height: 17px;
+        cursor: pointer;
+        background-color: $content-background-color;
+        border: 3px solid $custom-radio-border-color;
+        border-radius: 50%;
+        margin-top: 5px;
+    }
+    input[type="checkbox"] + label span:last-child {
+        border-radius: 25%;
+    }
+    input[type="radio"]:checked + label span:last-child, input[type="checkbox"]:checked + label span:last-child {
+        background-color: $brand-color;
+        border: 3px solid $brand-color;
+    }
+}
+
+// Badges *********************************
+.drsl-badge-sprites {
+    background: url("#{$image-path-global}/badge-sprites.png") no-repeat;
+    width: 75px;
+    height: 75px;
+    display: inline-block;
+    $pos-width: 75px;
+    $pos-x: 0px;
+    $pos-y: 0px;
+
+    &.badge-1 {
+        background-position: 0 0;
+    }
+    &.badge-2 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x $pos-y;
+    }
+    &.badge-3 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x $pos-y;
+    }
+    &.badge-4 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x $pos-y;
+    }
+    &.badge-5 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x $pos-y;
+    }
+    &.badge-6 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x $pos-y;
+    }
+    &.badge-7 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x $pos-y;
+    }
+    &.badge-8 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x $pos-y;
+    }
+    &.badge-9 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x $pos-y;
+    }
+    &.badge-10 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x $pos-y;
+    }
+    &.badge-11 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x $pos-y;
+    }
+    &.badge-12 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x $pos-y;
+    }
+    &.badge-13 {
+        $pos-x: ($pos-x - $pos-width);
+        background-position: $pos-x $pos-y;
+    }
+    &.selected {
+        background-position-y: -75px;
+    }
+}
+
+// Attachments ****************************
+.drsl-detail-attachment-wrapper {
+    .dropdown-menu {
+        left: initial;
+        right: 0;
+    }
+
+    .btn.btn-default.drsl-attach-btn {
+        font-family: $numbers-font;
+        font-size: 20px;
+        height: 34px;
+        border-radius: 4px;
+        padding: 2px;
+        min-width: 38px;
+
+        .fa-paperclip {
+            position: absolute;
+            top: 6px;
+            left: 2px;
+            display: inline-block;
+            transform: rotate(45deg);
+            opacity: .7;
+        }
+
+        .drsl-attachment-count {
+            position: relative;
+            padding-left: 18px;
+            padding-right: 2px;
+            top: 0;
+            font-weight: $thin-weight;
+            font-size: 20px;
+            opacity: .7;
+        }
+    }
+
+    &.drsl-no-attachments {
+        .btn.btn-default.drsl-attach-btn {
+            .fa-paperclip {
+                left: 10px;
+            }
+        }
+    }
+
+    .drsl-menuitem-field-type {
+        outline: none;
+        cursor: default;
+    }
+
+    .drsl-attachment-items-wrapper {
+        width: 490px;
+        height: 95px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        box-shadow: $attachments-wrapper-shadow;
+        margin: -5px -5px $default-half-padding -5px;
+
+        .drsl-attachment-item-odd {
+            background-color: $row-highlight-color;
+        }
+
+        .drsl-attachment-item {
+            height: 25px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            padding: 2px 5px;
+        }
+    }
+
+    .drsl-attachment-btn-wrapper {
+        .btn.detailButton {
+            float: right;
+            margin-left: $horizontal-space-between-elements;
+        }
+    }
+
+    .btn.detailButton {
+        margin-left: $horizontal-space-between-elements;
+    }
+
+    .drsl-attachment-control {
+        color: $brand-color;
+        text-transform: lowercase;
+        margin-left: $default-half-padding;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &.hide-buttons {
+        .drsl-attachment-items-wrapper {
+            margin: auto;
+            box-shadow: none;
+        }
+
+        .btn.detailButton {
+            display: none;
+        }
+    }
+
+    &.hide-controls {
+        .drsl-attachment-control {
+            display: none;
+        }
+    }
+
+    &.drsl-hide-tooltip {
+        .tooltip {
+            display: none;
+        }
+    }
+
+    &.drsl-attachments-inline {
+        width: 100%;
+
+        .drsl-attachment-items-wrapper {
+            width: 100%;
+            box-shadow: none;
+            border: 1px solid $attachments-inline-box-border-color;
+            border-radius: 4px;
+            margin: 0 0 $default-half-padding;
+        }
+
+        .btn.btn-default {
+            margin-right: 0;
+        }
+
+        .dropdown-menu {
+            position: relative;
+            display: block;
+            width: 100%;
+            border: 0;
+            padding: 0;
+            margin: 0;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .drsl-attach-btn {
+            display: none;
+        }
+    }
+
+    .drsl-main-attachment-btns {
+        display: inline;
+
+        .btn {
+            float: right;
+            margin-left: $horizontal-space-between-elements;
+        }
+    }
+
+    .drsl-pending-attachments-message {
+        color: $brand-color;
+        display: inline-block;
+    }
+
+    .tooltip {
+        .tooltip-inner {
+            min-width: 170px;
+        }
+    }
+}

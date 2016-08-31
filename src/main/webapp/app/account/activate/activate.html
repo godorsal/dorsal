@@ -1,13 +1,13 @@
-<div>
+<div class="drsl-account-activation-view">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <h1 translate="activate.title">Activation</h1>
 
-            <div class="activatePage"  ng-show="vm.success" translate="activate.messages.success" translate-compile>
+            <div class="drsl-activate-page"  ng-show="vm.success" translate="activate.messages.success" translate-compile>
                 <div>Your account has been activated.</div> Please <a href="" ng-click="vm.login()">sign in</a> and you will be redirected to the account settings page to complete the registration.
             </div>
 
-            <div class="activatePage" ng-show="vm.error" translate="activate.messages.error">
+            <div class="drsl-activate-page" ng-show="vm.error" translate="activate.messages.error">
                 <strong>Your user could not be activated.</strong> Please use the registration form to sign up.
             </div>
 

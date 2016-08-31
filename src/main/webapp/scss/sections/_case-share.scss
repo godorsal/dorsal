@@ -1,0 +1,67 @@
+/* ==========================================================================
+Case Share
+========================================================================== */
+
+.drsl-dialog.drsl-share-case .modal-body {
+    .drsl-share-case-top {
+        padding: 5px $default-half-padding 5px $default-half-padding;
+
+        .drsl-share-case-head {
+            margin: $default-half-padding;
+
+            .drsl-full-access {
+                padding-left: $default-double-padding;
+                padding-right: $default-double-padding;
+            }
+
+            .drsl-status-bool {
+                padding-left: $default-double-padding;
+                padding-right: $default-double-padding;
+            }
+
+            .drsl-remove-header {
+                padding-left: $default-double-padding;
+            }
+
+            .drsl-remove-button {
+                padding-left: $default-double-padding;
+
+                button {
+                    display: block;
+                    margin-top: $default-half-padding;
+                    margin-bottom: $default-half-padding;
+                }
+            }
+        }
+
+        .drsl-share-hr {
+            height: 2px;
+            border: none;
+            color: $horizontal-separator-color;
+            background-color: $horizontal-separator-color;
+            width: 555px;
+            margin-left: 11.5px;
+        }
+
+        .drsl-share-input {
+            margin-right: $default-half-padding;
+            width: 377px;
+            height: 33px;
+        }
+
+        .drsl-share-select {
+            width: 167px;
+            display: inline-block;
+        }
+    }
+
+    .drsl-decision-buttons {
+        text-align: right;
+
+        button:first-child {
+            margin-right: 7px;
+        }
+    }
+}
+
+

@@ -74,4 +74,30 @@ Case Details
     .drsl-details-user-view {
         text-align: right;
     }
+
+    .drsl-estimate-log-list {
+        overflow-y: auto;
+        height: 124px;
+        ol {
+            padding-left: 0;
+        }
+        li:nth-child(odd) {
+            background: $row-highlight-color;
+        }
+        li {
+            list-style: none;
+        }
+    }
+
+    .drsl-no-updates {
+        width: 500px;
+        height: 114px;
+        border: 1px solid $empty-box-border-color;
+
+        div {
+            padding: 5px 0 0 $default-half-padding;
+            font-weight: $default-weight;
+            color: $inactive-text-color;
+        }
+    }
 }

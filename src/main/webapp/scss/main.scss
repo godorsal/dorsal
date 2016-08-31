@@ -1,12 +1,18 @@
+// Global Components
 @import "components/variables";
 @import "components/keyframes";
 @import "components/hipster";
 @import "components/overrides";
 @import "components/global";
+@import "components/global-widgets";
+@import "components/fonts";
 @import "components/icons";
+
 // Sections
 @import "sections/landing";
 @import "sections/account-settings";
+@import "sections/account-password";
+@import "sections/account-activation";
 @import "sections/login";
 @import "sections/concierge";
 @import "sections/cases";
@@ -19,4 +25,6 @@
 @import "sections/case-complete";
 @import "sections/case-agreement";
 @import "sections/case-updates";
+@import "sections/case-share";
+@import "sections/case-escalation";
 @import "sections/chat";
