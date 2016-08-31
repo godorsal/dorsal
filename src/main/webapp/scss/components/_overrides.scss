@@ -58,22 +58,22 @@ Navbar
 .nav.navbar-nav.navbar-right {
     .dropdown-menu {
         right: initial;
-        background-color: rgba(0, 0, 0, .8);
+        background-color: $nav-dropdown-background-color;
 
         > li {
             &.active {
                 a {
-                    background-color: rgba(0, 0, 0, 1);
+                    background-color: $nav-dropdown-active-background-color;
                     &:hover {
-                        color: #ffffff;
+                        color: $nav-text-active-color;
                     }
                 }
             }
 
             > a {
-                color: #FFFFFF;
+                color: $nav-text-active-color;
                 &:hover {
-                    color: #000000;
+                    color: $nav-text-hover-color;
                 }
             }
         }
@@ -99,7 +99,7 @@ Dialogs
     }
 
     .modal-content {
-        background: rgba(255, 255, 255, .90);
+        background: $modal-content-background;
         border-radius: 0;
 
         .modal-header {
@@ -125,7 +125,7 @@ Dialogs
         h2 {
             font-weight: $thin-weight;
             margin-top: 0;
-            font-size: 22px;
+            font-size: $dialog-header-font-size;
         }
     }
 }
@@ -179,14 +179,14 @@ Glyphicon
 ========================================================================== */
 .glyphicon-chevron-left, .glyphicon-chevron-right{
     color: $brand-color;
-    font-size: 25px;
+    font-size: $glyphicon-chevron-font-size;
 }
 
 /* ==========================================================================
 Forms
 ========================================================================== */
 .form-control[readonly] {
-    background: white;
+    background: $form-field-readonly-background;
 }
 /* ==========================================================================
 Tables
@@ -230,14 +230,14 @@ Date Picker
         strong {
             @extend .drsl-label;
             font-weight: $thin-weight;
-            font-size: 18px;
+            font-size: $date-picker-month-font-size;
             text-align: center;
             width: initial;
         }
     }
 
     .btn-info:active, .btn-info.active, .open > .btn-info.dropdown-toggle {
-        color: #fff;
+        color: $date-picker-selected-day-text-color;
         background-color: $brand-color;
         border-color: $brand-color;
     }
