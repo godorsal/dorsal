@@ -2,36 +2,32 @@
     'use strict';
 
     angular
-        .module('dorsalApp')
-        .factory('DrslMetadata', DrslMetadata);
+    .module('dorsalApp')
+    .factory('DrslMetadata', DrslMetadata);
 
-    DrslMetadata.$inject = ['GlobalMetadata'];
+    DrslMetadata.$inject = ['GlobalMetadata', '$q'];
 
-    function DrslMetadata(GlobalMetadata) {
+    function DrslMetadata(GlobalMetadata, $q) {
         var service = {};
 
         service.getTotalForRateAtHours = function (hours) {
             return service.expertRate * hours;
         };
-        service.getItemsParsed = function() {
-            GlobalMetadata.query(function (result) {
-                var i, metaItem;
-
-                for (i = 0; i < result.length; i++) {
-                    metaItem = result[i];
-
-                    switch (metaItem.valueType) {
-                        case 'ISINTEGER':
-                        service[camelCase(metaItem.name)] = parseInt(metaItem.value);
-                        break;
-                        default:
-                        service[camelCase(metaItem.name)] = metaItem.value;
-                        break;
-                    }
+        GlobalMetadata.query(function (result) {
+            var i, metaItem;
+            for (i = 0; i < result.length; i++) {
+                metaItem = result[i];
+                switch (metaItem.valueType) {
+                    case 'ISINTEGER':
+                    service[camelCase(metaItem.name)] = parseInt(metaItem.value);
+                    break;
+                    default:
+                    service[camelCase(metaItem.name)] = metaItem.value;
+                    break;
                 }
-            });
-        }
-
+            }
+        });
+        
         return service;
     }
 

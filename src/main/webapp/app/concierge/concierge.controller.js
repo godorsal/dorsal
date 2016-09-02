@@ -30,7 +30,6 @@
         vm.errorMissingDescription = $translate.instant('concierge.errors.missing.description');
         vm.errorMissingAll = $translate.instant('concierge.errors.missing.all');
         vm.DrslMetadata = DrslMetadata;
-        vm.DrslMetadata.getItemsParsed();
         
         vm.caseDetails = {
             summary: '',
