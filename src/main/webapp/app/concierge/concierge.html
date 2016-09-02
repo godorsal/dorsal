@@ -8,15 +8,15 @@
                     <span translate="concierge.pageTitles.createCase"></span>
                 </div>
                 <div>
-                    <span ng-if="vm.DrslMetadata.conciergeavailable === 'true'">
-                    <span class="drsl-chat-with-expert" translate="concierge.pageTitles.chatWithExpert" translate-values="{concierge: '{{vm.DrslMetadata.conciergeavailableforchat}}'}">
-                    </span>
-                    <a href="{{vm.DrslMetadata.conciergechaturl}}" target="_blank">
-                        <button class="btn drsl-concierge-chat-button" >
-                            <i class="fa fa-weixin" aria-hidden="true"></i>
-                        </button>
-                    </a>
-                    </span>
+                    <div ng-if="vm.DrslMetadata.conciergeavailable === 'true'" class="drsl-avaiable-concierge-name">
+                        <span class="drsl-chat-with-expert" translate="concierge.pageTitles.chatWithExpert" translate-values="{concierge: '{{vm.DrslMetadata.conciergeavailableforchat}}'}">
+                        </span>
+                        <a href="{{vm.DrslMetadata.conciergechaturl}}" target="_blank">
+                            <button class="btn drsl-concierge-chat-button" >
+                                <i class="fa fa-weixin" aria-hidden="true"></i>
+                            </button>
+                        </a>
+                    </div>
                 </div>
             </div>
 

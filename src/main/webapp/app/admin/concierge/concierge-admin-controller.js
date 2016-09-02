@@ -5,11 +5,13 @@
 	.module('dorsalApp')
 	.controller('ConciergeAdminController', ConciergeController);
 
-	ConciergeController.$inject = ['$rootScope', '$scope', '$state', 'Principal', '$translate', '$http', 'toastr', 'DrslMetadata', 'GlobalMetadata'];
+	ConciergeController.$inject = ['toastr', 'GlobalMetadata'];
 
-	function ConciergeController($rootScope, $scope, $state, Principal, $translate, $http, toastr, DrslMetadata, GlobalMetadata) {
+	function ConciergeController(toastr, GlobalMetadata) {
 		var vm = this;
 		vm.globalData = {};
+		vm.tosting = false;
+
 		GlobalMetadata.query(function (result) {
 			toObject(result);
 		})
@@ -25,29 +27,33 @@
 		vm.setConcierge = setConcierge;
 
 		function setConcierge() {
+			vm.tosting = false;
+
 			vm.conciergeAvailable.value = vm.setAvailable;
 			if(vm.conciergeAvailableForChat == vm.globalData.conciergeAvailableForChat){
-				GlobalMetadata.update(vm.conciergeAvailableForChat);
+				GlobalMetadata.update(vm.conciergeAvailableForChat, onSaveSuccess, onSaveError);
 			}
 			if(vm.conciergeURL == vm.globalData.conciergeChatUrl){
-				GlobalMetadata.update(vm.conciergeURL);
+				GlobalMetadata.update(vm.conciergeURL, onSaveSuccess, onSaveError);
 			}
 			if(vm.conciergeAvailable == vm.globalData.conciergeAvailable){
-				GlobalMetadata.update(vm.conciergeAvailable);
+				GlobalMetadata.update(vm.conciergeAvailable, onSaveSuccess, onSaveError);
 			}
-			onSaveSuccess();
 		}
 		function onSaveSuccess(results){
-			toastr["success"]("Concierge Information Saved")
+			if(!vm.tosting){
+				vm.tosting = true;
+				toastr["success"]("Concierge Information Saved")
+			}
 		}
 		function onSaveError(results){
 			toastr["error"]("Concierge Information Error")
 		}
 		function isAvailable(){
 			if(vm.conciergeAvailable.value === 'true'){
-				 vm.setAvailable = true;
+				vm.setAvailable = true;
 			} else {
-				 vm.setAvailable = false;
+				vm.setAvailable = false;
 			}
 		}
 	}
