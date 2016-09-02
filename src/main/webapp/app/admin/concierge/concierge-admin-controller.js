@@ -9,32 +9,39 @@
 
 	function ConciergeController($rootScope, $scope, $state, Principal, $translate, $http, toastr, DrslMetadata, GlobalMetadata) {
 		var vm = this;
+		vm.globalData = {};
 		GlobalMetadata.query(function (result) {
 			toObject(result);
 		})
 		function toObject(arr) {
-			var rv = {};
 			for (var i = 0; i < arr.length; ++i){
-				rv[arr[i].name] = arr[i];
+				vm.globalData[arr[i].name] = arr[i];
 			}
-			vm.conciergeAvailableForChat = rv.conciergeAvailableForChat;
-			vm.conciergeURL = rv.conciergeChatUrl;
-			vm.conciergeAvailable = rv.conciergeAvailable;
+			vm.conciergeAvailableForChat = vm.globalData.conciergeAvailableForChat;
+			vm.conciergeURL = vm.globalData.conciergeChatUrl;
+			vm.conciergeAvailable = vm.globalData.conciergeAvailable;
 			isAvailable();
 		}
 		vm.setConcierge = setConcierge;
 
-		function setConcierge(){
+		function setConcierge() {
 			vm.conciergeAvailable.value = vm.setAvailable;
-			GlobalMetadata.update(vm.conciergeAvailableForChat, onSaveSuccess, onSaveError)
-			GlobalMetadata.update(vm.conciergeURL, onSaveSuccess, onSaveError)
-			GlobalMetadata.update(vm.conciergeAvailable, onSaveSuccess, onSaveError)
+			if(vm.conciergeAvailableForChat == vm.globalData.conciergeAvailableForChat){
+				GlobalMetadata.update(vm.conciergeAvailableForChat);
+			}
+			if(vm.conciergeURL == vm.globalData.conciergeChatUrl){
+				GlobalMetadata.update(vm.conciergeURL);
+			}
+			if(vm.conciergeAvailable == vm.globalData.conciergeAvailable){
+				GlobalMetadata.update(vm.conciergeAvailable);
+			}
+			onSaveSuccess();
 		}
 		function onSaveSuccess(results){
-			console.log(results);
+			toastr["success"]("Concierge Information Saved")
 		}
 		function onSaveError(results){
-			console.log(results);
+			toastr["error"]("Concierge Information Error")
 		}
 		function isAvailable(){
 			if(vm.conciergeAvailable.value === 'true'){

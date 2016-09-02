@@ -104,7 +104,6 @@
         }
         function updateUser() {
             Auth.updateAccount(vm.settingsAccount).then(function () {
-                console.log("ACCOUNT UPDATING");
                 vm.error = null;
                 vm.success = 'OK';
                 if (!vm.updatingExpert) {
