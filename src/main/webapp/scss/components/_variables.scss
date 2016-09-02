@@ -46,7 +46,7 @@ $custom-button-line-height: .95em;
 Colors
 ========================================================================== */
 // Brand Colors ***************************
-$brand-color: #F48B3D;
+$brand-color: #ff8600;
 
 // Background Colors **********************
 $background-color: #fff;
@@ -56,8 +56,8 @@ $modal-content-background: rgba(255, 255, 255, .90);
 $form-field-background-color: #DBDBDB;
 $form-field-readonly-background: #fff;
 $content-background-color: $background-color;
-$primary-button-background-color: #B0AFB4;
-$content-container-color: #E5E5E5;
+$primary-button-background-color: #b5b2b1;
+$content-container-color: #DDDCDB;
 $row-highlight-color: #E5E5E5;
 $home-additional-info-background-color: #fff;
 
@@ -79,21 +79,21 @@ $nav-text-color: #DDDCDB;
 $nav-text-active-color: #FFF;
 $nav-text-hover-color: #000;
 $inverted-heading-text-color: #fff;
-$inverted-heading-right-text-color: #838584;
-$sub-header-text-color: #F5F1EE;
+$inverted-heading-right-text-color: #858483;
+$sub-header-text-color: #f5f3f2;
 $inactive-text-color: #c0c0c0;
 $custom-button-text-color: #fff;
-$form-field-placeholder-color: #F8F8F8;
+$form-field-placeholder-color: #f5f3f2;
 $drsl-label-color: #999999;
 $drsl-value-color: #1a1a1a;
-$home-additional-info-heading-color: #666666;
-$custom-input-unit-color: #ac9999;
+$home-additional-info-heading-color: #666464;
+$custom-input-unit-color: #858483;
 $invalid-text-color: #FF0000;
 $search-input-text-color: $nav-text-active-color;
 $action-bar-text-color: #fff;
 // Home/Landing
 $home-main-header-text-color: rgb(25%, 25%, 25%);
-$home-additional-info-text-color: #9A9798;
+$home-additional-info-text-color: #999796;
 // Date Picker
 $date-picker-selected-day-text-color: #fff;
 // Account Activation
@@ -102,9 +102,9 @@ $account-activation-link-text-color: #fff;
 
 // Border Colors **************************
 $form-field-border-color: #CCC;
-$custom-radio-border-color: #B0AFB4;
-$primary-button-border-color: #9C9FA3;
-$brand-border-color: #E58C38;
+$custom-radio-border-color: #999796;
+$primary-button-border-color: #999796;
+$brand-border-color: $brand-color;
 $photo-border-color: #fff;
 $horizontal-separator-color: #E2E2E2;
 $empty-box-border-color: #E5E5E5;
@@ -116,9 +116,9 @@ $home-additional-info-border-color: #DCDCDC;
 // Case Summary
 $case-summary-updates-separator-color: #1a1a1a;
 // Account Password
-$account-password-box-border-color: #D8D8D8;
+$account-password-box-border-color: #DDDCDB;
 // Account Activation
-$account-activation-main-border-color: #d6e9c6;
+$account-activation-main-border-color: #DDDCDB;
 
 // Shadow Colors **************************
 $content-box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
