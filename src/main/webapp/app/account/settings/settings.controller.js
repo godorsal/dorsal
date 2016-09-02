@@ -26,6 +26,7 @@
         vm.addAuthorizedUser = addAuthorizedUser;
         vm.removeAuthorizedUsers = removeAuthorizedUsers;
         vm.removeInvitedUsers = removeInvitedUsers;
+        vm.updateUser = updateUser;
         vm.authorizedUser = '';
         vm.number = 0;
         vm.isExpert = false;
@@ -103,7 +104,9 @@
         }
         function updateUser() {
             Auth.updateAccount(vm.settingsAccount).then(function () {
+                console.log("ACCOUNT UPDATING");
                 vm.error = null;
+                vm.success = 'OK';
                 if (!vm.updatingExpert) {
                     toastr["success"]("User Info Saved")
                 }
@@ -120,6 +123,7 @@
                 }
             }).catch(function () {
                 vm.success = null;
+                vm.error = 'ERROR';
                 toastr["error"]("Saving Error")
             });
         }

@@ -5,7 +5,8 @@
             "createCase": "Create your case",
             "incident": "Incident Support",
             "proActive": "pro-active support",
-            "onDemand": "on-demand pros"
+            "onDemand": "on-demand pros",
+            "chatWithExpert": "Chat With an Expert: {{concierge}}"
         },
         "chat": {
             "header": "Concierge Chat",

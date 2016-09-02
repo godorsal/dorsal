@@ -17,7 +17,9 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/admin/concierge/conciergeAdmin.html'
+                    templateUrl: 'app/admin/concierge/conciergeAdmin.html',
+					controller: 'ConciergeAdminController',
+                    controllerAs: 'vm'
                 }
             },
             resolve: {

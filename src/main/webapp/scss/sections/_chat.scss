@@ -4,7 +4,7 @@ Chat
 
 // Chat Admin Interface *******************
 .drsl-chat-rooms-admin {
-    margin-top: 100px;
+    // margin-top: 100px;
 
     .drsl-chat-accord {
         width: 570px;
@@ -24,7 +24,19 @@ Chat
         min-width: 570px;
     }
 }
-
+.drsl-set-concierge-box{
+    background: #fff;
+    padding: 15px;
+    height: 200px;
+    margin-bottom: 20px;
+    display: inline-block;
+    float: left;
+    width: 100%;
+    .btn {
+        float: right;
+        margin: 10px;
+    }
+}
 // Shared Chat Styles *********************
 .drsl-chat-rooms-admin, .drsl-chat-section {
     .chat {

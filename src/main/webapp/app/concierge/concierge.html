@@ -8,7 +8,13 @@
                     <span translate="concierge.pageTitles.createCase"></span>
                 </div>
                 <div>
-                    <!-- Sub Head place holder -->
+                    <span ng-if="vm.DrslMetadata.conciergeavailable === 'true'" class="drsl-chat-with-expert" translate="concierge.pageTitles.chatWithExpert" translate-values="{concierge: '{{vm.DrslMetadata.conciergeavailableforchat}}'}">
+                    </span>
+                    <a href="{{vm.DrslMetadata.conciergechaturl}}" target="_blank">
+                        <button class="btn drsl-concierge-chat-button" >
+                            <i class="fa fa-weixin" aria-hidden="true"></i>
+                        </button>
+                    </a>
                 </div>
             </div>
 
@@ -52,11 +58,11 @@
                 <div class="drsl-case-inputs">
                     <!-- Radio Buttons -->
                     <linear-radio target-data="radio.selectedValue"
-                                  radio-data="radio"
-                                  start-limit="15"
-                                  ng-repeat="radio in vm.caseDetails.radios"
-                                  technology-properties="vm.technologyProperties"
-                                  technology="vm.technology" issue="vm.issue"></linear-radio>
+                    radio-data="radio"
+                    start-limit="15"
+                    ng-repeat="radio in vm.caseDetails.radios"
+                    technology-properties="vm.technologyProperties"
+                    technology="vm.technology" issue="vm.issue"></linear-radio>
 
                     <!-- Summary -->
                     <div class="drsl-field-seciton">

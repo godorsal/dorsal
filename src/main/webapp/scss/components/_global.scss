@@ -93,6 +93,51 @@ body {
     .drsl-understated {
         color: $inverted-heading-right-text-color;
     }
+    .drsl-chat-with-expert {
+        font-weight: 100;
+        text-transform: none;
+        color: white;
+    }
+    .drsl-concierge-chat-button {
+        background: green;
+        border: green;
+        color: white;
+    }
+
+}
+
+.drsl-placeholder-label {
+    position: relative;
+    padding: 10px;
+    .drsl-already-activated-input {
+        width: 1151px;
+    }
+    input[type="text"] {
+        padding: $default-half-padding 95px $default-half-padding $default-half-padding;
+        border: 1px solid $form-field-border-color;
+        border-radius: 4px;
+        height: 32px;
+        box-shadow: $custom-input-shadow;
+    }
+    input[type="checkbox"] {
+        display: inline-block;
+    }
+
+    .drsl-unit {
+        position: absolute;
+        display: block;
+        right: 14px;
+        top: 17px;
+        z-index: 1;
+        color: $custom-input-unit-color;
+    }
+    .drsl-checkbox-unit{
+        color: $custom-input-unit-color;
+        display: inline-block;
+    }
+    .drsl-select {
+        padding-right: 15px;
+    }
 }
 
 .drsl-button-wrapper {
