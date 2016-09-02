@@ -13,12 +13,12 @@
                 <form ng-submit="">
                     <div class="drsl-attachment-items-wrapper">
                         <div class="drsl-attachment-item" ng-class-odd="'drsl-attachment-item-odd'" ng-repeat="file in attachFileList">
-                            <span>{{file.name}}</span>
                             <span class="pull-right">
                                 <drsl-download-file file="file"></drsl-download-file>
                                 <span ng-show="file.dataStream && isNotMS" class="drsl-attachment-control" translate="entity.action.view" ng-click="viewAttachment(file);">view</span>
                                 <span class="drsl-attachment-control" translate="entity.action.delete" ng-click="removeAttachment($index);">remove</span>
                             </span>
+                            <span>{{file.name}}</span>
                         </div>
                     </div>
                     <div class="drsl-pending-attachments-message" ng-show="pending" translate="global.messages.info.pending" translate-values="{attachments: '{{pendingAttachments.length}}'}">
