@@ -1,2 +1,29 @@
-<link rel="stylesheet" href="content/css/main.css">
-<chatrooms></chatrooms>
+<div class="container drsl-chat-rooms-admin">
+	<div>
+		<acme-navbar creation-date="main.creationDate"></acme-navbar>
+	</div>
+	<div class="admin-header">
+		<div class="container no-padding drsl-sub-header">
+			<div class="col-md-6 col-sm-4">
+				<h3>
+					<span>Set Concierge User</span>
+				</h3>
+			</div>
+		</div>
+	</div>
+	<div class="container grid-container no-padding drsl-set-concierge-box">
+		<div class="drsl-placeholder-label" type="text">
+			<input type="text"  ng-if="vm.conciergeAvailableForChat" ng-model="vm.conciergeAvailableForChat.value" class="form-control" id="ConciergeName">
+			<span class="drsl-unit">(Concierge Name)</span>
+		</div>
+		<div class="drsl-placeholder-label" type="text">
+			<input type="text" ng-model="vm.conciergeURL.value" class="form-control" id="ConciergeUrl">
+			<span class="drsl-unit">(Concierge URL)</span>
+		</div>
+		<div class="drsl-placeholder-label">
+			<input type="checkbox" class="checkbox" id="ConciergeActive" ng-model="vm.setAvailable">
+			<span class="drsl-checkbox-unit">(Concierge Chat Active)</span>
+		</div>
+		<button class="btn btn-success" ng-click="vm.setConcierge()">Set Concierge</button>
+	</div>
+</div>
