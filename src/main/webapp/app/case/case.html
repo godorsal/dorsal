@@ -83,7 +83,7 @@
 
             <!-- Listing -->
             <div class="drsl-case-history-wrapper">
-                <div class="panel panel-default" ng-repeat="case in vm.supportcases | orderBy:'-case.lastUpdated'">
+                <div class="panel panel-default" ng-repeat="case in vm.supportcases">
                     <div class="panel-heading" ng-class="{active: vm.currentCase == case}" ng-click="vm.setCurrentCase(case);">
                         <h4 class="panel-title">
                             <div class="drsl-case-list">
