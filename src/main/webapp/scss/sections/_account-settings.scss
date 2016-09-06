@@ -11,6 +11,7 @@ Account Settings
 
     .drsl-placeholder-label {
         position: relative;
+        padding: 0;
 
         .drsl-already-activated-input {
             width: 1151px;
@@ -351,7 +352,7 @@ Account Settings
 
             > div {
                 .drsl-visibility {
-                    padding-left: 21px;
+                    padding-left: 0;
                     width: 288px;
 
                     .privacySelect {

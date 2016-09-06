@@ -182,15 +182,15 @@ Your e-mail cannot be longer than 100 characters.
         <div>
             <div>
                 <span translate="settings.form.expertScore">Expert Score:</span> {{ 'global.messages.info.expertScoreOutOf' | translate:'{score: '+ (((vm.currentExpert.expertScore / vm.currentExpert.numberOfCases) | number:0) || 0) + '}' }}
-
             </div>
-            <div class="drsl-visibility">
-                <label for="field_profileVisibility" class="drsl-profile-visibility-label">Profile Visibility:</label>
-                <select class="form-control privacySelect" name="profileVisibility" ng-model="vm.currentExpert.profileVisibility" id="field_profileVisibility" ng-change="vm.updatingExpert = true">
+            <div>
+                <div class="drsl-visibility">
+                    <label for="field_profileVisibility" class="drsl-profile-visibility-label">Profile Visibility:</label><select class="form-control privacySelect" name="profileVisibility" ng-model="vm.currentExpert.profileVisibility" id="field_profileVisibility" ng-change="vm.updatingExpert = true">
                     <option value="PUBLIC">Public</option>
                     <option value="INTERN">Intern</option>
                     <option value="HIDDEN">Hidden</option>
                 </select>
+                </div>
             </div>
         </div>
         <br>
