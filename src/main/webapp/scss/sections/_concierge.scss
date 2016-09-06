@@ -251,3 +251,27 @@ Concierge
         }
     }
 }
+
+.drsl-case-intake-view {
+    .drsl-sub-header {
+        > div:first-child {
+            flex: 1;
+        }
+
+        > div:last-child {
+            flex: 1;
+        }
+
+        .drsl-chat-with-expert {
+            font-weight: 100;
+            text-transform: none;
+            color: $inverted-heading-text-color;
+        }
+
+        .drsl-concierge-chat-button {
+            background: $drsl-concierge-chat-button-color;
+            border: $drsl-concierge-chat-button-color;
+            color: $custom-button-text-color;
+        }
+    }
+}
