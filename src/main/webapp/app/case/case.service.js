@@ -71,6 +71,8 @@
 
                 if (dataType === 'badges') {
                     dataOut[dataToTypes[i]] = entityData[i].sort(sortBadges);
+                } else if (dataType === 'supportCase') {
+                    dataOut[dataToTypes[i]] = entityData[i].sort(sortCases);
                 } else {
                     dataOut[dataToTypes[i]] = entityData[i];
                 }
@@ -78,6 +80,25 @@
             }
 
             return dataOut;
+        }
+
+        function sortCases(a, b) {
+            return getDateMilliseconds(b) - getDateMilliseconds(a);
+        }
+
+        function getDateMilliseconds(suppportCase) {
+            var date = 0;
+
+            if (suppportCase) {
+                var dateCreated = suppportCase.dateCreated.replace(/[A-Z]/gi, ' '),
+                    dateParts = dateCreated.split('-'),
+                    timeParts = dateCreated.split(' ')[1].split(':'),
+                    secondParts = timeParts[2].split('.');
+
+                date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2].split(' ')[0], timeParts[0], timeParts[1], secondParts[0]);
+            }
+
+            return date.valueOf();
         }
 
         function sortBadges(a, b) {

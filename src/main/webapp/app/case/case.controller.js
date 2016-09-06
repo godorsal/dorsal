@@ -61,7 +61,7 @@
                 if (data.supportCase.length < 1) {
                     $state.go('concierge')
                 } else {
-                    vm.supportcases = data.supportCase.reverse();
+                    vm.supportcases = data.supportCase;
 
                     if (vm.currentCase && vm.currentCase.id){
                         for (i=0; i<vm.supportcases.length; i++) {
