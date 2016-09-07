@@ -201,6 +201,7 @@
             if (targetCase.estimateLog) {
                 vm.estimateLogs = targetCase.estimateLog.split('##');
                 vm.estimateLogs.pop();
+                vm.estimateLogs = vm.estimateLogs.reverse();
             }
             getCaseExpertBadges();
             getCaseUpdates();
@@ -374,10 +375,11 @@
                 var modalInstance = CaseAgreementService.open(vm.currentCase, vm.currentCase.expert);
 
                 modalInstance.result.then(function () {
+                    var logDate = $filter('date')(new Date(), 'MMM dd, yyyy HH:mm');
                     vm.currentCase.isApproved = true;
                     vm.currentCase.status = StatusModel.getState('working');
                     vm.currentCase.estimateLog = (vm.currentCase.estimateLog) ? vm.currentCase.estimateLog : '';
-                    vm.currentCase.estimateLog += 'ACCEPTED ' + $filter('date')(new Date(), 'MMM dd, yyyy HH:MM') + ' – ' + vm.currentCase.estimateHours +  'hrs ' + vm.currentCase.estimateComment + '##';
+                    vm.currentCase.estimateLog += 'ACCEPTED ' + logDate + ' – ' + vm.currentCase.estimateHours +  'hrs ' + vm.currentCase.estimateComment + '##';
                     vm.currentCase.$update();
                 });
 
