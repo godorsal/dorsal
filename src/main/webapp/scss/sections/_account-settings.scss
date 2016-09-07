@@ -18,7 +18,7 @@ Account Settings
         }
 
         input {
-            padding: $default-half-padding 95px $default-half-padding $default-half-padding;
+            padding: 5px 95px 5px $default-half-padding;
             border: 1px solid $form-field-border-color;
             border-radius: 4px;
             height: 32px;
@@ -79,8 +79,10 @@ Account Settings
     }
 
     .drsl-update-user-button {
+        position: absolute;
         float: right;
-        margin-top: 63px;
+        left: 490px;
+        bottom: 30px;
     }
 
     .drsl-authorized-credit-card {
@@ -195,6 +197,7 @@ Account Settings
 
             .btn {
                 margin-left: $default-half-padding;
+                margin-bottom: 1px;
             }
         }
 
