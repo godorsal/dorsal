@@ -372,11 +372,10 @@
         */
         function openCaseAgreement() {
             if (!vm.isCaseExpert()){
-                var logDate = $filter('date')(new Date(), 'MMM dd, yyyy HH:mm');
-
                 var modalInstance = CaseAgreementService.open(vm.currentCase, vm.currentCase.expert);
 
                 modalInstance.result.then(function () {
+                    var logDate = $filter('date')(new Date(), 'MMM dd, yyyy HH:mm');
                     vm.currentCase.isApproved = true;
                     vm.currentCase.status = StatusModel.getState('working');
                     vm.currentCase.estimateLog = (vm.currentCase.estimateLog) ? vm.currentCase.estimateLog : '';
