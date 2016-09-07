@@ -198,7 +198,7 @@
         function setCurrentCase(targetCase) {
             vm.currentCase = targetCase;
             vm.estimateLogs = [];
-            if (targetCase.estimateLog) {
+            if (targetCase.estimateLog.replace(/(?:\r\n|\r|\n)/g, '<br />')) {
                 vm.estimateLogs = targetCase.estimateLog.split('##');
                 vm.estimateLogs.pop();
                 vm.estimateLogs = vm.estimateLogs.reverse();

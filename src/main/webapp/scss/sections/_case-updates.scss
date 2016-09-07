@@ -54,6 +54,7 @@ Case Updates
             .drsl-logs-tdata {
                 @extend .drsl-updates-content;
                 width: 300px;
+                white-space: pre;
             }
         }
     }
