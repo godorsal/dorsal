@@ -96,62 +96,22 @@ Global Widgets
     height: 75px;
     display: inline-block;
     $pos-width: 75px;
-    $pos-x: 0px;
+    $pos-x: 75px;
     $pos-y: 0px;
+    $pos-y-selected: -75px;
 
-    &.badge-1 {
-        background-position: 0 0;
+    @mixin selected-badge() {
+        &.selected {
+            background-position: $pos-x $pos-y-selected;
+        }
     }
-    &.badge-2 {
-        $pos-x: ($pos-x - $pos-width);
-        background-position: $pos-x $pos-y;
-    }
-    &.badge-3 {
-        $pos-x: ($pos-x - $pos-width);
-        background-position: $pos-x $pos-y;
-    }
-    &.badge-4 {
-        $pos-x: ($pos-x - $pos-width);
-        background-position: $pos-x $pos-y;
-    }
-    &.badge-5 {
-        $pos-x: ($pos-x - $pos-width);
-        background-position: $pos-x $pos-y;
-    }
-    &.badge-6 {
-        $pos-x: ($pos-x - $pos-width);
-        background-position: $pos-x $pos-y;
-    }
-    &.badge-7 {
-        $pos-x: ($pos-x - $pos-width);
-        background-position: $pos-x $pos-y;
-    }
-    &.badge-8 {
-        $pos-x: ($pos-x - $pos-width);
-        background-position: $pos-x $pos-y;
-    }
-    &.badge-9 {
-        $pos-x: ($pos-x - $pos-width);
-        background-position: $pos-x $pos-y;
-    }
-    &.badge-10 {
-        $pos-x: ($pos-x - $pos-width);
-        background-position: $pos-x $pos-y;
-    }
-    &.badge-11 {
-        $pos-x: ($pos-x - $pos-width);
-        background-position: $pos-x $pos-y;
-    }
-    &.badge-12 {
-        $pos-x: ($pos-x - $pos-width);
-        background-position: $pos-x $pos-y;
-    }
-    &.badge-13 {
-        $pos-x: ($pos-x - $pos-width);
-        background-position: $pos-x $pos-y;
-    }
-    &.selected {
-        background-position-y: -75px;
+
+    @for $i from 1 through 13 {
+        &.badge-#{$i} {
+            $pos-x: ($pos-x - $pos-width);
+            background-position: $pos-x $pos-y;
+            @include selected-badge();
+        }
     }
 }
 
