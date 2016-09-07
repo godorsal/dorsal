@@ -13,7 +13,7 @@
 	</div>
 	<div class="container grid-container no-padding drsl-set-concierge-box">
 		<div class="drsl-placeholder-label" type="text">
-			<input type="text"  ng-model="vm.conciergeAvailableForChat.value" class="form-control" id="ConciergeName">
+			<input type="text" ng-if="vm.conciergeAvailableForChat" ng-model="vm.conciergeAvailableForChat.value" class="form-control" id="ConciergeName">
 			<span class="drsl-unit">(Concierge Name)</span>
 		</div>
 		<div class="drsl-placeholder-label" type="text">
