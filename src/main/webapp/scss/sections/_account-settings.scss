@@ -25,9 +25,7 @@ Account Settings
             width: 532px;
             box-shadow: $custom-input-shadow;
         }
-        input::-ms-clear {
-            display: none;
-        }
+
         .drsl-unit {
             position: absolute;
             display: block;
@@ -195,7 +193,6 @@ Account Settings
 
             .btn {
                 margin-left: $default-half-padding;
-                margin-bottom: 2px;
             }
         }
 
@@ -240,7 +237,6 @@ Account Settings
             }
         }
     }
-
     .drsl-active-user-managment {
         width: 586px;
         height: 500px;
