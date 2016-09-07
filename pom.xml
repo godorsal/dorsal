@@ -11,7 +11,7 @@
 
     <groupId>com.dorsal</groupId>
     <artifactId>dorsal</artifactId>
-	<version>1.0.2</version>
+	<version>1.0.3-snapshot</version>
     <packaging>war</packaging>
     <name>dorsal</name>
 
