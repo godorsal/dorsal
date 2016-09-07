@@ -111,7 +111,9 @@ body {
     input[type="checkbox"] {
         display: inline-block;
     }
-
+    input::-ms-clear {
+        display: none;
+    }
     .drsl-unit {
         position: absolute;
         display: block;

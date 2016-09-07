@@ -25,7 +25,9 @@ Account Settings
             width: 532px;
             box-shadow: $custom-input-shadow;
         }
-
+        input::-ms-clear {
+            display: none;
+        }
         .drsl-unit {
             position: absolute;
             display: block;
