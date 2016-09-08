@@ -42,7 +42,9 @@
                 vm.otherLink = othercommunication[0];
                 vm.otherTitle = othercommunication[1];
                 if(vm.currentExpert.numberOfCases > 0){
-                    vm.currentExpert.expertScore = vm.currentExpert.expertScore / vm.currentExpert.numberOfCases;
+                    vm.displayedExpertScore = Math.round(vm.currentExpert.expertScore / vm.currentExpert.numberOfCases);
+                } else {
+                    vm.displayedExpertScore = vm.currentExpert.expertScore;
                 }
             }
         });
