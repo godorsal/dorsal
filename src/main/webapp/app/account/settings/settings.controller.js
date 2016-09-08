@@ -41,6 +41,9 @@
                 var othercommunication = vm.currentExpert.othercommunication.split(',');
                 vm.otherLink = othercommunication[0];
                 vm.otherTitle = othercommunication[1];
+                if(vm.currentExpert.numberOfCases > 0){
+                    vm.currentExpert.expertScore = vm.currentExpert.expertScore / vm.currentExpert.numberOfCases;
+                }
             }
         });
         Payment.query(function(result){
