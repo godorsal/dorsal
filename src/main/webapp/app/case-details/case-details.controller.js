@@ -34,7 +34,6 @@
             vm.estimateLogs = vm.case.estimateLog.split('##');
             vm.estimateLogs.pop();
             vm.estimateLogs = vm.estimateLogs.reverse();
-            console.log(vm.estimateLogs);
         }
         getCurrentUser()
 
