@@ -51,7 +51,6 @@
                 } else if (!scope.expertForm.estimateHours.$pristine && scope.localEstimateHours !== scope.case.estimateHours) {
                     scope.case.isApproved = false;
                     scope.case.estimateHours = scope.localEstimateHours;
-                    // scope.case.estimateLog += 'UPDATED ' + logDate + '<br />' + scope.case.expectedResult + ' – ' + scope.case.estimateHours +  ' hrs ' + scope.case.estimateComment + '##';
                     scope.case.estimateLog += 'UPDATED: ' + logDate + '\n' + 'OUTCOME: ' + scope.case.expectedResult + '\n' + 'ESTIMATE: ' + scope.case.estimateHours +  'hrs' + '\n' + 'COMMENT: ' + scope.case.estimateComment + '##';
 
                 }
