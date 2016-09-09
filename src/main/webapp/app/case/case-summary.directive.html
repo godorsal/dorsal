@@ -15,7 +15,7 @@
         <div>
             <span ng-show="DrslMetadata.demoModeEnabled" class="drsl-label" translate="case.details.status.main" ng-click="cycleStatus()">Status</span>
             <span ng-hide="DrslMetadata.demoModeEnabled" class="drsl-label" translate="case.details.status.main">Status</span>
-            <span>
+            <span ng-show="case">
                 <span class="drsl-value">{{'case.details.status.' + case.status.name.toLowerCase() + '.info' | translate}}</span>
                 <div class="drsl-summary-attachment-wrapper">
                     <drsl-attach-files hide-buttons="true" hide-controls="true" hide-tooltip="true" case-id="{{case.id}}" auto-close="outside"></drsl-attach-files>
@@ -35,7 +35,7 @@
     <div>
         <span>
             <span class="drsl-label" translate="case.details.estimate">Estimate</span>
-            <span class="drsl-value"><case-estimate hours="{{case.estimateHours}}"></case-estimate></span>
+            <span class="drsl-value" ng-show="case"><case-estimate hours="{{case.estimateHours}}"></case-estimate></span>
         </span>
         <div class="pull-right drsl-value"><span class="drsl-label" translate="case.details.requestedDate">Requested Delivery</span><span class="drsl-eta-date"> {{case.expectedCompletionDate | date:'MMM dd, yyyy'}}</span></div>
     </div>

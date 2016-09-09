@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'DrslMetadata'];
+    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'DrslMetadata', 'DrslUserFlowService'];
 
-    function LoginController ($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, DrslMetadata) {
+    function LoginController ($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, DrslMetadata, DrslUserFlowService) {
         var vm = this;
 
         vm.authenticationError = false;
@@ -60,14 +60,7 @@
                 }
 
                 $rootScope.$broadcast('authenticationSuccess');
-
-                // previousState was set in the authExpiredInterceptor before being redirected to login modal.
-                // since login is succesful, go to stored previousState and clear previousState
-                if (Auth.getPreviousState()) {
-                    var previousState = Auth.getPreviousState();
-                    Auth.resetPreviousState();
-                    $state.go(previousState.name, previousState.params);
-                }
+                DrslUserFlowService.handleUserFlow('login');
             }).catch(function () {
                 vm.authenticationError = true;
             });
