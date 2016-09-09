@@ -5,9 +5,10 @@
     .module('dorsalApp')
     .controller('CaseController', CaseController);
 
-    CaseController.$inject = ['$scope', '$window', '$interval', '$timeout', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', '$state', 'StatusModel', 'Rating', 'Expertbadge', 'DrslMetadata', 'Caseupdate', 'AttachmentModalService', 'DrslAttachFileService', 'DrslNewCaseService', '$filter', '_'];
+    CaseController.$inject = ['$scope', '$window', '$interval', '$timeout', 'CaseService', 'DrslRatingService', 'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', '$state', 'StatusModel', 'Rating', 'Expertbadge', 'DrslMetadata', 'Caseupdate', 'AttachmentModalService', 'DrslAttachFileService', 'DrslNewCaseService', '$filter', '_', 'DrslUserFlowService'];
 
-    function CaseController($scope, $window, $interval, $timeout, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, $state, StatusModel, Rating, Expertbadge, DrslMetadata, Caseupdate, AttachmentModalService, DrslAttachFileService, DrslNewCaseService, $filter, _) {
+    function CaseController($scope, $window, $interval, $timeout, CaseService, DrslRatingService, CaseDetailsService, EscalationFormService, ShareCaseService, CaseAgreementService, $state, StatusModel, Rating, Expertbadge, DrslMetadata, Caseupdate, AttachmentModalService, DrslAttachFileService, DrslNewCaseService, $filter, _, DrslUserFlowService) {
+        DrslUserFlowService.handleUserFlow();
 
         var vm = this, casePoll;
         vm.init = init;
@@ -58,27 +59,24 @@
                 if (data.badges) {
                     vm.badges = data.badges;
                 }
-                if (data.supportCase.length < 1) {
-                    $state.go('concierge')
-                } else {
-                    vm.supportcases = data.supportCase;
 
-                    if (vm.currentCase && vm.currentCase.id){
-                        for (i=0; i<vm.supportcases.length; i++) {
-                            if (vm.currentCase.id === vm.supportcases[i].id) {
-                                currentCaseIndex = i;
-                                break;
-                            }
+                vm.supportcases = data.supportCase;
+
+                if (vm.currentCase && vm.currentCase.id){
+                    for (i=0; i<vm.supportcases.length; i++) {
+                        if (vm.currentCase.id === vm.supportcases[i].id) {
+                            currentCaseIndex = i;
+                            break;
                         }
                     }
-
-                    vm.setCurrentCase(vm.supportcases[currentCaseIndex]);
                 }
+
+                vm.setCurrentCase(vm.supportcases[currentCaseIndex]);
 
                 if (data.identity) {
                     vm.currentUser = data.identity;
                 }
-                if(vm.currentCase.user.login === vm.currentUser.login){
+                if(vm.currentCase && vm.currentCase.user.login === vm.currentUser.login){
                     vm.isCreator = true;
                     vm.shareMessage = "share this case";
                 } else {
@@ -135,7 +133,7 @@
         }
 
         function getCaseExpertBadges() {
-            if (vm.currentCase.expertaccount && vm.currentCase.expertaccount.id) {
+            if (vm.currentCase && vm.currentCase.expertaccount && vm.currentCase.expertaccount.id) {
                 CaseService.getExpertBadges(vm.currentCase.expertaccount.id).then(function (data) {
                     vm.expertBadges = data.badges;
                     vm.expertBadgeResources = data.expertBadgeResources;
@@ -198,16 +196,19 @@
         function setCurrentCase(targetCase) {
             vm.currentCase = targetCase;
             vm.estimateLogs = [];
-            if (targetCase.estimateLog) {
+            if (targetCase && targetCase.estimateLog) {
                 vm.estimateLogs = targetCase.estimateLog.split('##');
                 vm.estimateLogs.pop();
                 vm.estimateLogs = vm.estimateLogs.reverse();
             }
             getCaseExpertBadges();
             getCaseUpdates();
-            $timeout(function () {
-                $scope.$broadcast('currentCaseSet');
-            }, 1);
+
+            if (targetCase) {
+                $timeout(function () {
+                    $scope.$broadcast('currentCaseSet');
+                }, 1);
+            }
         }
 
         /**
@@ -399,7 +400,7 @@
         * @returns {boolean}
         */
         function passedStep(step) {
-            var stepIndex = StatusModel.getStatusIndex(vm.currentCase.status);
+            var stepIndex = (vm.currentCase)? StatusModel.getStatusIndex(vm.currentCase.status) : -1;
 
             return (step <= stepIndex );
         }

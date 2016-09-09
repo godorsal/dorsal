@@ -5,11 +5,12 @@
     .module('dorsalApp')
     .controller('SettingsController', SettingsController);
 
-    SettingsController.$inject = ['Principal', 'Auth', 'JhiLanguageService', '$translate', 'Payment', 'Groupaccess', 'Useraccount', 'User', 'Focus', 'Register', 'toastr', 'ExpertAccount', 'Issue', 'Technology', '_', '$state'];
+    SettingsController.$inject = ['Principal', 'Auth', 'JhiLanguageService', '$translate', 'Payment', 'Groupaccess', 'Useraccount', 'User', 'Focus', 'Register', 'toastr', 'ExpertAccount', 'Issue', 'Technology', '_', '$state', 'DrslUserFlowService'];
 
-    function SettingsController(Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, Useraccount, User, focus, Register, toastr, ExpertAccount, Issue, Technology, _, $state) {
+    function SettingsController(Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, Useraccount, User, focus, Register, toastr, ExpertAccount, Issue, Technology, _, $state, DrslUserFlowService) {
+        DrslUserFlowService.handleUserFlow();
+
         var vm = this;
-
         vm.error = null;
         vm.save = save;
         vm.addCard = addCard;
