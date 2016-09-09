@@ -5,33 +5,18 @@
     .module('dorsalApp')
     .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state'];
+    HomeController.$inject = ['$scope', 'LoginService', '$state', 'DrslUserFlowService'];
 
-    function HomeController ($scope, Principal, LoginService, $state) {
+    function HomeController ($scope, LoginService, $state, DrslUserFlowService) {
+        DrslUserFlowService.handleUserFlow();
+
         var vm = this;
-
         vm.account = null;
         vm.isAuthenticated = null;
         vm.login = LoginService.open;
         vm.register = register;
         vm.concierge = concierge;
-        $scope.$on('authenticationSuccess', function() {
-            getAccount();
-        });
 
-        getAccount();
-
-        function getAccount() {
-            Principal.identity().then(function(account) {
-                vm.account = account;
-                vm.isAuthenticated = Principal.isAuthenticated;
-                if(vm.account && !vm.account.firstName && !vm.account.lastName.length){
-                    $state.go('settings')
-                } else if(vm.account){
-                    $state.go('case')
-                }
-            });
-        }
         function register () {
             $state.go('register');
         }

@@ -242,3 +242,7 @@ Date Picker
         border-color: $brand-color;
     }
 }
+
+#toast-container > .toast.drsl-user-flow-toast.toast-success {
+    background-color: $brand-color;
+}

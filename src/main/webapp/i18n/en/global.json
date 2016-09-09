@@ -83,7 +83,9 @@
                 "uploadingFiles": "Uploading {{fileCount}} file(s), please wait.",
                 "filesUploaded": "File upload complete.",
                 "expertScoreOutOf": "{{score}} out of 100",
-                "pending":"You still have {{attachments}} pending attachments. <br/> Press Later to dismiss or Done to upload."
+                "pending":"You still have {{attachments}} pending attachments. <br/> Press Later to dismiss or Done to upload.",
+                "missingDetails":"We need some additional details for your account",
+                "missingDetailsWithLink":"We need some additional details for your account: click to view User Settings"
             },
             "error": {
                 "dontmatch": "The password and its confirmation do not match!"
