@@ -19,7 +19,7 @@
             isAuthenticated: false,
             hasFirstAndLastName: false,
             isExpert: false,
-            cases: 0,
+            hasCases: false,
             account: null,
             expert: null
         };
@@ -30,11 +30,16 @@
         /**
          * Listen for $stateChangeStart events and redirect the user if necessary.
          */
-        $timeout(function () {
-            $rootScope.$on('$stateChangeStart', function(event, toState) {
-                service.stateChangeDetected = true;
-                service.redirectUser({event: event, toState: toState});
-            });
+        $rootScope.$on('$stateChangeStart', function(event, toState) {
+            service.stateChangeDetected = true;
+            service.redirectUser({event: event, toState: toState});
+        });
+
+        /**
+         * Listen for new cases, so we can update the hasCases boolean
+         */
+        $rootScope.$on('dorsalApp:supportcaseUpdate', function() {
+            service.user.hasCases = true;
         });
 
         /**
@@ -43,7 +48,6 @@
          * @param {string} type An optional string type (eg 'login')
          */
         service.handleUserFlow = function (type) {
-
             // If we already have a user in memory, don't bother to do the queries
             if (service.user.isAuthenticated && service.user.account && type !== 'login'){
                 // Pass the flow to the handoff function
@@ -72,7 +76,7 @@
 
                                 // Query the support cases to see if the user has associated cases
                                 Supportcase.query(function (data) {
-                                    service.user.cases = data.length;
+                                    service.user.hasCases = (data.length > 0)? true: false;
                                     // Pass the flow to the handoff function
                                     service.userFlowHandoff(type);
                                 });
@@ -117,7 +121,7 @@
             } else {
                 // Only redirect the user if they're not already on the concierge page
                 if ($state.current.name !== 'concierge') {
-                    if (service.user.cases > 0) {
+                    if (service.user.hasCases) {
                         toState = 'case';
                     } else {
                         toState = 'concierge';
@@ -148,7 +152,7 @@
                     break;
                 case 'case':
                     // Send non-experts with no cases back to the concierge page
-                    if (!service.user.isExpert && service.user.cases === 0) {
+                    if (!service.user.isExpert && !service.user.hasCases) {
                         toState = 'concierge';
                     }
                     break;
