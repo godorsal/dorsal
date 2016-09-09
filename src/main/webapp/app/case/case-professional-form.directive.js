@@ -46,12 +46,13 @@
                     scope.case.estimateHours = scope.localEstimateHours;
                     if (scope.case.estimateHours) {
                         scope.case.status = StatusModel.getState('estimated');
-                        scope.case.estimateLog += 'CREATED ' + logDate + ' – ' + scope.case.estimateHours +  'hrs ' + scope.case.estimateComment + '##';
+                        scope.case.estimateLog += 'CREATED: ' + logDate + '\n' + 'OUTCOME: ' + scope.case.expectedResult + '\n' + 'ESTIMATE: ' + scope.case.estimateHours +  'hrs ' + '\n' + 'COMMENT: ' + scope.case.estimateComment + '##';
                     }
                 } else if (!scope.expertForm.estimateHours.$pristine && scope.localEstimateHours !== scope.case.estimateHours) {
                     scope.case.isApproved = false;
                     scope.case.estimateHours = scope.localEstimateHours;
-                    scope.case.estimateLog += 'UPDATED ' + logDate + ' – ' + scope.case.estimateHours +  ' hrs ' + scope.case.estimateComment + '##';
+                    scope.case.estimateLog += 'UPDATED: ' + logDate + '\n' + 'OUTCOME: ' + scope.case.expectedResult + '\n' + 'ESTIMATE: ' + scope.case.estimateHours +  'hrs' + '\n' + 'COMMENT: ' + scope.case.estimateComment + '##';
+
                 }
 
                 scope.expertForm.estimateHours.$pristine = true;

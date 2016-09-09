@@ -30,7 +30,7 @@
         vm.errorMissingDescription = $translate.instant('concierge.errors.missing.description');
         vm.errorMissingAll = $translate.instant('concierge.errors.missing.all');
         vm.DrslMetadata = DrslMetadata;
-        
+
         vm.caseDetails = {
             summary: '',
             description: '',
@@ -120,7 +120,6 @@
                     brandNewProperty.technology = vm.technology;
                     brandNewProperty.supportcase = {};
                     brandNewProperty.supportcase.id = result.id;
-                    // brandNewProperty.supportcase = result.id;
                     brandNewProperty.propertyname = key;
                     brandNewProperty.propertyvalue = vm.technologyProperties[key];
                     Casetechnologyproperty.save(brandNewProperty);

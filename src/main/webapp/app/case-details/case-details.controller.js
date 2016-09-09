@@ -32,6 +32,8 @@
         };
         if (vm.case.estimateLog) {
             vm.estimateLogs = vm.case.estimateLog.split('##');
+            vm.estimateLogs.pop();
+            vm.estimateLogs = vm.estimateLogs.reverse();
         }
         getCurrentUser()
 
