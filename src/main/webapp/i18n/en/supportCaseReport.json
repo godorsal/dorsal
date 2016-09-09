@@ -20,7 +20,12 @@
             "datePaid": "Date Paid",
             "comments": "Comments",
             "supportcase": "Supportcase",
-            "rating": "Rating"
+            "id": "Support Case ID",
+            "rating": "Rating",
+            "completedDate": "Completed Date",
+            "comment": "Comment",
+            "expert": "Expert",
+            "user": "User"
         }
     }
 }
