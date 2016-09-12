@@ -62,6 +62,25 @@ Case Share
             margin-right: 7px;
         }
     }
+    table.drsl-share-table-scroll {
+        width: 560px;
+    }
+
+    table.drsl-share-table-scroll tbody {
+        display: block;
+        height: 360px;
+        overflow-y: auto;
+        > tr > td {
+            width: 100%;
+        }
+    }
+
+    table.drsl-share-table-scroll thead > tr {
+        color: $drsl-label-color;
+        display: block;
+        position: relative;
+        > th {
+            width: 100%;
+        }
+    }
 }
-
-
