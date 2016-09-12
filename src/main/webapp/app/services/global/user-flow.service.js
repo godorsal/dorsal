@@ -43,6 +43,17 @@
         });
 
         /**
+         * Listen for user account updates, so we can update the account data
+         */
+        $rootScope.$on('userAccountUpdated', function() {
+            Principal.identity().then(function (account) {
+                // Update the in-memory account data
+                service.user.account = account;
+                service.user.hasFirstAndLastName = (service.user.account.firstName && service.user.account.lastName) ? true : false;
+            });
+        });
+
+        /**
          * Handle User Flow and redirect if necessary.
          * This function is the first to called on all of our main pages and also after a user login.
          * @param {string} type An optional string type (eg 'login')

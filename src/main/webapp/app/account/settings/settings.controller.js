@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('SettingsController', SettingsController);
 
-    SettingsController.$inject = ['Principal', 'Auth', 'JhiLanguageService', '$translate', 'Payment', 'Groupaccess', 'Useraccount', 'User', 'Focus', 'Register', 'toastr', 'ExpertAccount', 'Issue', 'Technology', '_', '$state', 'DrslUserFlowService'];
+    SettingsController.$inject = ['$rootScope', 'Principal', 'Auth', 'JhiLanguageService', '$translate', 'Payment', 'Groupaccess', 'Useraccount', 'User', 'Focus', 'Register', 'toastr', 'ExpertAccount', 'Issue', 'Technology', '_', '$state', 'DrslUserFlowService'];
 
-    function SettingsController(Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, Useraccount, User, focus, Register, toastr, ExpertAccount, Issue, Technology, _, $state, DrslUserFlowService) {
+    function SettingsController($rootScope, Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, Useraccount, User, focus, Register, toastr, ExpertAccount, Issue, Technology, _, $state, DrslUserFlowService) {
         DrslUserFlowService.handleUserFlow();
 
         var vm = this;
@@ -117,6 +117,7 @@
                 }
                 Principal.identity(true).then(function (account) {
                     vm.settingsAccount = copyAccount(account);
+                    $rootScope.$broadcast('userAccountUpdated');
                 });
                 JhiLanguageService.getCurrent().then(function (current) {
                     if (vm.settingsAccount.langKey !== current) {
