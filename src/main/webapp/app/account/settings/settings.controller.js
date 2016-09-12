@@ -216,6 +216,7 @@
             Register.save(newUser, invitedGroup,  onUserSaveError)
         }
         function authorizedGroup(user){
+            console.log("AUTHORIZING USER");
             var group = {
                 authorizeduser: user,
             }
@@ -233,7 +234,9 @@
             }
         }
         function invitedGroup(newUser){
-            User.query(function(result){
+            console.log("HERE IS THE NEW USER, HE HAS NO ID!", newUser);
+            User.query({size: 200}, function(result){
+                console.log(result);
                 var userWithId = _.find(result, function(user){
                     return user.login == newUser.login;
                 })
@@ -241,6 +244,7 @@
                     authorizeduser: userWithId,
                 }
                 Groupaccess.save(group, function(data){
+                    console.log(data);
                     vm.invitedUsers.push(data)
                     vm.invitedUser = '';
                     toastr["success"](data.authorizeduser.email, "Invited User")
@@ -265,11 +269,12 @@
                     }
                 })
                 if(!isAlreadyInvited && !isAlreadyAuthorized){
-                    User.query(function(result){
+                    User.query({size: 200}, function(result){
                         var newUser = _.find(result, function (user) {
                             return user.email == currentEmail;
                         })
                         if(newUser){
+                            console.log("Found user, time to Authorize");
                             authorizedGroup(newUser);
                         } else {
                             makeUser(currentEmail);

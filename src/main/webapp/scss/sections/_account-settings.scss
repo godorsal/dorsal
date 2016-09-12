@@ -5,6 +5,27 @@ Account Settings
 .drsl-account-settings {
     height: 1147px;
 
+    table.drsl-settings-table-scroll {
+        width: 535px;
+    }
+
+    table.drsl-settings-table-scroll tbody {
+        display: block;
+        height: 360px;
+        overflow-y: auto;
+        > tr > td {
+            width: 100%;
+        }
+    }
+
+    table.drsl-settings-table-scroll thead > tr {
+        color: $drsl-label-color;
+        display: block;
+        position: relative;
+        > th {
+            width: 100%;
+        }
+    }
     .drsl-full-select {
         width: 531px;
     }
