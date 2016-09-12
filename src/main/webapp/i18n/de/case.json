@@ -81,6 +81,10 @@
                 "resolved.complete": "This case has been completed",
                 "lastUpdate": "Last update/action ",
                 "deliverDate": "Requested Delivery"
+            },
+            "noCases": {
+                "header": "Welcome!",
+                "message": "<p>We will match you to new cases that fit your expertise.</p><p>Have you set a log-in name? Did you set a custom welcome message for new cases? Updated your password</p>"
             }
         },
         "history": {

@@ -27,6 +27,9 @@ $account-settings-authorized-credit-card-font-size: 12px;
 $account-settings-email-font-size: 13px;
 // Account Activation
 $account-activation-font-size: 25px;
+// Case Summary
+$case-summary-expert-no-case-message-header-font-size: 40px;
+$case-summary-expert-no-case-message-body-font-size: 30px;
 
 // Font Weight ****************************
 $default-weight: 400;
@@ -99,6 +102,9 @@ $date-picker-selected-day-text-color: #fff;
 // Account Activation
 $account-activation-text-color: #fff;
 $account-activation-link-text-color: #fff;
+// Case Summary
+$case-summary-expert-no-case-message-header-text-color: $drsl-value-color;
+$case-summary-expert-no-case-message-body-text-color: $drsl-label-color;
 
 // Border Colors **************************
 $form-field-border-color: #CCC;
