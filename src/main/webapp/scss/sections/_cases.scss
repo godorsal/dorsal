@@ -25,6 +25,32 @@ Cases
                 margin-right: $default-padding;
             }
         }
+
+        .drsl-expert-no-case-message {
+            padding: $default-padding;
+            text-align: center;
+
+            h3 {
+                font-size: $case-summary-expert-no-case-message-header-font-size;
+                font-weight: $thin-weight;
+                color: $case-summary-expert-no-case-message-header-text-color;
+                margin-bottom: $default-double-padding;
+            }
+
+            .drsl-expert-no-case-message-body {
+                p {
+                    font-size: $case-summary-expert-no-case-message-body-font-size;
+                    font-weight: $thin-weight;
+                    max-width: 438px;
+                    margin: auto;
+                    color: $case-summary-expert-no-case-message-body-text-color;
+
+                    &:first-child {
+                        margin: auto auto $default-double-padding;
+                    }
+                }
+            }
+        }
     }
 
     .drsl-sub-header > div {
