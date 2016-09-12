@@ -32,6 +32,7 @@
         vm.isExpert = false;
         vm.issues = Issue.query();
         vm.technologies = Technology.query();
+        vm.usersToQuery = 200;
 
         getAuthorizedUsers()
 
@@ -233,7 +234,7 @@
             }
         }
         function invitedGroup(newUser){
-            User.query({size: 200}, function(result){
+            User.query({size: vm.usersToQuery}, function(result){
                 var userWithId = _.find(result, function(user){
                     return user.login == newUser.login;
                 })
@@ -265,7 +266,7 @@
                     }
                 })
                 if(!isAlreadyInvited && !isAlreadyAuthorized){
-                    User.query({size: 200}, function(result){
+                    User.query({size: vm.usersToQuery}, function(result){
                         var newUser = _.find(result, function (user) {
                             return user.email == currentEmail;
                         })
