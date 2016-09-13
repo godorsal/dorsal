@@ -47,6 +47,9 @@
                                 <input type="password" class="form-control" id="password" placeholder="{{'login.form.password.placeholder' | translate}}"
                                        ng-model="vm.password">
                             </div>
+                            <div class="drsl-forgot-password">
+                                <a ng-click="vm.requestResetPassword()" translate="login.password.forgot">Forgot Password?</a>
+                            </div>
                             <!-- Submit Button -->
                             <div class="drsl-login-submit">
                                 <button type="submit" class="btn btn-primary">Sign In</button>
