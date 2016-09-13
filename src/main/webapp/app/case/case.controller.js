@@ -380,7 +380,8 @@
                     vm.currentCase.isApproved = true;
                     vm.currentCase.status = StatusModel.getState('working');
                     vm.currentCase.estimateLog = (vm.currentCase.estimateLog) ? vm.currentCase.estimateLog : '';
-                    vm.currentCase.estimateLog += 'ACCEPTED ' + logDate + ' – ' + vm.currentCase.estimateHours +  'hrs ' + vm.currentCase.estimateComment + '##';
+                    // vm.currentCase.estimateLog += 'ACCEPTED ' + logDate + ' – ' + vm.currentCase.estimateHours +  'hrs ' + vm.currentCase.estimateComment + '##';
+                    vm.currentCase.estimateLog += 'ACCEPTED: ' + logDate + '\n' + 'OUTCOME: ' + vm.currentCase.expectedResult + '\n' + 'ESTIMATE: ' + vm.currentCase.estimateHours +  'hrs ' + '\n' + 'COMMENT: ' + vm.currentCase.estimateComment + '##';
                     vm.currentCase.$update();
                 });
 
