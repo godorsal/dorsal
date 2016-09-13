@@ -68,11 +68,15 @@
                 <!-- Case Summary -->
                 <div><case-summary case="vm.currentCase" expert="vm.experts[vm.currentCase.expert]" status="vm.status" passed-step="vm.passedStep"></case-summary></div>
 
-                <!-- Case Professional -->
-
-                <div ng-hide="vm.isCaseExpert()"><case-professional expert="vm.currentCase.expertaccount" case="vm.currentCase" expert-badges="vm.expertBadges" chat-room="vm.currentCase.chatRoom"></case-professional></div>
-
-                <div ng-show="vm.isCaseExpert()"><case-professional-form expert="vm.currentCase.expertaccount" case="vm.currentCase"></case-professional-form></div>
+                <!-- Case Professional (User View) -->
+                <div ng-hide="!vm.currentCase || vm.isCaseExpert()"><case-professional expert="vm.currentCase.expertaccount" case="vm.currentCase" expert-badges="vm.expertBadges" chat-room="vm.currentCase.chatRoom"></case-professional></div>
+                <!-- Case Professional (Expert View with Cases) -->
+                <div ng-show="vm.currentCase && vm.isCaseExpert()"><case-professional-form expert="vm.currentCase.expertaccount" case="vm.currentCase"></case-professional-form></div>
+                <!-- Case Professional (Expert View no Cases) -->
+                <div ng-show="!vm.currentCase" class="drsl-expert-no-case-message">
+                    <h3 translate="case.professional.noCases.header"></h3>
+                    <div class="drsl-expert-no-case-message-body" translate="case.professional.noCases.message"></div>
+                </div>
             </div>
         </div>
 

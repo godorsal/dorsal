@@ -43,6 +43,17 @@
         });
 
         /**
+         * Listen for user account updates, so we can update the account data
+         */
+        $rootScope.$on('userAccountUpdated', function() {
+            Principal.identity().then(function (account) {
+                // Update the in-memory account data
+                service.user.account = account;
+                service.user.hasFirstAndLastName = (service.user.account.firstName && service.user.account.lastName) ? true : false;
+            });
+        });
+
+        /**
          * Handle User Flow and redirect if necessary.
          * This function is the first to called on all of our main pages and also after a user login.
          * @param {string} type An optional string type (eg 'login')
@@ -110,6 +121,9 @@
         service.redirectUserAfterLogin = function () {
             var toState = null;
 
+            // Reset isFirstView after login
+            service.user.isFirstView = true;
+
             // Expert redirect logic
             if (service.user.isExpert) {
                 if (!service.user.hasFirstAndLastName) {
@@ -165,7 +179,7 @@
                 // If on or going to settings, show missing details message
                 if (stateName === 'settings') {
                     toastr.success($translate.instant('global.messages.info.missingDetails'), {
-                        timeOut: 0,
+                        timeOut: 5000,
                         toastClass: 'toast drsl-user-flow-toast'
                     });
                 // If elsewhere show the messing details message with a click here message to go to settings

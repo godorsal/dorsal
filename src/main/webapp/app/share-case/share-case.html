@@ -4,7 +4,7 @@
             <div class="drsl-dialog-header drsl-share-case-head">
                 <div><h2>SHARE MY CASE: <span>{{vm.case.technology.name}} {{vm.case.id}}</span></h2></div>
             </div>
-            <table class="drsl-share-case-head">
+            <table class="drsl-share-table-scroll drsl-share-case-head">
                 <thead>
                     <th><h3 class="drsl-label" ng-if="vm.sharedUsers.length">Users</h3></th>
                     <th><h3 class="drsl-label drsl-full-access" ng-if="vm.sharedUsers.length" >Permissions</h3></th>
@@ -32,7 +32,7 @@
             <hr class="drsl-share-hr" />
             <form ng-submit="vm.addUser()" class="drsl-share-case-head">
                 <input type="text" id="emailInput" name="emailInput"
-                ng-model="vm.emailInput" ng-minlength=4 ng-maxlength=50 required placeholder=" Email address" class="drsl-share-input drsl-value">
+                ng-model="vm.emailInput" required placeholder=" Email address" class="drsl-share-input drsl-value">
                 <select class="form-control drsl-share-select" ng-model="vm.permissions" id="permissionInput" required disabled>
                     <option value="">Full Access</option>
                     <option value="read">read</option>
