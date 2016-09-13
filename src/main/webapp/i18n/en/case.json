@@ -84,7 +84,7 @@
             },
             "noCases": {
                 "header": "Welcome!",
-                "message": "<p>We will match you to new cases that fit your expertise.</p><p>Have you updated your profile? <p>Did you set a custom welcome message for new cases? Updated your password?</p></p>"
+                "message": "<p>We will match you to new cases that fit your expertise.</p><p>Have you updated your profile? Did you set a custom welcome message for new cases? Updated your password?</p>"
             }
         },
         "history": {
