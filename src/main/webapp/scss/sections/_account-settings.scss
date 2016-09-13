@@ -395,4 +395,8 @@ Account Settings
             }
         }
     }
+
+    input.drsl-highlight-field, select.drsl-highlight-field, textarea.drsl-highlight-field {
+        border-color: $brand-color;
+    }
 }

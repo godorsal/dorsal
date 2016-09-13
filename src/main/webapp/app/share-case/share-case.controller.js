@@ -17,6 +17,8 @@
         vm.sharedUsers = [];
         vm.summary = vm.case.summary.toString();
         getSharedUsers();
+        vm.usersToQuery = 200;
+
         function cancel(e) {
             e.preventDefault();
             $uibModalInstance.dismiss('cancel');
@@ -48,7 +50,7 @@
             Register.save(newUser, shareCaseNew)
         }
         function shareCaseNew(newUser){
-            User.query(function(users){
+            User.query({size: vm.usersToQuery}, function(users){
                 newUser = _.find(users, function(user){
                     return user.email === newUser.email
                 })
@@ -78,7 +80,7 @@
         function addUser() {
             var newUsers = vm.emailInput.split(',');
             newUsers.forEach(function(currentEmail){
-                User.query(function(result){
+                User.query({size: vm.usersToQuery}, function(result){
                     var newUser = _.find(result, function (user) {
                         return user.email == currentEmail;
                     })
