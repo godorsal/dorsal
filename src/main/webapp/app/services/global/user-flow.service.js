@@ -121,6 +121,9 @@
         service.redirectUserAfterLogin = function () {
             var toState = null;
 
+            // Reset isFirstView after login
+            service.user.isFirstView = true;
+
             // Expert redirect logic
             if (service.user.isExpert) {
                 if (!service.user.hasFirstAndLastName) {
@@ -176,7 +179,7 @@
                 // If on or going to settings, show missing details message
                 if (stateName === 'settings') {
                     toastr.success($translate.instant('global.messages.info.missingDetails'), {
-                        timeOut: 0,
+                        timeOut: 5000,
                         toastClass: 'toast drsl-user-flow-toast'
                     });
                 // If elsewhere show the messing details message with a click here message to go to settings
