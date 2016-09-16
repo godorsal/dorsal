@@ -20,7 +20,8 @@
             "datePaid": "Date Paid",
             "comments": "Comments",
             "supportcase": "Supportcase",
-            "rating": "Rating"
+            "rating": "Rating",
+            "status": "Current Status"
         }
     }
 }

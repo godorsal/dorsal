@@ -214,10 +214,23 @@ public class SupportcaseResource {
     public List<Supportcase> getAllSupportcases() {
         log.debug("REST request to get all Supportcases");
         int numCases = 0;
+        // Get all support cases if logged in user is admin
+        List<Supportcase> supportcases = supportcaseRepository.findAllAdminIsCurrentUser();
+
+        if(supportcases.size() > 0) {
+            return supportcases;
+        }
+        
+        //.findAll();
+        // List<Supportcase> supportcases = supportcaseRepository.findByUserIsCurrentUser(); //.findAll();
+        // List<Supportcase> supportcases = supportcaseRepository.findByUserIsCurrentUser(); //.findAll();
+        // numCases = supportcases.size();
+        // log.debug("Support cases owned by user " + numCases);
+
         // Get support cases by currently logged in user
-        List<Supportcase> supportcases = supportcaseRepository.findByUserIsCurrentUser(); //.findAll();
-        numCases = supportcases.size();
+        supportcases.addAll(supportcaseRepository.findByUserIsCurrentUser());
         log.debug("Support cases owned by user " + numCases);
+        numCases = supportcases.size();
 
         // Get support cases for where currently logged in user is expert
         supportcases.addAll(supportcaseRepository.findByExpertIsCurrentUser());
