@@ -56,7 +56,7 @@
         /**
          * Handle User Flow and redirect if necessary.
          * This function is the first to called on all of our main pages and also after a user login.
-         * @param {string} type An optional string type (eg 'login')
+         * @param {string} [type] type An optional string type (eg 'login')
          */
         service.handleUserFlow = function (type) {
             // If we already have a user in memory, don't bother to do the queries

@@ -1,48 +1,31 @@
-(function() {
+(function () {
     'use strict';
 
     angular
-    .module('dorsalApp')
-    .controller('HomeController', HomeController);
+        .module('dorsalApp')
+        .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', 'LoginService', '$state', 'DrslUserFlowService'];
+    HomeController.$inject = ['DrslUserFlowService'];
 
-    function HomeController ($scope, LoginService, $state, DrslUserFlowService) {
+    function HomeController(DrslUserFlowService) {
         DrslUserFlowService.handleUserFlow();
 
+        // Set the view model and view model properties/methods
         var vm = this;
-        vm.account = null;
-        vm.isAuthenticated = null;
-        vm.login = LoginService.open;
-        vm.register = register;
-        vm.concierge = concierge;
+        vm.additionalInfoItemClassName = additionalInfoItemClassName;
 
-        function register () {
-            $state.go('register');
-        }
-        $scope.quoteSize = function(index){
-            if(index === 0){
+        /**
+         * Returns the css class name for an additional info item, for a given slot/index.
+         * @param index
+         * @returns {string} the css class name for an additional info item, for a given slot/index.
+         */
+        function additionalInfoItemClassName(index) {
+            if (index === 0) {
                 return "drsl-fast-easy-access";
-            } else if(index === 1){
+            } else if (index === 1) {
                 return "drsl-personalized-for-you"
-            } else if(index === 2){
+            } else if (index === 2) {
                 return "drsl-certified-professionals"
-            }
-        }
-        function concierge(type) {
-            switch (type) {
-                case 1:
-                $state.go('concierge', {'type': 'incident'});
-                break;
-                case 2:
-                $state.go('concierge', {"type": 'pro-active'});
-                break;
-                case 3:
-                $state.go('concierge', {"type": 'on-demand'});
-                break;
-                default:
-                $state.go('concierge', {"type": 'connect-now'});
-                break;
             }
         }
     }
