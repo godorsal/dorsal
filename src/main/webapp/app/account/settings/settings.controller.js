@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('SettingsController', SettingsController);
 
-    SettingsController.$inject = ['$rootScope', 'Principal', 'Auth', 'JhiLanguageService', '$translate', 'Payment', 'Groupaccess', 'Useraccount', 'User', 'Focus', 'Register', 'toastr', 'ExpertAccount', 'Issue', 'Technology', '_', '$state', 'DrslUserFlowService'];
+    SettingsController.$inject = ['$rootScope', 'Principal', 'Auth', 'JhiLanguageService', '$translate', 'Payment', 'Groupaccess', 'Useraccount', 'User', 'Focus', 'Register', 'toastr', 'ExpertAccount', 'Issue', 'Technology', '_', '$state', 'DrslUserFlowService', 'ManageUser'];
 
-    function SettingsController($rootScope, Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, Useraccount, User, focus, Register, toastr, ExpertAccount, Issue, Technology, _, $state, DrslUserFlowService) {
+    function SettingsController($rootScope, Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, Useraccount, User, focus, Register, toastr, ExpertAccount, Issue, Technology, _, $state, DrslUserFlowService, ManageUser) {
         DrslUserFlowService.handleUserFlow();
 
         var vm = this;
@@ -236,12 +236,9 @@
             }
         }
         function invitedGroup(newUser){
-            User.query({size: vm.usersToQuery}, function(result){
-                var userWithId = _.find(result, function(user){
-                    return user.login == newUser.login;
-                })
+            ManageUser.get({type: 'email', value: newUser.email}, function(user){
                 var group = {
-                    authorizeduser: userWithId,
+                    authorizeduser: user,
                 }
                 Groupaccess.save(group, function(data){
                     vm.invitedUsers.push(data)
@@ -268,14 +265,11 @@
                     }
                 })
                 if(!isAlreadyInvited && !isAlreadyAuthorized){
-                    User.query({size: vm.usersToQuery}, function(result){
-                        var newUser = _.find(result, function (user) {
-                            return user.email == currentEmail;
-                        })
-                        if(newUser){
-                            authorizedGroup(newUser);
+                    ManageUser.get({type: 'email', value: currentEmail}, function(result, err){
+                        if(result.id){
+                            authorizedGroup(result);
                         } else {
-                            makeUser(currentEmail);
+                            makeUser(currentEmail)
                         }
                     })
                 } else {
