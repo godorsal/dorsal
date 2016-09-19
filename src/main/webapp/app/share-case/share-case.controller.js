@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('ShareCaseController', ShareCaseController);
 
-    ShareCaseController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase', 'expert', 'User', 'SharedCase', 'Register', 'Principal', 'toastr'];
+    ShareCaseController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase', 'expert', 'User', 'SharedCase', 'Register', 'Principal', 'toastr', 'ManageUser'];
 
-    function ShareCaseController($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase, expert, User, SharedCase, Register, Principal, toastr) {
+    function ShareCaseController($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase, expert, User, SharedCase, Register, Principal, toastr, ManageUser) {
         var vm = this;
         vm.cancel = cancel;
         vm.addUser = addUser;
@@ -50,12 +50,9 @@
             Register.save(newUser, shareCaseNew)
         }
         function shareCaseNew(newUser){
-            User.query({size: vm.usersToQuery}, function(users){
-                newUser = _.find(users, function(user){
-                    return user.email === newUser.email
-                })
+            ManageUser.get({type: 'email', value: newUser.email}, function(user){
                 var newSharedCase = {
-                    user: newUser,
+                    user: user,
                     supportcase: vm.case
                 }
                 SharedCase.save(newSharedCase, function(data){
@@ -80,12 +77,9 @@
         function addUser() {
             var newUsers = vm.emailInput.split(',');
             newUsers.forEach(function(currentEmail){
-                User.query({size: vm.usersToQuery}, function(result){
-                    var newUser = _.find(result, function (user) {
-                        return user.email == currentEmail;
-                    })
-                    if(newUser){
-                        shareCase(newUser)
+                ManageUser.get({type: 'email', value: currentEmail}, function(result){
+                    if(result.id){
+                        shareCase(result)
                     } else {
                         makeUser(currentEmail);
                     }

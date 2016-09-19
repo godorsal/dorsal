@@ -4,11 +4,11 @@
             <div class="drsl-dialog-header drsl-share-case-head">
                 <div><h2>SHARE MY CASE: <span>{{vm.case.technology.name}} {{vm.case.id}}</span></h2></div>
             </div>
-            <table class="drsl-share-table-scroll drsl-share-case-head">
+            <table class="drsl-share-table-scroll">
                 <thead>
                     <th><h3 class="drsl-label" ng-if="vm.sharedUsers.length">Users</h3></th>
-                    <th><h3 class="drsl-label drsl-full-access" ng-if="vm.sharedUsers.length" >Permissions</h3></th>
-                    <th><h3 class="drsl-label drsl-full-access" ng-if="vm.sharedUsers.length" >Status</h3></th>
+                    <th><h3 class="drsl-label" ng-if="vm.sharedUsers.length" >Permissions</h3></th>
+                    <th><h3 class="drsl-label" ng-if="vm.sharedUsers.length" >Status</h3></th>
                     <th><h3 class="drsl-label drsl-remove-header" ng-if="vm.sharedUsers.length">Remove</h3></th>
                 </thead>
                 <tbody>
@@ -16,10 +16,10 @@
                         <td class="drsl-value">
                             {{share.user.email}}
                         </td>
-                        <td class="drsl-value drsl-full-access">
+                        <td class="drsl-value">
                             Full Access
                         </td>
-                        <td class="drsl-value drsl-status-bool">
+                        <td class="drsl-value">
                             <span ng-if="!share.user.activated">Invited</span>
                             <span ng-if="share.user.activated">Authorized</span>
                         </td>
