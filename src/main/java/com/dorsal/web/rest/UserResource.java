@@ -168,7 +168,7 @@ public class UserResource {
 
     /**
      * GET  /users : get all users.
-     * 
+     *
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and with body all users
      * @throws URISyntaxException if the pagination headers couldnt be generated
@@ -204,6 +204,41 @@ public class UserResource {
                 .map(ManagedUserDTO::new)
                 .map(managedUserDTO -> new ResponseEntity<>(managedUserDTO, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    /**
+     * GET  /users/email/:value : get the user by email.
+     *
+     * @param email the email of the user to find
+     * @return the ResponseEntity with status 200 (OK) and with body the "email" user, or with status 200 with null user value
+     */
+    @RequestMapping(value = "/users/email/{value:" + Constants.LOGIN_REGEX + "}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<ManagedUserDTO> getUserByEmail(@PathVariable String value) {
+        log.debug("REST request to get User : {}", value);
+        return userService.getUserWithAuthoritiesByEmail(value)
+                .map(ManagedUserDTO::new)
+                .map(managedUserDTO -> new ResponseEntity<>(managedUserDTO, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(null, HttpStatus.OK));
+    }
+    /**
+     * GET  /users/login/: : get the user by their login.
+     *
+     * @param email the email of the user to find
+     * @return the ResponseEntity with status 200 (OK) and with body the "email" user, or with status 200 with null user value
+     */
+    @RequestMapping(value = "/users/login/{value:" + Constants.LOGIN_REGEX + "}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<ManagedUserDTO> getUserByLogin(@PathVariable String value) {
+        log.debug("REST request to get User : {}", value);
+        return userService.getUserWithAuthoritiesByLogin(value)
+                .map(ManagedUserDTO::new)
+                .map(managedUserDTO -> new ResponseEntity<>(managedUserDTO, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(null, HttpStatus.OK));
     }
     /**
      * DELETE  USER :login : delete the "login" User.
