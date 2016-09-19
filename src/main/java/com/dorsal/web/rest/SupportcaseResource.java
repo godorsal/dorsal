@@ -214,13 +214,14 @@ public class SupportcaseResource {
     public List<Supportcase> getAllSupportcases() {
         log.debug("REST request to get all Supportcases");
         int numCases = 0;
+        
         // Get all support cases if logged in user is admin
         List<Supportcase> supportcases = supportcaseRepository.findAllAdminIsCurrentUser();
 
         if(supportcases.size() > 0) {
             return supportcases;
         }
-        
+
         //.findAll();
         // List<Supportcase> supportcases = supportcaseRepository.findByUserIsCurrentUser(); //.findAll();
         // List<Supportcase> supportcases = supportcaseRepository.findByUserIsCurrentUser(); //.findAll();
