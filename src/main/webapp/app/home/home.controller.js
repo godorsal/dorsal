@@ -8,6 +8,7 @@
     HomeController.$inject = ['DrslUserFlowService'];
 
     function HomeController(DrslUserFlowService) {
+        // Handle user flow redirects and messaging
         DrslUserFlowService.handleUserFlow();
 
         // Set the view model and view model properties/methods
