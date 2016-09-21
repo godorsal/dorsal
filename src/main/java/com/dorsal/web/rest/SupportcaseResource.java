@@ -214,7 +214,7 @@ public class SupportcaseResource {
     public List<Supportcase> getAllSupportcases() {
         log.debug("REST request to get all Supportcases");
         int numCases = 0;
-        
+
         // Get all support cases if logged in user is admin
         List<Supportcase> supportcases = supportcaseRepository.findAllAdminIsCurrentUser();
 

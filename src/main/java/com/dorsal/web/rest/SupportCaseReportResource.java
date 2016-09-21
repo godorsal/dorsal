@@ -130,6 +130,31 @@ public class SupportCaseReportResource {
 
         return supportCaseReports;
     }
+    @RequestMapping(value = "/support-case-reports/query/{daysSince}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<SupportCaseReport> getAllSupportCaseReportsByQuery(@PathVariable String daysSince) {
+        log.debug("REST request to get all SupportCaseReports");
+        ZonedDateTime dateFrom = ZonedDateTime.parse(daysSince);
+
+        List<SupportCaseReport> supportCaseReports = null;
+
+        // Only admin user can get report. Make sure the requester is admin before returning all records
+        User loggedInUser = userRepository.findLoggedInUser();
+        if (loggedInUser != null && loggedInUser.getLogin().equalsIgnoreCase("admin")) {
+            // supportCaseReports = supportCaseReportRepository.findAll();
+            supportCaseReports = supportCaseReportRepository.findAllFromDaysAgo(dateFrom);
+
+        }
+        else
+        {
+            log.error("User not allowed to access API. No reports returned.");
+            supportCaseReports = new ArrayList<SupportCaseReport>();
+        }
+
+        return supportCaseReports;
+    }
 
     /**
      * GET  /support-case-reports/:id : get the "id" supportCaseReport.
