@@ -1,4 +1,4 @@
- <div class="drsl-case-view" ng-cloak>
+<div class="drsl-case-view" ng-cloak>
     <div class="row">
         <div class="col-md-12">
             <div class="drsl-case-wrapper">
@@ -9,104 +9,115 @@
                         <span class="drsl-understated" ng-show="vm.currentCase">ID: {{vm.currentCase.technology.name}} {{vm.currentCase.id}}</span>
                     </div>
                     <div></div>
+                    <!-- Case Updates -->
                     <div class="drsl-case-updates">
                         <div class="btn-group" uib-dropdown is-open="status.isopen" ng-if="vm.currentCase.numberOfUpdates">
+                            <!-- Dropdown Link -->
                             <a id="single-button" type="button" uib-dropdown-toggle ng-disabled="disabled">
                                 <span ng-if="vm.currentCase.numberOfUpdates + vm.estimateLogs.length > 1">
-                                    {{vm.currentCase.numberOfUpdates}} Updates
+                                    {{vm.currentCase.numberOfUpdates}} {{'case.details.updates' | translate}}
                                 </span>
                                 <span ng-if="vm.currentCase.numberOfUpdates + vm.estimateLogs.length < 2">
-                                    {{vm.currentCase.numberOfUpdates}} Update
+                                    {{vm.currentCase.numberOfUpdates}} {{'case.details.update' | translate}}
                                 </span>
-                                 <span class="caret"></span>
+                                <span class="caret"></span>
                             </a>
+                            <!-- Dropdown List -->
                             <ul class="dropdown-menu dropdown-menu-right drsl-updates-dropdown" uib-dropdown-menu role="menu" aria-labelledby="single-button" >
                                 <table class="drsl-table-scroll">
                                     <tbody class="drsl-updates-tbody">
-                                        <tr class="drsl-updates-row drsl-label-row" ng-if="vm.updates.length" colspan="2">
-                                            <td class="drsl-updates-tdata">Case Updates
-                                                <span class="drsl-update-number">{{vm.updates.length}}</span>
-                                            </td>
-                                            <td class="drsl-updates-tdata"></td>
-                                        </tr>
-                                        <tr ng-repeat="update in vm.updates track by $index" class="drsl-updates-row" >
-                                                <td class="drsl-updates-message">{{update.updateMsg}}</td>
-                                                <td class="drsl-updates-date">
-                                                        {{update.dateUpdated  | date:'MMM dd, yyyy &nbsp h:mm a'}}
-                                                </td>
-                                        </tr>
-                                        <tr class="drsl-updates-row drsl-label-row" ng-if="vm.estimateLogs.length">
-                                            <td class="drsl-updates-tdata" colspan="2">Estimate Logs
-                                                <span class="drsl-update-number">
-                                                    {{vm.estimateLogs.length}}
-                                                </span>
-                                            </td>
-                                        </tr>
-                                        <tr ng-repeat="log in vm.estimateLogs track by $index" class="drsl-updates-row">
-                                                <td class="drsl-logs-tdata" colspan="2">{{log}}</td>
-                                        </tr>
+                                    <!-- Case Updates (Header) -->
+                                    <tr class="drsl-updates-row drsl-label-row" ng-if="vm.updates.length" colspan="2">
+                                        <td class="drsl-updates-tdata">{{'case.details.caseUpdates' | translate}}
+                                            <span class="drsl-update-number">{{vm.updates.length}}</span>
+                                        </td>
+                                        <td class="drsl-updates-tdata"></td>
+                                    </tr>
+                                    <!-- Case Updates (Items) -->
+                                    <tr ng-repeat="update in vm.updates track by $index" class="drsl-updates-row" >
+                                        <td class="drsl-updates-message">{{update.updateMsg}}</td>
+                                        <td class="drsl-updates-date">
+                                            {{update.dateUpdated  | date:'MMM dd, yyyy &nbsp h:mm a'}}
+                                        </td>
+                                    </tr>
+                                    <!-- Estimate Logs (Header) -->
+                                    <tr class="drsl-updates-row drsl-label-row" ng-if="vm.estimateLogs.length">
+                                        <td class="drsl-updates-tdata" colspan="2">{{'case.details.estimateLogs' | translate}}
+                                            <span class="drsl-update-number">{{vm.estimateLogs.length}}</span>
+                                        </td>
+                                    </tr>
+                                    <!-- Estimate Logs (Items) -->
+                                    <tr ng-repeat="log in vm.estimateLogs track by $index" class="drsl-updates-row">
+                                        <td class="drsl-logs-tdata" colspan="2">{{log}}</td>
+                                    </tr>
                                     </tbody>
                                 </table>
-                        </ul>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Bar -->
+                <div class="drsl-action-bar">
+                    <i class="glyphicon glyphicon-menu-right"></i>
+                    <!-- Details -->
+                    <a ng-click="vm.openDetails()" uib-tooltip="view case details" ng-class="{'drsl-link-disabled': !vm.currentCase}" translate="case.details.viewDetails">details</a>
+                    <!-- Share -->
+                    <a ng-click="vm.openShare()" uib-tooltip="{{vm.shareMessage}}" ng-class="{'drsl-link-disabled': !vm.isCreator}" translate="case.details.share">share</a>
+                    <!-- Attachments -->
+                    <a ng-click="vm.openAttachment()" uib-tooltip="add an attachment" ng-class="{'drsl-link-disabled': !vm.currentCase}" translate="case.details.attachFiles">attach files</a>
+                    <!-- Chat -->
+                    <a ng-show="vm.DrslMetadata.showCaseChat !== 0" ng-click="vm.openChat()" uib-tooltip="chat with expert" ng-class="{'drsl-link-disabled': !vm.passedStep(1)}" class="drsl-link-disabled" translate="case.details.chatRoom">chat</a>
+                    <!-- New Case -->
+                    <a ng-show="(vm.currentCase && !vm.isCaseExpert())" ui-sref="concierge" uib-tooltip="create a new case" translate="case.details.newCase">new</a>
+                    <!-- Escalation -->
+                    <a class="pull-right" ng-click="vm.openEscalation()" ng-class="{'drsl-link-disabled': (vm.passedStep(4) ||!vm.currentCase)}" translate="case.details.escalate">escalate or reassign this case</a>
+                </div>
+
+                <!-- Current Case -->
+                <div class="drsl-current-case">
+                    <!-- Case Summary -->
+                    <div><case-summary case="vm.currentCase" expert="vm.experts[vm.currentCase.expert]" status="vm.status" passed-step="vm.passedStep"></case-summary></div>
+
+                    <!-- Case Professional (User View) -->
+                    <div ng-hide="!vm.currentCase || vm.isCaseExpert()"><case-professional expert="vm.currentCase.expertaccount" case="vm.currentCase" expert-badges="vm.expertBadges" chat-room="vm.currentCase.chatRoom"></case-professional></div>
+                    <!-- Case Professional (Expert View with Cases) -->
+                    <div ng-show="vm.currentCase && vm.isCaseExpert()"><case-professional-form expert="vm.currentCase.expertaccount" case="vm.currentCase"></case-professional-form></div>
+                    <!-- Case Professional (Expert View no Cases) -->
+                    <div ng-show="!vm.currentCase" class="drsl-expert-no-case-message">
+                        <h3 translate="case.professional.noCases.header"></h3>
+                        <div class="drsl-expert-no-case-message-body" translate="case.professional.noCases.message"></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Action Bar -->
-            <div class="drsl-action-bar">
-                <i class="glyphicon glyphicon-menu-right"></i>
-                <a ng-click="vm.openDetails()" uib-tooltip="view case details" ng-class="{'drsl-link-disabled': !vm.currentCase}" translate="case.details.viewDetails">details</a>
-                <a ng-click="vm.openShare()" uib-tooltip="{{vm.shareMessage}}" ng-class="{'drsl-link-disabled': !vm.isCreator}">share</a>
-                <a ng-click="vm.openAttachment()" uib-tooltip="add an attachment" ng-class="{'drsl-link-disabled': !vm.currentCase}">attach files</a>
-                <a ng-show="vm.DrslMetadata.showCaseChat !== 0" ng-click="vm.openChat()" uib-tooltip="chat with expert" ng-class="{'drsl-link-disabled': !vm.passedStep(1)}" class="drsl-link-disabled" translate="case.details.chatRoom">chat</a>
-                <a ng-show="(vm.currentCase && !vm.isCaseExpert())" ui-sref="concierge" uib-tooltip="create a new case">new</a>
-                <a class="pull-right" ng-click="vm.openEscalation()" ng-class="{'drsl-link-disabled': (vm.passedStep(4) ||!vm.currentCase)}">escalate or reassign this case</a>
-            </div>
+            <!-- Case History -->
+            <div class="drsl-case-wrapper">
+                <!-- Header -->
+                <div class="drsl-sub-header drsl-sub-sub-header" translate="case.history.header">Your Case History</div>
 
-            <!-- Current Case -->
-            <div class="drsl-current-case">
-                <!-- Case Summary -->
-                <div><case-summary case="vm.currentCase" expert="vm.experts[vm.currentCase.expert]" status="vm.status" passed-step="vm.passedStep"></case-summary></div>
-
-                <!-- Case Professional (User View) -->
-                <div ng-hide="!vm.currentCase || vm.isCaseExpert()"><case-professional expert="vm.currentCase.expertaccount" case="vm.currentCase" expert-badges="vm.expertBadges" chat-room="vm.currentCase.chatRoom"></case-professional></div>
-                <!-- Case Professional (Expert View with Cases) -->
-                <div ng-show="vm.currentCase && vm.isCaseExpert()"><case-professional-form expert="vm.currentCase.expertaccount" case="vm.currentCase"></case-professional-form></div>
-                <!-- Case Professional (Expert View no Cases) -->
-                <div ng-show="!vm.currentCase" class="drsl-expert-no-case-message">
-                    <h3 translate="case.professional.noCases.header"></h3>
-                    <div class="drsl-expert-no-case-message-body" translate="case.professional.noCases.message"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Case History -->
-        <div class="drsl-case-wrapper">
-            <!-- Header -->
-            <div class="drsl-sub-header drsl-sub-sub-header" translate="case.history.header">Your Case History</div>
-
-            <!-- Listing -->
-            <div class="drsl-case-history-wrapper">
-                <div class="panel panel-default" ng-repeat="case in vm.supportcases">
-                    <div class="panel-heading" ng-class="{active: vm.currentCase == case}" ng-click="vm.setCurrentCase(case);">
-                        <h4 class="panel-title">
-                            <div class="drsl-case-list">
-                                <div>
-                                    <span class="drsl-case-list-id">{{case.technology.name}} {{case.id}}</span>
-                                    <span>{{case.dateCreated | date:'MMM dd, yyyy'}}</span>
+                <!-- Listing -->
+                <div class="drsl-case-history-wrapper">
+                    <div class="panel panel-default" ng-repeat="case in vm.supportcases">
+                        <div class="panel-heading" ng-class="{active: vm.currentCase == case}" ng-click="vm.setCurrentCase(case);">
+                            <h4 class="panel-title">
+                                <div class="drsl-case-list">
+                                    <div>
+                                        <span class="drsl-case-list-id">{{case.technology.name}} {{case.id}}</span>
+                                        <span>{{case.dateCreated | date:'MMM dd, yyyy'}}</span>
+                                    </div>
+                                    <div ng-if="case.numberOfUpdates">
+                                        <div>Updates: {{case.numberOfUpdates}}</div>
+                                    </div>
+                                    <div>
+                                        <div>{{case.status.name}}</div>
+                                    </div>
                                 </div>
-                                <div ng-if="case.numberOfUpdates">
-                                    <div>Updates: {{case.numberOfUpdates}}</div>
-                                </div>
-                                <div>
-                                    <div>{{case.status.name}}</div>
-                                </div>
-                            </div>
-                        </h4>
+                            </h4>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
