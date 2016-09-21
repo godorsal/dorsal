@@ -18,6 +18,7 @@
         vm.summary = vm.case.summary.toString();
         vm.escalationType = {};
         vm.issue = {};
+        vm.technologyProperties = [];
         vm.thisEscalation = {};
         checkStatus();
         vm.escalationTypes = [
