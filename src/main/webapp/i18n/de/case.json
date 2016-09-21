@@ -80,7 +80,9 @@
                 "resolved.action": "Complete this Case",
                 "resolved.complete": "This case has been completed",
                 "lastUpdate": "Last update/action ",
-                "deliverDate": "Requested Delivery"
+                "requestedDate": "Requested Delivery",
+                "shareCaseMessage": "share this case",
+                "cannotShareCaseMessage": "only the case creator can share the case"
             },
             "noCases": {
                 "header": "Welcome!",

@@ -38,7 +38,9 @@
             "id": "ID:",
             "caseID": "CASE ID:",
             "lastUpdate": "Last Update:",
-            "requestedDate": "Requested Delivery"
+            "requestedDate": "Requested Delivery",
+            "shareCaseMessage": "share this case",
+            "cannotShareCaseMessage": "only the case creator can share the case"
         },
         "professional": {
             "header": "Support Professional",
