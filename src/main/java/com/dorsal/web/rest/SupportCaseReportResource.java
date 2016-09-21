@@ -51,7 +51,7 @@ public class SupportCaseReportResource {
     @Timed
     public ResponseEntity<SupportCaseReport> createSupportCaseReport(@Valid @RequestBody SupportCaseReport supportCaseReport) throws URISyntaxException {
         log.debug("REST request to save SupportCaseReport : {}", supportCaseReport);
-
+        log.debug("FRESH");
         // Creation of entry not allowed through API. It is done in the backend
         return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("supportCaseReport", "createnotallowed", "supportCaseReport entry cannot be created through the API")).body(null);
 
@@ -135,9 +135,8 @@ public class SupportCaseReportResource {
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public List<SupportCaseReport> getAllSupportCaseReportsByQuery(@PathVariable String daysSince) {
-        log.debug("REST request to get all SupportCaseReports");
         ZonedDateTime dateFrom = ZonedDateTime.parse(daysSince);
-
+        log.debug("REST request to get all SupportCaseReports : {}", dateFrom);
         List<SupportCaseReport> supportCaseReports = null;
 
         // Only admin user can get report. Make sure the requester is admin before returning all records
