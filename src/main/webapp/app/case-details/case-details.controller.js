@@ -2,23 +2,26 @@
     'use strict';
 
     angular
-    .module('dorsalApp')
-    .controller('CaseDetailsController', CaseDetailsController);
+        .module('dorsalApp')
+        .controller('CaseDetailsController', CaseDetailsController);
 
-    CaseDetailsController.$inject = ['$rootScope', '$scope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase', 'expert', 'Casetechnologyproperty', 'Caseupdate', 'Attachment', 'Principal', 'Updatetype', 'Supportcase', 'DrslAttachFileService'];
+    CaseDetailsController.$inject = ['$scope', '$timeout', '$uibModalInstance', 'drslCase', 'expert',
+        'Casetechnologyproperty', 'Caseupdate', 'Attachment', 'Principal', 'DrslAttachFileService'];
 
-    function CaseDetailsController($rootScope, $scope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase, expert, Casetechnologyproperty, Caseupdate, Attachment, Principal, Updatetype, Supportcase, DrslAttachFileService) {
+    function CaseDetailsController($scope, $timeout, $uibModalInstance, drslCase, expert,
+                                   Casetechnologyproperty, Caseupdate, Attachment, Principal, DrslAttachFileService) {
+
+        // Set the view model and view model properties/methods
         var vm = this;
-        vm.cancel = cancel;
-        vm.submit = submit;
         vm.case = drslCase;
         vm.expert = expert;
+        vm.isExpert = false;
         vm.summary = vm.case.summary.toString();
+        vm.updates = [];
         vm.technologyProps = {};
         vm.technologyProps = [];
         vm.detailedResolutions = [];
         vm.updatemsg = '';
-        vm.capitalizeFirstLetter = capitalizeFirstLetter;
         vm.caseupdate = {
             user: vm.case.user,
             supportcase: vm.case,
@@ -30,104 +33,154 @@
             dataStreamContentType: null,
             id: null
         };
-        if (vm.case.estimateLog) {
-            vm.estimateLogs = vm.case.estimateLog.split('##');
-            vm.estimateLogs.pop();
-            vm.estimateLogs = vm.estimateLogs.reverse();
-        }
-        getCurrentUser()
 
-        $timeout(function(){$scope.$broadcast('currentCaseSet')}, 1);
+        // vm methods
+        vm.init = init;
+        vm.cancel = cancel;
+        vm.submit = submit;
 
-        function capitalizeFirstLetter(string) {
-            string = string.toLowerCase().replace('_', ' ');
-            return string.charAt(0).toUpperCase() + string.slice(1);
+        /**
+         * Initialize the controller's data.
+         */
+        function init() {
+            // Populate the vm's estimateLogs, cleanup and sort it
+            if (vm.case.estimateLog) {
+                vm.estimateLogs = vm.case.estimateLog.split('##');
+                vm.estimateLogs.pop();
+                vm.estimateLogs = vm.estimateLogs.reverse();
+            }
+
+            // Determines if the current user is an expert and set's the vm's isExpert boolean
+            getCurrentUser();
+
+            // Broadcast a 'currentCaseSet' event down to child components
+            $timeout(function () {
+                $scope.$broadcast('currentCaseSet')
+            }, 1);
+
+            // Query for case updates
+            Caseupdate.query(function (result) {
+                // Reset/empty the vm's updates array
+                vm.updates = [];
+
+                // Reverse/sort the results and store on the vm
+                result.reverse().forEach(function (update) {
+                    if (update.supportcase.id === vm.case.id) {
+                        if (update.updatetype.id == 2) {
+                            vm.detailedResolutions.push(update);
+                        }
+                        vm.updates.push(update)
+                    }
+                })
+            });
+
+            // Query for tech properties
+            Casetechnologyproperty.query(function (result) {
+                // Update the vm's technologyProps array with the results
+                result.forEach(function (property) {
+                    if (property.supportcase.id === vm.case.id) {
+                        switch (property.propertyname) {
+                            case 'Version':
+                                property.tagNO = 1;
+                                vm.technologyProps.push(property);
+                                break;
+                            case 'Configuration':
+                                property.tagNO = 2;
+                                vm.technologyProps.push(property);
+                                break;
+                            case 'OS':
+                                property.tagNO = 3;
+                                vm.technologyProps.push(property);
+                                break;
+                            case 'Environment':
+                                property.tagNO = 4;
+                                vm.technologyProps.push(property);
+                                break;
+                            case 'Other':
+                                property.tagNO = 5;
+                                vm.technologyProps.other = property;
+                                vm.technologyProps.push(property);
+                                break;
+                        }
+                    }
+                })
+            });
         }
-        function getCurrentUser(){
-            Principal.identity().then(function(account) {
-                if(vm.case.expertaccount.user.email == account.email){
+
+        /**
+         * Determine if the current user is an expert and set's the vm's isExpert boolean
+         */
+        function getCurrentUser() {
+            Principal.identity().then(function (account) {
+                if (vm.case.expertaccount.user.email == account.email) {
                     vm.isExpert = true;
                 } else {
                     vm.isExpert = false;
                 }
             });
         }
-        Caseupdate.query(function(result){
-            vm.updates = [];
-            result.reverse().forEach(function(update){
-                if(update.supportcase.id === vm.case.id){
-                    if(update.updatetype.id == 2){
-                        vm.detailedResolutions.push(update);
-                    }
-                    vm.updates.push(update)
-                }
-            })
-        })
-        Casetechnologyproperty.query(function(result) {
-            result.forEach(function(property){
-                if(property.supportcase.id === vm.case.id){
-                    switch (property.propertyname) {
-                        case 'Version':
-                        property.tagNO = 1;
-                        vm.technologyProps.push(property)
-                        break;
-                        case 'Configuration':
-                        property.tagNO = 2;
-                        vm.technologyProps.push(property)
-                        break;
-                        case 'OS':
-                        property.tagNO = 3;
-                        vm.technologyProps.push(property)
-                        break;
-                        case 'Environment':
-                        property.tagNO = 4;
-                        vm.technologyProps.push(property)
-                        break;
-                        case 'Other':
-                        property.tagNO = 5;
-                        vm.technologyProps.other = property
-                        vm.technologyProps.push(property)
-                        break;
 
-                    }
-                }
-            })
-        });
-
+        /**
+         * Handle the 'cancel' buttons click event
+         * @param e
+         */
         function cancel(e) {
             e.preventDefault();
             $uibModalInstance.dismiss('cancel');
         }
-        function onSaveSuccess (result){
-            if(vm.attachment.name){
+
+        /**
+         * A Success Callback function passed to the Caseupdate save function.
+         */
+        function onSaveSuccess() {
+            if (vm.attachment.name) {
                 vm.attachment.supportcase = {
                     id: vm.case.id
-                }
+                };
                 Attachment.save(vm.attachment);
             }
         }
-        function onSaveError (error){
+
+        /**
+         * An Error Callback function passed to the Caseupdate save function.
+         * @param error
+         */
+        function onSaveError(error) {
         }
+
+        /**
+         * Handles the main form submit and calls Caseupdate.save() if necessary
+         */
         function submit() {
+            // Set the update message
             if (vm.attachment.name) {
                 vm.caseupdate.updateMsg = vm.attachment.name + " Was uploaded. " + vm.updatemsg;
             } else {
                 vm.caseupdate.updateMsg = vm.updatemsg;
             }
 
+            // Set the update type
             vm.caseupdate.updatetype = {
                 id: 1
             };
 
+            // Make a call to upload or delete any attachments that may have been added or removed
             DrslAttachFileService.uploadAttachFileList(vm.case);
             DrslAttachFileService.deleteAttachments(vm.case);
 
-            if(vm.caseupdate.updateMsg){
+            // If there are change to the update message, save them.
+            if (vm.caseupdate.updateMsg) {
                 Caseupdate.save(vm.caseupdate, onSaveSuccess, onSaveError);
             }
 
+            // Update the case summary
             vm.case.summary = vm.summary.toString();
+
+            // Close the dialog
             $uibModalInstance.close({"updated": true});
         }
+
+        // Call to initialize the controller.
+        vm.init();
     }
 })();
