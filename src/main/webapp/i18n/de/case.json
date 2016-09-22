@@ -107,7 +107,7 @@
             "header": "Rating for",
             "badges": "Rating Badges",
             "badges.note": "select multiple badges to rate your expert’s technical and personal skills",
-            "ratingComments.placeholder": "Please provide additional feedback on the case rating (optional)",
+            "ratingComments.placeholder": "Please provide additional feedback on the case rating (required)",
             "ratingComments.error": "Please provide additional feedback",
             "timeOnCase": "Total time on case",
             "label": {
