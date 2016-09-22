@@ -4,137 +4,128 @@
             <div>
                 <!-- Dialog Header -->
                 <div class="drsl-dialog-header">
-                    <div><h2>CASE DETAILS: <span>{{vm.case.technology.name}} {{vm.case.id}}</span><div class="pull-right"><span class="drsl-header-status">Status: {{vm.case.status.name}}</span></div></h2></div>
+                    <div><h2>{{'caseDetails.header' | translate}} <span>{{vm.case.technology.name}} {{vm.case.id}}</span><div class="pull-right"><span class="drsl-header-status">Status: {{vm.case.status.name}}</span></div></h2></div>
                 </div>
-                <!-- <div class="drsl-dialog-header">
-                <div><h2>CASE DETAILS: <span>ID: {{vm.case.id}} &nbsp; START: {{vm.case.startDate | date:"MM/dd/yy h:mm a"}}</span><div class="pull-right"><span class="drsl-header-status">Status: {{vm.case.status}}</span></div></h2></div>
-            </div> -->
 
-            <!-- Dialog Content -->
-            <div>
-                <div class="drsl-dialog-content">
-                    <div class="drsl-case-props">
-                        <!-- User -->
-                        <div class="drsl-form-grid drsl-details-user-view">
-                            <div class="drsl-label" translate="case.details.user">User</div>
-                            <div class="drsl-value"  ng-if="vm.case.user.firstName && vm.case.user.lastName">{{vm.case.user.firstName}} {{vm.case.user.lastName}}</div>
-                            <div class="drsl-value" ng-if="!vm.case.user.firstName || !vm.case.user.lastName">{{vm.case.user.email}}</div>
+                <!-- Dialog Content -->
+                <div>
+                    <div class="drsl-dialog-content">
+                        <div class="drsl-case-props">
+                            <!-- User -->
+                            <div class="drsl-form-grid drsl-details-user-view">
+                                <div class="drsl-label" translate="case.details.user">User</div>
+                                <div class="drsl-value"  ng-if="vm.case.user.firstName && vm.case.user.lastName">{{vm.case.user.firstName}} {{vm.case.user.lastName}}</div>
+                                <div class="drsl-value" ng-if="!vm.case.user.firstName || !vm.case.user.lastName">{{vm.case.user.email}}</div>
+                            </div>
+
+                            <!-- Expert -->
+                            <div class="drsl-form-grid">
+                                <div class="drsl-label" translate="case.professional.expert">Expert</div>
+                                <div class="drsl-value">
+                                    <div>{{vm.case.expertaccount.user.firstName}} {{vm.case.expertaccount.user.lastName}}</div>
+                                    <contact-info contact="vm.case.expertaccount" chat-room="vm.case.chatRoom"></contact-info>
+                                </div>
+                            </div>
+
+                            <!-- Summary -->
+                            <div class="drsl-form-grid">
+                                <div class="drsl-label" translate="case.details.summary">Summary</div>
+                                <div class="drsl-value">{{vm.summary}}</div>
+                            </div>
+                            <div class="drsl-form-grid"></div>
+
+                            <!-- Issue -->
+                            <div class="drsl-form-grid">
+                                <div class="drsl-label" translate="case.details.issue">Issue</div>
+                                <div class="drsl-value">{{vm.case.issue.name}}</div>
+                            </div>
                         </div>
-                        <!-- <div class="drsl-form-grid">
-                        <div translate="case.details.user">User</div>
-                        <div>{{vm.case.user}}</div>
-                    </div> -->
 
-                    <!-- Expert -->
-                    <div class="drsl-form-grid">
-                        <div class="drsl-label" translate="case.professional.expert">Expert</div>
-                        <div class="drsl-value">
-                            <div>{{vm.case.expertaccount.user.firstName}} {{vm.case.expertaccount.user.lastName}}</div>
-                            <contact-info contact="vm.case.expertaccount" chat-room="vm.case.chatRoom"></contact-info>
+                        <!-- Technology Properties -->
+                        <div class="drsl-tech-props">
+                            <span class="drsl-label" translate="caseDetails.technology">Technology Properties</span>
+                            <br>
+                            <span ng-repeat="property in vm.technologyProps | orderBy: 'tagNO'">
+                                <span class="drsl-label">{{property.propertyname}}</span> <span class="drsl-value">{{property.propertyvalue}}</span><br>
+                            </span>
                         </div>
-                    </div>
-
-                    <!-- Summary -->
-                    <div class="drsl-form-grid">
-                        <div class="drsl-label" translate="case.details.summary">Summary</div>
-                        <div class="drsl-value">{{vm.summary}}</div>
-                    </div>
-                    <div class="drsl-form-grid">
-                    </div>
-                    <div class="drsl-form-grid">
-                        <div class="drsl-label" translate="case.details.issue">Issue</div>
-                        <div class="drsl-value">{{vm.case.issue.name}}</div>
-                    </div>
-                </div>
-                <!-- Incident Details -->
-                    <div class="drsl-tech-props">
-                        <span class="drsl-label">Technology Properties</span>
                         <br>
-                        <span ng-repeat="property in vm.technologyProps | orderBy: 'tagNO'">
-                            <span class="drsl-label">{{property.propertyname}}</span> <span class="drsl-value">{{property.propertyvalue}}</span><br>
-                        </span>
-                    </div>
-                <br>
-                <!-- Uploaded Files -->
-                <div class="drsl-form-grid">
-                    <div class="drsl-label" translate="case.details.uploadedFiles">Uploaded Files</div>
-                    <div>
-                        <drsl-attach-files hide-tooltip="true" case-id="{{vm.case.id}}" display-type="inline" add-on-attach="true"></drsl-attach-files>
-                    </div>
-                </div>
 
-                <!-- Dowloaded Files -->
-                <!-- <div class="drsl-form-grid">
-                <div translate="case.details.downloadedFiles">Downloaded Files</div>
-                <div><i class="fa fa-minus"></i></div>
-            </div> -->
-            <div class="drsl-form-grid">
-                <div class="drsl-label">Estimate History</div>
-                <div>
-                    <div class="drsl-estimate-log-list">
-
-                    <ol ng-show="vm.estimateLogs">
-                        <li class="drsl-value drsl-estimate-log-list" ng-repeat="log in vm.estimateLogs">
-                            {{log}}
-                        </li>
-                    </ol>
-                </div>
-                </div>
-            </div>
-            <div class="drsl-form-grid drsl-update-history-box">
-                <div class="drsl-label">Update History</div>
-                <div>
-                    <div class="drsl-no-updates" ng-hide="vm.updates.length > 0">
-                        <div>
-                            Updates for your case will be displayed here
+                        <!-- Uploaded Files -->
+                        <div class="drsl-form-grid">
+                            <div class="drsl-label" translate="case.details.uploadedFiles">Uploaded Files</div>
+                            <div>
+                                <drsl-attach-files hide-tooltip="true" case-id="{{vm.case.id}}" display-type="inline" add-on-attach="true"></drsl-attach-files>
+                            </div>
                         </div>
+
+                        <!-- Estimate History -->
+                        <div class="drsl-form-grid">
+                            <div class="drsl-label" translate="caseDetails.estimateHistory">Estimate History</div>
+                            <div>
+                                <div class="drsl-estimate-log-list">
+                                    <ol ng-show="vm.estimateLogs">
+                                        <li class="drsl-value drsl-estimate-log-list" ng-repeat="log in vm.estimateLogs">
+                                            {{log}}
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Update History -->
+                        <div class="drsl-form-grid drsl-update-history-box">
+                            <div class="drsl-label" translate="caseDetails.updateHistory">Update History</div>
+                            <div>
+                                <!-- No Updates -->
+                                <div class="drsl-no-updates" ng-hide="vm.updates.length > 0">
+                                    <div translate="caseDetails.noUpdatesMessage">
+                                        Updates for your case will be displayed here
+                                    </div>
+                                </div>
+
+                                <!-- Has Updates -->
+                                <table class="drsl-table-scroll table-striped" ng-show="vm.updates.length > 0">
+                                    <thead>
+                                    <tr>
+                                        <th class="drsl-label" translate="caseDetails.updates.message">Message</th>
+                                        <th class="drsl-label drsl-date-header" translate="caseDetails.updates.date">Date</th>
+                                        <th class="drsl-label drsl-user-header" translate="caseDetails.updates.userExpert">User/Expert</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="update in vm.updates track by $index" class="drsl-update-trow">
+                                        <td class="drsl-update-message-tdata">{{update.updateMsg}}</td>
+                                        <td class="drsl-update-date-tdata">{{update.dateUpdated | date:"MMM dd, yyyy h:mm a"}}</td>
+                                        <td class="drsl-update-user-tdata">{{update.user.login}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Chat Log -->
+                        <div class="drsl-form-grid" >
+                            <div class="drsl-label" translate="caseDetails.updateMessage">Update Message</div>
+                            <div><textarea class="form-control drsl-value" name="updateHistory" id="updateHistory" cols="30" rows="5" ng-model="vm.updatemsg"></textarea></div>
+                        </div>
+
+                        <!-- Detailed Resolution -->
+                        <div class="drsl-form-grid" ng-if="vm.case.status.id == 4 || vm.case.status.id == 5">
+                            <div translate="case.details.detailedResolution">Detailed Resolution</div>
+                            <div ng-if="vm.isExpert"><textarea class="form-control" name="detailedResolution" id="detailedResolution" cols="30" rows="5" ng-model="vm.detailedResolutions[0].updateMsg"></textarea></div>
+                            <div ng-if="!vm.isExpert">{{vm.detailedResolutions[0].updateMsg}}</div>
+                        </div>
+
                     </div>
-                    <table class="drsl-table-scroll table-striped" ng-show="vm.updates.length > 0">
-                        <thead>
-                            <tr>
-                                <th class="drsl-label">Message</th>
-                                <th class="drsl-label drsl-date-header">Date</th>
-                                <th class="drsl-label drsl-user-header">User/Expert</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="update in vm.updates track by $index" class="drsl-update-trow">
-                                <td class="drsl-update-message-tdata">{{update.updateMsg}}</td>
-                                <td class="drsl-update-date-tdata">{{update.dateUpdated | date:"MMM dd, yyyy h:mm a"}}</td>
-                                <td class="drsl-update-user-tdata">{{update.user.login}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
-
-                <!-- </div> -->
-            </div>
-            <!-- Chat Log -->
-            <div class="drsl-form-grid" >
-                <div class="drsl-label">Update Message</div>
-                <div><textarea class="form-control drsl-value" name="updateHistory" id="updateHistory" cols="30" rows="5" ng-model="vm.updatemsg"></textarea></div>
             </div>
 
-            <!-- Detailed Resolution -->
-            <div class="drsl-form-grid" ng-if="vm.case.status.id == 4 || vm.case.status.id == 5">
-                <div translate="case.details.detailedResolution">Detailed Resolution</div>
-                <div ng-if="vm.isExpert"><textarea class="form-control" name="detailedResolution" id="detailedResolution" cols="30" rows="5" ng-model="vm.detailedResolutions[0].updateMsg"></textarea></div>
-                <div ng-if="!vm.isExpert">{{vm.detailedResolutions[0].updateMsg}}</div>
+            <!-- Main Buttons -->
+            <div class="drsl-dialog-buttons">
+                <button class="btn btn-default" ng-click="vm.cancel($event)" translate="entity.action.cancel">Cancel</button>
+                <button type="submit" class="btn btn-success" translate="entity.action.update">Update</button>
             </div>
-
-            <!-- <div class="drsl-form-grid">
-            <div translate="case.details.chatLog">Chat Log</div>
-            <div><textarea class="form-control" name="chatLog" id="chatLog" cols="30" rows="10"></textarea></div>
-        </div> -->
-    </div>
-</div>
-</div>
-
-<!-- Main Buttons -->
-<div class="drsl-dialog-buttons">
-    <button class="btn btn-default" ng-click="vm.cancel($event)" translate="entity.action.cancel">Cancel</button>
-    <button type="submit" class="btn btn-success" translate="entity.action.update">Update</button>
-</div>
-</div>
-</form>
+        </div>
+    </form>
 </div>

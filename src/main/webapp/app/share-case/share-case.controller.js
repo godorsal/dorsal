@@ -35,11 +35,11 @@
             var charSet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
             var randomNewPassword = '';
             for(var i = 0; i < 5; i++){
-        		var randomIndex = Math.floor(Math.random() * charSet.length);
-        		randomNewPassword += charSet.substring(randomIndex,randomIndex+1);
-        	}
-        	randomNewPassword = randomNewPassword + Math.floor(Math.random() * 9);
-        	inviteString = inviteString + ':' + randomNewPassword;
+                var randomIndex = Math.floor(Math.random() * charSet.length);
+                randomNewPassword += charSet.substring(randomIndex,randomIndex+1);
+            }
+            randomNewPassword = randomNewPassword + Math.floor(Math.random() * 9);
+            inviteString = inviteString + ':' + randomNewPassword;
             var newUser = {
                 email: email,
                 langKey: $translate.use(),
@@ -77,13 +77,25 @@
         function addUser() {
             var newUsers = vm.emailInput.split(',');
             newUsers.forEach(function(currentEmail){
-                ManageUser.get({type: 'email', value: currentEmail}, function(result){
-                    if(result.id){
-                        shareCase(result)
-                    } else {
-                        makeUser(currentEmail);
+                if(currentEmail === vm.currentUser.email){
+                    toastr["error"]("Users cannot invite themselves")
+                    return
+                }
+                var alreadySharing = _.find(vm.sharedUsers, function(sharedUser){
+                    if(sharedUser.user.email === currentEmail){
+                        toastr["error"]("User is already invited")
+                        return true;
                     }
                 })
+                if(!alreadySharing){
+                    ManageUser.get({type: 'email', value: currentEmail}, function(result){
+                        if(result.id){
+                            shareCase(result)
+                        } else {
+                            makeUser(currentEmail);
+                        }
+                    })
+                }
             })
         }
         function getSharedUsers() {

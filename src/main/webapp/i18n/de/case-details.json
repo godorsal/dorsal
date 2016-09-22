@@ -1,4 +1,14 @@
 {
     "caseDetails": {
+        "header": "CASE DETAILS:",
+        "subHeader": "Status:",
+        "technology": "Technology Properties",
+        "estimateHistory": "Estimate History",
+        "updateHistory": "Update History",
+        "noUpdatesMessage": "Updates for your case will be displayed here",
+        "updates.message": "Message",
+        "updates.date": "Date",
+        "updates.userExpert": "User/Expert",
+        "updateMessage": "Update Message"
     }
 }
