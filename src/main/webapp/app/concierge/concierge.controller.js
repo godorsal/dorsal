@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .controller('ConciergeController', ConciergeController);
 
-    ConciergeController.$inject = ['$rootScope', '$scope', '$state', 'LoginService', 'Principal', 'ConciergeService', '$translate', '$http', 'Supportcase', 'Casetechnologyproperty', 'toastr', 'AttachmentModalService', 'DateUtils', 'CaseService', 'DrslNewCaseService', 'DrslMetadata', 'ExpertAccount', 'DrslUserFlowService', 'SupportCaseReport'];
+    ConciergeController.$inject = ['$rootScope', '$scope', '$state', 'LoginService', 'Principal', 'ConciergeService', '$translate', '$http', 'Supportcase', 'Casetechnologyproperty', 'toastr', 'AttachmentModalService', 'DateUtils', 'CaseService', 'DrslNewCaseService', 'DrslMetadata', 'ExpertAccount', 'DrslUserFlowService'];
 
-    function ConciergeController($rootScope, $scope, $state, LoginService, Principal, ConciergeService, $translate, $http, Supportcase, Casetechnologyproperty, toastr, AttachmentModalService, DateUtils, CaseService, DrslNewCaseService, DrslMetadata, ExpertAccount, DrslUserFlowService, SupportCaseReport) {
+    function ConciergeController($rootScope, $scope, $state, LoginService, Principal, ConciergeService, $translate, $http, Supportcase, Casetechnologyproperty, toastr, AttachmentModalService, DateUtils, CaseService, DrslNewCaseService, DrslMetadata, ExpertAccount, DrslUserFlowService) {
 
         DrslUserFlowService.handleUserFlow();
 

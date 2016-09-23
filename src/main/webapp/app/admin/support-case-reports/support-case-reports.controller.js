@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('SupportCaseReportsController', SupportCaseReportController);
 
-    SupportCaseReportController.$inject = ['Principal', 'Supportcase', 'ParseLinks', 'paginationConstants', 'JhiLanguageService', 'SupportCaseReport', '$scope'];
+    SupportCaseReportController.$inject = ['Principal', 'Supportcase', 'ParseLinks', 'paginationConstants', 'JhiLanguageService', 'ManageSupportCaseReports', '$scope', 'SupportCaseReport'];
 
-    function SupportCaseReportController(Principal, Supportcase, ParseLinks, paginationConstants, JhiLanguageService, SupportCaseReport, $scope) {
+    function SupportCaseReportController(Principal, Supportcase, ParseLinks, paginationConstants, JhiLanguageService, ManageSupportCaseReports, $scope, SupportCaseReport) {
         var vm = this;
         vm.authorities = ['ROLE_USER', 'ROLE_ADMIN'];
         vm.clear = clear;
@@ -25,7 +25,7 @@
         vm.reports = [];
         vm.casesInProgress = [];
         vm.dateRange = '10';
-        vm.supportcaseNumber = 10;
+        vm.supportcaseNumber = 5;
 
         vm.loadAll();
 
@@ -42,7 +42,7 @@
             vm.paidReports = [];
             vm.reports = [];
             vm.casesInProgress = [];
-            SupportCaseReport.query({page: vm.page - 1, size: paginationConstants.itemsPerPage, daysSince: vm.dateRange}, function (result, headers) {
+            ManageSupportCaseReports.query({page: vm.page - 1, size: paginationConstants.itemsPerPage, daysSince: vm.dateRange}, function (result, headers) {
                 result.forEach(function(report){
                     if(report.isPaid === true){
                         vm.paidReports.push(report);
@@ -52,7 +52,7 @@
                     }
                 })
             });
-            Supportcase.query({size: vm.supportcaseNumber+1}, function(result) {
+            Supportcase.query({size: vm.supportcaseNumber}, function(result) {
                 result.forEach(function(supportcase){
                     if(supportcase.status.id != 5){
                         vm.casesInProgress.push(supportcase);
