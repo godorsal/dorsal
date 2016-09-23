@@ -27,6 +27,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
+import java.util.stream.Collectors;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
+
 /**
  * REST controller for managing Supportcase.
  */
@@ -207,52 +212,65 @@ public class SupportcaseResource {
      *
      * @return the ResponseEntity with status 200 (OK) and the list of supportcases in body
      */
-    @RequestMapping(value = "/supportcases",
-        method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public List<Supportcase> getAllSupportcases() {
-        log.debug("REST request to get all Supportcases");
-        int numCases = 0;
+     @RequestMapping(value = "/supportcases",
+         method = RequestMethod.GET,
+         produces = MediaType.APPLICATION_JSON_VALUE)
+     @Timed
+     @Transactional(readOnly = true)
+     public ResponseEntity<List<Supportcase>> getAllSupportcases(Pageable pageable)
+         throws URISyntaxException {
+             log.debug("REST request to get all Supportcases");
+             int numCases = 0;
+         List<Supportcase> supportcasesList = supportcaseRepository.findAllAdminIsCurrentUser(pageable);
+         return new ResponseEntity<>(supportcasesList, HttpStatus.OK);
+     }
 
-        // Get all support cases if logged in user is admin
-        List<Supportcase> supportcases = supportcaseRepository.findAllAdminIsCurrentUser();
-
-        if(supportcases.size() > 0) {
-            return supportcases;
-        }
-
-        //.findAll();
-        // List<Supportcase> supportcases = supportcaseRepository.findByUserIsCurrentUser(); //.findAll();
-        // List<Supportcase> supportcases = supportcaseRepository.findByUserIsCurrentUser(); //.findAll();
-        // numCases = supportcases.size();
-        // log.debug("Support cases owned by user " + numCases);
-
-        // Get support cases by currently logged in user
-        supportcases.addAll(supportcaseRepository.findByUserIsCurrentUser());
-        log.debug("Support cases owned by user " + numCases);
-        numCases = supportcases.size();
-
-        // Get support cases for where currently logged in user is expert
-        supportcases.addAll(supportcaseRepository.findByExpertIsCurrentUser());
-        log.debug("Support cases user is expert " + (supportcases.size() - numCases) );
-        numCases = supportcases.size();
-
-        // Get support cases tat are shared to user
-        supportcases.addAll(supportcaseRepository.findBySharedIsCurrentUser());
-        log.debug("Support cases shared to user " + (supportcases.size() - numCases) );
-        numCases = supportcases.size();
-
-        // Get all support cases for users that in the authorized group for the logged in user
-        List<Supportcase> groupAuthorizedCases = supportcaseRepository.findGroupAccessUser();
-
-        // For now add the list to the result
-        supportcases.addAll(groupAuthorizedCases);
-        log.debug("Support by authorized users by this user " + groupAuthorizedCases.size()  );
-
-        // Return the combined list
-        return supportcases;
-    }
+    // @RequestMapping(value = "/supportcases",
+    //     method = RequestMethod.GET,
+    //     produces = MediaType.APPLICATION_JSON_VALUE)
+    // @Timed
+    // public List<Supportcase> getAllSupportcases() {
+    //     log.debug("REST request to get all Supportcases");
+    //     int numCases = 0;
+    //
+    //     // Get all support cases if logged in user is admin
+    //     List<Supportcase> supportcases = supportcaseRepository.findAllAdminIsCurrentUser();
+    //
+    //     if(supportcases.size() > 0) {
+    //         return supportcases;
+    //     }
+    //
+    //     //.findAll();
+    //     // List<Supportcase> supportcases = supportcaseRepository.findByUserIsCurrentUser(); //.findAll();
+    //     // List<Supportcase> supportcases = supportcaseRepository.findByUserIsCurrentUser(); //.findAll();
+    //     // numCases = supportcases.size();
+    //     // log.debug("Support cases owned by user " + numCases);
+    //
+    //     // Get support cases by currently logged in user
+    //     supportcases.addAll(supportcaseRepository.findByUserIsCurrentUser());
+    //     log.debug("Support cases owned by user " + numCases);
+    //     numCases = supportcases.size();
+    //
+    //     // Get support cases for where currently logged in user is expert
+    //     supportcases.addAll(supportcaseRepository.findByExpertIsCurrentUser());
+    //     log.debug("Support cases user is expert " + (supportcases.size() - numCases) );
+    //     numCases = supportcases.size();
+    //
+    //     // Get support cases tat are shared to user
+    //     supportcases.addAll(supportcaseRepository.findBySharedIsCurrentUser());
+    //     log.debug("Support cases shared to user " + (supportcases.size() - numCases) );
+    //     numCases = supportcases.size();
+    //
+    //     // Get all support cases for users that in the authorized group for the logged in user
+    //     List<Supportcase> groupAuthorizedCases = supportcaseRepository.findGroupAccessUser();
+    //
+    //     // For now add the list to the result
+    //     supportcases.addAll(groupAuthorizedCases);
+    //     log.debug("Support by authorized users by this user " + groupAuthorizedCases.size()  );
+    //
+    //     // Return the combined list
+    //     return supportcases;
+    // }
 
     /**
      * GET  /supportcases/:id : get the "id" supportcase.

@@ -19,6 +19,8 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -130,19 +132,26 @@ public class SupportCaseReportResource {
 
         return supportCaseReports;
     }
+    /**
+     * GET  /support-case-reports/query/{daysSince} : get all the supportCaseReports from {daysSince} days ago.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of supportCaseReports in body
+     */
     @RequestMapping(value = "/support-case-reports/query/{daysSince}",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public List<SupportCaseReport> getAllSupportCaseReportsByQuery(@PathVariable String daysSince) {
-        ZonedDateTime dateFrom = ZonedDateTime.parse(daysSince);
-        log.debug("REST request to get all SupportCaseReports : {}", dateFrom);
+    public List<SupportCaseReport> getAllSupportCaseReportsByQuery(@PathVariable int daysSince) {
+        ZonedDateTime todayDate = ZonedDateTime.now();
+        ZonedDateTime dateFrom = todayDate.minus(daysSince,ChronoUnit.DAYS);
+
+        log.debug("DATE FROM : {}", dateFrom);
+
         List<SupportCaseReport> supportCaseReports = null;
 
         // Only admin user can get report. Make sure the requester is admin before returning all records
         User loggedInUser = userRepository.findLoggedInUser();
         if (loggedInUser != null && loggedInUser.getLogin().equalsIgnoreCase("admin")) {
-            // supportCaseReports = supportCaseReportRepository.findAll();
             supportCaseReports = supportCaseReportRepository.findAllFromDaysAgo(dateFrom);
 
         }
