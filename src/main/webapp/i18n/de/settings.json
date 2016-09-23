@@ -1,6 +1,11 @@
 {
     "settings": {
         "title": "Einstellungen für Benutzer [<b>{{username}}</b>]",
+        "headers": {
+            "userSettings": "User settings for ",
+            "expertSettings": "Expert Settings",
+            "paymentMethod": "Payment Method"
+        },
         "form": {
             "firstname": "Vorname",
             "firstname.placeholder": "Ihr Vorname",
@@ -8,12 +13,61 @@
             "lastname.placeholder": "Ihr Nachname",
             "language": "Sprache",
             "button": "Speichern",
-            "expertScore": "Expert Score:"
+            "expertScore": "Expert Score:",
+            "login": "(Login)",
+            "email": "(Email Address)",
+            "email.placeholder": "Email: user@localhost.com",
+            "phone": "(Phone)",
+            "mobile": "(Mobile)",
+            "skype": "(Skype)",
+            "drslChatHandle": "(Chat Handle)",
+            "preferred": "(Other Method)",
+            "othercommunication": "(Other Link)",
+            "location": "(Location)",
+            "timezone": "(Timezone)",
+            "availability": "(Availability)",
+            "welcome": "Welcome Message",
+            "welcome.placeholder": "Greeting Message",
+            "bio": "Bio",
+            "bio.placeholder": "Expert Bio",
+            "issue": "(Issue Focus)",
+            "technology": "(1st Technology Focus)",
+            "technology2": "(2nd Technology Focus)",
+            "profileVisibility": "Profile Visibility:",
+            "totalNumberOfCases": "Total Number of Cases: ",
+            "expertSince": "Expert since:",
+            "authorizedCreditCard": "Authorized Credit Card",
+            "ccNameOnCard": "Name on Card",
+            "ccNameOnCard.placeholder": "Card Holder's Name",
+            "ccCardNumber.card.placeholder": "Card Number",
+            "ccCardNumber.field1.placeholder": "Credit",
+            "ccCardNumber.field2.placeholder": "Card",
+            "ccCardNumber.field3.placeholder": "Number",
+            "ccExpirationDate": "Expiration Date",
+            "ccMonth": "Month",
+            "ccYear": "Year",
+            "ccCVV": "Card CVV",
+            "ccCVV.placeholder": "CVV"
+        },
+        "authorization":{
+            "header": "Manage Authorized Users",
+            "input": "Add User",
+            "input.placeholder": "Email address; multiple users separated by commas",
+            "noInvitedUsers": "No Invited Users",
+            "InvitedUsers": "Invited Users",
+            "remove": "Remove",
+            "activeHeader": "(Invited Users automatically join Active Users once they register)",
+            "noActiveUsers": "No Active Users",
+            "ActiveUsers": "Active Users"
+
         },
         "messages": {
             "error": {
                 "fail": "<strong>Es ist ein Fehler aufgetreten!</strong> Die Einstellungen konnten nicht gespeichert werden.",
-                "emailexists": "<strong>E-mail wird bereits verwendet!</strong> Bitte wählen Sie eine andere aus."
+                "emailexists": "<strong>E-mail wird bereits verwendet!</strong> Bitte wählen Sie eine andere aus.",
+                "ccInvalidName": "Invalid Name",
+                "ccInvalidCardNumber": "Invalid Card Number",
+                "ccInvalidCVVNumber": "Invalid CVV Number"
             },
             "success": "<strong>Einstellungen wurden gespeichert!</strong>",
             "validate": {
