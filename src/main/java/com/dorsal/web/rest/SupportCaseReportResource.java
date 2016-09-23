@@ -53,7 +53,6 @@ public class SupportCaseReportResource {
     @Timed
     public ResponseEntity<SupportCaseReport> createSupportCaseReport(@Valid @RequestBody SupportCaseReport supportCaseReport) throws URISyntaxException {
         log.debug("REST request to save SupportCaseReport : {}", supportCaseReport);
-        log.debug("FRESH");
         // Creation of entry not allowed through API. It is done in the backend
         return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("supportCaseReport", "createnotallowed", "supportCaseReport entry cannot be created through the API")).body(null);
 

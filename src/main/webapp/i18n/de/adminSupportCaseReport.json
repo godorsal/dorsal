@@ -1,0 +1,39 @@
+{
+        "adminSupportCaseReport" : {
+            "home": {
+                "title": "Support Case Reports",
+                "createLabel": "Create a new Support Case Report",
+                "createOrEditLabel": "Create or edit a Support Case Report",
+                "search": "Search for Support Case Report"
+            },
+            "created": "A new Support Case Report is created with identifier {{ param }}",
+            "updated": "A Support Case Report is updated with identifier {{ param }}",
+            "deleted": "A Support Case Report is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Support Case Report {{ id }}?"
+            },
+            "detail": {
+                "title": "Support Case Report"
+            },
+            "isPaid": "Is Paid",
+            "datePaid": "Date Paid",
+            "comments": "Comments",
+            "supportcase": "Supportcase",
+            "id": "Support Case ID",
+            "rating": "Rating",
+            "completedDate": "Completed Date",
+            "comment": "Comment",
+            "expert": "Expert",
+            "user": "User",
+            "status": "Current Status",
+            "casePayments": "Case Payments",
+            "dateRange": "Date Range",
+            "last10": "Last 10 Days",
+            "last30": "Last 30 Days",
+            "last90": "Last 90 Days",
+            "unpaidCases": "Unpaid Cases {{ cases }}",
+            "paidCases": "Paid Cases {{ cases }}",
+            "supportCasesInProgress": "Support Cases In Progress {{ cases }}",
+            "update": "Update"
+        }
+}

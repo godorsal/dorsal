@@ -48,7 +48,6 @@
                         vm.paidReports.push(report);
                     } else {
                         vm.reports.push(report);
-                        console.log(report);
                     }
                 })
             });
