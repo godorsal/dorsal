@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('SupportCaseReportsController', SupportCaseReportController);
 
-    SupportCaseReportController.$inject = ['Principal', 'Supportcase', 'ParseLinks', 'paginationConstants', 'JhiLanguageService', 'ManageSupportCaseReports', '$scope', 'SupportCaseReport'];
+    SupportCaseReportController.$inject = ['Principal', 'Supportcase', 'ParseLinks', 'paginationConstants', 'JhiLanguageService', 'ManageSupportCaseReports', '$scope', 'SupportCaseReport', 'toastr'];
 
-    function SupportCaseReportController(Principal, Supportcase, ParseLinks, paginationConstants, JhiLanguageService, ManageSupportCaseReports, $scope, SupportCaseReport) {
+    function SupportCaseReportController(Principal, Supportcase, ParseLinks, paginationConstants, JhiLanguageService, ManageSupportCaseReports, $scope, SupportCaseReport, toastr) {
         var vm = this;
         vm.authorities = ['ROLE_USER', 'ROLE_ADMIN'];
         vm.clear = clear;
@@ -26,23 +26,27 @@
         vm.casesInProgress = [];
         vm.dateRange = '10';
         vm.supportcaseNumber = 5;
+        init();
 
-        vm.loadAll();
+        function init(){
+            vm.loadAll();
+            JhiLanguageService.getAll().then(function (languages) {
+                vm.languages = languages;
+            });
 
+            Principal.identity().then(function(account) {
+                vm.currentAccount = account;
+            });
 
-        JhiLanguageService.getAll().then(function (languages) {
-            vm.languages = languages;
-        });
-
-        Principal.identity().then(function(account) {
-            vm.currentAccount = account;
-        });
-
+        }
         function loadAll () {
+            //Sets the array of reports we want to view to blank, so we can requery them if whe have different parameters
             vm.paidReports = [];
             vm.reports = [];
             vm.casesInProgress = [];
+            //Gets support case reports by the date range, from 10 days ago to 90 days ago
             ManageSupportCaseReports.query({page: vm.page - 1, size: paginationConstants.itemsPerPage, daysSince: vm.dateRange}, function (result, headers) {
+                //Divide between paid and unpaid reports
                 result.forEach(function(report){
                     if(report.isPaid === true){
                         vm.paidReports.push(report);
@@ -51,6 +55,7 @@
                     }
                 })
             });
+            //Query the supportcases for the second tab
             Supportcase.query({size: vm.supportcaseNumber}, function(result) {
                 result.forEach(function(supportcase){
                     if(supportcase.status.id != 5){
@@ -59,7 +64,6 @@
                 })
             });
         }
-
         function loadPage (page) {
             vm.page = page;
             vm.loadAll();
@@ -71,7 +75,7 @@
             loadAll ();
         }
         function onUpdateError(result){
-            console.log("ERROR", result);
+            toastr.error("Report Update Error")
         }
         function setActive (user, isActivated) {
             user.activated = isActivated;

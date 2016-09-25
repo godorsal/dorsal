@@ -1,14 +1,0 @@
-Script started on Fri Aug 12 15:38:44 2016
-zsh loaded
-^CTraceback (most recent call last):
-  File "/usr/local/bin/thefuck", line 7, in <module>
-    from thefuck.main import main
-  File "/usr/local/lib/python2.7/site-packages/thefuck/main.py", line 2, in <module>
-    from .system import init_output
-  File "/usr/local/lib/python2.7/site-packages/thefuck/system/__init__.py", line 1, in <module>
-    import sys
-KeyboardInterrupt
-[1m[7m%[27m[1m[0m                                                                                                     [0m[27m[24m[JDamonMac% [K
-[1m[7m%[27m[1m[0m                                                                                                     [0m[27m[24m[JDamonMac% [Keexit
-
-Script done on Fri Aug 12 15:38:56 2016

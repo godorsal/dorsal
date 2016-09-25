@@ -8,7 +8,6 @@
 
     function SupportCaseReport ($resource, DateUtils) {
         var resourceUrl =  'api/support-case-reports/:id';
-        // var resourceUrl =  'api/support-case-reports/query/:daysSince';
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
