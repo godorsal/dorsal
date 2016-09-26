@@ -18,7 +18,7 @@
         vm.summary = vm.case.summary.toString();
         getSharedUsers();
         vm.usersToQuery = 200;
-
+        
         function cancel(e) {
             e.preventDefault();
             $uibModalInstance.dismiss('cancel');

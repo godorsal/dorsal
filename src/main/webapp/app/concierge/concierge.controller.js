@@ -5,10 +5,10 @@
         .module('dorsalApp')
         .controller('ConciergeController', ConciergeController);
 
-    ConciergeController.$inject = ['$rootScope', '$scope', '$state', 'LoginService', 'Principal', 'ConciergeService', '$translate', 'Supportcase', 'Casetechnologyproperty', 'toastr', 'DateUtils', 'DrslNewCaseService', 'DrslMetadata', 'DrslUserFlowService'];
+    ConciergeController.$inject = ['$rootScope', '$scope', '$state', 'LoginService', 'Principal', 'ConciergeService', '$translate', '$http', 'Supportcase', 'Casetechnologyproperty', 'toastr', 'AttachmentModalService', 'DateUtils', 'CaseService', 'DrslNewCaseService', 'DrslMetadata', 'ExpertAccount', 'DrslUserFlowService'];
 
-    function ConciergeController($rootScope, $scope, $state, LoginService, Principal, ConciergeService, $translate, Supportcase, Casetechnologyproperty, toastr, DateUtils, DrslNewCaseService, DrslMetadata, DrslUserFlowService) {
-        // Handle user flow redirects and messaging
+    function ConciergeController($rootScope, $scope, $state, LoginService, Principal, ConciergeService, $translate, $http, Supportcase, Casetechnologyproperty, toastr, AttachmentModalService, DateUtils, CaseService, DrslNewCaseService, DrslMetadata, ExpertAccount, DrslUserFlowService) {
+
         DrslUserFlowService.handleUserFlow();
 
         // Set the view model and view model properties/methods

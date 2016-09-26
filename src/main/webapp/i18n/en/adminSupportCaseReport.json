@@ -1,6 +1,5 @@
 {
-    "dorsalApp": {
-        "supportCaseReport" : {
+        "adminSupportCaseReport" : {
             "home": {
                 "title": "Support Case Reports",
                 "createLabel": "Create a new Support Case Report",
@@ -25,7 +24,16 @@
             "completedDate": "Completed Date",
             "comment": "Comment",
             "expert": "Expert",
-            "user": "User"
+            "user": "User",
+            "status": "Current Status",
+            "casePayments": "Case Payments",
+            "dateRange": "Date Range",
+            "last10": "Last 10 Days",
+            "last30": "Last 30 Days",
+            "last90": "Last 90 Days",
+            "unpaidCases": "Unpaid Cases {{ cases }}",
+            "paidCases": "Paid Cases {{ cases }}",
+            "supportCasesInProgress": "Support Cases In Progress {{ cases }}",
+            "update": "Update"
         }
-    }
 }

@@ -1,0 +1,122 @@
+<div>
+    <h2 translate="adminSupportCaseReport.home.title">Dorsal Reports</h2>
+    <!-- Uib tabset for "Completed Cases", "Cases in progress", and "..." as a placeholder for a possible third tab -->
+    <uib-tabset active="active">
+        <!-- First tab is for completed cases -->
+        <uib-tab index="0" heading="Completed Cases">
+            <h3 translate="adminSupportCaseReport.casePayments" class="drsl-reports-top">Case Payments</h3>
+            <div class="form-group">
+                <!-- Date Range for completed cases -->
+                <label for="DateRange" translate="adminSupportCaseReport.dateRange">Date Range</label>
+                <select ng-model="vm.dateRange" class="form-control">
+                    <option value="10" translate="adminSupportCaseReport.last10">Last 10 days</option>
+                    <option value="30" translate="adminSupportCaseReport.last30">Last 30 days</option>
+                    <option value="90" translate="adminSupportCaseReport.last90">Last 90 days</option>
+                </select>
+            </div>
+            <button ng-click="vm.loadAll()" class="btn btn-success">Query</button>
+            <!-- Displays all unpaid cases -->
+            <h3 translate="adminSupportCaseReport.unpaidCases" translate-values="{cases: '{{vm.reports.length}}'}">Unpaid Cases: {{vm.reports.length}}</h3>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th translate="adminSupportCaseReport.id">Support Case ID</th>
+                            <th translate="adminSupportCaseReport.completedDate">Completed Date</th>
+                            <th translate="adminSupportCaseReport.isPaid">Is Paid</th>
+                            <th translate="adminSupportCaseReport.comment">Comment</th>
+                            <th translate="adminSupportCaseReport.expert">Expert</th>
+                            <th translate="adminSupportCaseReport.user">User</th>
+                            <th translate="adminSupportCaseReport.update">Update</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="report in vm.reports track by $index">
+                            <td>{{report.supportcase.technology.name}}-{{report.supportcase.id}}</a></td>
+                            <td>{{report.supportcase.dateLastUpdate | date:'MM/dd/yyyy'}}</td>
+                            <td>
+                                <!-- Can assign isPaid to an unpaid case -->
+                                <input type="checkbox" ng-model="report.isPaid" class="form-control">
+                            </td>
+                            <td>
+                                <!-- Can write a comment to an unpaid case -->
+                                <textarea name="name" rows="2" cols="8" ng-model="report.comments" class="form-control"></textarea>
+                            </td>
+                            <td>{{report.supportcase.expertaccount.user.firstName}} {{report.supportcase.expertaccount.user.lastName}}</td>
+                            <td>{{report.supportcase.user.firstName}} {{report.supportcase.user.lastName}}</td>
+                            <td><button type="button" name="button" class="btn btn-success" ng-click="vm.updateReport(report)" translate="adminSupportCaseReport.update">Update</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- List of all paid cases -->
+            <h3 translate="adminSupportCaseReport.paidCases" translate-values="{cases: '{{vm.paidReports.length}}'}">Paid Cases: {{vm.paidReports.length}}</h3>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th translate="adminSupportCaseReport.id">Support Case ID</th>
+                            <th translate="adminSupportCaseReport.completedDate">Completed Date</th>
+                            <th translate="adminSupportCaseReport.isPaid">Is Paid</th>
+                            <th translate="adminSupportCaseReport.datePaid">Date Paid</th>
+                            <th translate="adminSupportCaseReport.comment">Comment</th>
+                            <th translate="adminSupportCaseReport.expert">Expert</th>
+                            <th translate="adminSupportCaseReport.user">User</th>
+                            <th translate="adminSupportCaseReport.update">Update</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="paidReport in vm.paidReports track by paidReport.id">
+                            <td>{{paidReport.supportcase.technology.name}}-{{paidReport.supportcase.id}}</a></td>
+                            <td>{{paidReport.supportcase.dateLastUpdate | date:'MM/dd/yyyy'}}</td>
+                            <td>
+                                <!-- Can assign isPaid to an paid case -->
+                                <input type="checkbox" ng-model="paidReport.isPaid" class="form-control">
+                            </td>
+                            <td>{{paidReport.datePaid}}</td>
+                            <td>
+                                <!-- Can write a comment to an unpaid case -->
+                                <textarea name="name" rows="2" cols="8" ng-model="paidReport.comments" class="form-control"></textarea>
+                            </td>
+                            <td>{{paidReport.supportcase.expertaccount.user.firstName}} {{paidReport.supportcase.expertaccount.user.lastName}}</td>
+                            <td>{{paidReport.supportcase.user.firstName}} {{paidReport.supportcase.user.lastName}}</td>
+                            <td><button type="button" name="button" class="btn btn-success" ng-click="vm.updateReport(paidReport)" translate="adminSupportCaseReport.update">Update</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </uib-tab>
+        <!-- Second tab is for cases in progress -->
+        <uib-tab index="1" heading="Cases In Progress">
+            <h3 translate="adminSupportCaseReport.supportCasesInProgress" class="drsl-reports-top" translate-values="{cases: '{{vm.casesInProgress.length}}'}">Support cases in progress: {{vm.casesInProgress.length}}</h3>
+            <div class="form-group">
+                <label for="SupportCaseNumber">Number Of Supportcases</label>
+                <input type="number" class="form-control" ng-model="vm.supportcaseNumber">
+            </div>
+            <button ng-click="vm.loadAll()" class="btn btn-success">Query</button>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th translate="adminSupportCaseReport.id">Support Case ID</th>
+                            <th translate="adminSupportCaseReport.status">Current Status</th>
+                            <th translate="adminSupportCaseReport.comment">Comment</th>
+                            <th translate="adminSupportCaseReport.expert">Expert</th>
+                            <th translate="adminSupportCaseReport.user">User</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="case in vm.casesInProgress track by $index">
+                            <td>{{case.technology.name}}-{{case.id}}</a></td>
+                            <td>{{case.status.name}}</td>
+                            <td><textarea name="name" rows="2" cols="8" ng-model="case.comment" class="form-control"></textarea></td>
+                            <td>{{case.expertaccount.user.firstName}} {{case.expertaccount.user.lastName}}</td>
+                            <td>{{case.user.firstName}} {{case.user.lastName}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </uib-tab>
+        <uib-tab index="2" heading="...">...</uib-tab>
+    </uib-tabset>
+</div>

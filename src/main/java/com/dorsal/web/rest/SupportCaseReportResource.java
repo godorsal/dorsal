@@ -19,6 +19,8 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -51,7 +53,6 @@ public class SupportCaseReportResource {
     @Timed
     public ResponseEntity<SupportCaseReport> createSupportCaseReport(@Valid @RequestBody SupportCaseReport supportCaseReport) throws URISyntaxException {
         log.debug("REST request to save SupportCaseReport : {}", supportCaseReport);
-
         // Creation of entry not allowed through API. It is done in the backend
         return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("supportCaseReport", "createnotallowed", "supportCaseReport entry cannot be created through the API")).body(null);
 
@@ -121,6 +122,37 @@ public class SupportCaseReportResource {
         User loggedInUser = userRepository.findLoggedInUser();
         if (loggedInUser != null && loggedInUser.getLogin().equalsIgnoreCase("admin")) {
             supportCaseReports = supportCaseReportRepository.findAll();
+        }
+        else
+        {
+            log.error("User not allowed to access API. No reports returned.");
+            supportCaseReports = new ArrayList<SupportCaseReport>();
+        }
+
+        return supportCaseReports;
+    }
+    /**
+     * GET  /support-case-reports/query/{daysSince} : get all the supportCaseReports from {daysSince} days ago.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of supportCaseReports in body
+     */
+    @RequestMapping(value = "/support-case-reports/query/{daysSince}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<SupportCaseReport> getAllSupportCaseReportsByQuery(@PathVariable int daysSince) {
+        ZonedDateTime todayDate = ZonedDateTime.now();
+        ZonedDateTime dateFrom = todayDate.minus(daysSince,ChronoUnit.DAYS);
+
+        log.debug("DATE FROM : {}", dateFrom);
+
+        List<SupportCaseReport> supportCaseReports = null;
+
+        // Only admin user can get report. Make sure the requester is admin before returning all records
+        User loggedInUser = userRepository.findLoggedInUser();
+        if (loggedInUser != null && loggedInUser.getLogin().equalsIgnoreCase("admin")) {
+            supportCaseReports = supportCaseReportRepository.findAllFromDaysAgo(dateFrom);
+
         }
         else
         {
