@@ -35,6 +35,8 @@
             "paidCases": "Paid Cases {{ cases }}",
             "supportCasesInProgress": "Support Cases In Progress {{ cases }}",
             "update": "Update",
-            "payment": "Payment Amount"
+            "payment": "Payment Amount",
+            "ratingScore": "Rating Score",
+            "ratingComment": "Rating Comment"
         }
 }

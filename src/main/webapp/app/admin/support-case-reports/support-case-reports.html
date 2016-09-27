@@ -25,7 +25,8 @@
                             <th translate="adminSupportCaseReport.completedDate">Completed Date</th>
                             <th translate="adminSupportCaseReport.isPaid">Is Paid</th>
                             <th translate="adminSupportCaseReport.payment">Payment</th>
-                            <th translate="adminSupportCaseReport.rating">Rating</th>
+                            <th translate="adminSupportCaseReport.ratingScore">Rating Score</th>
+                            <th translate="adminSupportCaseReport.ratingComment">Rating Comment</th>
                             <th translate="adminSupportCaseReport.comment">Comment</th>
                             <th translate="adminSupportCaseReport.expert">Expert</th>
                             <th translate="adminSupportCaseReport.user">User</th>
@@ -45,8 +46,12 @@
                                 {{report.payment}}
                             </td>
                             <td>
-                                <!-- Rating -->
+                                <!-- Rating Score -->
                                 {{report.rating.score}}
+                            </td>
+                            <td>
+                                <!-- Rating Comment -->
+                                {{report.rating.ratingComments}}
                             </td>
                             <td>
                                 <!-- Can write a comment to an unpaid case -->
@@ -70,7 +75,8 @@
                             <th translate="adminSupportCaseReport.isPaid">Is Paid</th>
                             <th translate="adminSupportCaseReport.datePaid">Date Paid</th>
                             <th translate="adminSupportCaseReport.payment">Payment</th>
-                            <th translate="adminSupportCaseReport.rating">Rating</th>
+                            <th translate="adminSupportCaseReport.ratingScore">Rating Score</th>
+                            <th translate="adminSupportCaseReport.ratingComment">Rating Comment</th>
                             <th translate="adminSupportCaseReport.comment">Comment</th>
                             <th translate="adminSupportCaseReport.expert">Expert</th>
                             <th translate="adminSupportCaseReport.user">User</th>
@@ -93,6 +99,10 @@
                             <td>
                                 <!-- Rating -->
                                 {{paidReport.rating.score}}
+                            </td>
+                            <td>
+                                <!-- Rating Comment -->
+                                {{paidReport.rating.ratingComments}}
                             </td>
                             <td>
                                 <!-- Can write a comment to an unpaid case -->
