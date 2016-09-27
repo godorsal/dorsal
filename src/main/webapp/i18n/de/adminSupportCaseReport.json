@@ -44,9 +44,7 @@
                 "creationDate": "Created Date",
                 "expectedDeliveryDate": "Expected Delivery Date",
                 "lastUpdatedDate": "Last Updated Date",
-                "estimatedHours": "Estimated Hours",
-                "expert": "Expert",
-                "user": "User"
+                "estimatedHours": "Estimated Hours"
             }
         }
 }
