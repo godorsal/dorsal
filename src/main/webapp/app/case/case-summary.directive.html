@@ -27,17 +27,27 @@
     <!-- Start / ETA to Completion -->
     <div>
         <span><span class="drsl-label">Start</span> <span class="drsl-value">{{case.dateCreated | date:'MMM dd, yyyy h:mm a'}}</span></span>
-        <div class="pull-right drsl-value" ng-show="case.estimateHours && !case.timeOnCase"><span class="drsl-label" translate="case.details.resolutionETA">ETA to Completion</span><span class="drsl-eta-hour"> {{case.estimateHours}} hr<span ng-show="(case.estimateHours) > 1">s</span></span></div>
-        <div class="pull-right drsl-value" ng-show="case.estimateHours && case.timeOnCase"><span class="drsl-label" translate="case.details.resolutionETA">ETA to Completion</span><span class="drsl-eta-date"> {{case.estimateHours - case.timeOnCase}} hr<span ng-show="(case.estimateHours - case.timeOnCase) > 1">s</span></span></div>
+        <div class="pull-right drsl-value" ng-show="case.estimateHours && !case.timeOnCase && case.status.id < 4 "><span class="drsl-label" translate="case.details.resolutionETA">ETA to Completion</span><span class="drsl-eta-hour"> {{case.estimateHours}} hr<span ng-show="(case.estimateHours) > 1">s</span></span></div>
+        <div class="pull-right drsl-value" ng-show="case.estimateHours && case.timeOnCase && case.status.id < 4 "><span class="drsl-label" translate="case.details.resolutionETA">ETA to Completion</span><span class="drsl-eta-date"> {{case.estimateHours - case.timeOnCase}} hr<span ng-show="(case.estimateHours - case.timeOnCase) > 1">s</span></span></div>
+        <div class="pull-right drsl-value" ng-show="case.status.id >= 4"><span class="drsl-label" translate="case.details.resolutionETA">ETA to Completion</span><span class="drsl-eta-date"> 0 hrs<span ng-show="(case.estimateHours - case.timeOnCase) > 1">s</span></span></div>
     </div>
 
     <!-- Estimate / Requested Delivery -->
-    <div>
+    <div ng-if="case.status.id < 4">
         <span>
             <span class="drsl-label" translate="case.details.estimate">Estimate</span>
             <span class="drsl-value" ng-show="case"><case-estimate hours="{{case.estimateHours}}"></case-estimate></span>
         </span>
         <div class="pull-right drsl-value"><span class="drsl-label" translate="case.details.requestedDate">Requested Delivery</span><span class="drsl-eta-date"> {{case.expectedCompletionDate | date:'MMM dd, yyyy'}}</span></div>
+    </div>
+
+    <!-- Cost / Actual Delivery Date -->
+    <div ng-if="case.status.id >= 4">
+        <span>
+            <span class="drsl-label" translate="case.details.finalCost">Cost</span>
+            <span class="drsl-value" ng-show="case"><case-estimate hours="{{case.timeOnCase}}" estimate="{{case.estimateHours}}"></case-estimate></span>
+        </span>
+        <div class="pull-right drsl-value drsl-delivered-date"><span class="drsl-label" translate="case.details.deliveredDate">Delivered</span><span class="drsl-eta-date"> {{case.dateLastUpdate | date:'MMM dd, yyyy'}}</span></div>
     </div>
 
     <!-- Timeline -->

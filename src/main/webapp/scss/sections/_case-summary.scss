@@ -68,14 +68,16 @@ Case Summary
         }
     }
     .drsl-eta-hour {
-        min-width: 88px;
+        min-width: 87px;
         display: inline-block;
     }
     .drsl-eta-date {
         min-width: 75px;
         display: inline-block;
     }
-
+    .drsl-delivered-date {
+        padding-right: 62px;
+    }
     .drsl-detail-attachment-wrapper .drsl-attachment-items-wrapper {
         width: 300px;
     }
