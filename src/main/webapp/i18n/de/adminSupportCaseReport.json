@@ -37,6 +37,16 @@
             "update": "Update",
             "payment": "Payment Amount",
             "ratingScore": "Rating Score",
-            "ratingComment": "Rating Comment"
+            "ratingComment": "Rating Comment",
+            "inProgress": {
+                "id": "ID",
+                "status": "Status",
+                "creationDate": "Created Date",
+                "expectedDeliveryDate": "Expected Delivery Date",
+                "lastUpdatedDate": "Last Updated Date",
+                "estimatedHours": "Estimated Hours",
+                "expert": "Expert",
+                "user": "User"
+            }
         }
 }
