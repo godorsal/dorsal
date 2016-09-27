@@ -49,7 +49,7 @@
                 console.log(result);
                 //Divide between paid and unpaid reports
                 result.forEach(function(report){
-                    report.payment = "$" + DrslMetadata.getTotalForRateAtHours(report.supportcase.estimateHours);
+                    report.payment = "$" + DrslMetadata.getTotalForRateAtHours(report.supportcase.timeOnCase);
                     if(report.isPaid === true){
                         vm.paidReports.push(report);
                     } else {
