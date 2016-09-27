@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('SupportCaseReportsController', SupportCaseReportController);
 
-    SupportCaseReportController.$inject = ['Principal', 'Supportcase', 'ParseLinks', 'paginationConstants', 'JhiLanguageService', 'ManageSupportCaseReports', '$scope', 'SupportCaseReport', 'toastr'];
+    SupportCaseReportController.$inject = ['Principal', 'Supportcase', 'ParseLinks', 'paginationConstants', 'JhiLanguageService', 'ManageSupportCaseReports', '$scope', 'SupportCaseReport', 'toastr', 'DrslMetadata'];
 
-    function SupportCaseReportController(Principal, Supportcase, ParseLinks, paginationConstants, JhiLanguageService, ManageSupportCaseReports, $scope, SupportCaseReport, toastr) {
+    function SupportCaseReportController(Principal, Supportcase, ParseLinks, paginationConstants, JhiLanguageService, ManageSupportCaseReports, $scope, SupportCaseReport, toastr, DrslMetadata) {
         var vm = this;
         vm.authorities = ['ROLE_USER', 'ROLE_ADMIN'];
         vm.clear = clear;
@@ -46,8 +46,10 @@
             vm.casesInProgress = [];
             //Gets support case reports by the date range, from 10 days ago to 90 days ago
             ManageSupportCaseReports.query({page: vm.page - 1, size: paginationConstants.itemsPerPage, daysSince: vm.dateRange}, function (result, headers) {
+                console.log(result);
                 //Divide between paid and unpaid reports
                 result.forEach(function(report){
+                    report.payment = "$" + DrslMetadata.getTotalForRateAtHours(report.supportcase.estimateHours);
                     if(report.isPaid === true){
                         vm.paidReports.push(report);
                     } else {

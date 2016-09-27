@@ -24,6 +24,8 @@
                             <th translate="adminSupportCaseReport.id">Support Case ID</th>
                             <th translate="adminSupportCaseReport.completedDate">Completed Date</th>
                             <th translate="adminSupportCaseReport.isPaid">Is Paid</th>
+                            <th translate="adminSupportCaseReport.payment">Payment</th>
+                            <th translate="adminSupportCaseReport.rating">Rating</th>
                             <th translate="adminSupportCaseReport.comment">Comment</th>
                             <th translate="adminSupportCaseReport.expert">Expert</th>
                             <th translate="adminSupportCaseReport.user">User</th>
@@ -37,6 +39,14 @@
                             <td>
                                 <!-- Can assign isPaid to an unpaid case -->
                                 <input type="checkbox" ng-model="report.isPaid" class="form-control">
+                            </td>
+                            <td>
+                                <!-- Payment Amound -->
+                                {{report.payment}}
+                            </td>
+                            <td>
+                                <!-- Rating -->
+                                {{report.rating.score}}
                             </td>
                             <td>
                                 <!-- Can write a comment to an unpaid case -->
@@ -59,6 +69,8 @@
                             <th translate="adminSupportCaseReport.completedDate">Completed Date</th>
                             <th translate="adminSupportCaseReport.isPaid">Is Paid</th>
                             <th translate="adminSupportCaseReport.datePaid">Date Paid</th>
+                            <th translate="adminSupportCaseReport.payment">Payment</th>
+                            <th translate="adminSupportCaseReport.rating">Rating</th>
                             <th translate="adminSupportCaseReport.comment">Comment</th>
                             <th translate="adminSupportCaseReport.expert">Expert</th>
                             <th translate="adminSupportCaseReport.user">User</th>
@@ -73,7 +85,15 @@
                                 <!-- Can assign isPaid to an paid case -->
                                 <input type="checkbox" ng-model="paidReport.isPaid" class="form-control">
                             </td>
-                            <td>{{paidReport.datePaid}}</td>
+                            <td>{{paidReport.datePaid | date:'MM/dd/yyyy'}}</td>
+                            <td>
+                                <!-- Payment Amound -->
+                                {{paidReport.payment}}
+                            </td>
+                            <td>
+                                <!-- Rating -->
+                                {{paidReport.rating.score}}
+                            </td>
                             <td>
                                 <!-- Can write a comment to an unpaid case -->
                                 <textarea name="name" rows="2" cols="8" ng-model="paidReport.comments" class="form-control"></textarea>
