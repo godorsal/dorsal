@@ -12,10 +12,11 @@
             restrict: 'E',
             scope: {
                 hours: '@',
-                displayByTime: '@'
+                displayByTime: '@',
+                estimate: '@'
             },
             template: '<span ng-hide="displayByTime" translate="case.details.estimateTotal" translate-values="{total:DrslMetadata.getTotalForRateAtHours(hours), hours:hours, rate:DrslMetadata.expertRate}"></span>' +
-                        '<span ng-show="displayByTime" translate="case.details.timeOnCaseTotal" translate-values="{total:DrslMetadata.getTotalForRateAtHours(hours), hours:hours, rate:DrslMetadata.expertRate}"></span>',
+                        '<span ng-show="displayByTime" translate="case.details.timeOnCaseTotal" translate-values="{total:DrslMetadata.getTotalForRateAtHours(hours), hours:hours, rate:DrslMetadata.expertRate}"></span>' + '<span ng-show="estimate"> /Est. {{estimate}}hrs</span>',
             link: linkFunc
         };
 

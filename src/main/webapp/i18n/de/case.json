@@ -17,6 +17,7 @@
             "resolutionETA": "ETA to Completion",
             "caseCompleted": "Case completed",
             "estimate": "Estimate",
+            "finalCost": "Cost",
             "estimateTotal": "${{total}} ({{hours}} hrs @ ${{rate}}/hr)",
             "timeOnCaseTotal": "{{hours}} hours @ ${{rate}}/hour = ${{total}}",
             "status": {
@@ -38,6 +39,7 @@
             "id": "ID:",
             "caseID": "CASE ID:",
             "lastUpdate": "Last Update:",
+            "deliveredDate": "Delivered",
             "requestedDate": "Requested Delivery",
             "share": "share",
             "shareCaseMessage": "share this case",
