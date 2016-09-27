@@ -46,7 +46,7 @@
             vm.casesInProgress = [];
             //Gets support case reports by the date range, from 10 days ago to 90 days ago
             ManageSupportCaseReports.query({page: vm.page - 1, size: paginationConstants.itemsPerPage, daysSince: vm.dateRange}, function (result, headers) {
-                console.log(result);
+
                 //Divide between paid and unpaid reports
                 result.forEach(function(report){
                     report.payment = "$" + DrslMetadata.getTotalForRateAtHours(report.supportcase.timeOnCase);

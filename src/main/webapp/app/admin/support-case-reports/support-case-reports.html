@@ -128,18 +128,24 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th translate="adminSupportCaseReport.id">Support Case ID</th>
-                            <th translate="adminSupportCaseReport.status">Current Status</th>
-                            <th translate="adminSupportCaseReport.comment">Comment</th>
+                            <th translate="adminSupportCaseReport.inProgress.id">Support Case ID</th>
+                            <th translate="adminSupportCaseReport.inProgress.status">Current Status</th>
+                            <th translate="adminSupportCaseReport.inProgress.creationDate">Creation Date</th>
+                            <th translate="adminSupportCaseReport.inProgress.expectedDeliveryDate">Expected Delivery Date</th>
+                            <th translate="adminSupportCaseReport.inProgress.lastUpdatedDate"> Last Update</th>
+                            <th translate="adminSupportCaseReport.inProgress.estimatedHours"> Estimated Hours</th>
                             <th translate="adminSupportCaseReport.expert">Expert</th>
                             <th translate="adminSupportCaseReport.user">User</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="case in vm.casesInProgress track by $index">
+                        <tr ng-repeat="case in vm.casesInProgress | orderBy: '-dateCreated':true track by $index">
                             <td>{{case.technology.name}}-{{case.id}}</a></td>
                             <td>{{case.status.name}}</td>
-                            <td><textarea name="name" rows="2" cols="8" ng-model="case.comment" class="form-control"></textarea></td>
+                            <td>{{case.dateCreated | date:'MM/dd/yyyy HH:MM ss'}}</td>
+                            <td>{{case.expectedCompletionDate | date:'MM/dd/yyyy'}}</td>
+                            <td>{{case.dateLastUpdate | date:'MM/dd/yyyy'}}</td>
+                            <td>{{case.estimateHours}}</td>
                             <td>{{case.expertaccount.user.firstName}} {{case.expertaccount.user.lastName}}</td>
                             <td>{{case.user.firstName}} {{case.user.lastName}}</td>
                         </tr>
