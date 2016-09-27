@@ -43,7 +43,7 @@
                 "status": "Status",
                 "creationDate": "Created Date",
                 "expectedDeliveryDate": "Expected Delivery Date",
-                "lastUpdatedDate": "Last Updated Date",
+                "lastUpdatedDate": "Last Update",
                 "estimatedHours": "Estimated Hours"
             }
         }
