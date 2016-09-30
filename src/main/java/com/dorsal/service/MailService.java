@@ -4,7 +4,7 @@ import com.dorsal.config.DorsalProperties;
 import com.dorsal.config.JHipsterProperties;
 import com.dorsal.domain.User;
 
-import org.apache.commons.lang.CharEncoding;
+import org.apache.commons.lang3.CharEncoding;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
@@ -14,7 +14,6 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring4.SpringTemplateEngine;
-
 
 
 import javax.inject.Inject;

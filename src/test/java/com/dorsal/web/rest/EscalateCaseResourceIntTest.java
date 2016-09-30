@@ -117,7 +117,7 @@ public class EscalateCaseResourceIntTest {
         // Get all the escalateCases
         restEscalateCaseMockMvc.perform(get("/api/escalate-cases?sort=id,desc"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(escalateCase.getId().intValue())))
                 .andExpect(jsonPath("$.[*].reason").value(hasItem(DEFAULT_REASON.toString())))
                 .andExpect(jsonPath("$.[*].dateEscalated").value(hasItem(DEFAULT_DATE_ESCALATED_STR)))
@@ -133,7 +133,7 @@ public class EscalateCaseResourceIntTest {
         // Get the escalateCase
         restEscalateCaseMockMvc.perform(get("/api/escalate-cases/{id}", escalateCase.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
             .andExpect(jsonPath("$.id").value(escalateCase.getId().intValue()))
             .andExpect(jsonPath("$.reason").value(DEFAULT_REASON.toString()))
             .andExpect(jsonPath("$.dateEscalated").value(DEFAULT_DATE_ESCALATED_STR))

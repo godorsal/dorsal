@@ -127,7 +127,7 @@ public class RatingResourceIntTest {
         // Get all the ratings
         restRatingMockMvc.perform(get("/api/ratings?sort=id,desc"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(rating.getId().intValue())))
                 .andExpect(jsonPath("$.[*].dateRated").value(hasItem(DEFAULT_DATE_RATED_STR)))
                 .andExpect(jsonPath("$.[*].score").value(hasItem(DEFAULT_SCORE)))
@@ -145,7 +145,7 @@ public class RatingResourceIntTest {
         // Get the rating
         restRatingMockMvc.perform(get("/api/ratings/{id}", rating.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
             .andExpect(jsonPath("$.id").value(rating.getId().intValue()))
             .andExpect(jsonPath("$.dateRated").value(DEFAULT_DATE_RATED_STR))
             .andExpect(jsonPath("$.score").value(DEFAULT_SCORE))

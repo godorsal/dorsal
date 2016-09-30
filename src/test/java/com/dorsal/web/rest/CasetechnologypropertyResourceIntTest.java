@@ -105,7 +105,7 @@ public class CasetechnologypropertyResourceIntTest {
         // Get all the casetechnologyproperties
         restCasetechnologypropertyMockMvc.perform(get("/api/casetechnologyproperties?sort=id,desc"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(casetechnologyproperty.getId().intValue())))
                 .andExpect(jsonPath("$.[*].propertyname").value(hasItem(DEFAULT_PROPERTYNAME.toString())))
                 .andExpect(jsonPath("$.[*].propertyvalue").value(hasItem(DEFAULT_PROPERTYVALUE.toString())));
@@ -120,7 +120,7 @@ public class CasetechnologypropertyResourceIntTest {
         // Get the casetechnologyproperty
         restCasetechnologypropertyMockMvc.perform(get("/api/casetechnologyproperties/{id}", casetechnologyproperty.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
             .andExpect(jsonPath("$.id").value(casetechnologyproperty.getId().intValue()))
             .andExpect(jsonPath("$.propertyname").value(DEFAULT_PROPERTYNAME.toString()))
             .andExpect(jsonPath("$.propertyvalue").value(DEFAULT_PROPERTYVALUE.toString()));

@@ -115,7 +115,7 @@ public class AttachmentResourceIntTest {
         // Get all the attachments
         restAttachmentMockMvc.perform(get("/api/attachments?sort=id,desc"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(attachment.getId().intValue())))
                 .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
                 .andExpect(jsonPath("$.[*].url").value(hasItem(DEFAULT_URL.toString())))
@@ -132,7 +132,7 @@ public class AttachmentResourceIntTest {
         // Get the attachment
         restAttachmentMockMvc.perform(get("/api/attachments/{id}", attachment.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
             .andExpect(jsonPath("$.id").value(attachment.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.url").value(DEFAULT_URL.toString()))

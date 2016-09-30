@@ -105,7 +105,7 @@ public class ReferencedocResourceIntTest {
         // Get all the referencedocs
         restReferencedocMockMvc.perform(get("/api/referencedocs?sort=id,desc"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(referencedoc.getId().intValue())))
                 .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
                 .andExpect(jsonPath("$.[*].url").value(hasItem(DEFAULT_URL.toString())));
@@ -120,7 +120,7 @@ public class ReferencedocResourceIntTest {
         // Get the referencedoc
         restReferencedocMockMvc.perform(get("/api/referencedocs/{id}", referencedoc.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
             .andExpect(jsonPath("$.id").value(referencedoc.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.url").value(DEFAULT_URL.toString()));

@@ -102,7 +102,7 @@ public class ExpertbadgeResourceIntTest {
         // Get all the expertbadges
         restExpertbadgeMockMvc.perform(get("/api/expertbadges?sort=id,desc"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(expertbadge.getId().intValue())))
                 .andExpect(jsonPath("$.[*].expertBadgeCount").value(hasItem(DEFAULT_EXPERT_BADGE_COUNT)));
     }
@@ -116,7 +116,7 @@ public class ExpertbadgeResourceIntTest {
         // Get the expertbadge
         restExpertbadgeMockMvc.perform(get("/api/expertbadges/{id}", expertbadge.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
             .andExpect(jsonPath("$.id").value(expertbadge.getId().intValue()))
             .andExpect(jsonPath("$.expertBadgeCount").value(DEFAULT_EXPERT_BADGE_COUNT));
     }

@@ -104,7 +104,7 @@ public class TechnologypropertyvalueResourceIntTest {
         // Get all the technologypropertyvalues
         restTechnologypropertyvalueMockMvc.perform(get("/api/technologypropertyvalues?sort=id,desc"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(technologypropertyvalue.getId().intValue())))
                 .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE.toString())));
     }
@@ -118,7 +118,7 @@ public class TechnologypropertyvalueResourceIntTest {
         // Get the technologypropertyvalue
         restTechnologypropertyvalueMockMvc.perform(get("/api/technologypropertyvalues/{id}", technologypropertyvalue.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
             .andExpect(jsonPath("$.id").value(technologypropertyvalue.getId().intValue()))
             .andExpect(jsonPath("$.value").value(DEFAULT_VALUE.toString()));
     }
