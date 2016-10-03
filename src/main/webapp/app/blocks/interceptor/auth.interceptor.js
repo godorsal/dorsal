@@ -15,14 +15,18 @@
         return service;
 
         function request (config) {
+            // console.log(config.headers.Authorization);
             /*jshint camelcase: false */
             config.headers = config.headers || {};
             var token = $localStorage.authenticationToken || $sessionStorage.authenticationToken;
-            
+
+            if(config.headers.Authorization){
+                return config;
+            }
             if (token) {
                 config.headers.Authorization = 'Bearer ' + token;
             }
-            
+
             return config;
         }
     }

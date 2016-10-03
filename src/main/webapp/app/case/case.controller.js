@@ -8,12 +8,12 @@
     CaseController.$inject = ['$scope', '$window', '$interval', '$timeout', '$translate', 'CaseService', 'DrslRatingService',
         'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', 'StatusModel',
         'Rating', 'Expertbadge', 'DrslMetadata', 'Caseupdate', 'AttachmentModalService', 'DrslAttachFileService',
-        'DrslNewCaseService', '$filter', '_', 'DrslUserFlowService'];
+        'DrslNewCaseService', '$filter', '_', 'DrslUserFlowService', 'DrslHipChatService'];
 
     function CaseController($scope, $window, $interval, $timeout, $translate, CaseService, DrslRatingService, CaseDetailsService,
                             EscalationFormService, ShareCaseService, CaseAgreementService, StatusModel, Rating,
                             Expertbadge, DrslMetadata, Caseupdate, AttachmentModalService, DrslAttachFileService,
-                            DrslNewCaseService, $filter, _, DrslUserFlowService) {
+                            DrslNewCaseService, $filter, _, DrslUserFlowService, DrslHipChatService) {
 
         // Handle user flow redirects and messaging
         DrslUserFlowService.handleUserFlow();
@@ -56,6 +56,8 @@
         vm.openChat = openChat;
         vm.isCaseExpert = isCaseExpert;
         vm.openCaseAgreement = openCaseAgreement;
+        vm.sendMessage = sendMessage;
+
 
         /**
          * Initialize the controller's data.
@@ -219,6 +221,7 @@
             // Set the vm's currentCase to the provided targetCase
             vm.currentCase = targetCase;
 
+            getMessages(targetCase);
             // Reset/clear the estimate logs
             vm.estimateLogs = [];
 
@@ -472,7 +475,24 @@
                 });
             }
         }
-
+        function getMessages(currentCase){
+            var messagesID = vm.currentCase.technology.name + vm.currentCase.id;
+            DrslHipChatService.getMessages(messagesID)
+            .then(function(res){
+                console.log(res.data);
+                vm.messages = res.data.items;
+            })
+        }
+        function sendMessage(){
+            var messageObject = {
+                roomID: vm.currentCase.technology.name + vm.currentCase.id,
+                message: vm.messageToSend
+            }
+            DrslHipChatService.sendMessage(messageObject)
+            .then(function(res){
+                getMessages(vm.currentCase);
+            })
+        }
         /**
          * Checks to see if the provided index is less than or equal to the current step/status index.
          * @param step

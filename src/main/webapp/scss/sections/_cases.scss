@@ -93,4 +93,26 @@ Cases
             }
         }
     }
+    .drsl-hipchat-section {
+        > ul {
+            min-height: 300px;
+            max-height: 300px;
+            list-style-type: none;
+            > li {
+                font-weight: normal;
+                height: 500px;
+            }
+        }
+    }
+    .drsl-hipchat-name {
+        color: #4a6785;
+        font-weight: bold;
+    }
+    .drsl-hipchat-date {
+        font-size: 12px;
+        color: #999999;
+    }
+    .drsl-hipchat-you {
+        background: #e0eaf3;
+    }
 }

@@ -2,12 +2,12 @@
     'use strict';
 
     angular
-        .module('dorsalApp')
-        .controller('ConciergeController', ConciergeController);
+    .module('dorsalApp')
+    .controller('ConciergeController', ConciergeController);
 
-    ConciergeController.$inject = ['$rootScope', '$scope', '$state', 'LoginService', 'Principal', 'ConciergeService', '$translate', '$http', 'Supportcase', 'Casetechnologyproperty', 'toastr', 'AttachmentModalService', 'DateUtils', 'CaseService', 'DrslNewCaseService', 'DrslMetadata', 'ExpertAccount', 'DrslUserFlowService'];
+    ConciergeController.$inject = ['$rootScope', '$scope', '$state', 'LoginService', 'Principal', 'ConciergeService', '$translate', '$http', 'Supportcase', 'Casetechnologyproperty', 'toastr', 'AttachmentModalService', 'DateUtils', 'CaseService', 'DrslNewCaseService', 'DrslMetadata', 'ExpertAccount', 'DrslUserFlowService', 'DrslHipChatService'];
 
-    function ConciergeController($rootScope, $scope, $state, LoginService, Principal, ConciergeService, $translate, $http, Supportcase, Casetechnologyproperty, toastr, AttachmentModalService, DateUtils, CaseService, DrslNewCaseService, DrslMetadata, ExpertAccount, DrslUserFlowService) {
+    function ConciergeController($rootScope, $scope, $state, LoginService, Principal, ConciergeService, $translate, $http, Supportcase, Casetechnologyproperty, toastr, AttachmentModalService, DateUtils, CaseService, DrslNewCaseService, DrslMetadata, ExpertAccount, DrslUserFlowService, DrslHipChatService) {
 
         DrslUserFlowService.handleUserFlow();
 
@@ -50,9 +50,9 @@
         vm.openDatePopup = openDatePopup;
 
         /**
-         * Creates (saves/updates) the case.
-         * Called after the form is submitted and the user is authenticated.
-         */
+        * Creates (saves/updates) the case.
+        * Called after the form is submitted and the user is authenticated.
+        */
         function createCase() {
             // Exit/Return if we already know we have errors
             if (hasErrors()) {
@@ -82,9 +82,9 @@
         }
 
         /**
-         * The success callback for saving/updating a case.
-         * @param result
-         */
+        * The success callback for saving/updating a case.
+        * @param result
+        */
         var onSaveSuccess = function (result) {
             DrslNewCaseService.setNewCaseId(result.id);
 
@@ -108,26 +108,34 @@
             vm.issue = null;
             vm.isSaving = false;
 
+            var roomObject = {
+                name: result.technology.name + result.id
+            }
+            console.log(result.user.firstName, result.user.lastName);
+            DrslHipChatService.makeRoom(roomObject)
+            .then(function(res){
+                console.log(res);
+            })
+
             // emit a 'dorsalApp:supportcaseUpdate' so the app can be aware of the change
             $scope.$emit('dorsalApp:supportcaseUpdate', result);
-
             // redirect to the case page
             $state.go('case')
         };
 
         /**
-         * The error callback for saving/updating a case.
-         */
+        * The error callback for saving/updating a case.
+        */
         var onSaveError = function () {
             vm.isSaving = false;
             checkError()
         };
 
         /**
-         * Checks to see if the user has provided all of the required bits of data.
-         * Called before data is sent to the back-end
-         * @returns {boolean}
-         */
+        * Checks to see if the user has provided all of the required bits of data.
+        * Called before data is sent to the back-end
+        * @returns {boolean}
+        */
         function hasErrors() {
             return (Object.keys(vm.technology).length === 0 ||
             Object.keys(vm.issue).length === 0 ||
@@ -135,9 +143,9 @@
         }
 
         /**
-         * Check to see why we may have gotten an error from the back-end.
-         * Display a toastr message if we were able to determine the missing data.
-         */
+        * Check to see why we may have gotten an error from the back-end.
+        * Display a toastr message if we were able to determine the missing data.
+        */
         function checkError() {
             var messages = [];
 
@@ -168,8 +176,8 @@
         }
 
         /**
-         * Initialize the controller's data.
-         */
+        * Initialize the controller's data.
+        */
         function init() {
             // Make a call to get the initial data.
             ConciergeService.getEntityData().then(function (data) {
@@ -183,8 +191,8 @@
         }
 
         /**
-         * Submits the form, or opens the login dialog if the user isn't logged in.
-         */
+        * Submits the form, or opens the login dialog if the user isn't logged in.
+        */
         function submitForm() {
             if (!vm.isAuthenticated()) {
                 LoginService.open();
@@ -201,8 +209,8 @@
         }
 
         /**
-         * Sets the vm.datePopup.opened boolean, which toggles the date popup display.
-         */
+        * Sets the vm.datePopup.opened boolean, which toggles the date popup display.
+        */
         function openDatePopup() {
             vm.datePopup.opened = true;
         }
