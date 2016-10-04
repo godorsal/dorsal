@@ -129,6 +129,8 @@ Cases
     .drsl-hipchat-message-list {
         list-style-type: none;
         padding-left: 0px;
+        max-height: 10px;
+        min-height: 10px;
     }
     .drsl-hipchat-message {
         height: 50px;
@@ -141,5 +143,11 @@ Cases
         top: 17px;
         z-index: 1;
         color: $custom-input-unit-color;
+    }
+    .drsl-hipchat-message-scroller {
+        height: 250px;
+        min-height: 250px;
+        max-height: 250px;
+        overflow-y: scroll;
     }
 }
