@@ -107,11 +107,10 @@
             vm.technology = null;
             vm.issue = null;
             vm.isSaving = false;
-
             var roomObject = {
-                name: result.technology.name + result.id
+                name: result.technology.name + result.id,
+                topic: result.summary
             }
-            console.log(result.user.firstName, result.user.lastName);
             DrslHipChatService.makeRoom(roomObject)
             .then(function(res){
                 console.log(res);

@@ -95,13 +95,24 @@ Cases
     }
     .drsl-hipchat-section {
         > ul {
-            min-height: 300px;
-            max-height: 300px;
+            // min-height: 300px;
+            // max-height: 300px;
             list-style-type: none;
             > li {
                 font-weight: normal;
-                height: 500px;
+                height: 50px;
             }
+        }
+        input {
+            display: inline-block;
+            width: 75%;
+        }
+        select {
+            display: inline-block;
+            width: 19%;
+        }
+        button {
+            display: inline-block;
         }
     }
     .drsl-hipchat-name {
@@ -114,5 +125,21 @@ Cases
     }
     .drsl-hipchat-you {
         background: #e0eaf3;
+    }
+    .drsl-hipchat-message-list {
+        list-style-type: none;
+        padding-left: 0px;
+    }
+    .drsl-hipchat-message {
+        height: 50px;
+        margin: 1px;
+    }
+    .drsl-unit {
+        position: absolute;
+        display: block;
+        left: 14px;
+        top: 17px;
+        z-index: 1;
+        color: $custom-input-unit-color;
     }
 }

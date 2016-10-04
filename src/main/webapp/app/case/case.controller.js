@@ -41,6 +41,7 @@
         vm.showNotifications = false;
         vm.shareCaseMessage = $translate.instant('case.details.shareCaseMessage');
         vm.cannotShareCaseMessage = $translate.instant('cannotShareCaseMessage');
+        vm.maxResults = '5';
 
         // vm methods
         vm.init = init;
@@ -57,8 +58,8 @@
         vm.isCaseExpert = isCaseExpert;
         vm.openCaseAgreement = openCaseAgreement;
         vm.sendMessage = sendMessage;
-
-
+        vm.isCurrentSender = isCurrentSender;
+        vm.getMessages = getMessages;
         /**
          * Initialize the controller's data.
          */
@@ -221,7 +222,7 @@
             // Set the vm's currentCase to the provided targetCase
             vm.currentCase = targetCase;
 
-            getMessages(targetCase);
+            getMessages();
             // Reset/clear the estimate logs
             vm.estimateLogs = [];
 
@@ -267,7 +268,7 @@
 
                     // Workflow: change the state/status of the current case to closed
                     vm.currentCase.status = StatusModel.getState('closed');
-
+                    DrslHipChatService.deleteRoom(vm.currentCase.technology.name + vm.currentCase.id)
                     // Add/update expert badges and their counts
                     updateExpertBadges(data.selectedBadges);
 
@@ -475,23 +476,35 @@
                 });
             }
         }
-        function getMessages(currentCase){
+        function getMessages(){
             var messagesID = vm.currentCase.technology.name + vm.currentCase.id;
-            DrslHipChatService.getMessages(messagesID)
+            DrslHipChatService.getMessages(messagesID, vm.maxResults)
             .then(function(res){
-                console.log(res.data);
                 vm.messages = res.data.items;
+                vm.messages.forEach(function(message){
+                    if(message.type === 'notification'){
+                        message.displayName = message.from.split('· ')[1];
+                    } else {
+                        message.displayName = message.from.name;
+                    }
+                })
             })
         }
         function sendMessage(){
             var messageObject = {
                 roomID: vm.currentCase.technology.name + vm.currentCase.id,
-                message: vm.messageToSend
+                message: vm.messageToSend,
+                from: vm.currentUser.firstName + ' ' + vm.currentUser.lastName,
+                message_format: 'text'
             }
             DrslHipChatService.sendMessage(messageObject)
             .then(function(res){
-                getMessages(vm.currentCase);
+                getMessages();
+                vm.messageToSend = '';
             })
+        }
+        function isCurrentSender(displayName){
+            return displayName == vm.currentUser.firstName + ' ' + vm.currentUser.lastName
         }
         /**
          * Checks to see if the provided index is less than or equal to the current step/status index.
