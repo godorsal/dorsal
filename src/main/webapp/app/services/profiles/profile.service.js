@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .factory('ProfileService', ProfileService);
 
-    ProfileService.$inject = ['$q', '$http'];
+    ProfileService.$inject = ['$http'];
 
-    function ProfileService($q, $http) {
+    function ProfileService($http) {
 
         var dataPromise;
 
@@ -18,14 +18,14 @@
         return service;
 
         function getProfileInfo() {
-            if (!angular.isDefined(dataPromise)) {
+            if (angular.isUndefined(dataPromise)) {
                 dataPromise = $http.get('api/profile-info').then(function(result) {
                     if (result.data.activeProfiles) {
                         var response = {};
                         response.activeProfiles = result.data.activeProfiles;
                         response.ribbonEnv = result.data.ribbonEnv;
                         response.inProduction = result.data.activeProfiles.indexOf("prod") !== -1;
-                        response.swaggerDisabled = result.data.activeProfiles.indexOf("no-swagger") !== -1;
+                        response.swaggerEnabled = result.data.activeProfiles.indexOf("swagger") !== -1;
                         return response;
                     }
                 });

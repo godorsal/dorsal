@@ -114,7 +114,7 @@ public class GlobalMetadataResourceIntTest {
         // Get all the globalMetadata
         restGlobalMetadataMockMvc.perform(get("/api/global-metadata?sort=id,desc"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(globalMetadata.getId().intValue())))
                 .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
                 .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE.toString())))
@@ -130,7 +130,7 @@ public class GlobalMetadataResourceIntTest {
         // Get the globalMetadata
         restGlobalMetadataMockMvc.perform(get("/api/global-metadata/{id}", globalMetadata.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
             .andExpect(jsonPath("$.id").value(globalMetadata.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.value").value(DEFAULT_VALUE.toString()))

@@ -1,6 +1,7 @@
 package com.dorsal;
 
 import com.dorsal.config.Constants;
+import com.dorsal.config.DefaultProfileUtil;
 import com.dorsal.config.JHipsterProperties;
 
 import org.slf4j.Logger;
@@ -12,7 +13,6 @@ import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
-import org.springframework.core.env.SimpleCommandLinePropertySource;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -40,19 +40,15 @@ public class DorsalApp {
      */
     @PostConstruct
     public void initApplication() {
-        if (env.getActiveProfiles().length == 0) {
-            log.warn("No Spring profile configured, running with default configuration");
-        } else {
-            log.info("Running with Spring profile(s) : {}", Arrays.toString(env.getActiveProfiles()));
-            Collection<String> activeProfiles = Arrays.asList(env.getActiveProfiles());
-            if (activeProfiles.contains(Constants.SPRING_PROFILE_DEVELOPMENT) && activeProfiles.contains(Constants.SPRING_PROFILE_PRODUCTION)) {
-                log.error("You have misconfigured your application! It should not run " +
-                    "with both the 'dev' and 'prod' profiles at the same time.");
-            }
-            if (activeProfiles.contains(Constants.SPRING_PROFILE_DEVELOPMENT) && activeProfiles.contains(Constants.SPRING_PROFILE_CLOUD)) {
-                log.error("You have misconfigured your application! It should not" +
-                    "run with both the 'dev' and 'cloud' profiles at the same time.");
-            }
+        log.info("Running with Spring profile(s) : {}", Arrays.toString(env.getActiveProfiles()));
+        Collection<String> activeProfiles = Arrays.asList(env.getActiveProfiles());
+        if (activeProfiles.contains(Constants.SPRING_PROFILE_DEVELOPMENT) && activeProfiles.contains(Constants.SPRING_PROFILE_PRODUCTION)) {
+            log.error("You have misconfigured your application! It should not run " +
+                "with both the 'dev' and 'prod' profiles at the same time.");
+        }
+        if (activeProfiles.contains(Constants.SPRING_PROFILE_DEVELOPMENT) && activeProfiles.contains(Constants.SPRING_PROFILE_CLOUD)) {
+            log.error("You have misconfigured your application! It should not" +
+                "run with both the 'dev' and 'cloud' profiles at the same time.");
         }
     }
 
@@ -64,8 +60,7 @@ public class DorsalApp {
      */
     public static void main(String[] args) throws UnknownHostException {
         SpringApplication app = new SpringApplication(DorsalApp.class);
-        SimpleCommandLinePropertySource source = new SimpleCommandLinePropertySource(args);
-        addDefaultProfile(app, source);
+        DefaultProfileUtil.addDefaultProfile(app);
         Environment env = app.run(args).getEnvironment();
         log.info("\n----------------------------------------------------------\n\t" +
                 "Application '{}' is running! Access URLs:\n\t" +
@@ -76,16 +71,5 @@ public class DorsalApp {
             InetAddress.getLocalHost().getHostAddress(),
             env.getProperty("server.port"));
 
-    }
-
-    /**
-     * If no profile has been configured, set by default the "dev" profile.
-     */
-    private static void addDefaultProfile(SpringApplication app, SimpleCommandLinePropertySource source) {
-        if (!source.containsProperty("spring.profiles.active") &&
-                !System.getenv().containsKey("SPRING_PROFILES_ACTIVE")) {
-
-            app.setAdditionalProfiles(Constants.SPRING_PROFILE_DEVELOPMENT);
-        }
     }
 }

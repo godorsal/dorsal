@@ -1,4 +1,4 @@
-(function () {
+(function() {
     'use strict';
 
     angular
@@ -19,6 +19,7 @@
         // Set the view model and view model properties/methods
         var vm = this;
         vm.error = null;
+        vm.save = save;
         vm.settingsAccount = null;
         vm.creditCard = null;
         vm.success = null;

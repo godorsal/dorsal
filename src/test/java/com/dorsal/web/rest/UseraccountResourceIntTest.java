@@ -114,7 +114,7 @@ public class UseraccountResourceIntTest {
         // Get all the useraccounts
 /*        restUseraccountMockMvc.perform(get("/api/useraccounts?sort=id,desc"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(useraccount.getId().intValue())))
                 .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION.toString())))
                 .andExpect(jsonPath("$.[*].preferlocalexpert").value(hasItem(DEFAULT_PREFERLOCALEXPERT.booleanValue())))
@@ -131,7 +131,7 @@ public class UseraccountResourceIntTest {
         // Get the useraccount
         restUseraccountMockMvc.perform(get("/api/useraccounts/{id}", useraccount.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
             .andExpect(jsonPath("$.id").value(useraccount.getId().intValue()))
             .andExpect(jsonPath("$.location").value(DEFAULT_LOCATION.toString()))
             .andExpect(jsonPath("$.preferlocalexpert").value(DEFAULT_PREFERLOCALEXPERT.booleanValue()))

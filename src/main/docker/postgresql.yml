@@ -2,7 +2,7 @@ version: '2'
 services:
     dorsal-postgresql:
         container_name: dorsal-postgresql
-        image: postgres:9.5.1
+        image: postgres:9.5.4
         # volumes:
         #     - ~/volumes/jhipster/dorsal/postgresql/:/var/lib/postgresql/
         environment:

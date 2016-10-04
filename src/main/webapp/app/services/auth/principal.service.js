@@ -64,6 +64,7 @@
             // if we have, reuse it by immediately resolving
             if (angular.isDefined(_identity)) {
                 deferred.resolve(_identity);
+
                 return deferred.promise;
             }
 

@@ -10,7 +10,6 @@
     function AuthServerProvider ($http, $localStorage, $sessionStorage, $q) {
         var service = {
             getToken: getToken,
-            hasValidToken: hasValidToken,
             login: login,
             loginWithToken: loginWithToken,
             storeAuthenticationToken: storeAuthenticationToken,
@@ -23,20 +22,14 @@
             return $localStorage.authenticationToken || $sessionStorage.authenticationToken;
         }
 
-        function hasValidToken () {
-            var token = this.getToken();
-            return token && token.expires && token.expires > new Date().getTime();
-        }
-
         function login (credentials) {
-            
-              var data = {
+
+            var data = {
                 username: credentials.username,
                 password: credentials.password,
                 rememberMe: credentials.rememberMe
-              };
+            };
             return $http.post('api/authenticate', data).success(authenticateSuccess);
-
 
             function authenticateSuccess (data, status, headers) {
                 var bearerToken = headers('Authorization');
@@ -46,7 +39,6 @@
                     return jwt;
                 }
             }
-            
         }
 
         function loginWithToken(jwt, rememberMe) {

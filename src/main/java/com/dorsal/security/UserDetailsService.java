@@ -1,4 +1,5 @@
 package com.dorsal.security;
+
 import com.dorsal.domain.User;
 import com.dorsal.repository.UserRepository;
 import org.slf4j.Logger;

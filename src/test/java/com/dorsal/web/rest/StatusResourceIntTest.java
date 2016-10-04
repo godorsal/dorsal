@@ -123,7 +123,7 @@ public class StatusResourceIntTest {
         // Get all the statuses
         restStatusMockMvc.perform(get("/api/statuses?sort=id,desc"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(status.getId().intValue())))
                 .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
                 .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE.toString())));
@@ -138,7 +138,7 @@ public class StatusResourceIntTest {
         // Get the status
         restStatusMockMvc.perform(get("/api/statuses/{id}", status.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
             .andExpect(jsonPath("$.id").value(status.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.code").value(DEFAULT_CODE.toString()));

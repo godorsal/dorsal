@@ -97,7 +97,7 @@ public class SharedCaseResourceIntTest {
         // Get all the sharedCases
         restSharedCaseMockMvc.perform(get("/api/shared-cases?sort=id,desc"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(sharedCase.getId().intValue())));
     }
 
@@ -110,7 +110,7 @@ public class SharedCaseResourceIntTest {
         // Get the sharedCase
         restSharedCaseMockMvc.perform(get("/api/shared-cases/{id}", sharedCase.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
             .andExpect(jsonPath("$.id").value(sharedCase.getId().intValue()));
     }
 

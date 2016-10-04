@@ -4,14 +4,13 @@ import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.servlet.InstrumentedFilter;
 import com.codahale.metrics.servlets.MetricsServlet;
 import com.dorsal.web.filter.CachingHttpHeadersFilter;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
-import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
-import org.springframework.boot.context.embedded.MimeMappings;
-import org.springframework.boot.context.embedded.ServletContextInitializer;
+import org.springframework.boot.context.embedded.*;
+import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -44,7 +43,9 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
-        log.info("Web application configuration, using profiles: {}", Arrays.toString(env.getActiveProfiles()));
+        if (env.getActiveProfiles().length != 0) {
+            log.info("Web application configuration, using profiles: {}", Arrays.toString(env.getActiveProfiles()));
+        }
         EnumSet<DispatcherType> disps = EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.ASYNC);
         initMetrics(servletContext, disps);
         if (env.acceptsProfiles(Constants.SPRING_PROFILE_PRODUCTION)) {
@@ -54,7 +55,7 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
     }
 
     /**
-     * Set up Mime types and, if needed, set the document root.
+     * Customize the Servlet engine: Mime types, the document root, the cache.
      */
     @Override
     public void customize(ConfigurableEmbeddedServletContainer container) {
@@ -64,7 +65,6 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
         // CloudFoundry issue, see https://github.com/cloudfoundry/gorouter/issues/64
         mappings.add("json", "text/html;charset=utf-8");
         container.setMimeMappings(mappings);
-
         // When running in an IDE or with ./mvnw spring-boot:run, set location of the static web assets.
         setLocationForStaticAssets(container);
     }
@@ -143,7 +143,6 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
         log.debug("Registering CORS filter");
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = jHipsterProperties.getCors();
-        config.addAllowedHeader("*");
         source.registerCorsConfiguration("/api/**", config);
         source.registerCorsConfiguration("/v2/api-docs", config);
         source.registerCorsConfiguration("/oauth/**", config);

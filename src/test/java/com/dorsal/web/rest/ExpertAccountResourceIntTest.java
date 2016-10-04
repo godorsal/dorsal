@@ -176,7 +176,7 @@ public class ExpertAccountResourceIntTest {
         // Get all the expertAccounts
  /*       restExpertAccountMockMvc.perform(get("/api/expert-accounts?sort=id,desc"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(expertAccount.getId().intValue())))
                 .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE.toString())))
                 .andExpect(jsonPath("$.[*].skype").value(hasItem(DEFAULT_SKYPE.toString())))
@@ -205,7 +205,7 @@ public class ExpertAccountResourceIntTest {
         // Get the expertAccount
         restExpertAccountMockMvc.perform(get("/api/expert-accounts/{id}", expertAccount.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
             .andExpect(jsonPath("$.id").value(expertAccount.getId().intValue()))
             .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE.toString()))
             .andExpect(jsonPath("$.skype").value(DEFAULT_SKYPE.toString()))

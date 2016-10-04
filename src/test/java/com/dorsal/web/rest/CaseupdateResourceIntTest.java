@@ -117,7 +117,7 @@ public class CaseupdateResourceIntTest {
         // Get all the caseupdates
         restCaseupdateMockMvc.perform(get("/api/caseupdates?sort=id,desc"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(caseupdate.getId().intValue())))
                 .andExpect(jsonPath("$.[*].dateUpdated").value(hasItem(DEFAULT_DATE_UPDATED_STR)))
                 .andExpect(jsonPath("$.[*].updateMsg").value(hasItem(DEFAULT_UPDATE_MSG.toString())))
@@ -133,7 +133,7 @@ public class CaseupdateResourceIntTest {
         // Get the caseupdate
         restCaseupdateMockMvc.perform(get("/api/caseupdates/{id}", caseupdate.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
             .andExpect(jsonPath("$.id").value(caseupdate.getId().intValue()))
             .andExpect(jsonPath("$.dateUpdated").value(DEFAULT_DATE_UPDATED_STR))
             .andExpect(jsonPath("$.updateMsg").value(DEFAULT_UPDATE_MSG.toString()))
