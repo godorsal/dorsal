@@ -15,12 +15,12 @@
         var SendMessageToken = 'Bearer 5ZbVyVDbZroGAN3Rbwkua2qYTZyILxvowbDQLSKn';
 
         service.getRooms = function(){
-            return $http.get('http://localhost/v2/room?auth_token=' + ManageRoomsToken)
+            return $http.get('/v2/room?auth_token=' + ManageRoomsToken)
         }
         service.getMessages = function(roomID, maxResults){
             var req = {
                 method: 'GET',
-                url: 'http://localhost/v2/room/' + roomID + '/history?max-results=' + maxResults,
+                url: '/v2/room/' + roomID + '/history?max-results=' + maxResults,
                 headers: {
                     'Authorization': GetMessagesToken
                 }
@@ -28,7 +28,7 @@
             return $http(req, GetMessagesToken);
         }
         service.makeRoom = function(roomObject){
-            var url = 'http://localhost/v2/room'
+            var url = '/v2/room'
             return $http({
                 method: 'POST',
                 url: url,
@@ -43,7 +43,7 @@
             })
         }
         service.deleteRoom = function(roomID){
-            var url = 'http://localhost/v2/room/' + roomID;
+            var url = '/v2/room/' + roomID;
             return $http({
                 method: 'DELETE',
                 url: url,
@@ -53,7 +53,7 @@
             })
         }
         service.sendMessage = function(messageObject){
-            var url = 'http://localhost/v2/room/' + messageObject.roomID +'/notification'
+            var url = '/v2/room/' + messageObject.roomID +'/notification'
             return $http({
                 method: 'POST',
                 url: url,
