@@ -92,9 +92,10 @@
                 </div>
             </div>
 
-            <div class="drsl-sub-header drsl-sub-sub-header" translate="">Chat with expert</div>
+            <div class="drsl-sub-header drsl-sub-sub-header" translate="case.hipchat.chatWithExpert" translate-values="{expert: '{{vm.currentCase.expertaccount.user.firstName + ' ' + vm.currentCase.expertaccount.user.lastName}}'}" ng-if="!vm.isCaseExpert()">Chat with expert: {{expert}} </div>
+            <div class="drsl-sub-header drsl-sub-sub-header" translate="case.hipchat.chatWithUser" translate-values="{user: '{{vm.getUserName()}}'}" ng-if="vm.isCaseExpert()">Chat with user: {{user}} </div>
             <div class="drsl-case-wrapper drsl-hipchat-section">
-                <div class="drsl-case-history-wrapper">
+                <div class="drsl-hipchat-messages-wrapper">
                     <div class="drsl-hipchat-message-scroller">
                         <ul class="drsl-hipchat-message-list">
                             <li ng-repeat="message in vm.messages" ng-class="{'drsl-hipchat-you': vm.isCurrentSender(message.displayName)}" class="drsl-hipchat-message">
@@ -105,10 +106,11 @@
                                     {{message.date | date:'MMM dd h:mm'}}
                                 </span>
                                 <br>
-                                {{message.message}}
+                                <span ng-bind-html="message.formattedMessage"></span>
                                 <a href="{{message.file.url}}" ng-if="message.file">
-                                    <img ng-src="{{message.file.thumb_url}}" alt="" >
+                                    <img ng-src="{{message.file.thumb_url}}" alt="" target="_blank" class="drsl-hipchat-message-image-thumbnail">
                                 </a>
+                                <br>
                             </li>
                         </ul>
                     </div>

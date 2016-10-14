@@ -17,13 +17,16 @@
 
         function responseError(response) {
             if (response.status === 401) {
-                // delete $localStorage.authenticationToken;
-                // delete $sessionStorage.authenticationToken;
-                // var Principal = $injector.get('Principal');
-                // if (Principal.isAuthenticated()) {
-                //     var Auth = $injector.get('Auth');
-                //     Auth.authorize(true);
-                // }
+                delete $localStorage.authenticationToken;
+                delete $sessionStorage.authenticationToken;
+                var Principal = $injector.get('Principal');
+                if (Principal.isAuthenticated()) {
+                    var Auth = $injector.get('Auth');
+                    Auth.authorize(true);
+                }
+            }
+            if (response.status === 429) {
+                console.log("RAN OUT OF REQUESTS, SWITCH TOKEN?");
             }
             return $q.reject(response);
         }

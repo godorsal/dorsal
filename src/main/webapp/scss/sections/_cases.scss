@@ -95,8 +95,6 @@ Cases
     }
     .drsl-hipchat-section {
         > ul {
-            // min-height: 300px;
-            // max-height: 300px;
             list-style-type: none;
             > li {
                 font-weight: normal;
@@ -129,11 +127,11 @@ Cases
     .drsl-hipchat-message-list {
         list-style-type: none;
         padding-left: 0px;
-        max-height: 10px;
         min-height: 10px;
     }
     .drsl-hipchat-message {
-        height: 50px;
+        min-height: 50px;
+        height: 100%;
         margin: 1px;
     }
     .drsl-unit {
@@ -145,9 +143,49 @@ Cases
         color: $custom-input-unit-color;
     }
     .drsl-hipchat-message-scroller {
-        height: 250px;
-        min-height: 250px;
-        max-height: 250px;
         overflow-y: scroll;
+        max-height: 400px;
+    }
+    .drsl-hipchat-messages-wrapper {
+        padding: $default-padding;
+        max-height: 470px;
+        background-color: $content-background-color;
+
+        .panel-default {
+            cursor: pointer;
+            margin-bottom: 5px;
+
+            > .panel-heading {
+                &.active {
+                    background-color: $brand-color;
+                    color: $inverted-heading-text-color;
+                }
+
+                .drsl-case-list {
+                    display: flex;
+                    flex-flow: row;
+
+                    > div {
+                        &:first-child {
+                            flex: 3;
+                            margin-right: $default-half-padding;
+                        }
+
+                        &:last-child {
+                            flex: 1;
+                            text-align: right
+                        }
+                    }
+
+                    .drsl-case-list-id {
+                        display: inline-block;
+                        width: 200px;
+                    }
+                }
+            }
+        }
+    }
+    .drsl-hipchat-message-image-thumbnail{
+        width: 100px;
     }
 }

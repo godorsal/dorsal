@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('ConciergeController', ConciergeController);
 
-    ConciergeController.$inject = ['$rootScope', '$scope', '$state', 'LoginService', 'Principal', 'ConciergeService', '$translate', '$http', 'Supportcase', 'Casetechnologyproperty', 'toastr', 'AttachmentModalService', 'DateUtils', 'CaseService', 'DrslNewCaseService', 'DrslMetadata', 'ExpertAccount', 'DrslUserFlowService', 'DrslHipChatService'];
+    ConciergeController.$inject = ['$rootScope', '$scope', '$state', 'LoginService', 'Principal', 'ConciergeService', '$translate', '$http', 'Supportcase', 'Casetechnologyproperty', 'toastr', 'AttachmentModalService', 'DateUtils', 'CaseService', 'DrslNewCaseService', 'DrslMetadata', 'ExpertAccount', 'DrslUserFlowService', 'DrslHipChatService', '$window', '$sce'];
 
-    function ConciergeController($rootScope, $scope, $state, LoginService, Principal, ConciergeService, $translate, $http, Supportcase, Casetechnologyproperty, toastr, AttachmentModalService, DateUtils, CaseService, DrslNewCaseService, DrslMetadata, ExpertAccount, DrslUserFlowService, DrslHipChatService) {
+    function ConciergeController($rootScope, $scope, $state, LoginService, Principal, ConciergeService, $translate, $http, Supportcase, Casetechnologyproperty, toastr, AttachmentModalService, DateUtils, CaseService, DrslNewCaseService, DrslMetadata, ExpertAccount, DrslUserFlowService, DrslHipChatService, $window, $sce) {
 
         DrslUserFlowService.handleUserFlow();
 
@@ -16,7 +16,8 @@
         vm.technologyProperties = {};
         vm.technology = {};
         vm.issue = {};
-        vm.isSaving = false;
+        vm.messages = [];
+        vm.checkingMessages = false;
         vm.isAuthenticated = Principal.isAuthenticated;
         vm.product = null;
         vm.errorMissingTech = $translate.instant('concierge.errors.missing.tech');
@@ -24,6 +25,16 @@
         vm.errorMissingDescription = $translate.instant('concierge.errors.missing.description');
         vm.errorMissingAll = $translate.instant('concierge.errors.missing.all');
         vm.DrslMetadata = DrslMetadata;
+        vm.DrslHipChatService = DrslHipChatService;
+        vm.sendMessage = sendMessage;
+        vm.checkMessages = checkMessages;
+        vm.getMessages = getMessages;
+        vm.maxResults = '5';
+
+        DrslHipChatService.clearRooms();
+        if(DrslHipChatService.currentRoom){
+            vm.chatroom = DrslHipChatService.currentRoom;
+        }
         vm.caseDetails = {
             summary: '',
             description: '',
@@ -42,13 +53,22 @@
             showWeeks: false
         };
         vm.DrslUserFlowService = DrslUserFlowService;
-
         // vm methods
         vm.init = init;
         vm.submitForm = submitForm;
         vm.createCase = createCase;
         vm.openDatePopup = openDatePopup;
+        vm.makeConciergeRoom = makeConciergeRoom;
 
+        if(DrslHipChatService.waitingOnRoom){
+            vm.conciergeChat = DrslHipChatService.currentRoom;
+            vm.conciergechaturl = vm.conciergeChat.guest_access_url;
+        }
+        $rootScope.$on('roomDeletion', function(){
+            vm.conciergechaturl = null;
+            vm.checkingMessages = false;
+            console.log("ROOM DELETED");
+        })
         /**
         * Creates (saves/updates) the case.
         * Called after the form is submitted and the user is authenticated.
@@ -64,20 +84,162 @@
             brandNewCase.technology = vm.technology;
             brandNewCase.issue = vm.issue;
             brandNewCase.status = {code: "case_created_assigned_to-Expert", id: 1, name: "CREATED"};
-            brandNewCase.id = null;
-            brandNewCase.expectedresult = null;
-            brandNewCase.chaturl = null;
-            brandNewCase.user = {};
-            brandNewCase.etacompletion = "4 hours";
             brandNewCase.statusmsg = 'Case Created';
             brandNewCase.expectedCompletionDate = DateUtils.convertDateTimeFromServer(vm.defaultDate);
             brandNewCase.summary = vm.caseDetails.summary;
-            vm.isSaving = true;
+            Supportcase.save(brandNewCase, onSaveSuccess, onSaveError)
+        }
 
-            if (brandNewCase.id !== null) {
-                Supportcase.update(brandNewCase, onSaveSuccess, onSaveError);
-            } else {
-                Supportcase.save(brandNewCase, onSaveSuccess, onSaveError);
+        function makeConciergeRoom(){
+            if(!DrslHipChatService.currentUsername){
+                DrslHipChatService.currentUsername = $window.prompt("Please Enter your Name")
+            }
+            DrslHipChatService.makeConciergeRoom()
+            .then(function(res){
+                DrslHipChatService.getRoom(res.data.id)
+                .then(function(res){
+                    vm.conciergechaturl = res.data.guest_access_url;
+                    vm.guestRoomID = res.data.id;
+                    vm.chatroom = res.data
+                    var messages = 0;
+                    DrslHipChatService.waitForMessage(res.data, messages);
+                    checkMessages();
+                })
+            })
+        }
+        function sendMessage(){
+            var messageObject = {
+                roomID: vm.guestRoomID,
+                message: vm.messageToSend,
+                from: DrslHipChatService.currentUsername,
+                message_format: 'text'
+            }
+            DrslHipChatService.sendMessage(messageObject)
+            .then(function(res){
+                getMessages();
+                vm.messageToSend = '';
+            })
+        }
+        function checkMessages() {
+            if(DrslHipChatService.waitingOnRoom){
+                setTimeout(function () {
+                    DrslHipChatService.getMessages(vm.guestRoomID, vm.maxResults)
+                    .then(function(res){
+                        vm.messages = res.data.items;
+                        vm.messages.forEach(function(message){
+                            var arrayMessage = message.message.split(' ');
+                            arrayMessage.map(function(word, index){
+                                 if (checkImg(word)) {
+                                    arrayMessage.splice(index, 1, '<a target="_blank" href=' + word + '>' + '<img src=' + word + ' alt="" class="drsl-hipchat-message-image-thumbnail"/>' + '</a>');
+                                } else if(checkHTTP(word)){
+                                    arrayMessage.splice(index, 1, '<a target="_blank" href=' + word + '>' + word + '</a>');
+                                } else if (checkCom(word)) {
+                                    arrayMessage.splice(index, 1, '<a target="_blank" href=http://' + word + '>' + word + '</a>');
+                                 }
+                            })
+                            if(message.type === 'notification'){
+                                message.displayName = message.from.split('· ')[1];
+                            } else {
+                                message.displayName = message.from.name;
+                            }
+                            message.formattedMessage = $sce.trustAsHtml(arrayMessage.join(' '));
+                        })
+                        checkMessages();
+                    })
+                }, 30 * 1000);
+            }
+        }
+        function getMessages() {
+            DrslHipChatService.getMessages(vm.guestRoomID, vm.maxResults)
+            .then(function(res){
+                vm.messages = res.data.items;
+                vm.messages.forEach(function(message){
+                    var arrayMessage = message.message.split(' ');
+                    arrayMessage.map(function(word, index){
+                         if (checkImg(word)) {
+                            arrayMessage.splice(index, 1, '<a target="_blank" href=' + word + '>' + '<img src=' + word + ' alt="" class="drsl-hipchat-message-image-thumbnail"/>' + '</a>');
+                        } else if(checkHTTP(word)){
+                            arrayMessage.splice(index, 1, '<a target="_blank" href=' + word + '>' + word + '</a>');
+                        } else if (checkCom(word)) {
+                            arrayMessage.splice(index, 1, '<a target="_blank" href=http://' + word + '>' + word + '</a>');
+                         }
+                    })
+                    if(message.type === 'notification'){
+                        message.displayName = message.from.split('· ')[1];
+                    } else {
+                        message.displayName = message.from.name;
+                    }
+                    message.formattedMessage = $sce.trustAsHtml(arrayMessage.join(' '));
+                    console.log(message.formattedMessage);
+                    $sce.trustAsHtml(arrayMessage.join(' '));
+                })
+                if(vm.checkingMessages){
+                    checkMessages();
+                }
+            })
+        }
+        function checkCom(word){
+            var splitWord = word.split('.')
+            switch (splitWord[splitWord.length-1]) {
+                case "com":
+                    return true;
+                    break;
+                case "net":
+                    return true;
+                    break;
+                case "org":
+                    return true;
+                    break;
+                case "int":
+                    return true;
+                    break;
+                case "edu":
+                    return true;
+                    break;
+                case "gov":
+                    return true;
+                    break;
+                case "mil":
+                    return true;
+                    break;
+                default:
+                    return false;
+            }
+        }
+        function checkImg(word){
+            var splitWord = word.split('.')
+            switch (splitWord[splitWord.length-1]) {
+                case "png":
+                    return true;
+                    break;
+                case "jpg":
+                    return true;
+                    break;
+                case "jpeg":
+                    return true;
+                    break;
+                case "gif":
+                    return true;
+                    break;
+                default:
+                    return false;
+            }
+        }
+        function checkHTTP(word){
+            switch (word.split(':')[0]) {
+                case "http":
+                    return true;
+                    break;
+                case "https":
+                    return true;
+                    break;
+                default:
+                    return false;
+            }
+        }
+        window.onbeforeunload = function (event) {
+            if(DrslHipChatService.waitingOnRoom){
+                DrslHipChatService.deleteRoom(vm.guestRoomID)
             }
         }
 
@@ -106,15 +268,11 @@
             vm.technologyProperties = null;
             vm.technology = null;
             vm.issue = null;
-            vm.isSaving = false;
             var roomObject = {
                 name: result.technology.name + result.id,
                 topic: result.summary
             }
-            DrslHipChatService.makeRoom(roomObject)
-            .then(function(res){
-                console.log(res);
-            })
+            DrslHipChatService.makeRoom(roomObject);
 
             // emit a 'dorsalApp:supportcaseUpdate' so the app can be aware of the change
             $scope.$emit('dorsalApp:supportcaseUpdate', result);
@@ -126,7 +284,6 @@
         * The error callback for saving/updating a case.
         */
         var onSaveError = function () {
-            vm.isSaving = false;
             checkError()
         };
 

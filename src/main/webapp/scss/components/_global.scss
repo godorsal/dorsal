@@ -357,3 +357,46 @@ table.drsl-table-scroll thead > tr {
     border: 2px solid $scrolling-container-border-color;
     padding: $horizontal-space-between-elements;
 }
+.drsl-hipchat-message-scroller {
+    overflow-y: scroll;
+    max-height: 400px;
+}
+.drsl-hipchat-messages-wrapper {
+    padding: $default-padding;
+    max-height: 470px;
+    background-color: $content-background-color;
+
+    .panel-default {
+        cursor: pointer;
+        margin-bottom: 5px;
+
+        > .panel-heading {
+            &.active {
+                background-color: $brand-color;
+                color: $inverted-heading-text-color;
+            }
+
+            .drsl-case-list {
+                display: flex;
+                flex-flow: row;
+
+                > div {
+                    &:first-child {
+                        flex: 3;
+                        margin-right: $default-half-padding;
+                    }
+
+                    &:last-child {
+                        flex: 1;
+                        text-align: right
+                    }
+                }
+
+                .drsl-case-list-id {
+                    display: inline-block;
+                    width: 200px;
+                }
+            }
+        }
+    }
+}

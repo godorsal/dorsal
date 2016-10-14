@@ -8,12 +8,12 @@
     CaseController.$inject = ['$scope', '$window', '$interval', '$timeout', '$translate', 'CaseService', 'DrslRatingService',
         'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', 'StatusModel',
         'Rating', 'Expertbadge', 'DrslMetadata', 'Caseupdate', 'AttachmentModalService', 'DrslAttachFileService',
-        'DrslNewCaseService', '$filter', '_', 'DrslUserFlowService', 'DrslHipChatService'];
+        'DrslNewCaseService', '$filter', '_', 'DrslUserFlowService', 'DrslHipChatService', '$sce'];
 
     function CaseController($scope, $window, $interval, $timeout, $translate, CaseService, DrslRatingService, CaseDetailsService,
                             EscalationFormService, ShareCaseService, CaseAgreementService, StatusModel, Rating,
                             Expertbadge, DrslMetadata, Caseupdate, AttachmentModalService, DrslAttachFileService,
-                            DrslNewCaseService, $filter, _, DrslUserFlowService, DrslHipChatService) {
+                            DrslNewCaseService, $filter, _, DrslUserFlowService, DrslHipChatService, $sce) {
 
         // Handle user flow redirects and messaging
         DrslUserFlowService.handleUserFlow();
@@ -60,6 +60,9 @@
         vm.sendMessage = sendMessage;
         vm.isCurrentSender = isCurrentSender;
         vm.getMessages = getMessages;
+        vm.getUserName = getUserName;
+        vm.getCurrentUserName = getCurrentUserName;
+
         /**
          * Initialize the controller's data.
          */
@@ -221,6 +224,7 @@
         function setCurrentCase(targetCase) {
             // Set the vm's currentCase to the provided targetCase
             vm.currentCase = targetCase;
+            vm.messages = [];
 
             getMessages();
             // Reset/clear the estimate logs
@@ -477,24 +481,96 @@
             }
         }
         function getMessages(){
+            // vm.messages = [];
             var messagesID = vm.currentCase.technology.name + vm.currentCase.id;
             DrslHipChatService.getMessages(messagesID, vm.maxResults)
             .then(function(res){
                 vm.messages = res.data.items;
                 vm.messages.forEach(function(message){
+                    var arrayMessage = message.message.split(' ');
+                    arrayMessage.map(function(word, index){
+                         if (checkImg(word)) {
+                            arrayMessage.splice(index, 1, '<a target="_blank" href=' + word + '>' + '<img src=' + word + ' alt="" class="drsl-hipchat-message-image-thumbnail"/>' + '</a>');
+                        } else if(checkHTTP(word)){
+                            arrayMessage.splice(index, 1, '<a target="_blank" href=' + word + '>' + word + '</a>');
+                        } else if (checkCom(word)) {
+                            arrayMessage.splice(index, 1, '<a target="_blank" href=http://' + word + '>' + word + '</a>');
+                         }
+                    })
                     if(message.type === 'notification'){
                         message.displayName = message.from.split('· ')[1];
                     } else {
                         message.displayName = message.from.name;
                     }
+                    message.formattedMessage = $sce.trustAsHtml(arrayMessage.join(' '));
+                    console.log(message.formattedMessage);
                 })
             })
+        }
+        function checkCom(word){
+            var splitWord = word.split('.')
+            switch (splitWord[splitWord.length-1]) {
+                case "com":
+                    return true;
+                    break;
+                case "net":
+                    return true;
+                    break;
+                case "org":
+                    return true;
+                    break;
+                case "int":
+                    return true;
+                    break;
+                case "edu":
+                    return true;
+                    break;
+                case "gov":
+                    return true;
+                    break;
+                case "mil":
+                    return true;
+                    break;
+                default:
+                    return false;
+            }
+        }
+        function checkImg(word){
+            var splitWord = word.split('.')
+            switch (splitWord[splitWord.length-1]) {
+                case "png":
+                    return true;
+                    break;
+                case "jpg":
+                    return true;
+                    break;
+                case "jpeg":
+                    return true;
+                    break;
+                case "gif":
+                    return true;
+                    break;
+                default:
+                    return false;
+            }
+        }
+        function checkHTTP(word){
+            switch (word.split(':')[0]) {
+                case "http":
+                    return true;
+                    break;
+                case "https":
+                    return true;
+                    break;
+                default:
+                    return false;
+            }
         }
         function sendMessage(){
             var messageObject = {
                 roomID: vm.currentCase.technology.name + vm.currentCase.id,
                 message: vm.messageToSend,
-                from: vm.currentUser.firstName + ' ' + vm.currentUser.lastName,
+                from: getCurrentUserName(),
                 message_format: 'text'
             }
             DrslHipChatService.sendMessage(messageObject)
@@ -503,8 +579,25 @@
                 vm.messageToSend = '';
             })
         }
+        //Checks to see if a message in the message list is sent by the current user
         function isCurrentSender(displayName){
-            return displayName == vm.currentUser.firstName + ' ' + vm.currentUser.lastName
+            return displayName == vm.currentUser.firstName + ' ' + vm.currentUser.lastName || displayName == vm.currentCase.user.login;
+        }
+        //Get's username of case creator for hipchat messages header
+        function getUserName(){
+            if(vm.currentCase.user.firstName == null){
+                return vm.currentCase.user.login;
+            } else {
+                return vm.currentCase.user.firstName + ' ' + vm.currentCase.user.lastName;
+            }
+        }
+        // Get's the current user's username, either login or firstName + lastName
+        function getCurrentUserName(){
+            if(vm.currentUser.firstName == null){
+                return vm.currentUser.login;
+            } else {
+                return vm.currentUser.firstName + ' ' + vm.currentUser.lastName;
+            }
         }
         /**
          * Checks to see if the provided index is less than or equal to the current step/status index.
