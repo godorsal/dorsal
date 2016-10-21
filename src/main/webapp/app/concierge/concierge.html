@@ -52,6 +52,7 @@
     <a ng-hide="vm.isAuthenticated() && vm.DrslUserFlowService.user.hasCases" class="drsl-link-disabled drsl-link-inactive" translate="concierge.activityBar.manageCases">manage cases</a>
     <a ng-class="{'drsl-link-disabled': !vm.passedStep(3), 'drsl-link-inactive': vm.currentCase.status == 'completed'}" ng-click="vm.openRating()" translate="concierge.activityBar.cloneCase">clone a case</a>
 </div>
+<hr style="border-top: 0px; margin-top: 5px; margin-bottom: 5px;">
     <div class="drsl-case-wrapper drsl-hipchat-section" ng-if="vm.conciergechaturl">
         <div class="drsl-hipchat-messages-wrapper">
             <div class="drsl-hipchat-message-scroller">
@@ -83,6 +84,8 @@
         </form>
     </div>
 </div>
+<hr style="border-top: 0px; margin-top: 5px; margin-bottom: 5px;">
+
 <!-- Main Content -->
 <div class="drsl-concierge-wrapper">
     <!-- Left Column: One, Two, Three, Go -->

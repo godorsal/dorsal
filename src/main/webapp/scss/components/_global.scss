@@ -182,19 +182,26 @@ body {
 }
 
 table.drsl-table-scroll {
-    width: 500px;
+    width: 100%;
 }
 
 table.drsl-table-scroll tbody {
     display: block;
-    height: 95px;
+    height: 300px;
     overflow-y: auto;
+    > td{
+        width: 25%;
+    }
 }
 
 table.drsl-table-scroll thead > tr {
+    width: 100%;
     color: $drsl-label-color;
     display: block;
     position: relative;
+    > th {
+        width: 300px;
+    }
 }
 
 .drsl-form-grid {

@@ -31,7 +31,8 @@
         vm.getMessages = getMessages;
         vm.maxResults = '5';
 
-        DrslHipChatService.clearRooms();
+        // DrslHipChatService.clearRooms();
+        DrslHipChatService.getCurrentUser();
         if(DrslHipChatService.currentRoom){
             vm.chatroom = DrslHipChatService.currentRoom;
         }
@@ -127,6 +128,7 @@
                     .then(function(res){
                         vm.messages = res.data.items;
                         vm.messages.forEach(function(message){
+                            console.log(message);
                             var arrayMessage = message.message.split(' ');
                             arrayMessage.map(function(word, index){
                                  if (checkImg(word)) {
@@ -139,8 +141,10 @@
                             })
                             if(message.type === 'notification'){
                                 message.displayName = message.from.split('· ')[1];
-                            } else {
+                            } else if(typeof message.from == "object") {
                                 message.displayName = message.from.name;
+                            } else {
+                                message.displayName = message.from;
                             }
                             message.formattedMessage = $sce.trustAsHtml(arrayMessage.join(' '));
                         })
@@ -166,8 +170,10 @@
                     })
                     if(message.type === 'notification'){
                         message.displayName = message.from.split('· ')[1];
-                    } else {
+                    } else if(typeof message.from == "object") {
                         message.displayName = message.from.name;
+                    } else {
+                        message.displayName = message.from;
                     }
                     message.formattedMessage = $sce.trustAsHtml(arrayMessage.join(' '));
                     console.log(message.formattedMessage);

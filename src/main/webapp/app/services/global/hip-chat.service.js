@@ -5,16 +5,18 @@
     .module('dorsalApp')
     .factory('DrslHipChatService', DrslHipChatService);
 
-    DrslHipChatService.$inject = ['$state', '$rootScope', '$timeout', '$translate', 'Principal', 'ExpertAccount', 'Supportcase', 'toastr', '$http', '$localStorage', 'requestInterceptor'];
+    DrslHipChatService.$inject = ['$state', '$rootScope', '$timeout', '$translate', 'Principal', 'ExpertAccount', 'Supportcase', 'toastr', '$http', '$localStorage', 'requestInterceptor', 'DrslMetadata', 'GlobalMetadata', '$window'];
 
-    function DrslHipChatService($state, $rootScope, $timeout, $translate, Principal, ExpertAccount, Supportcase, toastr, $http, $localStorage, requestInterceptor) {
+    function DrslHipChatService($state, $rootScope, $timeout, $translate, Principal, ExpertAccount, Supportcase, toastr, $http, $localStorage, requestInterceptor, DrslMetadata, GlobalMetadata, $window) {
         var service = {};
-        var ManageRoomsToken = 'Bearer t9hEidVCkyNRDFHTDnW1qlaoTg2ClAsSFb5UMSFC';
-        var GetMessagesToken = 'Bearer K5RV7BL8mON1XvgStVxXasG6dWtHISRJSdFR2j8z';
-        var MakeRoomToken = 'Bearer OVoAYGsITVTIWnhOoqtCvZlXFMQOUsXQYiqKIC94';
-        var SendMessageToken = 'Bearer 5ZbVyVDbZroGAN3Rbwkua2qYTZyILxvowbDQLSKn';
-        var GetRoomToken = 'Bearer t9hEidVCkyNRDFHTDnW1qlaoTg2ClAsSFb5UMSFC';
+        // var GetRoomToken = 'Bearer t9hEidVCkyNRDFHTDnW1qlaoTg2ClAsSFb5UMSFC';
 
+        // var ManageRoomsToken = 'Bearer t9hEidVCkyNRDFHTDnW1qlaoTg2ClAsSFb5UMSFC';
+        // var GetMessagesToken = 'Bearer K5RV7BL8mON1XvgStVxXasG6dWtHISRJSdFR2j8z';
+        // var MakeRoomToken = 'Bearer OVoAYGsITVTIWnhOoqtCvZlXFMQOUsXQYiqKIC94';
+        // var SendMessageToken = 'Bearer 5ZbVyVDbZroGAN3Rbwkua2qYTZyILxvowbDQLSKn';
+
+        service.DrslMetadata = DrslMetadata;
 
         service.getCurrentUser = function(){
             Principal.identity()
@@ -33,7 +35,17 @@
                 method: 'GET',
                 url: '/v2/room',
                 headers: {
-                    'Authorization': ManageRoomsToken
+                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.hipchattoken).split('#')[0]
+                }
+            }
+            return $http(req);
+        }
+        service.getOneRoom = function(roomID){
+            var req = {
+                method: 'GET',
+                url: '/v2/room/' + roomID,
+                headers: {
+                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.hipchattoken).split('#')[0]
                 }
             }
             return $http(req);
@@ -44,10 +56,10 @@
                 method: 'GET',
                 url: '/v2/room/' + roomID + '/history?max-results=' + maxResults,
                 headers: {
-                    'Authorization': GetMessagesToken
+                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.hipchattoken).split('#')[1]
                 }
             }
-            return $http(req, GetMessagesToken);
+            return $http(req, 'Bearer ' + $window.atob(service.DrslMetadata.hipchattoken).split('#')[0])
         }
         // Gets all the messages from a specific room to see if there's activity
         service.checkRoom = function(roomID){
@@ -73,7 +85,7 @@
                         $rootScope.$emit('roomDeletion');
                     }
                 })
-            }, 5 * 1000);
+            }, 5 * 60 * 1000);
         }
         // Make Hipchat chatroom using roomObjects name and topic
         service.makeRoom = function(roomObject){
@@ -88,7 +100,7 @@
                     guest_access: true
                 },
                 headers: {
-                    'Authorization': MakeRoomToken
+                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.hipchattoken).split('#')[2]
                 }
             })
         }
@@ -96,7 +108,7 @@
         service.makeConciergeRoom = function(){
             var timestamp = new Date();
             var roomName = "Concierge Chat Room: " + (timestamp.getMonth() + 1) + '/' + timestamp.getDate() + '/' + timestamp.getFullYear() + ' ' + timestamp.getHours() + ':' + timestamp.getMinutes() + ':' +  timestamp.getSeconds();
-            var url = '/v2/room';
+            var url = 'http://localhost/v2/room';
             return $http({
                 method: 'POST',
                 url: url,
@@ -107,7 +119,7 @@
                     guest_access: true
                 },
                 headers: {
-                    'Authorization': MakeRoomToken
+                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.hipchattoken).split('#')[2]
                 }
             })
         }
@@ -117,7 +129,7 @@
                 method: 'GET',
                 url: url,
                 headers: {
-                    'Authorization': GetRoomToken
+                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.hipchattoken).split('#')[0]
                 }
             })
         }
@@ -127,7 +139,7 @@
                 method: 'DELETE',
                 url: url,
                 headers: {
-                    'Authorization': MakeRoomToken
+                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.hipchattoken).split('#')[2]
                 }
             })
         }
@@ -141,7 +153,7 @@
                     from: messageObject.from
                 },
                 headers: {
-                    'Authorization': SendMessageToken
+                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.hipchattoken).split('#')[3]
                 }
             })
         }
@@ -153,6 +165,7 @@
                         service.deleteRoom(room.id)
                     }
                 })
+                $rootScope.$emit('refreshRooms');
             })
         }
         service.clearChatRoom = function () {

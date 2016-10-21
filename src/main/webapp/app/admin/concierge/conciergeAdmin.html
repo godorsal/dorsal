@@ -13,7 +13,7 @@
 	</div>
 	<div class="container grid-container no-padding drsl-set-concierge-box">
 		<div class="drsl-placeholder-label" type="text">
-			<input type="text" ng-if="vm.conciergeAvailableForChat" ng-model="vm.conciergeAvailableForChat.value" class="form-control" id="ConciergeName">
+			<input type="text" ng-model="vm.conciergeAvailableForChat.value" class="form-control" id="ConciergeName">
 			<span class="drsl-unit">(Concierge Name)</span>
 		</div>
 		<div class="drsl-placeholder-label" type="text">
@@ -25,5 +25,35 @@
 			<span class="drsl-checkbox-unit">(Concierge Chat Active)</span>
 		</div>
 		<button class="btn btn-success" ng-click="vm.setConcierge()">Set Concierge</button>
+		<div class="" style="padding: 20px; width: 100%; overflow-y: hidden;" ng-if="vm.concirgeRooms.length">
+			<h4>Open Concierge Chat Rooms</h4>
+			<table style="border: 1px solid #CCC;"  class="drsl-table-scroll">
+				<thead>
+					<th>Room Name:</th>
+					<th>Participants: </th>
+					<th>Last Active: </th>
+					<th>Delete: </th>
+				</thead>
+				<tbody>
+					<tr ng-repeat="room in vm.concirgeRooms" class="drsl-hipchat-message" style="border: 1px solid #CCC;">
+						<td class="drsl-hipchat-name" style="width: 25%;">
+							{{room.name}}
+						</td>
+						<td class="drsl-hipchat-name" style="width: 25%;">
+							{{room.participants}}
+						</td>
+						<td class="drsl-hipchat-name" style="width: 25%;">
+							{{room.last_active | date: 'MM/dd/yyyy'}}
+						</td>
+						<td style="width: 25%;">
+							<button type="button" name="button" class="btn btn-success" ng-click="vm.deleteRoom(room.id)" style="float: none;">Delete</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<button type="button" name="button" class="btn btn-success" ng-click="vm.clearRooms()">Clear All Rooms</button>
+		</div>
+		<!-- </div> -->
+		<!-- </div> -->
 	</div>
 </div>

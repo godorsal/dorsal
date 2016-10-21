@@ -5,22 +5,60 @@
 	.module('dorsalApp')
 	.controller('ConciergeAdminController', ConciergeController);
 
-	ConciergeController.$inject = ['toastr', 'GlobalMetadata'];
+	ConciergeController.$inject = ['toastr', 'GlobalMetadata', 'DrslHipChatService', '$rootScope'];
 
-	function ConciergeController(toastr, GlobalMetadata) {
+	function ConciergeController(toastr, GlobalMetadata, DrslHipChatService, $rootScope) {
 		var vm = this;
 		vm.globalData = {};
 		vm.tosting = false;
+		vm.concirgeRooms = [];
+		vm.deleteRoom = deleteRoom;
+		vm.clearRooms = clearRooms;
+		vm.getRooms = getRooms;
 
-		GlobalMetadata.query(function (result) {
-			toObject(result);
-		})
+		getChatRooms();
+		getRooms()
+
+		function getRooms() {
+			GlobalMetadata.query(function (result) {
+				toObject(result);
+			})
+		}
+		function getChatRooms() {
+			vm.concirgeRooms = [];
+			DrslHipChatService.getRooms()
+			.then(function(res){
+				res.data.items.forEach(function(room){
+					if(room.name.split(':')[0] == "Concierge Chat Room"){
+						DrslHipChatService.getOneRoom(room.id)
+						.then(function (res) {
+							vm.concirgeRooms.push(res.data);
+							console.log("ROOOM", res.data);
+						})
+					}
+				})
+				checkRooms();
+			})
+		}
+		function deleteRoom(id) {
+			DrslHipChatService.deleteRoom(id)
+			.then(function(res){
+				toastr.success("ROOM DELETED")
+				getChatRooms();
+			})
+		}
+		function clearRooms() {
+			DrslHipChatService.clearRooms();
+			vm.concirgeRooms = [];
+		}
 		function toObject(arr) {
 			for (var i = 0; i < arr.length; ++i){
 				vm.globalData[arr[i].name] = arr[i];
 			}
 			vm.conciergeAvailableForChat = vm.globalData.conciergeAvailableForChat;
+			console.log(vm.conciergeAvailableForChat);
 			vm.conciergeURL = vm.globalData.conciergeChatUrl;
+			console.log(vm.conciergeURL);
 			vm.conciergeAvailable = vm.globalData.conciergeAvailable;
 			isAvailable();
 		}
@@ -56,5 +94,14 @@
 				vm.setAvailable = false;
 			}
 		}
+		function checkRooms() {
+			setTimeout(function () {
+				getChatRooms();
+				checkRooms()
+			}, 5 * 60 * 1000);
+		}
+		$rootScope.$on('refreshRooms', function () {
+			getChatRooms();
+		})
 	}
 })();
