@@ -21,10 +21,12 @@
         service.getCurrentUser = function(){
             Principal.identity()
             .then(function(res){
-                if(res.firstName == null){
-                    service.currentUsername = res.login;
-                } else {
-                    service.currentUsername = res.firstName + ' ' + res.lastName;
+                if(res != null){
+                    if(res.firstName == null){
+                        service.currentUsername = res.login;
+                    } else {
+                        service.currentUsername = res.firstName + ' ' + res.lastName;
+                    }
                 }
             })
         }
