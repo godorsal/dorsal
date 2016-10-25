@@ -5,11 +5,11 @@
     .module('dorsalApp')
     .factory('DrslHipChatService', DrslHipChatService);
 
-    DrslHipChatService.$inject = ['$state', '$rootScope', '$timeout', '$translate', 'Principal', 'ExpertAccount', 'Supportcase', 'toastr', '$http', '$localStorage', 'requestInterceptor', 'DrslMetadata', 'GlobalMetadata', '$window'];
+    DrslHipChatService.$inject = ['$state', '$rootScope', '$timeout', '$translate', 'Principal', 'ExpertAccount', 'Supportcase', 'toastr', '$http', '$localStorage', 'requestInterceptor', 'DrslMetadata', 'GlobalMetadata', '$window', '$sce'];
 
-    function DrslHipChatService($state, $rootScope, $timeout, $translate, Principal, ExpertAccount, Supportcase, toastr, $http, $localStorage, requestInterceptor, DrslMetadata, GlobalMetadata, $window) {
+    function DrslHipChatService($state, $rootScope, $timeout, $translate, Principal, ExpertAccount, Supportcase, toastr, $http, $localStorage, requestInterceptor, DrslMetadata, GlobalMetadata, $window, $sce) {
         var service = {};
-        
+
         service.DrslMetadata = DrslMetadata;
 
         service.getCurrentUser = function(){
@@ -168,6 +168,97 @@
             service.deleteRoom(service.currentRoom.id)
             service.currentUsername = '';
         }
+
+
+        service.magicMessageParser = function (messages) {
+            return messages.forEach(function(message){
+                var arrayMessage = message.message.split(' ');
+                arrayMessage.map(function(word, index){
+                     if (checkImg(word)) {
+                        arrayMessage.splice(index, 1, '<a target="_blank" href=' + word + '>' + '<img src=' + word + ' alt="" class="drsl-hipchat-message-image-thumbnail"/>' + '</a>');
+                    } else if(checkHTTP(word)){
+                        console.log("GET HTTP WORKED");
+                        arrayMessage.splice(index, 1, '<a target="_blank" href=' + word.replace(/\/$/, "") + '>' + word + '</a>');
+                        console.log(arrayMessage);
+                    } else if (checkCom(word)) {
+                        arrayMessage.splice(index, 1, '<a target="_blank" href=http://' + word + '>' + word + '</a>');
+                     }
+                })
+                if(message.type === 'notification'){
+                    message.displayName = message.from.split('· ')[1];
+                } else if(typeof message.from == "object") {
+                    message.displayName = message.from.name;
+                } else {
+                    message.displayName = message.from;
+                }
+                message.formattedMessage = $sce.trustAsHtml(arrayMessage.join(' '));
+                $sce.trustAsHtml(arrayMessage.join(' '));
+            })
+        }
+        function checkCom(word){
+            var splitWord = word.split('.')
+            switch (splitWord[splitWord.length-1]) {
+                case "com":
+                    return true;
+                    break;
+                case "net":
+                    return true;
+                    break;
+                case "org":
+                    return true;
+                    break;
+                case "int":
+                    return true;
+                    break;
+                case "edu":
+                    return true;
+                    break;
+                case "gov":
+                    return true;
+                    break;
+                case "mil":
+                    return true;
+                    break;
+                default:
+                    return false;
+            }
+        }
+        function checkImg(word){
+            var splitWord = word.split('.')
+            switch (splitWord[splitWord.length-1]) {
+                case "png":
+                    return true;
+                    break;
+                case "jpg":
+                    return true;
+                    break;
+                case "jpeg":
+                    return true;
+                    break;
+                case "gif":
+                    return true;
+                    break;
+                default:
+                    return false;
+            }
+        }
+        function checkHTTP(word){
+            console.log("CHECKING HTTP", word.split(':')[0]);
+            switch (word.split(':')[0]) {
+                case "http":
+                    console.log("HTTP SUCCESS");
+                    return true;
+                    break;
+                case "https":
+                console.log("HTTP S SUCCESS");
+                    return true;
+                    break;
+                default:
+                    return false;
+            }
+        }
+
+
         return service;
     }
 })();

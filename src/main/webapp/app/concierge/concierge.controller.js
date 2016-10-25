@@ -126,26 +126,7 @@
                     DrslHipChatService.getMessages(vm.guestRoomID, vm.maxResults)
                     .then(function(res){
                         vm.messages = res.data.items;
-                        vm.messages.forEach(function(message){
-                            var arrayMessage = message.message.split(' ');
-                            arrayMessage.map(function(word, index){
-                                 if (checkImg(word)) {
-                                    arrayMessage.splice(index, 1, '<a target="_blank" href=' + word + '>' + '<img src=' + word + ' alt="" class="drsl-hipchat-message-image-thumbnail"/>' + '</a>');
-                                } else if(checkHTTP(word)){
-                                    arrayMessage.splice(index, 1, '<a target="_blank" href=' + word + '>' + word + '</a>');
-                                } else if (checkCom(word)) {
-                                    arrayMessage.splice(index, 1, '<a target="_blank" href=http://' + word + '>' + word + '</a>');
-                                 }
-                            })
-                            if(message.type === 'notification'){
-                                message.displayName = message.from.split('· ')[1];
-                            } else if(typeof message.from == "object") {
-                                message.displayName = message.from.name;
-                            } else {
-                                message.displayName = message.from;
-                            }
-                            message.formattedMessage = $sce.trustAsHtml(arrayMessage.join(' '));
-                        })
+                        DrslHipChatService.magicMessageParser(vm.messages);
                         checkMessages();
                     })
                 }, 30 * 1000);
@@ -155,91 +136,13 @@
             DrslHipChatService.getMessages(vm.guestRoomID, vm.maxResults)
             .then(function(res){
                 vm.messages = res.data.items;
-                vm.messages.forEach(function(message){
-                    var arrayMessage = message.message.split(' ');
-                    arrayMessage.map(function(word, index){
-                         if (checkImg(word)) {
-                            arrayMessage.splice(index, 1, '<a target="_blank" href=' + word + '>' + '<img src=' + word + ' alt="" class="drsl-hipchat-message-image-thumbnail"/>' + '</a>');
-                        } else if(checkHTTP(word)){
-                            arrayMessage.splice(index, 1, '<a target="_blank" href=' + word + '>' + word + '</a>');
-                        } else if (checkCom(word)) {
-                            arrayMessage.splice(index, 1, '<a target="_blank" href=http://' + word + '>' + word + '</a>');
-                         }
-                    })
-                    if(message.type === 'notification'){
-                        message.displayName = message.from.split('· ')[1];
-                    } else if(typeof message.from == "object") {
-                        message.displayName = message.from.name;
-                    } else {
-                        message.displayName = message.from;
-                    }
-                    message.formattedMessage = $sce.trustAsHtml(arrayMessage.join(' '));
-                    $sce.trustAsHtml(arrayMessage.join(' '));
-                })
+                DrslHipChatService.magicMessageParser(vm.messages);
                 if(vm.checkingMessages){
                     checkMessages();
                 }
             })
         }
-        function checkCom(word){
-            var splitWord = word.split('.')
-            switch (splitWord[splitWord.length-1]) {
-                case "com":
-                    return true;
-                    break;
-                case "net":
-                    return true;
-                    break;
-                case "org":
-                    return true;
-                    break;
-                case "int":
-                    return true;
-                    break;
-                case "edu":
-                    return true;
-                    break;
-                case "gov":
-                    return true;
-                    break;
-                case "mil":
-                    return true;
-                    break;
-                default:
-                    return false;
-            }
-        }
-        function checkImg(word){
-            var splitWord = word.split('.')
-            switch (splitWord[splitWord.length-1]) {
-                case "png":
-                    return true;
-                    break;
-                case "jpg":
-                    return true;
-                    break;
-                case "jpeg":
-                    return true;
-                    break;
-                case "gif":
-                    return true;
-                    break;
-                default:
-                    return false;
-            }
-        }
-        function checkHTTP(word){
-            switch (word.split(':')[0]) {
-                case "http":
-                    return true;
-                    break;
-                case "https":
-                    return true;
-                    break;
-                default:
-                    return false;
-            }
-        }
+
         window.onbeforeunload = function (event) {
             if(DrslHipChatService.waitingOnRoom){
                 DrslHipChatService.deleteRoom(vm.guestRoomID)
