@@ -134,8 +134,9 @@ body {
 }
 .drsl-max-results-select {
     position: absolute;
-    right: 120px;
+    right: 105px;
     padding: 10px;
+    color: $custom-input-unit-color;
 }
 .drsl-button-wrapper {
     display: flex;
@@ -244,7 +245,25 @@ table.drsl-table-scroll thead > tr {
 .drsl-case-inputs {
     width: 570px;
 }
-
+.drsl-chat-hr {
+    border-top: 0px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.drsl-hipchat-name {
+    width: 20%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    > button {
+        float: left;
+        padding: none;
+    }
+}
+.drsl-open-concierge-chatrooms {
+    padding: 20px;
+    width: 100%;
+    overflow-y: hidden;
+}
 .drsl-value {
     color: $drsl-value-color;
     font-weight: $default-medium-weight;
@@ -367,6 +386,9 @@ table.drsl-table-scroll thead > tr {
     overflow-y: auto;
     border: 2px solid $scrolling-container-border-color;
     padding: $horizontal-space-between-elements;
+}
+.drsl-hipchat-message {
+    border: 1px solid #CCC;
 }
 .drsl-hipchat-message-scroller {
     overflow-y: scroll;

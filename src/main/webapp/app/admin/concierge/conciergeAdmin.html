@@ -24,36 +24,40 @@
 			<input type="checkbox" class="checkbox" id="ConciergeActive" ng-model="vm.setAvailable">
 			<span class="drsl-checkbox-unit">(Concierge Chat Active)</span>
 		</div>
-		<button class="btn btn-success" ng-click="vm.setConcierge()">Set Concierge</button>
-		<div class="" style="padding: 20px; width: 100%; overflow-y: hidden;" ng-if="vm.concirgeRooms.length">
+		<button class="btn btn-success drsl-set-concierge-button" ng-click="vm.setConcierge()">Set Concierge</button>
+		<div class="drsl-open-concierge-chatrooms" ng-if="vm.concirgeRooms.length">
 			<h4>Open Concierge Chat Rooms</h4>
-			<table style="border: 1px solid #CCC;"  class="drsl-table-scroll">
+			<table class="drsl-table-scroll drsl-hipchat-message">
 				<thead>
 					<th>Room Name:</th>
 					<th>Participants: </th>
 					<th>Last Active: </th>
 					<th>Delete: </th>
+					<th>Open: </th>
 				</thead>
 				<tbody>
-					<tr ng-repeat="room in vm.concirgeRooms" class="drsl-hipchat-message" style="border: 1px solid #CCC;">
-						<td class="drsl-hipchat-name" style="width: 25%;">
+					<tr ng-repeat="room in vm.concirgeRooms" class="drsl-hipchat-message">
+						<td class="drsl-hipchat-name">
 							{{room.name}}
 						</td>
-						<td class="drsl-hipchat-name" style="width: 25%;">
+						<td class="drsl-hipchat-name">
 							{{room.participants}}
 						</td>
-						<td class="drsl-hipchat-name" style="width: 25%;">
-							{{room.last_active | date: 'MM/dd/yyyy'}}
+						<td class="drsl-hipchat-name">
+							{{room.last_active | date: 'HH:mm:ss'}}
 						</td>
-						<td style="width: 25%;">
-							<button type="button" name="button" class="btn btn-success" ng-click="vm.deleteRoom(room.id)" style="float: none;">Delete</button>
+						<td class="drsl-hipchat-name">
+							<button type="button" name="button" class="btn btn-success" ng-click="vm.deleteRoom(room.id)">Delete</button>
+						</td>
+						<td class="drsl-hipchat-name">
+							<a href="{{room.guest_access_url}}">
+								<button type="button" name="button" class="btn btn-success" href="">Open</button>
+							</a>
 						</td>
 					</tr>
 				</tbody>
 			</table>
 			<button type="button" name="button" class="btn btn-success" ng-click="vm.clearRooms()">Clear All Rooms</button>
 		</div>
-		<!-- </div> -->
-		<!-- </div> -->
 	</div>
 </div>

@@ -30,10 +30,10 @@ Chat
     display: inline-block;
     float: left;
     width: 100%;
-    .btn {
-        float: right;
-        margin: $default-half-padding;
-    }
+}
+.drsl-set-concierge-button {
+    float: right;
+    margin: $default-half-padding;
 }
 // Shared Chat Styles *********************
 .drsl-chat-rooms-admin, .drsl-chat-section {
