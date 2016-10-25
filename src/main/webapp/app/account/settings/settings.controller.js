@@ -44,6 +44,7 @@
         vm.removeAuthorizedUsers = removeAuthorizedUsers;
         vm.removeInvitedUsers = removeInvitedUsers;
         vm.updateUser = updateUser;
+        vm.checkInvalid = checkInvalid;
 
         /**
          * Initialize the controller's data.
@@ -240,7 +241,9 @@
                 Payment.save(payment, onSaveSuccess, onSaveError);
             }
         }
-
+        function checkInvalid() {
+            vm.invitedUser = vm.invitedUser.replace(/;|"|!|\+|#|\$|%|\^|&|\*|\)|\(|:|\?|\/|<|>|{|}|\[|\]|-|_|=|\~|\`|\||\\|\//g, "")
+        }
         /**
          * On Payment success, update the vm with the latest payment data and display a toastr message.
          * @param payment
