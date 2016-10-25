@@ -34,7 +34,11 @@
         vm.success = null;
 
         $timeout(function (){angular.element('#username').focus();});
-
+        $document.keyup(function(e) {
+             if (e.keyCode == 27) {
+                 cancel ();
+            }
+        });
         function cancel () {
             vm.credentials = {
                 username: null,
