@@ -177,9 +177,7 @@
                      if (checkImg(word)) {
                         arrayMessage.splice(index, 1, '<a target="_blank" href=' + word + '>' + '<img src=' + word + ' alt="" class="drsl-hipchat-message-image-thumbnail"/>' + '</a>');
                     } else if(checkHTTP(word)){
-                        console.log("GET HTTP WORKED");
                         arrayMessage.splice(index, 1, '<a target="_blank" href=' + word.replace(/\/$/, "") + '>' + word + '</a>');
-                        console.log(arrayMessage);
                     } else if (checkCom(word)) {
                         arrayMessage.splice(index, 1, '<a target="_blank" href=http://' + word + '>' + word + '</a>');
                      }
@@ -243,14 +241,11 @@
             }
         }
         function checkHTTP(word){
-            console.log("CHECKING HTTP", word.split(':')[0]);
             switch (word.split(':')[0]) {
                 case "http":
-                    console.log("HTTP SUCCESS");
                     return true;
                     break;
                 case "https":
-                console.log("HTTP S SUCCESS");
                     return true;
                     break;
                 default:
