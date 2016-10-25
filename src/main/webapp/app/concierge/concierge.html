@@ -53,10 +53,10 @@
     <a ng-class="{'drsl-link-disabled': !vm.passedStep(3), 'drsl-link-inactive': vm.currentCase.status == 'completed'}" ng-click="vm.openRating()" translate="concierge.activityBar.cloneCase">clone a case</a>
 </div>
 <hr style="border-top: 0px; margin-top: 5px; margin-bottom: 5px;">
-    <div class="drsl-case-wrapper drsl-hipchat-section" ng-if="vm.conciergechaturl">
-        <div class="drsl-hipchat-messages-wrapper">
-            <div class="drsl-hipchat-message-scroller">
-                <ul class="drsl-hipchat-message-list">
+<div class="drsl-case-wrapper drsl-hipchat-section" ng-if="vm.conciergechaturl">
+    <div class="drsl-hipchat-messages-wrapper">
+        <div class="drsl-hipchat-message-scroller">
+            <ul class="drsl-hipchat-message-list">
                 <li ng-if="vm.messages.length < 1"><span class="drsl-hipchat-message" translate="concierge.pageTitles.chatWelcome" translate-values="{username: '{{vm.DrslHipChatService.currentUsername}}'}">Welcome to the Dorsal Hipchat Chatroom, {{vm.DrslHipChatService.currentUsername}}.</span></li>
                 <li ng-if="vm.messages.length > 0" ng-repeat="message in vm.messages" ng-class="{'drsl-hipchat-you': message.displayName == vm.DrslHipChatService.currentUsername}" class="drsl-hipchat-message">
                     <span class="drsl-hipchat-name">
@@ -75,11 +75,12 @@
         </div>
         <form ng-submit="vm.sendMessage()">
             <input type="text" class="form-control drsl-hipchat-message-input" ng-model="vm.messageToSend">
-            <select name="maxResults" id="maxResults" ng-model="vm.maxResults" class="form-control drsl-hipchat-max-results" ng-change="vm.getMessages()">
+            <select name="maxResults" id="maxResults" ng-model="vm.maxResults" class="form-control drsl-hipchat-max-results " ng-change="vm.getMessages()">
                 <option value="5">5</option>
                 <option value="10">10</option>
                 <option value="15">15</option>
             </select>
+            <span class="drsl-max-results-select">(Max Results)</span>
             <button class="btn btn-success drsl-hipchat-send-button" button="submit">Send</button>
         </form>
     </div>

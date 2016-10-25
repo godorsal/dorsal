@@ -132,7 +132,11 @@ body {
         padding-right: 30px;
     }
 }
-
+.drsl-max-results-select {
+    position: absolute;
+    right: 120px;
+    padding: 10px;
+}
 .drsl-button-wrapper {
     display: flex;
     flex-flow: column;
