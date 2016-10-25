@@ -6,10 +6,9 @@
         .controller('CaseDetailsController', CaseDetailsController);
 
     CaseDetailsController.$inject = ['$scope', '$timeout', '$uibModalInstance', 'drslCase', 'expert',
-        'Casetechnologyproperty', 'Caseupdate', 'Attachment', 'Principal', 'DrslAttachFileService'];
+        'Casetechnologyproperty', 'Caseupdate', 'Attachment', 'Principal', 'DrslAttachFileService', '$document'];
 
-    function CaseDetailsController($scope, $timeout, $uibModalInstance, drslCase, expert,
-                                   Casetechnologyproperty, Caseupdate, Attachment, Principal, DrslAttachFileService) {
+    function CaseDetailsController($scope, $timeout, $uibModalInstance, drslCase, expert, Casetechnologyproperty, Caseupdate, Attachment, Principal, DrslAttachFileService, $document) {
 
         // Set the view model and view model properties/methods
         var vm = this;
@@ -33,7 +32,11 @@
             dataStreamContentType: null,
             id: null
         };
-
+        $document.keyup(function(e) {
+             if (e.keyCode == 27) {
+                 cancel (e);
+            }
+        });
         // vm methods
         vm.init = init;
         vm.cancel = cancel;
