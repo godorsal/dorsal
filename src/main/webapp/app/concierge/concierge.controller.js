@@ -68,7 +68,6 @@
         $rootScope.$on('roomDeletion', function(){
             vm.conciergechaturl = null;
             vm.checkingMessages = false;
-            console.log("ROOM DELETED");
         })
         /**
         * Creates (saves/updates) the case.
@@ -128,7 +127,6 @@
                     .then(function(res){
                         vm.messages = res.data.items;
                         vm.messages.forEach(function(message){
-                            console.log(message);
                             var arrayMessage = message.message.split(' ');
                             arrayMessage.map(function(word, index){
                                  if (checkImg(word)) {
@@ -176,7 +174,6 @@
                         message.displayName = message.from;
                     }
                     message.formattedMessage = $sce.trustAsHtml(arrayMessage.join(' '));
-                    console.log(message.formattedMessage);
                     $sce.trustAsHtml(arrayMessage.join(' '));
                 })
                 if(vm.checkingMessages){

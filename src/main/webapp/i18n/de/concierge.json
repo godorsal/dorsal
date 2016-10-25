@@ -8,7 +8,8 @@
             "onDemand": "on-demand pros",
             "chatWithExpert": "Chat With an Expert: {{concierge}}",
             "openChatWithExpert": "Start Chat an Expert: {{concierge}}",
-            "joinChatWithExpert": "Open In Hipchat {{concierge}}"
+            "joinChatWithExpert": "Open In Hipchat {{concierge}}",
+            "chatWelcome": "Welcome to the Dorsal Hipchat Chatroom, {{username}}"
         },
         "chat": {
             "header": "Concierge Chat",

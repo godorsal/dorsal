@@ -9,13 +9,7 @@
 
     function DrslHipChatService($state, $rootScope, $timeout, $translate, Principal, ExpertAccount, Supportcase, toastr, $http, $localStorage, requestInterceptor, DrslMetadata, GlobalMetadata, $window) {
         var service = {};
-        // var GetRoomToken = 'Bearer t9hEidVCkyNRDFHTDnW1qlaoTg2ClAsSFb5UMSFC';
-
-        // var ManageRoomsToken = 'Bearer t9hEidVCkyNRDFHTDnW1qlaoTg2ClAsSFb5UMSFC';
-        // var GetMessagesToken = 'Bearer K5RV7BL8mON1XvgStVxXasG6dWtHISRJSdFR2j8z';
-        // var MakeRoomToken = 'Bearer OVoAYGsITVTIWnhOoqtCvZlXFMQOUsXQYiqKIC94';
-        // var SendMessageToken = 'Bearer 5ZbVyVDbZroGAN3Rbwkua2qYTZyILxvowbDQLSKn';
-
+        
         service.DrslMetadata = DrslMetadata;
 
         service.getCurrentUser = function(){
@@ -37,7 +31,7 @@
                 method: 'GET',
                 url: '/v2/room',
                 headers: {
-                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.hipchattoken).split('#')[0]
+                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[0]
                 }
             }
             return $http(req);
@@ -47,7 +41,7 @@
                 method: 'GET',
                 url: '/v2/room/' + roomID,
                 headers: {
-                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.hipchattoken).split('#')[0]
+                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[0]
                 }
             }
             return $http(req);
@@ -58,10 +52,10 @@
                 method: 'GET',
                 url: '/v2/room/' + roomID + '/history?max-results=' + maxResults,
                 headers: {
-                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.hipchattoken).split('#')[1]
+                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[1]
                 }
             }
-            return $http(req, 'Bearer ' + $window.atob(service.DrslMetadata.hipchattoken).split('#')[0])
+            return $http(req, 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[0])
         }
         // Gets all the messages from a specific room to see if there's activity
         service.checkRoom = function(roomID){
@@ -102,7 +96,7 @@
                     guest_access: true
                 },
                 headers: {
-                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.hipchattoken).split('#')[2]
+                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[2]
                 }
             })
         }
@@ -121,7 +115,7 @@
                     guest_access: true
                 },
                 headers: {
-                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.hipchattoken).split('#')[2]
+                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[2]
                 }
             })
         }
@@ -131,7 +125,7 @@
                 method: 'GET',
                 url: url,
                 headers: {
-                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.hipchattoken).split('#')[0]
+                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[0]
                 }
             })
         }
@@ -141,7 +135,7 @@
                 method: 'DELETE',
                 url: url,
                 headers: {
-                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.hipchattoken).split('#')[2]
+                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[2]
                 }
             })
         }
@@ -155,7 +149,7 @@
                     from: messageObject.from
                 },
                 headers: {
-                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.hipchattoken).split('#')[3]
+                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[3]
                 }
             })
         }

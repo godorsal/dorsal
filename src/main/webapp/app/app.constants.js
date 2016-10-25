@@ -4,6 +4,6 @@
     angular
         .module('dorsalApp')
         .constant('VERSION', "1.0.6-SNAPSHOT")
-        .constant('DEBUG_INFO_ENABLED', true)
+        .constant('DEBUG_INFO_ENABLED', false)
 ;
 })();

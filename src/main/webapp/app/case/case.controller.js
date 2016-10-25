@@ -503,7 +503,6 @@
                         message.displayName = message.from.name;
                     }
                     message.formattedMessage = $sce.trustAsHtml(arrayMessage.join(' '));
-                    console.log(message.formattedMessage);
                 })
             })
         }

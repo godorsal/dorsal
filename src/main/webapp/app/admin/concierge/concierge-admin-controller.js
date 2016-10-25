@@ -32,14 +32,12 @@
 					if(room.name.split(':')[0] == "Concierge Chat Room"){
 						DrslHipChatService.getOneRoom(room.id)
 						.then(function (res) {
-							console.log(res.data);
 							var participants = [];
 							res.data.participants.forEach(function (participant) {
 								participants.push(participant.name);
 							})
 							res.data.participants = participants.join(',');
 							vm.concirgeRooms.push(res.data);
-							console.log("ROOOM", res.data);
 						})
 					}
 				})
@@ -62,9 +60,7 @@
 				vm.globalData[arr[i].name] = arr[i];
 			}
 			vm.conciergeAvailableForChat = vm.globalData.conciergeAvailableForChat;
-			console.log(vm.conciergeAvailableForChat);
 			vm.conciergeURL = vm.globalData.conciergeChatUrl;
-			console.log(vm.conciergeURL);
 			vm.conciergeAvailable = vm.globalData.conciergeAvailable;
 			isAvailable();
 		}

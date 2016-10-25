@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'DrslMetadata', 'DrslUserFlowService'];
+    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'DrslMetadata', 'DrslUserFlowService', '$document'];
 
-    function LoginController ($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, DrslMetadata, DrslUserFlowService) {
+    function LoginController ($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, DrslMetadata, DrslUserFlowService, $document) {
         var vm = this;
 
         vm.authenticationError = false;

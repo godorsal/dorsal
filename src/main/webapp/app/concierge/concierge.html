@@ -57,7 +57,7 @@
         <div class="drsl-hipchat-messages-wrapper">
             <div class="drsl-hipchat-message-scroller">
                 <ul class="drsl-hipchat-message-list">
-                <li ng-if="vm.messages.length < 1"><span class="drsl-hipchat-message">Welcome to the Dorsal Hipchat Chatroom, {{vm.DrslHipChatService.currentUsername}}.</span></li>
+                <li ng-if="vm.messages.length < 1"><span class="drsl-hipchat-message" translate="concierge.pageTitles.chatWelcome" translate-values="{username: '{{vm.DrslHipChatService.currentUsername}}'}">Welcome to the Dorsal Hipchat Chatroom, {{vm.DrslHipChatService.currentUsername}}.</span></li>
                 <li ng-if="vm.messages.length > 0" ng-repeat="message in vm.messages" ng-class="{'drsl-hipchat-you': message.displayName == vm.DrslHipChatService.currentUsername}" class="drsl-hipchat-message">
                     <span class="drsl-hipchat-name">
                         {{message.displayName}}:
