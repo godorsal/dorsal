@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'DrslMetadata', 'DrslUserFlowService', '$document'];
+    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'DrslMetadata', 'DrslUserFlowService', '$document', 'PasswordValidationService'];
 
-    function LoginController ($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, DrslMetadata, DrslUserFlowService, $document) {
+    function LoginController ($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, DrslMetadata, DrslUserFlowService, $document, PasswordValidationService) {
         var vm = this;
 
         vm.authenticationError = false;
@@ -18,6 +18,8 @@
         vm.password = null;
         vm.rememberMe = true;
         vm.requestResetPassword = requestResetPassword;
+        vm.checkPassword = checkPassword;
+        vm.checkConfirmPassword = checkConfirmPassword;
         vm.username = null;
         vm.altPathSignInText = "sign in";
         vm.altPathRegisterText = "create an account";
@@ -32,12 +34,13 @@
         vm.errorUserExists = null;
         vm.registerAccount = {};
         vm.success = null;
+        vm.passwordValidity = [];
 
         $timeout(function (){angular.element('#username').focus();});
 
         $document.keyup(function(e) {
-             if (e.keyCode == 27) {
-                 cancel ()
+            if (e.keyCode == 27) {
+                cancel ()
             }
         });
 
@@ -97,7 +100,12 @@
                 });
             }
         }
-
+        function checkPassword(form) {
+            PasswordValidationService.checkPassword(form);
+        }
+        function checkConfirmPassword(form) {
+            PasswordValidationService.checkConfirmPassword(form);
+        }
         function requestResetPassword () {
             $uibModalInstance.dismiss('cancel');
             $state.go('requestReset');
