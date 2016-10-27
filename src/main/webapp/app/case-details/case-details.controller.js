@@ -6,10 +6,9 @@
         .controller('CaseDetailsController', CaseDetailsController);
 
     CaseDetailsController.$inject = ['$scope', '$timeout', '$uibModalInstance', 'drslCase', 'expert',
-        'Casetechnologyproperty', 'Caseupdate', 'Attachment', 'Principal', 'DrslAttachFileService'];
+        'Casetechnologyproperty', 'Caseupdate', 'Attachment', 'Principal', 'DrslAttachFileService', '$document'];
 
-    function CaseDetailsController($scope, $timeout, $uibModalInstance, drslCase, expert,
-                                   Casetechnologyproperty, Caseupdate, Attachment, Principal, DrslAttachFileService) {
+    function CaseDetailsController($scope, $timeout, $uibModalInstance, drslCase, expert, Casetechnologyproperty, Caseupdate, Attachment, Principal, DrslAttachFileService, $document) {
 
         // Set the view model and view model properties/methods
         var vm = this;
@@ -119,7 +118,15 @@
                 }
             });
         }
-
+        /**
+         * On ESCAPE key press, close modal
+         * @param e
+         */
+        $document.keyup(function(e) {
+             if (e.keyCode == 27) {
+                 cancel (e)
+            }
+        });
         /**
          * Handle the 'cancel' buttons click event
          * @param e

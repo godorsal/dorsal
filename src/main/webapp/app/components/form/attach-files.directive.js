@@ -5,10 +5,10 @@
         .module('dorsalApp')
         .directive('drslAttachFiles', drslAttachFiles);
 
-    drslAttachFiles.$inject = ['DrslAttachFileService', 'Principal', '$sce', '$translate', 'Attachment', 'DataUtils', 'DrslBrowserDetectService'];
+    drslAttachFiles.$inject = ['DrslAttachFileService', 'Principal', '$sce', '$translate', 'Attachment', 'DataUtils', 'DrslBrowserDetectService', '$document'];
 
 
-    function drslAttachFiles(DrslAttachFileService, Principal, $sce, $translate, Attachment, DataUtils, DrslBrowserDetectService) {
+    function drslAttachFiles(DrslAttachFileService, Principal, $sce, $translate, Attachment, DataUtils, DrslBrowserDetectService, $document) {
         var directive = {
             restrict: 'E',
             scope:  {
@@ -107,7 +107,15 @@
                     })
                 })
             };
-
+            /**
+             * On ESCAPE key press, run cancelAttachments function
+             */
+            $document.keyup(function(e) {
+                 if (e.keyCode == 27) {
+                     scope.cancelAttachments ()
+                }
+                scope.$apply();
+            });
             /**
              * Cancel attachments, clears local and service file lists
              */

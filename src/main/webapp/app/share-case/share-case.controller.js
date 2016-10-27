@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('ShareCaseController', ShareCaseController);
 
-    ShareCaseController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase', 'expert', 'User', 'SharedCase', 'Register', 'Principal', 'toastr', 'ManageUser'];
+    ShareCaseController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase', 'expert', 'User', 'SharedCase', 'Register', 'Principal', 'toastr', 'ManageUser', '$document'];
 
-    function ShareCaseController($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase, expert, User, SharedCase, Register, Principal, toastr, ManageUser) {
+    function ShareCaseController($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase, expert, User, SharedCase, Register, Principal, toastr, ManageUser, $document) {
         var vm = this;
         vm.cancel = cancel;
         vm.addUser = addUser;
@@ -18,7 +18,12 @@
         vm.summary = vm.case.summary.toString();
         getSharedUsers();
         vm.usersToQuery = 200;
-        
+
+        $document.keyup(function(e) {
+             if (e.keyCode == 27) {
+                 cancel (e)
+            }
+        });
         function cancel(e) {
             e.preventDefault();
             $uibModalInstance.dismiss('cancel');
