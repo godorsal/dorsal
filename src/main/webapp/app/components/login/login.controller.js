@@ -24,7 +24,8 @@
         vm.altPathText = vm.altPathRegisterText;
         vm.isLogin = true;
         vm.DrslMetadata = DrslMetadata;
-
+        vm.checkPassword = checkPassword;
+        vm.passwordErrors = [];
         // Register Properties
         vm.register = register;
         vm.doNotMatch = null;
@@ -48,7 +49,27 @@
             vm.authenticationError = false;
             $uibModalInstance.dismiss('cancel');
         }
-
+        function checkPassword() {
+            vm.passwordErrors = [];
+            // if(vm.registerAccount.password.length < 8){
+            //     vm.passwordErrors.push("Too Short")
+            // }
+            if(!vm.registerAccount.password.match(/[a-z]/g)){
+                vm.passwordErrors.push("Needs Lowercase")
+            }
+            if(!vm.registerAccount.password.match(/[A-Z]/g)){
+                vm.passwordErrors.push("Needs Uppercase")
+            }
+            if(!vm.registerAccount.password.match(/[0-9]/g)){
+                vm.passwordErrors.push("Needs Number")
+            }
+            if(!vm.registerAccount.password.match(/;|"|!|\+|#|\$|%|\^|&|\*|\)|\(|:|\?|\/|<|>|{|}|\[|\]|-|_|=|\~|\`|\||\\|\/|\s/g)){
+                vm.passwordErrors.push("Needs Special Symbol")
+            }
+            if((/([a-z])\1/i).test(vm.registerAccount.password)){
+                vm.passwordErrors.push("Has Repeating Characters")
+            }
+        }
         function login (event) {
             event.preventDefault();
             Auth.login({
