@@ -24,6 +24,8 @@
             scope.StatusModel = StatusModel;
             scope.localEstimateHours = null;
             scope.maxHoursOnCase = 0;
+            // scope.expectedCompletionDate = scope.case.expectedCompletionDate
+            // console.log(scope);
 
             scope.datePopup = {
                 opened: false
@@ -38,6 +40,7 @@
             };
 
             scope.submit = function () {
+                console.log(scope.case);
                 var logDate = $filter('date')(new Date(), 'MMM dd, yyyy HH:mm');
 
                 scope.case.estimateLog = (scope.case.estimateLog) ? scope.case.estimateLog : '';
@@ -84,9 +87,15 @@
                 });
             };
 
-            scope.fieldTouched = function () {
+            scope.fieldTouched = function (form) {
                 scope.$emit('pauseOrResumeCasePolling', {'pause': true});
             };
+            scope.$watch('case', function (newValue, oldValue) {
+                console.log(newValue);
+                if(scope.case.expectedCompletionDate != "Invalid Date"){
+                    scope.case.expectedCompletionDate = new Date(scope.case.expectedCompletionDate);
+                }
+            })
 
             scope.openDatePopup = function () {
                 if (!scope.case.isResolved) {
