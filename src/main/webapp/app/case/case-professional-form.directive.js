@@ -91,7 +91,6 @@
                 scope.$emit('pauseOrResumeCasePolling', {'pause': true});
             };
             scope.$watch('case', function (newValue, oldValue) {
-                console.log(newValue);
                 if(scope.case.expectedCompletionDate != "Invalid Date"){
                     scope.case.expectedCompletionDate = new Date(scope.case.expectedCompletionDate);
                 }
