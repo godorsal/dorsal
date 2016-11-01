@@ -80,6 +80,7 @@
                 "attachmentMessageLoggedIn": "Attach any error logs,<br/> config files or screenshots<br/> to help speed up your case",
                 "attachmentMessageLoggedOut": "You must be logged in<br/>to attach files to your case",
                 "uploadingFiles": "Uploading {{fileCount}} file(s), please wait.",
+                "fileWasUploaded": " Was Uploaded. ",
                 "filesUploaded": "File upload complete.",
                 "expertScoreOutOf": "{{score}} out of 100",
                 "pending":"You still have {{attachments}} pending attachments. <br/> Press Later to dismiss or Done to upload.",

@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('EscalationFormController', EscalationFormController);
 
-    EscalationFormController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase', 'expert', 'EscalateCase', 'Casetechnologyproperty', '$scope'];
+    EscalationFormController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase', 'expert', 'EscalateCase', 'Casetechnologyproperty', '$scope', '$document'];
 
-    function EscalationFormController($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase, expert, EscalateCase, Casetechnologyproperty, $scope) {
+    function EscalationFormController($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase, expert, EscalateCase, Casetechnologyproperty, $scope, $document) {
         var vm = this;
         vm.cancel = cancel;
         vm.submit = submit;
@@ -49,6 +49,11 @@
                 ]
             }
         ]
+        $document.keyup(function(e) {
+             if (e.keyCode == 27) {
+                 cancel (e)
+            }
+        });
         function cancel(e) {
             e.preventDefault();
             $uibModalInstance.dismiss('cancel');

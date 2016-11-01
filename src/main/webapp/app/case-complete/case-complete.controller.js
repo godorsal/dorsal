@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .controller('CaseCompleteController', CaseCompleteController);
 
-    CaseCompleteController.$inject = ['$uibModalInstance', 'Caseupdate', 'StatusModel', 'drslCase'];
+    CaseCompleteController.$inject = ['$uibModalInstance', 'Caseupdate', 'StatusModel', 'drslCase', '$document'];
 
-    function CaseCompleteController($uibModalInstance, Caseupdate, StatusModel, drslCase) {
+    function CaseCompleteController($uibModalInstance, Caseupdate, StatusModel, drslCase, $document) {
         var vm = this;
         vm.case = drslCase;
         vm.cancel = cancel;
@@ -20,7 +20,11 @@
                 "id": 2
             }
         };
-
+        $document.keyup(function(e) {
+             if (e.keyCode == 27) {
+                 cancel ()
+            }
+        });
         function cancel() {
             $uibModalInstance.dismiss('cancel');
         }
