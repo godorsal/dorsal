@@ -186,15 +186,18 @@ table.drsl-table-scroll {
 }
 
 table.drsl-table-scroll tbody {
+    width: 668px;
     display: block;
-    height: 95px;
+    min-height: 95px;
+    // height: 95px;
+    max-height: 476px;
     overflow-y: auto;
 }
 
 table.drsl-table-scroll thead > tr {
     color: $drsl-label-color;
-    display: block;
-    position: relative;
+    display: table-header-group;
+    // position: relative;
 }
 
 .drsl-form-grid {

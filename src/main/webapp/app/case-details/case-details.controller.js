@@ -6,9 +6,9 @@
         .controller('CaseDetailsController', CaseDetailsController);
 
     CaseDetailsController.$inject = ['$scope', '$timeout', '$uibModalInstance', 'drslCase', 'expert',
-        'Casetechnologyproperty', 'Caseupdate', 'Attachment', 'Principal', 'DrslAttachFileService', '$document'];
+        'Casetechnologyproperty', 'Caseupdate', 'Attachment', 'Principal', 'DrslAttachFileService', '$document', '$rootScope'];
 
-    function CaseDetailsController($scope, $timeout, $uibModalInstance, drslCase, expert, Casetechnologyproperty, Caseupdate, Attachment, Principal, DrslAttachFileService, $document) {
+    function CaseDetailsController($scope, $timeout, $uibModalInstance, drslCase, expert, Casetechnologyproperty, Caseupdate, Attachment, Principal, DrslAttachFileService, $document, $rootScope) {
 
         // Set the view model and view model properties/methods
         var vm = this;
@@ -159,21 +159,32 @@
          * Handles the main form submit and calls Caseupdate.save() if necessary
          */
         function submit() {
+            var filesToUpload = DrslAttachFileService.attachFileList;
+            console.log(filesToUpload);
+            console.log(filesToUpload.join());
             // Set the update message
-            if (vm.attachment.name) {
-                vm.caseupdate.updateMsg = vm.attachment.name + " Was uploaded. " + vm.updatemsg;
+            // console.log("SERVICE: ", DrslAttachFileService.attachFileList);
+            // if (DrslAttachFileService.attachment.name) {
+            if (filesToUpload.length > 0) {
+                console.log(DrslAttachFileService);
+                // console.log("Upload File", DrslAttachFileService.attachment);
+                // console.log("Upload Files", DrslAttachFileService.attachFileList);
+                vm.caseupdate.updateMsg = DrslAttachFileService.attachment.name + " Was uploaded. " + vm.updatemsg;
+                DrslAttachFileService.uploadAttachFileList(vm.case);
             } else {
+                console.log("Just Message");
                 vm.caseupdate.updateMsg = vm.updatemsg;
             }
 
+            console.log('ATTACHMENT', vm.case);
             // Set the update type
             vm.caseupdate.updatetype = {
                 id: 1
             };
 
             // Make a call to upload or delete any attachments that may have been added or removed
-            DrslAttachFileService.uploadAttachFileList(vm.case);
-            DrslAttachFileService.deleteAttachments(vm.case);
+            // DrslAttachFileService.uploadAttachFileList(vm.case);
+            // DrslAttachFileService.deleteAttachments(vm.case);
 
             // If there are change to the update message, save them.
             if (vm.caseupdate.updateMsg) {
@@ -186,7 +197,10 @@
             // Close the dialog
             $uibModalInstance.close({"updated": true});
         }
-
+        // $rootScope.$on('attachmentCompleteWriteUpdate', function (thing, file) {
+        //     vm.caseupdate.updateMsg = file.name + " Was uploaded. " + vm.updatemsg;
+        //     Caseupdate.save(vm.caseupdate, onSaveSuccess, onSaveError);
+        // })
         // Call to initialize the controller.
         vm.init();
     }

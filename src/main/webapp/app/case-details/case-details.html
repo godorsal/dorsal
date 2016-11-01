@@ -74,8 +74,8 @@
                         </div>
 
                         <!-- Update History -->
+                        <div class="drsl-label" translate="caseDetails.updateHistory">Update History</div>
                         <div class="drsl-form-grid drsl-update-history-box">
-                            <div class="drsl-label" translate="caseDetails.updateHistory">Update History</div>
                             <div>
                                 <!-- No Updates -->
                                 <div class="drsl-no-updates" ng-hide="vm.updates.length > 0">
@@ -96,7 +96,7 @@
                                     <tbody>
                                     <tr ng-repeat="update in vm.updates track by $index" class="drsl-update-trow">
                                         <td class="drsl-update-message-tdata">{{update.updateMsg}}</td>
-                                        <td class="drsl-update-date-tdata">{{update.dateUpdated | date:"MMM dd, yyyy h:mm a"}}</td>
+                                        <td class="drsl-update-date-tdata">{{update.dateUpdated | date:"MMM dd, yyyy H:mm"}}</td>
                                         <td class="drsl-update-user-tdata">{{update.user.login}}</td>
                                     </tr>
                                     </tbody>
@@ -105,8 +105,8 @@
                         </div>
 
                         <!-- Chat Log -->
+                        <div class="drsl-label" translate="caseDetails.updateMessage">Update Message</div>
                         <div class="drsl-form-grid" >
-                            <div class="drsl-label" translate="caseDetails.updateMessage">Update Message</div>
                             <div><textarea class="form-control drsl-value" name="updateHistory" id="updateHistory" cols="30" rows="5" ng-model="vm.updatemsg"></textarea></div>
                         </div>
 
