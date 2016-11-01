@@ -199,7 +199,9 @@ table.drsl-table-scroll thead > tr {
     display: table-header-group;
     // position: relative;
 }
-
+.drsl-avaiable-concierge-name {
+    text-align: right;
+}
 .drsl-form-grid {
     display: flex;
     flex-flow: row;

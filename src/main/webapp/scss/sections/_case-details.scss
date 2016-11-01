@@ -93,7 +93,19 @@ Case Details
             list-style: none;
         }
     }
-
+    .drsl-expert-edit-resolution {
+        padding: 0px;
+        > textarea {
+            padding-top: 5px;
+        }
+    }
+    .drsl-view-resolution {
+        width: 668px;
+        height: 114px;
+        border: 1px solid $empty-box-border-color;
+        padding: 5px 0 0 $default-half-padding;
+        font-weight: $default-weight;
+    }
     .drsl-no-updates {
         width: 668px;
         height: 114px;

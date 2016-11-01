@@ -87,18 +87,18 @@
                                 <!-- Has Updates -->
                                 <table class="drsl-table-scroll table-striped" ng-show="vm.updates.length > 0">
                                     <thead>
-                                    <tr>
-                                        <th class="drsl-label" translate="caseDetails.updates.message">Message</th>
-                                        <th class="drsl-label drsl-date-header" translate="caseDetails.updates.date">Date</th>
-                                        <th class="drsl-label drsl-user-header" translate="caseDetails.updates.userExpert">User/Expert</th>
-                                    </tr>
+                                        <tr>
+                                            <th class="drsl-label" translate="caseDetails.updates.message">Message</th>
+                                            <th class="drsl-label drsl-date-header" translate="caseDetails.updates.date">Date</th>
+                                            <th class="drsl-label drsl-user-header" translate="caseDetails.updates.userExpert">User/Expert</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                    <tr ng-repeat="update in vm.updates track by $index" class="drsl-update-trow">
-                                        <td class="drsl-update-message-tdata">{{update.updateMsg}}</td>
-                                        <td class="drsl-update-date-tdata">{{update.dateUpdated | date:"MMM dd, yyyy H:mm"}}</td>
-                                        <td class="drsl-update-user-tdata">{{update.user.login}}</td>
-                                    </tr>
+                                        <tr ng-repeat="update in vm.updates track by $index" class="drsl-update-trow">
+                                            <td class="drsl-update-message-tdata">{{update.updateMsg}}</td>
+                                            <td class="drsl-update-date-tdata">{{update.dateUpdated | date:"MMM dd, yyyy H:mm"}}</td>
+                                            <td class="drsl-update-user-tdata">{{update.user.login}}</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -111,10 +111,15 @@
                         </div>
 
                         <!-- Detailed Resolution -->
-                        <div class="drsl-form-grid" ng-if="vm.case.status.id == 4 || vm.case.status.id == 5">
-                            <div translate="case.details.detailedResolution">Detailed Resolution</div>
-                            <div ng-if="vm.isExpert"><textarea class="form-control" name="detailedResolution" id="detailedResolution" cols="30" rows="5" ng-model="vm.detailedResolutions[0].updateMsg"></textarea></div>
-                            <div ng-if="!vm.isExpert">{{vm.detailedResolutions[0].updateMsg}}</div>
+                        <div ng-if="vm.case.status.id == 4 || vm.case.status.id == 5">
+                            <div class="drsl-label" translate="case.details.detailedResolution">Detailed Resolution</div>
+                            <div class="drsl-form-grid">
+                                <div ng-if="vm.isExpert" class="drsl-expert-edit-resolution">
+                                    <textarea class="form-control" name="detailedResolution" id="detailedResolution" cols="30" rows="5" ng-model="vm.detailedResolutions[0].updateMsg">
+                                    </textarea>
+                                </div>
+                                <div ng-if="!vm.isExpert" class="drsl-view-resolution">{{vm.detailedResolutions[0].updateMsg}}</div>
+                            </div>
                         </div>
 
                     </div>

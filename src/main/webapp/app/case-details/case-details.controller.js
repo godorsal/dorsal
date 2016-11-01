@@ -197,6 +197,7 @@
             // Close the dialog
             $uibModalInstance.close({"updated": true});
         }
+        
         // $rootScope.$on('attachmentCompleteWriteUpdate', function (thing, file) {
         //     vm.caseupdate.updateMsg = file.name + " Was uploaded. " + vm.updatemsg;
         //     Caseupdate.save(vm.caseupdate, onSaveSuccess, onSaveError);
