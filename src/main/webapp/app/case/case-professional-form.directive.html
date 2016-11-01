@@ -8,7 +8,7 @@
         <!-- Desired Outcome-->
         <div class="drsl-label-value-row">
             <div><span  class="drsl-label" translate="case.professional.input.desiredOutcome">Desired<br/>Outcome</span></div>
-            <div><textarea class="form-control drsl-value" ng-model="case.expectedResult" ng-keydown="fieldTouched()" ng-attr-placeholder="{{'case.professional.input.desiredOutcome.placeholder' | translate}}" ng-disabled="case.isResolved" required="true"></textarea></div>
+            <div><textarea class="form-control drsl-value" ng-model="case.expectedResult" ng-keydown="fieldTouched()" ng-attr-placeholder="{{'case.professional.input.desiredOutcome.placeholder' | translate}}" ng-disabled="case.isResolved" required></textarea></div>
         </div>
 
         <!-- Estimated # hours -->
@@ -17,7 +17,7 @@
             <div class="drsl-hours-date-wrapper">
                 <!-- Hours -->
                 <div class="drsl-expert-hours-wrapper">
-                    <input name="estimateHours" class="form-control drsl-value" type="number" min="0" ng-model="localEstimateHours" ng-keydown="fieldTouched()" placeholder="{{'case.professional.input.estimatedHours.placeholder' | translate}}" ng-disabled="case.isResolved"/>
+                    <input name="estimateHours" class="form-control drsl-value" type="number" min="0" ng-model="localEstimateHours" ng-keydown="fieldTouched()" placeholder="{{'case.professional.input.estimatedHours.placeholder' | translate}}" ng-disabled="case.isResolved" required/>
                 </div>
                 <!-- Delivery Date -->
                 <div class="drsl-expert-date-wrapper">
@@ -26,7 +26,7 @@
                         Requested Delivery
                     </div>
                     <!-- Date Picker -->
-                    <div class="drsl-expert-date-controls" ng-click="fieldTouched()">
+                    <div class="drsl-expert-date-controls" ng-click="fieldTouched(expertForm)">
                         <div class="drsl-date-widget-wrapper">
                             <span uib-datepicker-popup="{{format}}" ng-model="case.expectedCompletionDate" is-open="datePopup.opened" popup-placement="bottom-left" datepicker-options="dateOptions" show-button-bar="false" show-weeks="false"></span>
                         </div>
@@ -44,13 +44,13 @@
         <!-- Estimate Comment -->
         <div class="drsl-label-value-row">
             <div><span  class="drsl-label" translate="case.professional.input.estimateComment">Estimate<br/>Comment</span></div>
-            <div><textarea class="form-control drsl-value" ng-model="case.estimateComment" ng-keydown="fieldTouched()" ng-attr-placeholder="{{'case.professional.input.estimateComment.placeholder' | translate}}" ng-disabled="case.isResolved" required="true"></textarea></div>
+            <div><textarea class="form-control drsl-value" ng-model="case.estimateComment" ng-keydown="fieldTouched()" ng-attr-placeholder="{{'case.professional.input.estimateComment.placeholder' | translate}}" ng-disabled="case.isResolved" required></textarea></div>
         </div>
 
         <!-- Total Time on Case -->
         <div class="drsl-label-value-row">
             <div><span  class="drsl-label" translate="case.professional.input.timeOnCase">Total time<br/>on case</span></div>
-            <div class="drsl-time-on-case"><input class="form-control drsl-value" type="number" ng-model="case.timeOnCase" min="0" max="{{maxHoursOnCase}}" ng-keydown="fieldTouched()" placeholder="{{'case.professional.input.timeOnCase.placeholder' | translate}}" ng-disabled="!case.isApproved || case.isResolved" drsl-enforce-min-max/></div>
+            <div class="drsl-time-on-case"><input class="form-control drsl-value" type="number" ng-model="case.timeOnCase" min="0" max="{{maxHoursOnCase}}" ng-keydown="fieldTouched()" placeholder="{{'case.professional.input.timeOnCase.placeholder' | translate}}" ng-disabled="!case.isApproved || case.isResolved" drsl-enforce-min-max required/></div>
         </div>
 
         <!-- Resolved -->
@@ -60,7 +60,6 @@
             <div class="drsl-value" ng-hide="case.isResolved || !StatusModel.checkCaseStatus(case.status, 'working')"><a translate="case.professional.input.resolved.action" ng-click="openCompleteCase($event);"></a></div>
             <div ng-show="case.isResolved"><span class="drsl-value" translate="case.professional.input.resolved.complete"></span></div>
         </div>
-
         <!-- Last Update & Main Button -->
         <div>
             <div>

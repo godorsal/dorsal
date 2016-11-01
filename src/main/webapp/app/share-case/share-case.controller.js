@@ -18,6 +18,7 @@
         vm.summary = vm.case.summary.toString();
         getSharedUsers();
         vm.usersToQuery = 200;
+
         $document.keyup(function(e) {
              if (e.keyCode == 27) {
                  cancel (e);

@@ -44,11 +44,13 @@ Case Details
     }
 
     .drsl-date-header {
-        padding-left: 198px;
+        position: relative;
+        left: 438%;
     }
 
     .drsl-user-header {
-        padding-left: 140px;
+        position: absolute;
+        right: 5%;
     }
 
     .drsl-update-trow {
@@ -56,21 +58,22 @@ Case Details
     }
 
     .drsl-update-message-tdata {
+        display: table;
         min-width: 243px;
-        max-width: 243px;
-        padding-bottom: 35px;
+        width: 455px;
+        max-width: 455px;
+        max-height: 200px;
     }
 
     .drsl-update-date-tdata {
+        width: 120px;
         white-space: nowrap;
-        width: 225px;
-        padding-left: 15px;
-        padding-bottom: 35px;
     }
 
     .drsl-update-user-tdata {
         width: 87px;
-        padding-bottom: 35px;
+        padding-right: 50px;
+        padding-left: 50px;
     }
 
     .drsl-details-user-view {
@@ -90,9 +93,21 @@ Case Details
             list-style: none;
         }
     }
-
+    .drsl-expert-edit-resolution {
+        padding: 0px;
+        > textarea {
+            padding-top: 5px;
+        }
+    }
+    .drsl-view-resolution {
+        width: 668px;
+        height: 114px;
+        border: 1px solid $empty-box-border-color;
+        padding: 5px 0 0 $default-half-padding;
+        font-weight: $default-weight;
+    }
     .drsl-no-updates {
-        width: 500px;
+        width: 668px;
         height: 114px;
         border: 1px solid $empty-box-border-color;
 

@@ -5,14 +5,20 @@
         .module('dorsalApp')
         .factory('DrslAttachFileService', DrslAttachFileService);
 
-    DrslAttachFileService.$inject = ['Attachment', 'DataUtils', 'toastr', '$translate', 'DrslNewCaseService', '$rootScope', '$timeout'];
+    DrslAttachFileService.$inject = ['Attachment', 'DataUtils', 'toastr', '$translate', 'DrslNewCaseService', '$rootScope', '$timeout', 'Caseupdate', 'Principal'];
 
-    function DrslAttachFileService(Attachment, DataUtils, toastr, $translate, DrslNewCaseService, $rootScope, $timeout) {
+    function DrslAttachFileService(Attachment, DataUtils, toastr, $translate, DrslNewCaseService, $rootScope, $timeout, Caseupdate, Principal) {
         var service = {};
 
         service.attachFileList = [];
         service.attachErrFileList = [];
         service.deleteFileList = [];
+        service.caseupdate = {
+            updatetype: {
+                id: 1
+            }
+        };
+
         service.attachment = {
             name: null,
             url: null,
@@ -22,6 +28,12 @@
         };
         service.uploading = false;
         service.uploadingToasr = null;
+
+        function getCurrentUser() {
+            Principal.identity().then(function (account) {
+                service.caseupdate.user = account;
+            });
+        }
 
         /**
          * Set the attachFileList with the provided fileList.
@@ -91,6 +103,14 @@
                 $rootScope.$broadcast('attachmentUploadComplete');
             }, 1000);
         };
+        /**
+         * Broadcast an 'attachmentUploadComplete' event from the $rootScope
+         */
+        service.broadcastForAttachmentMessage = function (attachment){
+            $timeout(function(){
+                $rootScope.$broadcast('attachmentCompleteWriteUpdate', attachment);
+            }, 1000);
+        };
 
         /**
          * Broadcast an 'attachmentsRemoved' event from the $rootScope
@@ -117,8 +137,14 @@
                     service.attachment.supportcase = {
                         id: caseId
                     };
-                    Attachment.save(service.attachment, function () {
+                    Attachment.save(service.attachment, function (file) {
                         // on success, proceed to the next file
+                        // service.broadcastForAttachmentMessage(file);
+                        getCurrentUser();
+                        service.caseupdate.updateMsg = file.name + $translate.instant('global.messages.info.fileWasUploaded')
+                        service.caseupdate.supportcase = supportCase;
+
+                        Caseupdate.save(service.caseupdate)
                         uploadFileInQueue(supportCase);
                     }, function () {
                         // on error, proceed to the next file

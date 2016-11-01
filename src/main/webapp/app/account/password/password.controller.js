@@ -5,12 +5,14 @@
         .module('dorsalApp')
         .controller('PasswordController', PasswordController);
 
-    PasswordController.$inject = ['Auth', 'Principal'];
+    PasswordController.$inject = ['Auth', 'Principal', 'PasswordValidationService'];
 
-    function PasswordController (Auth, Principal) {
+    function PasswordController (Auth, Principal, PasswordValidationService) {
         var vm = this;
 
         vm.changePassword = changePassword;
+        vm.checkPassword = checkPassword;
+        vm.checkConfirmPassword = checkConfirmPassword;
         vm.doNotMatch = null;
         vm.error = null;
         vm.success = null;
@@ -34,6 +36,12 @@
                     vm.error = 'ERROR';
                 });
             }
+        }
+        function checkPassword(form) {
+            PasswordValidationService.checkPassword(form);
+        }
+        function checkConfirmPassword(form) {
+            PasswordValidationService.checkConfirmPassword(form);
         }
     }
 })();

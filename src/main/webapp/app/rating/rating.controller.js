@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .controller('DrslRatingController', DrslRatingController);
 
-    DrslRatingController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase', 'drslBadges', 'Caseupdate', 'toastr'];
+    DrslRatingController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase', 'drslBadges', 'Caseupdate', 'toastr', '$document'];
 
-    function DrslRatingController($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase, drslBadges, Caseupdate, toastr) {
+    function DrslRatingController($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase, drslBadges, Caseupdate, toastr, $document) {
         var vm = this;
         vm.case = drslCase;
         vm.badges = drslBadges;
@@ -130,6 +130,12 @@
                 "selectedValue": "100"
             }]
         ];
+
+        $document.keyup(function(e) {
+             if (e.keyCode == 27) {
+                 cancel ()
+            }
+        });
 
         function cancel() {
             $uibModalInstance.dismiss('cancel');

@@ -82,6 +82,7 @@
                 "attachmentMessageLoggedIn": "Attach any error logs,<br/> config files or screenshots<br/> to help speed up your case",
                 "attachmentMessageLoggedOut": "You must be logged in<br/>to attach files to your case",
                 "uploadingFiles": "Uploading {{fileCount}} file(s), please wait.",
+                "fileWasUploaded": " Was Uploaded. ",
                 "filesUploaded": "File upload complete.",
                 "expertScoreOutOf": "{{score}} out of 100",
                 "pending":"You still have {{attachments}} pending attachments. <br/> Press Later to dismiss or Done to upload.",
@@ -94,13 +95,19 @@
             "validate": {
                 "newpassword": {
                     "required": "Your password is required.",
+                    "noRepeatingCharacters": "Your password should not have any repeating characters.",
+                    "notEqualToUsername": "Your password should not be the same as your login name.",
+                    "noLowercase": "Your password should contain atleast 1 lowercase letter.",
+                    "noUppercase": "Your password should contain atleast 1 uppercase letter.",
+                    "noNumber": "Your password should contain atleast 1 number.",
+                    "noSpecial": "Your password should contain atleast 1 special symbol.",
                     "minlength": "Your password is required to be at least 8 characters.",
                     "maxlength": "Your password cannot be longer than 50 characters.",
                     "strength": "Password strength:"
                 },
                 "confirmpassword": {
                     "required": "Your confirmation password is required.",
-                    "minlength": "Your confirmation password is required to be at least 4 characters.",
+                    "minlength": "Your confirmation password is required to be at least 8 characters.",
                     "maxlength": "Your confirmation password cannot be longer than 50 characters."
                 },
                 "email": {

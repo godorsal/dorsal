@@ -2,16 +2,14 @@
     'use strict';
 
     angular
-        .module('dorsalApp')
-        .controller('SettingsController', SettingsController);
+    .module('dorsalApp')
+    .controller('SettingsController', SettingsController);
 
     SettingsController.$inject = ['$rootScope', 'Principal', 'Auth', 'JhiLanguageService', '$translate', 'Payment',
-        'Groupaccess', 'User', 'Focus', 'Register', 'toastr', 'ExpertAccount', 'Issue', 'Technology', '_', '$state',
-        'DrslUserFlowService', 'ManageUser'];
+    'Groupaccess', 'User', 'Focus', 'Register', 'toastr', 'ExpertAccount', 'Issue', 'Technology', '_', '$state',
+    'DrslUserFlowService', 'ManageUser'];
 
-    function SettingsController($rootScope, Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess,
-                                User, focus, Register, toastr, ExpertAccount, Issue, Technology, _, $state,
-                                DrslUserFlowService, ManageUser) {
+    function SettingsController($rootScope, Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, User, focus, Register, toastr, ExpertAccount, Issue, Technology, _, $state, DrslUserFlowService, ManageUser) {
 
         // Handle user flow redirects and messaging
         DrslUserFlowService.handleUserFlow();
@@ -47,8 +45,8 @@
         vm.checkInvalid = checkInvalid;
 
         /**
-         * Initialize the controller's data.
-         */
+        * Initialize the controller's data.
+        */
         function init() {
             // Update the vm with authorized and invited users.
             getAuthorizedUsers();
@@ -100,9 +98,9 @@
         }
 
         /**
-         * Shifts focus to the next CC field as data is entered.
-         * @param event
-         */
+        * Shifts focus to the next CC field as data is entered.
+        * @param event
+        */
         function numberTab(event) {
             if (event.target.value.length === event.target.maxLength) {
                 var currentNumber = event.target.id.match(/\d+/);
@@ -115,8 +113,8 @@
         }
 
         /**
-         * Store the "settings account" in a separate variable, and not in the shared "account" variable.
-         */
+        * Store the "settings account" in a separate variable, and not in the shared "account" variable.
+        */
         var copyAccount = function (account) {
             return {
                 activated: account.activated,
@@ -129,8 +127,8 @@
         };
 
         /**
-         * Handles the form submit/save for the main settings form.
-         */
+        * Handles the form submit/save for the main settings form.
+        */
         function save() {
             if (vm.updatingUser && vm.updatingExpert) {
                 toastr["success"]("User and Expert Info Saved");
@@ -144,8 +142,8 @@
         }
 
         /**
-         * Updates the user and displays success and error messages accordingly.
-         */
+        * Updates the user and displays success and error messages accordingly.
+        */
         function updateUser() {
             Auth.updateAccount(vm.settingsAccount).then(function () {
                 vm.error = null;
@@ -181,8 +179,8 @@
         }
 
         /**
-         * Updates the expert and displays a success messages.
-         */
+        * Updates the expert and displays a success messages.
+        */
         function updateExpert() {
             vm.currentExpert.othercommunication = vm.otherLink + ',' + vm.otherTitle;
 
@@ -194,8 +192,8 @@
         }
 
         /**
-         * Updates or saves the credit card data.
-         */
+        * Updates or saves the credit card data.
+        */
         function addCard() {
             // Get the cc number
             vm.number = Object.keys(vm.creditCard.number).map(function (k) {
@@ -245,9 +243,9 @@
             vm.invitedUser = vm.invitedUser.replace(/;|"|!|\+|#|\$|%|\^|&|\*|\)|\(|:|\?|\/|<|>|{|}|\[|\]|-|_|=|\~|\`|\||\\|\/|\s/g, "");
         }
         /**
-         * On Payment success, update the vm with the latest payment data and display a toastr message.
-         * @param payment
-         */
+        * On Payment success, update the vm with the latest payment data and display a toastr message.
+        * @param payment
+        */
         function onSaveSuccess(payment) {
             vm.tempCard.id = payment.id;
             vm.tempCard.user = payment.user;
@@ -256,26 +254,26 @@
         }
 
         /**
-         * On Payment error, display a toastr message.
-         * @param error
-         */
+        * On Payment error, display a toastr message.
+        * @param error
+        */
         function onSaveError(error) {
             vm.success = null;
             toastr["error"](data.authorizeduser.email, "Saving Error")
         }
 
         /**
-         * On user save error, display a toastr message.
-         * @param error
-         */
+        * On user save error, display a toastr message.
+        * @param error
+        */
         function onUserSaveError(error) {
             toastr["error"]("Incorrect " + error.data.fieldErrors[0].field + " input")
         }
 
         /**
-         * Saves a new user, usually during an add authorized user invite.
-         * @param email
-         */
+        * Saves a new user, usually during an add authorized user invite.
+        * @param email
+        */
         function makeUser(email) {
             // Set the invite string based on name or email
             if (vm.settingsAccount.firstName && vm.settingsAccount.lastName) {
@@ -307,9 +305,9 @@
         }
 
         /**
-         * Creates a new authorized group.
-         * @param user
-         */
+        * Creates a new authorized group.
+        * @param user
+        */
         function authorizedGroup(user) {
             var group = {
                 authorizeduser: user
@@ -330,9 +328,9 @@
         }
 
         /**
-         * Creates a new invited group.
-         * @param newUser
-         */
+        * Creates a new invited group.
+        * @param newUser
+        */
         function invitedGroup(newUser) {
             ManageUser.get({type: 'email', value: newUser.email}, function (user) {
                 var group = {
@@ -346,13 +344,26 @@
                 })
             })
         }
-
         /**
-         * Adds an authorized user.
-         */
+        * Checks to see if email address is valid
+        * @param email
+        */
+        function validateEmail(email) {
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+        }
+        /**
+        * Adds an authorized user.
+        */
         function addAuthorizedUser() {
             var currentEmails = vm.invitedUser.split(',');
             currentEmails.forEach(function (currentEmail) {
+
+                if(validateEmail(currentEmail) === false){
+                    toastr["error"]("Invalid Email Input");
+                    return
+                }
+
                 // Prevent user's from inviting themselves and display a toastr message.
                 if (currentEmail === vm.settingsAccount.email) {
                     toastr["error"]("Users cannot invite themselves");
@@ -386,9 +397,9 @@
         }
 
         /**
-         * Sets both authorizedUsers and invitedUsers on the vm and well as
-         * updates the isAlreadyAuthorized boolean if the user matches the account user.
-         */
+        * Sets both authorizedUsers and invitedUsers on the vm and well as
+        * updates the isAlreadyAuthorized boolean if the user matches the account user.
+        */
         function getAuthorizedUsers() {
             vm.authorizedUsers = [];
             Groupaccess.query(function (result) {
@@ -405,10 +416,10 @@
         }
 
         /**
-         * Removes an invited user.
-         * @param id
-         * @param index
-         */
+        * Removes an invited user.
+        * @param id
+        * @param index
+        */
         function removeInvitedUsers(id, index) {
             Groupaccess.delete({id: id});
             toastr["warning"]("User Removed");
@@ -416,10 +427,10 @@
         }
 
         /**
-         * Removes an authorized user.
-         * @param id
-         * @param index
-         */
+        * Removes an authorized user.
+        * @param id
+        * @param index
+        */
         function removeAuthorizedUsers(id, index) {
             Groupaccess.delete({id: id});
             toastr["warning"]("User Removed");

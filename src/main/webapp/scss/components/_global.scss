@@ -191,8 +191,10 @@ table.drsl-table-scroll {
 }
 
 table.drsl-table-scroll tbody {
+    width: 668px;
     display: block;
-    height: 300px;
+    min-height: 95px;
+    max-height: 476px;
     overflow-y: auto;
     > td{
         width: 25%;
@@ -202,13 +204,11 @@ table.drsl-table-scroll tbody {
 table.drsl-table-scroll thead > tr {
     width: 100%;
     color: $drsl-label-color;
-    display: block;
-    position: relative;
-    > th {
-        width: 300px;
-    }
+    display: table-header-group;
 }
-
+.drsl-avaiable-concierge-name {
+    text-align: right;
+}
 .drsl-form-grid {
     display: flex;
     flex-flow: row;
