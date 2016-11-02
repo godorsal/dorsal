@@ -6,6 +6,7 @@ import com.dorsal.domain.Supportcase;
 import com.dorsal.repository.CaseupdateRepository;
 import com.dorsal.repository.SupportcaseRepository;
 import com.dorsal.repository.UserRepository;
+import com.dorsal.service.emailNotificationUtility;
 import com.dorsal.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +42,9 @@ public class CaseupdateResource {
 
     @Inject
     private SupportcaseRepository supportcaseRepository;
+
+    @Inject
+    private emailNotificationUtility notificationService;
 
 
     /**
@@ -80,8 +84,22 @@ public class CaseupdateResource {
             log.error("CaseUpdate entity. Could not update Number Of Updates in Supportcase. Reason " + e);
         }
 
-        Caseupdate result = caseupdateRepository.save(caseupdate);
+        /**
+         * Send email notifications to both expert and user
+         * JIRA: DEB-383
+         */
 
+        /* Extract user that generated the update */
+        StringBuffer updateOriginator = new StringBuffer(caseupdate.getUser().getFirstName());
+        updateOriginator.append(" ").append(caseupdate.getUser().getLastName());
+        if (updateOriginator.length() == 0)
+            updateOriginator.append(caseupdate.getUser().getEmail());
+
+        /* Email notification */
+        notificationService.caseUpdateEmailNotification(caseupdate.getSupportcase(), updateOriginator.toString(), caseupdate.getUpdateMsg());
+
+        /* Persist case update */
+        Caseupdate result = caseupdateRepository.save(caseupdate);
 
         return ResponseEntity.created(new URI("/api/caseupdates/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("caseupdate", result.getId().toString()))
