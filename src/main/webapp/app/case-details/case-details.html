@@ -52,19 +52,24 @@
                         <br>
 
                         <!-- Uploaded Files -->
+                        <div class="drsl-label" translate="case.details.uploadedFiles">Uploaded Files</div>
                         <div class="drsl-form-grid">
-                            <div class="drsl-label" translate="case.details.uploadedFiles">Uploaded Files</div>
                             <div>
                                 <drsl-attach-files hide-tooltip="true" case-id="{{vm.case.id}}" display-type="inline" add-on-attach="true"></drsl-attach-files>
                             </div>
                         </div>
 
                         <!-- Estimate History -->
+                        <div class="drsl-label" translate="caseDetails.estimateHistory">Estimate History</div>
                         <div class="drsl-form-grid">
-                            <div class="drsl-label" translate="caseDetails.estimateHistory">Estimate History</div>
                             <div>
-                                <div class="drsl-estimate-log-list">
-                                    <ol ng-show="vm.estimateLogs">
+                                <div class="drsl-no-updates" ng-hide="vm.estimateLogs.length > 0">
+                                    <div translate="caseDetails.noUpdatesMessage">
+                                        Updates for your case will be displayed here
+                                    </div>
+                                </div>
+                                <div class="drsl-estimate-log-list" ng-show="vm.estimateLogs">
+                                    <ol>
                                         <li class="drsl-value drsl-estimate-log-list" ng-repeat="log in vm.estimateLogs">
                                             {{log}}
                                         </li>
@@ -79,7 +84,7 @@
                             <div>
                                 <!-- No Updates -->
                                 <div class="drsl-no-updates" ng-hide="vm.updates.length > 0">
-                                    <div translate="caseDetails.noUpdatesMessage">
+                                    <div translate="caseDetails.noEstimatesMessage">
                                         Updates for your case will be displayed here
                                     </div>
                                 </div>

@@ -7,13 +7,13 @@
         </div>
         <!-- Desired Outcome-->
         <div class="drsl-label-value-row">
-            <div><span  class="drsl-label" translate="case.professional.input.desiredOutcome">Desired<br/>Outcome</span></div>
+            <div><span class="drsl-required-asterix">*</span><span  class="drsl-label" translate="case.professional.input.desiredOutcome">Desired<br/>Outcome</span></div>
             <div><textarea class="form-control drsl-value" ng-model="case.expectedResult" ng-keydown="fieldTouched()" ng-attr-placeholder="{{'case.professional.input.desiredOutcome.placeholder' | translate}}" ng-disabled="case.isResolved" required></textarea></div>
         </div>
 
         <!-- Estimated # hours -->
         <div class="drsl-label-value-row">
-            <div><span  class="drsl-label" translate="case.professional.input.estimatedHours">Estimated<br/># hours</span></div>
+            <div><span class="drsl-required-asterix">*</span><span class="drsl-label" translate="case.professional.input.estimatedHours">Estimated<br/># hours</span></div>
             <div class="drsl-hours-date-wrapper">
                 <!-- Hours -->
                 <div class="drsl-expert-hours-wrapper">
@@ -43,7 +43,7 @@
 
         <!-- Estimate Comment -->
         <div class="drsl-label-value-row">
-            <div><span  class="drsl-label" translate="case.professional.input.estimateComment">Estimate<br/>Comment</span></div>
+            <div><span class="drsl-required-asterix">*</span><span  class="drsl-label" translate="case.professional.input.estimateComment">Estimate<br/>Comment</span></div>
             <div><textarea class="form-control drsl-value" ng-model="case.estimateComment" ng-keydown="fieldTouched()" ng-attr-placeholder="{{'case.professional.input.estimateComment.placeholder' | translate}}" ng-disabled="case.isResolved" required></textarea></div>
         </div>
 

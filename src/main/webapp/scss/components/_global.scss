@@ -192,6 +192,7 @@ table.drsl-table-scroll tbody {
     // height: 95px;
     max-height: 476px;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 table.drsl-table-scroll thead > tr {
@@ -223,7 +224,10 @@ table.drsl-table-scroll thead > tr {
     color: $drsl-label-color;
     font-weight: $default-weight;
 }
-
+.drsl-required-asterix {
+    font-size: 14px;
+    color: red;
+}
 .drsl-tech-props {
     margin-left: 35px;
     width: 240px;
