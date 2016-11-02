@@ -61,7 +61,7 @@ Case Details
         display: table;
         min-width: 243px;
         width: 455px;
-        max-width: 455px;
+        max-width: 435px;
         max-height: 200px;
     }
 
@@ -71,9 +71,9 @@ Case Details
     }
 
     .drsl-update-user-tdata {
-        width: 87px;
-        padding-right: 50px;
-        padding-left: 50px;
+        width: 145px;
+        word-break: break-all;
+        padding-left: 35px;
     }
 
     .drsl-details-user-view {
