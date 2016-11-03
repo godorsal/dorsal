@@ -89,7 +89,7 @@
                     <tbody>
                         <tr ng-repeat="paidReport in vm.paidReports track by paidReport.id">
                             <td>{{paidReport.supportcase.technology.name}}-{{paidReport.supportcase.id}}</a></td>
-                            <td>{{report.supportcase.dateCreated | date:'MM/dd/yyyy'}}</td>
+                            <td>{{paidReport.supportcase.dateCreated | date:'MM/dd/yyyy'}}</td>
                             <td>{{paidReport.supportcase.dateLastUpdate | date:'MM/dd/yyyy'}}</td>
                             <td>{{paidReport.datePaid | date:'MM/dd/yyyy'}}</td>
                             <td>
@@ -100,20 +100,20 @@
                                 <!-- Rating -->
                                 {{paidReport.rating.score}}
                             </td>
+                            <td ng-click="vm.openModal(paidReport)">
+                                <!-- Rating Comment -->
+                                {{paidReport.rating.ratingComments.substring(0, 30)}}...
+                            </td>
+                            <td>{{paidReport.supportcase.expertaccount.user.firstName}} {{paidReport.supportcase.expertaccount.user.lastName}}</td>
+                            <td>{{paidReport.supportcase.user.firstName}} {{paidReport.supportcase.user.lastName}}</td>
                             <td>
                                 <!-- Can assign isPaid to an paid case -->
                                 <input type="checkbox" ng-model="paidReport.isPaid" class="form-control">
-                            </td>
-                            <td ng-click="vm.openModal(report)">
-                                <!-- Rating Comment -->
-                                {{report.rating.ratingComments.substring(0, 30)}}...
                             </td>
                             <td>
                                 <!-- Can write a comment to an unpaid case -->
                                 <textarea name="name" rows="2" cols="8" ng-model="paidReport.comments" class="form-control" class="drsl-report-comment-textarea"></textarea>
                             </td>
-                            <td>{{paidReport.supportcase.expertaccount.user.firstName}} {{paidReport.supportcase.expertaccount.user.lastName}}</td>
-                            <td>{{paidReport.supportcase.user.firstName}} {{paidReport.supportcase.user.lastName}}</td>
                             <td><button type="button" name="button" class="btn btn-success" ng-click="vm.updateReport(paidReport)" translate="adminSupportCaseReport.update">Update</button></td>
                         </tr>
                     </tbody>
