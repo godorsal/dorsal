@@ -13,6 +13,13 @@ body {
 }
 .drsl-rating-comment {
     white-space: pre-line;
+    padding: 10px;
+    border: 1px solid #E2E2E2;
+    margin-top: 35px;
+}
+.drsl-report-comment-textarea {
+    width: 175px;
+    resize: none;
 }
 .drsl-rating-comment-header-1 {
     float: left;
