@@ -215,11 +215,16 @@ public class SupportcaseResource {
          method = RequestMethod.GET,
          produces = MediaType.APPLICATION_JSON_VALUE)
      @Timed
-     public ResponseEntity<List<Supportcase>> getAllSupportcases(Pageable pageable)
+     public ResponseEntity<List<Supportcase>> getAllSupportcases()
          throws URISyntaxException {
              log.debug("REST request to get all Supportcases");
              int numCases = 0;
-         List<Supportcase> supportcasesList = supportcaseRepository.findAllAdminIsCurrentUser(pageable);
+
+         /**
+          * Admin user will get all support cases
+          * TBD: Need pagination for this use case
+          */
+         List<Supportcase> supportcasesList = supportcaseRepository.findAllAdminIsCurrentUser();
          if(supportcasesList.size() > 0){
              return new ResponseEntity<>(supportcasesList, HttpStatus.OK);
          }

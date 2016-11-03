@@ -21,7 +21,7 @@ public interface SupportcaseRepository extends JpaRepository<Supportcase,Long> {
     List<Supportcase> findByExpertIsCurrentUser();
 
     @Query("select supportcase from Supportcase supportcase where ?#{principal.username} = 'admin'  ORDER BY supportcase.dateCreated ASC")
-    List<Supportcase> findAllAdminIsCurrentUser(Pageable pageable);
+    List<Supportcase> findAllAdminIsCurrentUser();
 
     @Query("select supportcase from Supportcase supportcase, SharedCase sharedcase where (supportcase.id = sharedcase.supportcase.id) AND (sharedcase.user.login = ?#{principal.username})  ORDER BY supportcase.dateCreated ASC")
     List<Supportcase> findBySharedIsCurrentUser();
