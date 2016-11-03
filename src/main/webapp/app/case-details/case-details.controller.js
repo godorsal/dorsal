@@ -2,11 +2,11 @@
     'use strict';
 
     angular
-        .module('dorsalApp')
-        .controller('CaseDetailsController', CaseDetailsController);
+    .module('dorsalApp')
+    .controller('CaseDetailsController', CaseDetailsController);
 
     CaseDetailsController.$inject = ['$scope', '$timeout', '$uibModalInstance', 'drslCase', 'expert',
-        'Casetechnologyproperty', 'Caseupdate', 'Attachment', 'Principal', 'DrslAttachFileService', '$document', '$rootScope'];
+    'Casetechnologyproperty', 'Caseupdate', 'Attachment', 'Principal', 'DrslAttachFileService', '$document', '$rootScope'];
 
     function CaseDetailsController($scope, $timeout, $uibModalInstance, drslCase, expert, Casetechnologyproperty, Caseupdate, Attachment, Principal, DrslAttachFileService, $document, $rootScope) {
 
@@ -39,8 +39,8 @@
         vm.submit = submit;
 
         /**
-         * Initialize the controller's data.
-         */
+        * Initialize the controller's data.
+        */
         function init() {
             // Populate the vm's estimateLogs, cleanup and sort it
             if (vm.case.estimateLog) {
@@ -80,26 +80,26 @@
                     if (property.supportcase.id === vm.case.id) {
                         switch (property.propertyname) {
                             case 'Version':
-                                property.tagNO = 1;
-                                vm.technologyProps.push(property);
-                                break;
+                            property.tagNO = 1;
+                            vm.technologyProps.push(property);
+                            break;
                             case 'Configuration':
-                                property.tagNO = 2;
-                                vm.technologyProps.push(property);
-                                break;
+                            property.tagNO = 2;
+                            vm.technologyProps.push(property);
+                            break;
                             case 'OS':
-                                property.tagNO = 3;
-                                vm.technologyProps.push(property);
-                                break;
+                            property.tagNO = 3;
+                            vm.technologyProps.push(property);
+                            break;
                             case 'Environment':
-                                property.tagNO = 4;
-                                vm.technologyProps.push(property);
-                                break;
+                            property.tagNO = 4;
+                            vm.technologyProps.push(property);
+                            break;
                             case 'Other':
-                                property.tagNO = 5;
-                                vm.technologyProps.other = property;
-                                vm.technologyProps.push(property);
-                                break;
+                            property.tagNO = 5;
+                            vm.technologyProps.other = property;
+                            vm.technologyProps.push(property);
+                            break;
                         }
                     }
                 })
@@ -107,8 +107,8 @@
         }
 
         /**
-         * Determine if the current user is an expert and set's the vm's isExpert boolean
-         */
+        * Determine if the current user is an expert and set's the vm's isExpert boolean
+        */
         function getCurrentUser() {
             Principal.identity().then(function (account) {
                 if (vm.case.expertaccount.user.email == account.email) {
@@ -119,26 +119,26 @@
             });
         }
         /**
-         * On ESCAPE key press, close modal
-         * @param e
-         */
+        * On ESCAPE key press, close modal
+        * @param e
+        */
         $document.keyup(function(e) {
-             if (e.keyCode == 27) {
-                 cancel (e)
+            if (e.keyCode == 27) {
+                cancel (e)
             }
         });
         /**
-         * Handle the 'cancel' buttons click event
-         * @param e
-         */
+        * Handle the 'cancel' buttons click event
+        * @param e
+        */
         function cancel(e) {
             e.preventDefault();
             $uibModalInstance.dismiss('cancel');
         }
 
         /**
-         * A Success Callback function passed to the Caseupdate save function.
-         */
+        * A Success Callback function passed to the Caseupdate save function.
+        */
         function onSaveSuccess() {
             if (vm.attachment.name) {
                 vm.attachment.supportcase = {
@@ -149,34 +149,21 @@
         }
 
         /**
-         * An Error Callback function passed to the Caseupdate save function.
-         * @param error
-         */
+        * An Error Callback function passed to the Caseupdate save function.
+        * @param error
+        */
         function onSaveError(error) {
         }
 
         /**
-         * Handles the main form submit and calls Caseupdate.save() if necessary
-         */
+        * Handles the main form submit and calls Caseupdate.save() if necessary
+        */
         function submit() {
             var filesToUpload = DrslAttachFileService.attachFileList;
-            console.log(filesToUpload);
-            console.log(filesToUpload.join());
+            DrslAttachFileService.uploadAttachFileList(vm.case);
             // Set the update message
-            // console.log("SERVICE: ", DrslAttachFileService.attachFileList);
-            // if (DrslAttachFileService.attachment.name) {
-            if (filesToUpload.length > 0) {
-                console.log(DrslAttachFileService);
-                // console.log("Upload File", DrslAttachFileService.attachment);
-                // console.log("Upload Files", DrslAttachFileService.attachFileList);
-                vm.caseupdate.updateMsg = DrslAttachFileService.attachment.name + " Was uploaded. " + vm.updatemsg;
-                DrslAttachFileService.uploadAttachFileList(vm.case);
-            } else {
-                console.log("Just Message");
-                vm.caseupdate.updateMsg = vm.updatemsg;
-            }
+            vm.caseupdate.updateMsg = vm.updatemsg;
 
-            console.log('ATTACHMENT', vm.case);
             // Set the update type
             vm.caseupdate.updatetype = {
                 id: 1
@@ -197,11 +184,7 @@
             // Close the dialog
             $uibModalInstance.close({"updated": true});
         }
-        
-        // $rootScope.$on('attachmentCompleteWriteUpdate', function (thing, file) {
-        //     vm.caseupdate.updateMsg = file.name + " Was uploaded. " + vm.updatemsg;
-        //     Caseupdate.save(vm.caseupdate, onSaveSuccess, onSaveError);
-        // })
+
         // Call to initialize the controller.
         vm.init();
     }

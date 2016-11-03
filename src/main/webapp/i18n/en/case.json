@@ -79,7 +79,8 @@
                 "badge-10": "Leader"
             },
             "input": {
-                "desiredOutcome": "Desired <br/> Outcome <span class='drsl-required-asterix'>*</span>",
+                "expertDesiredOutcome": "Desired <br/> Outcome <span class='drsl-required-asterix'>*</span>",
+                "desiredOutcome": "Desired <br/> Outcome",
                 "desiredOutcome.placeholder": "Please define the expert deliverable to resolve the case",
                 "estimatedHours": "Estimated<br/># hours <span class='drsl-required-asterix'>*</span>",
                 "estimatedHours.placeholder": "hours",

@@ -11,6 +11,24 @@ body {
 .drsl-reports-top {
     margin-top: 40px;
 }
+.drsl-rating-comment {
+    white-space: pre-line;
+}
+.drsl-rating-comment-header-1 {
+    float: left;
+    font-size: 20px;
+}
+.drsl-rating-comment-header-2 {
+    float: right;
+    font-size: 20px;
+}
+.drsl-rating-comment-modal {
+    position: fixed;
+    top: 20%;
+    left: 18.5%;
+    width: 80%;
+    margin-left: -10%;
+}
 .drsl-main-content {
     position: relative;
 

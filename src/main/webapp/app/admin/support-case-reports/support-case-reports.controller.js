@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('SupportCaseReportsController', SupportCaseReportController);
 
-    SupportCaseReportController.$inject = ['Principal', 'Supportcase', 'ParseLinks', 'paginationConstants', 'JhiLanguageService', 'ManageSupportCaseReports', '$scope', 'SupportCaseReport', 'toastr', 'DrslMetadata'];
+    SupportCaseReportController.$inject = ['Principal', 'Supportcase', 'ParseLinks', 'paginationConstants', 'JhiLanguageService', 'ManageSupportCaseReports', '$scope', 'SupportCaseReport', 'toastr', 'DrslMetadata', 'SupportCaseReportRatingCommentModalService'];
 
-    function SupportCaseReportController(Principal, Supportcase, ParseLinks, paginationConstants, JhiLanguageService, ManageSupportCaseReports, $scope, SupportCaseReport, toastr, DrslMetadata) {
+    function SupportCaseReportController(Principal, Supportcase, ParseLinks, paginationConstants, JhiLanguageService, ManageSupportCaseReports, $scope, SupportCaseReport, toastr, DrslMetadata, SupportCaseReportRatingCommentModalService) {
         var vm = this;
         vm.authorities = ['ROLE_USER', 'ROLE_ADMIN'];
         vm.clear = clear;
@@ -19,6 +19,7 @@
         vm.page = 1;
         vm.setActive = setActive;
         vm.updateReport = updateReport;
+        vm.openModal = openModal;
         vm.totalItems = null;
         vm.users = [];
         vm.paidReports = [];
@@ -50,6 +51,7 @@
                 //Divide between paid and unpaid reports
                 result.forEach(function(report){
                     report.payment = "$" + DrslMetadata.getTotalForRateAtHours(report.supportcase.timeOnCase);
+                    // report.rating.ratingComments = report.rating.ratingComments.substring(0, 30) + "...";
                     if(report.isPaid === true){
                         vm.paidReports.push(report);
                     } else {
@@ -96,6 +98,9 @@
             };
             vm.editForm.$setPristine();
             vm.editForm.$setUntouched();
+        }
+        function openModal(report) {
+            SupportCaseReportRatingCommentModalService.open(report)
         }
     }
 })();
