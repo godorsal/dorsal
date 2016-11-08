@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('SupportCaseReportRatingCommentModalController', SupportCaseReportRatingCommentModalController);
 
-    SupportCaseReportRatingCommentModalController.$inject = ['$scope', '$timeout', '$uibModalInstance', 'report', '$document'];
+    SupportCaseReportRatingCommentModalController.$inject = ['$scope', '$timeout', '$uibModalInstance', 'report', '$document', '$translate'];
 
-    function SupportCaseReportRatingCommentModalController($scope, $timeout, $uibModalInstance, report, $document) {
+    function SupportCaseReportRatingCommentModalController($scope, $timeout, $uibModalInstance, report, $document, $translate) {
         var vm = this;
         vm.report = report;
 

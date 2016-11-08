@@ -51,7 +51,11 @@
                 //Divide between paid and unpaid reports
                 result.forEach(function(report){
                     report.payment = "$" + DrslMetadata.getTotalForRateAtHours(report.supportcase.timeOnCase);
-                    // report.rating.ratingComments = report.rating.ratingComments.substring(0, 30) + "...";
+                    report.rating.detailedReportObject = {};
+                    report.rating.rateDetails.split(',').forEach(function (rateDetail) {
+                        var rateDetail = rateDetail.split(' ');
+                        report.rating.detailedReportObject[rateDetail[0]] = rateDetail[1]
+                    })
                     if(report.isPaid === true){
                         vm.paidReports.push(report);
                     } else {

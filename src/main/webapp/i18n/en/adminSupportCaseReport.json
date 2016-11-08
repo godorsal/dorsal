@@ -47,6 +47,12 @@
                 "expectedDeliveryDate": "Expected Delivery Date",
                 "lastUpdatedDate": "Last Update",
                 "estimatedHours": "Estimated Hours"
+            },
+            "label": {
+                "satisfaction": "Overall Result",
+                "prompt": "Responsiveness",
+                "courtesy": "Professionalism",
+                "skill": "Technical Skill"
             }
         }
 }

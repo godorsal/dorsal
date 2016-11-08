@@ -8,6 +8,14 @@ body {
     color: $default-text-color;
     font-size: $default-font-size;
 }
+.drsl-detailed-rating {
+    > h3 {
+        font-size: 16px; font-weight: 200; padding: 10px 0; margin: 0 0 10px; display: inline-block;
+    }
+    > div {
+        display: inline-block;
+    }
+}
 .drsl-reports-top {
     margin-top: 40px;
 }

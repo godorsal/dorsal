@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .factory('SupportCaseReportRatingCommentModalService', SupportCaseReportRatingCommentModalService);
 
-    SupportCaseReportRatingCommentModalService.$inject = ['$uibModal'];
+    SupportCaseReportRatingCommentModalService.$inject = ['$uibModal', '$translate'];
 
-    function SupportCaseReportRatingCommentModalService ($uibModal) {
+    function SupportCaseReportRatingCommentModalService ($uibModal, $translate) {
         var service = {
             open: open
         };
