@@ -27,7 +27,10 @@
 		function getChatRooms() {
 			vm.concirgeRooms = [];
 			DrslHipChatService.getRooms()
-			.then(function(res){
+			.then(function(res, err){
+				// if(err){
+				// 	console.log("ERROR", err);
+				// }
 				res.data.items.forEach(function(room){
 					if(room.name.split(':')[0] == "Concierge Chat Room"){
 						DrslHipChatService.getOneRoom(room.id)

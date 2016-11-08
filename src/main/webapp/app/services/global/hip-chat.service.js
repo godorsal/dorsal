@@ -11,7 +11,8 @@
         var service = {};
 
         service.DrslMetadata = DrslMetadata;
-
+// t9hEidVCkyNRDFHTDnW1qlaoTg2ClAsSFb5UMSFC#K5RV7BL8mON1XvgStVxXasG6dWtHISRJSdFR2j8z#OVoAYGsITVTIWnhOoqtCvZlXFMQOUsXQYiqKIC94#5ZbVyVDbZroGAN3Rbwkua2qYTZyILxvowbDQLSKn
+// dDloRWlkVkNreU5SREZIVERuVzFxbGFvVGcyQ2xBc1NGYjVVTVNGQyNLNVJWN0JMOG1PTjFYdmdTdFZ4WGFzRzZkV3RISVNSSlNkRlIyajh6I09Wb0FZR3NJVFZUSVduaE9vcXRDdlpsWEZNUU9Vc1hRWWlxS0lDOTQjNVpiVnlWRGJacm9HQU4zUmJ3a3VhMnFZVFp5SUx4dm93YkRRTFNLbg==
         service.getCurrentUser = function(){
             Principal.identity()
             .then(function(res){
@@ -27,6 +28,9 @@
 
         // Using the ManageRoomsToken, returns a list of all rooms
         service.getRooms = function(){
+            // if(!$window.atob(service.DrslMetadata.thingy)){
+            //     return function() { return "HIP CHAT CREDENTIALS MISSING"};
+            // }
             var req = {
                 method: 'GET',
                 url: '/v2/room',
