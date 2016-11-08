@@ -108,6 +108,7 @@
                                 <br>
                                 <span ng-bind-html="message.formattedMessage"></span>
                                 <a href="{{message.file.url}}" ng-if="message.file">
+                                    {{message.file.name}}
                                     <img ng-src="{{message.file.thumb_url}}" alt="" target="_blank" class="drsl-hipchat-message-image-thumbnail">
                                 </a>
                                 <br>
