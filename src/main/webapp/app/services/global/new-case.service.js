@@ -11,11 +11,15 @@
         var service = {};
 
         service.newCaseId = null;
+        service.newCase = null;
         service._hasConsumedNewCaseId = false;
 
         service.setNewCaseId = function (caseId) {
             service._hasConsumedNewCaseId = false;
             service.newCaseId = caseId;
+        };
+        service.setNewCase = function (newCase) {
+            service.newCase = newCase;
         };
 
         /**

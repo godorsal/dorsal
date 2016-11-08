@@ -142,7 +142,11 @@
                         // service.broadcastForAttachmentMessage(file);
                         getCurrentUser();
                         service.caseupdate.updateMsg = file.name + $translate.instant('global.messages.info.fileWasUploaded')
-                        service.caseupdate.supportcase = supportCase;
+                        if(supportCase){
+                            service.caseupdate.supportcase = supportCase;
+                        } else {
+                            service.caseupdate.supportcase = DrslNewCaseService.newCase;
+                        }
 
                         Caseupdate.save(service.caseupdate, onSaveSuccess, onSaveError)
                         uploadFileInQueue(supportCase);

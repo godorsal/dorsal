@@ -15,53 +15,39 @@
                             Rating Score
                         </span>
                         <span>: {{vm.report.rating.score}}</span>
-                    </span>
-                </h2>
-            </div>
+                    </div>
+                </span>
+            </h2>
         </div>
-        <hr>
-        <div>
-            <div class="drsl-dialog-content">
-                <div class="drsl-rating-comment">
-                    {{vm.report.rating.ratingComments}}
-                </div>
-            </div>
-        </div>
-        <div>
-            <div>
-                <div class="drsl-detailed-rating">
-                    <h3 translate="adminSupportCaseReport.label.satisfaction">
-                        Satisfaction
-                    </h3>
-                    <div>
-                        : {{vm.report.rating.detailedReportObject.satisfaction}}
-                    </div>
-                </div>
-                <div class="drsl-detailed-rating">
-                    <h3 translate="adminSupportCaseReport.label.prompt">
-                        Prompt
-                    </h3>
-                    <div>
-                        : {{vm.report.rating.detailedReportObject.prompt}}
-                    </div>
-                </div>
-                <div class="drsl-detailed-rating">
-                    <h3 translate="adminSupportCaseReport.label.courtesy">
-                        Courtesy
-                    </h3>
-                    <div>
-                        : {{vm.report.rating.detailedReportObject.courtesy}}
-                    </div>
-                </div>
-                <div class="drsl-detailed-rating">
-                    <h3 translate="adminSupportCaseReport.label.skill">
-                        Skill
-                    </h3>
-                    <div>
-                        : {{vm.report.rating.detailedReportObject.skill}}
-                    </div>
-                </div>
+        <br>
+    </div>
+    <br>
+    <div class="drsl-detailed-rating">
+        <span translate="adminSupportCaseReport.label.satisfaction">
+            Satisfaction
+        </span>
+        <span>: {{vm.report.rating.detailedReportObject.satisfaction}}</span>
+        <span translate="adminSupportCaseReport.label.prompt">
+            Prompt
+        </span>
+        <span>: {{vm.report.rating.detailedReportObject.prompt}}</span>
+        <span translate="adminSupportCaseReport.label.courtesy">
+            Courtesy
+        </span>
+        <span>: {{vm.report.rating.detailedReportObject.courtesy}}</span>
+        <span translate="adminSupportCaseReport.label.skill">
+            Skill
+        </span>
+        <span>: {{vm.report.rating.detailedReportObject.skill}}</span>
+    </div>
+    <div>
+        <div class="drsl-dialog-content">
+            <div class="drsl-rating-comment">
+                {{vm.report.rating.ratingComments}}
             </div>
         </div>
     </div>
+    <div>        
+    </div>
+</div>
 </div>

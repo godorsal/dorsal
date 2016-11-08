@@ -86,7 +86,8 @@
          * @param result
          */
         var onSaveSuccess = function (result) {
-            DrslNewCaseService.setNewCaseId(result.id);
+            DrslNewCaseService.setNewCase(result);
+            // DrslNewCaseService.setNewCaseId(result.id);
 
             // Loop through each tech property and save via an api call
             for (var key in vm.technologyProperties) {
