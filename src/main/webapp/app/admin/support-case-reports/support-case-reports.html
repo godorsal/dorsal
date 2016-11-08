@@ -22,25 +22,23 @@
                     <thead>
                         <tr>
                             <th translate="adminSupportCaseReport.id">Support Case ID</th>
+                            <th translate="adminSupportCaseReport.creationDate">Creation Date</th>
                             <th translate="adminSupportCaseReport.completedDate">Completed Date</th>
-                            <th translate="adminSupportCaseReport.isPaid">Is Paid</th>
                             <th translate="adminSupportCaseReport.payment">Payment</th>
                             <th translate="adminSupportCaseReport.ratingScore">Rating Score</th>
                             <th translate="adminSupportCaseReport.ratingComment">Rating Comment</th>
-                            <th translate="adminSupportCaseReport.comment">Comment</th>
                             <th translate="adminSupportCaseReport.expert">Expert</th>
                             <th translate="adminSupportCaseReport.user">User</th>
+                            <th translate="adminSupportCaseReport.isPaid">Is Paid</th>
+                            <th translate="adminSupportCaseReport.comment">Comment</th>
                             <th translate="adminSupportCaseReport.update">Update</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="report in vm.reports track by $index">
                             <td>{{report.supportcase.technology.name}}-{{report.supportcase.id}}</a></td>
+                            <td>{{report.supportcase.dateCreated | date:'MM/dd/yyyy'}}</td>
                             <td>{{report.supportcase.dateLastUpdate | date:'MM/dd/yyyy'}}</td>
-                            <td>
-                                <!-- Can assign isPaid to an unpaid case -->
-                                <input type="checkbox" ng-model="report.isPaid" class="form-control">
-                            </td>
                             <td>
                                 <!-- Payment Amound -->
                                 {{report.payment}}
@@ -49,16 +47,20 @@
                                 <!-- Rating Score -->
                                 {{report.rating.score}}
                             </td>
-                            <td>
+                            <td ng-click="vm.openModal(report)">
                                 <!-- Rating Comment -->
-                                {{report.rating.ratingComments}}
-                            </td>
-                            <td>
-                                <!-- Can write a comment to an unpaid case -->
-                                <textarea name="name" rows="2" cols="8" ng-model="report.comments" class="form-control"></textarea>
+                                {{report.rating.ratingComments.substring(0, 30)}}...
                             </td>
                             <td>{{report.supportcase.expertaccount.user.firstName}} {{report.supportcase.expertaccount.user.lastName}}</td>
                             <td>{{report.supportcase.user.firstName}} {{report.supportcase.user.lastName}}</td>
+                            <td>
+                                <!-- Can assign isPaid to an unpaid case -->
+                                <input type="checkbox" ng-model="report.isPaid">
+                            </td>
+                            <td>
+                                <!-- Can write a comment to an unpaid case -->
+                                <textarea name="name" rows="2" cols="8" ng-model="report.comments" class="form-control drsl-report-comment-textarea"></textarea>
+                            </td>
                             <td><button type="button" name="button" class="btn btn-success" ng-click="vm.updateReport(report)" translate="adminSupportCaseReport.update">Update</button></td>
                         </tr>
                     </tbody>
@@ -71,26 +73,24 @@
                     <thead>
                         <tr>
                             <th translate="adminSupportCaseReport.id">Support Case ID</th>
+                            <th translate="adminSupportCaseReport.creationDate">Creation Date</th>
                             <th translate="adminSupportCaseReport.completedDate">Completed Date</th>
-                            <th translate="adminSupportCaseReport.isPaid">Is Paid</th>
                             <th translate="adminSupportCaseReport.datePaid">Date Paid</th>
                             <th translate="adminSupportCaseReport.payment">Payment</th>
                             <th translate="adminSupportCaseReport.ratingScore">Rating Score</th>
                             <th translate="adminSupportCaseReport.ratingComment">Rating Comment</th>
-                            <th translate="adminSupportCaseReport.comment">Comment</th>
                             <th translate="adminSupportCaseReport.expert">Expert</th>
                             <th translate="adminSupportCaseReport.user">User</th>
+                            <th translate="adminSupportCaseReport.isPaid">Is Paid</th>
+                            <th translate="adminSupportCaseReport.comment">Comment</th>
                             <th translate="adminSupportCaseReport.update">Update</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="paidReport in vm.paidReports track by paidReport.id">
                             <td>{{paidReport.supportcase.technology.name}}-{{paidReport.supportcase.id}}</a></td>
+                            <td>{{paidReport.supportcase.dateCreated | date:'MM/dd/yyyy'}}</td>
                             <td>{{paidReport.supportcase.dateLastUpdate | date:'MM/dd/yyyy'}}</td>
-                            <td>
-                                <!-- Can assign isPaid to an paid case -->
-                                <input type="checkbox" ng-model="paidReport.isPaid" class="form-control">
-                            </td>
                             <td>{{paidReport.datePaid | date:'MM/dd/yyyy'}}</td>
                             <td>
                                 <!-- Payment Amound -->
@@ -100,16 +100,20 @@
                                 <!-- Rating -->
                                 {{paidReport.rating.score}}
                             </td>
-                            <td>
+                            <td ng-click="vm.openModal(paidReport)">
                                 <!-- Rating Comment -->
-                                {{paidReport.rating.ratingComments}}
-                            </td>
-                            <td>
-                                <!-- Can write a comment to an unpaid case -->
-                                <textarea name="name" rows="2" cols="8" ng-model="paidReport.comments" class="form-control"></textarea>
+                                {{paidReport.rating.ratingComments.substring(0, 30)}}...
                             </td>
                             <td>{{paidReport.supportcase.expertaccount.user.firstName}} {{paidReport.supportcase.expertaccount.user.lastName}}</td>
                             <td>{{paidReport.supportcase.user.firstName}} {{paidReport.supportcase.user.lastName}}</td>
+                            <td>
+                                <!-- Can assign isPaid to an paid case -->
+                                <input type="checkbox" ng-model="paidReport.isPaid" class="form-control">
+                            </td>
+                            <td>
+                                <!-- Can write a comment to an unpaid case -->
+                                <textarea name="name" rows="2" cols="8" ng-model="paidReport.comments" class="form-control drsl-report-comment-textarea"></textarea>
+                            </td>
                             <td><button type="button" name="button" class="btn btn-success" ng-click="vm.updateReport(paidReport)" translate="adminSupportCaseReport.update">Update</button></td>
                         </tr>
                     </tbody>

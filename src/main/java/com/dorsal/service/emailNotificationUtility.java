@@ -208,6 +208,56 @@ public class emailNotificationUtility {
 
     }
 
+    /**
+     * caseUpdateEmailNotification
+     * Each time the support case is updated an email notification will be send to the user and to the expert.
+     * All notifications are time stamped and include the message
+     * @param supportcase Support case object for which the update took place
+     * @param message update message
+     * @return true in case of success or false when an error occured.
+     */
+    public boolean caseUpdateEmailNotification(Supportcase supportcase, String userName, String message) {
+        /* Check for null objects */
+        if (supportcase == null)
+            return false;
+
+        // Local variables
+        String emailSubject;
+        String emailContent;
+        String[] args = {"","",""};
+
+        try {
+            // User & Context
+            Locale userlocale = Locale.forLanguageTag(supportcase.getUser().getLangKey());
+
+            args[0] = supportcase.getTechnology().getName() + '-' + supportcase.getId().toString();
+            args[1] = message;
+            args[2] = userName;
+
+            emailSubject = messageSource.getMessage("notification.caseupdate.create.subject", args, userlocale);
+            emailContent = messageSource.getMessage("notification.caseupdate.create.content", args, userlocale);
+
+            /* Send email to user */
+            mailService.sendEmail(supportcase.getUser().getEmail(), emailSubject, emailContent, false, true);
+
+            // Expert & Context
+            Locale expertlocale = Locale.forLanguageTag(supportcase.getExpertaccount().getUser().getLangKey());
+
+            emailSubject = messageSource.getMessage("notification.caseupdate.create.subject", args, expertlocale);
+            emailContent = messageSource.getMessage("notification.caseupdate.create.content", args, expertlocale);
+
+            /* Send email to expert */
+            mailService.sendEmail(supportcase.getExpertaccount().getUser().getEmail(), emailSubject, emailContent, false, true);
+
+            // Notifications sent out
+            return true;
+
+        } catch(Exception e) {
+            log.warn("Email notification for caseupdate notification failed. Reason " + e);
+            return false;
+        }
+    }
+
      /*
         Private methods
      */

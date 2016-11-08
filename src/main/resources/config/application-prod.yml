@@ -58,6 +58,8 @@ liquibase:
 
 server:
     port: 8080
+    # 15 minutes 900 sec
+    sessionTimeout: 900
     compression:
         enabled: true
         mime-types: text/html,text/xml,text/plain,text/css, application/javascript, application/json
@@ -83,8 +85,8 @@ jhipster:
         authentication:
             jwt:
                 secret: 332fb047a4208836503fe6f789b16513927de45f
-                # Token is valid 24 hours
-                tokenValidityInSeconds: 86400
+                # Token is valid 30 minutes 1800 sec
+                tokenValidityInSeconds: 1800
     mail: # specific JHipster mail property, for standard properties see MailProperties
         from: dorsal@localhost
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration

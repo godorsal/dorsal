@@ -8,6 +8,11 @@ Case Rating
             margin-bottom: 25px;
             min-height: 80px;
         }
+        .drsl-resolution-scrolling-container {
+            white-space: pre-line;
+            max-height: 105px;
+            overflow-y: scroll;
+        }
 
         .drsl-rating-row {
             display: flex;

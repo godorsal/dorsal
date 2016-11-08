@@ -61,8 +61,9 @@ Case Details
         display: table;
         min-width: 243px;
         width: 455px;
-        max-width: 455px;
+        max-width: 435px;
         max-height: 200px;
+        white-space: pre-line;
     }
 
     .drsl-update-date-tdata {
@@ -71,9 +72,9 @@ Case Details
     }
 
     .drsl-update-user-tdata {
-        width: 87px;
-        padding-right: 50px;
-        padding-left: 50px;
+        width: 145px;
+        word-break: break-all;
+        padding-left: 35px;
     }
 
     .drsl-details-user-view {
@@ -101,10 +102,12 @@ Case Details
     }
     .drsl-view-resolution {
         width: 668px;
-        height: 114px;
         border: 1px solid $empty-box-border-color;
         padding: 5px 0 0 $default-half-padding;
         font-weight: $default-weight;
+        white-space: pre;
+        max-height: 102px;
+        overflow-y: scroll;
     }
     .drsl-no-updates {
         width: 668px;

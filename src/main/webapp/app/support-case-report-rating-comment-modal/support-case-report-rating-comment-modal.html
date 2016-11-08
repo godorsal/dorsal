@@ -1,0 +1,53 @@
+
+<div class="modal-body">
+    <div>
+        <div class="drsl-dialog-header">
+            <div>
+                <h2>
+                    <span class="drsl-rating-comment-header-1">
+                        <span translate="adminSupportCaseReport.ratingCommentFor">
+                            Rating Comment for
+                        </span>
+                        <span>{{vm.report.supportcase.technology.name}}-{{vm.report.supportcase.id}}</span>
+                    </span>
+                    <span class="drsl-rating-comment-header-2">
+                        <span translate="adminSupportCaseReport.ratingScore">
+                            Rating Score
+                        </span>
+                        <span>: {{vm.report.rating.score}}</span>
+                    </div>
+                </span>
+            </h2>
+        </div>
+        <br>
+    </div>
+    <br>
+    <div class="drsl-detailed-rating">
+        <span translate="adminSupportCaseReport.label.satisfaction">
+            Satisfaction
+        </span>
+        <span>: {{vm.report.rating.detailedReportObject.satisfaction}}</span>
+        <span translate="adminSupportCaseReport.label.prompt">
+            Prompt
+        </span>
+        <span>: {{vm.report.rating.detailedReportObject.prompt}}</span>
+        <span translate="adminSupportCaseReport.label.courtesy">
+            Courtesy
+        </span>
+        <span>: {{vm.report.rating.detailedReportObject.courtesy}}</span>
+        <span translate="adminSupportCaseReport.label.skill">
+            Skill
+        </span>
+        <span>: {{vm.report.rating.detailedReportObject.skill}}</span>
+    </div>
+    <div>
+        <div class="drsl-dialog-content">
+            <div class="drsl-rating-comment">
+                {{vm.report.rating.ratingComments}}
+            </div>
+        </div>
+    </div>
+    <div>        
+    </div>
+</div>
+</div>

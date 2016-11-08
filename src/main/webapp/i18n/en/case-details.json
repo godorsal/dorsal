@@ -5,6 +5,7 @@
         "technology": "Technology Properties",
         "estimateHistory": "Estimate History",
         "updateHistory": "Update History",
+        "noEstimatesMessage": "Estimations for your case will be displayed here",
         "noUpdatesMessage": "Updates for your case will be displayed here",
         "updates.message": "Message",
         "updates.date": "Date",

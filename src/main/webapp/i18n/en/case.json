@@ -79,11 +79,12 @@
                 "badge-10": "Leader"
             },
             "input": {
+                "expertDesiredOutcome": "Desired <br/> Outcome <span class='drsl-required-asterix'>*</span>",
                 "desiredOutcome": "Desired <br/> Outcome",
                 "desiredOutcome.placeholder": "Please define the expert deliverable to resolve the case",
-                "estimatedHours": "Estimated<br/># hours",
+                "estimatedHours": "Estimated<br/># hours <span class='drsl-required-asterix'>*</span>",
                 "estimatedHours.placeholder": "hours",
-                "estimateComment": "Estimate<br/>Comment",
+                "estimateComment": "Estimate<br/>Comment <span class='drsl-required-asterix'>*</span>",
                 "estimateComment.noBR": "Estimate Comment",
                 "estimateComment.placeholder": "Comments regarding the estimated hours",
                 "timeOnCase": "Total time<br/>on case",

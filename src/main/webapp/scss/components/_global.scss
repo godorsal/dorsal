@@ -8,8 +8,37 @@ body {
     color: $default-text-color;
     font-size: $default-font-size;
 }
+.drsl-detailed-rating {
+    font-size: 13px;
+    text-align: center;
+}
 .drsl-reports-top {
     margin-top: 40px;
+}
+.drsl-rating-comment {
+    white-space: pre-line;
+    padding: 10px;
+    border: 1px solid #E2E2E2;
+    margin-top: 10px;
+}
+.drsl-report-comment-textarea {
+    width: 175px;
+    resize: none;
+}
+.drsl-rating-comment-header-1 {
+    float: left;
+    font-size: 20px;
+}
+.drsl-rating-comment-header-2 {
+    float: right;
+    font-size: 20px;
+}
+.drsl-rating-comment-modal {
+    position: fixed;
+    top: 20%;
+    left: 18.5%;
+    width: 80%;
+    margin-left: -10%;
 }
 .drsl-main-content {
     position: relative;
@@ -196,6 +225,7 @@ table.drsl-table-scroll tbody {
     min-height: 95px;
     max-height: 476px;
     overflow-y: auto;
+    overflow-x: hidden;
     > td{
         width: 25%;
     }
@@ -230,7 +260,10 @@ table.drsl-table-scroll thead > tr {
     color: $drsl-label-color;
     font-weight: $default-weight;
 }
-
+.drsl-required-asterix {
+    font-size: 20px;
+    color: red;
+}
 .drsl-tech-props {
     margin-left: 35px;
     width: 240px;

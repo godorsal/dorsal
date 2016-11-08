@@ -22,6 +22,7 @@
             "id": "Support Case ID",
             "rating": "Rating",
             "completedDate": "Completed Date",
+            "creationDate": "Creation Date",
             "comment": "Comment",
             "expert": "Expert",
             "user": "User",
@@ -38,6 +39,7 @@
             "payment": "Payment Amount",
             "ratingScore": "Rating Score",
             "ratingComment": "Rating Comment",
+            "ratingComment": "Rating Comment For",
             "inProgress": {
                 "id": "ID",
                 "status": "Status",
@@ -45,6 +47,12 @@
                 "expectedDeliveryDate": "Expected Delivery Date",
                 "lastUpdatedDate": "Last Update",
                 "estimatedHours": "Estimated Hours"
+            },
+            "label": {
+                "satisfaction": "Overall Result",
+                "prompt": "Responsiveness",
+                "courtesy": "Professionalism",
+                "skill": "Technical Skill"
             }
         }
 }

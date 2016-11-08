@@ -142,9 +142,13 @@
                         // service.broadcastForAttachmentMessage(file);
                         getCurrentUser();
                         service.caseupdate.updateMsg = file.name + $translate.instant('global.messages.info.fileWasUploaded')
-                        service.caseupdate.supportcase = supportCase;
+                        if(supportCase){
+                            service.caseupdate.supportcase = supportCase;
+                        } else {
+                            service.caseupdate.supportcase = DrslNewCaseService.newCase;
+                        }
 
-                        Caseupdate.save(service.caseupdate)
+                        Caseupdate.save(service.caseupdate, onSaveSuccess, onSaveError)
                         uploadFileInQueue(supportCase);
                     }, function () {
                         // on error, proceed to the next file
@@ -161,6 +165,12 @@
                 toastr.success($translate.instant('global.messages.info.filesUploaded'));
                 service.broadcastAttachmentUploadComplete();
             }
+        }
+        function onSaveSuccess(thing) {
+            console.log(thing, "!");
+        }
+        function onSaveError(thing) {
+            console.log(thing, "!");
         }
 
         return service;
