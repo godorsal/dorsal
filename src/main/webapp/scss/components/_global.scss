@@ -220,7 +220,7 @@ table.drsl-table-scroll {
 }
 
 table.drsl-table-scroll tbody {
-    width: 668px;
+    // width: 668px;
     display: block;
     min-height: 95px;
     max-height: 476px;
@@ -234,7 +234,7 @@ table.drsl-table-scroll tbody {
 table.drsl-table-scroll thead > tr {
     width: 100%;
     color: $drsl-label-color;
-    display: table-header-group;
+    display: table;
 }
 .drsl-avaiable-concierge-name {
     text-align: right;
@@ -283,8 +283,11 @@ table.drsl-table-scroll thead > tr {
     margin-top: 5px;
     margin-bottom: 5px;
 }
+.drsl-hipchat-concierge-table {
+
+}
 .drsl-hipchat-name {
-    width: 20%;
+    width: 27%;
     padding-top: 10px;
     padding-bottom: 10px;
     > button {

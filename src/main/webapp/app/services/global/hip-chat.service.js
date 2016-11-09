@@ -11,8 +11,8 @@
         var service = {};
 
         service.DrslMetadata = DrslMetadata;
-// t9hEidVCkyNRDFHTDnW1qlaoTg2ClAsSFb5UMSFC#K5RV7BL8mON1XvgStVxXasG6dWtHISRJSdFR2j8z#OVoAYGsITVTIWnhOoqtCvZlXFMQOUsXQYiqKIC94#5ZbVyVDbZroGAN3Rbwkua2qYTZyILxvowbDQLSKn
-// dDloRWlkVkNreU5SREZIVERuVzFxbGFvVGcyQ2xBc1NGYjVVTVNGQyNLNVJWN0JMOG1PTjFYdmdTdFZ4WGFzRzZkV3RISVNSSlNkRlIyajh6I09Wb0FZR3NJVFZUSVduaE9vcXRDdlpsWEZNUU9Vc1hRWWlxS0lDOTQjNVpiVnlWRGJacm9HQU4zUmJ3a3VhMnFZVFp5SUx4dm93YkRRTFNLbg==
+        // t9hEidVCkyNRDFHTDnW1qlaoTg2ClAsSFb5UMSFC#K5RV7BL8mON1XvgStVxXasG6dWtHISRJSdFR2j8z#OVoAYGsITVTIWnhOoqtCvZlXFMQOUsXQYiqKIC94#5ZbVyVDbZroGAN3Rbwkua2qYTZyILxvowbDQLSKn
+        // dDloRWlkVkNreU5SREZIVERuVzFxbGFvVGcyQ2xBc1NGYjVVTVNGQyNLNVJWN0JMOG1PTjFYdmdTdFZ4WGFzRzZkV3RISVNSSlNkRlIyajh6I09Wb0FZR3NJVFZUSVduaE9vcXRDdlpsWEZNUU9Vc1hRWWlxS0lDOTQjNVpiVnlWRGJacm9HQU4zUmJ3a3VhMnFZVFp5SUx4dm93YkRRTFNLbg==
         service.getCurrentUser = function(){
             Principal.identity()
             .then(function(res){
@@ -171,19 +171,29 @@
             service.deleteRoom(service.currentRoom.id)
             service.currentUsername = '';
         }
-
-
+        $rootScope.$on('logoutDeleteConciergeRoom', function () {
+            if(service.currentRoom){        
+                service.deleteRoom(service.currentRoom.id);
+                service.waitingOnRoom = false;
+            }
+            service.currentUsername = null;
+        })
+        $rootScope.$on('authenticationSuccess', function () {
+            if(service.currentUsername){
+                service.getCurrentUser();
+            }
+        })
         service.magicMessageParser = function (messages) {
             return messages.forEach(function(message){
                 var arrayMessage = message.message.split(' ');
                 arrayMessage.map(function(word, index){
-                     if (checkImg(word)) {
+                    if (checkImg(word)) {
                         arrayMessage.splice(index, 1, '<a target="_blank" href=' + word + '>' + '<img src=' + word + ' alt="" class="drsl-hipchat-message-image-thumbnail"/>' + '</a>');
                     } else if(checkHTTP(word)){
                         arrayMessage.splice(index, 1, '<a target="_blank" href=' + word.replace(/\/$/, "") + '>' + word + '</a>');
                     } else if (checkCom(word)) {
                         arrayMessage.splice(index, 1, '<a target="_blank" href=http://' + word + '>' + word + '</a>');
-                     }
+                    }
                 })
                 if(message.type === 'notification'){
                     message.displayName = message.from.split('· ')[1];
@@ -200,59 +210,59 @@
             var splitWord = word.split('.')
             switch (splitWord[splitWord.length-1]) {
                 case "com":
-                    return true;
-                    break;
+                return true;
+                break;
                 case "net":
-                    return true;
-                    break;
+                return true;
+                break;
                 case "org":
-                    return true;
-                    break;
+                return true;
+                break;
                 case "int":
-                    return true;
-                    break;
+                return true;
+                break;
                 case "edu":
-                    return true;
-                    break;
+                return true;
+                break;
                 case "gov":
-                    return true;
-                    break;
+                return true;
+                break;
                 case "mil":
-                    return true;
-                    break;
+                return true;
+                break;
                 default:
-                    return false;
+                return false;
             }
         }
         function checkImg(word){
             var splitWord = word.split('.')
             switch (splitWord[splitWord.length-1]) {
                 case "png":
-                    return true;
-                    break;
+                return true;
+                break;
                 case "jpg":
-                    return true;
-                    break;
+                return true;
+                break;
                 case "jpeg":
-                    return true;
-                    break;
+                return true;
+                break;
                 case "gif":
-                    return true;
-                    break;
+                return true;
+                break;
                 default:
-                    return false;
+                return false;
             }
         }
         function checkHTTP(word){
             switch (word.split(':')[0]) {
                 case "http":
-                    return true;
-                    break;
+                return true;
+                break;
                 case "https":
-                    return true;
-                    break;
+                return true;
+                break;
                 default:
-                    return false;
+                return false;
             }
         }
 

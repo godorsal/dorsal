@@ -42,6 +42,7 @@
             collapseNavbar();
             Auth.logout();
             DrslUserFlowService.clearUserData();
+            $scope.$emit('logoutDeleteConciergeRoom')
             $state.go('home');
         }
 
