@@ -487,6 +487,7 @@
                 .then(function(res){
                     vm.messages = res.data.items;
                     DrslHipChatService.magicMessageParser(vm.messages);
+                    scheduleMessages();
                 }, function errorCallback(res) {
                     if(res.data.error){
                         var roomObject = {
@@ -500,7 +501,11 @@
                     }
                 })
             }
-
+            function scheduleMessages() {
+                setTimeout(function () {
+                    getMessages();
+                }, 1000 * 15);
+            }
             function sendMessage(){
                 var messageObject = {
                     roomID: vm.currentCase.technology.name + vm.currentCase.id,

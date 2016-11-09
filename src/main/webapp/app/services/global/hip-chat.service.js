@@ -108,10 +108,9 @@
         service.makeConciergeRoom = function(){
             var timestamp = new Date();
             var roomName = "Concierge Chat Room: " + (timestamp.getMonth() + 1) + '/' + timestamp.getDate() + '/' + timestamp.getFullYear() + ' ' + timestamp.getHours() + ':' + timestamp.getMinutes() + ':' +  timestamp.getSeconds();
-            var url = 'http://localhost/v2/room';
             return $http({
                 method: 'POST',
-                url: url,
+                url: '/v2/room',
                 data: {
                     name: roomName,
                     privacy: 'private',
