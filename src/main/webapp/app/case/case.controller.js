@@ -137,7 +137,8 @@
             function pollForCaseUpdates() {
                 casePoll = $interval(function () {
                     if (!vm.pausePollForCaseUpdates) {
-                        clearInterval(vm.messageScheduler);
+                        $interval.cancel(vm.messageScheduler);
+                        // clearInterval(vm.messageScheduler);
                         vm.init();
                     }
                 }, vm.DrslMetadata.casePollingRateSeconds * 1000);
@@ -223,6 +224,9 @@
             * @param targetCase a case object
             */
             function setCurrentCase(targetCase) {
+                console.log("SETTING CURRENT CASE CLEAR INTERVAL");
+                // clearInterval(vm.messageScheduler);
+                $interval.cancel(vm.messageScheduler);
                 // Set the vm's currentCase to the provided targetCase
                 vm.currentCase = targetCase;
                 console.log(vm.currentCase.status);
@@ -234,7 +238,8 @@
                     DrslHipChatService.maxResults = '5';
                     vm.maxResults = DrslHipChatService.maxResults;
                     countdown(15);
-                    vm.messageScheduler = setInterval(function () {
+                    vm.messageScheduler = $interval(function () {
+                    // vm.messageScheduler = setInterval(function () {
                         getMessages();
                         countdown(15);
                     }, 15000, getMessages());
