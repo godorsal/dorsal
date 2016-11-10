@@ -2,12 +2,12 @@
     'use strict';
 
     angular
-        .module('dorsalApp')
-        .config(stateConfig);
+    .module('dorsalApp')
+    .config(stateConfig);
 
-    stateConfig.$inject = ['$stateProvider'];
+    stateConfig.$inject = ['$stateProvider', '$httpProvider'];
 
-    function stateConfig($stateProvider) {
+    function stateConfig($stateProvider, $httpProvider) {
         $stateProvider.state('case', {
             parent: 'app',
             url: '/case',
@@ -28,5 +28,12 @@
                 }]
             }
         });
+        if (!$httpProvider.defaults.headers.get) {
+            $httpProvider.defaults.headers.get = {};
+        }
+
+        $httpProvider.defaults.headers.get['If-Modified-Since'] = 'Mon, 26 Jul 1997 05:00:00 GMT';
+        $httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
+        $httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
     }
 })();

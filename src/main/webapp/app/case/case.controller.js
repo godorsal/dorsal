@@ -224,12 +224,10 @@
             * @param targetCase a case object
             */
             function setCurrentCase(targetCase) {
-                console.log("SETTING CURRENT CASE CLEAR INTERVAL");
                 // clearInterval(vm.messageScheduler);
                 $interval.cancel(vm.messageScheduler);
                 // Set the vm's currentCase to the provided targetCase
                 vm.currentCase = targetCase;
-                console.log(vm.currentCase.status);
                 if(vm.currentCase.status.name === 'CLOSED'){
                     vm.maxResults = DrslHipChatService.maxResults;
                     getMessages();
