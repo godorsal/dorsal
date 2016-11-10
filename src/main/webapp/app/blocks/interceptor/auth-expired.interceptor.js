@@ -26,7 +26,7 @@
                 }
             }
             if (response.status === 429) {
-                console.log("RAN OUT OF REQUESTS, SWITCH TOKEN?");
+                console.log("RAN OUT OF REQUESTS, SWITCH TOKEN?", response);
             }
             return $q.reject(response);
         }

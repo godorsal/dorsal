@@ -41,7 +41,6 @@
             vm.showNotifications = false;
             vm.shareCaseMessage = $translate.instant('case.details.shareCaseMessage');
             vm.cannotShareCaseMessage = $translate.instant('cannotShareCaseMessage');
-            vm.maxResults = '5';
 
             // vm methods
             vm.init = init;
@@ -129,6 +128,7 @@
                         getCurrentCase();
                     }
                 });
+
             }
 
             /**
@@ -225,8 +225,17 @@
                 // Set the vm's currentCase to the provided targetCase
                 vm.currentCase = targetCase;
                 vm.messages = [];
-
-                getMessages();
+                DrslHipChatService.getRoom(vm.currentCase.technology.name + vm.currentCase.id)
+                .then(function (res) {
+                    vm.currentCase.chatRoom = res.data;
+                    if(res.data.is_archived){
+                        vm.maxResults = '1000';
+                        getMessages();
+                    } else {
+                        vm.maxResults = '5';
+                        getMessages();
+                    }
+                })
                 // Reset/clear the estimate logs
                 vm.estimateLogs = [];
 
@@ -272,7 +281,10 @@
 
                         // Workflow: change the state/status of the current case to closed
                         vm.currentCase.status = StatusModel.getState('closed');
-                        DrslHipChatService.deleteRoom(vm.currentCase.technology.name + vm.currentCase.id)
+                        DrslHipChatService.getRoom(vm.currentCase.technology.name + vm.currentCase.id)
+                        .then(function (res) {
+                            DrslHipChatService.archiveRoom(res.data)
+                        })
                         // Add/update expert badges and their counts
                         updateExpertBadges(data.selectedBadges);
 
@@ -481,7 +493,6 @@
                 }
             }
             function getMessages(){
-                // vm.messages = [];
                 var messagesID = vm.currentCase.technology.name + vm.currentCase.id;
                 DrslHipChatService.getMessages(messagesID, vm.maxResults)
                 .then(function(res){

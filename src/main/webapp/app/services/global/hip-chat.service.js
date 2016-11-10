@@ -11,7 +11,7 @@
         var service = {};
 
         service.DrslMetadata = DrslMetadata;
-        // t9hEidVCkyNRDFHTDnW1qlaoTg2ClAsSFb5UMSFC#K5RV7BL8mON1XvgStVxXasG6dWtHISRJSdFR2j8z#OVoAYGsITVTIWnhOoqtCvZlXFMQOUsXQYiqKIC94#5ZbVyVDbZroGAN3Rbwkua2qYTZyILxvowbDQLSKn
+        // t9hEidVCkyNRDFHTDnW1qlaoTg2ClAsSFb5UMSFC#K5RV7BL8mON1XvgStVxXasG6dWtHISRJSdFR2j8z#OVoAYGsITVTIWnhOoqtCvZlXFMQOUsXQYiqKIC94#5ZbVyVDbZroGAN3Rbwkua2qYTZyILxvowbDQLSKn#o7fiSg2bnKuEiKRprF2acAXGIKsMu5MI8Xtk8EgX
         // dDloRWlkVkNreU5SREZIVERuVzFxbGFvVGcyQ2xBc1NGYjVVTVNGQyNLNVJWN0JMOG1PTjFYdmdTdFZ4WGFzRzZkV3RISVNSSlNkRlIyajh6I09Wb0FZR3NJVFZUSVduaE9vcXRDdlpsWEZNUU9Vc1hRWWlxS0lDOTQjNVpiVnlWRGJacm9HQU4zUmJ3a3VhMnFZVFp5SUx4dm93YkRRTFNLbg==
         service.getCurrentUser = function(){
             Principal.identity()
@@ -28,14 +28,14 @@
 
         // Using the ManageRoomsToken, returns a list of all rooms
         service.getRooms = function(){
-            // if(!$window.atob(service.DrslMetadata.thingy)){
+            // if(!service.DrslMetadata.thingy){
             //     return function() { return "HIP CHAT CREDENTIALS MISSING"};
             // }
             var req = {
                 method: 'GET',
                 url: '/v2/room',
                 headers: {
-                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[0]
+                    'Authorization': 'Bearer ' + service.DrslMetadata.thingy.split('#')[0]
                 }
             }
             return $http(req);
@@ -45,7 +45,7 @@
                 method: 'GET',
                 url: '/v2/room/' + roomID,
                 headers: {
-                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[0]
+                    'Authorization': 'Bearer ' + service.DrslMetadata.thingy.split('#')[0]
                 }
             }
             return $http(req);
@@ -56,10 +56,10 @@
                 method: 'GET',
                 url: '/v2/room/' + roomID + '/history?max-results=' + maxResults,
                 headers: {
-                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[1]
+                    'Authorization': 'Bearer ' + service.DrslMetadata.thingy.split('#')[1]
                 }
             }
-            return $http(req, 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[0])
+            return $http(req, 'Bearer ' + service.DrslMetadata.thingy.split('#')[0])
         }
         // Gets all the messages from a specific room to see if there's activity
         service.checkRoom = function(roomID){
@@ -100,7 +100,7 @@
                     guest_access: true
                 },
                 headers: {
-                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[2]
+                    'Authorization': 'Bearer ' + service.DrslMetadata.thingy.split('#')[2]
                 }
             })
         }
@@ -118,7 +118,7 @@
                     guest_access: true
                 },
                 headers: {
-                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[2]
+                    'Authorization': 'Bearer ' + service.DrslMetadata.thingy.split('#')[2]
                 }
             })
         }
@@ -128,7 +128,7 @@
                 method: 'GET',
                 url: url,
                 headers: {
-                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[0]
+                    'Authorization': 'Bearer ' + service.DrslMetadata.thingy.split('#')[0]
                 }
             })
         }
@@ -138,7 +138,25 @@
                 method: 'DELETE',
                 url: url,
                 headers: {
-                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[2]
+                    'Authorization': 'Bearer ' + service.DrslMetadata.thingy.split('#')[2]
+                }
+            })
+        }
+        service.archiveRoom = function(roomData){
+            var url = '/v2/room/' + roomData.id;
+            return $http({
+                method: 'PUT',
+                url: url,
+                data: {
+                    is_archived: true,
+                    name: roomData.name,
+                    privacy: roomData.privacy,
+                    is_guest_accessible: false,
+                    topic: roomData.topic,
+                    owner: roomData.owner
+                },
+                headers: {
+                    'Authorization': 'Bearer ' + service.DrslMetadata.thingy.split('#')[4]
                 }
             })
         }
@@ -152,7 +170,7 @@
                     from: messageObject.from
                 },
                 headers: {
-                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[3]
+                    'Authorization': 'Bearer ' + service.DrslMetadata.thingy.split('#')[3]
                 }
             })
         }
@@ -172,7 +190,7 @@
             service.currentUsername = '';
         }
         $rootScope.$on('logoutDeleteConciergeRoom', function () {
-            if(service.currentRoom){        
+            if(service.currentRoom){
                 service.deleteRoom(service.currentRoom.id);
                 service.waitingOnRoom = false;
             }

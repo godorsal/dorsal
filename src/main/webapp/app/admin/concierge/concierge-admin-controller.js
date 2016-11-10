@@ -15,6 +15,7 @@
 		vm.deleteRoom = deleteRoom;
 		vm.clearRooms = clearRooms;
 		vm.getRooms = getRooms;
+		vm.getChatRooms = getChatRooms;
 
 		getChatRooms();
 		getRooms()
@@ -25,12 +26,9 @@
 			})
 		}
 		function getChatRooms() {
-			vm.concirgeRooms = [];
 			DrslHipChatService.getRooms()
-			.then(function(res, err){
-				// if(err){
-				// 	console.log("ERROR", err);
-				// }
+			.then(function(res){
+				vm.concirgeRooms = [];
 				res.data.items.forEach(function(room){
 					if(room.name.split(':')[0] == "Concierge Chat Room"){
 						DrslHipChatService.getOneRoom(room.id)
@@ -45,6 +43,8 @@
 					}
 				})
 				checkRooms();
+			}, function errorHandler(err) {
+				console.log(err);
 			})
 		}
 		function deleteRoom(id) {

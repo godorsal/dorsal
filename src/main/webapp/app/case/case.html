@@ -115,7 +115,7 @@
                             </li>
                         </ul>
                     </div>
-                    <form ng-submit="vm.sendMessage()">
+                    <form ng-submit="vm.sendMessage()" ng-if="!vm.currentCase.chatRoom.is_archived">
                         <input type="text" class="form-control drsl-hipchat-message-input" ng-model="vm.messageToSend">
                         <select name="maxResults" id="maxResults" ng-model="vm.maxResults" class="form-control drsl-hipchat-max-results" ng-change="vm.getMessages()">
                             <option value="5">5</option>
