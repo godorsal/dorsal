@@ -498,7 +498,9 @@
                 .then(function(res){
                     vm.messages = res.data.items;
                     DrslHipChatService.magicMessageParser(vm.messages);
-                    scheduleMessages();
+                    if(!vm.currentCase.chatRoom.is_archived){
+                        scheduleMessages();
+                    }
                 }, function errorCallback(res) {
                     if(res.data.error){
                         var roomObject = {
