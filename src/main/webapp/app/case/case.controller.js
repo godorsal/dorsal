@@ -506,7 +506,7 @@
                     vm.messages = res.data.items;
                     DrslHipChatService.magicMessageParser(vm.messages);
                 }, function errorCallback(res) {
-                    if(res.data.error){
+                    if(res.data.error && vm.currentCase.status.name != 'CLOSED'){
                         var roomObject = {
                             name: messagesID,
                             topic: vm.currentCase.summary

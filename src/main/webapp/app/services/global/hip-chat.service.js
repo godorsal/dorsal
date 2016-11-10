@@ -33,10 +33,6 @@
 
         // Using the ManageRoomsToken, returns a list of all rooms
         service.getRooms = function(){
-            console.log("GET ROOMS REQUEST");
-            // if(!service.DrslMetadata.thingy){
-            //     return function() { return "HIP CHAT CREDENTIALS MISSING"};
-            // }
             var req = {
                 method: 'GET',
                 url: '/v2/room',
@@ -47,7 +43,6 @@
             return $http(req);
         }
         service.getOneRoom = function(roomID){
-            console.log("GET ONE ROOM REQUEST");
             var req = {
                 method: 'GET',
                 url: '/v2/room/' + roomID,
@@ -59,7 +54,6 @@
         }
         // With the GetMessagesToken, returns all messages in the provided room name or ID
         service.getMessages = function(roomID, maxResults, currentCase){
-            console.log("GET MESSAGES REQUEST");
             if(currentCase.status.name === 'CLOSED'){
                 var cached = true;
                 maxResults = '1000';
@@ -78,7 +72,6 @@
         }
         // Gets all the messages from a specific room to see if there's activity
         service.checkRoom = function(roomID){
-            console.log("CHECK ROOM ACTIVITY REQUEST");
             return service.getMessages(roomID, 100)
         }
         // Checks room every 5 minutes for activity, if number of messages in room is eqal to the maximum amount of messages queired, stop wating, if number of messages in room is more that what it was last time keep the room otherwise, delete it delete room
@@ -105,7 +98,6 @@
         }
         // Make Hipchat chatroom using roomObjects name and topic
         service.makeRoom = function(roomObject){
-            console.log("MAKE ROOM REQUEST");
             var url = '/v2/room';
             return $http({
                 method: 'POST',
@@ -123,7 +115,6 @@
         }
         // Make a room with a name based on a timestamp
         service.makeConciergeRoom = function(){
-            console.log("MAKE CONCIERGE ROOM REQUEST");
             var timestamp = new Date();
             var roomName = "Concierge Chat Room: " + (timestamp.getMonth() + 1) + '/' + timestamp.getDate() + '/' + timestamp.getFullYear() + ' ' + timestamp.getHours() + ':' + timestamp.getMinutes() + ':' +  timestamp.getSeconds();
             return $http({
@@ -141,7 +132,6 @@
             })
         }
         service.getRoom = function(roomID){
-            console.log("GET ROOM REQUEST");
             var url = 'https://godorsal-dev.hipchat.com/v2/room/' + roomID
             return $http({
                 method: 'GET',
@@ -152,7 +142,6 @@
             })
         }
         service.deleteRoom = function(roomID){
-            console.log("DELETE ROOM REQUEST");
             var url = '/v2/room/' + roomID;
             return $http({
                 method: 'DELETE',
@@ -163,7 +152,6 @@
             })
         }
         service.archiveRoom = function(roomData){
-            console.log("ARCHIVE ROOM REQUEST");
             var url = '/v2/room/' + roomData.id;
             return $http({
                 method: 'PUT',
@@ -182,7 +170,6 @@
             })
         }
         service.sendMessage = function(messageObject){
-            console.log("SEND MESSAGE REQUEST");
             var url = '/v2/room/' + messageObject.roomID +'/notification'
             return $http({
                 method: 'POST',
@@ -197,7 +184,6 @@
             })
         }
         service.clearRooms = function () {
-            console.log("CLEAR ROOMS REQUEST");
             service.getRooms()
             .then(function(res){
                 res.data.items.forEach(function(room){
@@ -209,7 +195,6 @@
             })
         }
         service.clearChatRoom = function () {
-            console.log("CLEAR Concierge ROOM REQUEST");
             service.deleteRoom(service.currentRoom.id)
             service.currentUsername = '';
         }
