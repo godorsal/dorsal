@@ -174,12 +174,14 @@
                                         Your password cannot be longer than 50 characters.
                                     </p>
                                 </div>
+                                <password-strength-bar password-to-check="vm.registerAccount.password"></password-strength-bar>
                             </div>
                             <!-- Confirm Password -->
                             <div class="form-group" ng-hide="vm.isLogin">
                                 <!--<label class="control-label" for="confirmPassword" translate="global.form.confirmpassword">New password confirmation</label>-->
                                 <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="{{'global.form.confirmpassword.placeholder' | translate}}"
                                 ng-model="vm.confirmPassword" ng-minlength=8 ng-maxlength=50 required ng-change="vm.checkConfirmPassword(form)">
+
                                 <div ng-show="form.confirmPassword.$dirty && form.confirmPassword.$invalid">
                                     <p class="help-block"
                                        ng-show="form.confirmPassword.$error.required" translate="global.messages.validate.confirmpassword.required">

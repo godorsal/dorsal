@@ -138,6 +138,10 @@
             "info": "Make sure you enter the total time on the case and a detailed resolution description. This will help the users rate our service and help us build a better service as well.",
             "timeOnCase.placeholder": "Total time on case",
             "detailedResolution.placeholder": "Detailed case resolution"
+        },
+        "hipchat": {
+            "chatWithExpert": "Chat With Expert: {{expert}}",
+            "chatWithUser": "Chat With User: {{user}}"
         }
     }
 }

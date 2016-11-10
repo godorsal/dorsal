@@ -7,12 +7,12 @@ import com.dorsal.repository.UserRepository;
 import com.dorsal.security.SecurityUtils;
 import com.dorsal.service.MailService;
 import com.dorsal.service.UserService;
-import com.dorsal.web.rest.dto.KeyAndPasswordDTO;
-import com.dorsal.web.rest.dto.ManagedUserDTO;
-import com.dorsal.web.rest.dto.UserDTO;
+import com.dorsal.service.dto.UserDTO;
+import com.dorsal.web.rest.vm.KeyAndPasswordVM;
+import com.dorsal.web.rest.vm.ManagedUserVM;
 import com.dorsal.web.rest.util.HeaderUtil;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -46,34 +46,33 @@ public class AccountResource {
     @Inject
     private MailService mailService;
 
-
     /**
      * POST  /register : register the user.
      *
-     * @param managedUserDTO the managed user DTO
+     * @param managedUserVM the managed user View Model
      * @param request the HTTP request
-     * @return the ResponseEntity with status 201 (Created) if the user is registred or 400 (Bad Request) if the login or e-mail is already in use
+     * @return the ResponseEntity with status 201 (Created) if the user is registered or 400 (Bad Request) if the login or e-mail is already in use
      */
     @RequestMapping(value = "/register",
                     method = RequestMethod.POST,
                     produces={MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
     @Timed
-    public ResponseEntity<?> registerAccount(@Valid @RequestBody ManagedUserDTO managedUserDTO, HttpServletRequest request) {
+    public ResponseEntity<?> registerAccount(@Valid @RequestBody ManagedUserVM managedUserVM, HttpServletRequest request) {
 
         HttpHeaders textPlainHeaders = new HttpHeaders();
         textPlainHeaders.setContentType(MediaType.TEXT_PLAIN);
 
-        return userRepository.findOneByLogin(managedUserDTO.getLogin().toLowerCase())
+        return userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase())
             .map(user -> new ResponseEntity<>("login already in use", textPlainHeaders, HttpStatus.BAD_REQUEST))
-            .orElseGet(() -> userRepository.findOneByEmail(managedUserDTO.getEmail())
+            .orElseGet(() -> userRepository.findOneByEmail(managedUserVM.getEmail())
                 .map(user -> new ResponseEntity<>("e-mail address already in use", textPlainHeaders, HttpStatus.BAD_REQUEST))
                 .orElseGet(() -> {
-                    String registartionMessage = managedUserDTO.getLastName();
+                    String registartionMessage = managedUserVM.getLastName();
                     log.info("Registration message:" + registartionMessage);
 
-                    User user = userService.createUserInformation(managedUserDTO.getLogin(), managedUserDTO.getPassword(),
-                    managedUserDTO.getFirstName(), "" /*managedUserDTO.getLastName()*/, managedUserDTO.getEmail().toLowerCase(),
-                    managedUserDTO.getLangKey());
+                    User user = userService.createUser(managedUserVM.getLogin(), managedUserVM.getPassword(),
+                    managedUserVM.getFirstName(), ""/*managedUserVM.getLastName()*/, managedUserVM.getEmail().toLowerCase(),
+                    managedUserVM.getLangKey());
 
                     // Read the server name from the configuration application-{dev|prod}.yml file
                     String serverURL = mailService.getDeploymentServerURL();
@@ -92,8 +91,8 @@ public class AccountResource {
 
                     String baseUrl = protocol +             // "http" or "https"
                     "://" +                                // "://"
-                    serverURL +                             // generated above with the properties setting
-                    request.getContextPath();              // "/myContextPath" or "" if deployed in root context
+                        serverURL +                             // generated above with the properties setting
+                        request.getContextPath();              // "/myContextPath" or "" if deployed in root context
 
                     mailService.sendActivationEmail(user, baseUrl, registartionMessage);
 
@@ -113,7 +112,6 @@ public class AccountResource {
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<String> activateAccount(@RequestParam(value = "key") String key) {
-        log.debug("Activation Key: " + key);
         return userService.activateRegistration(key)
             .map(user -> new ResponseEntity<String>(HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
@@ -167,7 +165,7 @@ public class AccountResource {
         return userRepository
             .findOneByLogin(SecurityUtils.getCurrentUserLogin())
             .map(u -> {
-                userService.updateUserInformation(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail(),
+                userService.updateUser(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail(),
                     userDTO.getLangKey());
                 return new ResponseEntity<String>(HttpStatus.OK);
             })
@@ -197,7 +195,7 @@ public class AccountResource {
      *
      * @param mail the mail of the user
      * @param request the HTTP request
-     * @return the ResponseEntity with status 200 (OK) if the e-mail was sent, or status 400 (Bad Request) if the e-mail address is not registred
+     * @return the ResponseEntity with status 200 (OK) if the e-mail was sent, or status 400 (Bad Request) if the e-mail address is not registered
      */
     @RequestMapping(value = "/account/reset_password/init",
         method = RequestMethod.POST,
@@ -228,7 +226,7 @@ public class AccountResource {
         method = RequestMethod.POST,
         produces = MediaType.TEXT_PLAIN_VALUE)
     @Timed
-    public ResponseEntity<String> finishPasswordReset(@RequestBody KeyAndPasswordDTO keyAndPassword) {
+    public ResponseEntity<String> finishPasswordReset(@RequestBody KeyAndPasswordVM keyAndPassword) {
         if (!checkPasswordLength(keyAndPassword.getNewPassword())) {
             return new ResponseEntity<>("Incorrect password", HttpStatus.BAD_REQUEST);
         }
@@ -239,7 +237,7 @@ public class AccountResource {
 
     private boolean checkPasswordLength(String password) {
         return (!StringUtils.isEmpty(password) &&
-            password.length() >= ManagedUserDTO.PASSWORD_MIN_LENGTH &&
-            password.length() <= ManagedUserDTO.PASSWORD_MAX_LENGTH);
+            password.length() >= ManagedUserVM.PASSWORD_MIN_LENGTH &&
+            password.length() <= ManagedUserVM.PASSWORD_MAX_LENGTH);
     }
 }

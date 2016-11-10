@@ -7,82 +7,140 @@
                 <div>
                     <span translate="concierge.pageTitles.createCase"></span>
                 </div>
+                <div ng-if="vm.conciergechaturl">
+                    {{vm.chatroom.name}}
+                </div>
                 <!-- Concierge Chat With Expert -->
-                <div>
+                <div class="drsl-chat-with-expert">
                     <div ng-if="vm.DrslMetadata.conciergeavailable === 'true'" class="drsl-avaiable-concierge-name">
-                        <span class="drsl-chat-with-expert" translate="concierge.pageTitles.chatWithExpert" translate-values="{concierge: '{{vm.DrslMetadata.conciergeavailableforchat}}'}">
-                        </span>
-                        <a href="{{vm.DrslMetadata.conciergechaturl}}" target="_blank">
-                            <button class="btn drsl-concierge-chat-button" >
-                                <i class="fa fa-comments fa-2x" aria-hidden="true"></i>
+                        <span ng-if="!vm.conciergechaturl">
+                            <span class="drsl-chat-with-expert" translate="concierge.pageTitles.openChatWithExpert" translate-values="{concierge: '{{vm.DrslMetadata.conciergeavailableforchat}}'}">
+                            </span>
+                            <button class="btn drsl-concierge-chat-button" ng-click="vm.makeConciergeRoom()">
+                                <i class="fa fa-comments fa-2x"></i>
                             </button>
-                        </a>
+                        </span>
+                        <span ng-if="vm.conciergechaturl">
+                            <span class="drsl-chat-with-expert" translate="concierge.pageTitles.joinChatWithExpert" translate-values="{concierge: '{{vm.chatroom.name}}'}">
+                            </span>
+                            <a ng-if="vm.conciergechaturl" href="{{vm.conciergechaturl}}" target="_blank">
+                                <button class="btn drsl-concierge-chat-button">
+                                    <i class="fa fa-comments fa-2x"></i>
+                                </button>
+                            </a>
+                        </span>
                     </div>
-                </div>
-            </div>
+                    <!-- <div ng-if="vm.DrslMetadata.conciergeavailable === 'true'" class="drsl-avaiable-concierge-name">
+                    <span class="drsl-chat-with-expert" translate="concierge.pageTitles.chatWithExpert" translate-values="{concierge: '{{vm.DrslMetadata.conciergeavailableforchat}}'}">
+                </span>
+                <button  ng-if="!vm.conciergechaturl" class="btn drsl-concierge-chat-button" ng-click="vm.makeConciergeRoom()">
+                CREATE ROOM <i class="fa fa-weixin" aria-hidden="true"></i>
+            </button>
+            <a ng-if="vm.conciergechaturl" href="{{vm.conciergechaturl}}" target="_blank">
+            <button class="btn drsl-concierge-chat-button">
+            JOIN ROOM <i class="fa fa-weixin" aria-hidden="true"></i>
+        </button>
+    </a>
+</div> -->
+</div>
+</div>
 
-            <!-- Action Bar -->
-            <div class="drsl-action-bar">
-                <i class="glyphicon glyphicon-menu-right"></i>
-                <a ng-show="vm.isAuthenticated() && vm.DrslUserFlowService.user.hasCases" ui-sref="case" translate="concierge.activityBar.manageCases">manage cases</a>
-                <a ng-hide="vm.isAuthenticated() && vm.DrslUserFlowService.user.hasCases" class="drsl-link-disabled drsl-link-inactive" translate="concierge.activityBar.manageCases">manage cases</a>
-                <a ng-class="{'drsl-link-disabled': !vm.passedStep(3), 'drsl-link-inactive': vm.currentCase.status == 'completed'}" ng-click="vm.openRating()" translate="concierge.activityBar.cloneCase">clone a case</a>
-            </div>
+<!-- Action Bar -->
+<div class="drsl-action-bar">
+    <i class="glyphicon glyphicon-menu-right"></i>
+    <a ng-show="vm.isAuthenticated() && vm.DrslUserFlowService.user.hasCases" ui-sref="case" translate="concierge.activityBar.manageCases">manage cases</a>
+    <a ng-hide="vm.isAuthenticated() && vm.DrslUserFlowService.user.hasCases" class="drsl-link-disabled drsl-link-inactive" translate="concierge.activityBar.manageCases">manage cases</a>
+    <a ng-class="{'drsl-link-disabled': !vm.passedStep(3), 'drsl-link-inactive': vm.currentCase.status == 'completed'}" ng-click="vm.openRating()" translate="concierge.activityBar.cloneCase">clone a case</a>
+</div>
+<div class="drsl-case-wrapper drsl-hipchat-section" ng-if="vm.conciergechaturl">
+    <hr class="drsl-chat-hr">
+    <div class="drsl-hipchat-messages-wrapper">
+        <div class="drsl-hipchat-message-scroller">
+            <ul class="drsl-hipchat-message-list">
+                <li ng-if="vm.messages.length < 1"><span class="drsl-hipchat-message" translate="concierge.pageTitles.chatWelcome" translate-values="{username: '{{vm.DrslHipChatService.currentUsername}}'}">Welcome to the Dorsal Hipchat Chatroom, {{vm.DrslHipChatService.currentUsername}}.</span></li>
+                <li ng-if="vm.messages.length > 0" ng-repeat="message in vm.messages" ng-class="{'drsl-hipchat-you': message.displayName == vm.DrslHipChatService.currentUsername}" class="drsl-hipchat-message">
+                    <span class="drsl-hipchat-name">
+                        {{message.displayName}}:
+                    </span>
+                    <span class="drsl-hipchat-date">
+                        {{message.date | date:'MMM dd h:mm'}}
+                    </span>
+                    <br>
+                    <span ng-bind-html="message.formattedMessage"></span>
+                    <a href="{{message.file.url}}" ng-if="message.file">
+                        <img ng-src="{{message.file.thumb_url}}" alt="" target="_blank" class="drsl-hipchat-message-image-thumbnail">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <form ng-submit="vm.sendMessage()">
+            <input type="text" class="form-control drsl-hipchat-message-input" ng-model="vm.messageToSend">
+            <select name="maxResults" id="maxResults" ng-model="vm.maxResults" class="form-control drsl-hipchat-max-results " ng-change="vm.getMessages()">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+            </select>
+            <span class="drsl-max-results-select">(Max Results)</span>
+            <button class="btn btn-success drsl-hipchat-send-button" button="submit">Send</button>
+        </form>
+    </div>
+    <hr class="drsl-chat-hr">
+</div>
 
-            <!-- Main Content -->
-            <div class="drsl-concierge-wrapper">
-                <!-- Left Column: One, Two, Three, Go -->
+<!-- Main Content -->
+<div class="drsl-concierge-wrapper">
+    <!-- Left Column: One, Two, Three, Go -->
+    <div>
+        <div class="drsl-one-two-three-lg">
+            <img class="drsl-one-two-three-img" src="content/images/dorsal_case_intake_123.png">
+            <div>
+                <!-- Step text -->
+                <div class="drsl-step-one" translate="concierge.caseDetails.one_two_three.one"></div>
+                <div class="drsl-step-two" translate="concierge.caseDetails.one_two_three.two"></div>
+                <div class="drsl-step-three" translate="concierge.caseDetails.one_two_three.three"></div>
+                <!-- Date Picker -->
                 <div>
-                    <div class="drsl-one-two-three-lg">
-                        <img class="drsl-one-two-three-img" src="content/images/dorsal_case_intake_123.png">
-                        <div>
-                            <!-- Step text -->
-                            <div class="drsl-step-one" translate="concierge.caseDetails.one_two_three.one"></div>
-                            <div class="drsl-step-two" translate="concierge.caseDetails.one_two_three.two"></div>
-                            <div class="drsl-step-three" translate="concierge.caseDetails.one_two_three.three"></div>
-                            <!-- Date Picker -->
-                            <div>
-                                <div class="drsl-date-widget-wrapper">
-                                    <span uib-datepicker-popup="{{format}}" ng-model="vm.defaultDate" is-open="vm.datePopup.opened" popup-placement="top-left" datepicker-options="vm.dateOptions" show-button-bar="false" ></span>
-                                </div>
-                                <div class="form-control drsl-date-display-wrapper" ng-click="vm.openDatePopup()">
-                                    <span class="drsl-date-display-label" translate="concierge.caseDetails.date.main">Requested delivery:</span><span>{{vm.defaultDate | date:'MMM dd, yyyy'}}</span>
-                                    <span class="pull-right">
-                                        <i class="fa fa-calendar"></i>
-                                    </span>
-                                </div>
-                            </div>
-                            <!-- Submit/go button and text -->
-                            <div>
-                                <div class="drsl-step-go-dots"><img class="drsl-one-two-three-img" src="content/images/dorsal_case_intake_123_dots.png"></div>
-                                <div class="drsl-step-go-text" translate="concierge.caseDetails.one_two_three.go"></div>
-                                <button type="submit" class="drsl-custom-button" ng-click="vm.submitForm()"><img src="content/images/global/go.png" /></button>
-                            </div>
-                        </div>
+                    <div class="drsl-date-widget-wrapper">
+                        <span uib-datepicker-popup="{{format}}" ng-model="vm.defaultDate" is-open="vm.datePopup.opened" popup-placement="top-left" datepicker-options="vm.dateOptions" show-button-bar="false" ></span>
+                    </div>
+                    <div class="form-control drsl-date-display-wrapper" ng-click="vm.openDatePopup()">
+                        <span class="drsl-date-display-label" translate="concierge.caseDetails.date.main">Requested delivery:</span><span>{{vm.defaultDate | date:'MMM dd, yyyy'}}</span>
+                        <span class="pull-right">
+                            <i class="fa fa-calendar"></i>
+                        </span>
                     </div>
                 </div>
-                <!-- Right Column: Issue, Tech, Summary and attachments -->
-                <div class="drsl-case-inputs">
-                    <!-- Radio Buttons (Issue and Tech) -->
-                    <linear-radio target-data="radio.selectedValue"
-                    radio-data="radio"
-                    start-limit="15"
-                    ng-repeat="radio in vm.caseDetails.radios"
-                    technology-properties="vm.technologyProperties"
-                    technology="vm.technology" issue="vm.issue"></linear-radio>
-
-                    <!-- Summary -->
-                    <div class="drsl-field-seciton">
-                        <div class="input-group">
-                            <input type="text" class="form-control drsl-summary-field" ng-model="vm.caseDetails.summary" placeholder="{{'concierge.caseDetails.summary.placeholder' | translate}}">
-                            <!-- Attachments -->
-                            <div class="input-group-btn">
-                                <drsl-attach-files></drsl-attach-files>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Submit/go button and text -->
+                <div>
+                    <div class="drsl-step-go-dots"><img class="drsl-one-two-three-img" src="content/images/dorsal_case_intake_123_dots.png"></div>
+                    <div class="drsl-step-go-text" translate="concierge.caseDetails.one_two_three.go"></div>
+                    <button type="submit" class="drsl-custom-button" ng-click="vm.submitForm()"><img src="content/images/global/go.png" /></button>
                 </div>
             </div>
         </div>
     </div>
+    <!-- Right Column: Issue, Tech, Summary and attachments -->
+    <div class="drsl-case-inputs">
+        <!-- Radio Buttons (Issue and Tech) -->
+        <linear-radio target-data="radio.selectedValue"
+        radio-data="radio"
+        start-limit="15"
+        ng-repeat="radio in vm.caseDetails.radios"
+        technology-properties="vm.technologyProperties"
+        technology="vm.technology" issue="vm.issue"></linear-radio>
+
+        <!-- Summary -->
+        <div class="drsl-field-seciton">
+            <div class="input-group">
+                <input type="text" class="form-control drsl-summary-field" ng-model="vm.caseDetails.summary" placeholder="{{'concierge.caseDetails.summary.placeholder' | translate}}">
+                <!-- Attachments -->
+                <div class="input-group-btn">
+                    <drsl-attach-files></drsl-attach-files>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
 </div>

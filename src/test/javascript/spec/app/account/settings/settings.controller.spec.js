@@ -4,8 +4,6 @@ describe('Controller Tests', function() {
 
     beforeEach(mockApiAccountCall);
     beforeEach(mockI18nCalls);
-    beforeEach(mockSettingsCall);
-
 
     describe('SettingsController', function() {
 
@@ -41,11 +39,10 @@ describe('Controller Tests', function() {
             };
             MockPrincipal.identity.and.returnValue($q.resolve(accountValues));
             MockAuth.updateAccount.and.returnValue($q.resolve());
-
             $scope.$apply(createController);
+
             //WHEN
             $scope.vm.save();
-            $scope.vm.updateUser();
 
             //THEN
             expect(MockPrincipal.identity).toHaveBeenCalled();
@@ -61,12 +58,10 @@ describe('Controller Tests', function() {
             };
             MockPrincipal.identity.and.returnValue($q.resolve(accountValues));
             MockAuth.updateAccount.and.returnValue($q.resolve());
-
             createController();
 
             //WHEN
             $scope.$apply($scope.vm.save);
-            $scope.$apply($scope.vm.updateUser());
 
             //THEN
             expect($scope.vm.error).toBeNull();
@@ -81,7 +76,6 @@ describe('Controller Tests', function() {
 
             //WHEN
             $scope.$apply($scope.vm.save);
-            $scope.$apply($scope.vm.updateUser());
 
             //THEN
             expect($scope.vm.error).toEqual('ERROR');

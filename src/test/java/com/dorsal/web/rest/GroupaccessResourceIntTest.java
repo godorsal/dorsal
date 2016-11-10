@@ -97,7 +97,7 @@ public class GroupaccessResourceIntTest {
         // Get all the groupaccesses
         /*restGroupaccessMockMvc.perform(get("/api/groupaccesses?sort=id,desc"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(groupaccess.getId().intValue())));*/
     }
 
@@ -110,7 +110,7 @@ public class GroupaccessResourceIntTest {
         // Get the groupaccess
         restGroupaccessMockMvc.perform(get("/api/groupaccesses/{id}", groupaccess.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
             .andExpect(jsonPath("$.id").value(groupaccess.getId().intValue()));
     }
 

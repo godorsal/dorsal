@@ -183,7 +183,7 @@ public class SupportcaseResourceIntTest {
         // Get all the supportcases
 /*        restSupportcaseMockMvc.perform(get("/api/supportcases?sort=id,desc"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(supportcase.getId().intValue())))
                 .andExpect(jsonPath("$.[*].summary").value(hasItem(DEFAULT_SUMMARY.toString())))
                 .andExpect(jsonPath("$.[*].expectedResult").value(hasItem(DEFAULT_EXPECTED_RESULT.toString())))
@@ -213,7 +213,7 @@ public class SupportcaseResourceIntTest {
         // Get the supportcase
         restSupportcaseMockMvc.perform(get("/api/supportcases/{id}", supportcase.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
             .andExpect(jsonPath("$.id").value(supportcase.getId().intValue()))
             .andExpect(jsonPath("$.summary").value(DEFAULT_SUMMARY.toString()))
             .andExpect(jsonPath("$.expectedResult").value(DEFAULT_EXPECTED_RESULT.toString()))

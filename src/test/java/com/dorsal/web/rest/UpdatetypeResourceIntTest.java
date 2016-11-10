@@ -103,7 +103,7 @@ public class UpdatetypeResourceIntTest {
         // Get all the updatetypes
         restUpdatetypeMockMvc.perform(get("/api/updatetypes?sort=id,desc"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(updatetype.getId().intValue())))
                 .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
     }
@@ -117,7 +117,7 @@ public class UpdatetypeResourceIntTest {
         // Get the updatetype
         restUpdatetypeMockMvc.perform(get("/api/updatetypes/{id}", updatetype.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
             .andExpect(jsonPath("$.id").value(updatetype.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()));
     }

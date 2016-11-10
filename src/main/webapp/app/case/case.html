@@ -8,7 +8,8 @@
                         <span translate="case.header">Case Summary</span>
                         <span class="drsl-understated" ng-show="vm.currentCase">ID: {{vm.currentCase.technology.name}} {{vm.currentCase.id}}</span>
                     </div>
-                    <div></div>
+                    <div>
+                    </div>
                     <!-- Case Updates -->
                     <div class="drsl-case-updates">
                         <div class="btn-group" uib-dropdown is-open="status.isopen" ng-if="vm.currentCase.numberOfUpdates">
@@ -26,30 +27,30 @@
                             <ul class="dropdown-menu dropdown-menu-right drsl-updates-dropdown" uib-dropdown-menu role="menu" aria-labelledby="single-button" >
                                 <table class="drsl-table-scroll">
                                     <tbody class="drsl-updates-tbody">
-                                    <!-- Case Updates (Header) -->
-                                    <tr class="drsl-updates-row drsl-label-row" ng-if="vm.updates.length" colspan="2">
-                                        <td class="drsl-updates-tdata">{{'case.details.caseUpdates' | translate}}
-                                            <span class="drsl-update-number">{{vm.updates.length}}</span>
-                                        </td>
-                                        <td class="drsl-updates-tdata"></td>
-                                    </tr>
-                                    <!-- Case Updates (Items) -->
-                                    <tr ng-repeat="update in vm.updates track by $index" class="drsl-updates-row" >
-                                        <td class="drsl-updates-message">{{update.updateMsg}}</td>
-                                        <td class="drsl-updates-date">
-                                            {{update.dateUpdated  | date:'MMM dd, yyyy &nbsp h:mm a'}}
-                                        </td>
-                                    </tr>
-                                    <!-- Estimate Logs (Header) -->
-                                    <tr class="drsl-updates-row drsl-label-row" ng-if="vm.estimateLogs.length">
-                                        <td class="drsl-updates-tdata" colspan="2">{{'case.details.estimateLogs' | translate}}
-                                            <span class="drsl-update-number">{{vm.estimateLogs.length}}</span>
-                                        </td>
-                                    </tr>
-                                    <!-- Estimate Logs (Items) -->
-                                    <tr ng-repeat="log in vm.estimateLogs track by $index" class="drsl-updates-row">
-                                        <td class="drsl-logs-tdata" colspan="2">{{log}}</td>
-                                    </tr>
+                                        <!-- Case Updates (Header) -->
+                                        <tr class="drsl-updates-row drsl-label-row" ng-if="vm.updates.length" colspan="2">
+                                            <td class="drsl-updates-tdata">{{'case.details.caseUpdates' | translate}}
+                                                <span class="drsl-update-number">{{vm.updates.length}}</span>
+                                            </td>
+                                            <td class="drsl-updates-tdata"></td>
+                                        </tr>
+                                        <!-- Case Updates (Items) -->
+                                        <tr ng-repeat="update in vm.updates track by $index" class="drsl-updates-row" >
+                                            <td class="drsl-updates-message">{{update.updateMsg}}</td>
+                                            <td class="drsl-updates-date">
+                                                {{update.dateUpdated  | date:'MMM dd, yyyy &nbsp h:mm a'}}
+                                            </td>
+                                        </tr>
+                                        <!-- Estimate Logs (Header) -->
+                                        <tr class="drsl-updates-row drsl-label-row" ng-if="vm.estimateLogs.length">
+                                            <td class="drsl-updates-tdata" colspan="2">{{'case.details.estimateLogs' | translate}}
+                                                <span class="drsl-update-number">{{vm.estimateLogs.length}}</span>
+                                            </td>
+                                        </tr>
+                                        <!-- Estimate Logs (Items) -->
+                                        <tr ng-repeat="log in vm.estimateLogs track by $index" class="drsl-updates-row">
+                                            <td class="drsl-logs-tdata" colspan="2">{{log}}</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </ul>
@@ -91,6 +92,43 @@
                 </div>
             </div>
 
+            <div class="drsl-sub-header drsl-sub-sub-header" translate="case.hipchat.chatWithExpert" translate-values="{expert: '{{vm.currentCase.expertaccount.user.firstName + ' ' + vm.currentCase.expertaccount.user.lastName}}'}" ng-if="!vm.isCaseExpert()">Chat with expert: {{expert}} </div>
+            <div class="drsl-sub-header drsl-sub-sub-header" translate="case.hipchat.chatWithUser" translate-values="{user: '{{vm.getUserName()}}'}" ng-if="vm.isCaseExpert()">Chat with user: {{user}} </div>
+            <div class="drsl-case-wrapper drsl-hipchat-section">
+                <div class="drsl-hipchat-messages-wrapper">
+                    <div class="drsl-hipchat-message-scroller">
+                        <ul class="drsl-hipchat-message-list">
+                            <li ng-repeat="message in vm.messages" ng-class="{'drsl-hipchat-you': vm.isCurrentSender(message.displayName)}" class="drsl-hipchat-message">
+                                <span class="drsl-hipchat-name">
+                                    {{message.displayName}}:
+                                </span>
+                                <span class="drsl-hipchat-date">
+                                    {{message.date | date:'MMM dd h:mm'}}
+                                </span>
+                                <br>
+                                <span ng-bind-html="message.formattedMessage"></span>
+                                <a href="{{message.file.url}}" ng-if="message.file">
+                                    {{message.file.name}}
+                                    <img ng-src="{{message.file.thumb_url}}" alt="" target="_blank" class="drsl-hipchat-message-image-thumbnail">
+                                </a>
+                                <br>
+                            </li>
+                        </ul>
+                    </div>
+                    <form ng-submit="vm.sendMessage()" ng-if="vm.currentCase.status.name != 'CLOSED'">
+                        <input type="text" class="form-control drsl-hipchat-message-input" ng-model="vm.messageToSend">
+                        <!-- <select name="maxResults" id="maxResults" ng-model="vm.maxResults" class="form-control drsl-hipchat-max-results"> -->
+                        <select name="maxResults" id="maxResults" ng-model="vm.maxResults" class="form-control drsl-hipchat-max-results" ng-change="vm.getMessages()">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                        </select>
+                        <span class="drsl-max-results-select">(Max Results)</span>
+                        <button class="btn btn-success drsl-hipchat-send-button" button="submit">Send</button>
+                    </form>
+                </div>
+            </div>
+            <br>
             <!-- Case History -->
             <!-- Header -->
             <div class="drsl-sub-header drsl-sub-sub-header" translate="case.history.header">Your Case History</div>

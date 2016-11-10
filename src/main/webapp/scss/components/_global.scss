@@ -161,7 +161,12 @@ body {
         padding-right: 30px;
     }
 }
-
+.drsl-max-results-select {
+    position: absolute;
+    right: 105px;
+    padding: 10px;
+    color: $custom-input-unit-color;
+}
 .drsl-button-wrapper {
     display: flex;
     flex-flow: column;
@@ -211,23 +216,25 @@ body {
 }
 
 table.drsl-table-scroll {
-    width: 500px;
+    width: 100%;
 }
 
 table.drsl-table-scroll tbody {
-    width: 668px;
+    // width: 668px;
     display: block;
     min-height: 95px;
-    // height: 95px;
     max-height: 476px;
     overflow-y: auto;
     overflow-x: hidden;
+    > td{
+        width: 25%;
+    }
 }
 
 table.drsl-table-scroll thead > tr {
+    width: 100%;
     color: $drsl-label-color;
-    display: table-header-group;
-    // position: relative;
+    display: table;
 }
 .drsl-avaiable-concierge-name {
     text-align: right;
@@ -271,7 +278,33 @@ table.drsl-table-scroll thead > tr {
 .drsl-case-inputs {
     width: 570px;
 }
+.drsl-chat-hr {
+    border-top: 0px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.drsl-hipchat-concierge-table {
 
+}
+.drsl-hipchat-name {
+    width: 27%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    > button {
+        float: left;
+        padding: none;
+    }
+}
+.drsl-concierge-chatrooms-header {
+    display: inline-block;
+    margin: auto;
+    padding: 20px;
+}
+.drsl-open-concierge-chatrooms {
+    padding: 20px;
+    width: 100%;
+    overflow-y: hidden;
+}
 .drsl-value {
     color: $drsl-value-color;
     font-weight: $default-medium-weight;
@@ -394,4 +427,50 @@ table.drsl-table-scroll thead > tr {
     overflow-y: auto;
     border: 2px solid $scrolling-container-border-color;
     padding: $horizontal-space-between-elements;
+}
+.drsl-hipchat-message {
+    // border: 1px solid #CCC;
+}
+.drsl-hipchat-message-scroller {
+    overflow-y: scroll;
+    max-height: 400px;
+}
+.drsl-hipchat-messages-wrapper {
+    padding: $default-padding;
+    max-height: 470px;
+    background-color: $content-background-color;
+
+    .panel-default {
+        cursor: pointer;
+        margin-bottom: 5px;
+
+        > .panel-heading {
+            &.active {
+                background-color: $brand-color;
+                color: $inverted-heading-text-color;
+            }
+
+            .drsl-case-list {
+                display: flex;
+                flex-flow: row;
+
+                > div {
+                    &:first-child {
+                        flex: 3;
+                        margin-right: $default-half-padding;
+                    }
+
+                    &:last-child {
+                        flex: 1;
+                        text-align: right
+                    }
+                }
+
+                .drsl-case-list-id {
+                    display: inline-block;
+                    width: 200px;
+                }
+            }
+        }
+    }
 }

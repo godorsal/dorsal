@@ -5,7 +5,7 @@
         .module('dorsalApp')
         .factory('authExpiredInterceptor', authExpiredInterceptor);
 
-    
+
     authExpiredInterceptor.$inject = ['$rootScope', '$q', '$injector', '$localStorage', '$sessionStorage'];
 
     function authExpiredInterceptor($rootScope, $q, $injector, $localStorage, $sessionStorage) {
@@ -24,6 +24,9 @@
                     var Auth = $injector.get('Auth');
                     Auth.authorize(true);
                 }
+            }
+            if (response.status === 429) {
+                console.log("RAN OUT OF REQUESTS, SWITCH TOKEN?", response);
             }
             return $q.reject(response);
         }

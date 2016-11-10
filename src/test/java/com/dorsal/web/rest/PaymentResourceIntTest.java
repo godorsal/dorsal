@@ -101,7 +101,7 @@ public class PaymentResourceIntTest {
         // Get all the payments
         /*restPaymentMockMvc.perform(get("/api/payments?sort=id,desc"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(payment.getId().intValue())))
                 .andExpect(jsonPath("$.[*].ccdata").value(hasItem(DEFAULT_CCDATA.toString())));*/
     }
@@ -115,7 +115,7 @@ public class PaymentResourceIntTest {
         // Get the payment
         /*restPaymentMockMvc.perform(get("/api/payments/{id}", payment.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
             .andExpect(jsonPath("$.id").value(payment.getId().intValue()))
             .andExpect(jsonPath("$.ccdata").value(DEFAULT_CCDATA.toString()));*/
     }

@@ -145,6 +145,12 @@
         },
         "validation": {
             "required": "Dieses Feld wird benötigt.",
+            "noRepeatingCharacters": "Your password should not have any repeating characters.",
+            "notEqualToUsername": "Your password should not be the same as your login name.",
+            "noLowercase": "Your password should contain atleast 1 lowercase letter.",
+            "noUppercase": "Your password should contain atleast 1 uppercase letter.",
+            "noNumber": "Your password should contain atleast 1 number.",
+            "noSpecial": "Your password should contain atleast 1 special symbol.",
             "minlength": "Dieses Feld muss mind. {{min}} Zeichen lang sein.",
             "maxlength": "Dieses Feld darf max. {{max}} Zeichen lang sein.",
             "min": "Dieses Feld muss größer als {{min}} sein.",
@@ -158,6 +164,7 @@
     },
     "error": {
         "server.not.reachable": "Server ist nicht erreichbar",
+        "url.not.found": "Not found",
         "NotNull": "Feld {{fieldName}} kann nicht leer sein!",
         "Size": "Feld {{fieldName}} erfüllt nicht die minimalen/maximalen Voraussetzungen!",
         "userexists": "Benutzername bereits vergeben!",

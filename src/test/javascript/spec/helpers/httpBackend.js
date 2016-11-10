@@ -15,8 +15,3 @@ function mockScriptsCalls() {
         $httpBackend.whenGET(/app\/.*/).respond({});
     });
 }
-function mockSettingsCall() {
-    inject(function($httpBackend) {
-        $httpBackend.whenGET(/api\/.*/).respond({});
-    });
-}

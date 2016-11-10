@@ -6,7 +6,10 @@
             "incident": "Incident Support",
             "proActive": "pro-active support",
             "onDemand": "on-demand pros",
-            "chatWithExpert": "Chat With an Expert: {{concierge}}"
+            "chatWithExpert": "Chat With an Expert: {{concierge}}",
+            "openChatWithExpert": "Start Chat With an Expert: {{concierge}}",
+            "joinChatWithExpert": "Open In Hipchat",
+            "chatWelcome": "Welcome to the Dorsal Hipchat Chatroom, {{username}}"
         },
         "chat": {
             "header": "Concierge Chat",

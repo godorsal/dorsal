@@ -425,8 +425,7 @@
                 <div class="panel-heading">
                     <form class="drsl-user-add-form" name="addUserForm" ng-submit="vm.addAuthorizedUser()">
                         <label class="control-label" for="uEmail" translate="settings.authorization.input">Add User</label>
-                        <input type="text" class="form-control" id="uEmail" ng-model="vm.invitedUser" name="uEmail" placeholder="{{'settings.authorization.input.placeholder' | translate}}"
-                               ng-minlength=1 >
+                        <input type="text" class="form-control" id="uEmail" ng-model="vm.invitedUser" name="uEmail" placeholder="{{'settings.authorization.input.placeholder' | translate}}" ng-minlength=1 ng-change="vm.checkInvalid()">
                         <button type="submit" class="btn btn-success inviteButton" translate="settings.form.button">Update</button>
                     </form>
                 </div>

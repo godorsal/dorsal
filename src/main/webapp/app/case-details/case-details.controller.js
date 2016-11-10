@@ -32,7 +32,11 @@
             dataStreamContentType: null,
             id: null
         };
-
+        $document.keyup(function(e) {
+             if (e.keyCode == 27) {
+                 cancel (e);
+            }
+        });
         // vm methods
         vm.init = init;
         vm.cancel = cancel;

@@ -275,3 +275,47 @@ Concierge
         }
     }
 }
+.drsl-chat-with-expert {
+    text-align: right;
+}
+.drsl-hipchat-section {
+    > ul {
+        list-style-type: none;
+        > li {
+            font-weight: normal;
+            height: 50px;
+        }
+    }
+    input {
+        display: inline-block;
+        width: 75%;
+    }
+    select {
+        display: inline-block;
+        width: 19%;
+    }
+    button {
+        display: inline-block;
+    }
+}
+.drsl-hipchat-name {
+    color: #4a6785;
+    font-weight: bold;
+}
+.drsl-hipchat-date {
+    font-size: 12px;
+    color: #999999;
+}
+.drsl-hipchat-you {
+    background: #e0eaf3;
+}
+.drsl-hipchat-message-list {
+    list-style-type: none;
+    padding-left: 0px;
+    min-height: 10px;
+}
+.drsl-hipchat-message {
+    min-height: 50px;
+    height: 100%;
+    margin: 1px;
+}

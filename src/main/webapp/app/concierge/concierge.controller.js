@@ -2,12 +2,12 @@
     'use strict';
 
     angular
-        .module('dorsalApp')
-        .controller('ConciergeController', ConciergeController);
+    .module('dorsalApp')
+    .controller('ConciergeController', ConciergeController);
 
-    ConciergeController.$inject = ['$rootScope', '$scope', '$state', 'LoginService', 'Principal', 'ConciergeService', '$translate', '$http', 'Supportcase', 'Casetechnologyproperty', 'toastr', 'AttachmentModalService', 'DateUtils', 'CaseService', 'DrslNewCaseService', 'DrslMetadata', 'ExpertAccount', 'DrslUserFlowService'];
+    ConciergeController.$inject = ['$rootScope', '$scope', '$state', 'LoginService', 'Principal', 'ConciergeService', '$translate', '$http', 'Supportcase', 'Casetechnologyproperty', 'toastr', 'AttachmentModalService', 'DateUtils', 'CaseService', 'DrslNewCaseService', 'DrslMetadata', 'ExpertAccount', 'DrslUserFlowService', 'DrslHipChatService', '$window', '$sce'];
 
-    function ConciergeController($rootScope, $scope, $state, LoginService, Principal, ConciergeService, $translate, $http, Supportcase, Casetechnologyproperty, toastr, AttachmentModalService, DateUtils, CaseService, DrslNewCaseService, DrslMetadata, ExpertAccount, DrslUserFlowService) {
+    function ConciergeController($rootScope, $scope, $state, LoginService, Principal, ConciergeService, $translate, $http, Supportcase, Casetechnologyproperty, toastr, AttachmentModalService, DateUtils, CaseService, DrslNewCaseService, DrslMetadata, ExpertAccount, DrslUserFlowService, DrslHipChatService, $window, $sce) {
 
         DrslUserFlowService.handleUserFlow();
 
@@ -16,7 +16,8 @@
         vm.technologyProperties = {};
         vm.technology = {};
         vm.issue = {};
-        vm.isSaving = false;
+        vm.messages = [];
+        vm.checkingMessages = false;
         vm.isAuthenticated = Principal.isAuthenticated;
         vm.product = null;
         vm.errorMissingTech = $translate.instant('concierge.errors.missing.tech');
@@ -24,6 +25,17 @@
         vm.errorMissingDescription = $translate.instant('concierge.errors.missing.description');
         vm.errorMissingAll = $translate.instant('concierge.errors.missing.all');
         vm.DrslMetadata = DrslMetadata;
+        vm.DrslHipChatService = DrslHipChatService;
+        vm.sendMessage = sendMessage;
+        vm.checkMessages = checkMessages;
+        vm.getMessages = getMessages;
+        vm.maxResults = '5';
+
+        // DrslHipChatService.clearRooms();
+        DrslHipChatService.getCurrentUser();
+        if(DrslHipChatService.currentRoom){
+            vm.chatroom = DrslHipChatService.currentRoom;
+        }
         vm.caseDetails = {
             summary: '',
             description: '',
@@ -42,17 +54,25 @@
             showWeeks: false
         };
         vm.DrslUserFlowService = DrslUserFlowService;
-
         // vm methods
         vm.init = init;
         vm.submitForm = submitForm;
         vm.createCase = createCase;
         vm.openDatePopup = openDatePopup;
+        vm.makeConciergeRoom = makeConciergeRoom;
 
+        if(DrslHipChatService.waitingOnRoom){
+            vm.conciergeChat = DrslHipChatService.currentRoom;
+            vm.conciergechaturl = vm.conciergeChat.guest_access_url;
+        }
+        $rootScope.$on('roomDeletion', function(){
+            vm.conciergechaturl = null;
+            vm.checkingMessages = false;
+        })
         /**
-         * Creates (saves/updates) the case.
-         * Called after the form is submitted and the user is authenticated.
-         */
+        * Creates (saves/updates) the case.
+        * Called after the form is submitted and the user is authenticated.
+        */
         function createCase() {
             // Exit/Return if we already know we have errors
             if (hasErrors()) {
@@ -64,27 +84,75 @@
             brandNewCase.technology = vm.technology;
             brandNewCase.issue = vm.issue;
             brandNewCase.status = {code: "case_created_assigned_to-Expert", id: 1, name: "CREATED"};
-            brandNewCase.id = null;
-            brandNewCase.expectedresult = null;
-            brandNewCase.chaturl = null;
-            brandNewCase.user = {};
-            brandNewCase.etacompletion = "4 hours";
             brandNewCase.statusmsg = 'Case Created';
             brandNewCase.expectedCompletionDate = DateUtils.convertDateTimeFromServer(vm.defaultDate);
             brandNewCase.summary = vm.caseDetails.summary;
-            vm.isSaving = true;
+            Supportcase.save(brandNewCase, onSaveSuccess, onSaveError)
+        }
 
-            if (brandNewCase.id !== null) {
-                Supportcase.update(brandNewCase, onSaveSuccess, onSaveError);
-            } else {
-                Supportcase.save(brandNewCase, onSaveSuccess, onSaveError);
+        function makeConciergeRoom(){
+            if(!DrslHipChatService.currentUsername){
+                DrslHipChatService.currentUsername = $window.prompt("Please Enter your Name")
+            }
+            DrslHipChatService.makeConciergeRoom()
+            .then(function(res){
+                DrslHipChatService.getRoom(res.data.id)
+                .then(function(res){
+                    vm.conciergechaturl = res.data.guest_access_url;
+                    vm.guestRoomID = res.data.id;
+                    vm.chatroom = res.data
+                    var messages = 0;
+                    DrslHipChatService.waitForMessage(res.data, messages);
+                    checkMessages();
+                })
+            })
+        }
+        function sendMessage(){
+            var messageObject = {
+                roomID: vm.guestRoomID,
+                message: vm.messageToSend,
+                from: DrslHipChatService.currentUsername,
+                message_format: 'text'
+            }
+            DrslHipChatService.sendMessage(messageObject)
+            .then(function(res){
+                getMessages();
+                vm.messageToSend = '';
+            })
+        }
+        function checkMessages() {
+            if(DrslHipChatService.waitingOnRoom){
+                setTimeout(function () {
+                    DrslHipChatService.getMessages(vm.guestRoomID, vm.maxResults)
+                    .then(function(res){
+                        vm.messages = res.data.items;
+                        DrslHipChatService.magicMessageParser(vm.messages);
+                        checkMessages();
+                    })
+                }, 30 * 1000);
+            }
+        }
+        function getMessages() {
+            DrslHipChatService.getMessages(vm.guestRoomID, vm.maxResults)
+            .then(function(res){
+                vm.messages = res.data.items;
+                DrslHipChatService.magicMessageParser(vm.messages);
+                if(vm.checkingMessages){
+                    checkMessages();
+                }
+            })
+        }
+
+        window.onbeforeunload = function (event) {
+            if(DrslHipChatService.waitingOnRoom){
+                DrslHipChatService.deleteRoom(vm.guestRoomID)
             }
         }
 
         /**
-         * The success callback for saving/updating a case.
-         * @param result
-         */
+        * The success callback for saving/updating a case.
+        * @param result
+        */
         var onSaveSuccess = function (result) {
             DrslNewCaseService.setNewCase(result);
             // DrslNewCaseService.setNewCaseId(result.id);
@@ -107,28 +175,30 @@
             vm.technologyProperties = null;
             vm.technology = null;
             vm.issue = null;
-            vm.isSaving = false;
+            var roomObject = {
+                name: result.technology.name + result.id,
+                topic: result.summary
+            }
+            DrslHipChatService.makeRoom(roomObject);
 
             // emit a 'dorsalApp:supportcaseUpdate' so the app can be aware of the change
             $scope.$emit('dorsalApp:supportcaseUpdate', result);
-
             // redirect to the case page
             $state.go('case')
         };
 
         /**
-         * The error callback for saving/updating a case.
-         */
+        * The error callback for saving/updating a case.
+        */
         var onSaveError = function () {
-            vm.isSaving = false;
             checkError()
         };
 
         /**
-         * Checks to see if the user has provided all of the required bits of data.
-         * Called before data is sent to the back-end
-         * @returns {boolean}
-         */
+        * Checks to see if the user has provided all of the required bits of data.
+        * Called before data is sent to the back-end
+        * @returns {boolean}
+        */
         function hasErrors() {
             return (Object.keys(vm.technology).length === 0 ||
             Object.keys(vm.issue).length === 0 ||
@@ -136,9 +206,9 @@
         }
 
         /**
-         * Check to see why we may have gotten an error from the back-end.
-         * Display a toastr message if we were able to determine the missing data.
-         */
+        * Check to see why we may have gotten an error from the back-end.
+        * Display a toastr message if we were able to determine the missing data.
+        */
         function checkError() {
             var messages = [];
 
@@ -169,8 +239,8 @@
         }
 
         /**
-         * Initialize the controller's data.
-         */
+        * Initialize the controller's data.
+        */
         function init() {
             // Make a call to get the initial data.
             ConciergeService.getEntityData().then(function (data) {
@@ -184,8 +254,8 @@
         }
 
         /**
-         * Submits the form, or opens the login dialog if the user isn't logged in.
-         */
+        * Submits the form, or opens the login dialog if the user isn't logged in.
+        */
         function submitForm() {
             if (!vm.isAuthenticated()) {
                 LoginService.open();
@@ -202,8 +272,8 @@
         }
 
         /**
-         * Sets the vm.datePopup.opened boolean, which toggles the date popup display.
-         */
+        * Sets the vm.datePopup.opened boolean, which toggles the date popup display.
+        */
         function openDatePopup() {
             vm.datePopup.opened = true;
         }

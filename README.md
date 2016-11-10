@@ -65,6 +65,11 @@ Unit tests are run by [Karma][] and written with [Jasmine][]. They're located in
 
 
 
+Performance tests are run by [Gatling]() and written in Scala. They're located in `src/test/gatling` and can be run with:
+
+    ./mvnw gatling:execute
+
+    
 ## Continuous Integration
 
 To setup this project in Jenkins, use the following configuration:
@@ -81,8 +86,8 @@ To setup this project in Jenkins, use the following configuration:
 * Post-build Actions
     * Publish JUnit test result report / Test Report XMLs: `build/test-results/*.xml`
 
-
 [JHipster]: https://jhipster.github.io/
+[Gatling]: http://gatling.io/
 [Node.js]: https://nodejs.org/
 [Bower]: http://bower.io/
 [Gulp]: http://gulpjs.com/

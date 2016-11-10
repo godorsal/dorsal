@@ -1,4 +1,4 @@
-(function () {
+(function() {
     'use strict';
 
     angular
@@ -17,6 +17,7 @@
         // Set the view model and view model properties/methods
         var vm = this;
         vm.error = null;
+        vm.save = save;
         vm.settingsAccount = null;
         vm.creditCard = null;
         vm.success = null;
@@ -41,6 +42,7 @@
         vm.removeAuthorizedUsers = removeAuthorizedUsers;
         vm.removeInvitedUsers = removeInvitedUsers;
         vm.updateUser = updateUser;
+        vm.checkInvalid = checkInvalid;
 
         /**
         * Initialize the controller's data.
@@ -237,7 +239,9 @@
                 Payment.save(payment, onSaveSuccess, onSaveError);
             }
         }
-
+        function checkInvalid() {
+            vm.invitedUser = vm.invitedUser.replace(/;|"|!|\+|#|\$|%|\^|&|\*|\)|\(|:|\?|\/|<|>|{|}|\[|\]|-|_|=|\~|\`|\||\\|\/|\s/g, "");
+        }
         /**
         * On Payment success, update the vm with the latest payment data and display a toastr message.
         * @param payment

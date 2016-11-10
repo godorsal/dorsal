@@ -21,7 +21,7 @@
 
         $document.keyup(function(e) {
              if (e.keyCode == 27) {
-                 cancel (e)
+                 cancel (e);
             }
         });
         function cancel(e) {
