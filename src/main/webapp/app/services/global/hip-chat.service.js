@@ -11,7 +11,11 @@
         var service = {};
 
         service.DrslMetadata = DrslMetadata;
-        // t9hEidVCkyNRDFHTDnW1qlaoTg2ClAsSFb5UMSFC#K5RV7BL8mON1XvgStVxXasG6dWtHISRJSdFR2j8z#OVoAYGsITVTIWnhOoqtCvZlXFMQOUsXQYiqKIC94#5ZbVyVDbZroGAN3Rbwkua2qYTZyILxvowbDQLSKn#o7fiSg2bnKuEiKRprF2acAXGIKsMu5MI8Xtk8EgX
+        // t9hEidVCkyNRDFHTDnW1qlaoTg2ClAsSFb5UMSFC
+        // #K5RV7BL8mON1XvgStVxXasG6dWtHISRJSdFR2j8z
+        // #OVoAYGsITVTIWnhOoqtCvZlXFMQOUsXQYiqKIC94
+        // #5ZbVyVDbZroGAN3Rbwkua2qYTZyILxvowbDQLSKn
+        // #o7fiSg2bnKuEiKRprF2acAXGIKsMu5MI8Xtk8EgX
         // dDloRWlkVkNreU5SREZIVERuVzFxbGFvVGcyQ2xBc1NGYjVVTVNGQyNLNVJWN0JMOG1PTjFYdmdTdFZ4WGFzRzZkV3RISVNSSlNkRlIyajh6I09Wb0FZR3NJVFZUSVduaE9vcXRDdlpsWEZNUU9Vc1hRWWlxS0lDOTQjNVpiVnlWRGJacm9HQU4zUmJ3a3VhMnFZVFp5SUx4dm93YkRRTFNLbg==
         service.getCurrentUser = function(){
             Principal.identity()
@@ -35,7 +39,7 @@
                 method: 'GET',
                 url: '/v2/room',
                 headers: {
-                    'Authorization': 'Bearer ' + service.DrslMetadata.thingy.split('#')[0]
+                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[0]
                 }
             }
             return $http(req);
@@ -45,7 +49,7 @@
                 method: 'GET',
                 url: '/v2/room/' + roomID,
                 headers: {
-                    'Authorization': 'Bearer ' + service.DrslMetadata.thingy.split('#')[0]
+                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[0]
                 }
             }
             return $http(req);
@@ -56,7 +60,7 @@
                 method: 'GET',
                 url: '/v2/room/' + roomID + '/history?max-results=' + maxResults,
                 headers: {
-                    'Authorization': 'Bearer ' + service.DrslMetadata.thingy.split('#')[1]
+                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[1]
                 }
             }
             return $http(req, 'Bearer ' + service.DrslMetadata.thingy.split('#')[0])
@@ -100,7 +104,7 @@
                     guest_access: true
                 },
                 headers: {
-                    'Authorization': 'Bearer ' + service.DrslMetadata.thingy.split('#')[2]
+                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[2]
                 }
             })
         }
@@ -118,7 +122,7 @@
                     guest_access: true
                 },
                 headers: {
-                    'Authorization': 'Bearer ' + service.DrslMetadata.thingy.split('#')[2]
+                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[2]
                 }
             })
         }
@@ -128,7 +132,7 @@
                 method: 'GET',
                 url: url,
                 headers: {
-                    'Authorization': 'Bearer ' + service.DrslMetadata.thingy.split('#')[0]
+                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[0]
                 }
             })
         }
@@ -138,7 +142,7 @@
                 method: 'DELETE',
                 url: url,
                 headers: {
-                    'Authorization': 'Bearer ' + service.DrslMetadata.thingy.split('#')[2]
+                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[2]
                 }
             })
         }
@@ -156,7 +160,7 @@
                     owner: roomData.owner
                 },
                 headers: {
-                    'Authorization': 'Bearer ' + service.DrslMetadata.thingy.split('#')[4]
+                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy2)
                 }
             })
         }
@@ -170,7 +174,7 @@
                     from: messageObject.from
                 },
                 headers: {
-                    'Authorization': 'Bearer ' + service.DrslMetadata.thingy.split('#')[3]
+                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[3]
                 }
             })
         }
