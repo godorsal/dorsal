@@ -61,7 +61,7 @@
             vm.getMessages = getMessages;
             vm.getUserName = getUserName;
             vm.getCurrentUserName = getCurrentUserName;
-
+            vm.maxResults = DrslHipChatService.maxResults;
             /**
             * Initialize the controller's data.
             */
@@ -137,6 +137,7 @@
             function pollForCaseUpdates() {
                 casePoll = $interval(function () {
                     if (!vm.pausePollForCaseUpdates) {
+                        clearInterval(vm.messageScheduler);
                         vm.init();
                     }
                 }, vm.DrslMetadata.casePollingRateSeconds * 1000);
@@ -224,18 +225,20 @@
             function setCurrentCase(targetCase) {
                 // Set the vm's currentCase to the provided targetCase
                 vm.currentCase = targetCase;
-                vm.messages = [];
-                DrslHipChatService.getRoom(vm.currentCase.technology.name + vm.currentCase.id)
-                .then(function (res) {
-                    vm.currentCase.chatRoom = res.data;
-                    if(res.data.is_archived){
-                        vm.maxResults = '1000';
+                console.log(vm.currentCase.status);
+                if(vm.currentCase.status.name === 'CLOSED'){
+                    DrslHipChatService.maxResults = '1000';
+                    vm.maxResults = DrslHipChatService.maxResults;
+                    getMessages();
+                } else {
+                    DrslHipChatService.maxResults = '5';
+                    vm.maxResults = DrslHipChatService.maxResults;
+                    countdown(15);
+                    vm.messageScheduler = setInterval(function () {
                         getMessages();
-                    } else {
-                        vm.maxResults = '5';
-                        getMessages();
-                    }
-                })
+                        countdown(15);
+                    }, 15000, getMessages());
+                }
                 // Reset/clear the estimate logs
                 vm.estimateLogs = [];
 
@@ -284,6 +287,8 @@
                         DrslHipChatService.getRoom(vm.currentCase.technology.name + vm.currentCase.id)
                         .then(function (res) {
                             DrslHipChatService.archiveRoom(res.data)
+                        }, function (res) {
+                            console.log("ERROR HANDLER", res);
                         })
                         // Add/update expert badges and their counts
                         updateExpertBadges(data.selectedBadges);
@@ -494,13 +499,11 @@
             }
             function getMessages(){
                 var messagesID = vm.currentCase.technology.name + vm.currentCase.id;
-                DrslHipChatService.getMessages(messagesID, vm.maxResults)
+                DrslHipChatService.maxResults = vm.maxResults;
+                DrslHipChatService.getMessages(messagesID, Number(DrslHipChatService.maxResults), vm.currentCase)
                 .then(function(res){
                     vm.messages = res.data.items;
                     DrslHipChatService.magicMessageParser(vm.messages);
-                    if(!vm.currentCase.chatRoom.is_archived){
-                        scheduleMessages();
-                    }
                 }, function errorCallback(res) {
                     if(res.data.error){
                         var roomObject = {
@@ -515,9 +518,16 @@
                 })
             }
             function scheduleMessages() {
+                countdown(15);
+                // vm.messageScheduler();
+            }
+            function countdown(time) {
                 setTimeout(function () {
-                    getMessages();
-                }, 1000 * 15);
+                    time = time-1;
+                    if(time != 1){
+                        countdown(time);
+                    }
+                }, 1000);
             }
             function sendMessage(){
                 var messageObject = {
@@ -530,6 +540,8 @@
                 .then(function(res){
                     getMessages();
                     vm.messageToSend = '';
+                }, function (res) {
+                    console.log("MESSAGE ERROR", res);
                 })
             }
             //Checks to see if a message in the message list is sent by the current user
