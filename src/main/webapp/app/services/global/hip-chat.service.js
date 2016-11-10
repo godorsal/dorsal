@@ -62,6 +62,7 @@
             console.log("GET MESSAGES REQUEST");
             if(currentCase.status.name === 'CLOSED'){
                 var cached = true;
+                maxResults = '1000';
             } else {
                 var cached = false;
             }

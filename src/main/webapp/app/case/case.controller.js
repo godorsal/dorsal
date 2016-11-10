@@ -231,11 +231,9 @@
                 vm.currentCase = targetCase;
                 console.log(vm.currentCase.status);
                 if(vm.currentCase.status.name === 'CLOSED'){
-                    DrslHipChatService.maxResults = '1000';
                     vm.maxResults = DrslHipChatService.maxResults;
                     getMessages();
                 } else {
-                    DrslHipChatService.maxResults = '5';
                     vm.maxResults = DrslHipChatService.maxResults;
                     countdown(15);
                     vm.messageScheduler = $interval(function () {
