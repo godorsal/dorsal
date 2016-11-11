@@ -160,7 +160,7 @@
                     is_archived: true,
                     name: roomData.name,
                     privacy: roomData.privacy,
-                    is_guest_accessible: false,
+                    // is_guest_accessible: false,
                     topic: roomData.topic,
                     owner: roomData.owner
                 },
