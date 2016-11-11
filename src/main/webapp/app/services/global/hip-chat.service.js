@@ -54,7 +54,7 @@
         }
         // With the GetMessagesToken, returns all messages in the provided room name or ID
         service.getMessages = function(roomID, maxResults, currentCase){
-            if(currentCase.status.name === 'CLOSED'){
+            if(currentCase && currentCase.status.name === 'CLOSED'){
                 var cached = true;
                 maxResults = '1000';
             } else {
@@ -132,7 +132,7 @@
             })
         }
         service.getRoom = function(roomID){
-            var url = 'https://godorsal-dev.hipchat.com/v2/room/' + roomID
+            var url = '/v2/room/' + roomID
             return $http({
                 method: 'GET',
                 url: url,
