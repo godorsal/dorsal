@@ -137,8 +137,6 @@
             function pollForCaseUpdates() {
                 casePoll = $interval(function () {
                     if (!vm.pausePollForCaseUpdates) {
-                        $interval.cancel(vm.messageScheduler);
-                        // clearInterval(vm.messageScheduler);
                         vm.init();
                     }
                 }, vm.DrslMetadata.casePollingRateSeconds * 1000);
@@ -224,7 +222,6 @@
             * @param targetCase a case object
             */
             function setCurrentCase(targetCase) {
-                // clearInterval(vm.messageScheduler);
                 $interval.cancel(vm.messageScheduler);
                 // Set the vm's currentCase to the provided targetCase
                 vm.currentCase = targetCase;
@@ -233,11 +230,8 @@
                     getMessages();
                 } else {
                     vm.maxResults = DrslHipChatService.maxResults;
-                    countdown(15);
                     vm.messageScheduler = $interval(function () {
-                    // vm.messageScheduler = setInterval(function () {
                         getMessages();
-                        countdown(15);
                     }, 15000, getMessages());
                 }
                 // Reset/clear the estimate logs
@@ -517,10 +511,6 @@
                         })
                     }
                 })
-            }
-            function scheduleMessages() {
-                countdown(15);
-                // vm.messageScheduler();
             }
             function countdown(time) {
                 setTimeout(function () {
