@@ -137,7 +137,9 @@
             function pollForCaseUpdates() {
                 casePoll = $interval(function () {
                     if (!vm.pausePollForCaseUpdates) {
-                        $interval.cancel(vm.messageScheduler);
+                        if (angular.isDefined(vm.messageScheduler)) {
+                            $interval.cancel(vm.messageScheduler);
+                        }
                         vm.init();
                     }
                 }, vm.DrslMetadata.casePollingRateSeconds * 1000);
