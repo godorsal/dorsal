@@ -139,10 +139,10 @@
                     if (!vm.pausePollForCaseUpdates) {
                         vm.init();
                     }
-                    if (vm.schedulingMessages) {
-                        $interval.cancel(vm.messageScheduler);
-                        vm.schedulingMessages = false;
-                    }
+                    // if (vm.schedulingMessages) {
+                    //     $interval.cancel(vm.messageScheduler);
+                    //     vm.schedulingMessages = false;
+                    // }
                 }, vm.DrslMetadata.casePollingRateSeconds * 1000);
             }
 
@@ -233,10 +233,10 @@
                     getMessages();
                 } else {
                     vm.maxResults = DrslHipChatService.maxResults;
-                    vm.schedulingMessages = true;
-                    vm.messageScheduler = $interval(function () {
-                        getMessages();
-                    }, 15000, getMessages());
+                    // vm.schedulingMessages = true;
+                    // vm.messageScheduler = $interval(function () {
+                    //     getMessages();
+                    // }, 15000, getMessages());
                 }
                 // Reset/clear the estimate logs
                 vm.estimateLogs = [];
