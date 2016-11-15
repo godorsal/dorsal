@@ -137,9 +137,6 @@
             function pollForCaseUpdates() {
                 casePoll = $interval(function () {
                     if (!vm.pausePollForCaseUpdates) {
-                        if (angular.isDefined(vm.messageScheduler)) {
-                            $interval.cancel(vm.messageScheduler);
-                        }
                         vm.init();
                     }
                 }, vm.DrslMetadata.casePollingRateSeconds * 1000);
@@ -227,6 +224,9 @@
             function setCurrentCase(targetCase) {
                 // Set the vm's currentCase to the provided targetCase
                 vm.currentCase = targetCase;
+                if (angular.isDefined(vm.messageScheduler)) {
+                    $interval.cancel(vm.messageScheduler);
+                }
                 if(vm.currentCase.status.name === 'CLOSED'){
                     vm.maxResults = DrslHipChatService.maxResults;
                     getMessages();
