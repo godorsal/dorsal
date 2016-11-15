@@ -139,6 +139,10 @@
                     if (!vm.pausePollForCaseUpdates) {
                         vm.init();
                     }
+                    if (vm.schedulingMessages) {
+                        $interval.cancel(vm.messageScheduler);
+                        vm.schedulingMessages = false;
+                    }
                 }, vm.DrslMetadata.casePollingRateSeconds * 1000);
             }
 
@@ -224,14 +228,12 @@
             function setCurrentCase(targetCase) {
                 // Set the vm's currentCase to the provided targetCase
                 vm.currentCase = targetCase;
-                if (angular.isDefined(vm.messageScheduler)) {
-                    $interval.cancel(vm.messageScheduler);
-                }
                 if(vm.currentCase.status.name === 'CLOSED'){
                     vm.maxResults = DrslHipChatService.maxResults;
                     getMessages();
                 } else {
                     vm.maxResults = DrslHipChatService.maxResults;
+                    vm.schedulingMessages = true;
                     vm.messageScheduler = $interval(function () {
                         getMessages();
                     }, 15000, getMessages());
