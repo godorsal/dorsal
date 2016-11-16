@@ -10,6 +10,7 @@ import com.dorsal.service.emailNotificationUtility;
 import com.dorsal.repository.UserRepository;
 import com.dorsal.web.rest.util.HeaderUtil;
 import com.dorsal.service.dto.SupportcaseDTO;
+import com.dorsal.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
@@ -227,8 +228,11 @@ public class SupportcaseResource {
           * TBD: Need pagination for this use case
           */
 
+         log.error("Pagabale arguments Pagesize [" + pageable.getPageSize() +"] Offset [" + pageable.getOffset() +"]");
          Page<Supportcase> page = supportcaseRepository.findAllAdminIsCurrentUser( pageable );
+         log.error("Page total elements [" + page.getTotalElements() + "] Total pages [" + page.getTotalPages() +"]" );
          List<Supportcase> supportcasesList = page.getContent();
+         log.error("Number of support cases: " + supportcasesList.size() );
 
          //List<Supportcase> supportcasesList = page.getContent().stream()
          //    .map(SupportcaseDTO::new),
@@ -237,7 +241,11 @@ public class SupportcaseResource {
 
              //List<Supportcase> supportcasesList = supportcaseRepository.findAllAdminIsCurrentUser();
          if(supportcasesList.size() > 0){
-             return new ResponseEntity<>(supportcasesList, HttpStatus.OK);
+             log.error("Creating headers for request");
+             HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/supportcases");
+             log.error("Header information [" + headers.toString() + "]");
+             return new ResponseEntity<>(supportcasesList, headers, HttpStatus.OK);
+             //return new ResponseEntity<>(supportcasesList, HttpStatus.OK);
          }
 
          // Get support cases by currently logged in user
