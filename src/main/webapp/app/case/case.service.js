@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .factory('CaseService', CaseService);
 
-    CaseService.$inject = ['$q', 'Supportcase', 'StatusModel', 'Principal', 'Badge', 'Expertbadge', 'DrslMetadata'];
+    CaseService.$inject = ['$q', 'Supportcase', 'StatusModel', 'Principal', 'Badge', 'Expertbadge', 'DrslMetadata', 'paginationConstants'];
 
-    function CaseService($q, Supportcase, StatusModel, Principal, Badge, Expertbadge, DrslMetadata) {
+    function CaseService($q, Supportcase, StatusModel, Principal, Badge, Expertbadge, DrslMetadata, paginationConstants) {
         var service = {};
 
         service.getEntityData = function (config) {
@@ -15,7 +15,11 @@
                 dataToFetch = [],
                 dataToTypes = [];
 
-            dataToFetch.push(Supportcase.query().$promise);
+            dataToFetch.push(Supportcase.query({
+                page: config.page,
+                size: config.itemsPerPage
+            }).$promise);
+            // dataToFetch.push(Supportcase.query().$promise);
             dataToTypes.push('supportCase');
 
             if (config.getCurrentUser) {
@@ -33,8 +37,9 @@
                 dataToTypes.push('badges');
             }
 
+            console.log("DATA", dataToFetch);
             // Combine multiple requests into one
-            $q.all(dataToFetch).then(function (data) {
+            $q.all(dataToFetch).then(function (data, headers) {
                 deferred.resolve(processEntityData(data, dataToTypes));
             });
 

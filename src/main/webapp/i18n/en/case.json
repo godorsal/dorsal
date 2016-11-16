@@ -34,6 +34,8 @@
                 "closed.info": "This case is closed."
             },
             "chatRoom": "chat",
+            "chatWelcome": "Welcome to the chat room. Use this facility for instant communication between user and expert",
+            "nbOfRecentMesssages": "Nb. Of Recent Messages",
             "viewDetails": "details",
             "rateCase": "rate this case",
             "id": "ID:",
@@ -140,8 +142,8 @@
             "detailedResolution.placeholder": "Detailed case resolution"
         },
         "hipchat": {
-            "chatWithExpert": "Chat With Expert: {{expert}}",
-            "chatWithUser": "Chat With User: {{user}}"
+            "chatWithExpert": "Chat With Your Expert: {{expert}}",
+            "chatWithUser": "Chat With The User: {{user}}"
         }
     }
 }

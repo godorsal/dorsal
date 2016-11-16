@@ -8,12 +8,12 @@
     CaseController.$inject = ['$scope', '$window', '$interval', '$timeout', '$translate', 'CaseService', 'DrslRatingService',
     'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', 'StatusModel',
     'Rating', 'Expertbadge', 'DrslMetadata', 'Caseupdate', 'AttachmentModalService', 'DrslAttachFileService',
-    'DrslNewCaseService', '$filter', '_', 'DrslUserFlowService', 'DrslHipChatService', '$sce'];
+    'DrslNewCaseService', '$filter', '_', 'DrslUserFlowService', 'DrslHipChatService', '$sce', 'paginationConstants'];
 
     function CaseController($scope, $window, $interval, $timeout, $translate, CaseService, DrslRatingService, CaseDetailsService,
         EscalationFormService, ShareCaseService, CaseAgreementService, StatusModel, Rating,
         Expertbadge, DrslMetadata, Caseupdate, AttachmentModalService, DrslAttachFileService,
-        DrslNewCaseService, $filter, _, DrslUserFlowService, DrslHipChatService, $sce) {
+        DrslNewCaseService, $filter, _, DrslUserFlowService, DrslHipChatService, $sce, paginationConstants) {
 
             // Handle user flow redirects and messaging
             DrslUserFlowService.handleUserFlow();
@@ -62,6 +62,13 @@
             vm.getUserName = getUserName;
             vm.getCurrentUserName = getCurrentUserName;
             vm.maxResults = DrslHipChatService.maxResults;
+
+            vm.itemsPerPage = 10;
+            vm.queryCount = 13;
+            vm.totalItems = 13;
+            vm.page = 1;
+            vm.transition = transition;
+
             /**
             * Initialize the controller's data.
             */
@@ -74,7 +81,9 @@
                 CaseService.getEntityData({
                     'getCurrentUser': getCurrentUser,
                     'getStatusStates': getStatusStates,
-                    'getBadges': getBadges
+                    'getBadges': getBadges,
+                    'itemsPerPage': vm.itemsPerPage,
+                    'page': vm.page
                 }).then(function (data) {
                     var i, currentCaseIndex = 0;
 
@@ -139,10 +148,10 @@
                     if (!vm.pausePollForCaseUpdates) {
                         vm.init();
                     }
-                    // if (vm.schedulingMessages) {
-                    //     $interval.cancel(vm.messageScheduler);
-                    //     vm.schedulingMessages = false;
-                    // }
+                    if (vm.schedulingMessages) {
+                        $interval.cancel(vm.messageScheduler);
+                        vm.schedulingMessages = false
+                    }
                 }, vm.DrslMetadata.casePollingRateSeconds * 1000);
             }
 
@@ -233,10 +242,10 @@
                     getMessages();
                 } else {
                     vm.maxResults = DrslHipChatService.maxResults;
-                    // vm.schedulingMessages = true;
-                    // vm.messageScheduler = $interval(function () {
-                    //     getMessages();
-                    // }, 15000, getMessages());
+                    vm.schedulingMessages = true;
+                    vm.messageScheduler = $interval(function () {
+                        getMessages();
+                    }, 15000, getMessages());
                 }
                 // Reset/clear the estimate logs
                 vm.estimateLogs = [];
@@ -558,6 +567,13 @@
                 } else {
                     return vm.currentUser.firstName + ' ' + vm.currentUser.lastName;
                 }
+            }
+            function transition () {
+                $state.transitionTo($state.$current, {
+                    page: vm.page,
+                    sort: vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc'),
+                    search: vm.currentSearch
+                });
             }
             /**
             * Checks to see if the provided index is less than or equal to the current step/status index.

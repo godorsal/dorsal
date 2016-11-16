@@ -144,11 +144,11 @@ Cases
     }
     .drsl-hipchat-message-scroller {
         overflow-y: scroll;
-        max-height: 400px;
+        max-height: 520px;
     }
     .drsl-hipchat-messages-wrapper {
         padding: $default-padding;
-        max-height: 470px;
+        max-height: 600px;
         background-color: $content-background-color;
 
         .panel-default {
