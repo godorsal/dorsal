@@ -13,7 +13,7 @@
         vm.users = User.query();
         vm.supportcases = Supportcase.query();
         vm.updatetypes = Updatetype.query();
-
+        
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });

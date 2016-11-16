@@ -27,7 +27,7 @@
         vm.transition = transition;
 
         vm.loadAll();
-        
+
         JhiLanguageService.getAll().then(function (languages) {
             vm.languages = languages;
         });
@@ -52,6 +52,7 @@
         }
 
         function onSuccess(data, headers) {
+            console.log("DATA", data);
             //hide anonymous user from user management: it's a required user for Spring Security
             for (var i in data) {
                 if (data[i]['login'] === 'anonymoususer') {

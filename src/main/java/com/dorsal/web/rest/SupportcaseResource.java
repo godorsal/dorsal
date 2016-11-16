@@ -9,6 +9,7 @@ import com.dorsal.service.DorsalExpertMatchService;
 import com.dorsal.service.emailNotificationUtility;
 import com.dorsal.repository.UserRepository;
 import com.dorsal.web.rest.util.HeaderUtil;
+import com.dorsal.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
