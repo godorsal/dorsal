@@ -9,6 +9,7 @@ import com.dorsal.service.DorsalExpertMatchService;
 import com.dorsal.service.emailNotificationUtility;
 import com.dorsal.repository.UserRepository;
 import com.dorsal.web.rest.util.HeaderUtil;
+import com.dorsal.service.dto.SupportcaseDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
@@ -26,6 +27,7 @@ import java.time.ZonedDateTime;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -215,7 +217,7 @@ public class SupportcaseResource {
          method = RequestMethod.GET,
          produces = MediaType.APPLICATION_JSON_VALUE)
      @Timed
-     public ResponseEntity<List<Supportcase>> getAllSupportcases()
+     public ResponseEntity<List<Supportcase>> getAllSupportcases(Pageable pageable)
          throws URISyntaxException {
              log.debug("REST request to get all Supportcases");
              int numCases = 0;
@@ -224,7 +226,16 @@ public class SupportcaseResource {
           * Admin user will get all support cases
           * TBD: Need pagination for this use case
           */
-         List<Supportcase> supportcasesList = supportcaseRepository.findAllAdminIsCurrentUser();
+
+         Page<Supportcase> page = supportcaseRepository.findAllAdminIsCurrentUser( pageable );
+         List<Supportcase> supportcasesList = page.getContent();
+
+         //List<Supportcase> supportcasesList = page.getContent().stream()
+         //    .map(SupportcaseDTO::new),
+         //    .collect(Collectors.toList());
+
+
+             //List<Supportcase> supportcasesList = supportcaseRepository.findAllAdminIsCurrentUser();
          if(supportcasesList.size() > 0){
              return new ResponseEntity<>(supportcasesList, HttpStatus.OK);
          }
