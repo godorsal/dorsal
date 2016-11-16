@@ -106,7 +106,8 @@
                     name: roomObject.name,
                     privacy: 'private',
                     topic: roomObject.topic,
-                    guest_access: true
+                    guest_access: true,
+                    owner_user_id: roomObject.expert
                 },
                 headers: {
                     'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[2]

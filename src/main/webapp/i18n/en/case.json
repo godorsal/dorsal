@@ -140,8 +140,8 @@
             "detailedResolution.placeholder": "Detailed case resolution"
         },
         "hipchat": {
-            "chatWithExpert": "Chat With Expert: {{expert}}",
-            "chatWithUser": "Chat With User: {{user}}"
+            "chatWithExpert": "Chat With Your Expert: {{expert}}",
+            "chatWithUser": "Chat With The User: {{user}}"
         }
     }
 }

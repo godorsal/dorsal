@@ -29,4 +29,8 @@ public interface SupportcaseRepository extends JpaRepository<Supportcase,Long> {
     @Query("select supportcase from Supportcase supportcase, Groupaccess groupaccess where (supportcase.user.id = groupaccess.authorizeduser.id) AND (groupaccess.user.login = ?#{principal.username})  ORDER BY supportcase.dateCreated ASC")
     List<Supportcase> findGroupAccessUser();
 
+    @Query(value = "select supportcase from Supportcase supportcase where ?#{principal.username} = 'admin'  ORDER BY supportcase.dateCreated ASC",
+        countQuery = "select count(supportcase) from Supportcase supportcase")
+    Page<Supportcase> findAllPageAdminIsCurrentUser(Pageable pageable);
+
 }
