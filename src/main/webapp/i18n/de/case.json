@@ -34,6 +34,8 @@
                 "closed.info": "This case is closed."
             },
             "chatRoom": "chat",
+            "chatWelcome": "Welcome to the chat room. Use this facility for instant communication between user and expert",
+            "nbOfRecentMesssages": "Nb. Of Recent Messages",
             "viewDetails": "details",
             "rateCase": "rate this case",
             "id": "ID:",

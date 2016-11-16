@@ -162,8 +162,9 @@ body {
     }
 }
 .drsl-max-results-select {
+    pointer-events: none;
     position: absolute;
-    right: 105px;
+    right: 125px;
     padding: 10px;
     color: $custom-input-unit-color;
 }
@@ -433,11 +434,11 @@ table.drsl-table-scroll thead > tr {
 }
 .drsl-hipchat-message-scroller {
     overflow-y: scroll;
-    max-height: 400px;
+    max-height: 600px;
 }
 .drsl-hipchat-messages-wrapper {
     padding: $default-padding;
-    max-height: 470px;
+    max-height: 600px;
     background-color: $content-background-color;
 
     .panel-default {

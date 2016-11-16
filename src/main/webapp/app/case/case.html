@@ -97,7 +97,7 @@
             <div class="drsl-case-wrapper drsl-hipchat-section">
                 <div class="drsl-hipchat-messages-wrapper">
                     <div class="drsl-hipchat-message-scroller">
-                        <div ng-if="vm.messages.length < 1" translate="concierge.pageTitles.chatWelcome" translate-values="{username: '{{vm.DrslHipChatService.currentUsername}}'}"></div>
+                        <div ng-if="vm.messages.length < 1" translate="case.details.chatWelcome" translate-values="{username: '{{vm.DrslHipChatService.currentUsername}}'}"></div>
                         <ul class="drsl-hipchat-message-list">
                             <li ng-repeat="message in vm.messages" ng-class="{'drsl-hipchat-you': vm.isCurrentSender(message.displayName)}" class="drsl-hipchat-message">
                                 <span class="drsl-hipchat-name">
@@ -119,13 +119,14 @@
                     <form ng-submit="vm.sendMessage()" ng-if="vm.currentCase.status.name != 'CLOSED'">
                         <input type="text" class="form-control drsl-hipchat-message-input" ng-model="vm.messageToSend">
                         <!-- <select name="maxResults" id="maxResults" ng-model="vm.maxResults" class="form-control drsl-hipchat-max-results"> -->
-                        <select name="maxResults" id="maxResults" ng-model="vm.maxResults" class="form-control drsl-hipchat-max-results" ng-change="vm.getMessages()">
+                        <!-- <label for=""></label> -->
+                        <select name="maxResults" id="maxResults" ng-model="vm.maxResults" class="form-control drsl-hipchat-max-results" ng-change="vm.getMessages()" dir="rtl">
                             <option value="5">5</option>
                             <option value="10">10</option>
                             <option value="50">50</option>
                             <option value="1000">All</option>
                         </select>
-                        <span class="drsl-max-results-select">(Max Results)</span>
+                        <span class="drsl-max-results-select" translate="case.details.nbOfRecentMesssages">Nb. Of Recent Messages: </span>
                         <button class="btn btn-success drsl-hipchat-send-button" button="submit">Send</button>
                     </form>
                 </div>
