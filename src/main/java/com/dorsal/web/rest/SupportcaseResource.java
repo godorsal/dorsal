@@ -86,15 +86,15 @@ public class SupportcaseResource {
         supportcase.setUser(userRepository.findLoggedInUser());
 
         // Update the date fields
-        supportcase.setDateCreated( ZonedDateTime.now() );
-        supportcase.setDateLastUpdate( ZonedDateTime.now() );
+        supportcase.setDateCreated(ZonedDateTime.now());
+        supportcase.setDateLastUpdate(ZonedDateTime.now());
 
         //
         // Set the Expert for this account
         // This is the placeholder for the matching algorithm
         //
         ExpertAccount expert = dorsalExpertMatchService.findExpertForSupportcase(supportcase);
-        if (   expert != null ) {
+        if (expert != null) {
             // Assign Expert to support case
             supportcase.setExpertaccount(expert);
             log.info("Expert [" + expert.getId() + "] assigned to support case: [" + supportcase.getSummary() + "]");
@@ -140,7 +140,7 @@ public class SupportcaseResource {
             return createSupportcase(supportcase);
         }
         // Adjust time
-        supportcase.setDateLastUpdate( ZonedDateTime.now() );
+        supportcase.setDateLastUpdate(ZonedDateTime.now());
 
         /*
             Notifications of (re)-approval of estimate depends on state change and approval flag.
@@ -149,7 +149,7 @@ public class SupportcaseResource {
         Supportcase currentCase = supportcaseRepository.findOne(supportcase.getId());
 
         /* If estimate hours changed trigger re-approval request */
-        if (   currentCase.getStatus().getName().equalsIgnoreCase("WORKING")
+        if (currentCase.getStatus().getName().equalsIgnoreCase("WORKING")
             && supportcase.getStatus().getName().equalsIgnoreCase("WORKING")
             && currentCase.getEstimateHours() != supportcase.getEstimateHours()) {
             supportcase.setIsApproved(false);
@@ -157,16 +157,16 @@ public class SupportcaseResource {
         }
 
         try {
-                isNotified = notificationService.supportCaseReEstimateApproved(currentCase, supportcase);
+            isNotified = notificationService.supportCaseReEstimateApproved(currentCase, supportcase);
                 /* Check if estimate approval took place -- trigger increment of updates for the case */
-                if (isNotified) {
-                    int updates = supportcase.getNumberOfUpdates();
-                    supportcase.setNumberOfUpdates(++updates);
-                    log.info("Incremented Number of updates for case: " + updates);
-                }
+            if (isNotified) {
+                int updates = supportcase.getNumberOfUpdates();
+                supportcase.setNumberOfUpdates(++updates);
+                log.info("Incremented Number of updates for case: " + updates);
+            }
 
         } catch (Exception e) {
-                log.error("Case Estimate notification -- Failed to call notification service. Error " +e);
+            log.error("Case Estimate notification -- Failed to call notification service. Error " + e);
         }
 
         /*
@@ -180,8 +180,8 @@ public class SupportcaseResource {
                 && (supportcase.isIsResolved())) {
                 supportcase.setIsRated(true);
             }
-        }catch (Exception e) {
-            log.error("Failed to set support case to resolved. Error " +e);
+        } catch (Exception e) {
+            log.error("Failed to set support case to resolved. Error " + e);
         }
 
         // Persist update
@@ -190,7 +190,7 @@ public class SupportcaseResource {
         /*
             Check for other type of Notifications
          */
-        if ( !isNotified ) {
+        if (!isNotified) {
             try {
                 if (!notificationService.stateChangeNotifications(supportcase)) {
                     log.info("No notification send out for support case update");
@@ -214,65 +214,158 @@ public class SupportcaseResource {
      *
      * @return the ResponseEntity with status 200 (OK) and the list of supportcases in body
      */
-     @RequestMapping(value = "/supportcases",
-         method = RequestMethod.GET,
-         produces = MediaType.APPLICATION_JSON_VALUE)
-     @Timed
-     public ResponseEntity<List<Supportcase>> getAllSupportcases(Pageable pageable)
-         throws URISyntaxException {
-             log.debug("REST request to get all Supportcases");
-             int numCases = 0;
+    @RequestMapping(value = "/supportcases",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<Supportcase>> getAllSupportcases(Pageable pageable)
+        throws URISyntaxException {
+        log.debug("REST request to get all Supportcases");
+        int numCases = 0;
 
-         /**
-          * Admin user will get all support cases
-          * TBD: Need pagination for this use case
-          */
+        /**
+         * Admin user will get all support cases
+         * TBD: Need pagination for this use case
+         */
 
-         log.error("Pagabale arguments Pagesize [" + pageable.getPageSize() +"] Offset [" + pageable.getOffset() +"]");
-         Page<Supportcase> page = supportcaseRepository.findAllAdminIsCurrentUser( pageable );
-         log.error("Page total elements [" + page.getTotalElements() + "] Total pages [" + page.getTotalPages() +"]" );
-         List<Supportcase> supportcasesList = page.getContent();
-         log.error("Number of support cases: " + supportcasesList.size() );
+        log.error("Pagabale arguments Pagesize [" + pageable.getPageSize() + "] Offset [" + pageable.getOffset() + "]");
+        Page<Supportcase> page = supportcaseRepository.findAllAdminIsCurrentUser(pageable);
+        List<Supportcase> supportcasesList = page.getContent();
 
-         //List<Supportcase> supportcasesList = page.getContent().stream()
-         //    .map(SupportcaseDTO::new),
-         //    .collect(Collectors.toList());
+        //List<Supportcase> supportcasesList = supportcaseRepository.findAllAdminIsCurrentUser();
+        if (supportcasesList.size() > 0) {
+            log.error("Pages [" +page.getTotalPages() + "] Total Elements ADMIN [" + page.getTotalElements() +"]");
+            HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/supportcases");
+            return new ResponseEntity<>(supportcasesList, headers, HttpStatus.OK);
+            //return new ResponseEntity<>(supportcasesList, HttpStatus.OK);
+        }
+
+        // Get support cases for where currently logged in user is expert
+        page = supportcaseRepository.findByExpertIsCurrentUser(pageable);
+        supportcasesList = page.getContent();
+
+        if (supportcasesList.size() > 0) {
+            log.error("Pages [" +page.getTotalPages() + "] Total Elements EXPERT [" + page.getTotalElements() +"]");
+            HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/supportcases");
+            return new ResponseEntity<>(supportcasesList, headers, HttpStatus.OK);
+        }
 
 
-             //List<Supportcase> supportcasesList = supportcaseRepository.findAllAdminIsCurrentUser();
-         if(supportcasesList.size() > 0){
-             log.error("Creating headers for request");
-             HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/supportcases");
-             log.error("Header information [" + headers.toString() + "]");
-             return new ResponseEntity<>(supportcasesList, headers, HttpStatus.OK);
-             //return new ResponseEntity<>(supportcasesList, HttpStatus.OK);
-         }
+        // Get support cases for where currently logged in user is owner
+        page = supportcaseRepository.findByOwnerIsCurrentUser(pageable);
+        supportcasesList = page.getContent();
 
-         // Get support cases by currently logged in user
-         supportcasesList.addAll(supportcaseRepository.findByUserIsCurrentUser());
-         log.debug("Support cases owned by user " + numCases);
-         numCases = supportcasesList.size();
+        if (supportcasesList.size() > 0 ) {
+            log.error("Pages [" +page.getTotalPages() + "] Total Elements OWNER[" + page.getTotalElements() +"]");
+            HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/supportcases");
+            return new ResponseEntity<>(supportcasesList, headers, HttpStatus.OK);
+        }
 
-         // Get support cases for where currently logged in user is expert
-         supportcasesList.addAll(supportcaseRepository.findByExpertIsCurrentUser());
-         log.debug("Support cases user is expert " + (supportcasesList.size() - numCases) );
-         numCases = supportcasesList.size();
+        // Get support cases for where currently logged in user has shared cases
+        page = supportcaseRepository.findIsSharedwithCurrentUser(pageable);
+        supportcasesList = page.getContent();
 
-         // Get support cases tat are shared to user
-         supportcasesList.addAll(supportcaseRepository.findBySharedIsCurrentUser());
-         log.debug("Support cases shared to user " + (supportcasesList.size() - numCases) );
-         numCases = supportcasesList.size();
+        log.error("Pages [" +page.getTotalPages() + "] Total Elements SHARED[" + page.getTotalElements() +"]");
 
-         // Get all support cases for users that in the authorized group for the logged in user
-         List<Supportcase> groupAuthorizedCases = supportcaseRepository.findGroupAccessUser();
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/supportcases");
+        return new ResponseEntity<>(supportcasesList, headers, HttpStatus.OK);
 
-         // For now add the list to the result
-         supportcasesList.addAll(groupAuthorizedCases);
-         log.debug("Support by authorized users by this user " + groupAuthorizedCases.size()  );
+        // Get support cases by currently logged in user
+ //       supportcasesList.addAll(supportcaseRepository.findByUserIsCurrentUser());
+//        log.debug("Support cases owned by user " + numCases);
+//        numCases = supportcasesList.size();
 
-         // Return the combined list
-         return new ResponseEntity<>(supportcasesList, HttpStatus.OK);
-     }
+        // Get support cases for where currently logged in user is expert
+ //       supportcasesList.addAll(supportcaseRepository.findByExpertIsCurrentUser());
+ //       log.debug("Support cases user is expert " + (supportcasesList.size() - numCases));
+ //       numCases = supportcasesList.size();
+
+        // Get support cases tat are shared to user
+ //       supportcasesList.addAll(supportcaseRepository.findBySharedIsCurrentUser());
+ //       log.debug("Support cases shared to user " + (supportcasesList.size() - numCases));
+  //      numCases = supportcasesList.size();
+
+        // Get all support cases for users that in the authorized group for the logged in user
+   //     List<Supportcase> groupAuthorizedCases = supportcaseRepository.findGroupAccessUser();
+
+        // For now add the list to the result
+  //      supportcasesList.addAll(groupAuthorizedCases);
+  //      log.debug("Support by authorized users by this user " + groupAuthorizedCases.size());
+
+        // Return the combined list
+  //      return new ResponseEntity<>(supportcasesList, HttpStatus.OK);
+    }
+
+
+    /**
+     * GET  /supportcases/expert : get all the supportcases for the expert.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of supportcases in body
+     */
+    @RequestMapping(value = "/supportcases/expert",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<Supportcase>> getAllSupportcasesExpert(Pageable pageable)
+        throws URISyntaxException {
+        log.debug("REST request to get all Supportcases");
+
+        // Get support cases for where currently logged in user is expert
+        Page<Supportcase> page = supportcaseRepository.findByExpertIsCurrentUser(pageable);
+        List<Supportcase> supportcasesList = page.getContent();
+
+        log.debug("Support cases user is expert " + (supportcasesList.size()));
+
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/supportcases/expert");
+        return new ResponseEntity<>(supportcasesList, headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /supportcases/owner : get all the supportcases for the owner.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of supportcases in body
+     */
+    @RequestMapping(value = "/supportcases/owner",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<Supportcase>> getAllSupportcasesOwner(Pageable pageable)
+        throws URISyntaxException {
+        log.debug("REST request to get all Supportcases");
+
+        // Get support cases for where currently logged in user is owner
+        Page<Supportcase> page = supportcaseRepository.findByOwnerIsCurrentUser(pageable);
+        List<Supportcase> supportcasesList = page.getContent();
+
+        log.debug("Support cases user is owner " + (supportcasesList.size()));
+
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/supportcases/owner");
+        return new ResponseEntity<>(supportcasesList, headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /supportcases/shared : get all the supportcases that are shared with user.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of supportcases in body
+     */
+    @RequestMapping(value = "/supportcases/shared",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<Supportcase>> getAllSupportcasesShared(Pageable pageable)
+        throws URISyntaxException {
+        log.debug("REST request to get all Supportcases");
+
+        // Get support cases for where currently logged in user is owner
+        Page<Supportcase> page = supportcaseRepository.findIsSharedwithCurrentUser(pageable);
+        List<Supportcase> supportcasesList = page.getContent();
+
+        log.debug("Support cases shared with user " + (supportcasesList.size()));
+
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/supportcases/shared");
+        return new ResponseEntity<>(supportcasesList, headers, HttpStatus.OK);
+    }
+
 
     /**
      * GET  /supportcases/:id : get the "id" supportcase.
