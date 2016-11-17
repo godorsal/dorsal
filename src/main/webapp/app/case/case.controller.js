@@ -63,10 +63,8 @@
             vm.getCurrentUserName = getCurrentUserName;
             vm.maxResults = DrslHipChatService.maxResults;
 
-            vm.itemsPerPage = 10;
-            vm.queryCount = 13;
-            vm.totalItems = 13;
-            vm.page = 1;
+            vm.itemsPerPage = 5;
+            vm.page = 0;
             vm.transition = transition;
 
             /**
@@ -89,6 +87,8 @@
 
                     // Set the vm's  support cases
                     vm.supportcases = data.supportCase;
+                    vm.totalItems = vm.supportcases.headers('X-Total-Count');
+                    vm.queryCount = vm.totalItems;
 
                     // Set the vm's badges
                     if (data.badges) {

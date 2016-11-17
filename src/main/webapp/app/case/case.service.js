@@ -15,12 +15,15 @@
                 dataToFetch = [],
                 dataToTypes = [];
 
-            dataToFetch.push(Supportcase.query({
-                page: config.page,
-                size: config.itemsPerPage
-            }).$promise);
-            // dataToFetch.push(Supportcase.query().$promise);
-            dataToTypes.push('supportCase');
+            // dataToFetch.push(Supportcase.query({
+            //     page: config.page,
+            //     size: config.itemsPerPage
+            // }, function (data, headers) {
+            //     dataToFetch.push(headers)
+            //     dataToTypes.push('headers')
+            // }).$promise);
+
+            // dataToTypes.push('supportCase');
 
             if (config.getCurrentUser) {
                 dataToFetch.push(Principal.identity());
@@ -37,12 +40,19 @@
                 dataToTypes.push('badges');
             }
 
-            console.log("DATA", dataToFetch);
-            // Combine multiple requests into one
-            $q.all(dataToFetch).then(function (data, headers) {
-                deferred.resolve(processEntityData(data, dataToTypes));
-            });
+            dataToFetch.push(Supportcase.query({
+                page: config.page,
+                size: config.itemsPerPage
+            }, function (data, headers) {
+                data.headers = headers;
+                dataToFetch.push(data.$promise)
+                dataToTypes.push('supportCase')
+                $q.all(dataToFetch).then(function (data) {
+                    deferred.resolve(processEntityData(data, dataToTypes));
+                });
+            }).$promise);
 
+            // Combine multiple requests into one
             return deferred.promise;
         };
 
@@ -73,7 +83,9 @@
 
             for (i = 0; i<dataToTypes.length; i++){
                 dataType = dataToTypes[i];
-
+                // console.log("INDEX", i);
+                // console.log("TYPE", dataToTypes[i]);
+                // console.log("DATA", entityData[i]);
                 if (dataType === 'badges') {
                     dataOut[dataToTypes[i]] = entityData[i].sort(sortBadges);
                 } else if (dataType === 'supportCase') {
