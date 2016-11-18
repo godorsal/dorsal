@@ -8,12 +8,12 @@
     CaseController.$inject = ['$scope', '$window', '$interval', '$timeout', '$translate', 'CaseService', 'DrslRatingService',
     'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', 'StatusModel',
     'Rating', 'Expertbadge', 'DrslMetadata', 'Caseupdate', 'AttachmentModalService', 'DrslAttachFileService',
-    'DrslNewCaseService', '$filter', '_', 'DrslUserFlowService', 'DrslHipChatService', '$sce', 'paginationConstants'];
+    'DrslNewCaseService', '$filter', '_', 'DrslUserFlowService', 'DrslHipChatService', '$sce', 'paginationConstants', '$state'];
 
     function CaseController($scope, $window, $interval, $timeout, $translate, CaseService, DrslRatingService, CaseDetailsService,
         EscalationFormService, ShareCaseService, CaseAgreementService, StatusModel, Rating,
         Expertbadge, DrslMetadata, Caseupdate, AttachmentModalService, DrslAttachFileService,
-        DrslNewCaseService, $filter, _, DrslUserFlowService, DrslHipChatService, $sce, paginationConstants) {
+        DrslNewCaseService, $filter, _, DrslUserFlowService, DrslHipChatService, $sce, paginationConstants, $state) {
 
             // Handle user flow redirects and messaging
             DrslUserFlowService.handleUserFlow();
@@ -63,7 +63,7 @@
             vm.getCurrentUserName = getCurrentUserName;
             vm.maxResults = DrslHipChatService.maxResults;
 
-            vm.itemsPerPage = 5;
+            vm.itemsPerPage = paginationConstants.itemsPerPage;
             vm.page = 0;
             vm.transition = transition;
 
