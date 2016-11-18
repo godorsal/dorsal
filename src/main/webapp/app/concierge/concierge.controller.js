@@ -93,19 +93,21 @@
         function makeConciergeRoom(){
             if(!DrslHipChatService.currentUsername){
                 DrslHipChatService.currentUsername = $window.prompt("Please Enter your Name")
-            }
-            DrslHipChatService.makeConciergeRoom()
-            .then(function(res){
-                DrslHipChatService.getRoom(res.data.id)
+                DrslHipChatService.currentUsername ? makeConciergeRoom(): '';
+            } else {
+                DrslHipChatService.makeConciergeRoom()
                 .then(function(res){
-                    vm.conciergechaturl = res.data.guest_access_url;
-                    vm.guestRoomID = res.data.id;
-                    vm.chatroom = res.data
-                    var messages = 0;
-                    DrslHipChatService.waitForMessage(res.data, messages);
-                    checkMessages();
+                    DrslHipChatService.getRoom(res.data.id)
+                    .then(function(res){
+                        vm.conciergechaturl = res.data.guest_access_url;
+                        vm.guestRoomID = res.data.id;
+                        vm.chatroom = res.data
+                        var messages = 0;
+                        DrslHipChatService.waitForMessage(res.data, messages);
+                        checkMessages();
+                    })
                 })
-            })
+            }
         }
         function sendMessage(){
             var messageObject = {
