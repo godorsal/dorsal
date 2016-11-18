@@ -86,7 +86,7 @@
                                 }
 
                                 // Query the support cases to see if the user has associated cases
-                                Supportcase.query(function (data) {
+                                Supportcase.query({size: 1}, function (data) {
                                     service.user.hasCases = (data.length > 0)? true: false;
                                     // Pass the flow to the handoff function
                                     service.userFlowHandoff(type);
