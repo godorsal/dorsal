@@ -96,8 +96,7 @@
             <div class="drsl-sub-header drsl-sub-sub-header" translate="case.hipchat.chatWithUser" translate-values="{user: '{{vm.getUserName()}}'}" ng-if="vm.isCaseExpert()">Chat with user: {{user}} </div>
             <div class="drsl-case-wrapper drsl-hipchat-section">
                 <div class="drsl-hipchat-messages-wrapper">
-                    <div class="drsl-hipchat-message-scroller">
-                        <div ng-if="vm.messages.length < 1" translate="case.details.chatWelcome" translate-values="{username: '{{vm.DrslHipChatService.currentUsername}}'}"></div>
+                    <div class="drsl-hipchat-message-scroller" ng-if="vm.messages.length > 0">
                         <ul class="drsl-hipchat-message-list">
                             <li ng-repeat="message in vm.messages" ng-class="{'drsl-hipchat-you': vm.isCurrentSender(message.displayName)}" class="drsl-hipchat-message">
                                 <span class="drsl-hipchat-name">
@@ -117,7 +116,7 @@
                         </ul>
                     </div>
                     <form ng-submit="vm.sendMessage()" ng-if="vm.currentCase.status.name != 'CLOSED'">
-                        <input type="text" class="form-control drsl-hipchat-message-input" ng-model="vm.messageToSend">
+                        <input type="text" class="form-control drsl-hipchat-message-input" ng-model="vm.messageToSend" placeholder="{{ 'case.details.chatWelcome' | translate }}" autofocus id="messageSender">
                         <!-- <select name="maxResults" id="maxResults" ng-model="vm.maxResults" class="form-control drsl-hipchat-max-results"> -->
                         <!-- <label for=""></label> -->
                         <select name="maxResults" id="maxResults" ng-model="vm.maxResults" class="form-control drsl-hipchat-max-results" ng-change="vm.getMessages()" dir="rtl">
@@ -159,7 +158,7 @@
                     </div>
                     <div class="text-center">
                         <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
-                        <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+                        <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()" items-per-page="vm.itemsPerPage"></uib-pagination>
                     </div>
                 </div>
             </div>

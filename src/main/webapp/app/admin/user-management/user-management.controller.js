@@ -23,6 +23,7 @@
         vm.loadPage = loadPage;
         vm.predicate = pagingParams.predicate;
         vm.reverse = pagingParams.ascending;
+        paginationConstants.itemsPerPage = "20";
         vm.itemsPerPage = paginationConstants.itemsPerPage;
         vm.transition = transition;
 

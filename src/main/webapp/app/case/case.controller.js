@@ -8,12 +8,12 @@
     CaseController.$inject = ['$scope', '$window', '$interval', '$timeout', '$translate', 'CaseService', 'DrslRatingService',
     'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', 'StatusModel',
     'Rating', 'Expertbadge', 'DrslMetadata', 'Caseupdate', 'AttachmentModalService', 'DrslAttachFileService',
-    'DrslNewCaseService', '$filter', '_', 'DrslUserFlowService', 'DrslHipChatService', '$sce', 'paginationConstants', '$state'];
+    'DrslNewCaseService', '$filter', '_', 'DrslUserFlowService', 'DrslHipChatService', '$sce', 'paginationConstants', '$state', 'pagingParams'];
 
     function CaseController($scope, $window, $interval, $timeout, $translate, CaseService, DrslRatingService, CaseDetailsService,
         EscalationFormService, ShareCaseService, CaseAgreementService, StatusModel, Rating,
         Expertbadge, DrslMetadata, Caseupdate, AttachmentModalService, DrslAttachFileService,
-        DrslNewCaseService, $filter, _, DrslUserFlowService, DrslHipChatService, $sce, paginationConstants, $state) {
+        DrslNewCaseService, $filter, _, DrslUserFlowService, DrslHipChatService, $sce, paginationConstants, $state, pagingParams) {
 
             // Handle user flow redirects and messaging
             DrslUserFlowService.handleUserFlow();
@@ -21,6 +21,7 @@
             // Set the view model and view model properties/methods
             var vm = this, casePoll;
             vm.DrslMetadata = DrslMetadata;
+            $scope.DrslMetadata = vm.DrslMetadata;
             vm.pausePollForCaseUpdates = false;
             vm.badges = [];
             vm.expertBadges = [];
@@ -63,9 +64,18 @@
             vm.getCurrentUserName = getCurrentUserName;
             vm.maxResults = DrslHipChatService.maxResults;
 
+            // vm.loadAll = loadAll;
+            // vm.page = 1;
+            // vm.pageSize = 5;
+            vm.totalItems = null;
+            vm.loadPage = loadPage;
+            vm.predicate = pagingParams.predicate;
+            vm.reverse = pagingParams.ascending;
+            paginationConstants.itemsPerPage = "5";
             vm.itemsPerPage = paginationConstants.itemsPerPage;
-            vm.page = 0;
             vm.transition = transition;
+
+
 
             /**
             * Initialize the controller's data.
@@ -81,7 +91,7 @@
                     'getStatusStates': getStatusStates,
                     'getBadges': getBadges,
                     'itemsPerPage': vm.itemsPerPage,
-                    'page': vm.page
+                    'page': pagingParams.page - 1
                 }).then(function (data) {
                     var i, currentCaseIndex = 0;
 
@@ -89,6 +99,7 @@
                     vm.supportcases = data.supportCase;
                     vm.totalItems = vm.supportcases.headers('X-Total-Count');
                     vm.queryCount = vm.totalItems;
+                    vm.page = pagingParams.page;
 
                     // Set the vm's badges
                     if (data.badges) {
@@ -136,6 +147,8 @@
                     if (DrslNewCaseService.newCaseId) {
                         getCurrentCase();
                     }
+
+
                 });
 
             }
@@ -247,6 +260,7 @@
                         getMessages();
                     }, 15000, getMessages());
                 }
+                focus();
                 // Reset/clear the estimate logs
                 vm.estimateLogs = [];
 
@@ -568,7 +582,12 @@
                     return vm.currentUser.firstName + ' ' + vm.currentUser.lastName;
                 }
             }
+            function loadPage (page) {
+                vm.page = page;
+                vm.transition();
+            }
             function transition () {
+                focus()
                 $state.transitionTo($state.$current, {
                     page: vm.page,
                     sort: vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc'),
@@ -613,7 +632,26 @@
                 }
             });
 
+            function focus() {
+                $timeout(function() {
+                    var element = $window.document.getElementById("messageSender");
+                    if(element){
+                        element.focus();
+                    } else {
+                    }
+                });
+            }
+
             // Call to initialize the controller.
-            vm.init();
+            $timeout(function () {
+                    if(vm.DrslMetadata.itemsperpage){
+                        paginationConstants.itemsPerPage = vm.DrslMetadata.itemsperpage;
+                        vm.itemsPerPage = paginationConstants.itemsPerPage;
+                    } else {
+                        paginationConstants.itemsPerPage = "5";
+                        vm.itemsPerPage = paginationConstants.itemsPerPage;
+                    }
+                    vm.init()
+            }, 10);
         }
     })();
