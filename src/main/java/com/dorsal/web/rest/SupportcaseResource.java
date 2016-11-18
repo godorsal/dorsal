@@ -228,13 +228,13 @@ public class SupportcaseResource {
          * TBD: Need pagination for this use case
          */
 
-        log.error("Pagabale arguments Pagesize [" + pageable.getPageSize() + "] Offset [" + pageable.getOffset() + "]");
+        log.info("Pagabale arguments Pagesize [" + pageable.getPageSize() + "] Offset [" + pageable.getOffset() + "]");
         Page<Supportcase> page = supportcaseRepository.findAllAdminIsCurrentUser(pageable);
         List<Supportcase> supportcasesList = page.getContent();
 
         //List<Supportcase> supportcasesList = supportcaseRepository.findAllAdminIsCurrentUser();
         if (supportcasesList.size() > 0) {
-            log.error("Pages [" +page.getTotalPages() + "] Total Elements ADMIN [" + page.getTotalElements() +"]");
+            log.info("Pages [" +page.getTotalPages() + "] Total Elements ADMIN [" + page.getTotalElements() +"]");
             HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/supportcases");
             return new ResponseEntity<>(supportcasesList, headers, HttpStatus.OK);
             //return new ResponseEntity<>(supportcasesList, HttpStatus.OK);
@@ -245,7 +245,7 @@ public class SupportcaseResource {
         supportcasesList = page.getContent();
 
         if (supportcasesList.size() > 0) {
-            log.error("Pages [" +page.getTotalPages() + "] Total Elements EXPERT [" + page.getTotalElements() +"]");
+            log.info("Pages [" +page.getTotalPages() + "] Total Elements EXPERT [" + page.getTotalElements() +"]");
             HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/supportcases");
             return new ResponseEntity<>(supportcasesList, headers, HttpStatus.OK);
         }
@@ -256,7 +256,7 @@ public class SupportcaseResource {
         supportcasesList = page.getContent();
 
         if (supportcasesList.size() > 0 ) {
-            log.error("Pages [" +page.getTotalPages() + "] Total Elements OWNER[" + page.getTotalElements() +"]");
+            log.info("Pages [" +page.getTotalPages() + "] Total Elements OWNER[" + page.getTotalElements() +"]");
             HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/supportcases");
             return new ResponseEntity<>(supportcasesList, headers, HttpStatus.OK);
         }
@@ -265,7 +265,7 @@ public class SupportcaseResource {
         page = supportcaseRepository.findIsSharedwithCurrentUser(pageable);
         supportcasesList = page.getContent();
 
-        log.error("Pages [" +page.getTotalPages() + "] Total Elements SHARED[" + page.getTotalElements() +"]");
+        log.info("Pages [" +page.getTotalPages() + "] Total Elements SHARED[" + page.getTotalElements() +"]");
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/supportcases");
         return new ResponseEntity<>(supportcasesList, headers, HttpStatus.OK);
