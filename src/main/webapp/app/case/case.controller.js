@@ -530,7 +530,8 @@
                     if(res.data.error ){
                         var roomObject = {
                             name: messagesID,
-                            topic: vm.currentCase.summary
+                            topic: vm.currentCase.summary,
+                            expert: vm.currentCase.expertaccount.user.email
                         }
                         DrslHipChatService.makeRoom(roomObject)
                         .then(function () {
