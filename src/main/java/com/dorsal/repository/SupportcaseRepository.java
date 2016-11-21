@@ -36,7 +36,13 @@ public interface SupportcaseRepository extends JpaRepository<Supportcase,Long> {
     @Query("select supportcase from Supportcase supportcase, Groupaccess groupaccess where (supportcase.user.id = groupaccess.authorizeduser.id) AND (groupaccess.user.login = ?#{principal.username})  ORDER BY supportcase.dateCreated DESC")
     List<Supportcase> findGroupAccessUser();
 
-    @Query(value ="select supportcase from Supportcase supportcase, SharedCase sharedcase, Groupaccess groupaccess where ((supportcase.id = sharedcase.supportcase.id) AND (sharedcase.user.login = ?#{principal.username}) AND (supportcase.user.id = groupaccess.authorizeduser.id) AND (groupaccess.user.login = ?#{principal.username}))  ORDER BY supportcase.dateCreated DESC" ,
-        countQuery = "select count(supportcase.id) from Supportcase supportcase, SharedCase sharedcase, Groupaccess groupaccess where ((supportcase.id = sharedcase.supportcase.id) AND (sharedcase.user.login = ?#{principal.username}) AND (supportcase.user.id = groupaccess.authorizeduser.id) AND (groupaccess.user.login = ?#{principal.username})) ")
+    @Query(value ="select supportcase from Supportcase supportcase where supportcase.id in (select supportcase.id from Supportcase, SharedCase sharedcase where supportcase.id = sharedcase.supportcase.id AND sharedcase.user.login = ?#{principal.username}) or supportcase.id in (select supportcase.id from Supportcase supportcase, Groupaccess groupaccess where supportcase.user.id = groupaccess.authorizeduser.id AND groupaccess.user.login = ?#{principal.username}) ORDER BY supportcase.dateCreated DESC",
+           countQuery = "select count(supportcase.id) from Supportcase supportcase where supportcase.id in (select supportcase.id from Supportcase, SharedCase sharedcase where supportcase.id = sharedcase.supportcase.id AND sharedcase.user.login = ?#{principal.username}) or supportcase.id in (select supportcase.id from Supportcase supportcase, Groupaccess groupaccess where supportcase.user.id = groupaccess.authorizeduser.id AND groupaccess.user.login = ?#{principal.username} )")
     Page<Supportcase>findIsSharedwithCurrentUser(Pageable pageable);
+
+    @Query("select count(supportcase.id) from Supportcase supportcase, SharedCase sharedcase where supportcase.id = sharedcase.supportcase.id AND sharedcase.user.login = ?#{principal.username}")
+    int getCountOfSharedCasesByUser();
+
+    @Query("select count(supportcase.id) from Supportcase supportcase, Groupaccess groupaccess WHERE supportcase.user.id = groupaccess.authorizeduser.id AND groupaccess.user.login = ?#{principal.username}")
+    int getCountOfGroupAccessbyUser();
 }

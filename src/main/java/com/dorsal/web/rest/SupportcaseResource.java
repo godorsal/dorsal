@@ -265,9 +265,15 @@ public class SupportcaseResource {
         page = supportcaseRepository.findIsSharedwithCurrentUser(pageable);
         supportcasesList = page.getContent();
 
-        log.info("Pages [" +page.getTotalPages() + "] Total Elements SHARED[" + page.getTotalElements() +"]");
+        int sharedCases = supportcaseRepository.getCountOfSharedCasesByUser();
+        int groupAccess = supportcaseRepository.getCountOfGroupAccessbyUser();
+        log.debug("Cases shared [" + sharedCases +"] Cases GroupAccess [" + groupAccess + "]");
+
+        log.info("Total Elements SHARED[" + page.getTotalElements() + "]");
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/supportcases");
+        log.debug("Header: " + headers.toString());
+
         return new ResponseEntity<>(supportcasesList, headers, HttpStatus.OK);
 
         // Get support cases by currently logged in user
