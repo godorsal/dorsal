@@ -172,6 +172,26 @@ public class RatingResource {
     }
 
     /**
+     * GET  /ratings/{supportcase:id} : get the rating for the supportcase "id".
+     *
+     * @param id the id of the supportcase for the rating to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the rating, or with status 404 (Not Found)
+     */
+    @RequestMapping(value = "/ratings/supportcase/{id}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Rating> getRatingBySupportcase(@PathVariable Long id) {
+        log.debug("REST request to get Rating for supportcase: {}", id);
+        Rating rating = ratingRepository.findRatingBySupportcaseID(id);
+        return Optional.ofNullable(rating)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    /**
      * DELETE  /ratings/:id : delete the "id" rating.
      *
      * @param id the id of the rating to delete
