@@ -9,6 +9,7 @@
 
     function paginationConfig(uibPaginationConfig, paginationConstants) {
         uibPaginationConfig.itemsPerPage = paginationConstants.itemsPerPage;
+        uibPaginationConfig.sharedItemsPerPage = paginationConstants.sharedItemsPerPage;
         uibPaginationConfig.maxSize = 5;
         uibPaginationConfig.boundaryLinks = true;
         uibPaginationConfig.firstText = '«';

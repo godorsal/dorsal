@@ -26,7 +26,7 @@
                 templateUrl: 'app/case-details/case-details.html',
                 controller: 'CaseDetailsController',
                 controllerAs: 'vm',
-                size:'md',
+                size:'lg',
                 resolve: {
                     drslCase: function(){ return drslCase; },
                     expert: function(){ return expert; },

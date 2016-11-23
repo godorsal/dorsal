@@ -26,6 +26,14 @@
                     value: '1',
                     squash: true
                 },
+                sharedPage: {
+                    value: '1',
+                    squash: true
+                },
+                currentCaseIndex: {
+                    value: 0,
+                    squash: true
+                },
                 sort: {
                     value: 'id,asc',
                     squash: true
@@ -35,12 +43,14 @@
                 pagingParams: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
                     return {
                         page: PaginationUtil.parsePage($stateParams.page),
+                        sharedPage: PaginationUtil.parsePage($stateParams.sharedPage),
                         sort: $stateParams.sort,
                         predicate: PaginationUtil.parsePredicate($stateParams.sort),
-                        ascending: PaginationUtil.parseAscending($stateParams.sort)
+                        ascending: PaginationUtil.parseAscending($stateParams.sort),
+                        currentCaseIndex: $stateParams.currentCaseIndex
                     };
                 }],
-                mainTranslatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate,$translatePartialLoader) {
+                TranslatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate,$translatePartialLoader) {
                     $translatePartialLoader.addPart('case');
                     return $translate.refresh();
                 }]

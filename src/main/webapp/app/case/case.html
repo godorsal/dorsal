@@ -134,12 +134,13 @@
             <!-- Case History -->
             <!-- Header -->
             <div class="drsl-sub-header drsl-sub-sub-header" translate="case.history.header">Your Case History</div>
+
             <div class="drsl-case-wrapper">
 
                 <!-- Listing -->
                 <div class="drsl-case-history-wrapper">
-                    <div class="panel panel-default" ng-repeat="case in vm.supportcases">
-                        <div class="panel-heading" ng-class="{active: vm.currentCase == case}" ng-click="vm.setCurrentCase(case);">
+                    <div class="panel panel-default" ng-repeat="case in vm.supportcases track by $index">
+                        <div class="panel-heading" ng-class="{active: vm.currentCase == case}" ng-click="vm.setCurrentCase(case, $index);">
                             <h4 class="panel-title">
                                 <div class="drsl-case-list">
                                     <div>
@@ -159,6 +160,33 @@
                     <div class="text-center">
                         <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage" name-of-item="'cases'"></jhi-item-count>
                         <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()" items-per-page="vm.itemsPerPage"></uib-pagination>
+                    </div>
+                </div>
+            </div>
+            <div class="drsl-sub-header drsl-sub-sub-header" translate="case.history.sharedHeader" ng-if="vm.sharedcases.length > 0 && vm.currentUser.login != 'admin'">Shared Case History</div>
+            <div class="drsl-case-wrapper" ng-if="vm.sharedcases.length > 0 && vm.currentUser.login != 'admin'">
+                <div class="drsl-case-history-wrapper">
+                    <div class="panel panel-default" ng-repeat="case in vm.sharedcases track by $index">
+                        <div class="panel-heading" ng-class="{active: vm.currentCase == case}" ng-click="vm.setCurrentCase(case, $index);">
+                            <h4 class="panel-title">
+                                <div class="drsl-case-list">
+                                    <div>
+                                        <span class="drsl-case-list-id">{{case.technology.name}} {{case.id}}</span>
+                                        <span>{{case.dateCreated | date:'MMM dd, yyyy'}}</span>
+                                    </div>
+                                    <div ng-if="case.numberOfUpdates">
+                                        <div>Updates: {{case.numberOfUpdates}}</div>
+                                    </div>
+                                    <div>
+                                        <div>{{case.status.name}}</div>
+                                    </div>
+                                </div>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <jhi-item-count page="vm.sharedPage" total="vm.sharedQueryCount" items-per-page="vm.sharedItemsPerPage" name-of-item="'cases'"></jhi-item-count>
+                        <uib-pagination class="pagination-sm" total-items="vm.sharedTotalItems" ng-model="vm.sharedPage" ng-change="vm.sharedTransition()" items-per-page="vm.sharedItemsPerPage"></uib-pagination>
                     </div>
                 </div>
             </div>

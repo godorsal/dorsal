@@ -9,6 +9,7 @@
 
     function pagerConfig(uibPagerConfig, paginationConstants) {
         uibPagerConfig.itemsPerPage = paginationConstants.itemsPerPage;
+        uibPagerConfig.sharedItemsPerPage = paginationConstants.sharedItemsPerPage;
         uibPagerConfig.previousText = '«';
         uibPagerConfig.nextText = '»';
     }

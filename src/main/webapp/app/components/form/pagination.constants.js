@@ -4,6 +4,7 @@
     angular
         .module('dorsalApp')
         .constant('paginationConstants', {
-            'itemsPerPage': 20
+            'itemsPerPage': 20,
+            'sharedItemsPerPage': 20
         });
 })();

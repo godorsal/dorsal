@@ -8,12 +8,12 @@
     CaseController.$inject = ['$scope', '$window', '$interval', '$timeout', '$translate', 'CaseService', 'DrslRatingService',
     'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', 'StatusModel',
     'Rating', 'Expertbadge', 'DrslMetadata', 'Caseupdate', 'AttachmentModalService', 'DrslAttachFileService',
-    'DrslNewCaseService', '$filter', '_', 'DrslUserFlowService', 'DrslHipChatService', '$sce', 'paginationConstants', '$state', 'pagingParams'];
+    'DrslNewCaseService', '$filter', '_', 'DrslUserFlowService', 'DrslHipChatService', '$sce', 'paginationConstants', '$state', 'pagingParams', '$rootScope'];
 
     function CaseController($scope, $window, $interval, $timeout, $translate, CaseService, DrslRatingService, CaseDetailsService,
         EscalationFormService, ShareCaseService, CaseAgreementService, StatusModel, Rating,
         Expertbadge, DrslMetadata, Caseupdate, AttachmentModalService, DrslAttachFileService,
-        DrslNewCaseService, $filter, _, DrslUserFlowService, DrslHipChatService, $sce, paginationConstants, $state, pagingParams) {
+        DrslNewCaseService, $filter, _, DrslUserFlowService, DrslHipChatService, $sce, paginationConstants, $state, pagingParams, $rootScope) {
 
             // Handle user flow redirects and messaging
             DrslUserFlowService.handleUserFlow();
@@ -41,7 +41,7 @@
             vm.currentUser = {};
             vm.showNotifications = false;
             vm.shareCaseMessage = $translate.instant('case.details.shareCaseMessage');
-            vm.cannotShareCaseMessage = $translate.instant('cannotShareCaseMessage');
+            vm.cannotShareCaseMessage = $translate.instant('case.details.cannotShareCaseMessage');
 
             // vm methods
             vm.init = init;
@@ -64,16 +64,21 @@
             vm.getCurrentUserName = getCurrentUserName;
             vm.maxResults = DrslHipChatService.maxResults;
 
-            // vm.loadAll = loadAll;
-            // vm.page = 1;
-            // vm.pageSize = 5;
+            paginationConstants.itemsPerPage = "5";
+            paginationConstants.sharedItemsPerPage = "5";
+
             vm.totalItems = null;
             vm.loadPage = loadPage;
             vm.predicate = pagingParams.predicate;
             vm.reverse = pagingParams.ascending;
-            paginationConstants.itemsPerPage = "5";
             vm.itemsPerPage = paginationConstants.itemsPerPage;
             vm.transition = transition;
+
+            vm.sharedTotalItems = null;
+            vm.sharedLoadPage = sharedLoadPage;
+            vm.sharedPredicate = pagingParams.sharedPredicate;
+            vm.sharedItemsPerPage = paginationConstants.sharedItemsPerPage;
+            vm.sharedTransition = sharedTransition;
 
 
 
@@ -84,19 +89,28 @@
                 var getCurrentUser = (typeof(vm.currentUser.email) === 'undefined'),
                 getStatusStates = (vm.statusStates.length === 0),
                 getBadges = (vm.badges.length === 0);
-
+                console.log(pagingParams);
                 // Make a call to get the initial data.
                 CaseService.getEntityData({
                     'getCurrentUser': getCurrentUser,
                     'getStatusStates': getStatusStates,
                     'getBadges': getBadges,
                     'itemsPerPage': vm.itemsPerPage,
-                    'page': pagingParams.page - 1
+                    'sharedItemsPerPage': vm.sharedItemsPerPage,
+                    'page': pagingParams.page - 1,
+                    'sharedPage': pagingParams.sharedPage - 1
                 }).then(function (data) {
+                    console.log("DATA!?", data);
                     var i, currentCaseIndex = 0;
-
                     // Set the vm's  support cases
                     vm.supportcases = data.supportCase;
+                    if(data.sharedCase){
+                        vm.sharedcases = data.sharedCase;
+                        vm.sharedTotalItems = vm.sharedcases.headers('X-Total-Count');
+                        vm.sharedQueryCount = vm.sharedTotalItems;
+                        vm.sharedPage = pagingParams.sharedPage;
+                    }
+
                     vm.totalItems = vm.supportcases.headers('X-Total-Count');
                     vm.queryCount = vm.totalItems;
                     vm.page = pagingParams.page;
@@ -117,7 +131,18 @@
                     }
 
                     // Set the current case to the first case, or if we found one above, use that index
-                    vm.setCurrentCase(vm.supportcases[currentCaseIndex]);
+                    if(typeof $rootScope.saveThisThing === "number"){
+                        vm.setCurrentCase(vm.supportcases[$rootScope.saveThisThing], $rootScope.saveThisThing);
+                    } else {
+                        vm.setCurrentCase(vm.supportcases[currentCaseIndex], currentCaseIndex);
+
+                    }
+                    // currentCaseIndex = pagingParams.currentCaseIndex
+                    // if(!pagingParams.currentCaseIndex){
+                    //     vm.setCurrentCase(vm.supportcases[currentCaseIndex], currentCaseIndex);
+                    // } else {
+                    //     vm.setCurrentCase(vm.supportcases[currentCaseIndex], currentCaseIndex);
+                    // }
 
                     // Set the vm's currentUser
                     if (data.identity) {
@@ -218,12 +243,22 @@
 
                 return caseExpert;
             }
+            function isExpert() {
+                var isExpert = false;
+
+                if (vm.currentCase && vm.currentCase.expertaccount && vm.currentUser.email) {
+                    caseExpert = (vm.currentCase.expertaccount.user.email === vm.currentUser.email);
+                }
+
+                return caseExpert;
+            }
 
             /**
             * Gets and sets the vm's current case.
             * Usually called after a new case has been added
             */
             function getCurrentCase() {
+                console.log(thisCase);
                 var thisCase,
                 newCaseId = DrslNewCaseService.getConsumableNewCaseId();
 
@@ -247,9 +282,23 @@
             * Sets the currentCase reference to the given case object.
             * @param targetCase a case object
             */
-            function setCurrentCase(targetCase) {
+            function setCurrentCase(targetCase, index) {
                 // Set the vm's currentCase to the provided targetCase
+                $rootScope.saveThisThing = index;
                 vm.currentCase = targetCase;
+                if (vm.currentCase && (vm.currentCase.user.login === vm.currentUser.login)) {
+                    console.log("WAZ", vm.currentCase.user.login === vm.currentUser.login);
+                    vm.isCreator = true;
+                    vm.shareMessage = vm.shareCaseMessage;
+                } else {
+                    vm.isCreator = false;
+                    vm.shareMessage = vm.cannotShareCaseMessage;
+                }
+                // console.log("CASE INDEX", index);
+                // console.log("PAGING PARAMS INDEX BEFORE", pagingParams.currentCaseIndex);
+                pagingParams.currentCaseIndex = index;
+                // console.log("PAGING PARAMS INDEX AFTER", pagingParams.currentCaseIndex);
+
                 if(vm.currentCase.status.name === 'CLOSED'){
                     vm.maxResults = DrslHipChatService.maxResults;
                     getMessages();
@@ -587,11 +636,25 @@
                 vm.page = page;
                 vm.transition();
             }
+            function sharedLoadPage (sharedPage) {
+                vm.sharedPage = sharedPage;
+                vm.sharedTransition();
+            }
             function transition () {
                 focus()
                 $state.transitionTo($state.$current, {
                     page: vm.page,
+                    sharedPage: vm.sharedPage,
                     sort: vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc'),
+                    search: vm.currentSearch
+                });
+            }
+            function sharedTransition () {
+                focus()
+                $state.transitionTo($state.$current, {
+                    page: vm.page,
+                    sharedPage: vm.sharedPage,
+                    sort: vm.sharedPredicate + ',' + (vm.reverse ? 'asc' : 'desc'),
                     search: vm.currentSearch
                 });
             }

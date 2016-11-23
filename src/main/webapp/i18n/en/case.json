@@ -104,6 +104,7 @@
         },
         "history": {
             "header": "Your Case History",
+            "sharedHeader": "Shared Case History",
             "details": {
                 "header": "Case History"
             }
