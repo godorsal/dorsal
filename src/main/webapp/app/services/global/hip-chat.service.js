@@ -170,7 +170,7 @@
                 }
             })
         }
-        service.sendMessage = function(messageObject){
+        service.sendMessage = function(messageObject, expert){
             var url = '/v2/room/' + messageObject.roomID +'/notification'
             return $http({
                 method: 'POST',

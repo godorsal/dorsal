@@ -89,7 +89,7 @@
                 var getCurrentUser = (typeof(vm.currentUser.email) === 'undefined'),
                 getStatusStates = (vm.statusStates.length === 0),
                 getBadges = (vm.badges.length === 0);
-                console.log(pagingParams);
+
                 // Make a call to get the initial data.
                 CaseService.getEntityData({
                     'getCurrentUser': getCurrentUser,
@@ -100,7 +100,6 @@
                     'page': pagingParams.page - 1,
                     'sharedPage': pagingParams.sharedPage - 1
                 }).then(function (data) {
-                    console.log("DATA!?", data);
                     var i, currentCaseIndex = 0;
                     // Set the vm's  support cases
                     vm.supportcases = data.supportCase;
@@ -258,7 +257,6 @@
             * Usually called after a new case has been added
             */
             function getCurrentCase() {
-                console.log(thisCase);
                 var thisCase,
                 newCaseId = DrslNewCaseService.getConsumableNewCaseId();
 
@@ -286,18 +284,14 @@
                 // Set the vm's currentCase to the provided targetCase
                 $rootScope.saveThisThing = index;
                 vm.currentCase = targetCase;
+
                 if (vm.currentCase && (vm.currentCase.user.login === vm.currentUser.login)) {
-                    console.log("WAZ", vm.currentCase.user.login === vm.currentUser.login);
                     vm.isCreator = true;
                     vm.shareMessage = vm.shareCaseMessage;
                 } else {
                     vm.isCreator = false;
                     vm.shareMessage = vm.cannotShareCaseMessage;
                 }
-                // console.log("CASE INDEX", index);
-                // console.log("PAGING PARAMS INDEX BEFORE", pagingParams.currentCaseIndex);
-                pagingParams.currentCaseIndex = index;
-                // console.log("PAGING PARAMS INDEX AFTER", pagingParams.currentCaseIndex);
 
                 if(vm.currentCase.status.name === 'CLOSED'){
                     vm.maxResults = DrslHipChatService.maxResults;
@@ -598,9 +592,15 @@
                 }, 1000);
             }
             function sendMessage(){
+                if(!vm.isCaseExpert()){
+                    var messageToSend = "@" + vm.currentCase.expertaccount.user.firstName + vm.currentCase.expertaccount.user.lastName + ' ' + vm.messageToSend
+                } else {
+                    console.log("EXPERT");
+                    var messageToSend = vm.messageToSend
+                }
                 var messageObject = {
                     roomID: vm.currentCase.technology.name + vm.currentCase.id,
-                    message: vm.messageToSend,
+                    message: messageToSend,
                     from: getCurrentUserName(),
                     message_format: 'text'
                 }
