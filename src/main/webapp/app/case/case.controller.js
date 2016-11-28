@@ -103,7 +103,8 @@
                 }).then(function (data) {
                     var i, currentCaseIndex = 0;
                     // Set the vm's  support cases
-                    console.log("DATA", data);
+                    console.log("INDEX", CaseService.currentCase.index);
+                    console.log("TYPE", CaseService.currentCase.type);
                     if(data.sharedCase){
                         vm.sharedcases = data.sharedCase;
                         vm.sharedTotalItems = vm.sharedcases.headers('X-Total-Count');
@@ -139,9 +140,9 @@
                     }
 
                     // Set the current case to the first case, or if we found one above, use that index
-                    if(vm.supportcases.length > 0){
+                    if(vm.supportcases.length > 0 && CaseService.currentCase.type === "supportCase"){
                         vm.setCurrentCase(vm.supportcases[CaseService.currentCase.index], CaseService.currentCase.index);
-                    } else {
+                    } else if(CaseService.currentCase.type === "sharedCase") {
                         vm.setCurrentCase(vm.sharedcases[CaseService.currentCase.index], CaseService.currentCase.index);
                     }
 
@@ -649,6 +650,7 @@
                 focus()
                 if(CaseService.currentCase.type === "supportCase"){
                     CaseService.currentCase.index = 0;
+                    console.log("SUPPORTCASE TRANSITION", CaseService.currentCase.type);
                 }
                 $state.transitionTo($state.$current, {
                     page: vm.page,
@@ -661,6 +663,7 @@
                 focus()
                 if(CaseService.currentCase.type === "sharedCase"){
                     CaseService.currentCase.index = 0;
+                    console.log("SHAREDCASE TRANSITION", CaseService.currentCase.type);
                 }
                 $state.transitionTo($state.$current, {
                     page: vm.page,
