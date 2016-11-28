@@ -31,7 +31,10 @@
                     squash: true
                 },
                 currentCaseIndex: {
-                    value: 0,
+                    value: {
+                        index: 0,
+                        type: 'supportCase'
+                    },
                     squash: true
                 },
                 sort: {

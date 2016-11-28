@@ -8,9 +8,7 @@
 
     function Supportcase ($resource, DateUtils) {
         var resourceUrl =  'api/supportcases/:id';
-        // this.resourceUrl =  'api/supportcases/:id';
         return $resource(resourceUrl, {}, {
-        // return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
             'get': {
                 method: 'GET',

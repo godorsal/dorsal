@@ -13,6 +13,7 @@
 
         // Handle user flow redirects and messaging
         DrslUserFlowService.handleUserFlow();
+        console.log("DORSAL USER FLOW SERVICE", DrslUserFlowService);
 
         // Set the view model and view model properties/methods
         var vm = this;

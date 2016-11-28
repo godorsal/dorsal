@@ -133,12 +133,12 @@
             <br>
             <!-- Case History -->
             <!-- Header -->
-            <div class="drsl-sub-header drsl-sub-sub-header" translate="case.history.header">Your Case History</div>
+            <div class="drsl-sub-header drsl-sub-sub-header" translate="case.history.header" ng-if="vm.supportcases.length > 0">Your Case History</div>
 
             <div class="drsl-case-wrapper">
 
                 <!-- Listing -->
-                <div class="drsl-case-history-wrapper">
+                <div class="drsl-case-history-wrapper" ng-if="vm.supportcases.length > 0">
                     <div class="panel panel-default" ng-repeat="case in vm.supportcases track by $index">
                         <div class="panel-heading" ng-class="{active: vm.currentCase == case}" ng-click="vm.setCurrentCase(case, $index);">
                             <h4 class="panel-title">

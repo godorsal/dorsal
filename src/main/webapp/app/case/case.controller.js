@@ -98,21 +98,30 @@
                     'itemsPerPage': vm.itemsPerPage,
                     'sharedItemsPerPage': vm.sharedItemsPerPage,
                     'page': pagingParams.page - 1,
-                    'sharedPage': pagingParams.sharedPage - 1
+                    'sharedPage': pagingParams.sharedPage - 1,
+                    'isExpert': DrslUserFlowService.user.isExpert
                 }).then(function (data) {
                     var i, currentCaseIndex = 0;
                     // Set the vm's  support cases
-                    vm.supportcases = data.supportCase;
+                    console.log("DATA", data);
                     if(data.sharedCase){
                         vm.sharedcases = data.sharedCase;
                         vm.sharedTotalItems = vm.sharedcases.headers('X-Total-Count');
                         vm.sharedQueryCount = vm.sharedTotalItems;
                         vm.sharedPage = pagingParams.sharedPage;
+                    } else {
+                        CaseService.currentCase.type = "supportCase"
+                    }
+                    if(data.supportCase){
+                        vm.supportcases = data.supportCase;
+                        vm.totalItems = vm.supportcases.headers('X-Total-Count');
+                        vm.queryCount = vm.totalItems;
+                        vm.page = pagingParams.page;
+                    } else {
+                        CaseService.currentCase.type = "sharedCase"
                     }
 
-                    vm.totalItems = vm.supportcases.headers('X-Total-Count');
-                    vm.queryCount = vm.totalItems;
-                    vm.page = pagingParams.page;
+
 
                     // Set the vm's badges
                     if (data.badges) {
@@ -130,12 +139,17 @@
                     }
 
                     // Set the current case to the first case, or if we found one above, use that index
-                    if(typeof $rootScope.saveThisThing === "number"){
-                        vm.setCurrentCase(vm.supportcases[$rootScope.saveThisThing], $rootScope.saveThisThing);
+                    if(CaseService.currentCase.type === "supportCase"){
+                        vm.setCurrentCase(vm.supportcases[CaseService.currentCase.index], CaseService.currentCase.index);
                     } else {
-                        vm.setCurrentCase(vm.supportcases[currentCaseIndex], currentCaseIndex);
-
+                        vm.setCurrentCase(vm.sharedcases[CaseService.currentCase.index], CaseService.currentCase.index);
                     }
+                    // if(typeof CaseService.saveThisThing === "number"){
+                    //     vm.setCurrentCase(vm.supportcases[CaseService.saveThisThing], $rootScope.saveThisThing);
+                    // } else {
+                    //     vm.setCurrentCase(vm.supportcases[currentCaseIndex], currentCaseIndex);
+                    //
+                    // }
                     // currentCaseIndex = pagingParams.currentCaseIndex
                     // if(!pagingParams.currentCaseIndex){
                     //     vm.setCurrentCase(vm.supportcases[currentCaseIndex], currentCaseIndex);
@@ -282,15 +296,17 @@
             */
             function setCurrentCase(targetCase, index) {
                 // Set the vm's currentCase to the provided targetCase
-                $rootScope.saveThisThing = index;
                 vm.currentCase = targetCase;
+                CaseService.currentCase.index = index;
 
                 if (vm.currentCase && (vm.currentCase.user.login === vm.currentUser.login)) {
                     vm.isCreator = true;
                     vm.shareMessage = vm.shareCaseMessage;
+                    CaseService.currentCase.type = "supportCase";
                 } else {
                     vm.isCreator = false;
                     vm.shareMessage = vm.cannotShareCaseMessage;
+                    CaseService.currentCase.type = "sharedCase";
                 }
 
                 if(vm.currentCase.status.name === 'CLOSED'){
@@ -708,14 +724,14 @@
 
             // Call to initialize the controller.
             $timeout(function () {
-                    if(vm.DrslMetadata.itemsperpage){
-                        paginationConstants.itemsPerPage = vm.DrslMetadata.itemsperpage;
-                        vm.itemsPerPage = paginationConstants.itemsPerPage;
-                    } else {
-                        paginationConstants.itemsPerPage = "5";
-                        vm.itemsPerPage = paginationConstants.itemsPerPage;
-                    }
-                    vm.init()
+                if(vm.DrslMetadata.itemsperpage){
+                    paginationConstants.itemsPerPage = vm.DrslMetadata.itemsperpage;
+                    vm.itemsPerPage = paginationConstants.itemsPerPage;
+                } else {
+                    paginationConstants.itemsPerPage = "5";
+                    vm.itemsPerPage = paginationConstants.itemsPerPage;
+                }
+                vm.init()
             }, 10);
         }
     })();
