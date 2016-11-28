@@ -339,11 +339,22 @@ public class SupportcaseResource {
         throws URISyntaxException {
         log.debug("REST request to get all Supportcases");
 
-        // Get support cases for where currently logged in user is owner
-        Page<Supportcase> page = supportcaseRepository.findByOwnerIsCurrentUser(pageable);
+        /**
+         * Check if logged-in user is admin which will return all cases
+         *
+         * If 0 cases are returned (no admin) return the cases that the current users owns
+         */
+        Page<Supportcase> page = supportcaseRepository.findAllAdminIsCurrentUser(pageable);
         List<Supportcase> supportcasesList = page.getContent();
 
-        log.debug("Support cases user is owner " + (supportcasesList.size()));
+        if (supportcasesList.size() == 0) {
+
+            // Get support cases for where currently logged in user is owner
+            page = supportcaseRepository.findByOwnerIsCurrentUser(pageable);
+            supportcasesList = page.getContent();
+
+            log.debug("Support cases user is owner " + (supportcasesList.size()));
+        }
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/supportcases/owner");
         return new ResponseEntity<>(supportcasesList, headers, HttpStatus.OK);
