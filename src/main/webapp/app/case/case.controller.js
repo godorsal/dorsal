@@ -139,23 +139,12 @@
                     }
 
                     // Set the current case to the first case, or if we found one above, use that index
-                    if(CaseService.currentCase.type === "supportCase"){
+                    if(vm.supportcases.length > 0){
                         vm.setCurrentCase(vm.supportcases[CaseService.currentCase.index], CaseService.currentCase.index);
                     } else {
                         vm.setCurrentCase(vm.sharedcases[CaseService.currentCase.index], CaseService.currentCase.index);
                     }
-                    // if(typeof CaseService.saveThisThing === "number"){
-                    //     vm.setCurrentCase(vm.supportcases[CaseService.saveThisThing], $rootScope.saveThisThing);
-                    // } else {
-                    //     vm.setCurrentCase(vm.supportcases[currentCaseIndex], currentCaseIndex);
-                    //
-                    // }
-                    // currentCaseIndex = pagingParams.currentCaseIndex
-                    // if(!pagingParams.currentCaseIndex){
-                    //     vm.setCurrentCase(vm.supportcases[currentCaseIndex], currentCaseIndex);
-                    // } else {
-                    //     vm.setCurrentCase(vm.supportcases[currentCaseIndex], currentCaseIndex);
-                    // }
+                    
 
                     // Set the vm's currentUser
                     if (data.identity) {
