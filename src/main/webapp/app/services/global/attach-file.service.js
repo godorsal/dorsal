@@ -127,16 +127,19 @@
          */
         function uploadFileInQueue(supportCase) {
             var file = service.attachFileList.shift(),
-                caseId = (supportCase)? supportCase.id : DrslNewCaseService.newCaseId;
-                
+                caseId = (supportCase)? supportCase.id : DrslNewCaseService.newCase.id;
+                // caseId = (supportCase)? supportCase.id : DrslNewCaseService.newCaseId;
+
             if (file && !file.dataStream && caseId) {
                 DataUtils.toBase64(file, function (base64Data) {
                     service.attachment.name = file.name.replace(/\s|,|-/g, '');
                     service.attachment.dataStream = base64Data;
                     service.attachment.dataStreamContentType = file.type;
-                    service.attachment.supportcase = {
-                        id: caseId
-                    };
+                    service.attachment.supportcase = DrslNewCaseService.newCase;
+
+                    // service.attachment.supportcase = {
+                    //     id: caseId
+                    // };
                     Attachment.save(service.attachment, function (file) {
                         // on success, proceed to the next file
                         // service.broadcastForAttachmentMessage(file);
