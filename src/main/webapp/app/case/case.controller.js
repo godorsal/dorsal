@@ -144,7 +144,7 @@
                     } else {
                         vm.setCurrentCase(vm.sharedcases[CaseService.currentCase.index], CaseService.currentCase.index);
                     }
-                    
+
 
                     // Set the vm's currentUser
                     if (data.identity) {
@@ -647,6 +647,9 @@
             }
             function transition () {
                 focus()
+                if(CaseService.currentCase.type === "supportCase"){
+                    CaseService.currentCase.index = 0;
+                }
                 $state.transitionTo($state.$current, {
                     page: vm.page,
                     sharedPage: vm.sharedPage,
@@ -656,6 +659,9 @@
             }
             function sharedTransition () {
                 focus()
+                if(CaseService.currentCase.type === "sharedCase"){
+                    CaseService.currentCase.index = 0;
+                }
                 $state.transitionTo($state.$current, {
                     page: vm.page,
                     sharedPage: vm.sharedPage,
