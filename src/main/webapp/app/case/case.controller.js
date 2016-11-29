@@ -80,6 +80,7 @@
             vm.sharedItemsPerPage = paginationConstants.sharedItemsPerPage;
             vm.sharedTransition = sharedTransition;
 
+            vm.schedulingMessages = false;
 
 
             /**
@@ -337,10 +338,14 @@
                     })
                 } else {
                     vm.maxResults = DrslHipChatService.maxResults;
-                    vm.schedulingMessages = true;
-                    vm.messageScheduler = $interval(function () {
+                    if(!vm.schedulingMessages){
+                        vm.schedulingMessages = true;
+                        vm.messageScheduler = $interval(function () {
+                            getMessages();
+                        }, 15000, getMessages());
+                    } else {
                         getMessages();
-                    }, 15000, getMessages());
+                    }
                 }
                 focus();
                 // Reset/clear the estimate logs
@@ -391,8 +396,8 @@
                         DrslHipChatService.getRoom(vm.currentCase.technology.name + vm.currentCase.id)
                         .then(function (res) {
                             DrslHipChatService.archiveRoom(res.data)
-                        }, function (res) {
-                            console.log("ERROR HANDLER", res);
+                        }, function errorHandler(error) {
+                            console.log("ERROR HANDLER", error);
                         })
                         // Add/update expert badges and their counts
                         updateExpertBadges(data.selectedBadges);
@@ -610,6 +615,7 @@
                     DrslHipChatService.magicMessageParser(vm.messages);
                 }, function errorCallback(res) {
                     if(res.data.error ){
+                        if(res.data.error.code != 429){
                         var roomObject = {
                             name: messagesID,
                             topic: vm.currentCase.summary,
@@ -620,7 +626,9 @@
                             getMessages();
                         })
                     }
+                    }
                 })
+
             }
             function countdown(time) {
                 setTimeout(function () {
@@ -736,6 +744,7 @@
             $scope.$on('$destroy', function () {
                 if (angular.isDefined(casePoll)) {
                     $interval.cancel(casePoll);
+                    $interval.cancel(vm.messageScheduler);
                     casePoll = undefined;
                 }
             });

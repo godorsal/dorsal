@@ -38,6 +38,7 @@
                 dataToFetch.push(Badge.query().$promise);
                 dataToTypes.push('badges');
             }
+
             if(DrslUserFlowService.user.isExpert){
                 Supportcase.query({
                     page: config.page,
@@ -53,6 +54,7 @@
                     return deferred.promise;
                 })
             }
+
             if(!DrslUserFlowService.user.isExpert){
                 Supportcase.query({
                     page: config.page,
@@ -67,11 +69,13 @@
                             deferred.resolve(processEntityData(data, dataToTypes));
                         });
                     } else {
+                        console.log("QUERYING FOR SHARED CASES!!");
                         Supportcase.query({
                             page: config.sharedPage,
                             size: config.sharedItemsPerPage,
                             id: "shared"
                         }, function (data, headers) {
+                            console.log("SHARED CASES: ", data);
                             data.headers = headers;
                             dataToFetch.push(data.$promise)
                             dataToTypes.push('sharedCase')
