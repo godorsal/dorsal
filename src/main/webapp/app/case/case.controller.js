@@ -109,12 +109,18 @@
                         vm.sharedTotalItems = vm.sharedcases.headers('X-Total-Count');
                         vm.sharedQueryCount = vm.sharedTotalItems;
                         vm.sharedPage = pagingParams.sharedPage;
+                        if(Number(vm.sharedTotalItems) > Number(vm.sharedItemsPerPage)){
+                            vm.sharedPagination = true;
+                        }
                     } else {
                         CaseService.currentCase.type = "supportCase"
                     }
                     if(data.supportCase){
                         vm.supportcases = data.supportCase;
                         vm.totalItems = vm.supportcases.headers('X-Total-Count');
+                        if(Number(vm.totalItems) > Number(vm.itemsPerPage)){
+                            vm.pagination = true;
+                        }
                         vm.queryCount = vm.totalItems;
                         vm.page = pagingParams.page;
                     } else {
@@ -710,6 +716,9 @@
                     search: vm.currentSearch
                 });
             }
+            // scope. = function() {
+            //     SupportCaseReportRatingCommentModalService.open(scope.case.report)
+            // }
             /**
             * Checks to see if the provided index is less than or equal to the current step/status index.
             * @param step

@@ -71,6 +71,8 @@
                     <a ng-show="vm.DrslMetadata.showCaseChat !== 0" ng-click="vm.openChat()" uib-tooltip="chat with expert" ng-class="{'drsl-link-disabled': !vm.passedStep(1)}" class="drsl-link-disabled" translate="case.details.chatRoom">chat</a>
                     <!-- New Case -->
                     <a ng-show="(vm.currentCase && !vm.isCaseExpert())" ui-sref="concierge" uib-tooltip="create a new case" translate="case.details.newCase">new</a>
+                    <!-- Case Rating -->
+                    <a ng-show="(vm.currentCase && vm.isCaseExpert())" ng-click="openRatingFromAction()" uib-tooltip="View Rating Details" translate="case.details.newCase">new</a>
                     <!-- Escalation -->
                     <a class="pull-right" ng-click="vm.openEscalation()" ng-class="{'drsl-link-disabled': (vm.passedStep(4) ||!vm.currentCase)}" translate="case.details.escalate">escalate or reassign this case</a>
                 </div>
@@ -157,7 +159,7 @@
                             </h4>
                         </div>
                     </div>
-                    <div class="text-center">
+                    <div class="text-center" ng-if="vm.pagination">
                         <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage" name-of-item="'cases'"></jhi-item-count>
                         <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()" items-per-page="vm.itemsPerPage"></uib-pagination>
                     </div>
@@ -184,7 +186,7 @@
                             </h4>
                         </div>
                     </div>
-                    <div class="text-center">
+                    <div class="text-center" ng-if="vm.sharedPagination">
                         <jhi-item-count page="vm.sharedPage" total="vm.sharedQueryCount" items-per-page="vm.sharedItemsPerPage" name-of-item="'cases'"></jhi-item-count>
                         <uib-pagination class="pagination-sm" total-items="vm.sharedTotalItems" ng-model="vm.sharedPage" ng-change="vm.sharedTransition()" items-per-page="vm.sharedItemsPerPage"></uib-pagination>
                     </div>

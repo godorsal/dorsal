@@ -51,6 +51,7 @@
             "caseUpdates": "Case Updates",
             "estimateLogs": "Estimate Logs",
             "attachFiles": "attach files",
+            "ratingDetials": "view rating details",
             "newCase": "new",
             "escalate": "escalate or reassign this case"
         },
