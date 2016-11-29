@@ -58,7 +58,7 @@
             <div><span class="drsl-label" translate="case.professional.input.resolved">Finalize</span></div>
             <div class="drsl.value" ng-hide="case.isResolved || StatusModel.checkCaseStatus(case.status, 'working')"><span class="drsl-complete-lnk disabled" translate="case.professional.input.resolved.action"></span></div>
             <div class="drsl-value" ng-hide="case.isResolved || !StatusModel.checkCaseStatus(case.status, 'working')"><a translate="case.professional.input.resolved.action" ng-click="openCompleteCase($event);"></a></div>
-            <div ng-show="case.isResolved"><span class="drsl-value" translate="case.professional.input.resolved.complete"></span><a ng-click="openModal()" translate="case.details.ratingDetials"> View Rating Details</a></div>
+            <div ng-show="case.isResolved"><span class="drsl-value" translate="case.professional.input.resolved.complete"></span><a ng-click="openModal()" translate="case.details.ratingDetails"> View Rating Details</a></div>
         </div>
         <!-- Last Update & Main Button -->
         <div>

@@ -71,10 +71,10 @@
                     <a ng-show="vm.DrslMetadata.showCaseChat !== 0" ng-click="vm.openChat()" uib-tooltip="chat with expert" ng-class="{'drsl-link-disabled': !vm.passedStep(1)}" class="drsl-link-disabled" translate="case.details.chatRoom">chat</a>
                     <!-- New Case -->
                     <a ng-show="(vm.currentCase && !vm.isCaseExpert())" ui-sref="concierge" uib-tooltip="create a new case" translate="case.details.newCase">new</a>
-                    <!-- Case Rating -->
-                    <a ng-show="(vm.currentCase && vm.isCaseExpert() && vm.currentCase.status.name === 'CLOSED')" ng-click="vm.openRatingFromActionBar()" uib-tooltip="View Rating Details" translate="case.details.ratingDetials">new</a>
                     <!-- Escalation -->
                     <a class="pull-right" ng-click="vm.openEscalation()" ng-class="{'drsl-link-disabled': (vm.passedStep(4) ||!vm.currentCase)}" translate="case.details.escalate">escalate or reassign this case</a>
+                    <!-- Case Rating -->
+                    <a class="pull-right" ng-show="(vm.currentCase && vm.isCaseExpert() && vm.currentCase.status.name === 'CLOSED')" ng-click="vm.openRatingFromActionBar()" uib-tooltip="View Rating Details" translate="case.details.ratingDetails">new</a>
                 </div>
 
                 <!-- Current Case -->
@@ -148,7 +148,7 @@
                                     <div>
                                         <span class="drsl-case-list-id">{{case.technology.name}} {{case.id}}</span>
                                         <span class="drsl-case-list-id">{{case.dateCreated | date:'MMM dd, yyyy'}}</span>
-                                        <span ng-click="vm.openRatingFromList(case); $event.stopPropagation();" ng-if="case.status.name === 'CLOSED' && vm.isCaseExpert()" translate="case.details.ratingDetails">View Rating Details</span>
+                                        <a ng-click="vm.openRatingFromList(case); $event.stopPropagation();" ng-if="case.status.name === 'CLOSED' && vm.isCaseExpert()" translate="case.details.ratingDetailsList">View Rating Details</a>
                                     </div>
                                     <div ng-if="case.numberOfUpdates">
                                         <div>Updates: {{case.numberOfUpdates}}</div>
