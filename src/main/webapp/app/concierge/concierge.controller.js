@@ -179,7 +179,8 @@
             vm.issue = null;
             var roomObject = {
                 name: result.technology.name + result.id,
-                topic: result.summary
+                topic: result.summary,
+                expert: result.expertaccount.user.email
             }
             DrslHipChatService.makeRoom(roomObject);
 
