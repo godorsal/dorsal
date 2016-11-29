@@ -72,7 +72,7 @@
                     <!-- New Case -->
                     <a ng-show="(vm.currentCase && !vm.isCaseExpert())" ui-sref="concierge" uib-tooltip="create a new case" translate="case.details.newCase">new</a>
                     <!-- Case Rating -->
-                    <a ng-show="(vm.currentCase && vm.isCaseExpert())" ng-click="openRatingFromAction()" uib-tooltip="View Rating Details" translate="case.details.newCase">new</a>
+                    <a ng-show="(vm.currentCase && vm.isCaseExpert() && vm.currentCase.status.name === 'CLOSED')" ng-click="vm.openRatingFromActionBar()" uib-tooltip="View Rating Details" translate="case.details.ratingDetials">new</a>
                     <!-- Escalation -->
                     <a class="pull-right" ng-click="vm.openEscalation()" ng-class="{'drsl-link-disabled': (vm.passedStep(4) ||!vm.currentCase)}" translate="case.details.escalate">escalate or reassign this case</a>
                 </div>
@@ -147,7 +147,8 @@
                                 <div class="drsl-case-list">
                                     <div>
                                         <span class="drsl-case-list-id">{{case.technology.name}} {{case.id}}</span>
-                                        <span>{{case.dateCreated | date:'MMM dd, yyyy'}}</span>
+                                        <span class="drsl-case-list-id">{{case.dateCreated | date:'MMM dd, yyyy'}}</span>
+                                        <span ng-click="vm.openRatingFromList(case); $event.stopPropagation();" ng-if="case.status.name === 'CLOSED' && vm.isCaseExpert()" translate="case.details.ratingDetails">View Rating Details</span>
                                     </div>
                                     <div ng-if="case.numberOfUpdates">
                                         <div>Updates: {{case.numberOfUpdates}}</div>

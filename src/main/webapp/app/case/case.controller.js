@@ -8,12 +8,12 @@
     CaseController.$inject = ['$scope', '$window', '$interval', '$timeout', '$translate', 'CaseService', 'DrslRatingService',
     'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', 'StatusModel',
     'Rating', 'Expertbadge', 'DrslMetadata', 'Caseupdate', 'AttachmentModalService', 'DrslAttachFileService',
-    'DrslNewCaseService', '$filter', '_', 'DrslUserFlowService', 'DrslHipChatService', '$sce', 'paginationConstants', '$state', 'pagingParams', '$rootScope'];
+    'DrslNewCaseService', '$filter', '_', 'DrslUserFlowService', 'DrslHipChatService', '$sce', 'paginationConstants', '$state', 'pagingParams', '$rootScope', 'SupportCaseReportRatingCommentModalService'];
 
     function CaseController($scope, $window, $interval, $timeout, $translate, CaseService, DrslRatingService, CaseDetailsService,
         EscalationFormService, ShareCaseService, CaseAgreementService, StatusModel, Rating,
         Expertbadge, DrslMetadata, Caseupdate, AttachmentModalService, DrslAttachFileService,
-        DrslNewCaseService, $filter, _, DrslUserFlowService, DrslHipChatService, $sce, paginationConstants, $state, pagingParams, $rootScope) {
+        DrslNewCaseService, $filter, _, DrslUserFlowService, DrslHipChatService, $sce, paginationConstants, $state, pagingParams, $rootScope, SupportCaseReportRatingCommentModalService) {
 
             // Handle user flow redirects and messaging
             DrslUserFlowService.handleUserFlow();
@@ -62,6 +62,8 @@
             vm.getMessages = getMessages;
             vm.getUserName = getUserName;
             vm.getCurrentUserName = getCurrentUserName;
+            vm.openRatingFromActionBar = openRatingFromActionBar;
+            vm.openRatingFromList = openRatingFromList;
             vm.maxResults = DrslHipChatService.maxResults;
 
             paginationConstants.itemsPerPage = "5";
@@ -716,9 +718,36 @@
                     search: vm.currentSearch
                 });
             }
-            // scope. = function() {
-            //     SupportCaseReportRatingCommentModalService.open(scope.case.report)
-            // }
+            function openRatingFromActionBar() {
+                console.log(vm.currentCase);
+                SupportCaseReportRatingCommentModalService.open(vm.currentCase.report)
+            }
+            function openRatingFromList(supportcase) {
+                Rating.get({
+                    supportcase: "supportcase",
+                    id: supportcase.id
+                }, function (data) {
+                    var ratingObject = {
+                        dateRated: data.dateRated,
+                        hasExpertExceeded: data.hasExpertExceeded,
+                        id: data.id,
+                        rateDetails: data.ratingComments,
+                        detailedReportObject: {},
+                        ratingComments: data.ratingComments,
+                        score: data.score,
+                        supportcase: data.supportcase
+                    }
+                    data.rateDetails.split(',').forEach(function (rateDetail) {
+                        var rateDetail = rateDetail.split(' ');
+                        ratingObject.detailedReportObject[rateDetail[0]] = rateDetail[1]
+                    })
+                    supportcase.report = {
+                        rating: ratingObject,
+                        supportcase: data.supportcase
+                    }
+                    SupportCaseReportRatingCommentModalService.open(supportcase.report)
+                })
+            }
             /**
             * Checks to see if the provided index is less than or equal to the current step/status index.
             * @param step
