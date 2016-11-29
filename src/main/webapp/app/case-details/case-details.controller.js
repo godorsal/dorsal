@@ -15,6 +15,7 @@
         vm.case = drslCase;
         vm.expert = expert;
         vm.isExpert = false;
+        vm.pending = false;
         vm.summary = vm.case.summary.toString();
         vm.updates = [];
         vm.technologyProps = {};
@@ -32,11 +33,7 @@
             dataStreamContentType: null,
             id: null
         };
-        $document.keyup(function(e) {
-             if (e.keyCode == 27) {
-                 cancel (e);
-            }
-        });
+
         // vm methods
         vm.init = init;
         vm.cancel = cancel;
@@ -126,20 +123,24 @@
         * On ESCAPE key press, close modal
         * @param e
         */
-        $document.keyup(function(e) {
-            if (e.keyCode == 27) {
-                cancel (e)
-            }
-        });
+        
         /**
         * Handle the 'cancel' buttons click event
         * @param e
         */
         function cancel(e) {
+            console.log("CANCEL");
             e.preventDefault();
-            $uibModalInstance.dismiss('cancel');
+            if(DrslAttachFileService.attachFileList.length){
+                $scope.$broadcast('closingDetailsModal');
+            } else {
+                $uibModalInstance.dismiss('cancel');
+            }
         }
 
+        $scope.$on('cancelAttachments', function () {
+            $uibModalInstance.dismiss('cancel');
+        });
         /**
         * A Success Callback function passed to the Caseupdate save function.
         */

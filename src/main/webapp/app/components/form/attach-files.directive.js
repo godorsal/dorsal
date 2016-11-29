@@ -188,6 +188,11 @@
                     scope.getCaseAttachments();
                 }
             });
+            scope.$on('closingDetailsModal', function(){
+                if (scope.caseId) {
+                    scope.cancelAttachments();
+                }
+            });
         }
     }
 })();
