@@ -9,22 +9,19 @@
 
     function CaseService($q, Supportcase, StatusModel, Principal, Badge, Expertbadge, DrslMetadata, paginationConstants, SupportcaseQuery, DrslUserFlowService) {
         var service = {};
-        var isAdmin = false;
 
         service.currentCase = {
             index: 0,
             type: 'supportCase'
         };
+
         service.getEntityData = function (config) {
             var deferred = $q.defer(),
             dataToFetch = [],
             dataToTypes = [];
 
             if (config.getCurrentUser) {
-                var userLogin = Principal.identity().$$state.value.login;
-                if(userLogin === 'admin'){
-                    isAdmin = true;
-                }
+                service.currentCase.userLogin = Principal.identity().$$state.value.login;
                 dataToFetch.push(Principal.identity());
                 dataToTypes.push('identity');
             }
@@ -56,6 +53,7 @@
             }
 
             if(!DrslUserFlowService.user.isExpert){
+                // console.log("CURRENT USER", userLogin);
                 Supportcase.query({
                     page: config.page,
                     size: config.itemsPerPage,
@@ -64,7 +62,7 @@
                     data.headers = headers;
                     dataToFetch.push(data.$promise)
                     dataToTypes.push('supportCase')
-                    if(isAdmin){
+                    if(service.currentCase.userLogin === 'admin'){
                         $q.all(dataToFetch).then(function (data) {
                             deferred.resolve(processEntityData(data, dataToTypes));
                         });
@@ -163,7 +161,7 @@
                 return;
             }
         })
-
     }
+
 }
 })();
