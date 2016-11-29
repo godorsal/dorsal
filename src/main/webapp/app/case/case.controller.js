@@ -286,7 +286,7 @@
             */
             function setCurrentCase(targetCase, index) {
                 // Set the vm's currentCase to the provided targetCase
-                if(vm.currentCase === targetCase){
+                if(targetCase === undefined){
                     CaseService.currentCase.index = 0;
                     if(CaseService.currentCase.type === "supportCase"){
                         setCurrentCase(vm.supportcases[0])
