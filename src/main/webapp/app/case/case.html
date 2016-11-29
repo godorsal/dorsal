@@ -148,7 +148,9 @@
                                     <div>
                                         <span class="drsl-case-list-id">{{case.technology.name}} {{case.id}}</span>
                                         <span class="drsl-case-list-id">{{case.dateCreated | date:'MMM dd, yyyy'}}</span>
-                                        <a ng-click="vm.openRatingFromList(case); $event.stopPropagation();" ng-if="case.status.name === 'CLOSED' && vm.isCaseExpert()" translate="case.details.ratingDetailsList">View Rating Details</a>
+                                        <span>
+                                            <a ng-click="vm.openRatingFromList(case); $event.stopPropagation();" ng-if="case.status.name === 'CLOSED' && vm.isCaseExpert()" translate="case.details.ratingDetailsList">View Rating Details</a>
+                                        </span>
                                     </div>
                                     <div ng-if="case.numberOfUpdates">
                                         <div>Updates: {{case.numberOfUpdates}}</div>

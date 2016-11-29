@@ -46,9 +46,9 @@
             scope.openAttachments = function(event) {
                 event.stopPropagation();
                 event.preventDefault();
-
                 if (scope.isAuthenticated()) {
                     scope.attachmentsOpen = !scope.attachmentsOpen;
+                    scope.littleModalOpen = true;
                 }
             };
 
@@ -112,7 +112,11 @@
              */
             $document.keyup(function(e) {
                  if (e.keyCode == 27) {
-                     scope.cancelAttachments ()
+                     if(!scope.littleModalOpen){
+                         scope.cancelAttachments ()
+                     } else {
+                         scope.closeAttachments();
+                     }
                 }
                 scope.$apply();
             });

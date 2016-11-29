@@ -137,9 +137,9 @@
                     service.attachment.dataStreamContentType = file.type;
                     service.attachment.supportcase = DrslNewCaseService.newCase;
 
-                    // service.attachment.supportcase = {
-                    //     id: caseId
-                    // };
+                    service.attachment.supportcase = {
+                        id: caseId
+                    };
                     Attachment.save(service.attachment, function (file) {
                         // on success, proceed to the next file
                         // service.broadcastForAttachmentMessage(file);
