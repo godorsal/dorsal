@@ -24,8 +24,6 @@
             scope.StatusModel = StatusModel;
             scope.localEstimateHours = null;
             scope.maxHoursOnCase = 0;
-            // scope.expectedCompletionDate = scope.case.expectedCompletionDate
-            console.log(scope);
 
             scope.datePopup = {
                 opened: false
@@ -40,7 +38,6 @@
             };
 
             scope.submit = function () {
-                console.log(scope.case);
                 var logDate = $filter('date')(new Date(), 'MMM dd, yyyy HH:mm');
 
                 scope.case.estimateLog = (scope.case.estimateLog) ? scope.case.estimateLog : '';

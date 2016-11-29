@@ -103,8 +103,6 @@
                 }).then(function (data) {
                     var i, currentCaseIndex = 0;
                     // Set the vm's  support cases
-                    console.log("INDEX", CaseService.currentCase.index);
-                    console.log("TYPE", CaseService.currentCase.type);
                     if(data.sharedCase){
                         vm.sharedcases = data.sharedCase;
                         vm.sharedTotalItems = vm.sharedcases.headers('X-Total-Count');
@@ -636,7 +634,6 @@
                 if(!vm.isCaseExpert()){
                     var messageToSend = "@" + vm.currentCase.expertaccount.user.firstName + vm.currentCase.expertaccount.user.lastName + ' ' + vm.messageToSend
                 } else {
-                    console.log("EXPERT");
                     var messageToSend = vm.messageToSend
                 }
                 var messageObject = {
@@ -685,7 +682,6 @@
                 focus()
                 if(CaseService.currentCase.type === "supportCase"){
                     CaseService.currentCase.index = 0;
-                    console.log("SUPPORTCASE TRANSITION", CaseService.currentCase.type);
                 }
                 $state.transitionTo($state.$current, {
                     page: vm.page,
@@ -698,7 +694,6 @@
                 focus()
                 if(CaseService.currentCase.type === "sharedCase"){
                     CaseService.currentCase.index = 0;
-                    console.log("SHAREDCASE TRANSITION", CaseService.currentCase.type);
                 }
                 $state.transitionTo($state.$current, {
                     page: vm.page,

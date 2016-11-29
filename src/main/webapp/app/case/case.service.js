@@ -40,8 +40,8 @@
             }
             if(DrslUserFlowService.user.isExpert){
                 Supportcase.query({
-                    page: config.sharedPage,
-                    size: config.sharedItemsPerPage,
+                    page: config.page,
+                    size: config.itemsPerPage,
                     id: "expert"
                 }, function (data, headers) {
                     data.headers = headers;
@@ -67,7 +67,6 @@
                             deferred.resolve(processEntityData(data, dataToTypes));
                         });
                     } else {
-                        console.log("SHARD DASES");
                         Supportcase.query({
                             page: config.sharedPage,
                             size: config.sharedItemsPerPage,
