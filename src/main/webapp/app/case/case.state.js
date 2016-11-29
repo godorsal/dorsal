@@ -54,6 +54,7 @@
                     };
                 }],
                 TranslatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate,$translatePartialLoader) {
+                    $translatePartialLoader.addPart('adminSupportCaseReport');
                     $translatePartialLoader.addPart('case');
                     return $translate.refresh();
                 }]

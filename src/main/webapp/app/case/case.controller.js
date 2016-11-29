@@ -286,9 +286,21 @@
             */
             function setCurrentCase(targetCase, index) {
                 // Set the vm's currentCase to the provided targetCase
-                vm.currentCase = targetCase;
-                CaseService.currentCase.index = index;
+                if(vm.currentCase === targetCase){
+                    CaseService.currentCase.index = 0;
+                    if(CaseService.currentCase.type === "supportCase"){
+                        setCurrentCase(vm.supportcases[0])
+                        return;
+                    } else {
+                        setCurrentCase(vm.sharedcases[0])
+                        return;
+                    }
+                }
 
+                vm.currentCase = targetCase;
+
+
+                CaseService.currentCase.index = index;
                 if (vm.currentCase && (vm.currentCase.user.login === vm.currentUser.login)) {
                     vm.isCreator = true;
                     vm.shareMessage = vm.shareCaseMessage;
@@ -302,6 +314,29 @@
                 if(vm.currentCase.status.name === 'CLOSED'){
                     vm.maxResults = DrslHipChatService.maxResults;
                     getMessages();
+                    Rating.get({
+                        supportcase: "supportcase",
+                        id: vm.currentCase.id
+                    }, function (data) {
+                        var ratingObject = {
+                            dateRated: data.dateRated,
+                            hasExpertExceeded: data.hasExpertExceeded,
+                            id: data.id,
+                            rateDetails: data.ratingComments,
+                            detailedReportObject: {},
+                            ratingComments: data.ratingComments,
+                            score: data.score,
+                            supportcase: data.supportcase
+                        }
+                        data.rateDetails.split(',').forEach(function (rateDetail) {
+                            var rateDetail = rateDetail.split(' ');
+                            ratingObject.detailedReportObject[rateDetail[0]] = rateDetail[1]
+                        })
+                        vm.currentCase.report = {
+                            rating: ratingObject,
+                            supportcase: data.supportcase
+                        }
+                    })
                 } else {
                     vm.maxResults = DrslHipChatService.maxResults;
                     vm.schedulingMessages = true;

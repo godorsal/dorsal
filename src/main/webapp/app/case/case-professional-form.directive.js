@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .directive('caseProfessionalForm', caseProfessionalForm);
 
-    caseProfessionalForm.$inject = ['StatusModel', 'toastr', 'CaseCompleteService', '$filter'];
+    caseProfessionalForm.$inject = ['StatusModel', 'toastr', 'CaseCompleteService', '$filter', 'SupportCaseReportRatingCommentModalService'];
 
-    function caseProfessionalForm(StatusModel, toastr, CaseCompleteService, $filter) {
+    function caseProfessionalForm(StatusModel, toastr, CaseCompleteService, $filter, SupportCaseReportRatingCommentModalService) {
         var directive = {
             restrict: 'E',
             scope:  {
@@ -25,7 +25,7 @@
             scope.localEstimateHours = null;
             scope.maxHoursOnCase = 0;
             // scope.expectedCompletionDate = scope.case.expectedCompletionDate
-            // console.log(scope);
+            console.log(scope);
 
             scope.datePopup = {
                 opened: false
@@ -101,6 +101,10 @@
                     scope.datePopup.opened = true;
                 }
             };
+
+            scope.openModal = function() {
+                SupportCaseReportRatingCommentModalService.open(scope.case.report)
+            }
 
             scope.$on('currentCaseSet', function(){
                 var caseEstimateHours = scope.case.estimateHours/1;
