@@ -178,7 +178,8 @@
                 url: url,
                 data: {
                     message: messageObject.message,
-                    from: messageObject.from
+                    from: messageObject.from,
+                    message_format: "text"
                 },
                 headers: {
                     'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[3]
