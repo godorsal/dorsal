@@ -652,7 +652,7 @@
             }
             function sendMessage(){
                 if(!vm.isCaseExpert()){
-                    var messageToSend = "@" + vm.currentCase.expertaccount.user.firstName + vm.currentCase.expertaccount.user.lastName + ' ' + vm.messageToSend
+                    var messageToSend = encodeURI("@") + vm.currentCase.expertaccount.user.firstName + vm.currentCase.expertaccount.user.lastName + ' ' + vm.messageToSend
                 } else {
                     var messageToSend = vm.messageToSend
                 }
