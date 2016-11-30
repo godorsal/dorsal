@@ -146,19 +146,24 @@
                         }
                     }
 
-                    // Set the current case to the first case, or if we found one above, use that index
-                    if(vm.supportcases.length > 0 && CaseService.currentCase.type === "supportCase"){
-                        vm.setCurrentCase(vm.supportcases[CaseService.currentCase.index], CaseService.currentCase.index);
-                    } else if(CaseService.currentCase.type === "sharedCase") {
-                        vm.setCurrentCase(vm.sharedcases[CaseService.currentCase.index], CaseService.currentCase.index);
-                    }
+                    // // Set the current case to the first case, or if we found one above, use that index
+                    // if(vm.supportcases.length > 0 && CaseService.currentCase.type === "supportCase"){
+                    //     vm.setCurrentCase(vm.supportcases[CaseService.currentCase.index], CaseService.currentCase.index);
+                    // } else if(CaseService.currentCase.type === "sharedCase") {
+                    //     vm.setCurrentCase(vm.sharedcases[CaseService.currentCase.index], CaseService.currentCase.index);
+                    // }
 
 
                     // Set the vm's currentUser
                     if (data.identity) {
                         vm.currentUser = data.identity;
                     }
-
+                    // Set the current case to the first case, or if we found one above, use that index
+                    if(vm.supportcases.length > 0 && CaseService.currentCase.type === "supportCase"){
+                        vm.setCurrentCase(vm.supportcases[CaseService.currentCase.index], CaseService.currentCase.index);
+                    } else if(CaseService.currentCase.type === "sharedCase") {
+                        vm.setCurrentCase(vm.sharedcases[CaseService.currentCase.index], CaseService.currentCase.index);
+                    }
                     // Determine if the current user is the case creator and set the vm's "shareMessage"
                     if (vm.currentCase && (vm.currentCase.user.login === vm.currentUser.login)) {
                         vm.isCreator = true;
@@ -305,7 +310,6 @@
                 }
 
                 vm.currentCase = targetCase;
-
 
                 CaseService.currentCase.index = index;
                 if (vm.currentCase && (vm.currentCase.user.login === vm.currentUser.login)) {
@@ -719,7 +723,6 @@
                 });
             }
             function openRatingFromActionBar() {
-                console.log(vm.currentCase);
                 SupportCaseReportRatingCommentModalService.open(vm.currentCase.report)
             }
             function openRatingFromList(supportcase) {
