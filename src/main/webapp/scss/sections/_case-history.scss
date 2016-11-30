@@ -16,6 +16,11 @@ Case History
             &.active {
                 background-color: $brand-color;
                 color: $inverted-heading-text-color;
+                .drsl-case-list-id {
+                    > a {
+                        color: white;
+                    }
+                }
             }
 
             .drsl-case-list {
