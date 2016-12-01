@@ -130,7 +130,6 @@
 					}
 
 
-
 					// Set the vm's badges
 					if (data.badges) {
 						vm.badges = data.badges;
@@ -350,6 +349,13 @@
 					})
 				} else {
 					vm.maxResults = DrslHipChatService.maxResults;
+					console.log(vm.currentCase);
+					if (vm.currentCase.expertaccount.numberOfCases > 0) {
+                        vm.currentCase.expertaccount.displayedExpertScore = Math.round(vm.currentCase.expertaccount.expertScore / vm.currentCase.expertaccount.numberOfCases);
+                    } else {
+                        vm.currentCase.expertaccount.displayedExpertScore = 0;
+                    }
+					console.log(vm.currentCase.expertaccount.displayedExpertScore);
 					if(!vm.schedulingMessages){
 						vm.schedulingMessages = true;
 						vm.messageScheduler = $interval(function () {

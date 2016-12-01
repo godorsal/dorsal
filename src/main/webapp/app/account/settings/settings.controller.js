@@ -64,7 +64,7 @@
                     if (vm.currentExpert.numberOfCases > 0) {
                         vm.displayedExpertScore = Math.round(vm.currentExpert.expertScore / vm.currentExpert.numberOfCases);
                     } else {
-                        vm.displayedExpertScore = vm.currentExpert.expertScore;
+                        vm.displayedExpertScore = 0;
                     }
                 }
             });
