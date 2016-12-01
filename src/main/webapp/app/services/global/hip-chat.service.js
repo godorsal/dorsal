@@ -216,9 +216,6 @@
         service.magicMessageParser = function (messages) {
             return messages.forEach(function(message){
                 var arrayMessage = message.message.split(' ');
-                if(arrayMessage[0][0] === "@"){
-                    arrayMessage.splice(0, 1);
-                }
                 arrayMessage.map(function(word, index){
                     if (checkImg(word)) {
                         arrayMessage.splice(index, 1, '<a target="_blank" href=' + word + '>' + '<img src=' + word + ' alt="" class="drsl-hipchat-message-image-thumbnail"/>' + '</a>');
@@ -226,6 +223,8 @@
                         arrayMessage.splice(index, 1, '<a target="_blank" href=' + word.replace(/\/$/, "") + '>' + word + '</a>');
                     } else if (checkCom(word)) {
                         arrayMessage.splice(index, 1, '<a target="_blank" href=http://' + word + '>' + word + '</a>');
+                    } else if(index === 0 && word[0] === "@"){
+                        arrayMessage.splice(index, 1);
                     }
                 })
                 if(message.type === 'notification'){

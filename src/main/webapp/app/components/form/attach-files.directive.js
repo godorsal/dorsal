@@ -101,7 +101,7 @@
                     scope.attachFileList = [];
 
                     result.reverse().forEach(function(attachment){
-                        if(attachment.supportcase.id == scope.caseId){
+                        if(attachment.supportcase && attachment.supportcase.id == scope.caseId){
                             scope.attachFileList.push(attachment);
                         }
                     })
