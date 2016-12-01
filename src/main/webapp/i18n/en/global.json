@@ -103,7 +103,8 @@
                     "noSpecial": "Your password should contain atleast 1 special symbol.",
                     "minlength": "Your password is required to be at least 8 characters.",
                     "maxlength": "Your password cannot be longer than 50 characters.",
-                    "strength": "Password strength:"
+                    "strength": "Password strength:",
+                    "attachmentPlaceholder": "Select attach to browse for files"
                 },
                 "confirmpassword": {
                     "required": "Your confirmation password is required.",

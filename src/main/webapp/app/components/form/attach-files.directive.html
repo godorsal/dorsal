@@ -12,6 +12,7 @@
             <div class="drsl-menuitem-field-type" ng-click="textFieldClick($event)">
                 <form ng-submit="">
                     <div class="drsl-attachment-items-wrapper">
+                        <div ng-if="attachFileList.length < 1" translate="global.messages.info.attachmentPlaceholder">Select attach to browse for files</div>
                         <div class="drsl-attachment-item" ng-class-odd="'drsl-attachment-item-odd'" ng-repeat="file in attachFileList">
                             <span class="pull-right">
                                 <drsl-download-file file="file"></drsl-download-file>

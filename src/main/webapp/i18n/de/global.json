@@ -85,7 +85,8 @@
                 "expertScoreOutOf": "{{score}} out of 100",
                 "pending":"You still have {{attachments}} pending attachments. <br/> Press Later to dismiss or Done to upload.",
                 "missingDetails":"We need some additional details for your account",
-                "missingDetailsWithLink":"We need some additional details for your account: click to view User Settings"
+                "missingDetailsWithLink":"We need some additional details for your account: click to view User Settings",
+                "attachmentPlaceholder": "Select attach to browse for files"
             },
             "error": {
                 "dontmatch": "Das bestätigte Passwort entspricht nicht dem neuen Passwort!"

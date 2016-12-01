@@ -810,7 +810,7 @@
 			}
 
 			// Call to initialize the controller.
-			$timeout(function () {
+			// $timeout(function () {
 				if(vm.DrslMetadata.itemsperpage){
 					paginationConstants.itemsPerPage = vm.DrslMetadata.itemsperpage;
 					vm.itemsPerPage = paginationConstants.itemsPerPage;
@@ -819,6 +819,6 @@
 					vm.itemsPerPage = paginationConstants.itemsPerPage;
 				}
 				vm.init()
-			}, 10);
+			// }, 10);
 		}
 	})();
