@@ -164,10 +164,11 @@
 					} else if(data.sharedCase && vm.sharedcases.length > 0 &&  CaseService.currentCase.type === "sharedCase") {
 						vm.setCurrentCase(vm.sharedcases[CaseService.currentCase.index], CaseService.currentCase.index);
 					} else {
+						log
 						vm.currentCase = null;
 						return;
 					}
-
+					console.log("CURENT CASE", vm.currentCase);
 					// Determine if the current user is the case creator and set the vm's "shareMessage"
 					if (vm.currentCase.user && (vm.currentCase.user.login === vm.currentUser.login)) {
 						vm.isCreator = true;
@@ -301,6 +302,7 @@
 			* @param targetCase a case object
 			*/
 			function setCurrentCase(targetCase, index) {
+				console.log("TARGET ", targetCase);
 				// Set the vm's currentCase to the provided targetCase
 				if(targetCase === undefined){
 					CaseService.currentCase.index = 0;
@@ -314,7 +316,7 @@
 				}
 
 				vm.currentCase = targetCase;
-
+				console.log("YEAH BBY", vm.currentCase);
 				CaseService.currentCase.index = index;
 				if (vm.currentCase && (vm.currentCase.user.login === vm.currentUser.login)) {
 					vm.isCreator = true;
@@ -816,6 +818,7 @@
 				if(vm.DrslMetadata.itemsperpage){
 					paginationConstants.itemsPerPage = vm.DrslMetadata.itemsperpage;
 					vm.itemsPerPage = paginationConstants.itemsPerPage;
+					vm.sharedItemsPerPage = paginationConstants.itemsPerPage;
 				} else {
 					paginationConstants.itemsPerPage = "5";
 					vm.itemsPerPage = paginationConstants.itemsPerPage;
