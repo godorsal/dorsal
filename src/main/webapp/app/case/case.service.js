@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .factory('CaseService', CaseService);
 
-    CaseService.$inject = ['$q', 'Supportcase', 'StatusModel', 'Principal', 'Badge', 'Expertbadge', 'DrslMetadata', 'paginationConstants', 'SupportcaseQuery', 'DrslUserFlowService'];
+    CaseService.$inject = ['$q', 'Supportcase', 'StatusModel', 'Principal', 'Badge', 'Expertbadge', 'DrslMetadata', 'paginationConstants', 'SupportcaseQuery'];
 
-    function CaseService($q, Supportcase, StatusModel, Principal, Badge, Expertbadge, DrslMetadata, paginationConstants, SupportcaseQuery, DrslUserFlowService) {
+    function CaseService($q, Supportcase, StatusModel, Principal, Badge, Expertbadge, DrslMetadata, paginationConstants, SupportcaseQuery) {
         var service = {};
 
         service.currentCase = {
@@ -36,7 +36,7 @@
                 dataToTypes.push('badges');
             }
 
-            if(DrslUserFlowService.user.isExpert){
+            if(config.isExpert){
                 Supportcase.query({
                     page: config.page,
                     size: config.itemsPerPage,
@@ -52,8 +52,7 @@
                 })
             }
 
-            if(!DrslUserFlowService.user.isExpert){
-                // console.log("CURRENT USER", userLogin);
+            if(!config.isExpert){
                 Supportcase.query({
                     page: config.page,
                     size: config.itemsPerPage,
@@ -67,13 +66,11 @@
                             deferred.resolve(processEntityData(data, dataToTypes));
                         });
                     } else {
-                        console.log("QUERYING FOR SHARED CASES!!");
                         Supportcase.query({
                             page: config.sharedPage,
                             size: config.sharedItemsPerPage,
                             id: "shared"
                         }, function (data, headers) {
-                            console.log("SHARED CASES: ", data);
                             data.headers = headers;
                             dataToFetch.push(data.$promise)
                             dataToTypes.push('sharedCase')

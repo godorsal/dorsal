@@ -31,9 +31,11 @@
          * Listen for $stateChangeStart events and redirect the user if necessary.
          */
         $rootScope.$on('$stateChangeStart', function(event, toState) {
+            console.log("EVENT", event);
+            console.log("TO STATE", toState);
+
             service.stateChangeDetected = true;
-            service.handleUserFlow({event: event, toState: toState});
-            // service.redirectUser({event: event, toState: toState});
+            service.redirectUser({event: event, toState: toState});
         });
 
         /**
@@ -104,7 +106,6 @@
          * @param {string} type An optional string type (eg 'login')
          */
         service.userFlowHandoff = function (type) {
-            console.log("userFlowHandoff", service.user);
             // When coming from login redirect the user differently
             if (type === 'login') {
                 service.redirectUserAfterLogin();
@@ -153,7 +154,6 @@
          * @param {Object} data An optional object containing useful $stateChangeStart event data
          */
         service.redirectUser = function (data) {
-            console.log("redirectUser", service.user);
             var toState = null,
                 stateName = (data && data.toState) ? data.toState.name : $state.current.name;
 
@@ -168,7 +168,6 @@
                     }
                     break;
                 case 'case':
-                    console.log("case", service.user);
                     // Send non-experts with no cases back to the concierge page
                     if (!service.user.isExpert && !service.user.hasCases) {
                         toState = 'concierge';

@@ -123,13 +123,12 @@
         * On ESCAPE key press, close modal
         * @param e
         */
-        
+
         /**
         * Handle the 'cancel' buttons click event
         * @param e
         */
         function cancel(e) {
-            console.log("CANCEL");
             e.preventDefault();
             if(DrslAttachFileService.attachFileList.length){
                 $scope.$broadcast('closingDetailsModal');
@@ -141,6 +140,8 @@
         $scope.$on('cancelAttachments', function () {
             $uibModalInstance.dismiss('cancel');
         });
+
+
         /**
         * A Success Callback function passed to the Caseupdate save function.
         */
@@ -180,6 +181,7 @@
 
             // If there are change to the update message, save them.
             if (vm.caseupdate.updateMsg) {
+                console.log(vm.caseupdate);
                 Caseupdate.save(vm.caseupdate, onSaveSuccess, onSaveError);
             }
 

@@ -349,13 +349,11 @@
 					})
 				} else {
 					vm.maxResults = DrslHipChatService.maxResults;
-					console.log(vm.currentCase);
 					if (vm.currentCase.expertaccount.numberOfCases > 0) {
                         vm.currentCase.expertaccount.displayedExpertScore = Math.round(vm.currentCase.expertaccount.expertScore / vm.currentCase.expertaccount.numberOfCases);
                     } else {
                         vm.currentCase.expertaccount.displayedExpertScore = 0;
                     }
-					console.log(vm.currentCase.expertaccount.displayedExpertScore);
 					if(!vm.schedulingMessages){
 						vm.schedulingMessages = true;
 						vm.messageScheduler = $interval(function () {
@@ -732,7 +730,6 @@
 				SupportCaseReportRatingCommentModalService.open(vm.currentCase.report)
 			}
 			function openRatingFromList(supportcase) {
-				console.log("OPEN RATING");
 				if(supportcase.status.name === 'CLOSED'){
 					Rating.get({
 						supportcase: "supportcase",
@@ -810,7 +807,7 @@
 			}
 
 			// Call to initialize the controller.
-			// $timeout(function () {
+			$timeout(function () {
 				if(vm.DrslMetadata.itemsperpage){
 					paginationConstants.itemsPerPage = vm.DrslMetadata.itemsperpage;
 					vm.itemsPerPage = paginationConstants.itemsPerPage;
@@ -819,6 +816,6 @@
 					vm.itemsPerPage = paginationConstants.itemsPerPage;
 				}
 				vm.init()
-			// }, 10);
+			});
 		}
 	})();

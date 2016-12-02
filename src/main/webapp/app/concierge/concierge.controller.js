@@ -69,6 +69,9 @@
             vm.conciergechaturl = null;
             vm.checkingMessages = false;
         })
+        $scope.$on('attachmentCompleteWriteUpdate', function(thing1, thing2){
+            console.log("Attachment Complete Concierge Page", thing2);
+        });
         /**
         * Creates (saves/updates) the case.
         * Called after the form is submitted and the user is authenticated.
@@ -156,8 +159,8 @@
         * @param result
         */
         var onSaveSuccess = function (result) {
-            DrslNewCaseService.setNewCase(result);
-            // DrslNewCaseService.setNewCaseId(result.id);
+            // DrslNewCaseService.setNewCase(result);
+            DrslNewCaseService.setNewCaseId(result.id);
 
             // Loop through each tech property and save via an api call
             for (var key in vm.technologyProperties) {
