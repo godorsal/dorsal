@@ -158,13 +158,18 @@
 						vm.currentUser = data.identity;
 					}
 					// Set the current case to the first case, or if we found one above, use that index
+
 					if(vm.supportcases.length > 0 && CaseService.currentCase.type === "supportCase"){
 						vm.setCurrentCase(vm.supportcases[CaseService.currentCase.index], CaseService.currentCase.index);
-					} else if(CaseService.currentCase.type === "sharedCase") {
+					} else if(data.sharedCase && vm.sharedcases.length > 0 &&  CaseService.currentCase.type === "sharedCase") {
 						vm.setCurrentCase(vm.sharedcases[CaseService.currentCase.index], CaseService.currentCase.index);
+					} else {
+						vm.currentCase = null;
+						return;
 					}
+
 					// Determine if the current user is the case creator and set the vm's "shareMessage"
-					if (vm.currentCase && (vm.currentCase.user.login === vm.currentUser.login)) {
+					if (vm.currentCase.user && (vm.currentCase.user.login === vm.currentUser.login)) {
 						vm.isCreator = true;
 						vm.shareMessage = vm.shareCaseMessage;
 					} else {
