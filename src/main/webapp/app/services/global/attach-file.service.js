@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .factory('DrslAttachFileService', DrslAttachFileService);
 
-    DrslAttachFileService.$inject = ['Attachment', 'DataUtils', 'toastr', '$translate', 'DrslNewCaseService', '$rootScope', '$timeout', 'Caseupdate', 'Principal'];
+    DrslAttachFileService.$inject = ['Attachment', 'DataUtils', 'toastr', '$translate', 'DrslNewCaseService', '$rootScope', '$timeout', 'Caseupdate', 'Principal', 'Supportcase'];
 
-    function DrslAttachFileService(Attachment, DataUtils, toastr, $translate, DrslNewCaseService, $rootScope, $timeout, Caseupdate, Principal) {
+    function DrslAttachFileService(Attachment, DataUtils, toastr, $translate, DrslNewCaseService, $rootScope, $timeout, Caseupdate, Principal, Supportcase) {
         var service = {};
 
         service.attachFileList = [];
@@ -127,15 +127,13 @@
          */
         function uploadFileInQueue(supportCase) {
             var file = service.attachFileList.shift(),
-                caseId = (supportCase)? supportCase.id : DrslNewCaseService.newCase.id;
-                // caseId = (supportCase)? supportCase.id : DrslNewCaseService.newCaseId;
+                caseId = (supportCase)? supportCase.id : DrslNewCaseService.newCaseId;
 
             if (file && !file.dataStream && caseId) {
                 DataUtils.toBase64(file, function (base64Data) {
                     service.attachment.name = file.name.replace(/\s|,|-/g, '');
                     service.attachment.dataStream = base64Data;
                     service.attachment.dataStreamContentType = file.type;
-                    service.attachment.supportcase = DrslNewCaseService.newCase;
 
                     service.attachment.supportcase = {
                         id: caseId
@@ -151,7 +149,8 @@
                             service.caseupdate.supportcase = DrslNewCaseService.newCase;
                         }
 
-                        Caseupdate.save(service.caseupdate, onSaveSuccess, onSaveError)
+                        // Caseupdate.save(service.caseupdate, onSaveSuccess, onSaveError)
+                        writeUpdate(service.attachment.supportcase.id)
                         uploadFileInQueue(supportCase);
                     }, function () {
                         // on error, proceed to the next file
@@ -175,7 +174,12 @@
         function onSaveError(thing) {
             console.log(thing, "!");
         }
-
+        function writeUpdate(supportCaseId) {
+            Supportcase.get({id: supportCaseId}, function (supportcase) {
+                service.caseupdate.supportcase = supportcase;
+                Caseupdate.save(service.caseupdate, onSaveSuccess, onSaveError)
+            })
+        }
         return service;
     }
 })();
