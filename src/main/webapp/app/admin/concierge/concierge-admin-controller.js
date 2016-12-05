@@ -44,7 +44,7 @@
 				})
 				checkRooms();
 			}, function errorHandler(err) {
-				console.log(err);
+				console.error(err);
 			})
 		}
 		function deleteRoom(id) {

@@ -31,9 +31,6 @@
          * Listen for $stateChangeStart events and redirect the user if necessary.
          */
         $rootScope.$on('$stateChangeStart', function(event, toState) {
-            console.log("EVENT", event);
-            console.log("TO STATE", toState);
-
             service.stateChangeDetected = true;
             service.redirectUser({event: event, toState: toState});
         });

@@ -26,7 +26,7 @@
                 }
             }
             if (response.status === 429) {
-                // console.log("RAN OUT OF REQUESTS, SWITCH TOKEN?", response);
+                console.error("Hipchat API token ran out of requests", response);
             }
             return $q.reject(response);
         }

@@ -181,7 +181,6 @@
 
             // If there are change to the update message, save them.
             if (vm.caseupdate.updateMsg) {
-                console.log(vm.caseupdate);
                 Caseupdate.save(vm.caseupdate, onSaveSuccess, onSaveError);
             }
 

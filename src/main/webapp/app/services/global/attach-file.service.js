@@ -148,8 +148,6 @@
                         } else {
                             service.caseupdate.supportcase = DrslNewCaseService.newCase;
                         }
-
-                        // Caseupdate.save(service.caseupdate, onSaveSuccess, onSaveError)
                         writeUpdate(service.attachment.supportcase.id)
                         uploadFileInQueue(supportCase);
                     }, function () {
@@ -168,16 +166,10 @@
                 service.broadcastAttachmentUploadComplete();
             }
         }
-        function onSaveSuccess(thing) {
-            console.log(thing, "!");
-        }
-        function onSaveError(thing) {
-            console.log(thing, "!");
-        }
         function writeUpdate(supportCaseId) {
             Supportcase.get({id: supportCaseId}, function (supportcase) {
                 service.caseupdate.supportcase = supportcase;
-                Caseupdate.save(service.caseupdate, onSaveSuccess, onSaveError)
+                Caseupdate.save(service.caseupdate)
             })
         }
         return service;

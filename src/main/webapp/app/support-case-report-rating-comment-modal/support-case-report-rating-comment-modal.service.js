@@ -20,7 +20,6 @@
         return service;
 
         function open (report) {
-            console.log(report);
             if (modalInstance !== null) return;
             modalInstance = $uibModal.open({
                 animation: true,

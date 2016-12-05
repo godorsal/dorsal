@@ -168,7 +168,6 @@
 						vm.currentCase = null;
 						return;
 					}
-					console.log("CURENT CASE", vm.currentCase);
 					// Determine if the current user is the case creator and set the vm's "shareMessage"
 					if (vm.currentCase.user && (vm.currentCase.user.login === vm.currentUser.login)) {
 						vm.isCreator = true;
@@ -302,7 +301,6 @@
 			* @param targetCase a case object
 			*/
 			function setCurrentCase(targetCase, index) {
-				console.log("TARGET ", targetCase);
 				// Set the vm's currentCase to the provided targetCase
 				if(targetCase === undefined){
 					CaseService.currentCase.index = 0;
@@ -316,7 +314,6 @@
 				}
 
 				vm.currentCase = targetCase;
-				console.log("YEAH BBY", vm.currentCase);
 				CaseService.currentCase.index = index;
 				if (vm.currentCase && (vm.currentCase.user.login === vm.currentUser.login)) {
 					vm.isCreator = true;
@@ -420,7 +417,7 @@
 						.then(function (res) {
 							DrslHipChatService.archiveRoom(res.data)
 						}, function errorHandler(error) {
-							console.log("ERROR HANDLER", error);
+							console.error(error);
 						})
 						// Add/update expert badges and their counts
 						updateExpertBadges(data.selectedBadges);
@@ -678,7 +675,7 @@
 					getMessages();
 					vm.messageToSend = '';
 				}, function (res) {
-					console.log("MESSAGE ERROR", res);
+					console.error(res);
 				})
 			}
 			//Checks to see if a message in the message list is sent by the current user

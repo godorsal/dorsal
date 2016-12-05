@@ -69,9 +69,7 @@
             vm.conciergechaturl = null;
             vm.checkingMessages = false;
         })
-        $scope.$on('attachmentCompleteWriteUpdate', function(thing1, thing2){
-            console.log("Attachment Complete Concierge Page", thing2);
-        });
+        
         /**
         * Creates (saves/updates) the case.
         * Called after the form is submitted and the user is authenticated.

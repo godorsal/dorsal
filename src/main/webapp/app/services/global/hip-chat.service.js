@@ -98,7 +98,6 @@
         }
         // Make Hipchat chatroom using roomObjects name and topic
         service.makeRoom = function(roomObject){
-            console.log("THIS IS WHO!", roomObject.expert);
             var url = '/v2/room';
             return $http({
                 method: 'POST',
