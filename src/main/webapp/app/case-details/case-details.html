@@ -91,7 +91,7 @@
                             </div>
 
                             <!-- Has Updates -->
-                            <table ng-show="vm.updates.length > 0" style="width: 170%">
+                            <table ng-show="vm.updates.length > 0" class="drsl-outer-table">
                                 <thead>
                                     <tr>
                                         <th colspan="80"  translate="caseDetails.updates.message">Message</th>
@@ -104,9 +104,12 @@
                                 <table class="drsl-table-scroll table-striped" ng-show="vm.updates.length > 0">
                                     <tbody>
                                         <tr ng-repeat="update in vm.updates track by $index" class="drsl-update-trow">
-                                            <td colspan=80>{{update.updateMsg}}</td>
+                                            <td >{{update.updateMsg}}</td>
+                                            <td >{{update.dateUpdated | date:"MMM dd, yyyy H:mm"}}</td>
+                                            <td >{{update.user.login}}</td>
+                                            <!-- <td colspan=80>{{update.updateMsg}}</td>
                                             <td colspan=10>{{update.dateUpdated | date:"MMM dd, yyyy H:mm"}}</td>
-                                            <td colspan=10>{{update.user.login}}</td>
+                                            <td colspan=10>{{update.user.login}}</td> -->
                                         </tr>
                                     </tbody>
                                 </table>

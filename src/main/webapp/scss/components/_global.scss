@@ -220,10 +220,17 @@ body {
 table.drsl-table-scroll {
     width: 100%;
 }
+.drsl-outer-table {
+    width: 167%
+}
 .drsl-inner-table {
     max-height: 450px;
     overflow-y: scroll;
     overflow-x: hidden;
+    >table>tbody>tr>td {
+        white-space: pre-wrap;
+        width: 59%;
+    }
 }
 .drsl-avaiable-concierge-name {
     text-align: right;
