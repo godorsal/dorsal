@@ -163,7 +163,10 @@
                                     <div class="form-group">
                                         <div class="drsl-placeholder-label" type="text"  uib-tooltip="name of other contact method">
                                             <input type="text" class="form-control" id="preferred" name="preferred"
-                                                   ng-model="vm.otherTitle" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.preferred.$dirty && !vm.otherTitle)}">
+                                                   ng-model="vm.shownTitle" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.preferred.$dirty && !vm.otherTitle)}"
+                                                   ng-focus="vm.hideTitleElipsis()"
+                                                   ng-blur="vm.showTitleElipsis()"
+                                                   >
                                             <span class="drsl-unit" translate="settings.form.preferred">(Preffered Contact Method)</span>
                                         </div>
                                     </div>
@@ -172,7 +175,10 @@
                                     <div class="form-group">
                                         <div class="drsl-placeholder-label" type="text" uib-tooltip="link to other contact method">
                                             <input type="text" class="form-control" id="othercommunication" name="othercommunication"
-                                                   ng-model="vm.otherLink" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.othercommunication.$dirty && !vm.otherLink)}">
+                                                   ng-model="vm.shownLink" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.othercommunication.$dirty && !vm.otherLink)}"
+                                                   ng-focus="vm.hideLinkElipsis()"
+                                                   ng-blur="vm.showLinkElipsis()"
+                                                   >
                                             <span class="drsl-unit" translate="settings.form.othercommunication">(Other Comms)</span>
                                         </div>
                                     </div>

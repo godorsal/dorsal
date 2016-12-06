@@ -31,7 +31,10 @@
         vm.isExpert = false;
         vm.issues = Issue.query();
         vm.technologies = Technology.query();
-
+        vm.hideTitleElipsis = hideTitleElipsis;
+        vm.showTitleElipsis = showTitleElipsis;
+        vm.hideLinkElipsis = hideLinkElipsis;
+        vm.showLinkElipsis = showLinkElipsis;
         // vm methods
         vm.init = init;
         vm.save = save;
@@ -59,7 +62,8 @@
                     var othercommunication = vm.currentExpert.othercommunication.split(',');
                     vm.otherLink = othercommunication[0];
                     vm.otherTitle = othercommunication[1];
-
+                    vm.shownTitle = vm.otherTitle.substring(0, 19) + "...";
+                    vm.shownLink = vm.otherLink.substring(0, 19) + "...";
                     if (vm.currentExpert.numberOfCases > 0) {
                         vm.displayedExpertScore = Math.round(vm.currentExpert.expertScore / vm.currentExpert.numberOfCases);
                     } else {
@@ -437,7 +441,20 @@
             toastr["warning"]("User Removed");
             vm.authorizedUsers.splice(index, 1)
         }
-
+        function hideTitleElipsis() {
+            vm.shownTitle = vm.otherTitle
+        }
+        function showTitleElipsis() {
+            vm.otherTitle = vm.shownTitle
+            vm.shownTitle = vm.otherTitle.substring(0, 19) + "...";
+        }
+        function hideLinkElipsis() {
+            vm.shownLink = vm.otherLink
+        }
+        function showLinkElipsis() {
+            vm.otherLink = vm.shownLink
+            vm.shownLink = vm.otherLink.substring(0, 19) + "...";
+        }
         // Call to initialize the controller.
         vm.init();
     }
