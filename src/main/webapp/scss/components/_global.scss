@@ -221,6 +221,24 @@ body {
 table.drsl-table-scroll {
     width: 100%;
 }
+
+table.drsl-table-scroll tbody {
+    // width: 668px;
+    display: block;
+    min-height: 95px;
+    max-height: 476px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    > td{
+        width: 25%;
+    }
+}
+
+table.drsl-table-scroll thead > tr {
+    width: 100%;
+    color: $drsl-label-color;
+    display: table;
+}
 .drsl-outer-table {
     width: 100%;
 }
