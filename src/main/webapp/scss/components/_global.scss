@@ -214,6 +214,7 @@ body {
 
     .drsl-dialog-buttons {
         text-align: right;
+        padding: 20px;
     }
 }
 
@@ -221,7 +222,7 @@ table.drsl-table-scroll {
     width: 100%;
 }
 .drsl-outer-table {
-    width: 167%
+    width: 100%;
 }
 .drsl-inner-table {
     max-height: 450px;
@@ -229,7 +230,7 @@ table.drsl-table-scroll {
     overflow-x: hidden;
     >table>tbody>tr>td {
         white-space: pre-wrap;
-        width: 59%;
+        // width: 59%;
     }
 }
 .drsl-avaiable-concierge-name {
