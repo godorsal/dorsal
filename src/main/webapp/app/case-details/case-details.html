@@ -94,8 +94,8 @@
                             <table ng-show="vm.updates.length > 0" class="drsl-outer-table">
                                 <thead>
                                     <tr>
-                                        <th style="width: 56%" translate="caseDetails.updates.message">Message</th>
-                                        <th style="width: 20%"  translate="caseDetails.updates.date">Date</th>
+                                        <th style="width: 64%;" translate="caseDetails.updates.message">Message</th>
+                                        <th style="width: 19%"  translate="caseDetails.updates.date">Date</th>
                                         <th style="width: 20%"  translate="caseDetails.updates.userExpert">User/Expert</th>
                                     </tr>
                                 </thead>
@@ -104,8 +104,8 @@
                                 <table class="table-striped" ng-show="vm.updates.length > 0">
                                     <tbody>
                                         <tr ng-repeat="update in vm.updates track by $index" class="drsl-update-trow">
-                                            <td style="width: 60%">{{update.updateMsg}}</td>
-                                            <td style="width: 21%">{{update.dateUpdated | date:"MMM dd, yyyy H:mm"}}</td>
+                                            <td style="width: 64%; min-width: 588px; max-width: 588px; word-wrap: break-word;">{{update.updateMsg}}</td>
+                                            <td style="width: 19%">{{update.dateUpdated | date:"MMM dd, yyyy H:mm"}}</td>
                                             <td style="width: 20%">{{update.user.login}}</td>
                                             <!-- <td colspan=80>{{update.updateMsg}}</td>
                                             <td colspan=10>{{update.dateUpdated | date:"MMM dd, yyyy H:mm"}}</td>
