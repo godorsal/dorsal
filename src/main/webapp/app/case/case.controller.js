@@ -626,10 +626,13 @@
 					});
 				}
 			}
-			function getMessages(){
+			function getMessages(tokenNo){
+				if(!tokenNo){
+					tokenNo = 1;
+				}
 				var messagesID = vm.currentCase.technology.name + vm.currentCase.id;
 				DrslHipChatService.maxResults = vm.maxResults;
-				DrslHipChatService.getMessages(messagesID, Number(DrslHipChatService.maxResults), vm.currentCase)
+				DrslHipChatService.getMessages(messagesID, Number(DrslHipChatService.maxResults), vm.currentCase, tokenNo)
 				.then(function(res){
 					vm.messages = res.data.items;
 					DrslHipChatService.magicMessageParser(vm.messages);
@@ -645,6 +648,9 @@
 							.then(function () {
 								getMessages();
 							})
+						} else if(res.data.error.code === 429){
+							tokenNo = tokenNo + 2;
+							getMessages(tokenNo);
 						}
 					}
 				})
@@ -658,7 +664,10 @@
 					}
 				}, 1000);
 			}
-			function sendMessage(){
+			function sendMessage(tokenNo){
+				if(!tokenNo){
+					tokenNo = 1;
+				}
 				if(!vm.isCaseExpert()){
 					var messageToSend = encodeURI("@" + vm.currentCase.expertaccount.user.firstName + vm.currentCase.expertaccount.user.lastName) + ' ' + vm.messageToSend
 				} else {
@@ -670,12 +679,15 @@
 					from: getCurrentUserName(),
 					message_format: 'text'
 				}
-				DrslHipChatService.sendMessage(messageObject)
+				DrslHipChatService.sendMessage(messageObject, tokenNo)
 				.then(function(res){
 					getMessages();
 					vm.messageToSend = '';
-				}, function (res) {
-					console.error(res);
+				}, function errorHandler(error) {
+					if(error.status === 429){
+						sendMessage(tokenNo + 2);
+					}
+					// console.error(error);
 				})
 			}
 			//Checks to see if a message in the message list is sent by the current user

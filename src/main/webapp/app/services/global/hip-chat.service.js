@@ -53,22 +53,33 @@
             return $http(req);
         }
         // With the GetMessagesToken, returns all messages in the provided room name or ID
-        service.getMessages = function(roomID, maxResults, currentCase){
+        service.getMessages = function(roomID, maxResults, currentCase, tokenNo){
             if(currentCase && currentCase.status.name === 'CLOSED'){
                 var cached = true;
                 maxResults = '1000';
             } else {
                 var cached = false;
             }
+            switch (tokenNo) {
+                case 1:
+                    var code = service.DrslMetadata.thingy;
+                    break;
+                case 3:
+                    var code = service.DrslMetadata.thingy3;
+                    break;
+                case 5:
+                    var code = service.DrslMetadata.thingy5;
+                    break;
+            }
             var req = {
                 method: 'GET',
                 url: '/v2/room/' + roomID + '/history?max-results=' + maxResults,
                 cache: cached,
                 headers: {
-                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[1]
+                    'Authorization': 'Bearer ' + $window.atob(code).split('#')[1]
                 }
             }
-            return $http(req, 'Bearer ' + service.DrslMetadata.thingy.split('#')[0])
+            return $http(req, 'Bearer ' + code.split('#')[0])
         }
         // Gets all the messages from a specific room to see if there's activity
         service.checkRoom = function(roomID){
@@ -97,8 +108,19 @@
             }, 5 * 60 * 1000);
         }
         // Make Hipchat chatroom using roomObjects name and topic
-        service.makeRoom = function(roomObject){
+        service.makeRoom = function(roomObject, tokenNo){
             var url = '/v2/room';
+            switch (tokenNo) {
+                case 1:
+                    var code = service.DrslMetadata.thingy;
+                    break;
+                case 3:
+                    var code = service.DrslMetadata.thingy3;
+                    break;
+                case 5:
+                    var code = service.DrslMetadata.thingy5;
+                    break;
+            }
             return $http({
                 method: 'POST',
                 url: url,
@@ -110,14 +132,25 @@
                     owner_user_id: roomObject.expert
                 },
                 headers: {
-                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[2]
+                    'Authorization': 'Bearer ' + $window.atob(code).split('#')[2]
                 }
             })
         }
         // Make a room with a name based on a timestamp
-        service.makeConciergeRoom = function(){
+        service.makeConciergeRoom = function(tokenNo){
             var timestamp = new Date();
             var roomName = "Concierge Chat Room: " + (timestamp.getMonth() + 1) + '/' + timestamp.getDate() + '/' + timestamp.getFullYear() + ' ' + timestamp.getHours() + ':' + timestamp.getMinutes() + ':' +  timestamp.getSeconds();
+            switch (tokenNo) {
+                case 1:
+                    var code = service.DrslMetadata.thingy;
+                    break;
+                case 3:
+                    var code = service.DrslMetadata.thingy3;
+                    break;
+                case 5:
+                    var code = service.DrslMetadata.thingy5;
+                    break;
+            }
             return $http({
                 method: 'POST',
                 url: '/v2/room',
@@ -128,27 +161,49 @@
                     guest_access: true
                 },
                 headers: {
-                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[2]
+                    'Authorization': 'Bearer ' + $window.atob(code).split('#')[2]
                 }
             })
         }
-        service.getRoom = function(roomID){
+        service.getRoom = function(roomID, tokenNo){
             var url = '/v2/room/' + roomID
+            switch (tokenNo) {
+                case 1:
+                    var code = service.DrslMetadata.thingy;
+                    break;
+                case 3:
+                    var code = service.DrslMetadata.thingy3;
+                    break;
+                case 5:
+                    var code = service.DrslMetadata.thingy5;
+                    break;
+            }
             return $http({
                 method: 'GET',
                 url: url,
                 headers: {
-                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[0]
+                    'Authorization': 'Bearer ' + $window.atob(code).split('#')[0]
                 }
             })
         }
-        service.deleteRoom = function(roomID){
+        service.deleteRoom = function(roomID, tokenNo){
             var url = '/v2/room/' + roomID;
+            switch (tokenNo) {
+                case 1:
+                    var code = service.DrslMetadata.thingy;
+                    break;
+                case 3:
+                    var code = service.DrslMetadata.thingy3;
+                    break;
+                case 5:
+                    var code = service.DrslMetadata.thingy5;
+                    break;
+            }
             return $http({
                 method: 'DELETE',
                 url: url,
                 headers: {
-                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[2]
+                    'Authorization': 'Bearer ' + $window.atob(code).split('#')[2]
                 }
             })
         }
@@ -170,8 +225,19 @@
                 }
             })
         }
-        service.sendMessage = function(messageObject, expert){
+        service.sendMessage = function(messageObject, tokenNo){
             var url = '/v2/room/' + messageObject.roomID +'/notification'
+            switch (tokenNo) {
+                case 1:
+                    var code = service.DrslMetadata.thingy;
+                    break;
+                case 3:
+                    var code = service.DrslMetadata.thingy3;
+                    break;
+                case 5:
+                    var code = service.DrslMetadata.thingy5;
+                    break;
+            }
             return $http({
                 method: 'POST',
                 url: url,
@@ -181,7 +247,7 @@
                     message_format: "text"
                 },
                 headers: {
-                    'Authorization': 'Bearer ' + $window.atob(service.DrslMetadata.thingy).split('#')[3]
+                    'Authorization': 'Bearer ' + $window.atob(code).split('#')[3]
                 }
             })
         }
