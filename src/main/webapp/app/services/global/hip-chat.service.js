@@ -70,6 +70,9 @@
                 case 5:
                     var code = service.DrslMetadata.thingy5;
                     break;
+                default:
+                    var code = service.DrslMetadata.thingy;
+                    break;
             }
             var req = {
                 method: 'GET',
@@ -120,6 +123,9 @@
                 case 5:
                     var code = service.DrslMetadata.thingy5;
                     break;
+                default:
+                    var code = service.DrslMetadata.thingy;
+                    break;
             }
             return $http({
                 method: 'POST',
@@ -150,6 +156,9 @@
                 case 5:
                     var code = service.DrslMetadata.thingy5;
                     break;
+                default:
+                    var code = service.DrslMetadata.thingy;
+                    break;
             }
             return $http({
                 method: 'POST',
@@ -177,6 +186,9 @@
                 case 5:
                     var code = service.DrslMetadata.thingy5;
                     break;
+                default:
+                    var code = service.DrslMetadata.thingy;
+                    break;
             }
             return $http({
                 method: 'GET',
@@ -197,6 +209,9 @@
                     break;
                 case 5:
                     var code = service.DrslMetadata.thingy5;
+                    break;
+                default:
+                    var code = service.DrslMetadata.thingy;
                     break;
             }
             return $http({
@@ -236,6 +251,9 @@
                     break;
                 case 5:
                     var code = service.DrslMetadata.thingy5;
+                    break;
+                default:
+                    var code = service.DrslMetadata.thingy;
                     break;
             }
             return $http({
