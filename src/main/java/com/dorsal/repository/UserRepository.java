@@ -6,6 +6,7 @@ import java.time.ZonedDateTime;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -48,10 +49,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
     void delete(User t);
 
     /* Cleanup of GroupAccess and SharedCase for the user */
+    @Modifying
     @Query("delete from Groupaccess ga where ga.authorizeduser.id = :userid OR ga.user.id = :userid")
     int cleanupGroupAccess(@Param("userid") long userID);
 
     /* Cleanup SharedCases for the user */
+    @Modifying
     @Query("delete from SharedCase sc where owner.id = :userid OR user.id = :userid")
     int cleanupSharedCase(@Param("userid") long userID);
 }

@@ -214,7 +214,7 @@ public class UserService {
 
 
     /**
-     * Not activated users should be automatically deleted after 14 days.
+     * Not activated users should be automatically deleted after 30 days.
      * <p>
      * This is scheduled to get fired everyday, at 01:00 (am).
      * </p>
@@ -222,7 +222,7 @@ public class UserService {
     @Scheduled(cron = "0 0 1 * * ?")
     public void removeNotActivatedUsers() {
         ZonedDateTime now = ZonedDateTime.now();
-        List<User> users = userRepository.findAllByActivatedIsFalseAndCreatedDateBefore(now.minusDays(14));
+        List<User> users = userRepository.findAllByActivatedIsFalseAndCreatedDateBefore(now.minusDays(30));
         for (User user : users) {
             log.debug("Deleting not activated user {}", user.getLogin());
             userRepository.cleanupGroupAccess(user.getId());
