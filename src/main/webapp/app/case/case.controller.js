@@ -362,7 +362,7 @@
 						vm.schedulingMessages = true;
 						vm.messageScheduler = $interval(function () {
 							getMessages();
-						}, 15000);
+						}, 15000, getMessages());
 						// }, 15000, getMessages());
 					} else {
 						getMessages();
