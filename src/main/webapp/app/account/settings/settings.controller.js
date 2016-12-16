@@ -60,10 +60,14 @@
                     vm.currentExpert = data[0];
 
                     var othercommunication = vm.currentExpert.othercommunication.split(',');
-                    vm.otherLink = othercommunication[0];
-                    vm.otherTitle = othercommunication[1];
-                    vm.shownTitle = vm.otherTitle.substring(0, 19) + "...";
-                    vm.shownLink = vm.otherLink.substring(0, 19) + "...";
+                    if(othercommunication[0]){
+                        vm.otherLink = othercommunication[0];
+                        vm.shownLink = vm.otherLink.substring(0, 19) + "...";
+                    }
+                    if(othercommunication[1]){
+                        vm.otherTitle = othercommunication[1];
+                        vm.shownTitle = vm.otherTitle.substring(0, 19) + "...";
+                    }
                     if (vm.currentExpert.numberOfCases > 0) {
                         vm.displayedExpertScore = Math.round(vm.currentExpert.expertScore / vm.currentExpert.numberOfCases);
                     } else {
