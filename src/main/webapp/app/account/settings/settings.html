@@ -284,14 +284,23 @@
 
                                     <!-- Technology (1st focus) -->
                                     <div class="drsl-placeholder-label">
-                                        <select class="form-control" id="field_technology" name="Technology" ng-model="vm.currentExpert.firsttechnology" ng-options="technology as technology.name for technology in vm.technologies track by technology.id" ng-change="vm.updatingExpert = true"></select>
-                                        <span class="drsl-select drsl-unit" translate="settings.form.technology">(1st Technology Focus)</span>
+                                        <a ui-sref="selfAssesmentTechnology">Technology</a>
+                                        <!-- <select class="form-control" id="field_technology" name="Technology" ng-model="vm.currentExpert.firsttechnology" ng-options="technology as technology.name for technology in vm.technologies track by technology.id" ng-change="vm.updatingExpert = true"></select>
+                                        <span class="drsl-select drsl-unit" translate="settings.form.technology">(1st Technology Focus)</span> -->
                                     </div>
 
                                     <!-- Technology (2nd focus) -->
                                     <div class="drsl-placeholder-label">
-                                        <select class="form-control" id="field_technology2" name="Technology2" ng-model="vm.currentExpert.secondtechnology" ng-options="technology as technology.name for technology in vm.technologies track by technology.id" ng-change="vm.updatingExpert = true"></select>
-                                        <span class="drsl-select drsl-unit" translate="settings.form.technology2">(2nd Technology Focus)</span>
+                                        <a ui-sref="selfAssesmentProduct">Product</a>
+
+                                        <!-- <select class="form-control" id="field_technology2" name="Technology2" ng-model="vm.currentExpert.secondtechnology" ng-options="technology as technology.name for technology in vm.technologies track by technology.id" ng-change="vm.updatingExpert = true"></select>
+                                        <span class="drsl-select drsl-unit" translate="settings.form.technology2">(2nd Technology Focus)</span> -->
+                                    </div>
+                                    <div class="drsl-placeholder-label">
+                                        <a ui-sref="selfAssesmentJobRole">Role</a>
+
+                                        <!-- <select class="form-control" id="field_technology2" name="Technology2" ng-model="vm.currentExpert.secondtechnology" ng-options="technology as technology.name for technology in vm.technologies track by technology.id" ng-change="vm.updatingExpert = true"></select>
+                                        <span class="drsl-select drsl-unit" translate="settings.form.technology2">(2nd Technology Focus)</span> -->
                                     </div>
 
                                     <!-- Update/Submit button -->

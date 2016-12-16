@@ -62,8 +62,16 @@
                     var othercommunication = vm.currentExpert.othercommunication.split(',');
                     vm.otherLink = othercommunication[0];
                     vm.otherTitle = othercommunication[1];
-                    vm.shownTitle = vm.otherTitle.substring(0, 19) + "...";
-                    vm.shownLink = vm.otherLink.substring(0, 19) + "...";
+                    if(vm.otherTitle){
+                        vm.shownTitle = vm.otherTitle.substring(0, 19) + "...";
+                    } else {
+                        vm.shownTitle = "";
+                    }
+                    if(vm.otherLink){
+                        vm.shownLink = vm.otherLink.substring(0, 19) + "...";
+                    } else {
+                        vm.shownLink = "";
+                    }
                     if (vm.currentExpert.numberOfCases > 0) {
                         vm.displayedExpertScore = Math.round(vm.currentExpert.expertScore / vm.currentExpert.numberOfCases);
                     } else {
