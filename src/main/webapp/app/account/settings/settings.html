@@ -42,424 +42,463 @@
                                 <!-- First Name Errors -->
                                 <div ng-show="form.firstName.$dirty && form.firstName.$invalid">
                                     <p class="help-block"
-                                       ng-show="form.firstName.$error.required" translate="settings.messages.validate.firstname.required">
-                                        Your first name is required.
-                                    </p>
-                                    <p class="help-block"
-                                       ng-show="form.firstName.$error.minlength" translate="settings.messages.validate.firstname.minlength">
-                                        Your first name is required to be at least 1 character.
-                                    </p>
-                                    <p class="help-block"
-                                       ng-show="form.firstName.$error.maxlength" translate="settings.messages.validate.firstname.maxlength">
-                                        Your first name cannot be longer than 50 characters.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <!-- Last Name (required) -->
-                            <div class="form-group">
-                                <div class="drsl-placeholder-label" type="text">
-                                    <input type="text" id="lastName" name="lastName" value="" ng-model="vm.settingsAccount.lastName" ng-minlength=1 ng-maxlength=50 required maxlength="50" ng-change="vm.updatingUser = true" ng-class="{'drsl-already-activated-input': vm.isAlreadyAuthorized, 'drsl-highlight-field': (vm.settingsAccount.login && !form.lastName.$dirty && !vm.settingsAccount.lastName)}">
-                                    <span class="drsl-unit" translate="settings.form.lastname">(Last Name)</span>
-                                </div>
-                                <!-- Last Name Errors -->
-                                <div ng-show="form.lastName.$dirty && form.lastName.$invalid">
-                                    <p class="help-block"
-                                       ng-show="form.lastName.$error.required" translate="settings.messages.validate.lastname.required">
-                                        Your last name is required.
-                                    </p>
-                                    <p class="help-block"
-                                       ng-show="form.lastName.$error.minlength" translate="settings.messages.validate.lastname.minlength">
-                                        Your last name is required to be at least 1 character.
-                                    </p>
-                                    <p class="help-block"
-                                       ng-show="form.lastName.$error.maxlength" translate="settings.messages.validate.lastname.maxlength">
-                                        Your last name cannot be longer than 50 characters.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <!-- Email (required) -->
-                            <div class="form-group">
-                                <div class="drsl-placeholder-label" type="text">
-                                    <input type="text" id="email" name="email" ng-model="vm.settingsAccount.email" ng-minlength=1 ng-maxlength=50 required maxlength="50" ng-change="vm.updatingUser = true" ng-class="{'drsl-already-activated-input': vm.isAlreadyAuthorized, 'drsl-highlight-field': (vm.settingsAccount.login && !form.email.$dirty && !vm.settingsAccount.email)}">
-                                    <span class="drsl-unit" translate="settings.form.email">Email Address</span>
-                                </div>
-                                <!-- Email Errors -->
-                                <div ng-show="form.email.$dirty && form.email.$invalid">
-                                    <p class="help-block"
-                                       ng-show="form.email.$error.required" translate="global.messages.validate.email.required">
-                                        Your e-mail is required.
-                                    </p>
-                                    <p class="help-block"
-                                       ng-show="form.email.$error.email" translate="global.messages.validate.email.invalid">
-                                        Your e-mail is invalid.
-                                    </p>
-                                    <p class="help-block"
-                                       ng-show="form.email.$error.minlength" translate="global.messages.validate.email.minlength">
-                                        Your e-mail is required to be at least 5 characters.
-                                    </p>
-                                    <p class="help-block"
-                                       ng-show="form.email.$error.maxlength" translate="global.messages.validate.email.maxlength">
-                                        Your e-mail cannot be longer than 100 characters.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <!-- Language -->
-                            <div class="form-group" ng-if="!vm.currentExpert">
-                                <select id="langKey" name="langKey" class="form-control" ng-model="vm.settingsAccount.langKey" ng-controller="JhiLanguageController as languageVm" ng-options="code as (code | findLanguageFromKey) for code in languageVm.languages">
-                                    <option value="">Language(s)</option>
-                                </select>
-                            </div>
-
-                            <!-- Expert Fields -->
-                            <div ng-if="vm.currentExpert">
-                                <!-- Phone Numbers -->
-                                <div class="drsl-two-inputs">
-                                    <!-- Telephone (required) -->
-                                    <div class="form-group">
-                                        <div class="drsl-placeholder-label" type="text">
-                                            <input type="tel" class="form-control" id="telephone" name="telephone"
-                                                   ng-model="vm.currentExpert.phone" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.telephone.$dirty && !vm.currentExpert.phone)}">
-                                            <span class="drsl-unit" translate="settings.form.phone">Telephone Number</span>
-                                        </div>
-                                    </div>
-
-                                    <!-- Mobile (required) -->
-                                    <div class="form-group">
-                                        <div class="drsl-placeholder-label" type="text">
-                                            <input type="tel" class="form-control" id="mobile" name="mobile"
-                                                   ng-model="vm.currentExpert.mobile" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.mobile.$dirty && !vm.currentExpert.mobile)}">
-                                            <span class="drsl-unit" translate="settings.form.mobile">Mobile Number</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Skype and Chat Fields -->
-                                <div class="drsl-two-inputs">
-                                    <!-- Skype (required) -->
-                                    <div class="form-group">
-                                        <div class="drsl-placeholder-label" type="text">
-                                            <input type="text" class="form-control" id="skype" name="skype"
-                                                   ng-model="vm.currentExpert.skype" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.skype.$dirty && !vm.currentExpert.skype)}">
-                                            <span class="drsl-unit" translate="settings.form.skype">Skype</span>
-                                        </div>
-                                    </div>
-
-                                    <!-- Chat Handle (required) -->
-                                    <div class="form-group">
-                                        <div class="drsl-placeholder-label" type="text">
-                                            <input type="text" class="form-control" id="drslChatHandle" name="drslChatHandle"
-                                                   ng-model="vm.currentExpert.drslChatHandle" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.drslChatHandle.$dirty && !vm.currentExpert.drslChatHandle)}">
-                                            <span class="drsl-unit" translate="settings.form.drslChatHandle">Dorsal Chat Handle</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Preferred/Other Contact and Other Communication Link Fields  -->
-                                <div class="drsl-two-inputs">
-                                    <!-- Preferred/Other Contact (required) -->
-                                    <div class="form-group">
-                                        <div class="drsl-placeholder-label" type="text"  uib-tooltip="name of other contact method">
-                                            <input type="text" class="form-control" id="preferred" name="preferred"
-                                                   ng-model="vm.shownTitle" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.preferred.$dirty && !vm.otherTitle)}"
-                                                   ng-focus="vm.hideTitleElipsis()"
-                                                   ng-blur="vm.showTitleElipsis()"
-                                                   >
-                                            <span class="drsl-unit" translate="settings.form.preferred">(Preffered Contact Method)</span>
-                                        </div>
-                                    </div>
-
-                                    <!-- Other Communication Link (required) -->
-                                    <div class="form-group">
-                                        <div class="drsl-placeholder-label" type="text" uib-tooltip="link to other contact method">
-                                            <input type="text" class="form-control" id="othercommunication" name="othercommunication"
-                                                   ng-model="vm.shownLink" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.othercommunication.$dirty && !vm.otherLink)}"
-                                                   ng-focus="vm.hideLinkElipsis()"
-                                                   ng-blur="vm.showLinkElipsis()"
-                                                   >
-                                            <span class="drsl-unit" translate="settings.form.othercommunication">(Other Comms)</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Language -->
-                                <div class="form-group">
-                                    <div class="drsl-placeholder-label" type="text">
-                                        <select id="langKeyExpert" name="langKey" class="form-control drsl-fullSelect" ng-model="vm.settingsAccount.langKey" ng-controller="JhiLanguageController as languageVm" ng-options="code as (code | findLanguageFromKey) for code in languageVm.languages" ng-change="vm.updatingExpert = true"></select>
-                                        <span class="drsl-select drsl-unit" translate="settings.form.language">(Language)</span>
-                                    </div>
-                                </div>
-
-                                <!-- Location and Timezone Fields -->
-                                <div class="drsl-two-inputs">
-                                    <!-- Location (required) -->
-                                    <div class="form-group">
-                                        <div class="drsl-placeholder-label" type="text">
-                                            <input type="text" class="form-control" id="location" name="location"
-                                                   ng-model="vm.currentExpert.location" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.location.$dirty && !vm.currentExpert.location)}">
-                                            <span class="drsl-unit" translate="settings.form.location">(Location)</span>
-                                        </div>
-                                    </div>
-
-                                    <!-- Timezone (required) -->
-                                    <div class="form-group">
-                                        <div class="drsl-placeholder-label" type="text">
-                                            <input type="text" class="form-control" id="timezone" name="timezone"
-                                                   ng-model="vm.currentExpert.timezone" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.timezone.$dirty && !vm.currentExpert.timezone)}">
-                                            <span class="drsl-unit" translate="settings.form.timezone">(Timezone)</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Availability -->
-                                <div class="form-group">
-                                    <div class="drsl-placeholder-label">
-                                        <select class="form-control drsl-full-select" name="expertAvailability" ng-model="vm.currentExpert.expertAvailability" id="field_expertAvailability" ng-change="vm.updatingExpert = true">
-                                            <option value="FULL_TIME">Full Time</option>
-                                            <option value="MON_FRI">Monday Through Friday</option>
-                                            <option value="EVENING">Evenings</option>
-                                            <option value="WEEKEND">Weekends</option>
-                                            <option value="OFFLINE">Offline</option>
-                                        </select>
-                                        <span class="drsl-select drsl-unit" translate="settings.form.availability">(Availability)</span>
-                                    </div>
-                                </div>
-
-                                <!-- Expert Stats (score, visibility, number of cases, expert since) -->
-                                <div class="drsl-extra-info">
-                                    <div>
-                                        <!-- Expert Score -->
-                                        <div>
-                                            <span translate="settings.form.expertScore">Expert Score:</span> {{ 'global.messages.info.expertScoreOutOf' | translate:'{score: '+ vm.displayedExpertScore + '}' }}
-                                        </div>
-
-                                        <!-- Profile Visibility -->
-                                        <div>
-                                            <div class="drsl-visibility">
-                                                <label for="field_profileVisibility" class="drsl-profile-visibility-label" translate="settings.form.profileVisibility">Profile Visibility:</label><select class="form-control privacySelect" name="profileVisibility" ng-model="vm.currentExpert.profileVisibility" id="field_profileVisibility" ng-change="vm.updatingExpert = true">
-                                                <option value="PUBLIC">Public</option>
-                                                <option value="INTERN">Intern</option>
-                                                <option value="HIDDEN">Hidden</option>
-                                            </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br>
-
-                                    <!-- Expert Case Count and Expert Since -->
-                                    <div class="drsl-two-items">
-                                        <div>
-                                            {{'settings.form.totalNumberOfCases' | translate}} {{vm.currentExpert.numberOfCases}}
-                                        </div>
-                                        <div>
-                                            {{'settings.form.expertSince' | translate}} {{vm.currentExpert.expertSince | date:'MMM dd, yyyy'}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Update/Submit button -->
-                            <button type="submit" ng-disabled="form.$invalid" class="btn btn-success drsl-update-user-button" translate="settings.form.button" ng-if="!vm.currentExpert">Update</button>
-                        </div>
-
-                        <!-- Expert Panel Right (welcome message, bio, issue focus, tech and 2nd tech) -->
-                        <div class="drsl-expert-message-content" ng-if="vm.currentExpert">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <!-- Welcome Message -->
-                                    <label for="welcome" translate="settings.form.welcome" class="drsl-expert-textarea-label">Welcome Message</label>
-                                    <textarea id="welcome" name="welcome" rows="4" cols="20" class="form-control" ng-model="vm.currentExpert.welcomeMessage" ng-change="vm.updatingExpert = true" placeholder="{{'settings.form.welcome.placeholder' | translate}}"></textarea>
-
-                                    <!-- Bio -->
-                                    <label for="bio" translate="settings.form.bio" class="drsl-expert-textarea-label">Bio</label>
-                                    <textarea id="bio" name="bio" rows="4" cols="20" class="form-control" ng-model="vm.currentExpert.expertBio" ng-change="vm.updatingExpert = true" placeholder="{{'settings.form.bio.placeholder' | translate}}"></textarea>
-
-                                    <!-- Issue (focus) -->
-                                    <div class="drsl-placeholder-label">
-                                        <select class="form-control" id="field_issue" name="Issue" ng-model="vm.currentExpert.issueexpertise" ng-options="issue as issue.name for issue in vm.issues track by issue.id" ng-change="vm.updatingExpert = true"></select>
-                                        <span class="drsl-select drsl-unit" translate="settings.form.issue">(Issue)</span>
-                                    </div>
-
-                                    <!-- Technology (1st focus) -->
-                                    <div class="drsl-placeholder-label">
-                                        <a ui-sref="selfAssesmentTechnology">Technology</a>
-                                        <!-- <select class="form-control" id="field_technology" name="Technology" ng-model="vm.currentExpert.firsttechnology" ng-options="technology as technology.name for technology in vm.technologies track by technology.id" ng-change="vm.updatingExpert = true"></select>
-                                        <span class="drsl-select drsl-unit" translate="settings.form.technology">(1st Technology Focus)</span> -->
-                                    </div>
-
-                                    <!-- Technology (2nd focus) -->
-                                    <div class="drsl-placeholder-label">
-                                        <a ui-sref="selfAssesmentProduct">Product</a>
-
-                                        <!-- <select class="form-control" id="field_technology2" name="Technology2" ng-model="vm.currentExpert.secondtechnology" ng-options="technology as technology.name for technology in vm.technologies track by technology.id" ng-change="vm.updatingExpert = true"></select>
-                                        <span class="drsl-select drsl-unit" translate="settings.form.technology2">(2nd Technology Focus)</span> -->
-                                    </div>
-                                    <div class="drsl-placeholder-label">
-                                        <a ui-sref="selfAssesmentJobRole">Role</a>
-
-                                        <!-- <select class="form-control" id="field_technology2" name="Technology2" ng-model="vm.currentExpert.secondtechnology" ng-options="technology as technology.name for technology in vm.technologies track by technology.id" ng-change="vm.updatingExpert = true"></select>
-                                        <span class="drsl-select drsl-unit" translate="settings.form.technology2">(2nd Technology Focus)</span> -->
-                                    </div>
-
-                                    <!-- Update/Submit button -->
-                                    <button type="submit" class="btn btn-success" translate="settings.form.button" ng-click="vm.save()">Update</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-
-                    <!-- Payment Method (Users only, right panel) -->
-                    <div class="drsl-payment-content" ng-if="!vm.currentExpert && !vm.isAlreadyAuthorized">
-                        <div>
-                            <div class="panel panel-default">
-                                <!-- Authorized Credit Card Images -->
-                                <div class="panel-heading drsl-authorized-credit-card">
-                                    <!-- Label -->
-                                    <span translate="settings.form.authorizedCreditCard">
-                                        Authorized Credit Card
-                                    </span>
-                                    <!-- Images -->
-                                    <span>
-                                        <img src="https://www.braintreepayments.com/images/visa-logo-8ea8a4fc.svg" alt="">
-                                        <img src="https://www.braintreepayments.com/images/mastercard-logo-09664196.svg" alt="">
-                                        <img src="https://www.braintreepayments.com/images/maestro-logo-db229f9d.svg" alt="">
-                                        <img src="https://www.braintreepayments.com/images/jcb-logo-62a7882e.svg" alt="">
-                                        <img src="https://www.braintreepayments.com/images/discover-logo-d781232e.svg" alt="">
-                                        <img src="https://www.braintreepayments.com/images/amex-logo-e238f7a3.svg" alt="">
-                                        <img src="https://www.braintreepayments.com/images/diners-club-logo-cd0de029.svg" alt="">
-                                    </span>
-                                </div>
-
-                                <!-- Payment Form Container -->
-                                <div class="panel-body">
-                                    <form ng-submit="vm.addCard()">
-                                        <!-- Name on Card (required) -->
-                                        <div class="form-group">
-                                            <label class="control-label sr-only" for="ccName" translate="settings.form.ccNameOnCard">Name on Card</label>
-                                            <input type="text" class="form-control drsl-inline" id="ccName" name="ccName" placeholder="{{'settings.form.ccNameOnCard.placeholder' | translate}}"
-                                                   ng-minlength=1  ng-model="vm.creditCard.name" required ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.ccName.$dirty && !vm.creditCard.name)}">
-                                            <span ng-if="vm.error && vm.creditCard.name === undefined" class="drsl-invalid" translate="settings.messages.error.ccInvalidName">Invalid Name</span>
-                                        </div>
-
-                                        <!-- Card Number (required) -->
-                                        <div class="form-group">
-                                            <label class="control-label sr-only" for="ccNumber1" translate="settings.form.ccCardNumber">Card Number</label>
-                                            <input type="number" class="form-control drsl-card-number-quarter" id="ccNumber1" name="ccNumber" placeholder="{{'settings.form.ccCardNumber.field1.placeholder' | translate}}"
-                                                   ng-model="vm.creditCard.number.one" required  ng-keypress="vm.numberTab($event)" maxlength="4" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.ccNumber.$dirty && !vm.creditCard.number.one)}">
-                                            -
-                                            <input type="number" class="form-control drsl-card-number-quarter" id="ccNumber2" name="ccNumber" placeholder="{{'settings.form.ccCardNumber.field2.placeholder' | translate}}" ng-keypress="vm.numberTab($event)"
-                                                   ng-model="vm.creditCard.number.two" required maxlength="4" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.ccNumber.$dirty && !vm.creditCard.number.two)}">
-                                            -
-                                            <input type="number" class="form-control drsl-card-number-quarter" id="ccNumber3" name="ccNumber" placeholder="{{'settings.form.ccCardNumber.field3.placeholder' | translate}}" ng-keypress="vm.numberTab($event)"
-                                                   ng-model="vm.creditCard.number.three" required maxlength="4" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.ccNumber.$dirty && !vm.creditCard.number.three)}">
-                                            -
-                                            <input type="number" class="form-control drsl-card-number-quarter" id="ccNumber4" name="ccNumber"  ng-keypress="vm.numberTab($event)"
-                                                   ng-model="vm.creditCard.number.four" required maxlength="4" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.ccNumber.$dirty && !vm.creditCard.number.four)}">
-                                            <span ng-if="vm.error && vm.number.join('').length != 16" class="drsl-invalid" translate="settings.messages.error.ccInvalidCardNumber">Invalid Card Number</span>
-                                        </div>
-
-                                        <!-- Expiration Date -->
-                                        <div class="form-group">
-                                            <label class="control-label sr-only" for="ccName" translate="settings.form.ccExpirationDate">Expiration Date</label>
-                                            <div class="row">
-                                                <!-- Month (required) -->
-                                                <div class="col-sm-6">
-                                                    <select class="form-control" name="expiry-month" ng-model="vm.creditCard.month" required ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form['expiry-month'].$dirty && !vm.creditCard.month)}">
-                                                        <option value="" translate="settings.form.ccMonth">Month</option>
-                                                        <option value="01">Jan (01)</option>
-                                                        <option value="02">Feb (02)</option>
-                                                        <option value="03">Mar (03)</option>
-                                                        <option value="04">Apr (04)</option>
-                                                        <option value="05">May (05)</option>
-                                                        <option value="06">June (06)</option>
-                                                        <option value="07">July (07)</option>
-                                                        <option value="08">Aug (08)</option>
-                                                        <option value="09">Sep (09)</option>
-                                                        <option value="10">Oct (10)</option>
-                                                        <option value="11">Nov (11)</option>
-                                                        <option value="12">Dec (12)</option>
-                                                    </select>
-                                                </div>
-
-                                                <!-- Year (required) -->
-                                                <div class="col-sm-6">
-                                                    <select class="form-control" name="expiry-year" ng-model="vm.creditCard.year" required ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form['expiry-year'].$dirty && !vm.creditCard.year)}">
-                                                        <option value="" translate="settings.form.ccYear">Year</option>
-                                                        <option value="13">2013</option>
-                                                        <option value="14">2014</option>
-                                                        <option value="15">2015</option>
-                                                        <option value="16">2016</option>
-                                                        <option value="17">2017</option>
-                                                        <option value="18">2018</option>
-                                                        <option value="19">2019</option>
-                                                        <option value="20">2020</option>
-                                                        <option value="21">2021</option>
-                                                        <option value="22">2022</option>
-                                                        <option value="23">2023</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- CVV (required) -->
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <label class="control-label sr-only" for="cvv" translate="settings.form.ccCVV">Card CVV</label>
-                                                    <input ng-keypress="vm.numberTab($event)" type="number" class="form-control drsl-card-number-quarter" id="cvv" name="cvv" placeholder="{{'settings.form.ccCVV.placeholder' | translate}}"
-                                                           ng-minlength=1 ng-maxlength=4  maxlength="3" ng-model="vm.creditCard.cvv" required ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.cvv.$dirty && !vm.creditCard.cvv)}">
-                                                    <span ng-if="vm.error && vm.creditCard.cvv.toString().length != 3" class="drsl-invalid" translate="settings.messages.error.ccInvalidCVVNumber">Invalid CVV Number</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Update/Submit button -->
-                                        <button type="submit" ng-disabled="form.$invalid" class="btn btn-success drsl-update-card-button" translate="settings.form.button">Update</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+                                    ng-show="form.firstName.$error.required" translate="settings.messages.validate.firstname.required">
+                                    Your first name is required.
+                                </p>
+                                <p class="help-block"
+                                ng-show="form.firstName.$error.minlength" translate="settings.messages.validate.firstname.minlength">
+                                Your first name is required to be at least 1 character.
+                            </p>
+                            <p class="help-block"
+                            ng-show="form.firstName.$error.maxlength" translate="settings.messages.validate.firstname.maxlength">
+                            Your first name cannot be longer than 50 characters.
+                        </p>
                     </div>
                 </div>
+
+                <!-- Last Name (required) -->
+                <div class="form-group">
+                    <div class="drsl-placeholder-label" type="text">
+                        <input type="text" id="lastName" name="lastName" value="" ng-model="vm.settingsAccount.lastName" ng-minlength=1 ng-maxlength=50 required maxlength="50" ng-change="vm.updatingUser = true" ng-class="{'drsl-already-activated-input': vm.isAlreadyAuthorized, 'drsl-highlight-field': (vm.settingsAccount.login && !form.lastName.$dirty && !vm.settingsAccount.lastName)}">
+                        <span class="drsl-unit" translate="settings.form.lastname">(Last Name)</span>
+                    </div>
+                    <!-- Last Name Errors -->
+                    <div ng-show="form.lastName.$dirty && form.lastName.$invalid">
+                        <p class="help-block"
+                        ng-show="form.lastName.$error.required" translate="settings.messages.validate.lastname.required">
+                        Your last name is required.
+                    </p>
+                    <p class="help-block"
+                    ng-show="form.lastName.$error.minlength" translate="settings.messages.validate.lastname.minlength">
+                    Your last name is required to be at least 1 character.
+                </p>
+                <p class="help-block"
+                ng-show="form.lastName.$error.maxlength" translate="settings.messages.validate.lastname.maxlength">
+                Your last name cannot be longer than 50 characters.
+            </p>
+        </div>
+    </div>
+
+    <!-- Email (required) -->
+    <div class="form-group">
+        <div class="drsl-placeholder-label" type="text">
+            <input type="text" id="email" name="email" ng-model="vm.settingsAccount.email" ng-minlength=1 ng-maxlength=50 required maxlength="50" ng-change="vm.updatingUser = true" ng-class="{'drsl-already-activated-input': vm.isAlreadyAuthorized, 'drsl-highlight-field': (vm.settingsAccount.login && !form.email.$dirty && !vm.settingsAccount.email)}">
+            <span class="drsl-unit" translate="settings.form.email">Email Address</span>
+        </div>
+        <!-- Email Errors -->
+        <div ng-show="form.email.$dirty && form.email.$invalid">
+            <p class="help-block"
+            ng-show="form.email.$error.required" translate="global.messages.validate.email.required">
+            Your e-mail is required.
+        </p>
+        <p class="help-block"
+        ng-show="form.email.$error.email" translate="global.messages.validate.email.invalid">
+        Your e-mail is invalid.
+    </p>
+    <p class="help-block"
+    ng-show="form.email.$error.minlength" translate="global.messages.validate.email.minlength">
+    Your e-mail is required to be at least 5 characters.
+</p>
+<p class="help-block"
+ng-show="form.email.$error.maxlength" translate="global.messages.validate.email.maxlength">
+Your e-mail cannot be longer than 100 characters.
+</p>
+</div>
+</div>
+
+<!-- Language -->
+<div class="form-group" ng-if="!vm.currentExpert">
+    <select id="langKey" name="langKey" class="form-control" ng-model="vm.settingsAccount.langKey" ng-controller="JhiLanguageController as languageVm" ng-options="code as (code | findLanguageFromKey) for code in languageVm.languages">
+        <option value="">Language(s)</option>
+    </select>
+</div>
+
+<!-- Expert Fields -->
+<div ng-if="vm.currentExpert">
+    <!-- Phone Numbers -->
+    <div class="drsl-two-inputs">
+        <!-- Telephone (required) -->
+        <div class="form-group">
+            <div class="drsl-placeholder-label" type="text">
+                <input type="tel" class="form-control" id="telephone" name="telephone"
+                ng-model="vm.currentExpert.phone" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.telephone.$dirty && !vm.currentExpert.phone)}">
+                <span class="drsl-unit" translate="settings.form.phone">Telephone Number</span>
+            </div>
+        </div>
+
+        <!-- Mobile (required) -->
+        <div class="form-group">
+            <div class="drsl-placeholder-label" type="text">
+                <input type="tel" class="form-control" id="mobile" name="mobile"
+                ng-model="vm.currentExpert.mobile" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.mobile.$dirty && !vm.currentExpert.mobile)}">
+                <span class="drsl-unit" translate="settings.form.mobile">Mobile Number</span>
             </div>
         </div>
     </div>
 
-    <!-- Manage Authorized Users -->
-    <div class="drsl-settings-wrapper" ng-if="!vm.isAlreadyAuthorized && !vm.currentExpert">
-        <div ng-if="!vm.isAlreadyAuthorized">
-            <!-- Header -->
-            <div class="drsl-sub-header" translate="settings.authorization.header">
-                Manage Authorized Users
+    <!-- Skype and Chat Fields -->
+    <div class="drsl-two-inputs">
+        <!-- Skype (required) -->
+        <div class="form-group">
+            <div class="drsl-placeholder-label" type="text">
+                <input type="text" class="form-control" id="skype" name="skype"
+                ng-model="vm.currentExpert.skype" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.skype.$dirty && !vm.currentExpert.skype)}">
+                <span class="drsl-unit" translate="settings.form.skype">Skype</span>
+            </div>
+        </div>
+
+        <!-- Chat Handle (required) -->
+        <div class="form-group">
+            <div class="drsl-placeholder-label" type="text">
+                <input type="text" class="form-control" id="drslChatHandle" name="drslChatHandle"
+                ng-model="vm.currentExpert.drslChatHandle" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.drslChatHandle.$dirty && !vm.currentExpert.drslChatHandle)}">
+                <span class="drsl-unit" translate="settings.form.drslChatHandle">Dorsal Chat Handle</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Preferred/Other Contact and Other Communication Link Fields  -->
+    <div class="drsl-two-inputs">
+        <!-- Preferred/Other Contact (required) -->
+        <div class="form-group">
+            <div class="drsl-placeholder-label" type="text"  uib-tooltip="name of other contact method">
+                <input type="text" class="form-control" id="preferred" name="preferred"
+                ng-model="vm.shownTitle" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.preferred.$dirty && !vm.otherTitle)}"
+                ng-focus="vm.hideTitleElipsis()"
+                ng-blur="vm.showTitleElipsis()"
+                >
+                <span class="drsl-unit" translate="settings.form.preferred">(Preffered Contact Method)</span>
+            </div>
+        </div>
+
+        <!-- Other Communication Link (required) -->
+        <div class="form-group">
+            <div class="drsl-placeholder-label" type="text" uib-tooltip="link to other contact method">
+                <input type="text" class="form-control" id="othercommunication" name="othercommunication"
+                ng-model="vm.shownLink" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.othercommunication.$dirty && !vm.otherLink)}"
+                ng-focus="vm.hideLinkElipsis()"
+                ng-blur="vm.showLinkElipsis()"
+                >
+                <span class="drsl-unit" translate="settings.form.othercommunication">(Other Comms)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Language -->
+    <div class="form-group">
+        <div class="drsl-placeholder-label" type="text">
+            <select id="langKeyExpert" name="langKey" class="form-control drsl-fullSelect" ng-model="vm.settingsAccount.langKey" ng-controller="JhiLanguageController as languageVm" ng-options="code as (code | findLanguageFromKey) for code in languageVm.languages" ng-change="vm.updatingExpert = true"></select>
+            <span class="drsl-select drsl-unit" translate="settings.form.language">(Language)</span>
+        </div>
+    </div>
+
+    <!-- Location and Timezone Fields -->
+    <div class="drsl-two-inputs">
+        <!-- Location (required) -->
+        <div class="form-group">
+            <div class="drsl-placeholder-label" type="text">
+                <input type="text" class="form-control" id="location" name="location"
+                ng-model="vm.currentExpert.location" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.location.$dirty && !vm.currentExpert.location)}">
+                <span class="drsl-unit" translate="settings.form.location">(Location)</span>
+            </div>
+        </div>
+
+        <!-- Timezone (required) -->
+        <div class="form-group">
+            <div class="drsl-placeholder-label" type="text">
+                <input type="text" class="form-control" id="timezone" name="timezone"
+                ng-model="vm.currentExpert.timezone" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.timezone.$dirty && !vm.currentExpert.timezone)}">
+                <span class="drsl-unit" translate="settings.form.timezone">(Timezone)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Availability -->
+    <div class="form-group">
+        <div class="drsl-placeholder-label">
+            <select class="form-control drsl-full-select" name="expertAvailability" ng-model="vm.currentExpert.expertAvailability" id="field_expertAvailability" ng-change="vm.updatingExpert = true">
+                <option value="FULL_TIME">Full Time</option>
+                <option value="MON_FRI">Monday Through Friday</option>
+                <option value="EVENING">Evenings</option>
+                <option value="WEEKEND">Weekends</option>
+                <option value="OFFLINE">Offline</option>
+            </select>
+            <span class="drsl-select drsl-unit" translate="settings.form.availability">(Availability)</span>
+        </div>
+    </div>
+    <!-- SLA -->
+    <div class="form-group">
+        <div class="drsl-placeholder-label">
+            <select class="form-control drsl-full-select" name="expertSLA" ng-model="vm.currentExpert.expertSLA" id="field_expertSLA" ng-change="vm.updatingExpert = true">
+                <option value="30m">30 Minutes</option>
+                <option value="2h">2 Hours</option>
+                <option value="4h">4 Hours</option>
+                <option value="24h">24 Hours</option>
+            </select>
+            <span class="drsl-select drsl-unit" translate="settings.form.SLA">(SLA)</span>
+        </div>
+    </div>
+
+    <!-- Expert Stats (score, visibility, number of cases, expert since) -->
+    <div class="drsl-extra-info">
+        <div>
+            <!-- Expert Score -->
+            <div>
+                <span translate="settings.form.expertScore">Expert Score:</span> {{ 'global.messages.info.expertScoreOutOf' | translate:'{score: '+ vm.displayedExpertScore + '}' }}
             </div>
 
-            <!-- Add/Invite Users (left panel) -->
-            <div class="panel panel-default drsl-user-managment">
-                <div class="panel-heading">
-                    <form class="drsl-user-add-form" name="addUserForm" ng-submit="vm.addAuthorizedUser()">
-                        <label class="control-label" for="uEmail" translate="settings.authorization.input">Add User</label>
-                        <input type="text" class="form-control" id="uEmail" ng-model="vm.invitedUser" name="uEmail" placeholder="{{'settings.authorization.input.placeholder' | translate}}" ng-minlength=1 ng-change="vm.checkInvalid()">
-                        <button type="submit" class="btn btn-success inviteButton" translate="settings.form.button">Update</button>
-                    </form>
+            <!-- Profile Visibility -->
+            <div>
+                <div class="drsl-visibility">
+                    <label for="field_profileVisibility" class="drsl-profile-visibility-label" translate="settings.form.profileVisibility">Profile Visibility:</label><select class="form-control privacySelect" name="profileVisibility" ng-model="vm.currentExpert.profileVisibility" id="field_profileVisibility" ng-change="vm.updatingExpert = true">
+                        <option value="PUBLIC">Public</option>
+                        <option value="INTERN">Intern</option>
+                        <option value="HIDDEN">Hidden</option>
+                    </select>
                 </div>
-                <div class="panel-body">
-                    <!-- No Invited Users -->
-                    <div class="drsl-user-list empty" ng-hide="vm.invitedUsers.length">
-                        <div  translate="settings.authorization.noInvitedUsers">No Invited Users</div>
+            </div>
+        </div>
+        <br>
+
+        <!-- Expert Case Count and Expert Since -->
+        <div class="drsl-two-items">
+            <div>
+                {{'settings.form.totalNumberOfCases' | translate}} {{vm.currentExpert.numberOfCases}}
+            </div>
+            <div>
+                {{'settings.form.expertSince' | translate}} {{vm.currentExpert.expertSince | date:'MMM dd, yyyy'}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Update/Submit button -->
+<button type="submit" ng-disabled="form.$invalid" class="btn btn-success drsl-update-user-button" translate="settings.form.button" ng-if="!vm.currentExpert">Update</button>
+</div>
+
+<!-- Expert Panel Right (welcome message, bio, issue focus, tech and 2nd tech) -->
+<div class="drsl-expert-message-content" ng-if="vm.currentExpert">
+    <div class="panel panel-default" style="height: 100%;">
+        <div class="panel-body">
+            <!-- Welcome Message -->
+            <label for="welcome" translate="settings.form.welcome" class="drsl-expert-textarea-label">Welcome Message</label>
+            <textarea id="welcome" name="welcome" rows="4" cols="20" class="form-control" ng-model="vm.currentExpert.welcomeMessage" ng-change="vm.updatingExpert = true" placeholder="{{'settings.form.welcome.placeholder' | translate}}"></textarea>
+
+            <!-- Bio -->
+            <label for="bio" translate="settings.form.bio" class="drsl-expert-textarea-label">Bio</label>
+            <textarea id="bio" name="bio" rows="4" cols="20" class="form-control" ng-model="vm.currentExpert.expertBio" ng-change="vm.updatingExpert = true" placeholder="{{'settings.form.bio.placeholder' | translate}}"></textarea>
+
+            <i class="fa fa-pencil" aria-hidden="true" ng-click="vm.editingAttributes = true" ng-if="!vm.editingAttributes"></i>
+            <i class="fa fa-eye" aria-hidden="true" ng-click="vm.editingAttributes = false" ng-if="vm.editingAttributes"></i>
+            <label for="bio" translate="settings.form.expertAttributes" class="drsl-expert-textarea-label">Expert Attributes</label>
+            <span>
+                <input type="text" name="name" value="" ng-if="vm.editingAttributes" ng-model="vm.atbInputString" style="">
+                <button ng-if="vm.editingAttributes" class="btn btn-success" ng-click="vm.saveAttributes()" style="line-height: 1;">Add</button>
+            </span>
+
+            <br>
+            <div style="border: 1px solid rgb(204, 204, 204); padding: 10px; border-radius: 10px;">
+                <button type="button" name="button" ng-repeat="attribute in vm.expertAttributes track by $index" class="btn" style="margin: 5px;">
+                    <span>
+                        {{attribute}}
+                    </span>
+                    <span ng-if="vm.editingAttributes" ng-click="vm.deleteAttribute($index)">
+                        <i class="fa fa-times-circle" aria-hidden="true"></i>
+                    </span>
+                </button>
+            </div>
+            <br>
+
+            <!-- Issue (focus) -->
+            <div class="drsl-placeholder-label">
+                <select class="form-control" id="field_issue" name="Issue" ng-model="vm.currentExpert.issueexpertise" ng-options="issue as issue.name for issue in vm.issues track by issue.id" ng-change="vm.updatingExpert = true"></select>
+                <span class="drsl-select drsl-unit" translate="settings.form.issue">(Issue)</span>
+            </div>
+
+            <!-- Technology (1st focus) -->
+            <div class="drsl-placeholder-label">
+                <a ui-sref="selfAssesmentTechnology">Technology</a>
+                <!-- <select class="form-control" id="field_technology" name="Technology" ng-model="vm.currentExpert.firsttechnology" ng-options="technology as technology.name for technology in vm.technologies track by technology.id" ng-change="vm.updatingExpert = true"></select>
+                <span class="drsl-select drsl-unit" translate="settings.form.technology">(1st Technology Focus)</span> -->
+            </div>
+
+            <!-- Technology (2nd focus) -->
+            <div class="drsl-placeholder-label">
+                <a ui-sref="selfAssesmentProduct">Product</a>
+
+                <!-- <select class="form-control" id="field_technology2" name="Technology2" ng-model="vm.currentExpert.secondtechnology" ng-options="technology as technology.name for technology in vm.technologies track by technology.id" ng-change="vm.updatingExpert = true"></select>
+                <span class="drsl-select drsl-unit" translate="settings.form.technology2">(2nd Technology Focus)</span> -->
+            </div>
+            <div class="drsl-placeholder-label">
+                <a ui-sref="selfAssesmentJobRole">Role</a>
+            </div>
+            <div class="drsl-placeholder-label">
+                <a ui-sref="selfAssesmentSkills">Skills</a>
+            </div>
+            <div class="drsl-placeholder-label">
+                <a ui-sref="selfAssesmentSpecialties">Specialties</a>
+            </div>
+
+
+            <!-- <textarea id="bio" name="bio" rows="4" cols="20" class="form-control" ng-model="" ng-change="vm.updatingExpert = true"></textarea> -->
+
+            <!-- Update/Submit button -->
+            <button type="submit" class="btn btn-success" translate="settings.form.button" ng-click="vm.save()" style="float: right;">Update</button>
+        </div>
+    </div>
+</div>
+</form>
+
+<!-- Payment Method (Users only, right panel) -->
+<div class="drsl-payment-content" ng-if="!vm.currentExpert && !vm.isAlreadyAuthorized">
+    <div>
+        <div class="panel panel-default">
+            <!-- Authorized Credit Card Images -->
+            <div class="panel-heading drsl-authorized-credit-card">
+                <!-- Label -->
+                <span translate="settings.form.authorizedCreditCard">
+                    Authorized Credit Card
+                </span>
+                <!-- Images -->
+                <span>
+                    <img src="https://www.braintreepayments.com/images/visa-logo-8ea8a4fc.svg" alt="">
+                    <img src="https://www.braintreepayments.com/images/mastercard-logo-09664196.svg" alt="">
+                    <img src="https://www.braintreepayments.com/images/maestro-logo-db229f9d.svg" alt="">
+                    <img src="https://www.braintreepayments.com/images/jcb-logo-62a7882e.svg" alt="">
+                    <img src="https://www.braintreepayments.com/images/discover-logo-d781232e.svg" alt="">
+                    <img src="https://www.braintreepayments.com/images/amex-logo-e238f7a3.svg" alt="">
+                    <img src="https://www.braintreepayments.com/images/diners-club-logo-cd0de029.svg" alt="">
+                </span>
+            </div>
+
+            <!-- Payment Form Container -->
+            <div class="panel-body">
+                <form ng-submit="vm.addCard()">
+                    <!-- Name on Card (required) -->
+                    <div class="form-group">
+                        <label class="control-label sr-only" for="ccName" translate="settings.form.ccNameOnCard">Name on Card</label>
+                        <input type="text" class="form-control drsl-inline" id="ccName" name="ccName" placeholder="{{'settings.form.ccNameOnCard.placeholder' | translate}}"
+                        ng-minlength=1  ng-model="vm.creditCard.name" required ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.ccName.$dirty && !vm.creditCard.name)}">
+                        <span ng-if="vm.error && vm.creditCard.name === undefined" class="drsl-invalid" translate="settings.messages.error.ccInvalidName">Invalid Name</span>
                     </div>
 
-                    <!-- Invited User List -->
-                    <div class="drsl-user-list" ng-show="vm.invitedUsers.length">
-                        <table class="table drsl-settings-table-scroll">
-                            <thead>
+                    <!-- Card Number (required) -->
+                    <div class="form-group">
+                        <label class="control-label sr-only" for="ccNumber1" translate="settings.form.ccCardNumber">Card Number</label>
+                        <input type="number" class="form-control drsl-card-number-quarter" id="ccNumber1" name="ccNumber" placeholder="{{'settings.form.ccCardNumber.field1.placeholder' | translate}}"
+                        ng-model="vm.creditCard.number.one" required  ng-keypress="vm.numberTab($event)" maxlength="4" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.ccNumber.$dirty && !vm.creditCard.number.one)}">
+                        -
+                        <input type="number" class="form-control drsl-card-number-quarter" id="ccNumber2" name="ccNumber" placeholder="{{'settings.form.ccCardNumber.field2.placeholder' | translate}}" ng-keypress="vm.numberTab($event)"
+                        ng-model="vm.creditCard.number.two" required maxlength="4" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.ccNumber.$dirty && !vm.creditCard.number.two)}">
+                        -
+                        <input type="number" class="form-control drsl-card-number-quarter" id="ccNumber3" name="ccNumber" placeholder="{{'settings.form.ccCardNumber.field3.placeholder' | translate}}" ng-keypress="vm.numberTab($event)"
+                        ng-model="vm.creditCard.number.three" required maxlength="4" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.ccNumber.$dirty && !vm.creditCard.number.three)}">
+                        -
+                        <input type="number" class="form-control drsl-card-number-quarter" id="ccNumber4" name="ccNumber"  ng-keypress="vm.numberTab($event)"
+                        ng-model="vm.creditCard.number.four" required maxlength="4" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.ccNumber.$dirty && !vm.creditCard.number.four)}">
+                        <span ng-if="vm.error && vm.number.join('').length != 16" class="drsl-invalid" translate="settings.messages.error.ccInvalidCardNumber">Invalid Card Number</span>
+                    </div>
+
+                    <!-- Expiration Date -->
+                    <div class="form-group">
+                        <label class="control-label sr-only" for="ccName" translate="settings.form.ccExpirationDate">Expiration Date</label>
+                        <div class="row">
+                            <!-- Month (required) -->
+                            <div class="col-sm-6">
+                                <select class="form-control" name="expiry-month" ng-model="vm.creditCard.month" required ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form['expiry-month'].$dirty && !vm.creditCard.month)}">
+                                    <option value="" translate="settings.form.ccMonth">Month</option>
+                                    <option value="01">Jan (01)</option>
+                                    <option value="02">Feb (02)</option>
+                                    <option value="03">Mar (03)</option>
+                                    <option value="04">Apr (04)</option>
+                                    <option value="05">May (05)</option>
+                                    <option value="06">June (06)</option>
+                                    <option value="07">July (07)</option>
+                                    <option value="08">Aug (08)</option>
+                                    <option value="09">Sep (09)</option>
+                                    <option value="10">Oct (10)</option>
+                                    <option value="11">Nov (11)</option>
+                                    <option value="12">Dec (12)</option>
+                                </select>
+                            </div>
+
+                            <!-- Year (required) -->
+                            <div class="col-sm-6">
+                                <select class="form-control" name="expiry-year" ng-model="vm.creditCard.year" required ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form['expiry-year'].$dirty && !vm.creditCard.year)}">
+                                    <option value="" translate="settings.form.ccYear">Year</option>
+                                    <option value="13">2013</option>
+                                    <option value="14">2014</option>
+                                    <option value="15">2015</option>
+                                    <option value="16">2016</option>
+                                    <option value="17">2017</option>
+                                    <option value="18">2018</option>
+                                    <option value="19">2019</option>
+                                    <option value="20">2020</option>
+                                    <option value="21">2021</option>
+                                    <option value="22">2022</option>
+                                    <option value="23">2023</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CVV (required) -->
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class="control-label sr-only" for="cvv" translate="settings.form.ccCVV">Card CVV</label>
+                                <input ng-keypress="vm.numberTab($event)" type="number" class="form-control drsl-card-number-quarter" id="cvv" name="cvv" placeholder="{{'settings.form.ccCVV.placeholder' | translate}}"
+                                ng-minlength=1 ng-maxlength=4  maxlength="3" ng-model="vm.creditCard.cvv" required ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.cvv.$dirty && !vm.creditCard.cvv)}">
+                                <span ng-if="vm.error && vm.creditCard.cvv.toString().length != 3" class="drsl-invalid" translate="settings.messages.error.ccInvalidCVVNumber">Invalid CVV Number</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Update/Submit button -->
+                    <button type="submit" ng-disabled="form.$invalid" class="btn btn-success drsl-update-card-button" translate="settings.form.button">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Manage Authorized Users -->
+<div class="drsl-settings-wrapper" ng-if="!vm.isAlreadyAuthorized && !vm.currentExpert">
+    <div ng-if="!vm.isAlreadyAuthorized">
+        <!-- Header -->
+        <div class="drsl-sub-header" translate="settings.authorization.header">
+            Manage Authorized Users
+        </div>
+
+        <!-- Add/Invite Users (left panel) -->
+        <div class="panel panel-default drsl-user-managment">
+            <div class="panel-heading">
+                <form class="drsl-user-add-form" name="addUserForm" ng-submit="vm.addAuthorizedUser()">
+                    <label class="control-label" for="uEmail" translate="settings.authorization.input">Add User</label>
+                    <input type="text" class="form-control" id="uEmail" ng-model="vm.invitedUser" name="uEmail" placeholder="{{'settings.authorization.input.placeholder' | translate}}" ng-minlength=1 ng-change="vm.checkInvalid()">
+                    <button type="submit" class="btn btn-success inviteButton" translate="settings.form.button">Update</button>
+                </form>
+            </div>
+            <div class="panel-body">
+                <!-- No Invited Users -->
+                <div class="drsl-user-list empty" ng-hide="vm.invitedUsers.length">
+                    <div  translate="settings.authorization.noInvitedUsers">No Invited Users</div>
+                </div>
+
+                <!-- Invited User List -->
+                <div class="drsl-user-list" ng-show="vm.invitedUsers.length">
+                    <table class="table drsl-settings-table-scroll">
+                        <thead>
                             <tr>
                                 <th translate="settings.authorization.InvitedUsers">Invited Users</th>
                                 <th translate="settings.authorization.remove">Remove</th>
                             </tr>
-                            </thead>
-                            <tbody>
+                        </thead>
+                        <tbody>
                             <tr ng-repeat="invitedUser in vm.invitedUsers track by $index">
                                 <td>
                                     {{invitedUser.authorizeduser.email}}
@@ -468,30 +507,30 @@
                                     <img src="content/images/black_trashcan_icon.png" alt="" ng-click="vm.removeInvitedUsers(invitedUser.id, $index)"/>
                                 </td>
                             </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
             </div>
+        </div>
 
-            <!-- Active Users (right panel) -->
-            <div class="panel panel-default drsl-active-user-managment">
-                <div class="panel-heading">
-                    <div translate="settings.authorization.activeHeader">(Invited Users automatically join Active Users once they register)</div>
+        <!-- Active Users (right panel) -->
+        <div class="panel panel-default drsl-active-user-managment">
+            <div class="panel-heading">
+                <div translate="settings.authorization.activeHeader">(Invited Users automatically join Active Users once they register)</div>
+            </div>
+            <div class="panel-body">
+                <div class="drsl-user-list empty" ng-hide="vm.authorizedUsers.length">
+                    <div  translate="settings.authorization.noActiveUsers">No Active Users</div>
                 </div>
-                <div class="panel-body">
-                    <div class="drsl-user-list empty" ng-hide="vm.authorizedUsers.length">
-                        <div  translate="settings.authorization.noActiveUsers">No Active Users</div>
-                    </div>
-                    <div class="drsl-user-list" ng-show="vm.authorizedUsers.length">
-                        <table class="table drsl-settings-table-scroll">
-                            <thead>
+                <div class="drsl-user-list" ng-show="vm.authorizedUsers.length">
+                    <table class="table drsl-settings-table-scroll">
+                        <thead>
                             <tr>
                                 <th translate="settings.authorization.ActiveUsers">Active Users</th>
                                 <th translate="settings.authorization.remove">Remove</th>
                             </tr>
-                            </thead>
-                            <tbody>
+                        </thead>
+                        <tbody>
                             <tr ng-repeat="user in vm.authorizedUsers track by $index">
                                 <td>
                                     {{user.authorizeduser.firstName}}
@@ -502,11 +541,11 @@
                                     <img src="content/images/black_trashcan_icon.png" ng-click="vm.removeAuthorizedUsers(user.id, $index)"/>
                                 </td>
                             </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>

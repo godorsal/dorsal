@@ -46,7 +46,24 @@
         vm.removeInvitedUsers = removeInvitedUsers;
         vm.updateUser = updateUser;
         vm.checkInvalid = checkInvalid;
+        vm.expertAttributes = ['one', 'two', 'three']
+        vm.editingAttributes = false;
+        vm.saveAttributes = saveAttributes;
 
+        function saveAttributes() {
+            if(vm.atbInputString.length){
+                var inputArray = vm.atbInputString.split(',');
+                vm.atbInputString = '';
+                inputArray.forEach(function (atb) {
+                    vm.expertAttributes.push(atb)
+                })
+            }
+        }
+        vm.deleteAttribute = deleteAttribute;
+        function deleteAttribute(index) {
+            console.log(index);
+            vm.expertAttributes.splice(index, 1)
+        }
         /**
         * Initialize the controller's data.
         */
