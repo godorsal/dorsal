@@ -173,7 +173,7 @@ entity ExpertAttribute {
 entity ExpertAttributeToExpert {}
 
 relationship OneToMany {
-    ExpertAccount{expertattributetoexpert(expert)} to ExpertAttributeToExpert{expert}
+    ExpertAccount{expertattributetoexpert(expertaccount)} to ExpertAttributeToExpert{expertaccount}
 }
 
 relationship OneToMany {
@@ -209,7 +209,7 @@ relationship OneToMany {
 entity ExpertPoolToExpert {}
 
 relationship OneToMany {
-    ExpertAccount{expertpooltoexpert(expert)} to ExpertPoolToExpert{expert}
+    ExpertAccount{expertpooltoexpert(expertaccount)} to ExpertPoolToExpert{expertaccount}
 }
 
 relationship OneToMany {
