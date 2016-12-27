@@ -1,7 +1,52 @@
+//////////////////////////
+// Entity Technology
+
+entity Technology {
+	name String required,
+    code String
+}
+
+///////////////////////////////////////////
+// Entity Availability
+//
+// FullTime, Mon-Fri/8-5, Evening, Weekend
+///////////////////////////////////////////
+enum Availability {
+    FULL_TIME, MON_FRI, EVENING, WEEKEND
+}
+
+////////////////////////////////
+// Entity Profile Visability
+////////////////////////////////
+enum ProfileVisability {
+    PUBLIC, INTERN, HIDDEN
+}
+
+//////////////////////////
+// Entity Expert Account
+
+entity ExpertAccount  {
+    phone String,
+    skype String,
+    othercommunication String,
+    location String,
+    expertScore Integer,
+    handle String,
+    languages String,
+    imagePath String maxlength(512),
+    isAvailable Boolean,
+    expertBio String maxlength(4096),
+    expertSince ZonedDateTime,
+    numberOfCases Integer,
+    welcomeMessage String maxlength(2048),
+    expertTimezone String,
+    expertAvailability Availability,
+    profileVisibility ProfileVisability
+}
+
 //////////////////////////////
 // Expert profiles and scores
 //////////////////////////////
-
 
 ///////////////////////////////////
 // TechnologyExpertScore Entity
@@ -11,13 +56,12 @@ entity TechnologyExpertScore {
 }
 
 relationship OneToMany {
-    User{technologyexpertscore(expert_account)} to TechnologyExpertScore{expert_account}
+    ExpertAccount{technologyexpertscore(expertaccount)} to TechnologyExpertScore{expertaccount}
 }
 
 relationship OneToMany {
     Technology{technologyexpertscore(technology)} to TechnologyExpertScore{technology}
 }
-
 
 //////////////////////////////////////
 // Product
@@ -35,7 +79,7 @@ entity ProductExpertScore {
 }
 
 relationship OneToMany {
-    User{productexpertscore(expert_account)} to ProductExpertScore{expert_account}
+    ExpertAccount{productexpertscore(expertaccount)} to ProductExpertScore{expertaccount}
 }
 
 relationship OneToMany {
@@ -58,7 +102,7 @@ entity SkillExpertScore {
 }
 
 relationship OneToMany {
-    User{skillexpertscore(expert_account)} to SkillExpertScore{expert_account}
+    ExpertAccount{skillexpertscore(expertaccount)} to SkillExpertScore{expertaccount}
 }
 
 relationship OneToMany {
@@ -82,7 +126,7 @@ entity JobroleExpertScore {
 }
 
 relationship OneToMany {
-    User{jobroleexpertscore(expert_account)} to JobroleExpertScore{expert_account}
+    ExpertAccount{jobroleexpertscore(expertaccount)} to JobroleExpertScore{expertaccount}
 }
 
 relationship OneToMany {
@@ -106,7 +150,7 @@ entity SpecialityExpertScore {
 }
 
 relationship OneToMany {
-    User{specialityexpertscore(expert_account)} to SpecialityExpertScore{expert_account}
+    ExpertAccount{specialityexpertscore(expertaccount)} to SpecialityExpertScore{expertaccount}
 }
 
 relationship OneToMany {
@@ -129,7 +173,7 @@ entity ExpertAttribute {
 entity ExpertAttributeToExpert {}
 
 relationship OneToMany {
-    User{expertattributetoexpert(expert)} to ExpertAttributeToExpert{expert}
+    ExpertAccount{expertattributetoexpert(expert)} to ExpertAttributeToExpert{expert}
 }
 
 relationship OneToMany {
@@ -156,7 +200,7 @@ entity ExpertPool {
 }
 
 relationship OneToMany {
-    User{expertpool(expertpoolowner)} to ExpertPool{expertpoolowner}
+    ExpertAccount{expertpool(expertpoolowner)} to ExpertPool{expertpoolowner}
 }
 
 /////////////////////////////////////////////////
@@ -165,7 +209,7 @@ relationship OneToMany {
 entity ExpertPoolToExpert {}
 
 relationship OneToMany {
-    User{expertpooltoexpert(expert)} to ExpertPoolToExpert{expert}
+    ExpertAccount{expertpooltoexpert(expert)} to ExpertPoolToExpert{expert}
 }
 
 relationship OneToMany {
