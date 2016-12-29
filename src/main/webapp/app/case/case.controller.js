@@ -164,7 +164,6 @@
 					} else if(data.sharedCase && vm.sharedcases.length > 0 &&  CaseService.currentCase.type === "sharedCase") {
 						vm.setCurrentCase(vm.sharedcases[CaseService.currentCase.index], CaseService.currentCase.index);
 					} else {
-						log
 						vm.currentCase = null;
 						return;
 					}
