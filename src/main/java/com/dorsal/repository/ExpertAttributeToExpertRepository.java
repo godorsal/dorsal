@@ -12,4 +12,6 @@ import java.util.List;
 @SuppressWarnings("unused")
 public interface ExpertAttributeToExpertRepository extends JpaRepository<ExpertAttributeToExpert,Long> {
 
+    @Query("select expertattrinutetoexpert from ExpertAttributeToExpert expertattrinutetoexpert where expertattrinutetoexpert.expertaccount.user.login = ?#{principal.username} ORDER BY expertattrinutetoexpert.expertattribute.name DESC")
+    List<ExpertAttributeToExpert> findByUserIsCurrentUser();
 }

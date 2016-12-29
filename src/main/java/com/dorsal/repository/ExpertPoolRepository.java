@@ -11,5 +11,6 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 public interface ExpertPoolRepository extends JpaRepository<ExpertPool,Long> {
-
+    @Query("select expertpool from ExpertPool expertpool where expertpool.expertpoolowner.user.login = ?#{principal.username} ORDER BY expertpool.name DESC")
+    List<ExpertPool> findByUserIsCurrentUser();
 }

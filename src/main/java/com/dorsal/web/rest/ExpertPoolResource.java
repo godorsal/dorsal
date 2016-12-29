@@ -95,6 +95,17 @@ public class ExpertPoolResource {
         if (expertPool.getId() == null) {
             return createExpertPool(expertPool);
         }
+
+        // Get the current logged in user, make sure is an expert and matches the expert on record
+        ExpertAccount expert = expertRepository.findExpertAccountForUser(userRepository.findLoggedInUser().getLogin());
+
+        if (   expert == null
+            || expert.getId() != expertPool.getExpertpoolowner().getId() ) {
+            // Only valid experts and records owner can update the record
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("ExpertPool", "invaliduser", "ExpertPool entry can only be updated by expert that has created the entry!")).body(null);
+        }
+
+
         ExpertPool result = expertPoolRepository.save(expertPool);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("expertPool", expertPool.getId().toString()))
@@ -112,7 +123,7 @@ public class ExpertPoolResource {
     @Timed
     public List<ExpertPool> getAllExpertPools() {
         log.debug("REST request to get all ExpertPools");
-        List<ExpertPool> expertPools = expertPoolRepository.findAll();
+        List<ExpertPool> expertPools = expertPoolRepository.findByUserIsCurrentUser();
         return expertPools;
     }
 
