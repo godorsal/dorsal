@@ -1,0 +1,24 @@
+{
+    "dorsalApp": {
+        "jobRole" : {
+            "home": {
+                "title": "Job Roles",
+                "createLabel": "Job Role erstellen",
+                "createOrEditLabel": "Job Role erstellen oder bearbeiten",
+                "search": "Suche nach Job Role"
+            },
+            "created": "Job Role erstellt mit ID {{ param }}",
+            "updated": "Job Role aktualisiert mit ID {{ param }}",
+            "deleted": "Job Role gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Job Role {{ id }} wirklich dauerhaft gelöscht werden?"
+            },
+            "detail": {
+                "title": "Job Role"
+            },
+            "name": "Name",
+            "code": "Code",
+            "jobroleexpertscore": "Jobroleexpertscore"
+        }
+    }
+}

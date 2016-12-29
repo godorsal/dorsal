@@ -1,0 +1,64 @@
+<div>
+    <h2 data-translate="dorsalApp.specialityExpertScore.home.title">Speciality Expert Scores</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="speciality-expert-score.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="dorsalApp.specialityExpertScore.home.createLabel">
+                        Create new Speciality Expert Score
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span data-translate="global.field.id">ID</span></th>
+                    <th><span data-translate="dorsalApp.specialityExpertScore.score">Score</span></th>
+                    <th><span data-translate="dorsalApp.specialityExpertScore.expertaccount">Expertaccount</span></th>
+                    <th><span data-translate="dorsalApp.specialityExpertScore.speciality">Speciality</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="specialityExpertScore in vm.specialityExpertScores track by specialityExpertScore.id">
+                    <td><a ui-sref="speciality-expert-score-detail({id:specialityExpertScore.id})">{{specialityExpertScore.id}}</a></td>
+                    <td>{{specialityExpertScore.score}}</td>
+                    <td>
+                        <a ui-sref="expert-account-detail({id:specialityExpertScore.expertaccount.id})">{{specialityExpertScore.expertaccount.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="speciality-detail({id:specialityExpertScore.speciality.id})">{{specialityExpertScore.speciality.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="speciality-expert-score-detail({id:specialityExpertScore.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="speciality-expert-score.edit({id:specialityExpertScore.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="speciality-expert-score.delete({id:specialityExpertScore.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+
+<div>
+    <h2><span data-translate="dorsalApp.expertAttributeToExpert.detail.title">Expert Attribute To Expert</span> {{vm.expertAttributeToExpert.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="dorsalApp.expertAttributeToExpert.expertaccount">Expertaccount</span></dt>
+        <dd>
+            <a ui-sref="expert-account-detail({id:vm.expertAttributeToExpert.expertaccount.id})">{{vm.expertAttributeToExpert.expertaccount.id}}</a>
+        </dd>
+        <dt><span data-translate="dorsalApp.expertAttributeToExpert.expertattribute">Expertattribute</span></dt>
+        <dd>
+            <a ui-sref="expert-attribute-detail({id:vm.expertAttributeToExpert.expertattribute.id})">{{vm.expertAttributeToExpert.expertattribute.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="expert-attribute-to-expert-detail.edit({id:vm.expertAttributeToExpert.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

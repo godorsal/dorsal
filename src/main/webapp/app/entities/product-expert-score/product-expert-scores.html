@@ -1,0 +1,64 @@
+<div>
+    <h2 data-translate="dorsalApp.productExpertScore.home.title">Product Expert Scores</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="product-expert-score.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="dorsalApp.productExpertScore.home.createLabel">
+                        Create new Product Expert Score
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span data-translate="global.field.id">ID</span></th>
+                    <th><span data-translate="dorsalApp.productExpertScore.score">Score</span></th>
+                    <th><span data-translate="dorsalApp.productExpertScore.expertaccount">Expertaccount</span></th>
+                    <th><span data-translate="dorsalApp.productExpertScore.product">Product</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="productExpertScore in vm.productExpertScores track by productExpertScore.id">
+                    <td><a ui-sref="product-expert-score-detail({id:productExpertScore.id})">{{productExpertScore.id}}</a></td>
+                    <td>{{productExpertScore.score}}</td>
+                    <td>
+                        <a ui-sref="expert-account-detail({id:productExpertScore.expertaccount.id})">{{productExpertScore.expertaccount.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="product-detail({id:productExpertScore.product.id})">{{productExpertScore.product.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="product-expert-score-detail({id:productExpertScore.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="product-expert-score.edit({id:productExpertScore.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="product-expert-score.delete({id:productExpertScore.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
