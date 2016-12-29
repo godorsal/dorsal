@@ -95,6 +95,15 @@ public class ExpertAttributeToExpertResource {
         if (expertAttributeToExpert.getId() == null) {
             return createExpertAttributeToExpert(expertAttributeToExpert);
         }
+        // Get the current logged in user, make sure is an expert and matches the expert on record
+        ExpertAccount expert = expertRepository.findExpertAccountForUser(userRepository.findLoggedInUser().getLogin());
+
+        if (    expert == null
+             || expert.getId() != expertAttributeToExpert.getExpertaccount().getId() ){
+            // Only valid experts and records owner can update the record
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("expertAttributeToExpert", "invaliduser", "ExpertAttributeToExpert entry can only be updated by expert that has created the entry!")).body(null);
+        }
+
         ExpertAttributeToExpert result = expertAttributeToExpertRepository.save(expertAttributeToExpert);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("expertAttributeToExpert", expertAttributeToExpert.getId().toString()))
@@ -112,7 +121,7 @@ public class ExpertAttributeToExpertResource {
     @Timed
     public List<ExpertAttributeToExpert> getAllExpertAttributeToExperts() {
         log.debug("REST request to get all ExpertAttributeToExperts");
-        List<ExpertAttributeToExpert> expertAttributeToExperts = expertAttributeToExpertRepository.findAll();
+        List<ExpertAttributeToExpert> expertAttributeToExperts = expertAttributeToExpertRepository.findByUserIsCurrentUser();
         return expertAttributeToExperts;
     }
 
