@@ -1,0 +1,24 @@
+{
+    "dorsalApp": {
+        "productExpertScore" : {
+            "home": {
+                "title": "Product Expert Scores",
+                "createLabel": "Create a new Product Expert Score",
+                "createOrEditLabel": "Create or edit a Product Expert Score",
+                "search": "Search for Product Expert Score"
+            },
+            "created": "A new Product Expert Score is created with identifier {{ param }}",
+            "updated": "A Product Expert Score is updated with identifier {{ param }}",
+            "deleted": "A Product Expert Score is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Product Expert Score {{ id }}?"
+            },
+            "detail": {
+                "title": "Product Expert Score"
+            },
+            "score": "Score",
+            "expertaccount": "Expertaccount",
+            "product": "Product"
+        }
+    }
+}

@@ -39,4 +39,7 @@ public interface ExpertAccountRepository extends JpaRepository<ExpertAccount,Lon
 
     @Query("select ea from ExpertAccount ea where ea.user.login = :concierge")
     ExpertAccount getDorsalConcierge(@Param("concierge") String conciergeLogin);
+
+    @Query("select ea from ExpertAccount ea where ea.user.login = :userlogin")
+    ExpertAccount findExpertAccountForUser(@Param("userlogin") String userLogin);
 }

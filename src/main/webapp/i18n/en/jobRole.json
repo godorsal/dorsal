@@ -1,0 +1,24 @@
+{
+    "dorsalApp": {
+        "jobRole" : {
+            "home": {
+                "title": "Job Roles",
+                "createLabel": "Create a new Job Role",
+                "createOrEditLabel": "Create or edit a Job Role",
+                "search": "Search for Job Role"
+            },
+            "created": "A new Job Role is created with identifier {{ param }}",
+            "updated": "A Job Role is updated with identifier {{ param }}",
+            "deleted": "A Job Role is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Job Role {{ id }}?"
+            },
+            "detail": {
+                "title": "Job Role"
+            },
+            "name": "Name",
+            "code": "Code",
+            "jobroleexpertscore": "Jobroleexpertscore"
+        }
+    }
+}

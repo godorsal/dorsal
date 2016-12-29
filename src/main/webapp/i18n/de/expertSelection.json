@@ -1,0 +1,9 @@
+{
+    "dorsalApp": {
+        "ExpertSelection" : {
+            "null": "",
+            "EXPERT_IN_POOL_ONLY": "EXPERT_IN_POOL_ONLY",
+            "EXPERT_IN_POOL_FIRST": "EXPERT_IN_POOL_FIRST"
+        }
+    }
+}

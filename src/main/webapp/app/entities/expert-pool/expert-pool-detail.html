@@ -1,0 +1,35 @@
+
+<div>
+    <h2><span data-translate="dorsalApp.expertPool.detail.title">Expert Pool</span> {{vm.expertPool.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="dorsalApp.expertPool.name">Name</span></dt>
+        <dd>
+            <span>{{vm.expertPool.name}}</span>
+        </dd>
+        <dt><span data-translate="dorsalApp.expertPool.description">Description</span></dt>
+        <dd>
+            <span>{{vm.expertPool.description}}</span>
+        </dd>
+        <dt><span data-translate="dorsalApp.expertPool.expertSelection">Expert Selection</span></dt>
+        <dd>
+            <span data-translate="{{'dorsalApp.ExpertSelection.' + vm.expertPool.expertSelection}}">{{vm.expertPool.expertSelection}}</span>
+        </dd>
+        <dt><span data-translate="dorsalApp.expertPool.expertpoolowner">Expertpoolowner</span></dt>
+        <dd>
+            <a ui-sref="expert-account-detail({id:vm.expertPool.expertpoolowner.id})">{{vm.expertPool.expertpoolowner.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="expert-pool-detail.edit({id:vm.expertPool.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

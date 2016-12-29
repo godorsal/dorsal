@@ -7,9 +7,9 @@
 
     SettingsController.$inject = ['$rootScope', 'Principal', 'Auth', 'JhiLanguageService', '$translate', 'Payment',
     'Groupaccess', 'User', 'Focus', 'Register', 'toastr', 'ExpertAccount', 'Issue', 'Technology', '_', '$state',
-    'DrslUserFlowService', 'ManageUser'];
+    'DrslUserFlowService', 'ManageUser', 'ExpertAttribute', 'ExpertAttributeToExpert'];
 
-    function SettingsController($rootScope, Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, User, focus, Register, toastr, ExpertAccount, Issue, Technology, _, $state, DrslUserFlowService, ManageUser) {
+    function SettingsController($rootScope, Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, User, focus, Register, toastr, ExpertAccount, Issue, Technology, _, $state, DrslUserFlowService, ManageUser, ExpertAttribute, ExpertAttributeToExpert) {
 
         // Handle user flow redirects and messaging
         DrslUserFlowService.handleUserFlow();
@@ -46,23 +46,32 @@
         vm.removeInvitedUsers = removeInvitedUsers;
         vm.updateUser = updateUser;
         vm.checkInvalid = checkInvalid;
-        vm.expertAttributes = ['one', 'two', 'three']
         vm.editingAttributes = false;
         vm.saveAttributes = saveAttributes;
+
+        ExpertAttributeToExpert.query(function (res) {
+            vm.expertAttributes = res;
+        })
 
         function saveAttributes() {
             if(vm.atbInputString.length){
                 var inputArray = vm.atbInputString.split(',');
                 vm.atbInputString = '';
                 inputArray.forEach(function (atb) {
-                    vm.expertAttributes.push(atb)
+                    ExpertAttribute.save({name: atb, description: ''}, attributeSaved)
+                    // vm.currentExpert.expertAttributes.push(atb)
                 })
             }
         }
+        function attributeSaved(res) {
+            var newAttribute = {
+                id: res.id
+            }
+            ExpertAttributeToExpert.save({expertattribute: newAttribute});
+        }
         vm.deleteAttribute = deleteAttribute;
         function deleteAttribute(index) {
-            console.log(index);
-            vm.expertAttributes.splice(index, 1)
+            ExpertAttributeToExpert.delete({id: vm.expertAttributes[index].id}, vm.expertAttributes.splice(index, 1))
         }
         /**
         * Initialize the controller's data.

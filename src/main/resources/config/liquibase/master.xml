@@ -26,6 +26,19 @@
     <include file="classpath:config/liquibase/changelog/20160801160055_added_entity_Useraccount.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160801160056_added_entity_Supportcase.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160804193843_added_entity_SupportCaseReport.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161227222400_added_entity_Skill.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161227222401_added_entity_SkillExpertScore.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161227222402_added_entity_JobRole.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161227222403_added_entity_JobroleExpertScore.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161227222404_added_entity_Speciality.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161227222405_added_entity_SpecialityExpertScore.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161227222406_added_entity_ExpertAttribute.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161227222407_added_entity_ExpertAttributeToExpert.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161227222408_added_entity_ExpertPool.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161227222409_added_entity_ExpertPoolToExpert.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161227222457_added_entity_TechnologyExpertScore.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161227222458_added_entity_Product.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161227222459_added_entity_ProductExpertScore.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="classpath:config/liquibase/changelog/20160623155303_added_entity_constraints_Referencedoc.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160623155304_added_entity_constraints_Groupaccess.xml" relativeToChangelogFile="false"/>
@@ -42,5 +55,13 @@
     <include file="classpath:config/liquibase/changelog/20160801160055_added_entity_constraints_Useraccount.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160801160056_added_entity_constraints_Supportcase.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160804193843_added_entity_constraints_SupportCaseReport.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161227222401_added_entity_constraints_SkillExpertScore.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161227222403_added_entity_constraints_JobroleExpertScore.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161227222405_added_entity_constraints_SpecialityExpertScore.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161227222407_added_entity_constraints_ExpertAttributeToExpert.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161227222408_added_entity_constraints_ExpertPool.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161227222409_added_entity_constraints_ExpertPoolToExpert.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161227222457_added_entity_constraints_TechnologyExpertScore.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161227222459_added_entity_constraints_ProductExpertScore.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

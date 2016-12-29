@@ -1,0 +1,26 @@
+{
+    "dorsalApp": {
+        "expertPool" : {
+            "home": {
+                "title": "Expert Pools",
+                "createLabel": "Expert Pool erstellen",
+                "createOrEditLabel": "Expert Pool erstellen oder bearbeiten",
+                "search": "Suche nach Expert Pool"
+            },
+            "created": "Expert Pool erstellt mit ID {{ param }}",
+            "updated": "Expert Pool aktualisiert mit ID {{ param }}",
+            "deleted": "Expert Pool gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Expert Pool {{ id }} wirklich dauerhaft gelöscht werden?"
+            },
+            "detail": {
+                "title": "Expert Pool"
+            },
+            "name": "Name",
+            "description": "Description",
+            "expertSelection": "Expert Selection",
+            "expertpooltoexpert": "Expertpooltoexpert",
+            "expertpoolowner": "Expertpoolowner"
+        }
+    }
+}

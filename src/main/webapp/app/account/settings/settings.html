@@ -300,7 +300,7 @@ Your e-mail cannot be longer than 100 characters.
             <div style="border: 1px solid rgb(204, 204, 204); padding: 10px; border-radius: 10px;">
                 <button type="button" name="button" ng-repeat="attribute in vm.expertAttributes track by $index" class="btn" style="margin: 5px;">
                     <span>
-                        {{attribute}}
+                        {{attribute.expertattribute.name}}
                     </span>
                     <span ng-if="vm.editingAttributes" ng-click="vm.deleteAttribute($index)">
                         <i class="fa fa-times-circle" aria-hidden="true"></i>

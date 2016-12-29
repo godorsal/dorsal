@@ -1,0 +1,24 @@
+{
+    "dorsalApp": {
+        "technologyExpertScore" : {
+            "home": {
+                "title": "Technology Expert Scores",
+                "createLabel": "Create a new Technology Expert Score",
+                "createOrEditLabel": "Create or edit a Technology Expert Score",
+                "search": "Search for Technology Expert Score"
+            },
+            "created": "A new Technology Expert Score is created with identifier {{ param }}",
+            "updated": "A Technology Expert Score is updated with identifier {{ param }}",
+            "deleted": "A Technology Expert Score is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Technology Expert Score {{ id }}?"
+            },
+            "detail": {
+                "title": "Technology Expert Score"
+            },
+            "score": "Score",
+            "expertaccount": "Expertaccount",
+            "technology": "Technology"
+        }
+    }
+}

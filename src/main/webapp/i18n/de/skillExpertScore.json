@@ -1,0 +1,24 @@
+{
+    "dorsalApp": {
+        "skillExpertScore" : {
+            "home": {
+                "title": "Skill Expert Scores",
+                "createLabel": "Skill Expert Score erstellen",
+                "createOrEditLabel": "Skill Expert Score erstellen oder bearbeiten",
+                "search": "Suche nach Skill Expert Score"
+            },
+            "created": "Skill Expert Score erstellt mit ID {{ param }}",
+            "updated": "Skill Expert Score aktualisiert mit ID {{ param }}",
+            "deleted": "Skill Expert Score gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Skill Expert Score {{ id }} wirklich dauerhaft gelöscht werden?"
+            },
+            "detail": {
+                "title": "Skill Expert Score"
+            },
+            "score": "Score",
+            "expertaccount": "Expertaccount",
+            "skill": "Skill"
+        }
+    }
+}
