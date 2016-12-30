@@ -51,27 +51,47 @@
 
         ExpertAttributeToExpert.query(function (res) {
             vm.expertAttributes = res;
+            calculateAttributes()
         })
+        function calculateAttributes() {
+        ExpertAttribute.query(function (res) {
+            vm.presentAttributes = res;
+			vm.expertAttributes.forEach(function (attribute1, index1) {
+				vm.presentAttributes.forEach(function (attribute2, index2) {
+					if(attribute1.expertattribute.id === attribute2.id){
+						vm.presentAttributes.splice(index2, 1);
+					}
+				})
+			})
+        })
+    }
 
         function saveAttributes() {
-            if(vm.atbInputString.length){
+            if(vm.atbInputString){
                 var inputArray = vm.atbInputString.split(',');
                 vm.atbInputString = '';
                 inputArray.forEach(function (atb) {
                     ExpertAttribute.save({name: atb, description: ''}, attributeSaved)
-                    // vm.currentExpert.expertAttributes.push(atb)
                 })
+            } else if (vm.addAttribute) {
+                ExpertAttributeToExpert.save({expertattribute: JSON.parse(vm.addAttribute)}, addToArray);
             }
         }
         function attributeSaved(res) {
-            var newAttribute = {
-                id: res.id
-            }
-            ExpertAttributeToExpert.save({expertattribute: newAttribute});
+            ExpertAttributeToExpert.save({expertattribute: res}, addToArray);
+        }
+        function addToArray(res) {
+            vm.expertAttributes.push(res)
+            vm.presentAttributes.forEach(function (attribute, index) {
+                if(attribute.name === res.expertattribute.name){
+                    vm.presentAttributes.splice(index, 1)
+                }
+            })
         }
         vm.deleteAttribute = deleteAttribute;
         function deleteAttribute(index) {
-            ExpertAttributeToExpert.delete({id: vm.expertAttributes[index].id}, vm.expertAttributes.splice(index, 1))
+            vm.presentAttributes.push(vm.expertAttributes[index].expertattribute)
+            ExpertAttributeToExpert.delete({id: vm.expertAttributes[index].id}, vm.expertAttributes.splice(index, 1));
         }
         /**
         * Initialize the controller's data.
