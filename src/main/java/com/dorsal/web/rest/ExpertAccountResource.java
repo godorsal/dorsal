@@ -92,6 +92,28 @@ public class ExpertAccountResource {
         return expertAccounts;
     }
 
+
+    /**
+     * GET  /expert-accounts/experts : get all the expertAccounts if the caller is an expert
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of expertAccounts in body
+     */
+    @RequestMapping(value = "/expert-accounts/experts",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<ExpertAccount> getAllExpertAccountsForExpert() {
+        log.debug("REST request to get all ExpertAccounts. Needs to be an expert to get it.");
+        // Check if logged-in user is expert.
+        if (expertAccountRepository.findByUserIsCurrentUser() != null) {
+            List<ExpertAccount> expertAccounts = expertAccountRepository.findAll();
+            return expertAccounts;
+        } else {
+            log.error("Request for all expert accounts from an un-authorized user.");
+            return null;
+        }
+    }
+
     /**
      * GET  /expert-accounts/:id : get the "id" expertAccount.
      *
