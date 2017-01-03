@@ -40,6 +40,68 @@ BEGIN
         INSERT INTO expert_attribute(name, description) VALUES('VERIZON-ONLY', 'Experts working exclusively on Verizon projects');
 
         -- Expert profiles
+        -- Product --
+        INSERT INTO product(name,code) VALUES('MySQL', 'mysql');
+        INSERT INTO product(name,code) VALUES('MariaDB', 'mariadb');
+        INSERT INTO product(name,code) VALUES('PostgreSQL', 'postgresql');
+        INSERT INTO product(name,code) VALUES('MongoDB', 'mongodb');
+        INSERT INTO product(name,code) VALUES('Oracle DB', 'oracledb');
+        INSERT INTO product(name,code) VALUES('MS SQL', 'mssql');
+        INSERT INTO product(name,code) VALUES('Hadoop', 'hadoop');
+        INSERT INTO product(name,code) VALUES('XtraDB Cluster', 'xtradbcluster');
+        INSERT INTO product(name,code) VALUES('Tungsten Cluster', 'tungstencluster');
+        INSERT INTO product(name,code) VALUES('Galera Cluster', 'galeracluster');
+        INSERT INTO product(name,code) VALUES('PGCluster', 'pgcluster');
+        INSERT INTO product(name,code) VALUES('PGPool', 'pgpool');
+        INSERT INTO product(name,code) VALUES('PostgreSQL-XL', 'postgresqlxl');
+        INSERT INTO product(name,code) VALUES('Xtra Backup', 'xtrabackup');
+        INSERT INTO product(name,code) VALUES('Ansible', 'ansible');
+        INSERT INTO product(name,code) VALUES('Puppet', 'puppet');
+        INSERT INTO product(name,code) VALUES('Chef', 'chef');
+        INSERT INTO product(name,code) VALUES('CFEngine', 'cfengine');
+        INSERT INTO product(name,code) VALUES('Neo4J', 'neo4j');
+        INSERT INTO product(name,code) VALUES('Shell scripting', 'shellscripting');
+        INSERT INTO product(name,code) VALUES('PERL programming', 'perlprogramming  ');
+
+-- Job Role --
+        INSERT INTO job_role(name, code) VALUES('Administrator' , 'administrator');
+        INSERT INTO job_role(name, code) VALUES('Architect', 'architect');
+        INSERT INTO job_role(name, code) VALUES('Developer', 'developer');
+        INSERT INTO job_role(name, code) VALUES('DevOps', 'devops');
+        INSERT INTO job_role(name, code) VALUES('Data Model Designer', 'datamodeldesigner');
+
+        -- Skills
+        INSERT INTO skill(name, code) VALUES('Configuration Review', 'configurationreview');
+        INSERT INTO skill(name, code) VALUES('Benchmarking', 'benchmarking');
+        INSERT INTO skill(name, code) VALUES('Query tuning', 'querytuning');
+        INSERT INTO skill(name, code) VALUES('Installations', 'installations');
+        INSERT INTO skill(name, code) VALUES('AWS RDBS', 'awsrdbs');
+        INSERT INTO skill(name, code) VALUES('Cluster Design', 'clusterdesign');
+        INSERT INTO skill(name, code) VALUES('Database HA', 'databaseha');
+        INSERT INTO skill(name, code) VALUES('OpenStack infrastructure', 'openstackinfrastructure');
+        INSERT INTO skill(name, code) VALUES('VMware infrastructure', 'vmwareinfrastructure');
+        INSERT INTO skill(name, code) VALUES('AWS infrastructure', 'awsinfrastructure');
+
+        -- Speciality
+        INSERT INTO speciality(name, code) VALUES('Oracle to MySQL transitions', 'oracletomysqltransition');
+        INSERT INTO speciality(name, code) VALUES('Oracle to MongoDB transitions', 'oracletomongodbtransitions');
+        INSERT INTO speciality(name, code) VALUES('Oracle to PostgreSQL transitions', 'oracletopostgresqltransitions');
+        INSERT INTO speciality(name, code) VALUES('Database Infrastructure', 'databaseinfrastructure');
+        INSERT INTO speciality(name, code) VALUES('MS SQL to FOSS transitions', 'mssqltofosstransitions');
+
+        -- Technology table is used for version 1.0 & 1.1 intake page which will be still used
+        -- New technology definition starting in v1.2 will use higher range of ID's
+        -- set the sequence so that it is above the values from the initial deployment
+
+        PERFORM setval('technology_id_seq', 10);
+
+        INSERT INTO technology(name, code) VALUES('SQL', 'sql');
+        INSERT INTO technology(name, code) VALUES('NoSQL', 'nosql');
+        INSERT INTO technology(name, code) VALUES('Cluster', 'cluster');
+        INSERT INTO technology(name, code) VALUES('Backup', 'backup');
+        INSERT INTO technology(name, code) VALUES('Replication', 'replication');
+        INSERT INTO technology(name, code) VALUES('Monitoring', 'monitoring');
+
 
 
 		currentSchemaVersion = '1.2.0';
