@@ -305,7 +305,7 @@
                                 <span translate="global.menu.account.mycases">My Cases</span>
                             </a>
                         </li>
-                        <li ui-sref-active="active">
+                        <li ui-sref-active="active" ng-if="vm.DUFS.user.isExpert">
                             <a ui-sref="expert-groups" ng-click="vm.collapseNavbar()">
                                 <span class="glyphicon glyphicon-user"></span>&nbsp;
                                 <span>Expert Groups</span>

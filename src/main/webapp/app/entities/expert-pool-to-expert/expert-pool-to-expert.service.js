@@ -7,7 +7,8 @@
     ExpertPoolToExpert.$inject = ['$resource'];
 
     function ExpertPoolToExpert ($resource) {
-        var resourceUrl =  'api/expert-pool-to-experts/:id';
+        var resourceUrl =  'api/expert-pool-to-experts/:type/:id';
+        // var resourceUrl =  'api/expert-pool-to-experts/:id';
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
