@@ -12,4 +12,9 @@ import java.util.List;
 @SuppressWarnings("unused")
 public interface TechnologyRepository extends JpaRepository<Technology,Long> {
 
+    @Query("select technology from Technology technology where technology.id >= 10 ORDER BY technology.id DESC")
+    List<Technology> findExpertProfileEntries();
+
+    @Query("select technology from Technology technology where technology.id < 10 ORDER BY technology.id DESC")
+    List<Technology> findUserIntakeList();
 }

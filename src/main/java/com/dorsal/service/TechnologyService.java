@@ -22,16 +22,16 @@ import java.util.stream.Collectors;
 public class TechnologyService {
 
     private final Logger log = LoggerFactory.getLogger(TechnologyService.class);
-    
+
     @Inject
     private TechnologyRepository technologyRepository;
-    
+
     @Inject
     private TechnologyMapper technologyMapper;
-    
+
     /**
      * Save a technology.
-     * 
+     *
      * @param technologyDTO the entity to save
      * @return the persisted entity
      */
@@ -45,13 +45,31 @@ public class TechnologyService {
 
     /**
      *  Get all the technologies.
-     *  
+     *
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<TechnologyDTO> findAll() {
         log.debug("Request to get all Technologies");
         List<TechnologyDTO> result = technologyRepository.findAll().stream()
+            .map(technologyMapper::technologyToTechnologyDTO)
+            .collect(Collectors.toCollection(LinkedList::new));
+        return result;
+    }
+
+    @Transactional(readOnly = true)
+    public List<TechnologyDTO> findExpertProfileEntries() {
+        log.debug("Request to get all Technologies");
+        List<TechnologyDTO> result = technologyRepository.findExpertProfileEntries().stream()
+            .map(technologyMapper::technologyToTechnologyDTO)
+            .collect(Collectors.toCollection(LinkedList::new));
+        return result;
+    }
+
+    @Transactional(readOnly = true)
+    public List<TechnologyDTO> findUserIntakeList() {
+        log.debug("Request to get all Technologies");
+        List<TechnologyDTO> result = technologyRepository.findUserIntakeList().stream()
             .map(technologyMapper::technologyToTechnologyDTO)
             .collect(Collectors.toCollection(LinkedList::new));
         return result;
@@ -63,7 +81,7 @@ public class TechnologyService {
      *  @param id the id of the entity
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public TechnologyDTO findOne(Long id) {
         log.debug("Request to get Technology : {}", id);
         Technology technology = technologyRepository.findOne(id);
@@ -73,7 +91,7 @@ public class TechnologyService {
 
     /**
      *  Delete the  technology by id.
-     *  
+     *
      *  @param id the id of the entity
      */
     public void delete(Long id) {
