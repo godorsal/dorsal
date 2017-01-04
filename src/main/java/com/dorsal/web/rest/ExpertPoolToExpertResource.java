@@ -27,7 +27,7 @@ import java.util.Optional;
 public class ExpertPoolToExpertResource {
 
     private final Logger log = LoggerFactory.getLogger(ExpertPoolToExpertResource.class);
-        
+
     @Inject
     private ExpertPoolToExpertRepository expertPoolToExpertRepository;
 
@@ -89,6 +89,16 @@ public class ExpertPoolToExpertResource {
     public List<ExpertPoolToExpert> getAllExpertPoolToExperts() {
         log.debug("REST request to get all ExpertPoolToExperts");
         List<ExpertPoolToExpert> expertPoolToExperts = expertPoolToExpertRepository.findAll();
+        return expertPoolToExperts;
+    }
+
+    @RequestMapping(value = "/expert-pool-to-experts/expertpool/{id}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<ExpertPoolToExpert> getExpertPoolsByExpertPoolID(@PathVariable Long id) {
+        log.debug("REST request to get ExpertPoolToExperts for a given pool ID : {}", id);
+        List<ExpertPoolToExpert> expertPoolToExperts = expertPoolToExpertRepository.findExpertPoolToExpertbyPoolID(id);
         return expertPoolToExperts;
     }
 
