@@ -8,13 +8,16 @@
 	CaseController.$inject = ['$scope', '$window', '$interval', '$timeout', '$translate', 'CaseService', 'DrslRatingService',
 	'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', 'StatusModel',
 	'Rating', 'Expertbadge', 'DrslMetadata', 'Caseupdate', 'AttachmentModalService', 'DrslAttachFileService',
-	'DrslNewCaseService', '$filter', '_', 'DrslUserFlowService', 'DrslHipChatService', '$sce', 'paginationConstants', '$state', 'pagingParams', '$rootScope', 'SupportCaseReportRatingCommentModalService'];
+	'DrslNewCaseService', '$filter', '_', 'DrslUserFlowService', 'DrslHipChatService', '$sce', 'paginationConstants', '$state', 'pagingParams', '$rootScope', 'SupportCaseReportRatingCommentModalService', 'ExpertAccount'];
 
 	function CaseController($scope, $window, $interval, $timeout, $translate, CaseService, DrslRatingService, CaseDetailsService,
 		EscalationFormService, ShareCaseService, CaseAgreementService, StatusModel, Rating,
 		Expertbadge, DrslMetadata, Caseupdate, AttachmentModalService, DrslAttachFileService,
-		DrslNewCaseService, $filter, _, DrslUserFlowService, DrslHipChatService, $sce, paginationConstants, $state, pagingParams, $rootScope, SupportCaseReportRatingCommentModalService) {
+		DrslNewCaseService, $filter, _, DrslUserFlowService, DrslHipChatService, $sce, paginationConstants, $state, pagingParams, $rootScope, SupportCaseReportRatingCommentModalService, ExpertAccount) {
 
+			ExpertAccount.query({id: "experts"},function (res) {
+				console.log(res);
+			})
 			// Handle user flow redirects and messaging
 			DrslUserFlowService.handleUserFlow();
 

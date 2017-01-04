@@ -31,6 +31,10 @@
         vm.getMessages = getMessages;
         vm.maxResults = '5';
 
+        // ExpertAccount.query(function (res) {
+        //     console.log(res);
+        // })
+
         // DrslHipChatService.clearRooms();
         DrslHipChatService.getCurrentUser();
         if(DrslHipChatService.currentRoom){
@@ -69,7 +73,7 @@
             vm.conciergechaturl = null;
             vm.checkingMessages = false;
         })
-        
+
         /**
         * Creates (saves/updates) the case.
         * Called after the form is submitted and the user is authenticated.

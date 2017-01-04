@@ -7,6 +7,7 @@
     ExpertAccount.$inject = ['$resource', 'DateUtils'];
 
     function ExpertAccount ($resource, DateUtils) {
+        // var resourceUrl =  'api/expert-a'ccounts/experts';
         var resourceUrl =  'api/expert-accounts/:id';
 
         return $resource(resourceUrl, {}, {
