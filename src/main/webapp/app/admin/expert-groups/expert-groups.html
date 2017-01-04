@@ -1,0 +1,52 @@
+<div>
+    <h2>Expert Groups</h2>
+    <button class="btn btn-success" ng-click="vm.openModal()" style="margin-top: 200px;">Create</button>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        Expert Selection
+                    </th>
+                    <th>
+                        Experts
+                    </th>
+                    <th>
+                        Owner
+                    </th>
+                    <th>
+                        Edit
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="group in vm.expertGroups track by $index">
+                    <td>
+                        {{group.name}}
+                    </td>
+                    <td>
+                        {{group.description}}
+                    </td>
+                    <td>
+                        {{group.expertSelection}}
+                    </td>
+                    <td>
+                        {{group.experts.length}}
+                    </td>
+                    <td>
+                        {{group.expertpoolowner.user.firstName}} {{group.expertpoolowner.user.lastName}}
+                    </td>
+                    <td ng-click="vm.openModal(group)">
+                        Edit
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

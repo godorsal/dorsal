@@ -1,0 +1,107 @@
+
+<div class="modal-body">
+    <div>
+        <div class="drsl-dialog-header">
+            <div>
+                <h2>
+                    <span class="drsl-rating-comment-header-1">
+                        <span>
+                            Expert Groups
+                        </span>
+                    </span>
+                </span>
+            </h2>
+        </div>
+        <br>
+    </div>
+    <br>
+    <label for="">Name: </label>
+    <input type="text" ng-model="vm.newGroup.name" class="form-control">
+    <label for="">Description: </label>
+    <textarea name="name" rows="8" cols="40" ng-model="vm.newGroup.description" class="form-control"></textarea>
+    <label for="">Selection: </label>
+    <select class="form-control" name="" ng-model="vm.newGroup.expertSelection">
+        <option value="EXPERT_IN_POOL_FIRST">Experts in pool first</option>
+        <option value="EXPERT_IN_POOL_ONLY">Experts in pool only</option>
+    </select>
+    <!-- <div ng-repeat="attribute in ">
+    <label for=""></label>
+    <input type="checkbox">
+</div> -->
+<!-- <ol>
+<li ng-repeat="expert in vm.expertsToAdd track by $index">
+{{expert.user.firstName}} {{expert.user.lastName}}
+<button type="button" name="button" class="btn btn-success" ng-click="vm.removeExpert(expert, $index)">X</button>
+</li>
+</ol> -->
+<button type="button" name="button" class="btn btn-success" ng-click="ownedExperts = !ownedExperts">Toggle</button>
+<div ng-if="ownedExperts">
+    <h3>Staged Experts</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Add</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="expert in vm.expertsToAdd track by $index">
+                <td>{{expert.user.firstName}} {{expert.user.lastName}}</td>
+                <td><button type="button" name="button" class="btn btn-success" ng-click="vm.removeExpert(expert, $index)">X</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div ng-if="ownedExperts && vm.editingGroup">
+    <h3>Current Experts</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Add</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="expert in vm.currentExperts track by $index">
+                <td>{{expert.expertaccount.user.firstName}} {{expert.expertaccount.user.lastName}}</td>
+                <td><button type="button" name="button" class="btn btn-success" ng-click="vm.removeCurrentExpert(expert, $index)">X</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div ng-if="!ownedExperts">
+    <h3>Available Experts</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Add</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="expert in vm.availableExperts track by $index">
+                <td ng-if="!editing">{{expert.user.firstName}} {{expert.user.lastName}}</td>
+                <td ng-if="editing">{{expert.expertaccount.user.firstName}} {{expert.expertaccount.user.lastName}}</td>
+                <td><button type="button" name="button" class="btn btn-success" ng-click="vm.addExpert(expert, $index)">+</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- <ol>
+<li ng-repeat="expert in vm.availableExperts track by $index">
+{{expert.user.firstName}} {{expert.user.lastName}}
+<button type="button" name="button" class="btn btn-success" ng-click="vm.addExpert(expert, $index)">+</button>
+</li>
+</ol> -->
+<!-- <div>
+<div class="drsl-dialog-content">
+<div class="drsl-rating-comment">
+{{vm.report.rating.ratingComments}}
+</div>
+</div>
+</div> -->
+<div>
+    <button type="button" name="button" class="btn btn-success" ng-click="vm.saveGroup()">Save Group</button>
+</div>
+</div>
+</div>

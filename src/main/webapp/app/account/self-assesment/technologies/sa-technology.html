@@ -1,0 +1,44 @@
+<div class="drsl-account-settings">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="drsl-settings-wrapper">
+                <!-- Header -->
+                <div class="drsl-sub-header">
+                    <h2>Technologies</h2>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                <!-- <h1>Technologies</h1> -->
+                            </th>
+                            <th ng-repeat="score in vm.scores">
+                                {{score}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <form>
+                            <tr ng-repeat="technology in vm.technologies">
+                                <td class="drsl-sa-td">
+                                    {{technology.name}}
+                                </td>
+                                <td ng-repeat="score in vm.scores">
+                                    <input type="radio" ng-model="technology.score" value="{{score}}" ng-change="vm.checkTech()">
+                                </td>
+                            </tr>
+                        </form>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <label for="otherTechnologies" class="drsl-sa-other-label">List other technologies and rate yourself </label>
+                <input type="text" class="form-control drsl-sa-other-input" ng-model="vm.technologies.otherTechnology" name="otherTechnologies">
+                <div class="drsl-sa-button">
+                    <button ui-sref="settings" class="btn btn-default">Cancel</button>
+                    <button ng-click="vm.submit()" class="btn btn-success">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

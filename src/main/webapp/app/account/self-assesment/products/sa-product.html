@@ -1,0 +1,46 @@
+<div class="drsl-account-settings">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="drsl-settings-wrapper">
+                <!-- Header -->
+                <div class="drsl-sub-header">
+                    <h2>Products</h2>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                <!-- <h1>Technologies</h1> -->
+                            </th>
+                            <th ng-repeat="score in vm.scores">
+                                {{score}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <form>
+                            <tr ng-repeat="product in vm.products">
+                                {{product}}
+                                <td class="drsl-sa-td">
+                                    {{product}}
+                                </td>
+                                <td ng-repeat="score in vm.scores">
+                                    <input type="radio" ng-model="technology.score" value="{{score}}">
+                                </td>
+                            </tr>
+                        </form>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <label for="otherProducts" class="drsl-sa-other-label">List other technologies and rate yourself </label>
+                <input type="text" class="form-control drsl-sa-other-input" ng-model="vm.products.otherProduct" name="otherProducts">
+                <div class="drsl-sa-button">
+                    <button ui-sref="settings" class="btn btn-default">Cancel</button>
+                    <!-- <button ui-sref="selfAssesmentSkills" class="btn btn-success">Back</button> -->
+                    <button ng-click="vm.submit()" class="btn btn-success">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
