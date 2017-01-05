@@ -64,7 +64,10 @@ BEGIN
         INSERT INTO product(name,code) VALUES('CFEngine', 'cfengine');
         INSERT INTO product(name,code) VALUES('Neo4J', 'neo4j');
         INSERT INTO product(name,code) VALUES('Shell scripting', 'shellscripting');
-        INSERT INTO product(name,code) VALUES('PERL programming', 'perlprogramming  ');
+        INSERT INTO product(name,code) VALUES('PERL programming', 'perlprogramming');
+        INSERT INTO product(name,code) VALUES('Druid', 'druid');
+        INSERT INTO product(name,code) VALUES('MemSQL', 'memsql');
+        INSERT INTO product(name,code) VALUES('Oracle Cluster', 'oraclecluster');
 
 -- Job Role --
         INSERT INTO job_role(name, code) VALUES('Administrator' , 'administrator');
