@@ -15,6 +15,8 @@ CREATE OR REPLACE FUNCTION fn_migrate_dorsalprod() RETURNS VOID AS $$
 DECLARE
 	currentSchemaVersion varchar;
 	schemaUpdated varchar;
+	technologypropertyid bigint;
+	technologyid bigint;
 BEGIN
 
     -- Get initial version of the current database. If not set then assume is v1.1
@@ -54,6 +56,7 @@ BEGIN
         INSERT INTO product(name,code) VALUES('PGCluster', 'pgcluster');
         INSERT INTO product(name,code) VALUES('PGPool', 'pgpool');
         INSERT INTO product(name,code) VALUES('PostgreSQL-XL', 'postgresqlxl');
+        INSERT INTO product(name,code) VALUES('Postgres-BDR', 'postgresbdr');
         INSERT INTO product(name,code) VALUES('Xtra Backup', 'xtrabackup');
         INSERT INTO product(name,code) VALUES('Ansible', 'ansible');
         INSERT INTO product(name,code) VALUES('Puppet', 'puppet');
@@ -103,6 +106,17 @@ BEGIN
         INSERT INTO technology(name, code) VALUES('Monitoring', 'monitoring');
 
 
+        -- Add more products to the intake page. Values will be used to match against expert profile data
+
+        SELECT tp.id INTO technologypropertyid FROM technologyproperty tp WHERE name like 'Configuration';
+        SELECT t.id INTO technologyid FROM technology t WHERE name like 'MySQL';
+
+        PERFORM setval('technologypropertyvalue_id_seq', 60);
+        INSERT INTO technologypropertyvalue(value, technology_id, technologyproperty_id) VALUES('Xtra Backup',technologyid,technologypropertyid);
+
+        SELECT t.id INTO technologyid FROM technology t WHERE name like 'PostgreSQL';
+        INSERT INTO technologypropertyvalue(value, technology_id, technologyproperty_id) VALUES('Postgres-BDR',technologyid,technologypropertyid);
+
 
 		currentSchemaVersion = '1.2.0';
 		UPDATE global_metadata set value = currentSchemaVersion where name = 'CurrentSchemaVersion';
@@ -122,4 +136,3 @@ $$ LANGUAGE plpgsql;
 SELECT fn_migrate_dorsalprod();
 
 DROP FUNCTION IF EXISTS fn_migrate_dorsalprod();
-
