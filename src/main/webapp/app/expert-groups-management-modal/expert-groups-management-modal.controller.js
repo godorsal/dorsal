@@ -12,7 +12,8 @@
         vm.expertsToAdd = [];
         vm.expertsToDelete = [];
         vm.currentExperts = [];
-
+        vm.pending = false;
+        
         ExpertAccount.query({id: "experts"},function (res) {
             vm.availableExperts = res;
             checkResolve();
@@ -92,8 +93,21 @@
 
         $document.keyup(function(e) {
             if (e.keyCode == 27) {
-                $uibModalInstance.dismiss('cancel');
+                attemptToCloseModal()
             }
         });
+
+        vm.closeModal = function () {
+            attemptToCloseModal()
+        }
+
+
+        function attemptToCloseModal() {
+            if(vm.expertsToAdd.length > 0 && vm.pending === false){
+                vm.pending = true;
+            } else {
+                $uibModalInstance.dismiss('cancel');
+            }
+        }
     }
 })();

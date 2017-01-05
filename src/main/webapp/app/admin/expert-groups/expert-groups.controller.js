@@ -29,7 +29,6 @@
             console.log("user", user);
         })
         $rootScope.$on('editedGroup', function () {
-            console.log("ON IT BRO!");
             ExpertPool.query(function (res) {
                 vm.expertGroups = res;
                 vm.expertGroups.forEach(function (group) {

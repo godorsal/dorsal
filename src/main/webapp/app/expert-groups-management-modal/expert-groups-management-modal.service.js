@@ -26,6 +26,7 @@
                 templateUrl: 'app/expert-groups-management-modal/expert-groups-management-modal.html',
                 controller: 'ExpertGroupsManagementModal',
                 controllerAs: 'vm',
+                backdrop: 'static',
                 size:'sm',
                 windowClass: 'drsl-rating-comment-modal',
                 resolve: {
