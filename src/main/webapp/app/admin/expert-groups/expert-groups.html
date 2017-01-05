@@ -21,7 +21,6 @@
                         Owner
                     </th>
                     <th>
-                        Edit
                     </th>
                 </tr>
             </thead>
@@ -36,14 +35,14 @@
                     <td>
                         {{group.expertSelection}}
                     </td>
-                    <td>
+                    <td ng-click="vm.openModal(group, 'view')">
                         {{group.experts.length}}
                     </td>
                     <td>
                         {{group.expertpoolowner.user.firstName}} {{group.expertpoolowner.user.lastName}}
                     </td>
                     <td ng-click="vm.openModal(group)">
-                        Edit
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
                     </td>
                 </tr>
             </tbody>

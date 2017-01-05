@@ -3,20 +3,24 @@
 
     angular
     .module('dorsalApp')
-    .controller('ExpertGroupsManagementModal', ExpertGroupsManagementModal);
+    .controller('ExpertGroupsManagementModalController', ExpertGroupsManagementModalController);
 
-    ExpertGroupsManagementModal.$inject = ['$scope', '$timeout', '$uibModalInstance', '$document', '$translate', 'ExpertAccount', 'ExpertPool', 'ExpertPoolToExpert', '$rootScope'];
+    ExpertGroupsManagementModalController.$inject = ['$scope', '$timeout', '$uibModalInstance', '$document', '$translate', 'ExpertAccount', 'ExpertPool', 'ExpertPoolToExpert', '$rootScope'];
 
-    function ExpertGroupsManagementModal($scope, $timeout, $uibModalInstance, $document, $translate, ExpertAccount, ExpertPool, ExpertPoolToExpert, $rootScope) {
+    function ExpertGroupsManagementModalController($scope, $timeout, $uibModalInstance, $document, $translate, ExpertAccount, ExpertPool, ExpertPoolToExpert, $rootScope) {
         var vm = this;
         vm.expertsToAdd = [];
         vm.expertsToDelete = [];
         vm.currentExperts = [];
         vm.pending = false;
-        
+        vm.viewOnly = false;
+
         ExpertAccount.query({id: "experts"},function (res) {
             vm.availableExperts = res;
             checkResolve();
+            if($scope.$resolve.option === "view"){
+                vm.viewOnly = true;
+            }
         })
         function checkResolve() {
             if($scope.$resolve.group){
@@ -25,8 +29,8 @@
                 vm.currentExperts = vm.newGroup.experts;
                 console.log("CURENT EXPERTS!", vm.currentExperts);
                 vm.availableExperts.forEach(function (aExpert, index) {
-                    vm.currentExperts.forEach(function (eExpert) {
-                        if(aExpert.id === eExpert.id){
+                    vm.currentExperts.forEach(function (connection) {
+                        if(aExpert.id === connection.expertaccount.id){
                             vm.availableExperts.splice(index, 1);
                         }
                     })

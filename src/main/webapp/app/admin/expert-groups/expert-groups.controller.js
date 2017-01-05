@@ -41,8 +41,8 @@
                 })
             })
         })
-        function openModal(group) {
-            ExpertGroupsManagementModal.open(group)
+        function openModal(group, option) {
+            ExpertGroupsManagementModal.open(group, option)
         }
     }
 })();
