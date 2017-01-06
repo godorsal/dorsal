@@ -27,7 +27,7 @@ import java.util.Optional;
 public class SkillExpertScoreResource {
 
     private final Logger log = LoggerFactory.getLogger(SkillExpertScoreResource.class);
-        
+
     @Inject
     private SkillExpertScoreRepository skillExpertScoreRepository;
 
@@ -88,7 +88,7 @@ public class SkillExpertScoreResource {
     @Timed
     public List<SkillExpertScore> getAllSkillExpertScores() {
         log.debug("REST request to get all SkillExpertScores");
-        List<SkillExpertScore> skillExpertScores = skillExpertScoreRepository.findAll();
+        List<SkillExpertScore> skillExpertScores = skillExpertScoreRepository.findByUserIsCurrentUser();
         return skillExpertScores;
     }
 

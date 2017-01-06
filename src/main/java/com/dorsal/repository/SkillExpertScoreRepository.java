@@ -11,5 +11,8 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 public interface SkillExpertScoreRepository extends JpaRepository<SkillExpertScore,Long> {
+    // Get the list of skill for the currently logged in expert
+    @Query("select ses from SkillExpertScore ses where ses.expertaccount.user.login = ?#{principal.username} ORDER BY ses.id ASC")
+    List<SkillExpertScore> findByUserIsCurrentUser();
 
 }
