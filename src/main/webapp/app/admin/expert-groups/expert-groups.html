@@ -35,7 +35,7 @@
                     <td>
                         {{group.expertSelection}}
                     </td>
-                    <td ng-click="vm.openModal(group, 'view')">
+                    <td ng-click="vm.openModal(group, true)">
                         {{group.experts.length}}
                     </td>
                     <td>
@@ -43,6 +43,9 @@
                     </td>
                     <td ng-click="vm.openModal(group)">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </td>
+                    <td ng-click="vm.deleteGroup(group)">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
                     </td>
                 </tr>
             </tbody>

@@ -19,19 +19,21 @@
 
         return service;
 
-        function open (group, option) {
+        function open (group, viewOnly) {
             if (modalInstance !== null) return;
             modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'app/expert-groups-management-modal/expert-groups-management-modal.html',
                 controller: 'ExpertGroupsManagementModalController',
                 controllerAs: 'vm',
-                backdrop: 'static',
+                // backdrop: true,
+                // backdrop: viewOnly,
+                // backdrop: 'static',
                 size:'sm',
                 windowClass: 'drsl-rating-comment-modal',
                 resolve: {
                     group: function(){ return group; },
-                    option: function(){ return option; }
+                    viewOnly: function(){ return viewOnly; }
                 }
             });
             modalInstance.result.then(

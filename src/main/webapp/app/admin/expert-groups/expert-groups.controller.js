@@ -9,26 +9,15 @@
 
     function ExpertGroupsController(ExpertPool, ExpertPoolToExpert, ExpertGroupsManagementModal, ExpertAttribute, User, $scope, $rootScope) {
         var vm = this;
+
+        vm.init = init;
         vm.authorities = ['ROLE_USER', 'ROLE_ADMIN'];
         vm.expertGroups = [];
         vm.openModal = openModal;
+        vm.deleteGroup = deleteGroup;
 
-        ExpertPool.query(function (res) {
-            vm.expertGroups = res;
-            vm.expertGroups.forEach(function (group) {
-                group.experts = [];
-                ExpertPoolToExpert.query({type: "expertpool", id: group.id}, function (res){
-                    res.forEach(function (connection) {
-                        group.experts.push(connection)
-                    })
-                })
-            })
-        })
 
-        User.query(function (user) {
-            console.log("user", user);
-        })
-        $rootScope.$on('editedGroup', function () {
+        function init() {
             ExpertPool.query(function (res) {
                 vm.expertGroups = res;
                 vm.expertGroups.forEach(function (group) {
@@ -40,9 +29,24 @@
                     })
                 })
             })
+        }
+        init();
+
+        User.query(function (user) {
+            console.log("user", user);
         })
-        function openModal(group, option) {
-            ExpertGroupsManagementModal.open(group, option)
+        $rootScope.$on('editedGroup', function () {
+            vm.init();
+        })
+        function deleteGroup(group) {
+            console.log("GRUPO", group);
+            group.experts.forEach(function (connection) {
+                ExpertPoolToExpert.delete({id: connection.id})
+            })
+            ExpertPool.delete({id: group.id}, init)
+        }
+        function openModal(group, viewOnly) {
+            ExpertGroupsManagementModal.open(group, viewOnly)
         }
     }
 })();

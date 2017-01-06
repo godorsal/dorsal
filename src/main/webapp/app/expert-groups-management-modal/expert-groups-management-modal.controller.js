@@ -14,11 +14,13 @@
         vm.currentExperts = [];
         vm.pending = false;
         vm.viewOnly = false;
+        vm.changesMade = false;
+
 
         ExpertAccount.query({id: "experts"},function (res) {
             vm.availableExperts = res;
             checkResolve();
-            if($scope.$resolve.option === "view"){
+            if($scope.$resolve.viewOnly){
                 vm.viewOnly = true;
             }
         })
@@ -41,6 +43,8 @@
             vm.expertsToAdd.push(expert);
             vm.availableExperts.splice(index, 1);
             console.log(vm.expertsToAdd);
+            vm.changesMade = true;
+
         }
         vm.removeExpert = function (expert, index) {
             // if(vm.editingGroup){
@@ -48,6 +52,7 @@
             //     vm.availableExperts.push(expert);
             //     vm.expertsToDelete.push(expert);
             // }
+            vm.changesMade = true;
             vm.availableExperts.push(expert);
             vm.expertsToAdd.splice(index, 1);
         }
@@ -60,6 +65,7 @@
             vm.expertsToDelete.push(expert);
             vm.availableExperts.push(expert);
             vm.currentExperts.splice(index, 1);
+            vm.changesMade = true;
         }
         vm.saveGroup = function () {
             if(vm.newGroup.id){
@@ -85,10 +91,11 @@
                 })
             }
             $rootScope.$emit('editedGroup');
-
+            $uibModalInstance.dismiss('cancel');
         }
         function onSaveSuccess(res) {
             console.log("Good", res);
+            $rootScope.$emit('editedGroup');
             $uibModalInstance.dismiss('cancel');
         }
         function onSaveError(res) {
@@ -109,6 +116,7 @@
         function attemptToCloseModal() {
             if(vm.expertsToAdd.length > 0 && vm.pending === false){
                 vm.pending = true;
+                console.log("PENDING!", vm.pending);
             } else {
                 $uibModalInstance.dismiss('cancel');
             }

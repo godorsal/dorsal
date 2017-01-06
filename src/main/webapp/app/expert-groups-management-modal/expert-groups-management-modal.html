@@ -45,11 +45,11 @@
     </div>
     <div ng-if="!vm.viewOnly">
         <label for="">Name: </label>
-        <input type="text" ng-model="vm.newGroup.name" class="form-control">
+        <input type="text" ng-model="vm.newGroup.name" class="form-control" ng-change="vm.changesMade = true">
         <label for="">Description: </label>
-        <textarea name="name" rows="2" cols="40" ng-model="vm.newGroup.description" class="form-control"></textarea>
+        <textarea name="name" rows="2" cols="40" ng-model="vm.newGroup.description" class="form-control" ng-change="vm.changesMade = true"></textarea>
         <label for="">Selection: </label>
-        <select class="form-control" name="" ng-model="vm.newGroup.expertSelection">
+        <select class="form-control" name="" ng-model="vm.newGroup.expertSelection" ng-change="vm.changesMade = true">
             <option value="EXPERT_IN_POOL_FIRST">Experts in pool first</option>
             <option value="EXPERT_IN_POOL_ONLY">Experts in pool only</option>
         </select>
@@ -63,13 +63,12 @@
     <button type="button" name="button" class="btn btn-success" ng-click="vm.removeExpert(expert, $index)">X</button>
 </li>
 </ol> -->
-<h4 ng-if="vm.pending && vm.expertsToAdd.length">You still have {{vm.expertsToAdd.length}} experts pending</h4>
+<h4 ng-show="vm.pending">You still have {{vm.expertsToAdd.length}} experts pending</h4>
 <h2>Experts</h2>
 <table class="table">
     <thead>
         <tr>
             <th>Current</th>
-            <th>Staged</th>
             <th>Available</th>
         </tr>
     </thead>
@@ -79,38 +78,43 @@
                 <table class="table table-striped">
                     <tr ng-repeat="expert in vm.currentExperts track by $index">
                         <td>{{expert.expertaccount.user.firstName}} {{expert.expertaccount.user.lastName}}</td>
-                        <td><i class="fa fa-plus" aria-hidden="true" ng-click="vm.removeCurrentExpert(expert, $index)"></i></td>
+                        <td>
+                            <i class="fa fa-trash" aria-hidden="true" ng-click="vm.removeCurrentExpert(expert, $index)"></i>
+                        </td>
                     </tr>
-                </table>
-            </td>
-            <td>
-                <table class="table table-striped">
+
+                        <th>Staged</th>
+
                     <tr ng-repeat="expert in vm.expertsToAdd track by $index">
                         <td>{{expert.user.firstName}} {{expert.user.lastName}}</td>
                         <td>
-                            <img src="content/images/black_trashcan_icon.png" alt="" ng-click="vm.removeExpert(expert, $index)"/>
+                            <i class="fa fa-trash" aria-hidden="true" ng-click="vm.removeExpert(expert, $index)"></i>
                         </td>
-
                     </tr>
                 </table>
             </td>
-            <td>
-                <table class="table table-striped">
-                    <tr ng-repeat="expert in vm.availableExperts track by $index">
-                        <td ng-if="!editing">{{expert.user.firstName}} {{expert.user.lastName}}</td>
-                        <td ng-if="editing">{{expert.expertaccount.user.firstName}} {{expert.expertaccount.user.lastName}}</td>
-                        <td><i class="fa fa-plus" aria-hidden="true" ng-click="vm.addExpert(expert, $index)"></i></td>
+            <!-- <td>
+            <table class="table table-striped">
 
-                    </tr>
-                </table>
-            </td>
+        </table>
+    </td> -->
+    <td>
+        <table class="table table-striped">
+            <tr ng-repeat="expert in vm.availableExperts track by $index">
+                <td ng-if="!editing">{{expert.user.firstName}} {{expert.user.lastName}}</td>
+                <td ng-if="editing">{{expert.expertaccount.user.firstName}} {{expert.expertaccount.user.lastName}}</td>
+                <td><i class="fa fa-plus" aria-hidden="true" ng-click="vm.addExpert(expert, $index)"></i></td>
 
-        </tr>
+            </tr>
+        </table>
+    </td>
 
-    </tbody>
+</tr>
+
+</tbody>
 </table>
 <div>
-    <button type="button" name="button" class="btn btn-success" ng-click="vm.saveGroup()">Save Group</button>
+    <button type="button" name="button" class="btn btn-success" ng-click="vm.saveGroup()" ng-disabled="!vm.changesMade">Save Group</button>
     <button type="button" name="button" class="btn btn-success" ng-click="vm.closeModal()">Cancel</button>
 </div>
 </div>
