@@ -5,25 +5,32 @@
     .module('dorsalApp')
     .controller('SelfAssesmentSkillsController', SelfAssesmentSkillsController);
 
-    SelfAssesmentSkillsController.$inject = ['$state', 'Technology', 'Principal', 'DrslUserFlowService'];
+    SelfAssesmentSkillsController.$inject = ['$state', 'Technology', 'Principal', 'DrslUserFlowService', 'SkillExpertScore'];
 
-    function SelfAssesmentSkillsController($state, Technology, Principal, DrslUserFlowService) {
+    function SelfAssesmentSkillsController($state, Technology, Principal, DrslUserFlowService, SkillExpertScore) {
 
         DrslUserFlowService.handleUserFlow();
 
         var vm = this;
-        // vm.technologies = Technology.query()
-        vm.skills = ["Configuration Review","Benchmarking","Query tuning","Installations","AWS RDBS","Cluster Design","Database HA","OpenStack infrastructure","VMware infrastructure","AWS infrastructure"]
-        vm.scores = [1, 2, 3, 4, 5]
 
-        vm.expert = DrslUserFlowService.user.expert;
+        vm.skills = [];
+        vm.skillsToUpdate = [];
+        vm.scores = [1, 2, 3, 4, 5];
+        vm.skills = SkillExpertScore.query();
 
+        vm.changeScore = changeScore;
         vm.submit = submit;
 
+
+        function changeScore(skill) {
+            vm.skillsToUpdate.push(skill)
+        }
+
         function submit() {
-            vm.expert.technologies = vm.technologies;
+            vm.skillsToUpdate.forEach(function (skill) {
+                SkillExpertScore.update(skill)
+            })
             $state.go('settings')
-            // $state.go('skills')
         }
     }
 })();

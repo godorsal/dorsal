@@ -5,30 +5,31 @@
     .module('dorsalApp')
     .controller('SelfAssesmentSpecialtiesController', SelfAssesmentSpecialtiesController);
 
-    SelfAssesmentSpecialtiesController.$inject = ['$state', 'Technology', 'Principal', 'DrslUserFlowService'];
+    SelfAssesmentSpecialtiesController.$inject = ['$state', 'Technology', 'Principal', 'DrslUserFlowService', 'SpecialityExpertScore'];
 
-    function SelfAssesmentSpecialtiesController($state, Technology, Principal, DrslUserFlowService) {
+    function SelfAssesmentSpecialtiesController($state, Technology, Principal, DrslUserFlowService, SpecialityExpertScore) {
 
         DrslUserFlowService.handleUserFlow();
 
         var vm = this;
-        // vm.technologies = Technology.query()
-        vm.specialties = [
-            "Oracle to MySQL transitions",
-        "Oracle to MongoDB transitions",
-        "Oracle to PostgreSQL transitions",
-        "Database Infrastructure",
-        "MS SQL to FOSS transitions"]
-        vm.scores = [1, 2, 3, 4, 5]
 
-        vm.expert = DrslUserFlowService.user.expert;
-
+        vm.specialtiesToUpdate = [];
+        vm.scores = [1, 2, 3, 4, 5];
+        vm.specialties = SpecialityExpertScore.query();
+        console.log(vm.specialties);
+        vm.changeScore = changeScore;
         vm.submit = submit;
 
+
+        function changeScore(speciality) {
+            vm.specialtiesToUpdate.push(speciality)
+        }
+
         function submit() {
-            vm.expert.technologies = vm.technologies;
+            vm.specialtiesToUpdate.forEach(function (speciality) {
+                SpecialityExpertScore.update(speciality)
+            })
             $state.go('settings')
-            // $state.go('products')
         }
     }
 })();

@@ -10,14 +10,14 @@
     function stateConfig($stateProvider) {
         $stateProvider.state('selfAssesmentSpecialties', {
             parent: 'account',
-            url: '/self-assesment/specialties',
+            url: '/self-assesment/specialities',
             data: {
                 authorities: ['ROLE_USER'],
                 pageTitle: 'global.menu.account.selfAssesment'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/account/self-assesment/products/sa-product.html',
+                    templateUrl: 'app/account/self-assesment/specialities/sa-specialties.html',
                     controller: 'SelfAssesmentSpecialtiesController',
                     controllerAs: 'vm'
                 }

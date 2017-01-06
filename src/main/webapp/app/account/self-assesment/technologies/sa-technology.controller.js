@@ -5,22 +5,31 @@
     .module('dorsalApp')
     .controller('SelfAssesmentTechnologyController', SelfAssesmentTechnologyController);
 
-    SelfAssesmentTechnologyController.$inject = ['$state', 'Technology', 'Principal', 'DrslUserFlowService'];
+    SelfAssesmentTechnologyController.$inject = ['$state', 'TechnologyExpertScore', 'Principal', 'DrslUserFlowService'];
 
-    function SelfAssesmentTechnologyController($state, Technology, Principal, DrslUserFlowService) {
+    function SelfAssesmentTechnologyController($state, TechnologyExpertScore, Principal, DrslUserFlowService) {
 
         DrslUserFlowService.handleUserFlow();
 
         var vm = this;
-        vm.technologies = Technology.query()
-        vm.scores = [1, 2, 3, 4, 5]
 
-        vm.expert = DrslUserFlowService.user.expert;
+        vm.technologies = [];
+        vm.technologiesToUpdate = [];
+        vm.scores = [1, 2, 3, 4, 5];
+        vm.technologies = TechnologyExpertScore.query();
 
+        vm.changeScore = changeScore;
         vm.submit = submit;
 
+
+        function changeScore(technology) {
+            vm.technologiesToUpdate.push(technology)
+        }
+
         function submit() {
-            // vm.expert.technologies = vm.technologies;
+            vm.technologiesToUpdate.forEach(function (technology) {
+                TechnologyExpertScore.update(technology)
+            })
             $state.go('settings')
         }
     }

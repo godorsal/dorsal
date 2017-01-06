@@ -32,7 +32,6 @@
                 vm.editingGroup = true;
                 vm.newGroup = $scope.$resolve.group;
                 vm.currentExperts = vm.newGroup.experts;
-                console.log("CURENT EXPERTS!", vm.currentExperts);
                 vm.availableExperts.forEach(function (aExpert, index) {
                     vm.currentExperts.forEach(function (connection) {
                         if(aExpert.id === connection.expertaccount.id){
@@ -45,26 +44,15 @@
         vm.addExpert = function (expert, index) {
             vm.expertsToAdd.push(expert);
             vm.availableExperts.splice(index, 1);
-            console.log(vm.expertsToAdd);
             vm.changesMade = true;
 
         }
         vm.removeExpert = function (expert, index) {
-            // if(vm.editingGroup){
-            //     vm.expertsToAdd.splice(index, 1);
-            //     vm.availableExperts.push(expert);
-            //     vm.expertsToDelete.push(expert);
-            // }
             vm.changesMade = true;
             vm.availableExperts.push(expert);
             vm.expertsToAdd.splice(index, 1);
         }
         vm.removeCurrentExpert = function (expert, index) {
-            // if(vm.editingGroup){
-            //     vm.expertsToAdd.splice(index, 1);
-            //     vm.availableExperts.push(expert);
-            // }
-            console.log("EXPERT TO DELETE!", expert);
             vm.expertsToDelete.push(expert);
             vm.availableExperts.push(expert.expertaccount);
             vm.currentExperts.splice(index, 1);
@@ -90,12 +78,10 @@
                     expertaccount: expert,
                     expertpool: res
                 }
-                console.log(connection);
                 ExpertPoolToExpert.save(connection, onSaveSuccess, onSaveError)
             })
             if(vm.editingGroup && vm.expertsToDelete.length){
                 vm.expertsToDelete.forEach(function (connection) {
-                    console.log("CONNECTION TO DELETE!", connection);
                     ExpertPoolToExpert.delete({id: connection.id}, onSaveSuccess, onSaveError)
                 })
             }
@@ -103,12 +89,11 @@
             $uibModalInstance.dismiss('cancel');
         }
         function onSaveSuccess(res) {
-            console.log("Good", res);
             $rootScope.$emit('editedGroup');
             $uibModalInstance.dismiss('cancel');
         }
         function onSaveError(res) {
-            console.log("BAD", res);
+            console.error("BAD", res);
         }
 
         $document.keyup(function(e) {
@@ -125,7 +110,6 @@
         function attemptToCloseModal() {
             if(vm.expertsToAdd.length > 0 && vm.pending === false){
                 vm.pending = true;
-                console.log("PENDING!", vm.pending);
             } else {
                 $uibModalInstance.dismiss('cancel');
             }

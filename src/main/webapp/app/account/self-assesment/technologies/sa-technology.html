@@ -10,21 +10,32 @@
                     <thead>
                         <tr>
                             <th>
-                                <!-- <h1>Technologies</h1> -->
                             </th>
-                            <th ng-repeat="score in vm.scores">
-                                {{score}}
+                            <th>
+                                None
+                            </th>
+                            <th>
+                                Novice
+                            </th>
+                            <th>
+                                Intermediate
+                            </th>
+                            <th>
+                                Advanced
+                            </th>
+                            <th>
+                                Expert
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         <form>
-                            <tr ng-repeat="technology in vm.technologies">
+                            <tr ng-repeat="technology in vm.technologies track by $index">
                                 <td class="drsl-sa-td">
-                                    {{technology.name}}
+                                    {{technology.technology.name}}
                                 </td>
                                 <td ng-repeat="score in vm.scores">
-                                    <input type="radio" ng-model="technology.score" value="{{score}}" ng-change="vm.checkTech()">
+                                    <input type="radio" ng-model="technology.score" value="{{score}}" ng-change="vm.changeScore(technology)">
                                 </td>
                             </tr>
                         </form>
@@ -32,8 +43,6 @@
                 </table>
             </div>
             <div>
-                <label for="otherTechnologies" class="drsl-sa-other-label">List other technologies and rate yourself </label>
-                <input type="text" class="form-control drsl-sa-other-input" ng-model="vm.technologies.otherTechnology" name="otherTechnologies">
                 <div class="drsl-sa-button">
                     <button ui-sref="settings" class="btn btn-default">Cancel</button>
                     <button ng-click="vm.submit()" class="btn btn-success">Submit</button>

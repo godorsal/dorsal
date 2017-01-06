@@ -295,6 +295,7 @@ Your e-mail cannot be longer than 100 characters.
             <span ng-if="vm.editingAttributes">
                 <input type="text" name="name" value="" ng-model="vm.atbInputString" style="">
                 <select class="" name="" ng-model="vm.addAttribute">
+                    <option value="">Select Attribute</option>
                     <option value="{{attribute}}" ng-repeat="attribute in vm.presentAttributes track by $index">{{attribute.name}}</option>
                 </select>
                 <button class="btn btn-success" ng-click="vm.saveAttributes()" style="line-height: 1;">Add</button>

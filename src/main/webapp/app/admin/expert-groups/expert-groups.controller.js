@@ -31,15 +31,11 @@
             })
         }
         init();
-
-        User.query(function (user) {
-            console.log("user", user);
-        })
+        
         $rootScope.$on('editedGroup', function () {
             vm.init();
         })
         function deleteGroup(group) {
-            console.log("GRUPO", group);
             group.experts.forEach(function (connection) {
                 ExpertPoolToExpert.delete({id: connection.id})
             })

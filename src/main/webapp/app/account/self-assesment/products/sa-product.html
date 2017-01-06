@@ -6,26 +6,37 @@
                 <div class="drsl-sub-header">
                     <h2>Products</h2>
                 </div>
-                <table class="table table-striped">
+                <table class="table table-striped table-scroll">
                     <thead>
                         <tr>
                             <th>
-                                <!-- <h1>Technologies</h1> -->
                             </th>
-                            <th ng-repeat="score in vm.scores">
-                                {{score}}
+                            <th>
+                                None
+                            </th>
+                            <th>
+                                Novice
+                            </th>
+                            <th>
+                                Intermediate
+                            </th>
+                            <th>
+                                Advanced
+                            </th>
+                            <th>
+                                Expert
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         <form>
-                            <tr ng-repeat="product in vm.products">
-                                {{product}}
+                            <tr ng-repeat="product in vm.products track by $index">
+                                <!-- {{product.name}} -->
                                 <td class="drsl-sa-td">
-                                    {{product}}
+                                    {{product.product.name}}
                                 </td>
                                 <td ng-repeat="score in vm.scores">
-                                    <input type="radio" ng-model="technology.score" value="{{score}}">
+                                    <input type="radio" ng-model="product.score" value="{{score}}" ng-change="vm.changeScore(product)">
                                 </td>
                             </tr>
                         </form>
@@ -33,8 +44,6 @@
                 </table>
             </div>
             <div>
-                <label for="otherProducts" class="drsl-sa-other-label">List other technologies and rate yourself </label>
-                <input type="text" class="form-control drsl-sa-other-input" ng-model="vm.products.otherProduct" name="otherProducts">
                 <div class="drsl-sa-button">
                     <button ui-sref="settings" class="btn btn-default">Cancel</button>
                     <!-- <button ui-sref="selfAssesmentSkills" class="btn btn-success">Back</button> -->

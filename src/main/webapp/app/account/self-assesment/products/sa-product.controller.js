@@ -5,42 +5,31 @@
     .module('dorsalApp')
     .controller('SelfAssesmentProductController', SelfAssesmentProductController);
 
-    SelfAssesmentProductController.$inject = ['$state', 'Technology', 'Principal', 'DrslUserFlowService'];
+    SelfAssesmentProductController.$inject = ['$state', 'Technology', 'Principal', 'DrslUserFlowService', 'Product', 'ProductExpertScore'];
 
-    function SelfAssesmentProductController($state, Technology, Principal, DrslUserFlowService) {
+    function SelfAssesmentProductController($state, Technology, Principal, DrslUserFlowService, Product, ProductExpertScore) {
 
         DrslUserFlowService.handleUserFlow();
 
         var vm = this;
-        vm.products = [
-            "MySQL",
-            "MariaDB",
-            "PostgreSQL",
-            "MongoDB",
-            "Oracle DB",
-            "MS SQL",
-            "Hadoop",
-            "XtraDB Cluster",
-            "Tungsten Cluster",
-            "Galera Cluster",
-            "PGCluster",
-            "PGPool",
-            "PostgreSQL-XL",
-            "Xtra Backup",
-            "Ansible",
-            "Puppet",
-            "Chef",
-            "CFEngine",
-            "Neo4J"]
-            console.log(vm.products);
-        vm.scores = [1, 2, 3, 4, 5]
 
-        vm.expert = DrslUserFlowService.user.expert;
-
+        vm.products = [];
+        vm.productsToUpdate = [];
+        vm.scores = [1, 2, 3, 4, 5];
+        vm.products = ProductExpertScore.query();
+        
+        vm.changeScore = changeScore;
         vm.submit = submit;
 
+
+        function changeScore(product) {
+            vm.productsToUpdate.push(product)
+        }
+
         function submit() {
-            vm.expert.technologies = vm.technologies;
+            vm.productsToUpdate.forEach(function (product) {
+                ProductExpertScore.update(product)
+            })
             $state.go('settings')
         }
     }
