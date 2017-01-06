@@ -63,11 +63,17 @@
             // }
             console.log("EXPERT TO DELETE!", expert);
             vm.expertsToDelete.push(expert);
-            vm.availableExperts.push(expert);
+            vm.availableExperts.push(expert.expertaccount);
             vm.currentExperts.splice(index, 1);
             vm.changesMade = true;
         }
         vm.saveGroup = function () {
+            if(!vm.newGroup.description){
+                vm.newGroup.description = "Group created on " + new Date();
+            }
+            if(!vm.newGroup.expertSelection){
+                vm.newGroup.expertSelection = 'EXPERT_IN_POOL_FIRST';
+            }
             if(vm.newGroup.id){
                 ExpertPool.update(vm.newGroup, onGroupSaveSuccess, onSaveError)
             } else {

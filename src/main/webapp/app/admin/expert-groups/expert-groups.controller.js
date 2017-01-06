@@ -46,7 +46,13 @@
             ExpertPool.delete({id: group.id}, init)
         }
         function openModal(group, viewOnly) {
-            ExpertGroupsManagementModal.open(group, viewOnly)
+            if(!viewOnly){
+                ExpertGroupsManagementModal.open(group, false)
+            } else {
+                if(group.experts.length > 0){
+                    ExpertGroupsManagementModal.open(group, viewOnly)
+                }
+            }
         }
     }
 })();
