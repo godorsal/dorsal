@@ -30,6 +30,8 @@ BEGIN
     DELETE FROM skill;
     DELETE FROM product;
     DELETE FROM technology where id > 10;
+    DELETE FROM technologypropertyvalue where value like 'Xtra Backup';
+    DELETE FROM technologypropertyvalue where value like 'Postgres-BDR';
 
     -- set schema version
     UPDATE global_metadata set value='1.1.0' WHERE name like 'CurrentSchemaVersion' ;
