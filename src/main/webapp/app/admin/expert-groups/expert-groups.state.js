@@ -22,12 +22,16 @@
                     controllerAs: 'vm'
                 }
             },
-            // resolve: {
-            //     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-            //         $translatePartialLoader.addPart('adminSupportCaseReport');
-            //         return $translate.refresh();
-            //     }]
-            // }
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+
+                    // $translatePartialLoader.addPart('expertPool');
+                    // $translatePartialLoader.addPart('expertSelection');
+                    $translatePartialLoader.addPart('expertGroup');
+                    $translatePartialLoader.addPart('global');
+                    return $translate.refresh();
+                }]
+            }
         })
 	}
 })();

@@ -16,6 +16,9 @@
         vm.viewOnly = false;
         vm.changesMade = false;
 
+        vm.newGroup = {
+            expertSelection: 'EXPERT_IN_POOL_FIRST'
+        };
 
         ExpertAccount.query({id: "experts"},function (res) {
             vm.availableExperts = res;
