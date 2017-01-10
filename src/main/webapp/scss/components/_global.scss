@@ -508,3 +508,29 @@ table.drsl-table-scroll thead > tr {
 .drsl-expert-groups-button, .drsl-expert-groups-table {
     position: relative;
 }
+.drsl-sa-table {
+    thead {
+        display: block;
+        tr {
+            width: 100%;
+            th {
+                width: 9%;
+                // padding-left: 20px;
+                // padding-right: 20px;
+            }
+        }
+    }
+    tbody {
+        display: block;
+        max-height: 400px;
+        overflow-y: scroll;
+        tr {
+            width: 100%;
+            td {
+                width: 7%;
+                // padding-left: 20px;
+                // padding-right: 20px;
+            }
+        }
+    }
+}
