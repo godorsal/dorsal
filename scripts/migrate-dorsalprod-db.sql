@@ -117,6 +117,9 @@ BEGIN
         PERFORM setval('technologypropertyvalue_id_seq', 60);
         INSERT INTO technologypropertyvalue(value, technology_id, technologyproperty_id) VALUES('Xtra Backup',technologyid,technologypropertyid);
 
+        SELECT t.id INTO technologyid FROM technology t WHERE name like 'MariaDB';
+        INSERT INTO technologypropertyvalue(value, technology_id, technologyproperty_id) VALUES('Xtra Backup',technologyid,technologypropertyid);
+
         SELECT t.id INTO technologyid FROM technology t WHERE name like 'PostgreSQL';
         INSERT INTO technologypropertyvalue(value, technology_id, technologyproperty_id) VALUES('Postgres-BDR',technologyid,technologypropertyid);
 
