@@ -26,6 +26,7 @@
                     <form name="form" role="form" novalidate ng-submit="vm.save()" show-validation>
                         <div ng-class="{'drsl-expert-info-content': vm.currentExpert, 'drsl-user-info-content': !vm.currentExpert, 'drsl-is-already-activated': vm.isAlreadyAuthorized}">
                             <!-- Login (readonly) -->
+                            <label for="bio"  class="drsl-expert-textarea-label">User Info</label>
                             <div class="form-group" >
                                 <div class="drsl-placeholder-label" type="text">
                                     <input type="text" id="login" name="login" value="" ng-model="vm.settingsAccount.login" disabled ng-change="vm.updatingUser = true" ng-class="{'drsl-already-activated-input': vm.isAlreadyAuthorized}">
@@ -80,6 +81,7 @@
     </div>
 
     <!-- Email (required) -->
+    <label for="bio"  class="drsl-expert-textarea-label">Contact</label>
     <div class="form-group">
         <div class="drsl-placeholder-label" type="text">
             <input type="text" id="email" name="email" ng-model="vm.settingsAccount.email" ng-minlength=1 ng-maxlength=50 required maxlength="50" ng-change="vm.updatingUser = true" ng-class="{'drsl-already-activated-input': vm.isAlreadyAuthorized, 'drsl-highlight-field': (vm.settingsAccount.login && !form.email.$dirty && !vm.settingsAccount.email)}">
@@ -214,6 +216,7 @@ Your e-mail cannot be longer than 100 characters.
     </div>
 
     <!-- Availability -->
+    <label for="bio"  class="drsl-expert-textarea-label">Availability</label>
     <div class="form-group">
         <div class="drsl-placeholder-label">
             <select class="form-control drsl-full-select" name="expertAvailability" ng-model="vm.currentExpert.expertAvailability" id="field_expertAvailability" ng-change="vm.updatingExpert = true">
@@ -227,49 +230,49 @@ Your e-mail cannot be longer than 100 characters.
         </div>
     </div>
     <!-- SLA -->
-    <div class="form-group">
-        <div class="drsl-placeholder-label">
-            <select class="form-control drsl-full-select" name="expertSLA" ng-model="vm.currentExpert.expertSLA" id="field_expertSLA" ng-change="vm.updatingExpert = true">
-                <option value="30m">30 Minutes</option>
-                <option value="2h">2 Hours</option>
-                <option value="4h">4 Hours</option>
-                <option value="24h">24 Hours</option>
-            </select>
-            <span class="drsl-select drsl-unit" translate="settings.form.SLA">(SLA)</span>
-        </div>
-    </div>
+    <!-- <div class="form-group">
+    <div class="drsl-placeholder-label">
+    <select class="form-control drsl-full-select" name="expertSLA" ng-model="vm.currentExpert.expertSLA" id="field_expertSLA" ng-change="vm.updatingExpert = true">
+    <option value="30m">30 Minutes</option>
+    <option value="2h">2 Hours</option>
+    <option value="4h">4 Hours</option>
+    <option value="24h">24 Hours</option>
+</select>
+<span class="drsl-select drsl-unit" translate="settings.form.SLA">(SLA)</span>
+</div>
+</div> -->
 
-    <!-- Expert Stats (score, visibility, number of cases, expert since) -->
-    <div class="drsl-extra-info">
+<!-- Expert Stats (score, visibility, number of cases, expert since) -->
+<div class="drsl-extra-info">
+    <div>
+        <!-- Expert Score -->
         <div>
-            <!-- Expert Score -->
-            <div>
-                <span translate="settings.form.expertScore">Expert Score:</span> {{ 'global.messages.info.expertScoreOutOf' | translate:'{score: '+ vm.displayedExpertScore + '}' }}
-            </div>
-
-            <!-- Profile Visibility -->
-            <div>
-                <div class="drsl-visibility">
-                    <label for="field_profileVisibility" class="drsl-profile-visibility-label" translate="settings.form.profileVisibility">Profile Visibility:</label><select class="form-control privacySelect" name="profileVisibility" ng-model="vm.currentExpert.profileVisibility" id="field_profileVisibility" ng-change="vm.updatingExpert = true">
-                        <option value="PUBLIC">Public</option>
-                        <option value="INTERN">Intern</option>
-                        <option value="HIDDEN">Hidden</option>
-                    </select>
-                </div>
-            </div>
+            <span translate="settings.form.expertScore">Expert Score:</span> {{ 'global.messages.info.expertScoreOutOf' | translate:'{score: '+ vm.displayedExpertScore + '}' }}
         </div>
-        <br>
 
-        <!-- Expert Case Count and Expert Since -->
-        <div class="drsl-two-items">
-            <div>
-                {{'settings.form.totalNumberOfCases' | translate}} {{vm.currentExpert.numberOfCases}}
-            </div>
-            <div>
-                {{'settings.form.expertSince' | translate}} {{vm.currentExpert.expertSince | date:'MMM dd, yyyy'}}
+        <!-- Profile Visibility -->
+        <div>
+            <div class="drsl-visibility">
+                <label for="field_profileVisibility" class="drsl-profile-visibility-label" translate="settings.form.profileVisibility">Profile Visibility:</label><select class="form-control privacySelect" name="profileVisibility" ng-model="vm.currentExpert.profileVisibility" id="field_profileVisibility" ng-change="vm.updatingExpert = true">
+                    <option value="PUBLIC">Public</option>
+                    <option value="INTERN">Intern</option>
+                    <option value="HIDDEN">Hidden</option>
+                </select>
             </div>
         </div>
     </div>
+    <br>
+
+    <!-- Expert Case Count and Expert Since -->
+    <div class="drsl-two-items">
+        <div>
+            {{'settings.form.totalNumberOfCases' | translate}} {{vm.currentExpert.numberOfCases}}
+        </div>
+        <div>
+            {{'settings.form.expertSince' | translate}} {{vm.currentExpert.expertSince | date:'MMM dd, yyyy'}}
+        </div>
+    </div>
+</div>
 </div>
 
 <!-- Update/Submit button -->
@@ -293,12 +296,21 @@ Your e-mail cannot be longer than 100 characters.
             <label for="bio" translate="settings.form.expertAttributes" class="drsl-expert-textarea-label">Expert Attributes</label>
 
             <span ng-if="vm.editingAttributes">
-                <input type="text" name="name" value="" ng-model="vm.atbInputString" style="">
-                <select class="" name="" ng-model="vm.addAttribute">
-                    <option value="">Select Attribute</option>
-                    <option value="{{attribute}}" ng-repeat="attribute in vm.presentAttributes track by $index">{{attribute.name}}</option>
-                </select>
-                <button class="btn btn-success" ng-click="vm.saveAttributes()" style="line-height: 1;">Add</button>
+                <div>
+                    <div style="display: inline-block;">
+                        <div>Custom</div>
+                        <input type="text" name="name" value="" ng-model="vm.atbInputString" style="">
+                    </div>
+                    <div style="display: inline-block;">
+                        <div>Predefined</div>
+                        <select class="" name="" ng-model="vm.addAttribute">
+                            <option value="">Select Attribute</option>
+                            <option value="{{attribute}}" ng-repeat="attribute in vm.presentAttributes track by $index">{{attribute.name}}</option>
+                        </select>
+                    </div>
+                    <!-- <span>Predefined</span> -->
+                    <button class="btn btn-success" ng-click="vm.saveAttributes()" style="line-height: 1;">Add</button>
+                </div>
             </span>
 
             <br>
@@ -313,35 +325,42 @@ Your e-mail cannot be longer than 100 characters.
                 </button>
             </div>
             <br>
+            <label for="bio" translate="settings.form.expertise" class="drsl-expert-textarea-label">Expertise</label>
 
             <!-- Issue (focus) -->
             <div class="drsl-placeholder-label">
                 <select class="form-control" id="field_issue" name="Issue" ng-model="vm.currentExpert.issueexpertise" ng-options="issue as issue.name for issue in vm.issues track by issue.id" ng-change="vm.updatingExpert = true"></select>
                 <span class="drsl-select drsl-unit" translate="settings.form.issue">(Issue)</span>
             </div>
+            <!-- <p for="bio"  class="">Self Assesment: </p> -->
 
             <!-- Technology (1st focus) -->
             <div class="drsl-placeholder-label">
                 <a ui-sref="selfAssesmentTechnology">Technology</a>
-                <!-- <select class="form-control" id="field_technology" name="Technology" ng-model="vm.currentExpert.firsttechnology" ng-options="technology as technology.name for technology in vm.technologies track by technology.id" ng-change="vm.updatingExpert = true"></select>
-                <span class="drsl-select drsl-unit" translate="settings.form.technology">(1st Technology Focus)</span> -->
+                <i class="fa fa-check" aria-hidden="true" ng-if="vm.technologyComplete" style="color: green;"></i>
+                <i class="fa fa-times" aria-hidden="true" ng-if="!vm.technologyComplete" style="color: red;"></i>
             </div>
 
             <!-- Technology (2nd focus) -->
             <div class="drsl-placeholder-label">
                 <a ui-sref="selfAssesmentProduct">Product</a>
-
-                <!-- <select class="form-control" id="field_technology2" name="Technology2" ng-model="vm.currentExpert.secondtechnology" ng-options="technology as technology.name for technology in vm.technologies track by technology.id" ng-change="vm.updatingExpert = true"></select>
-                <span class="drsl-select drsl-unit" translate="settings.form.technology2">(2nd Technology Focus)</span> -->
+                <i class="fa fa-check" aria-hidden="true" ng-if="vm.productsComplete" style="color: green;"></i>
+                <i class="fa fa-times" aria-hidden="true" ng-if="!vm.productsComplete" style="color: red;"></i>
             </div>
             <div class="drsl-placeholder-label">
                 <a ui-sref="selfAssesmentJobRole">Role</a>
+                <i class="fa fa-check" aria-hidden="true" ng-if="vm.jobrolesComplete" style="color: green;"></i>
+                <i class="fa fa-times" aria-hidden="true" ng-if="!vm.jobrolesComplete" style="color: red;"></i>
             </div>
             <div class="drsl-placeholder-label">
                 <a ui-sref="selfAssesmentSkills">Skills</a>
+                <i class="fa fa-check" aria-hidden="true" ng-if="vm.skillsComplete" style="color: green;"></i>
+                <i class="fa fa-times" aria-hidden="true" ng-if="!vm.skillsComplete" style="color: red;"></i>
             </div>
             <div class="drsl-placeholder-label">
                 <a ui-sref="selfAssesmentSpecialties">Specialties</a>
+                <i class="fa fa-check" aria-hidden="true" style="color: green;"></i>
+                <!-- <i class="fa fa-times" aria-hidden="true" ng-if="!vm.specialtiesComplete" style="color: red;"></i> -->
             </div>
 
 

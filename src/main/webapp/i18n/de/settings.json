@@ -38,6 +38,7 @@
             "profileVisibility": "Profile Visibility:",
             "totalNumberOfCases": "Total Number of Cases: ",
             "expertSince": "Expert since:",
+            "expertise": "Expertise",
             "authorizedCreditCard": "Authorized Credit Card",
             "ccNameOnCard": "Name on Card",
             "ccNameOnCard.placeholder": "Card Holder's Name",

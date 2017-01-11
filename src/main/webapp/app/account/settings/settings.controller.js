@@ -7,9 +7,9 @@
 
     SettingsController.$inject = ['$rootScope', 'Principal', 'Auth', 'JhiLanguageService', '$translate', 'Payment',
     'Groupaccess', 'User', 'Focus', 'Register', 'toastr', 'ExpertAccount', 'Issue', 'Technology', '_', '$state',
-    'DrslUserFlowService', 'ManageUser', 'ExpertAttribute', 'ExpertAttributeToExpert'];
+    'DrslUserFlowService', 'ManageUser', 'ExpertAttribute', 'ExpertAttributeToExpert', 'JobroleExpertScore', 'ProductExpertScore', 'SpecialityExpertScore', 'SkillExpertScore', 'TechnologyExpertScore'];
 
-    function SettingsController($rootScope, Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, User, focus, Register, toastr, ExpertAccount, Issue, Technology, _, $state, DrslUserFlowService, ManageUser, ExpertAttribute, ExpertAttributeToExpert) {
+    function SettingsController($rootScope, Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, User, focus, Register, toastr, ExpertAccount, Issue, Technology, _, $state, DrslUserFlowService, ManageUser, ExpertAttribute, ExpertAttributeToExpert, JobroleExpertScore, ProductExpertScore, SpecialityExpertScore, SkillExpertScore, TechnologyExpertScore) {
 
         // Handle user flow redirects and messaging
         DrslUserFlowService.handleUserFlow();
@@ -123,6 +123,26 @@
                     } else {
                         vm.displayedExpertScore = 0;
                     }
+                    JobroleExpertScore.query(function (res) {
+                        vm.currentExpert.jobroles = res;
+                        jobroleCalculation();
+                    });
+                    ProductExpertScore.query(function (res) {
+                        vm.currentExpert.products = res;
+                        productCalculation();
+                    });
+                    SpecialityExpertScore.query(function (res) {
+                        vm.currentExpert.specialties = res;
+                        specialtiesCalculation();
+                    });
+                    SkillExpertScore.query(function (res) {
+                        vm.currentExpert.skills = res;
+                        skillsCalculation();
+                    });
+                    TechnologyExpertScore.query(function (res) {
+                        vm.currentExpert.technology = res;
+                        technologyCalculation();
+                    });
                 }
             });
 
@@ -153,6 +173,47 @@
             Principal.identity().then(function (account) {
                 vm.settingsAccount = copyAccount(account);
             });
+        }
+
+        function jobroleCalculation() {
+            vm.currentExpert.jobrolesScore = 0;
+            vm.currentExpert.jobroles.forEach(function (role) {
+                 vm.currentExpert.jobrolesScore =  vm.currentExpert.jobrolesScore + role.score;
+                 console.log(vm.currentExpert.jobrolesScore);
+                 vm.jobrolesComplete = vm.currentExpert.jobrolesScore > vm.currentExpert.jobroles.length;
+            })
+        }
+        function productCalculation() {
+            vm.currentExpert.productsScore = 0;
+            vm.currentExpert.products.forEach(function (role) {
+                 vm.currentExpert.productsScore =  vm.currentExpert.productsScore + role.score;
+                 console.log(vm.currentExpert.productsScore);
+                 vm.productsComplete = vm.currentExpert.productsScore > vm.currentExpert.products.length;
+            })
+        }
+        function specialtiesCalculation() {
+            vm.currentExpert.specialtiesScore = 0;
+            vm.currentExpert.specialties.forEach(function (role) {
+                 vm.currentExpert.specialtiesScore =  vm.currentExpert.specialtiesScore + role.score;
+                 console.log(vm.currentExpert.specialtiesScore);
+                 vm.specialtiesComplete = vm.currentExpert.specialtiesScore > vm.currentExpert.specialties.length;
+            })
+        }
+        function skillsCalculation() {
+            vm.currentExpert.skillsScore = 0;
+            vm.currentExpert.skills.forEach(function (role) {
+                 vm.currentExpert.skillsScore =  vm.currentExpert.skillsScore + role.score;
+                 console.log(vm.currentExpert.skillsScore);
+                 vm.skillsComplete = vm.currentExpert.skillsScore > vm.currentExpert.skills.length;
+            })
+        }
+        function technologyCalculation() {
+            vm.currentExpert.technologyScore = 0;
+            vm.currentExpert.technology.forEach(function (role) {
+                 vm.currentExpert.technologyScore =  vm.currentExpert.technologyScore + role.score;
+                 console.log(vm.currentExpert.technologyScore);
+                 vm.technologyComplete = vm.currentExpert.technologyScore > vm.currentExpert.technology.length;
+            })
         }
 
         /**
