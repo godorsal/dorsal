@@ -67,6 +67,15 @@
 </li>
 </ol> -->
 <h4 ng-show="vm.pending" data-translate="dorsalApp.expertGroup.modal.form.pending" translate-values="{expertsToAdd: '{{vm.expertsToAdd.length}}'}">You still have {{vm.expertsToAdd.length}} experts pending</h4>
+<h2>Options</h2>
+<select class="form-control" name="" ng-model="vm.addAttribute">
+    <option value="">Select Attribute</option>
+    <option ng-repeat="attribute in vm.availableAttributes track by $index" value="{{attribute}}">{{attribute.name}}</option>
+</select>
+<select class="form-control" name="" ng-model="vm.addProduct">
+    <option value="">Select Product</option>
+    <option ng-repeat="product in vm.availableProducts track by $index" value="{{product}}">{{product.name}}</option>
+</select>
 <h2 data-translate="dorsalApp.expertGroup.experts">Experts</h2>
 <table class="table">
     <thead>

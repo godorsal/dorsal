@@ -179,7 +179,6 @@
             vm.currentExpert.jobrolesScore = 0;
             vm.currentExpert.jobroles.forEach(function (role) {
                  vm.currentExpert.jobrolesScore =  vm.currentExpert.jobrolesScore + role.score;
-                 console.log(vm.currentExpert.jobrolesScore);
                  vm.jobrolesComplete = vm.currentExpert.jobrolesScore > vm.currentExpert.jobroles.length;
             })
         }
@@ -187,7 +186,6 @@
             vm.currentExpert.productsScore = 0;
             vm.currentExpert.products.forEach(function (role) {
                  vm.currentExpert.productsScore =  vm.currentExpert.productsScore + role.score;
-                 console.log(vm.currentExpert.productsScore);
                  vm.productsComplete = vm.currentExpert.productsScore > vm.currentExpert.products.length;
             })
         }
@@ -195,7 +193,6 @@
             vm.currentExpert.specialtiesScore = 0;
             vm.currentExpert.specialties.forEach(function (role) {
                  vm.currentExpert.specialtiesScore =  vm.currentExpert.specialtiesScore + role.score;
-                 console.log(vm.currentExpert.specialtiesScore);
                  vm.specialtiesComplete = vm.currentExpert.specialtiesScore > vm.currentExpert.specialties.length;
             })
         }
@@ -203,7 +200,6 @@
             vm.currentExpert.skillsScore = 0;
             vm.currentExpert.skills.forEach(function (role) {
                  vm.currentExpert.skillsScore =  vm.currentExpert.skillsScore + role.score;
-                 console.log(vm.currentExpert.skillsScore);
                  vm.skillsComplete = vm.currentExpert.skillsScore > vm.currentExpert.skills.length;
             })
         }
@@ -211,7 +207,6 @@
             vm.currentExpert.technologyScore = 0;
             vm.currentExpert.technology.forEach(function (role) {
                  vm.currentExpert.technologyScore =  vm.currentExpert.technologyScore + role.score;
-                 console.log(vm.currentExpert.technologyScore);
                  vm.technologyComplete = vm.currentExpert.technologyScore > vm.currentExpert.technology.length;
             })
         }

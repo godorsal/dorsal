@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('ExpertGroupsManagementModalController', ExpertGroupsManagementModalController);
 
-    ExpertGroupsManagementModalController.$inject = ['$scope', '$timeout', '$uibModalInstance', '$document', '$translate', 'ExpertAccount', 'ExpertPool', 'ExpertPoolToExpert', '$rootScope'];
+    ExpertGroupsManagementModalController.$inject = ['$scope', '$timeout', '$uibModalInstance', '$document', '$translate', 'ExpertAccount', 'ExpertPool', 'ExpertPoolToExpert', '$rootScope', 'ExpertAttribute', 'Product'];
 
-    function ExpertGroupsManagementModalController($scope, $timeout, $uibModalInstance, $document, $translate, ExpertAccount, ExpertPool, ExpertPoolToExpert, $rootScope) {
+    function ExpertGroupsManagementModalController($scope, $timeout, $uibModalInstance, $document, $translate, ExpertAccount, ExpertPool, ExpertPoolToExpert, $rootScope, ExpertAttribute, Product) {
         var vm = this;
         vm.expertsToAdd = [];
         vm.expertsToDelete = [];
@@ -26,6 +26,12 @@
             if($scope.$resolve.viewOnly){
                 vm.viewOnly = true;
             }
+        })
+        ExpertAttribute.query(function (res) {
+            vm.availableAttributes = res;
+        })
+        Product.query(function (res) {
+            vm.availableProducts = res;
         })
         function checkResolve() {
             if($scope.$resolve.group){
