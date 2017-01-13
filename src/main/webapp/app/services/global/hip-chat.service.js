@@ -127,6 +127,7 @@
                     var code = service.DrslMetadata.thingy;
                     break;
             }
+            if(roomObject.hasExpert){
             return $http({
                 method: 'POST',
                 url: url,
@@ -141,7 +142,22 @@
                     'Authorization': 'Bearer ' + $window.atob(code).split('#')[2]
                 }
             })
+        } else {
+            return $http({
+                method: 'POST',
+                url: url,
+                data: {
+                    name: roomObject.name,
+                    privacy: 'private',
+                    topic: roomObject.topic,
+                    guest_access: true,
+                },
+                headers: {
+                    'Authorization': 'Bearer ' + $window.atob(code).split('#')[2]
+                }
+            })
         }
+    }
         // Make a room with a name based on a timestamp
         service.makeConciergeRoom = function(tokenNo){
             var timestamp = new Date();

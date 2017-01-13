@@ -641,11 +641,22 @@
 					DrslHipChatService.magicMessageParser(vm.messages);
 				}, function errorCallback(res) {
 					if(res.data.error ){
-						if(res.data.error.code != 429){
+						if(res.data.error.code === 404){
 							var roomObject = {
 								name: messagesID,
 								topic: vm.currentCase.summary,
-								expert: vm.currentCase.expertaccount.user.email
+								hasExpert: false
+							}
+							DrslHipChatService.makeRoom(roomObject)
+							.then(function () {
+								getMessages();
+							})
+						} else if(res.data.error.code != 429){
+							var roomObject = {
+								name: messagesID,
+								topic: vm.currentCase.summary,
+								expert: vm.currentCase.expertaccount.user.email,
+								hasExpert: true
 							}
 							DrslHipChatService.makeRoom(roomObject)
 							.then(function () {

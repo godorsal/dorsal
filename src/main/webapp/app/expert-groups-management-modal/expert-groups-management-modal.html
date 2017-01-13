@@ -67,16 +67,53 @@
 </li>
 </ol> -->
 <h4 ng-show="vm.pending" data-translate="dorsalApp.expertGroup.modal.form.pending" translate-values="{expertsToAdd: '{{vm.expertsToAdd.length}}'}">You still have {{vm.expertsToAdd.length}} experts pending</h4>
-<h2>Options</h2>
-<select class="form-control" name="" ng-model="vm.addAttribute">
-    <option value="">Select Attribute</option>
-    <option ng-repeat="attribute in vm.availableAttributes track by $index" value="{{attribute}}">{{attribute.name}}</option>
-</select>
-<select class="form-control" name="" ng-model="vm.addProduct">
-    <option value="">Select Product</option>
-    <option ng-repeat="product in vm.availableProducts track by $index" value="{{product}}">{{product.name}}</option>
-</select>
+
+
 <h2 data-translate="dorsalApp.expertGroup.experts">Experts</h2>
+<!-- {{vm.queryString}} -->
+<div style="float: left;">
+    <span ng-if="vm.queryObject.attributes">
+        <label for="">Attributes:</label>
+        <div ng-repeat="attribute in vm.queryObject.attributes">
+            {{attribute}}
+        </div>
+    </span>
+    <span ng-if="vm.queryObject.products">
+        <label for="">Products:</label>
+        <div ng-repeat="product in vm.queryObject.products">
+            {{product}}
+        </div>
+    </span>
+    <span ng-if="vm.queryObject.score">
+        <label for="">Score:</label>
+        <div>
+            {{vm.queryObject.score}}
+        </div>
+    </span>
+</div>
+<div style="float: right;">
+    <select class="form-control" name="" ng-model="vm.addAttribute" ng-change="vm.enterAttribute()" style="">
+        <option value="">Select Attribute</option>
+        <option ng-repeat="attribute in vm.availableAttributes track by $index" value="{{attribute.name}}">{{attribute.name}}</option>
+    </select>
+    <select class="form-control" name="" ng-model="vm.addProduct" ng-change="vm.enterProduct()" style="">
+        <option value="">Select Product</option>
+        <option ng-repeat="product in vm.availableProducts track by $index" value="{{product.name}}">{{product.name}}</option>
+    </select>
+    <select class="form-control" name="" ng-model="vm.selectScore" ng-change="vm.updateQuerystring()" style="">
+        <option value="">Select Score</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select>
+    <br>
+    <button type="button" name="button" ng-click="vm.searchExperts()" class="btn btn-success">Search</button>
+    <button type="button" name="button" ng-click="vm.clearQuery()" class="btn btn-success">Clear</button>
+    <br>
+</div>
+
 <table class="table">
     <thead>
         <tr>

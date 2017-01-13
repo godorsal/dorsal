@@ -15,18 +15,40 @@
         vm.pending = false;
         vm.viewOnly = false;
         vm.changesMade = false;
-
+        vm.queryString = "";
         vm.newGroup = {
             expertSelection: 'EXPERT_IN_POOL_FIRST'
         };
-
-        ExpertAccount.query({id: "experts"},function (res) {
+        vm.queryProducts = [];
+        vm.queryAttributes = [];
+        vm.queryObject = {};
+        // ExpertAccount.query(function (res) {
+        ExpertAccount.query({param: "experts"},function (res) {
             vm.availableExperts = res;
             checkResolve();
             if($scope.$resolve.viewOnly){
                 vm.viewOnly = true;
             }
         })
+        vm.searchExperts = function () {
+            ExpertAccount.query({param: "query", options: vm.queryString}, function (res) {
+                // console.log("REEEZ", res);
+                vm.availableExperts = res;
+                checkResolve();
+                if($scope.$resolve.viewOnly){
+                    vm.viewOnly = true;
+                }
+            })
+        }
+        vm.clearQuery = function () {
+            vm.queryString = "";
+            vm.queryProducts = [];
+            vm.queryAttributes = [];
+            vm.selectScore = "";
+            vm.addAttribute = "";
+            vm.addProduct = "";
+            vm.queryObject = {};
+        }
         ExpertAttribute.query(function (res) {
             vm.availableAttributes = res;
         })
@@ -77,7 +99,42 @@
                 ExpertPool.save(vm.newGroup, onGroupSaveSuccess, onSaveError)
             }
         }
-
+        vm.updateQuerystring = function () {
+            var showProducts = vm.queryProducts.join(',');
+            var showAttributes = vm.queryAttributes.join(',');
+            vm.queryString = "product:" + showProducts + ":attribute:" + showAttributes + ":score:" + vm.selectScore;
+            vm.queryObject = {
+                attributes: vm.queryAttributes,
+                products: vm.queryProducts,
+                score: vm.selectScore
+            }
+        }
+        vm.enterAttribute = function () {
+            if(vm.queryAttributes.length > 0){
+                var attIndex = vm.queryAttributes.indexOf(vm.addAttribute);
+                if(attIndex != -1){
+                    vm.queryAttributes.splice(attIndex, 1);
+                } else {
+                    vm.queryAttributes.push(vm.addAttribute);
+                }
+            } else {
+                vm.queryAttributes.push(vm.addAttribute);
+            }
+            vm.updateQuerystring();
+        }
+        vm.enterProduct = function () {
+            if(vm.queryProducts.length > 0){
+                var prodIndex = vm.queryProducts.indexOf(vm.addProduct);
+                if(prodIndex != -1){
+                    vm.queryProducts.splice(prodIndex, 1);
+                } else {
+                    vm.queryProducts.push(vm.addProduct);
+                }
+            } else {
+                vm.queryProducts.push(vm.addProduct);
+            }
+            vm.updateQuerystring();
+        }
         function onGroupSaveSuccess(res) {
             vm.expertsToAdd.forEach(function (expert) {
                 var connection = {
