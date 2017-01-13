@@ -22,6 +22,8 @@
         vm.queryProducts = [];
         vm.queryAttributes = [];
         vm.queryObject = {};
+        vm.selectScore = "1";
+
         // ExpertAccount.query(function (res) {
         ExpertAccount.query({param: "experts"},function (res) {
             vm.availableExperts = res;
@@ -44,7 +46,7 @@
             vm.queryString = "";
             vm.queryProducts = [];
             vm.queryAttributes = [];
-            vm.selectScore = "";
+            vm.selectScore = 1;
             vm.addAttribute = "";
             vm.addProduct = "";
             vm.queryObject = {};
