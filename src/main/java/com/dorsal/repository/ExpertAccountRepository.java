@@ -59,8 +59,8 @@ public interface ExpertAccountRepository extends JpaRepository<ExpertAccount,Lon
     @Query("select distinct ea from ExpertAccount ea, ExpertAttribute eatt, ExpertAttributeToExpert eate where eatt.name IN(:attributelist) AND eatt.id = eate.expertattribute.id AND eate.expertaccount.id = ea.id ORDER BY ea.expertScore DESC")
     List<ExpertAccount> findExpertByAttribute(@Param("attributelist")List<String> attributelist);
 
-    @Query("select distinct ea from ExpertAccount ea, ProductExpertScore pes, Product p where ea.id = pes.expertaccount.id AND pes.product.id = p.id and p.name IN (:productlist) AND pes.score > :score  ORDER BY ea.expertScore DESC")
-    List<ExpertAccount> findExpertByProduct(@Param("productlist")List<String> productlist, @Param("score") int score);
+//    @Query("select distinct ea from ExpertAccount ea, ProductExpertScore pes, Product p where ea.id = pes.expertaccount.id AND pes.product.id = p.id and p.name IN (:productlist) AND pes.score > :score  ORDER BY ea.expertScore DESC")
+//    List<ExpertAccount> findExpertByProduct(@Param("productlist")List<String> productlist, @Param("score") int score);
 
     @Query("select distinct ea from ExpertAccount ea, SkillExpertScore ses, Skill s where ea.id = ses.expertaccount.id AND ses.skill.id = s.id and s.name IN (:skilllist) AND ses.score > :score ORDER BY ea.expertScore DESC")
     List<ExpertAccount> findExpertBySkill(@Param("skilllist")List<String> skilllist, @Param("score") int score);

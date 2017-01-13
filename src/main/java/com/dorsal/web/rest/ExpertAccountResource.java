@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.dorsal.domain.ExpertAccount;
 import com.dorsal.repository.ExpertAccountRepository;
 import com.dorsal.web.rest.util.HeaderUtil;
+import com.dorsal.web.rest.util.QueryStringParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -16,8 +17,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * REST controller for managing ExpertAccount.
@@ -87,6 +87,40 @@ public class ExpertAccountResource {
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public List<ExpertAccount> getAllExpertAccounts() {
+
+        // Debug
+        /*log.warn("********** Test expert matching *************");
+        List<String> productList = new ArrayList<String>();
+        productList = Arrays.asList("MariaDB", "MySQL");
+
+        List<ExpertAccount> experts = expertAccountRepository.findExpertByProducts(productList, 2);
+        log.warn("Number of Experts " + experts.size() + " with score greater than 2 ");
+
+        List<String> attributeList = new ArrayList<String>();
+        attributeList = Arrays.asList("US-RESIDENT");
+
+        experts = expertAccountRepository.findExpertByProductsAndAttribute(productList,2,attributeList);
+        log.warn("Number of Experts " + experts.size() + " with score greater than 2 and US-RESIDENTS");
+        for (int i=0; i < experts.size(); i++) {
+            log.warn("Expert that matches: " + experts.get(i).getUser().getLogin());
+        }
+
+        String poolname = "Verizon";
+        experts = expertAccountRepository.findExpertByProductsAndExpertPool(productList, 2,poolname.toLowerCase());
+        log.warn("Number of Experts " + experts.size() + " with score greater than 2 and member of expertpool VERIZON");
+        for (int i=0; i < experts.size(); i++) {
+            log.warn("Expert that matches: " + experts.get(i).getUser().getLogin());
+        }
+
+        long qtime = System.currentTimeMillis();
+        experts = expertAccountRepository.findExpertByProductsAndAttributesAndExpertPool(productList,2,attributeList,poolname.toLowerCase());
+        log.warn("Number of Experts " + experts.size() + " with score greater than 2 and member of expertpool VERIZON and US-RESIDENT. Execution time: " + (System.currentTimeMillis() - qtime) + "ms");
+
+        for (int i=0; i < experts.size(); i++) {
+            log.warn("Expert that matches: " + experts.get(i).getUser().getLogin());
+        }
+        // Debug*/
+
         log.debug("REST request to get all ExpertAccounts");
         List<ExpertAccount> expertAccounts = expertAccountRepository.findByUserIsCurrentUser();
         return expertAccounts;
@@ -107,6 +141,54 @@ public class ExpertAccountResource {
         // Check if logged-in user is expert.
         if (expertAccountRepository.findByUserIsCurrentUser() != null) {
             List<ExpertAccount> expertAccounts = expertAccountRepository.findAll();
+            return expertAccounts;
+        } else {
+            log.error("Request for all expert accounts from an un-authorized user.");
+            return null;
+        }
+    }
+
+    /**
+     * Get experts for ExpertPool creation based on different criteria such as product and attributes
+     *
+     * A caller can pass in a list of products and a list of attributes and the minimum score as a query string
+     * with the following format:
+     *
+     * /expert-accounts/query/product:MySQL,MariaDB:attribute:us-resident:score:2
+     *
+     */
+    @RequestMapping(value = "/expert-accounts/query/{query}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<ExpertAccount> getExpertsByQuery(@PathVariable String query) {
+        log.debug("REST request to get ExpertAccounts by query");
+        log.warn("ExpertAccount query string: " + query);
+
+        // Check if logged-in user is expert.
+        if (expertAccountRepository.findByUserIsCurrentUser() != null) {
+
+            // Parse out the query strings before calling into the API
+            List<ExpertAccount> expertAccounts = null;
+            List<String> productList = QueryStringParser.getProductListFromQuery(query);
+            List<String> attributeList = QueryStringParser.getAttributeListFromQuery(query);
+            int score = QueryStringParser.getScoreFromQuery(query);
+
+            if (attributeList == null && productList == null) {
+                // invalid query return a null set
+                expertAccounts = null;
+            } else if (attributeList == null || attributeList.size() == 0) {
+                // No attributes defined search by products only
+                expertAccounts = expertAccountRepository.findExpertByProducts(productList, score);
+            } else if (productList == null){
+                // no products defined search by attributes only
+                expertAccounts = expertAccountRepository.findExpertByAttribute(attributeList);
+            } else {
+                // Search by products and attributes
+                expertAccounts = expertAccountRepository.findExpertByProductsAndAttribute(productList,score,attributeList);
+            }
+
+            // Return result set
             return expertAccounts;
         } else {
             log.error("Request for all expert accounts from an un-authorized user.");

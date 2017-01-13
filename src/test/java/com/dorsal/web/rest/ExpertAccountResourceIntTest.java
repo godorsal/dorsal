@@ -4,6 +4,7 @@ import com.dorsal.DorsalApp;
 import com.dorsal.domain.ExpertAccount;
 import com.dorsal.repository.ExpertAccountRepository;
 
+import com.dorsal.web.rest.util.QueryStringParser;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -89,6 +90,17 @@ public class ExpertAccountResourceIntTest {
     private static final ProfileVisability DEFAULT_PROFILE_VISIBILITY = ProfileVisability.PUBLIC;
     private static final ProfileVisability UPDATED_PROFILE_VISIBILITY = ProfileVisability.INTERN;
 
+    private static final String PRODUCT_ONLY_QUERY = "product:MySQL,MariaDB:attribute::score:4";
+    private static final String ATTRIBUTE_ONLY_QUERY ="product::attribute:US-RESIDENT:score:";
+    private static final String ALL_ELEMENTS_QUERY = "product:MySQL,MariaDB,MongoDB:attribute:US-RESIDENT,VERIZON-ONLY:score:3";
+
+    private static final String RESULT_MYSQL   = "MySQL";
+    private static final String RESULT_MARIADB = "MariaDB";
+    private static final String RESULT_MONGODB = "MongoDB";
+    private static final String RESULT_USRESIDENT = "US-RESIDENT";
+    private static final String RESULT_VERIZON    = "VERIZON-ONLY";
+
+
     @Inject
     private ExpertAccountRepository expertAccountRepository;
 
@@ -131,6 +143,37 @@ public class ExpertAccountResourceIntTest {
         expertAccount.setExpertTimezone(DEFAULT_EXPERT_TIMEZONE);
         expertAccount.setExpertAvailability(DEFAULT_EXPERT_AVAILABILITY);
         expertAccount.setProfileVisibility(DEFAULT_PROFILE_VISIBILITY);
+    }
+
+    @Test
+    @Transactional
+    public void testQueryStringParser() throws Exception {
+
+        List<String> attributeList  = QueryStringParser.getAttributeListFromQuery(ALL_ELEMENTS_QUERY);
+        int score =0;
+
+        assertThat(attributeList.get(0)).isEqualTo(RESULT_USRESIDENT);
+        assertThat(attributeList.get(1)).isEqualTo(RESULT_VERIZON);
+
+        List<String> productList  = QueryStringParser.getProductListFromQuery(ALL_ELEMENTS_QUERY);
+        assertThat(productList.get(0)).isEqualTo(RESULT_MYSQL);
+        assertThat(productList.get(1)).isEqualTo(RESULT_MARIADB);
+        assertThat(productList.get(2)).isEqualTo(RESULT_MONGODB);
+        score = QueryStringParser.getScoreFromQuery(ALL_ELEMENTS_QUERY);
+        assertThat(score == 3);
+
+
+        attributeList  = QueryStringParser.getAttributeListFromQuery(ATTRIBUTE_ONLY_QUERY);
+        assertThat(attributeList.get(0)).isEqualTo(RESULT_USRESIDENT);
+        score = QueryStringParser.getScoreFromQuery(ATTRIBUTE_ONLY_QUERY);
+        assertThat(score == 2);
+
+        productList  = QueryStringParser.getProductListFromQuery(PRODUCT_ONLY_QUERY);
+        assertThat(productList.get(0)).isEqualTo(RESULT_MYSQL);
+        assertThat(productList.get(1)).isEqualTo(RESULT_MARIADB);
+        score = QueryStringParser.getScoreFromQuery(PRODUCT_ONLY_QUERY);
+        assertThat(score == 4);
+
     }
 
     @Test
