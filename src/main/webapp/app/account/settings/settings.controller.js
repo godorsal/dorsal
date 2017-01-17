@@ -7,9 +7,9 @@
 
     SettingsController.$inject = ['$rootScope', 'Principal', 'Auth', 'JhiLanguageService', '$translate', 'Payment',
     'Groupaccess', 'User', 'Focus', 'Register', 'toastr', 'ExpertAccount', 'Issue', 'Technology', '_', '$state',
-    'DrslUserFlowService', 'ManageUser', 'ExpertAttribute', 'ExpertAttributeToExpert', 'JobroleExpertScore', 'ProductExpertScore', 'SpecialityExpertScore', 'SkillExpertScore', 'TechnologyExpertScore', 'Useraccount'];
+    'DrslUserFlowService', 'ManageUser', 'ExpertAttribute', 'ExpertAttributeToExpert', 'JobroleExpertScore', 'ProductExpertScore', 'SpecialityExpertScore', 'SkillExpertScore', 'TechnologyExpertScore', 'Useraccount', 'ExpertPoolToExpert'];
 
-    function SettingsController($rootScope, Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, User, focus, Register, toastr, ExpertAccount, Issue, Technology, _, $state, DrslUserFlowService, ManageUser, ExpertAttribute, ExpertAttributeToExpert, JobroleExpertScore, ProductExpertScore, SpecialityExpertScore, SkillExpertScore, TechnologyExpertScore, Useraccount) {
+    function SettingsController($rootScope, Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, User, focus, Register, toastr, ExpertAccount, Issue, Technology, _, $state, DrslUserFlowService, ManageUser, ExpertAttribute, ExpertAttributeToExpert, JobroleExpertScore, ProductExpertScore, SpecialityExpertScore, SkillExpertScore, TechnologyExpertScore, Useraccount, ExpertPoolToExpert) {
 
         // Handle user flow redirects and messaging
         DrslUserFlowService.handleUserFlow();
@@ -177,6 +177,19 @@
                         vm.currentExpert.technology = res;
                         technologyCalculation();
                     });
+                    ExpertPoolToExpert.query(function (res) {
+                        vm.currentExpert.groups = res;
+                    })
+                } else {
+                    Useraccount.query(function (res) {
+                        vm.currentUserAccount = res[0];
+                        if(vm.currentUserAccount.companyname.length){
+                            vm.userAttributes = vm.currentUserAccount.companyname.split(',');
+                            calculateUserAttributes();
+                        } else {
+                            vm.userAttributes = [];
+                        }
+                    })
                 }
             });
 
@@ -207,15 +220,6 @@
             Principal.identity().then(function (account) {
                 vm.settingsAccount = copyAccount(account);
             });
-            Useraccount.query(function (res) {
-                vm.currentUserAccount = res[0];
-                if(vm.currentUserAccount.companyname.length){
-                    vm.userAttributes = vm.currentUserAccount.companyname.split(',');
-                    calculateUserAttributes();
-                } else {
-                    vm.userAttributes = [];
-                }
-            })
         }
 
         function jobroleCalculation() {
