@@ -20,6 +20,15 @@ public class QueryStringParser {
     private static String ARG_PRODUCT   = "product:";
     private static String ARG_SCORE     = ":score:";
 
+    /*
+        Support case allows to define tags for Attributes an products
+     */
+    public static String TAG_ATTRIBUTE = "Attribute:";
+    public static String TAG_PRODUCT = "Product:";
+    public static String TAG_GROUP = "Group:";
+    public static String TAG_SKILL = "Skill:";
+
+
     private static final Logger log = LoggerFactory.getLogger(QueryStringParser.class);
 
 
@@ -94,7 +103,11 @@ public class QueryStringParser {
                     score = 2;
                 } else {
                     // Convert
-                    score = Integer.parseInt(query.substring(startIn + ARG_SCORE.length()));
+                    String strScore = query.substring(startIn + ARG_SCORE.length());
+                    if (strScore.equalsIgnoreCase("undefined") )
+                        score =2;
+                    else
+                        score = Integer.parseInt(strScore);
                 }
             }
         }catch (Exception e) {
@@ -103,5 +116,50 @@ public class QueryStringParser {
         }
 
         return score;
+    }
+
+    /*
+        Helper functions to extract values from tags that might have been defined in the other section
+        of the support case page
+     */
+
+
+
+    /**
+     * Extract attributes from tag
+     * @param attributeArg
+     * @return
+     */
+
+    public static String getAttributeFromString(String attributeArg) {
+        String result = "";
+
+        int startIn = attributeArg.indexOf(TAG_ATTRIBUTE);
+
+        if (startIn != -1) {
+            // Extract the result
+            result = attributeArg.substring(startIn+TAG_ATTRIBUTE.length());
+        }
+
+        return result;
+    }
+
+    /**
+     * Generic form to extract values for a given tag
+     * @param tagArg Argument has the following format TAG:Value. Example: Attribute:US-RESIDENT
+     * @param tag Tag format is the following: Product: , Attribute:  , Group: , etc
+     * @return value string
+     */
+    public static String getValueFromTag(String tagArg, String tag) {
+        String result = "";
+
+        int startIn = tagArg.indexOf(tag);
+
+        if (startIn != -1) {
+            // Extract the result
+            result = tagArg.substring(startIn + tag.length());
+        }
+
+        return result;
     }
 }

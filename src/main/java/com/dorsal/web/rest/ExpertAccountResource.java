@@ -180,7 +180,7 @@ public class ExpertAccountResource {
             } else if (attributeList == null || attributeList.size() == 0) {
                 // No attributes defined search by products only
                 expertAccounts = expertAccountRepository.findExpertByProducts(productList, score);
-            } else if (productList == null){
+            } else if (productList == null || productList.size() == 0) {
                 // no products defined search by attributes only
                 expertAccounts = expertAccountRepository.findExpertByAttribute(attributeList);
             } else {

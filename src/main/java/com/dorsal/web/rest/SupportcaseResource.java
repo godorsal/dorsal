@@ -76,7 +76,7 @@ public class SupportcaseResource {
     @RequestMapping(value = "/supportcases",
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
+    //@Timed
     public ResponseEntity<Supportcase> createSupportcase(@Valid @RequestBody Supportcase supportcase) throws URISyntaxException {
         log.debug("REST request to save Supportcase : {}", supportcase);
         if (supportcase.getId() != null) {
@@ -109,7 +109,20 @@ public class SupportcaseResource {
         supportcase.setEstimateHours(0);
         supportcase.setEstimateComment("");
 
-        Supportcase result = supportcaseRepository.save(supportcase);
+        //Supportcase result = supportcaseRepository.save(supportcase);
+        Supportcase result = supportcaseRepository.saveAndFlush(supportcase);
+
+        log.warn("Support case created. ID: " + supportcase.getId());
+        log.warn("*********** v1.2 Expert lookup start **********");
+
+        //result.setExpertaccount(dorsalExpertMatchService.findExpertByProfileMatch(result));
+        dorsalExpertMatchService.findExpertByProfileMatch(supportcase);
+
+        // Save update
+        supportcaseRepository.saveAndFlush(supportcase);
+        //result = supportcaseRepository.save(result);
+
+        log.warn("*********** v1.2 Expert lookup end **********");
 
         /*
             Notification
