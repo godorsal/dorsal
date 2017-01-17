@@ -163,9 +163,6 @@
         var onSaveSuccess = function (result) {
             // DrslNewCaseService.setNewCase(result);
 
-            Supportcase.update({id: "expertmatch"}, result, function(res) {
-                console.log("REZULTS", res);
-            })
             DrslNewCaseService.setNewCaseId(result.id);
 
             // Loop through each tech property and save via an api call
@@ -181,17 +178,21 @@
                     Casetechnologyproperty.save(brandNewProperty);
                 }
             }
+            Supportcase.update({id: "expertmatch"}, result, function(res) {
+                console.log("REZULTS", res);
+            })
 
             // Reset view model properties
             vm.technologyProperties = null;
             vm.technology = null;
             vm.issue = null;
+
             var roomObject = {
                 name: result.technology.name + result.id,
                 topic: result.summary,
                 expert: result.expertaccount.user.email
             }
-            DrslHipChatService.makeRoom(roomObject);
+            // DrslHipChatService.makeRoom(roomObject);
 
             // emit a 'dorsalApp:supportcaseUpdate' so the app can be aware of the change
             $scope.$emit('dorsalApp:supportcaseUpdate', result);
