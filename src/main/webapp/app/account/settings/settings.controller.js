@@ -69,6 +69,19 @@
                 })
             })
         }
+        function calculateUserAttributes() {
+            console.log("CALCULATING", vm.userAttributes);
+            ExpertAttribute.query(function (res) {
+                vm.presentAttributes = res;
+                vm.userAttributes.forEach(function (attribute1, index1) {
+                    vm.presentAttributes.forEach(function (attribute2, index2) {
+                        if(attribute1.id === attribute2.id){
+                            vm.presentAttributes.splice(index2, 1);
+                        }
+                    })
+                })
+            })
+        }
 
         function saveAttributes() {
             if(vm.atbInputString){
@@ -90,6 +103,7 @@
             })
             vm.currentUserAccount.companyname = vm.userAttributes.join(',');
             vm.addAttribute = "";
+            vm.updatingUser = true;
         }
         function attributeSaved(res) {
             ExpertAttributeToExpert.save({expertattribute: res}, addToArray);
@@ -109,6 +123,8 @@
         function deleteUserAttribute(index) {
             vm.presentAttributes.push({name:vm.userAttributes[index]})
             vm.userAttributes.splice(index, 1)
+            vm.currentUserAccount.companyname = vm.userAttributes.join(',');
+            vm.updatingUser = true;
         }
         /**
         * Initialize the controller's data.
@@ -189,11 +205,15 @@
             // Grab the current user and preserve a copy in the vm's settingsAccount property
             Principal.identity().then(function (account) {
                 vm.settingsAccount = copyAccount(account);
-                console.log(account);
             });
             Useraccount.query(function (res) {
                 vm.currentUserAccount = res[0];
-                console.log(vm.currentUserAccount);
+                if(vm.currentUserAccount.companyname.length){
+                    vm.userAttributes = vm.currentUserAccount.companyname.split(',');
+                    calculateUserAttributes();
+                } else {
+                    vm.userAttributes = [];
+                }
             })
         }
 
@@ -306,7 +326,6 @@
                 //     user: vm.settingsAccount,
                 //     companyname: vm.userAttributesString
                 // }
-                console.log(vm.currentUserAccount);
                 Useraccount.update(vm.currentUserAccount)
 
                 // Redirect to the case page

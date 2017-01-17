@@ -123,13 +123,13 @@ Your e-mail cannot be longer than 100 characters.
     <div>
         <div style="display: inline-block;">
             <!-- <div>Predefined</div> -->
-            <select class="" name="" ng-model="vm.addAttribute">
+            <select class="" name="" ng-model="vm.addAttribute" ng-change="vm.updatingUser = true">
                 <option value="">Select Attribute</option>
                 <option value="{{attribute.name}}" ng-repeat="attribute in vm.presentAttributes track by $index">{{attribute.name}}</option>
             </select>
         </div>
         <!-- <span>Predefined</span> -->
-        <button class="btn btn-success" ng-click="vm.saveUserAttributes()" style="line-height: 1;">Add</button>
+        <button class="btn btn-success" ng-click="vm.saveUserAttributes()"  style="line-height: 1;">Add</button>
     </div>
 </span>
 
