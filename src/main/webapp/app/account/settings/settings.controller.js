@@ -70,12 +70,11 @@
             })
         }
         function calculateUserAttributes() {
-            console.log("CALCULATING", vm.userAttributes);
             ExpertAttribute.query(function (res) {
                 vm.presentAttributes = res;
                 vm.userAttributes.forEach(function (attribute1, index1) {
                     vm.presentAttributes.forEach(function (attribute2, index2) {
-                        if(attribute1.id === attribute2.id){
+                        if(attribute1 === attribute2.name){
                             vm.presentAttributes.splice(index2, 1);
                         }
                     })
@@ -95,15 +94,17 @@
             }
         }
         function saveUserAttributes() {
-            vm.userAttributes.push(vm.addAttribute)
-            vm.presentAttributes.forEach(function (attribute, index) {
-                if(attribute.name === vm.addAttribute){
-                    vm.presentAttributes.splice(index, 1)
-                }
-            })
-            vm.currentUserAccount.companyname = vm.userAttributes.join(',');
-            vm.addAttribute = "";
-            vm.updatingUser = true;
+            if(vm.addAttribute){
+                vm.userAttributes.push(vm.addAttribute)
+                vm.presentAttributes.forEach(function (attribute, index) {
+                    if(attribute.name === vm.addAttribute){
+                        vm.presentAttributes.splice(index, 1)
+                    }
+                })
+                vm.currentUserAccount.companyname = vm.userAttributes.join(',');
+                vm.addAttribute = "";
+                vm.updatingUser = true;
+            }
         }
         function attributeSaved(res) {
             ExpertAttributeToExpert.save({expertattribute: res}, addToArray);
