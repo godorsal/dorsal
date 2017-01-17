@@ -162,6 +162,10 @@
         */
         var onSaveSuccess = function (result) {
             // DrslNewCaseService.setNewCase(result);
+
+            Supportcase.update({id: "expertmatch"}, result, function(res) {
+                console.log("REZULTS", res);
+            })
             DrslNewCaseService.setNewCaseId(result.id);
 
             // Loop through each tech property and save via an api call

@@ -46,7 +46,7 @@
             vm.queryString = "";
             vm.queryProducts = [];
             vm.queryAttributes = [];
-            vm.selectScore = 1;
+            vm.selectScore = "1";
             vm.addAttribute = "";
             vm.addProduct = "";
             vm.queryObject = {};

@@ -7,9 +7,9 @@
 
     SettingsController.$inject = ['$rootScope', 'Principal', 'Auth', 'JhiLanguageService', '$translate', 'Payment',
     'Groupaccess', 'User', 'Focus', 'Register', 'toastr', 'ExpertAccount', 'Issue', 'Technology', '_', '$state',
-    'DrslUserFlowService', 'ManageUser', 'ExpertAttribute', 'ExpertAttributeToExpert', 'JobroleExpertScore', 'ProductExpertScore', 'SpecialityExpertScore', 'SkillExpertScore', 'TechnologyExpertScore'];
+    'DrslUserFlowService', 'ManageUser', 'ExpertAttribute', 'ExpertAttributeToExpert', 'JobroleExpertScore', 'ProductExpertScore', 'SpecialityExpertScore', 'SkillExpertScore', 'TechnologyExpertScore', 'Useraccount'];
 
-    function SettingsController($rootScope, Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, User, focus, Register, toastr, ExpertAccount, Issue, Technology, _, $state, DrslUserFlowService, ManageUser, ExpertAttribute, ExpertAttributeToExpert, JobroleExpertScore, ProductExpertScore, SpecialityExpertScore, SkillExpertScore, TechnologyExpertScore) {
+    function SettingsController($rootScope, Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, User, focus, Register, toastr, ExpertAccount, Issue, Technology, _, $state, DrslUserFlowService, ManageUser, ExpertAttribute, ExpertAttributeToExpert, JobroleExpertScore, ProductExpertScore, SpecialityExpertScore, SkillExpertScore, TechnologyExpertScore, Useraccount) {
 
         // Handle user flow redirects and messaging
         DrslUserFlowService.handleUserFlow();
@@ -25,6 +25,7 @@
         vm.invitedUsers = [];
         vm.invitedUsersToRemove = [];
         vm.activatedUsersToRemove = [];
+        vm.userAttributes = [];
         vm.isAlreadyAuthorized = false;
         vm.authorizedUser = '';
         vm.number = 0;
@@ -48,23 +49,26 @@
         vm.checkInvalid = checkInvalid;
         vm.editingAttributes = false;
         vm.saveAttributes = saveAttributes;
+        vm.saveUserAttributes = saveUserAttributes;
+        vm.deleteAttribute = deleteAttribute;
+        vm.deleteUserAttribute = deleteUserAttribute;
 
         ExpertAttributeToExpert.query(function (res) {
             vm.expertAttributes = res;
             calculateAttributes()
         })
         function calculateAttributes() {
-        ExpertAttribute.query(function (res) {
-            vm.presentAttributes = res;
-			vm.expertAttributes.forEach(function (attribute1, index1) {
-				vm.presentAttributes.forEach(function (attribute2, index2) {
-					if(attribute1.expertattribute.id === attribute2.id){
-						vm.presentAttributes.splice(index2, 1);
-					}
-				})
-			})
-        })
-    }
+            ExpertAttribute.query(function (res) {
+                vm.presentAttributes = res;
+                vm.expertAttributes.forEach(function (attribute1, index1) {
+                    vm.presentAttributes.forEach(function (attribute2, index2) {
+                        if(attribute1.expertattribute.id === attribute2.id){
+                            vm.presentAttributes.splice(index2, 1);
+                        }
+                    })
+                })
+            })
+        }
 
         function saveAttributes() {
             if(vm.atbInputString){
@@ -77,6 +81,16 @@
                 ExpertAttributeToExpert.save({expertattribute: JSON.parse(vm.addAttribute)}, addToArray);
             }
         }
+        function saveUserAttributes() {
+            vm.userAttributes.push(vm.addAttribute)
+            vm.presentAttributes.forEach(function (attribute, index) {
+                if(attribute.name === vm.addAttribute){
+                    vm.presentAttributes.splice(index, 1)
+                }
+            })
+            vm.currentUserAccount.companyname = vm.userAttributes.join(',');
+            vm.addAttribute = "";
+        }
         function attributeSaved(res) {
             ExpertAttributeToExpert.save({expertattribute: res}, addToArray);
         }
@@ -88,10 +102,13 @@
                 }
             })
         }
-        vm.deleteAttribute = deleteAttribute;
         function deleteAttribute(index) {
             vm.presentAttributes.push(vm.expertAttributes[index].expertattribute)
             ExpertAttributeToExpert.delete({id: vm.expertAttributes[index].id}, vm.expertAttributes.splice(index, 1));
+        }
+        function deleteUserAttribute(index) {
+            vm.presentAttributes.push({name:vm.userAttributes[index]})
+            vm.userAttributes.splice(index, 1)
         }
         /**
         * Initialize the controller's data.
@@ -172,42 +189,47 @@
             // Grab the current user and preserve a copy in the vm's settingsAccount property
             Principal.identity().then(function (account) {
                 vm.settingsAccount = copyAccount(account);
+                console.log(account);
             });
+            Useraccount.query(function (res) {
+                vm.currentUserAccount = res[0];
+                console.log(vm.currentUserAccount);
+            })
         }
 
         function jobroleCalculation() {
             vm.currentExpert.jobrolesScore = 0;
             vm.currentExpert.jobroles.forEach(function (role) {
-                 vm.currentExpert.jobrolesScore =  vm.currentExpert.jobrolesScore + role.score;
-                 vm.jobrolesComplete = vm.currentExpert.jobrolesScore > vm.currentExpert.jobroles.length;
+                vm.currentExpert.jobrolesScore =  vm.currentExpert.jobrolesScore + role.score;
+                vm.jobrolesComplete = vm.currentExpert.jobrolesScore > vm.currentExpert.jobroles.length;
             })
         }
         function productCalculation() {
             vm.currentExpert.productsScore = 0;
             vm.currentExpert.products.forEach(function (role) {
-                 vm.currentExpert.productsScore =  vm.currentExpert.productsScore + role.score;
-                 vm.productsComplete = vm.currentExpert.productsScore > vm.currentExpert.products.length;
+                vm.currentExpert.productsScore =  vm.currentExpert.productsScore + role.score;
+                vm.productsComplete = vm.currentExpert.productsScore > vm.currentExpert.products.length;
             })
         }
         function specialtiesCalculation() {
             vm.currentExpert.specialtiesScore = 0;
             vm.currentExpert.specialties.forEach(function (role) {
-                 vm.currentExpert.specialtiesScore =  vm.currentExpert.specialtiesScore + role.score;
-                 vm.specialtiesComplete = vm.currentExpert.specialtiesScore > vm.currentExpert.specialties.length;
+                vm.currentExpert.specialtiesScore =  vm.currentExpert.specialtiesScore + role.score;
+                vm.specialtiesComplete = vm.currentExpert.specialtiesScore > vm.currentExpert.specialties.length;
             })
         }
         function skillsCalculation() {
             vm.currentExpert.skillsScore = 0;
             vm.currentExpert.skills.forEach(function (role) {
-                 vm.currentExpert.skillsScore =  vm.currentExpert.skillsScore + role.score;
-                 vm.skillsComplete = vm.currentExpert.skillsScore > vm.currentExpert.skills.length;
+                vm.currentExpert.skillsScore =  vm.currentExpert.skillsScore + role.score;
+                vm.skillsComplete = vm.currentExpert.skillsScore > vm.currentExpert.skills.length;
             })
         }
         function technologyCalculation() {
             vm.currentExpert.technologyScore = 0;
             vm.currentExpert.technology.forEach(function (role) {
-                 vm.currentExpert.technologyScore =  vm.currentExpert.technologyScore + role.score;
-                 vm.technologyComplete = vm.currentExpert.technologyScore > vm.currentExpert.technology.length;
+                vm.currentExpert.technologyScore =  vm.currentExpert.technologyScore + role.score;
+                vm.technologyComplete = vm.currentExpert.technologyScore > vm.currentExpert.technology.length;
             })
         }
 
@@ -280,6 +302,12 @@
                         $translate.use(vm.settingsAccount.langKey);
                     }
                 });
+                // var newUserAccount = {
+                //     user: vm.settingsAccount,
+                //     companyname: vm.userAttributesString
+                // }
+                console.log(vm.currentUserAccount);
+                Useraccount.update(vm.currentUserAccount)
 
                 // Redirect to the case page
                 if (vm.isAlreadyAuthorized) {

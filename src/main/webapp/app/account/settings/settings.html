@@ -115,6 +115,37 @@ Your e-mail cannot be longer than 100 characters.
     </select>
 </div>
 
+<i class="fa fa-pencil" aria-hidden="true" ng-click="vm.editingAttributes = true" ng-if="!vm.editingAttributes"></i>
+<i class="fa fa-eye" aria-hidden="true" ng-click="vm.editingAttributes = false" ng-if="vm.editingAttributes"></i>
+<label for="bio" translate="settings.form.expertAttributes" class="drsl-expert-textarea-label">Expert Attributes</label>
+
+<span ng-if="vm.editingAttributes">
+    <div>
+        <div style="display: inline-block;">
+            <!-- <div>Predefined</div> -->
+            <select class="" name="" ng-model="vm.addAttribute">
+                <option value="">Select Attribute</option>
+                <option value="{{attribute.name}}" ng-repeat="attribute in vm.presentAttributes track by $index">{{attribute.name}}</option>
+            </select>
+        </div>
+        <!-- <span>Predefined</span> -->
+        <button class="btn btn-success" ng-click="vm.saveUserAttributes()" style="line-height: 1;">Add</button>
+    </div>
+</span>
+
+<br>
+<div style="border: 1px solid rgb(204, 204, 204); padding: 10px; border-radius: 10px;">
+    <button type="button" name="button" ng-repeat="attribute in vm.userAttributes track by $index" class="btn" style="margin: 5px;">
+        <span>
+            {{attribute}}
+        </span>
+        <span ng-if="vm.editingAttributes" ng-click="vm.deleteUserAttribute($index)">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+        </span>
+    </button>
+</div>
+<br>
+<br>
 <!-- Expert Fields -->
 <div ng-if="vm.currentExpert">
     <!-- Phone Numbers -->
