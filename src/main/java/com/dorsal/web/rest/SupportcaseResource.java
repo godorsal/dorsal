@@ -109,20 +109,8 @@ public class SupportcaseResource {
         supportcase.setEstimateHours(0);
         supportcase.setEstimateComment("");
 
-        //Supportcase result = supportcaseRepository.save(supportcase);
-        Supportcase result = supportcaseRepository.saveAndFlush(supportcase);
-
-        log.warn("Support case created. ID: " + supportcase.getId());
-        log.warn("*********** v1.2 Expert lookup start **********");
-
-        //result.setExpertaccount(dorsalExpertMatchService.findExpertByProfileMatch(result));
-        dorsalExpertMatchService.findExpertByProfileMatch(supportcase);
-
-        // Save update
-        supportcaseRepository.saveAndFlush(supportcase);
-        //result = supportcaseRepository.save(result);
-
-        log.warn("*********** v1.2 Expert lookup end **********");
+        Supportcase result = supportcaseRepository.save(supportcase);
+        //Supportcase result = supportcaseRepository.saveAndFlush(supportcase);
 
         /*
             Notification
@@ -133,6 +121,52 @@ public class SupportcaseResource {
             .headers(HeaderUtil.createEntityCreationAlert("supportcase", result.getId().toString()))
             .body(result);
     }
+
+    /**
+     * PUT  /supportcases/expertmatch : Updates an existing supportcase with perfect expert match.
+     *
+     * @param supportcase the supportcase to update
+     * @return the ResponseEntity with status 200 (OK) and with body the updated supportcase,
+     * or with status 400 (Bad Request) if the supportcase is not valid,
+     * or with status 500 (Internal Server Error) if the supportcase couldnt be updated
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @RequestMapping(value = "/supportcases/expertmatch",
+        method = RequestMethod.PUT,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Supportcase> updateSupportcaseWithExpertMatch(@Valid @RequestBody Supportcase supportcase) throws URISyntaxException {
+        log.debug("REST request to update Supportcase with expert match : {}", supportcase);
+        if (supportcase.getId() == null) {
+            return createSupportcase(supportcase);
+        }
+
+        // Launch perfect match
+        log.error("API call for perfect match");
+        // Adjust time
+        supportcase.setDateLastUpdate(ZonedDateTime.now());
+
+        log.warn("Support case to update. ID: " + supportcase.getId());
+        log.warn("*********** v1.2 Expert lookup start **********");
+
+        //result.setExpertaccount(dorsalExpertMatchService.findExpertByProfileMatch(result));
+        supportcase.setExpertaccount( dorsalExpertMatchService.findExpertByProfileMatch(supportcase));
+
+        // Save update
+        //supportcaseRepository.saveAndFlush(supportcase);
+
+        log.warn("*********** v1.2 Expert lookup end **********");
+
+        // Persist update
+        Supportcase result = supportcaseRepository.save(supportcase);
+
+
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert("supportcase", supportcase.getId().toString()))
+            .body(result);
+
+    }
+
 
     /**
      * PUT  /supportcases : Updates an existing supportcase.
