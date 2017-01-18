@@ -114,7 +114,7 @@ Your e-mail cannot be longer than 100 characters.
         <option value="">Language(s)</option>
     </select>
 </div>
-<div ng-if="!vm.currentExpert">
+<div ng-if="!vm.currentExpert && !vm.isAlreadyAuthorized">
 
     <i class="fa fa-pencil" aria-hidden="true" ng-click="vm.editingAttributes = true" ng-if="!vm.editingAttributes"></i>
     <i class="fa fa-eye" aria-hidden="true" ng-click="vm.editingAttributes = false" ng-if="vm.editingAttributes"></i>
@@ -432,7 +432,8 @@ Your e-mail cannot be longer than 100 characters.
             </div>
 
             <!-- Payment Form Container -->
-            <div class="panel-body">
+            <div class="panel-body right-panel">
+            <!-- <div class="panel-body right-panel" ng-class="{'editing-attributes': vm.editingAttributes}"> -->
                 <form ng-submit="vm.addCard()">
                     <!-- Name on Card (required) -->
                     <div class="form-group">
