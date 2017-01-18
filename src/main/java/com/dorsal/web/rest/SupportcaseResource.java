@@ -93,6 +93,7 @@ public class SupportcaseResource {
         // Set the Expert for this account
         // This is the placeholder for the matching algorithm
         //
+
         ExpertAccount expert = dorsalExpertMatchService.findExpertForSupportcase(supportcase);
         if (expert != null) {
             // Assign Expert to support case
@@ -113,9 +114,9 @@ public class SupportcaseResource {
         //Supportcase result = supportcaseRepository.saveAndFlush(supportcase);
 
         /*
-            Notification
+            Notification -- moved to expert match routine
          */
-        notificationService.createSupportCaseNotifications(supportcase);
+        // notificationService.createSupportCaseNotifications(supportcase);
 
         return ResponseEntity.created(new URI("/api/supportcases/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("supportcase", result.getId().toString()))
@@ -143,22 +144,26 @@ public class SupportcaseResource {
 
         // Launch perfect match
         log.error("API call for perfect match");
+
         // Adjust time
         supportcase.setDateLastUpdate(ZonedDateTime.now());
 
-        log.warn("Support case to update. ID: " + supportcase.getId());
         log.warn("*********** v1.2 Expert lookup start **********");
+        long startTime = System.currentTimeMillis();
 
         //result.setExpertaccount(dorsalExpertMatchService.findExpertByProfileMatch(result));
         supportcase.setExpertaccount( dorsalExpertMatchService.findExpertByProfileMatch(supportcase));
 
-        // Save update
-        //supportcaseRepository.saveAndFlush(supportcase);
-
+        log.warn("Perfect match routine took " + (System.currentTimeMillis() - startTime) + " ms");
         log.warn("*********** v1.2 Expert lookup end **********");
 
         // Persist update
         Supportcase result = supportcaseRepository.save(supportcase);
+
+        /*
+            Notification
+         */
+        notificationService.createSupportCaseNotifications(supportcase);
 
 
         return ResponseEntity.ok()

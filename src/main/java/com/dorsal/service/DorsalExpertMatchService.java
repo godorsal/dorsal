@@ -45,7 +45,7 @@ public class DorsalExpertMatchService {
     private static String NO_EXPERT_FOR_ATTRIBUTES = "No expert found for the required attributes: ";
     private static String NO_EXPERT_FOR_ATTRIBUTES_PRODUCTS = "No expert found for the required attributes and products: ";
     private static String NO_EXPERT_FOR_PRODUCT = "No expert is available for products: ";
-
+    private static String NO_EXPERT_FOR_EXPERT_POOL = "No matching experts in Expert Group found. Group: ";
     // Property values
     private static String PROPERTY_CONFIGURATION = "Configuration";
     private static String PROPERTY_OTHER = "Other";
@@ -96,14 +96,14 @@ public class DorsalExpertMatchService {
          */
         String attributeList = userRepository.getAttributesForMasterUser(supportcase.getUser().getId());
         if (attributeList != null && attributeList.length() > 0) {
-            log.warn("Attributes [" + attributeList + "] for user " + supportcase.getUser().getLogin());
+            log.info("Attributes [" + attributeList + "] for user " + supportcase.getUser().getLogin());
         } else {
-            log.warn("Master user has no attributes");
+            log.info("Master user has no attributes");
             attributeList = "";
         }
 
         String userAttribute = userRepository.getAttributesForUser();
-        if(userAttribute != null & userAttribute.length() > 0) {
+        if(userAttribute != null && userAttribute.length() > 0) {
             if (attributeList.length() > 0)
                 attributeList = attributeList + "," + userAttribute;
             else
@@ -114,13 +114,12 @@ public class DorsalExpertMatchService {
         // Get attributes from support case that are defined in the Other property. User can define Attribute, Product, Group and Skill
 
         casetechpropertiesList = casetechnologypropertyRepository.findPropertiesByCaseAndName(supportcase.getId(), PROPERTY_OTHER);
-        log.warn("Property other lookup for ID: " + supportcase.getId());
+        log.warn("Intake field OTHER extraction for ID: " + supportcase.getId());
         if (casetechpropertiesList != null && casetechpropertiesList.size() > 0) {
             otherPropertyValue = casetechpropertiesList.get(0).getPropertyvalue();
 
             if (otherPropertyValue != null && otherPropertyValue.length() > 0) {
                 inputAttribute = QueryStringParser.getValueFromTag(otherPropertyValue, QueryStringParser.TAG_ATTRIBUTE);
-                log.warn("Attributes defined in Other property: " + inputAttribute);
                 inputProduct   = QueryStringParser.getValueFromTag(otherPropertyValue, QueryStringParser.TAG_PRODUCT);
                 inputSkill     = QueryStringParser.getValueFromTag(otherPropertyValue, QueryStringParser.TAG_SKILL);
                 inputGroup     = QueryStringParser.getValueFromTag(otherPropertyValue, QueryStringParser.TAG_GROUP);
@@ -160,7 +159,6 @@ public class DorsalExpertMatchService {
                 return expert;
             }
         }
-
 
         /**
          * At this point we might have an expert list that matches attributes and main product (MySQL, MariaDB,..)
@@ -217,32 +215,64 @@ public class DorsalExpertMatchService {
 
             }
         } else {
-            // Extract the expert ID's so that it can be passed as arguments to product properties lookup
-            for (int iii=0; iii < experts.size();iii++) {
-                expertIDListArray.add(experts.get(iii).getId());
+
+            /*
+                If no additional products are defined no need for additional lookup. Lookup is only necessary
+                for matching more product properties with existing experts.
+             */
+            if (productListArray != null && productListArray.size() > 0) {
+                // Extract the expert ID's so that it can be passed as arguments to product properties lookup
+                for (int iii=0; iii < experts.size();iii++) {
+                    expertIDListArray.add(experts.get(iii).getId());
+                }
+                log.warn("List of Experts that match attribute/product lookup: " + expertIDListArray.toString());
+
+                experts = expertAccountRepository.findExpertThatMatchListAndProductProperties(expertIDListArray, productListArray, DEFAULT_SCORE);
+
+                if (experts == null) {
+                    log.warn("NO Experts match attributes and product properties");
+                } else {
+                    log.warn("Experts that match attributes and product properties " + experts.size());
+                }
+
+                if (experts == null || experts.size() == 0) {
+                    // No match -- Message and Concierge user
+                    log.warn("No expert match for product & attributes: " + mainProduct + " " +productListArray.toString() + " " + attributeList);
+                    supportcase.setExpectedResult(NO_EXPERT_FOR_ATTRIBUTES_PRODUCTS + attributeList + " Products: " + mainProduct + " " +productListArray.toString());
+
+                    // return default Concierge expert
+                    return expert;
+                }
             }
-            log.warn("List of Experts that match attribute/product lookup: " + expertIDListArray.toString());
+        }
 
-            experts = expertAccountRepository.findExpertThatMatchListAndProductProperties(expertIDListArray, productListArray, DEFAULT_SCORE);
 
-            if (experts == null) {
-                log.warn("NO Experts match attributes and product properties");
-            } else {
-                log.warn("Experts that match attributes and product properties " + experts.size());
+        /*
+            If the user defines a group on the intake page the list of experts found will be matched against the members of
+            the defined group. Other properties format Group:{GroupName}
+         */
+
+        // Check if a Group was defined in the properties
+        if (inputGroup != null && inputGroup.length() > 0) {
+            expertIDListArray.clear();
+            for (int ix=0; ix < experts.size();ix++) {
+                expertIDListArray.add(experts.get(ix).getId());
             }
+            /* Lower case group name because lookup is converted to lowercase to be case insensitive */
+            experts = expertAccountRepository.findExpertMatchExpertPoolMembers(expertIDListArray, inputGroup.toLowerCase());
+            log.warn("ExpertPool lookup. Input Experts [" + expertIDListArray.size() + "] Output experts [" + experts.size() + "]");
 
+            // Check if pool member found
             if (experts == null || experts.size() == 0) {
                 // No match -- Message and Concierge user
-                log.warn("No expert match for product & attributes: " + mainProduct + " " +productListArray.toString() + " " + attributeList);
-                supportcase.setExpectedResult(NO_EXPERT_FOR_ATTRIBUTES_PRODUCTS + attributeList + " Products: " + mainProduct + " " +productListArray.toString());
+                log.warn("No expert in pool [" + inputGroup + "] Did match criteria.");
+                supportcase.setExpectedResult(NO_EXPERT_FOR_EXPERT_POOL + inputGroup + " Attributes:" + attributeList + " Products: " + mainProduct + " " +productListArray.toString());
 
                 // return default Concierge expert
                 return expert;
             }
         }
 
-        // Filter by Expert Group
-        // TBD -- Check if Expert Group was defined
 
         // List of experts is available -- Pick Expert that is available
         boolean bFoundExpert = false;
@@ -278,6 +308,9 @@ public class DorsalExpertMatchService {
     public ExpertAccount findExpertForSupportcase(Supportcase supportcase) {
 
         ExpertAccount expert = null;
+
+        if (true)
+            return expertAccountRepository.getDorsalConcierge(dorsalProperties.getSupport().getConcierge());
 
         try {
             // First technology preference, is available and ordered by score

@@ -78,4 +78,7 @@ public interface ExpertAccountRepository extends JpaRepository<ExpertAccount,Lon
     @Query("select distinct ea from ExpertAccount ea, ProductExpertScore pes, Product p where ea.id = pes.expertaccount.id AND ea.id IN(:expertidlist) AND pes.product.id = p.id and p.name IN (:productlist) AND pes.score >= :score ORDER BY ea.expertScore DESC")
     List<ExpertAccount>findExpertThatMatchListAndProductProperties(@Param("expertidlist")List<Long> expertidlist, @Param("productlist")List<String> productlist, @Param("score") int score);
 
+    @Query("select distinct ea from ExpertAccount ea, ProductExpertScore pes, ExpertPool ep, ExpertPoolToExpert epte where ea.id = pes.expertaccount.id AND ea.id IN(:expertidlist) AND lower(ep.name) like :expertpool AND ep.id = epte.expertpool.id AND epte.expertaccount.id = ea.id  ORDER BY ea.expertScore DESC")
+    List<ExpertAccount> findExpertMatchExpertPoolMembers(@Param("expertidlist")List<Long> expertidlist, @Param("expertpool")String expertpool);
+
 }
