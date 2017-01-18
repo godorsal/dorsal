@@ -179,13 +179,13 @@ public class ExpertAccountResource {
                 expertAccounts = null;
             } else if (attributeList == null || attributeList.size() == 0) {
                 // No attributes defined search by products only
-                expertAccounts = expertAccountRepository.findExpertByProducts(productList, score);
+                expertAccounts = expertAccountRepository.findExpertByProductsList(productList, score);
             } else if (productList == null || productList.size() == 0) {
                 // no products defined search by attributes only
                 expertAccounts = expertAccountRepository.findExpertByAttribute(attributeList);
             } else {
                 // Search by products and attributes
-                expertAccounts = expertAccountRepository.findExpertByProductsAndAttribute(productList,score,attributeList);
+                expertAccounts = expertAccountRepository.findExpertByProductsAndAttributeLists(productList,score,attributeList);
             }
 
             // Return result set

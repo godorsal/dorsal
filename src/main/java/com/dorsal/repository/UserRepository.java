@@ -65,4 +65,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
      */
     @Query("select ua.companyname from Useraccount ua, User user, Groupaccess ga where ua.user.id = user.id AND ga.authorizeduser.id = :userid AND user.id = ga.user.id")
     String getAttributesForMasterUser(@Param("userid") long userID);
+
+    @Query("select ua.companyname from Useraccount ua, User user where ua.user.id = user.id AND user.login = ?#{principal.username}")
+    String getAttributesForUser();
 }

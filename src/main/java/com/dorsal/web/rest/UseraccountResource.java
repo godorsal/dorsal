@@ -2,6 +2,7 @@ package com.dorsal.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.dorsal.domain.Useraccount;
+import com.dorsal.repository.UserRepository;
 import com.dorsal.repository.UseraccountRepository;
 import com.dorsal.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
@@ -29,6 +30,9 @@ public class UseraccountResource {
 
     @Inject
     private UseraccountRepository useraccountRepository;
+
+    @Inject
+    UserRepository userRepository;
 
     /**
      * POST  /useraccounts : Create a new useraccount.
@@ -88,6 +92,15 @@ public class UseraccountResource {
     public List<Useraccount> getAllUseraccounts() {
         log.debug("REST request to get all Useraccounts");
         List<Useraccount> useraccounts = useraccountRepository.findByUserIsCurrentUser();// .findAll();
+        if (useraccounts == null || useraccounts.size() == 0) {
+            // Create user account for current user
+            Useraccount useraccount = new Useraccount();
+            useraccount.setUser(userRepository.findLoggedInUser());
+            useraccountRepository.saveAndFlush(useraccount);
+            log.warn("Useraccount created");
+            useraccounts.clear();
+            useraccounts.add(useraccount);
+        }
         return useraccounts;
     }
 

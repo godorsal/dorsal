@@ -150,7 +150,7 @@ public class SupportcaseResource {
         log.warn("*********** v1.2 Expert lookup start **********");
 
         //result.setExpertaccount(dorsalExpertMatchService.findExpertByProfileMatch(result));
-        //supportcase.setExpertaccount( dorsalExpertMatchService.findExpertByProfileMatch(supportcase));
+        supportcase.setExpertaccount( dorsalExpertMatchService.findExpertByProfileMatch(supportcase));
 
         // Save update
         //supportcaseRepository.saveAndFlush(supportcase);

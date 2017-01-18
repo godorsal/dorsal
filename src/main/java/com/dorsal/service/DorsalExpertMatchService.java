@@ -42,9 +42,9 @@ public class DorsalExpertMatchService {
     @Inject
     private CasetechnologypropertyRepository casetechnologypropertyRepository;
 
-    private static String NO_EXPERT_FOR_ATTRIBUTES = "No expert found for the required attributes for this case. Attributes: ";
-    private static String NO_EXPERT_FOR_ATTRIBUTES_PRODUCTS = "No expert found for the required attributes and products that match this case. Attributes & Products: ";
-    private static String NO_EXPERT_FOR_PRODUCT = "No expert is available for products Products: ";
+    private static String NO_EXPERT_FOR_ATTRIBUTES = "No expert found for the required attributes: ";
+    private static String NO_EXPERT_FOR_ATTRIBUTES_PRODUCTS = "No expert found for the required attributes and products: ";
+    private static String NO_EXPERT_FOR_PRODUCT = "No expert is available for products: ";
 
     // Property values
     private static String PROPERTY_CONFIGURATION = "Configuration";
@@ -52,7 +52,7 @@ public class DorsalExpertMatchService {
     private static String PROPERTY_ENVIRONMENT = "Environment";
     private static String PROPERTY_OS = "OS";
 
-    private static int DEFAULT_SCORE = 2;
+    private static int DEFAULT_SCORE = 3;
 
 
     /**
@@ -77,6 +77,7 @@ public class DorsalExpertMatchService {
 
         List<String> attributeListArray = new ArrayList<String>();
         List<String> productListArray = new ArrayList<String>();
+        List<Long> expertIDListArray = new ArrayList<Long>();
 
         // Intake Other property value placeholders
         String otherPropertyValue = "";
@@ -90,14 +91,25 @@ public class DorsalExpertMatchService {
 
         /*
             Extract attributes values from:
-            --> Master User
+            --> Master User, current user
             --> TAG in Other property attached to support case
          */
         String attributeList = userRepository.getAttributesForMasterUser(supportcase.getUser().getId());
-        if (attributeList != null && attributeList.length() > 0)
+        if (attributeList != null && attributeList.length() > 0) {
             log.warn("Attributes [" + attributeList + "] for user " + supportcase.getUser().getLogin());
-        else
+        } else {
             log.warn("Master user has no attributes");
+            attributeList = "";
+        }
+
+        String userAttribute = userRepository.getAttributesForUser();
+        if(userAttribute != null & userAttribute.length() > 0) {
+            if (attributeList.length() > 0)
+                attributeList = attributeList + "," + userAttribute;
+            else
+                attributeList = userAttribute;
+        }
+        log.warn("Master and User attributes: "+ attributeList);
 
         // Get attributes from support case that are defined in the Other property. User can define Attribute, Product, Group and Skill
 
@@ -115,7 +127,7 @@ public class DorsalExpertMatchService {
 
                 // Add attribute if it was defined as part of other properties
                 if (inputAttribute.length() > 0) {
-                    if (attributeList.length() > 0)
+                    if (attributeList != null && attributeList.length() > 0)
                         attributeList = attributeList + "," + inputAttribute;
                     else
                         attributeList = inputAttribute;
@@ -123,12 +135,20 @@ public class DorsalExpertMatchService {
             }
         }
 
-        log.warn("Property other lookup done");
+        /*
+            Lookup for the main product (Intake technology section)
+         */
+
+        // Extract product List -- It's technology, configuration and other
+        String mainProduct = supportcase.getTechnology().getName();
+        log.warn("Product property for technology: " + mainProduct);
+
         // Lookup expert for matching attributes if any defined
-        if (attributeList.length() > 0) {
+        if (attributeList != null && attributeList.length() > 0) {
+            log.warn("Attribute list not empty " +attributeList);
             attributeListArray = Arrays.asList(attributeList);
-            log.warn("Find Expert by attribute");
-            experts = expertAccountRepository.findExpertByAttribute(attributeListArray);
+            log.warn("Find Expert by attribute and product: " + mainProduct);
+            experts = expertAccountRepository.findExpertByProductAndAttribute(mainProduct, DEFAULT_SCORE, attributeListArray);
 
             // Check for no match
             if (experts == null || experts.size() == 0) {
@@ -141,15 +161,18 @@ public class DorsalExpertMatchService {
             }
         }
 
-        log.warn("Attribute lookup done");
-        // Extract product List -- It's technology, configuration and other
-        productListArray.add(supportcase.getTechnology().getName());
 
-        log.warn("Product property for technology: " + supportcase.getTechnology().getName());
+        /**
+         * At this point we might have an expert list that matches attributes and main product (MySQL, MariaDB,..)
+         *
+         * If we have experts match them against the properties
+         *
+         * If we have no properties match them against main product and product properties list
+         */
 
         // Extract properties -- Products are under configuration
         casetechpropertiesList = casetechnologypropertyRepository.findPropertiesByCaseAndName(supportcase.getId(), PROPERTY_CONFIGURATION);
-        log.warn("Get properties size[" +  casetechpropertiesList.size() + "] by case : " + supportcase.getId());
+        log.warn("Get properties size[" +  casetechpropertiesList.size() + "] by case : " + supportcase.getId() + " and property: " + PROPERTY_CONFIGURATION);
         if (casetechpropertiesList != null && casetechpropertiesList.size() > 0) {
             // Extract properties
             for (int i=0; i< casetechpropertiesList.size();i++ ) {
@@ -164,32 +187,62 @@ public class DorsalExpertMatchService {
 
         log.warn("Following products defined for expert lookup: " + productListArray.toString());
 
-        // Lookup Product and attributes (if available)
-        if (attributeList.length() > 0) {
-            // Product and attribute lookup
-            experts = expertAccountRepository.findExpertByProductsAndAttribute(productListArray, DEFAULT_SCORE, attributeListArray);
+        /**
+         * If experts list is empty:
+         * --> if properties is empty --> lookup expert by main product only (same result  as pre 1.2)
+         *
+         * if (experts list is not empty (product attribute lookup sucessfull)
+         * --> Create a list of expert ID's
+         * --> Lookup byExpertList ID's and Product properties
+         */
 
+        if(experts == null || experts.size() == 0) {
+            log.warn("No experts for product/attributes");
+            if (productListArray == null || productListArray.size() == 0) {
+                experts = expertAccountRepository.findExpertByMainProduct(mainProduct, DEFAULT_SCORE);
+                log.warn("No product properties just get experts for main product. Number of experts: " + experts.size());
+
+            } else {
+                experts = expertAccountRepository.findExpertByProducts(productListArray, DEFAULT_SCORE);
+                log.warn("Get experts for properties " + productListArray + " and for main product " + mainProduct+ " Number of experts: " + experts.size());
+            }
+
+            /* If no match return Concierge */
             if (experts == null || experts.size() == 0) {
-                // No match -- Message and Concierge user
-                log.warn("No expert match for product & attributes: " + productListArray.toString() + " " + attributeList);
-                supportcase.setExpectedResult(NO_EXPERT_FOR_ATTRIBUTES_PRODUCTS + attributeList + productListArray.toString());
+                // Set message
+                supportcase.setExpectedResult(NO_EXPERT_FOR_PRODUCT + productListArray.toString());
 
                 // return default Concierge expert
                 return expert;
+
+            }
+        } else {
+            // Extract the expert ID's so that it can be passed as arguments to product properties lookup
+            for (int iii=0; iii < experts.size();iii++) {
+                expertIDListArray.add(experts.get(iii).getId());
+            }
+            log.warn("List of Experts that match attribute/product lookup: " + expertIDListArray.toString());
+
+            experts = expertAccountRepository.findExpertThatMatchListAndProductProperties(expertIDListArray, productListArray, DEFAULT_SCORE);
+
+            if (experts == null) {
+                log.warn("NO Experts match attributes and product properties");
+            } else {
+                log.warn("Experts that match attributes and product properties " + experts.size());
             }
 
-        } else {
-            // Just product lookup
-            experts = expertAccountRepository.findExpertByProducts(productListArray, DEFAULT_SCORE);
             if (experts == null || experts.size() == 0) {
-                log.warn("No expert match for products: " + productListArray.toString());
                 // No match -- Message and Concierge user
-                supportcase.setExpectedResult(NO_EXPERT_FOR_PRODUCT + productListArray.toString());
+                log.warn("No expert match for product & attributes: " + mainProduct + " " +productListArray.toString() + " " + attributeList);
+                supportcase.setExpectedResult(NO_EXPERT_FOR_ATTRIBUTES_PRODUCTS + attributeList + " Products: " + mainProduct + " " +productListArray.toString());
 
                 // return default Concierge expert
                 return expert;
             }
         }
+
+        // Filter by Expert Group
+        // TBD -- Check if Expert Group was defined
 
         // List of experts is available -- Pick Expert that is available
         boolean bFoundExpert = false;
