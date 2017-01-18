@@ -114,36 +114,39 @@ Your e-mail cannot be longer than 100 characters.
         <option value="">Language(s)</option>
     </select>
 </div>
+<div ng-if="!vm.currentExpert">
 
-<i class="fa fa-pencil" aria-hidden="true" ng-click="vm.editingAttributes = true" ng-if="!vm.editingAttributes"></i>
-<i class="fa fa-eye" aria-hidden="true" ng-click="vm.editingAttributes = false" ng-if="vm.editingAttributes"></i>
-<label for="bio" translate="settings.form.expertAttributes" class="drsl-expert-textarea-label">Expert Attributes</label>
+    <i class="fa fa-pencil" aria-hidden="true" ng-click="vm.editingAttributes = true" ng-if="!vm.editingAttributes"></i>
+    <i class="fa fa-eye" aria-hidden="true" ng-click="vm.editingAttributes = false" ng-if="vm.editingAttributes"></i>
+    <label for="bio" translate="settings.form.expertAttributes" class="drsl-expert-textarea-label">Expert Attributes</label>
 
-<span ng-if="vm.editingAttributes">
-    <div>
-        <div style="display: inline-block;">
-            <!-- <div>Predefined</div> -->
-            <select class="" name="" ng-model="vm.addAttribute" ng-change="vm.updatingUser = true">
-                <option value="">Select Attribute</option>
-                <option value="{{attribute.name}}" ng-repeat="attribute in vm.presentAttributes track by $index">{{attribute.name}}</option>
-            </select>
+    <span ng-if="vm.editingAttributes">
+        <div>
+            <div style="display: inline-block;">
+                <!-- <div>Predefined</div> -->
+                <select class="" name="" ng-model="vm.addAttribute" ng-change="vm.updatingUser = true">
+                    <option value="">Select Attribute</option>
+                    <option value="{{attribute.name}}" ng-repeat="attribute in vm.presentAttributes track by $index">{{attribute.name}}</option>
+                </select>
+            </div>
+            <!-- <span>Predefined</span> -->
+            <button class="btn btn-success" type="button" ng-click="vm.saveUserAttributes()"  style="line-height: 1;">Add</button>
         </div>
-        <!-- <span>Predefined</span> -->
-        <button class="btn btn-success" type="button" ng-click="vm.saveUserAttributes()"  style="line-height: 1;">Add</button>
-    </div>
-</span>
+    </span>
 
-<br>
-<div style="border: 1px solid rgb(204, 204, 204); padding: 10px; border-radius: 10px;">
-    <button type="button" name="button" ng-repeat="attribute in vm.userAttributes track by $index" class="btn" style="margin: 5px;">
-        <span>
-            {{attribute}}
-        </span>
-        <span ng-if="vm.editingAttributes" ng-click="vm.deleteUserAttribute($index)">
-            <i class="fa fa-times-circle" aria-hidden="true"></i>
-        </span>
-    </button>
+    <br>
+    <div style="border: 1px solid rgb(204, 204, 204); padding: 10px; border-radius: 10px;">
+        <button type="button" name="button" ng-repeat="attribute in vm.userAttributes track by $index" class="btn" style="margin: 5px;">
+            <span>
+                {{attribute}}
+            </span>
+            <span ng-if="vm.editingAttributes" ng-click="vm.deleteUserAttribute($index)">
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+            </span>
+        </button>
+    </div>
 </div>
+
 <br>
 <br>
 <!-- Expert Fields -->
@@ -399,7 +402,9 @@ Your e-mail cannot be longer than 100 characters.
 
             <!-- Update/Submit button -->
             <button type="submit" class="btn btn-success" translate="settings.form.button" ng-click="vm.save()" style="float: right;">Update</button>
+            <br><br>
         </div>
+
     </div>
 </div>
 </form>
@@ -420,9 +425,9 @@ Your e-mail cannot be longer than 100 characters.
                     <img src="https://www.braintreepayments.com/images/mastercard-logo-09664196.svg" alt="">
                     <img src="https://www.braintreepayments.com/images/maestro-logo-db229f9d.svg" alt="">
                     <img src="https://www.braintreepayments.com/images/jcb-logo-62a7882e.svg" alt="">
-                    <img src="https://www.braintreepayments.com/images/discover-logo-d781232e.svg" alt="">
+                    <img src="https://www.braintreepayments.com/images/discover-logo-57d59cd4.svg" alt="">
                     <img src="https://www.braintreepayments.com/images/amex-logo-e238f7a3.svg" alt="">
-                    <img src="https://www.braintreepayments.com/images/diners-club-logo-cd0de029.svg" alt="">
+                    <img src="https://www.braintreepayments.com/images/diners-club-logo-c3edc4c2.svg" alt="">
                 </span>
             </div>
 
@@ -520,7 +525,31 @@ Your e-mail cannot be longer than 100 characters.
 </div>
 </div>
 </div>
-
+<div style="background-color: #fff; padding: 15px;" ng-if="vm.currentExpert">
+    <label for="bio" class="drsl-expert-textarea-label">Expert Groups Membership</label>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Owner
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="group in vm.currentExpert.groups">
+                <td>{{group.expertpool.name}}</td>
+                <td>{{group.expertpool.description}}</td>
+                <td>{{group.expertpool.expertpoolowner.user.firstName}} {{group.expertpool.expertpoolowner.user.lastName}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 <!-- Manage Authorized Users -->
 <div class="drsl-settings-wrapper" ng-if="!vm.isAlreadyAuthorized && !vm.currentExpert">
     <div ng-if="!vm.isAlreadyAuthorized">
