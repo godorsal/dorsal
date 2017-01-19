@@ -142,9 +142,6 @@ public class SupportcaseResource {
             return createSupportcase(supportcase);
         }
 
-        // Launch perfect match
-        log.error("API call for perfect match");
-
         // Adjust time
         supportcase.setDateLastUpdate(ZonedDateTime.now());
 
@@ -169,7 +166,6 @@ public class SupportcaseResource {
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("supportcase", supportcase.getId().toString()))
             .body(result);
-
     }
 
 

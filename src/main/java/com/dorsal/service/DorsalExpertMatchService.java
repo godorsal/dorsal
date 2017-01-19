@@ -3,10 +3,13 @@ package com.dorsal.service;
 import com.dorsal.config.DorsalProperties;
 import com.dorsal.domain.Casetechnologyproperty;
 import com.dorsal.domain.ExpertAccount;
+import com.dorsal.domain.ExpertPool;
 import com.dorsal.domain.Supportcase;
 import com.dorsal.domain.enumeration.Availability;
+import com.dorsal.domain.enumeration.ExpertSelection;
 import com.dorsal.repository.CasetechnologypropertyRepository;
 import com.dorsal.repository.ExpertAccountRepository;
+import com.dorsal.repository.ExpertPoolRepository;
 import com.dorsal.repository.UserRepository;
 import com.dorsal.web.rest.util.QueryStringParser;
 import org.slf4j.Logger;
@@ -41,6 +44,9 @@ public class DorsalExpertMatchService {
 
     @Inject
     private CasetechnologypropertyRepository casetechnologypropertyRepository;
+
+    @Inject
+    private ExpertPoolRepository expertPoolRepository;
 
     private static String NO_EXPERT_FOR_ATTRIBUTES = "No expert found for the required attributes: ";
     private static String NO_EXPERT_FOR_ATTRIBUTES_PRODUCTS = "No expert found for the required attributes and products: ";
@@ -250,26 +256,58 @@ public class DorsalExpertMatchService {
         /*
             If the user defines a group on the intake page the list of experts found will be matched against the members of
             the defined group. Other properties format Group:{GroupName}
+
+            Note: The group name lookup is case insensitive. All group name input needs to be set to lower case
          */
 
         // Check if a Group was defined in the properties
         if (inputGroup != null && inputGroup.length() > 0) {
-            expertIDListArray.clear();
-            for (int ix=0; ix < experts.size();ix++) {
-                expertIDListArray.add(experts.get(ix).getId());
-            }
-            /* Lower case group name because lookup is converted to lowercase to be case insensitive */
-            experts = expertAccountRepository.findExpertMatchExpertPoolMembers(expertIDListArray, inputGroup.toLowerCase());
-            log.warn("ExpertPool lookup. Input Experts [" + expertIDListArray.size() + "] Output experts [" + experts.size() + "]");
+            // Get ExpertPool details
+            ExpertPool pool = expertPoolRepository.findExpertPoolByName(inputGroup.toLowerCase());
 
-            // Check if pool member found
-            if (experts == null || experts.size() == 0) {
-                // No match -- Message and Concierge user
-                log.warn("No expert in pool [" + inputGroup + "] Did match criteria.");
-                supportcase.setExpectedResult(NO_EXPERT_FOR_EXPERT_POOL + inputGroup + " Attributes:" + attributeList + " Products: " + mainProduct + " " +productListArray.toString());
+            // If pool doesn't exist (wrong user entry) ignore lookup and go for the existing list
+            if(pool != null) {
+                // Extract the expert ID's for the current match
+                expertIDListArray.clear();
+                for (int ix = 0; ix < experts.size(); ix++) {
+                    expertIDListArray.add(experts.get(ix).getId());
+                }
 
-                // return default Concierge expert
-                return expert;
+                /**
+                 * Depending on the Expert Selection settings the pool is exclusive EXPERT_IN_POOL_ONLY or preferred EXPERT_IN_POOL_FIRST
+                 */
+
+                 /* Lower case group name because lookup is converted to lowercase to be case insensitive */
+                List<ExpertAccount> expertsInPool = expertAccountRepository.findExpertMatchExpertPoolMembers(expertIDListArray, inputGroup.toLowerCase());
+                log.warn("ExpertPool lookup. Input Experts [" + expertIDListArray.size() + "] Output experts [" + expertsInPool.size() + "]");
+
+                // Exclusive only experts in pool
+                if ( pool.getExpertSelection().compareTo(ExpertSelection.EXPERT_IN_POOL_ONLY) == 0 ) {
+                    log.warn("Users in Expert Pool only");
+                    // Empty list means default Dorsal Concierge
+                    if (expertsInPool == null || expertsInPool.size() == 0) {
+                        // No match -- Message and Concierge user
+                        log.warn("No expert in pool [" + inputGroup + "] Did match criteria.");
+                        supportcase.setExpectedResult(NO_EXPERT_FOR_EXPERT_POOL + inputGroup + " Attributes:" + attributeList + " Products: " + mainProduct + " " + productListArray.toString());
+
+                        // return default Concierge expert
+                        return expert;
+                    }
+                    else
+                    {
+                        // Use the list
+                        log.warn("Use exclusive experts that are member of group: " + inputGroup);
+                        experts = expertsInPool;
+                    }
+                } else {
+                    // Preferred expert list use them first if not empty otherwise ignore and use experts from previous lookup
+                    log.warn("Experts in Expert Pool preferred");
+                    if (expertsInPool != null && expertsInPool.size() > 0) {
+                        experts = expertsInPool;
+                    }
+                }
+            } else {
+                log.warn("Expert Group enetered by user doesn't exist. GroupName: " + inputGroup);
             }
         }
 
