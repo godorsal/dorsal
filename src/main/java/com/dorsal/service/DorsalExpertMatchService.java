@@ -325,7 +325,7 @@ public class DorsalExpertMatchService {
 
         // If everybody is busy -- select the top expert that is not offline
         if (bFoundExpert == false) {
-            log.warn("All experts busyIf everybody is busy -- select the top expert that is not offline" );
+            log.warn("All experts busy. If everybody is busy -- select the top expert that is not offline" );
             for (int iii=0; iii < experts.size();iii++ ) {
                 selectedExpert = experts.get(iii);
                 log.debug("Expert Availability " + selectedExpert.getExpertAvailability() );
@@ -333,12 +333,15 @@ public class DorsalExpertMatchService {
                     log.warn("All experts are busy pick the top of the list that is not offline: " + selectedExpert.getUser().getLogin());
                     expert = selectedExpert;
                     bFoundExpert = true;
+                    // Quit loop
+                    iii = experts.size();
                 }
             }
         }
 
         // All experts are offline return concierge
         if (bFoundExpert == false) {
+            log.warn("All matching experts are offline." );
             supportcase.setExpectedResult(NO_EXPERT_AVAILABLE);
             return expert;
         }

@@ -131,10 +131,10 @@ public class TechnologyResource {
          */
         try {
             if (expertAccountRepository.findByUserIsCurrentUser().size() > 0) {
-                log.warn("Technology query for Expert profiles ...");
+                log.info("Technology query for Expert profiles ...");
                 return technologyService.findExpertProfileEntries();
             } else {
-                log.warn("Technology query for intake - case create page ...");
+                log.info("Technology query for intake - case create page ...");
                 return technologyService.findUserIntakeList();
             }
         } catch (SpelEvaluationException evale) {
