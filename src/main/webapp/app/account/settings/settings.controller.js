@@ -178,7 +178,12 @@
                         technologyCalculation();
                     });
                     ExpertPoolToExpert.query(function (res) {
-                        vm.currentExpert.groups = res;
+                        vm.currentExpert.groups = [];
+                        res.forEach(function (connection) {
+                            if(connection.expertaccount.id === vm.currentExpert.id){
+                                vm.currentExpert.groups.push(connection);
+                            }
+                        })
                     })
                 } else {
                     Useraccount.query(function (res) {
