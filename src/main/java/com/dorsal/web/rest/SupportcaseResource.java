@@ -145,14 +145,14 @@ public class SupportcaseResource {
         // Adjust time
         supportcase.setDateLastUpdate(ZonedDateTime.now());
 
-        log.warn("*********** v1.2 Expert lookup start **********");
+        log.info("*********** v1.2 Expert lookup start **********");
         long startTime = System.currentTimeMillis();
 
         //result.setExpertaccount(dorsalExpertMatchService.findExpertByProfileMatch(result));
         supportcase.setExpertaccount( dorsalExpertMatchService.findExpertByProfileMatch(supportcase));
 
-        log.warn("Perfect match routine took " + (System.currentTimeMillis() - startTime) + " ms");
-        log.warn("*********** v1.2 Expert lookup end **********");
+        log.info("Perfect match routine took " + (System.currentTimeMillis() - startTime) + " ms");
+        log.info("*********** v1.2 Expert lookup end **********");
 
         // Persist update
         Supportcase result = supportcaseRepository.save(supportcase);

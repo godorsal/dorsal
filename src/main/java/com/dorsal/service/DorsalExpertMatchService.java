@@ -311,11 +311,12 @@ public class DorsalExpertMatchService {
 
 
         // List of experts is available -- Pick Expert that is available
+        log.info("Found " + experts.size() + " Experts that match.");
         boolean bFoundExpert = false;
         ExpertAccount selectedExpert = null;
         for (int ii=0; ii < experts.size();ii++ ) {
             selectedExpert = experts.get(ii);
-            if (selectedExpert.isIsAvailable() == true && (selectedExpert.getExpertAvailability().compareTo(Availability.OFFLINE) >= 0) ) {
+            if (selectedExpert.isIsAvailable() == true && (selectedExpert.getExpertAvailability().compareTo(Availability.OFFLINE) != 0) ) {
                 expert = selectedExpert;
                 log.info("Found expert : " + expert.getUser().getLogin());
                 bFoundExpert = true;
@@ -324,9 +325,11 @@ public class DorsalExpertMatchService {
 
         // If everybody is busy -- select the top expert that is not offline
         if (bFoundExpert == false) {
+            log.warn("All experts busyIf everybody is busy -- select the top expert that is not offline" );
             for (int iii=0; iii < experts.size();iii++ ) {
                 selectedExpert = experts.get(iii);
-                if ( selectedExpert.getExpertAvailability().compareTo(Availability.OFFLINE) >= 0 ) {
+                log.debug("Expert Availability " + selectedExpert.getExpertAvailability() );
+                if ( selectedExpert.getExpertAvailability().compareTo(Availability.OFFLINE) != 0 ) {
                     log.warn("All experts are busy pick the top of the list that is not offline: " + selectedExpert.getUser().getLogin());
                     expert = selectedExpert;
                     bFoundExpert = true;
