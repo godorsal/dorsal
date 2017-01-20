@@ -37,5 +37,125 @@
            timeToLiveSeconds="3600">
     </cache>
     
+    <cache name="com.dorsal.domain.Skill"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.dorsal.domain.Skill.skillexpertscores"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.dorsal.domain.SkillExpertScore"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.dorsal.domain.JobRole"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.dorsal.domain.JobRole.jobroleexpertscores"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.dorsal.domain.JobroleExpertScore"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.dorsal.domain.Speciality"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.dorsal.domain.Speciality.specialityexpertscores"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.dorsal.domain.SpecialityExpertScore"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.dorsal.domain.ExpertAttribute"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.dorsal.domain.ExpertAttribute.expertattributetoexperts"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.dorsal.domain.ExpertAttributeToExpert"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.dorsal.domain.ExpertPool"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.dorsal.domain.ExpertPool.expertpooltoexperts"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.dorsal.domain.ExpertPoolToExpert"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.dorsal.domain.Technology"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.dorsal.domain.Technology.technologyexpertscores"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.dorsal.domain.ExpertAccount"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.dorsal.domain.ExpertAccount.technologyexpertscores"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.dorsal.domain.ExpertAccount.productexpertscores"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.dorsal.domain.ExpertAccount.skillexpertscores"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.dorsal.domain.ExpertAccount.jobroleexpertscores"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.dorsal.domain.ExpertAccount.specialityexpertscores"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.dorsal.domain.ExpertAccount.expertattributetoexperts"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.dorsal.domain.ExpertAccount.expertpools"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.dorsal.domain.ExpertAccount.expertpooltoexperts"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.dorsal.domain.TechnologyExpertScore"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.dorsal.domain.Product"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.dorsal.domain.Product.productexpertscores"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.dorsal.domain.ProductExpertScore"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
     <!-- jhipster-needle-ehcache-add-entry -->
 </ehcache>

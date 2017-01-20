@@ -1,0 +1,217 @@
+//////////////////////////
+// Entity Technology
+
+entity Technology {
+	name String required,
+    code String
+}
+
+///////////////////////////////////////////
+// Entity Availability
+//
+// FullTime, Mon-Fri/8-5, Evening, Weekend
+///////////////////////////////////////////
+enum Availability {
+    FULL_TIME, MON_FRI, EVENING, WEEKEND
+}
+
+////////////////////////////////
+// Entity Profile Visability
+////////////////////////////////
+enum ProfileVisability {
+    PUBLIC, INTERN, HIDDEN
+}
+
+//////////////////////////
+// Entity Expert Account
+
+entity ExpertAccount  {
+    phone String,
+    skype String,
+    othercommunication String,
+    location String,
+    expertScore Integer,
+    handle String,
+    languages String,
+    imagePath String maxlength(512),
+    isAvailable Boolean,
+    expertBio String maxlength(4096),
+    expertSince ZonedDateTime,
+    numberOfCases Integer,
+    welcomeMessage String maxlength(2048),
+    expertTimezone String,
+    expertAvailability Availability,
+    profileVisibility ProfileVisability
+}
+
+//////////////////////////////
+// Expert profiles and scores
+//////////////////////////////
+
+///////////////////////////////////
+// TechnologyExpertScore Entity
+
+entity TechnologyExpertScore {
+    score Integer
+}
+
+relationship OneToMany {
+    ExpertAccount{technologyexpertscore(expertaccount)} to TechnologyExpertScore{expertaccount}
+}
+
+relationship OneToMany {
+    Technology{technologyexpertscore(technology)} to TechnologyExpertScore{technology}
+}
+
+//////////////////////////////////////
+// Product
+
+entity Product {
+    name String required maxlength(512),
+    code String maxlength(512)
+}
+
+//////////////////////////////////////
+// ProductExpertScore Entity
+
+entity ProductExpertScore {
+    score Integer
+}
+
+relationship OneToMany {
+    ExpertAccount{productexpertscore(expertaccount)} to ProductExpertScore{expertaccount}
+}
+
+relationship OneToMany {
+    Product{productexpertscore(product)} to ProductExpertScore{product}
+}
+
+//////////////////////////////////////
+// Skill
+
+entity Skill {
+    name String required maxlength(512),
+    code String maxlength(512)
+}
+
+//////////////////////////////////////
+// SkillExpertScore Entity
+
+entity SkillExpertScore {
+    score Integer
+}
+
+relationship OneToMany {
+    ExpertAccount{skillexpertscore(expertaccount)} to SkillExpertScore{expertaccount}
+}
+
+relationship OneToMany {
+    Skill{skillexpertscore(skill)} to SkillExpertScore{skill}
+}
+
+
+//////////////////////////////////////
+// Job Role Entity
+
+entity JobRole {
+    name String required maxlength(512),
+    code String maxlength(512)
+}
+
+//////////////////////////////////////
+// JobroleExpertScore Entity
+
+entity JobroleExpertScore {
+    score Integer
+}
+
+relationship OneToMany {
+    ExpertAccount{jobroleexpertscore(expertaccount)} to JobroleExpertScore{expertaccount}
+}
+
+relationship OneToMany {
+    JobRole{jobroleexpertscore(jobrole)} to JobroleExpertScore{jobrole}
+}
+
+
+//////////////////////////////////////
+// Speciality Entity
+
+entity Speciality {
+    name String required maxlength(512),
+    code String maxlength(512)
+}
+
+//////////////////////////////////////
+// SpecialityExpertScore Entity
+
+entity SpecialityExpertScore {
+    score Integer
+}
+
+relationship OneToMany {
+    ExpertAccount{specialityexpertscore(expertaccount)} to SpecialityExpertScore{expertaccount}
+}
+
+relationship OneToMany {
+    Speciality{specialityexpertscore(speciality)} to SpecialityExpertScore{speciality}
+}
+
+
+/////////////////////////////////////////////////////////
+// Expert Attribute Entity
+
+entity ExpertAttribute {
+    name String required maxlength(512),
+    description String maxlength(512)
+}
+
+
+/////////////////////////////////////////////////////
+// ExpertAttributeToExpert Entity
+
+entity ExpertAttributeToExpert {}
+
+relationship OneToMany {
+    ExpertAccount{expertattributetoexpert(expertaccount)} to ExpertAttributeToExpert{expertaccount}
+}
+
+relationship OneToMany {
+    ExpertAttribute{expertattributetoexpert(expertattribute)} to ExpertAttributeToExpert{expertattribute}
+}
+
+///////////////////////////////////////////////////////
+// ExpertSelection Entity (not a table, internal enum)
+//
+// Values: EXPERT_IN_POOL_ONLY, EXPERT_IN_POOL_FIRST
+
+
+enum ExpertSelection {
+    EXPERT_IN_POOL_ONLY, EXPERT_IN_POOL_FIRST
+}
+
+//////////////////////////////////////////////////
+// Expert Pool Entity
+
+entity ExpertPool {
+    name String required maxlength(512),
+    description String required maxlength(512),
+    expertSelection ExpertSelection
+}
+
+relationship OneToMany {
+    ExpertAccount{expertpool(expertpoolowner)} to ExpertPool{expertpoolowner}
+}
+
+/////////////////////////////////////////////////
+// Expert Pool To Expert Entity
+
+entity ExpertPoolToExpert {}
+
+relationship OneToMany {
+    ExpertAccount{expertpooltoexpert(expertaccount)} to ExpertPoolToExpert{expertaccount}
+}
+
+relationship OneToMany {
+    ExpertPool{expertpooltoexpert(expertpool)} to ExpertPoolToExpert{expertpool}
+}

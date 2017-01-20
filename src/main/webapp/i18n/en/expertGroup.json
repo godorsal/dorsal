@@ -1,0 +1,49 @@
+{
+    "dorsalApp": {
+        "expertGroup" : {
+            "home": {
+                "title": "Expert Groups",
+                "createLabel": "Create a new Expert Group",
+                "createOrEditLabel": "Create or edit a Expert Group",
+                "search": "Search for Expert Group"
+            },
+            "created": "A new Expert Group is created with identifier {{ param }}",
+            "updated": "A Expert Group is updated with identifier {{ param }}",
+            "deleted": "A Expert Group is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Expert Group {{ id }}?"
+            },
+            "detail": {
+                "title": "Expert Group"
+            },
+            "name": "Name",
+            "description": "Description",
+            "expertSelection": "Expert Selection",
+            "expertgrouptoexpert": "Expertgrouptoexpert",
+            "experts": "Experts",
+            "expertgroupowner": "Expertgroupowner",
+            "owner": "Owner",
+            "modal": {
+                "header": {
+                    "newGroup": "New Expert Group",
+                    "editingGroup": "Editing {{groupname}}",
+                    "viewing": "{{groupname}}'s Experts"
+                },
+                "login": "Login",
+                "current": "Current",
+                "available": "Available",
+                "staged": "Staged",
+                "form": {
+                    "name": "Name: ",
+                    "description": "Description: ",
+                    "selection": "Selection: ",
+                    "expertsInPoolFirst": "Experts in pool first",
+                    "expertsInPoolOnly": "Experts in pool only",
+                    "pending": "You still have {{expertsToAdd}} experts pending",
+                    "save": "Save",
+                    "cancel": "Cancel"
+                }
+            }
+        }
+    }
+}

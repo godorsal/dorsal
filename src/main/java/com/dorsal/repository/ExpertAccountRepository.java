@@ -2,6 +2,7 @@ package com.dorsal.repository;
 
 import com.dorsal.domain.ExpertAccount;
 
+import com.dorsal.domain.GlobalMetadata;
 import com.dorsal.domain.Technology;
 import com.dorsal.domain.enumeration.Availability;
 import org.springframework.data.domain.PageRequest;
@@ -39,4 +40,53 @@ public interface ExpertAccountRepository extends JpaRepository<ExpertAccount,Lon
 
     @Query("select ea from ExpertAccount ea where ea.user.login = :concierge")
     ExpertAccount getDorsalConcierge(@Param("concierge") String conciergeLogin);
+
+    @Query("select ea from ExpertAccount ea where ea.user.login = :userlogin")
+    ExpertAccount findExpertAccountForUser(@Param("userlogin") String userLogin);
+
+    // Good Expert Match queries seraching across rich profiles. The expert list is always ordered by expert_score
+    @Query("select distinct ea from ExpertAccount ea, ProductExpertScore pes, Product p where ea.id = pes.expertaccount.id AND pes.product.id = p.id and p.name IN (:productlist) AND pes.score >= :score ORDER BY ea.expertScore DESC")
+    List<ExpertAccount> findExpertByProducts(@Param("productlist")List<String> productlist, @Param("score") int score);
+
+    @Query("select distinct ea from ExpertAccount ea, ProductExpertScore pes, Product p where ea.id = pes.expertaccount.id AND pes.product.id = p.id and p.name like :mainproduct AND pes.score >= :score ORDER BY ea.expertScore DESC")
+    List<ExpertAccount> findExpertByMainProduct(@Param("mainproduct")String mainProduct, @Param("score") int score);
+
+
+    @Query("select distinct ea from ExpertAccount ea, ProductExpertScore pes, Product p where ea.id = pes.expertaccount.id AND pes.product.id = p.id and p.name IN (:productlist) AND pes.score >= :score ORDER BY ea.expertScore DESC")
+    List<ExpertAccount> findExpertByProductsList(@Param("productlist")List<String> productlist, @Param("score") int score);
+
+    @Query("select distinct ea from ExpertAccount ea, ProductExpertScore pes, Product p, ExpertAttribute eatt, ExpertAttributeToExpert eate where ea.id = pes.expertaccount.id AND pes.product.id = p.id and p.name IN (:productlist) AND pes.score >= :score AND eatt.name IN(:attributelist) AND eatt.id = eate.expertattribute.id AND eate.expertaccount.id = ea.id ORDER BY ea.expertScore DESC")
+    List<ExpertAccount> findExpertByProductsAndAttributeLists(@Param("productlist")List<String> productlist, @Param("score") int score, @Param("attributelist")List<String> attributelist);
+
+    @Query("select distinct ea from ExpertAccount ea, ProductExpertScore pes, Product p, ExpertAttribute eatt, ExpertAttributeToExpert eate where ea.id = pes.expertaccount.id AND pes.product.id = p.id and p.name like :mainproduct AND pes.score >= :score AND eatt.name IN(:attributelist) AND eatt.id = eate.expertattribute.id AND eate.expertaccount.id = ea.id ORDER BY ea.expertScore DESC")
+    List<ExpertAccount> findExpertByProductAndAttribute(@Param("mainproduct")String mainProduct, @Param("score") int score, @Param("attributelist")List<String> attributelist);
+
+    @Query("select distinct ea from ExpertAccount ea, ProductExpertScore pes, Product p, ExpertPool ep, ExpertPoolToExpert epte where ea.id = pes.expertaccount.id AND pes.product.id = p.id and p.name IN (:productlist) AND pes.score >= :score AND lower(ep.name) like :expertpool AND ep.id = epte.expertpool.id AND epte.expertaccount.id = ea.id ORDER BY ea.expertScore DESC")
+    List<ExpertAccount> findExpertByProductsAndExpertPool(@Param("productlist")List<String> productlist, @Param("score") int score, @Param("expertpool")String expertpool);
+
+    @Query("select distinct ea from ExpertAccount ea, ProductExpertScore pes, Product p, ExpertPool ep, ExpertPoolToExpert epte, ExpertAttribute eatt, ExpertAttributeToExpert eate where ea.id = pes.expertaccount.id AND pes.product.id = p.id and p.name IN (:productlist) AND pes.score >= :score AND lower(ep.name) like :expertpool AND ep.id = epte.expertpool.id AND epte.expertaccount.id = ea.id AND eatt.name IN(:attributelist) AND eatt.id = eate.expertattribute.id AND eate.expertaccount.id = ea.id ORDER BY ea.expertScore DESC")
+    List<ExpertAccount> findExpertByProductsAndAttributesAndExpertPool(@Param("productlist")List<String> productlist, @Param("score") int score, @Param("attributelist")List<String> attributelist, @Param("expertpool")String expertpool);
+
+    @Query("select distinct ea from ExpertAccount ea, ExpertAttribute eatt, ExpertAttributeToExpert eate where eatt.name IN(:attributelist) AND eatt.id = eate.expertattribute.id AND eate.expertaccount.id = ea.id ORDER BY ea.expertScore DESC")
+    List<ExpertAccount> findExpertByAttribute(@Param("attributelist")List<String> attributelist);
+
+//    @Query("select distinct ea from ExpertAccount ea, ProductExpertScore pes, Product p where ea.id = pes.expertaccount.id AND pes.product.id = p.id and p.name IN (:productlist) AND pes.score >= :score  ORDER BY ea.expertScore DESC")
+//    List<ExpertAccount> findExpertByProduct(@Param("productlist")List<String> productlist, @Param("score") int score);
+
+    @Query("select distinct ea from ExpertAccount ea, SkillExpertScore ses, Skill s where ea.id = ses.expertaccount.id AND ses.skill.id = s.id and s.name IN (:skilllist) AND ses.score >= :score ORDER BY ea.expertScore DESC")
+    List<ExpertAccount> findExpertBySkill(@Param("skilllist")List<String> skilllist, @Param("score") int score);
+
+    @Query("select distinct ea from ExpertAccount ea, ProductExpertScore pes, Product p where ea.id = pes.expertaccount.id AND ea.id IN(:expertidlist) AND pes.product.id = p.id and p.name IN (:productlist) AND pes.score >= :score ORDER BY ea.expertScore DESC")
+    List<ExpertAccount>findExpertThatMatchListAndProductProperties(@Param("expertidlist")List<Long> expertidlist, @Param("productlist")List<String> productlist, @Param("score") int score);
+
+    @Query("select distinct ea from ExpertAccount ea, ProductExpertScore pes, ExpertPool ep, ExpertPoolToExpert epte where ea.id = pes.expertaccount.id AND ea.id IN(:expertidlist) AND lower(ep.name) like :expertpool AND ep.id = epte.expertpool.id AND epte.expertaccount.id = ea.id  ORDER BY ea.expertScore DESC")
+    List<ExpertAccount> findExpertMatchExpertPoolMembers(@Param("expertidlist")List<Long> expertidlist, @Param("expertpool")String expertpool);
+
+    @Modifying
+    @Query("update ExpertAccount set isAvailable = false where id = :expertid" )
+    int setExpertAvailability(@Param("expertid") long expertid);
+
+    @Query ("select gm from GlobalMetadata gm where gm.name like 'EXPERT_CASE_LIMIT'")
+    GlobalMetadata getExpertCaseLimit();
+
 }

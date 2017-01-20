@@ -31,6 +31,10 @@
         vm.getMessages = getMessages;
         vm.maxResults = '5';
 
+        // ExpertAccount.query(function (res) {
+        //     console.log(res);
+        // })
+
         // DrslHipChatService.clearRooms();
         DrslHipChatService.getCurrentUser();
         if(DrslHipChatService.currentRoom){
@@ -69,7 +73,7 @@
             vm.conciergechaturl = null;
             vm.checkingMessages = false;
         })
-        
+
         /**
         * Creates (saves/updates) the case.
         * Called after the form is submitted and the user is authenticated.
@@ -158,6 +162,7 @@
         */
         var onSaveSuccess = function (result) {
             // DrslNewCaseService.setNewCase(result);
+
             DrslNewCaseService.setNewCaseId(result.id);
 
             // Loop through each tech property and save via an api call
@@ -173,11 +178,15 @@
                     Casetechnologyproperty.save(brandNewProperty);
                 }
             }
+            Supportcase.update({id: "expertmatch"}, result, function(res) {
+                console.log("REZULTS", res);
+            })
 
             // Reset view model properties
             vm.technologyProperties = null;
             vm.technology = null;
             vm.issue = null;
+
             var roomObject = {
                 name: result.technology.name + result.id,
                 topic: result.summary,

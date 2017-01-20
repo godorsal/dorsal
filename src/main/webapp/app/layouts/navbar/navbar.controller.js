@@ -33,6 +33,8 @@
         vm.getIdentity();
         vm.DrslMetadata = DrslMetadata;
 
+        vm.DUFS = DrslUserFlowService;
+        // console.log("IS EXPERT?!", DrslUserFlowService.user);
         function login() {
             collapseNavbar();
             LoginService.open();

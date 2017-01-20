@@ -1,0 +1,24 @@
+{
+    "dorsalApp": {
+        "expertAttribute" : {
+            "home": {
+                "title": "Expert Attributes",
+                "createLabel": "Create a new Expert Attribute",
+                "createOrEditLabel": "Create or edit a Expert Attribute",
+                "search": "Search for Expert Attribute"
+            },
+            "created": "A new Expert Attribute is created with identifier {{ param }}",
+            "updated": "A Expert Attribute is updated with identifier {{ param }}",
+            "deleted": "A Expert Attribute is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Expert Attribute {{ id }}?"
+            },
+            "detail": {
+                "title": "Expert Attribute"
+            },
+            "name": "Name",
+            "description": "Description",
+            "expertattributetoexpert": "Expertattributetoexpert"
+        }
+    }
+}

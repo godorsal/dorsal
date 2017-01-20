@@ -1,0 +1,173 @@
+
+<div class="modal-body">
+    <div>
+        <div class="drsl-dialog-header">
+            <div>
+                <h2>
+                    <span class="drsl-rating-comment-header-1">
+                        <span ng-if="!vm.viewOnly && !vm.editingGroup" data-translate="dorsalApp.expertGroup.modal.header.newGroup">
+                            New Expert Group
+                        </span>
+                        <span ng-if="!vm.viewOnly && vm.editingGroup" translate-values="{groupname: '{{vm.newGroup.name}}'}" data-translate="dorsalApp.expertGroup.modal.header.editingGroup">
+                            Editing {{vm.newGroup.name}}
+                        </span>
+                        <span ng-if="vm.viewOnly" data-translate="dorsalApp.expertGroup.modal.header.viewing"translate-values="{groupname: '{{vm.newGroup.name}}'}">
+                            {{vm.newGroup.name}}'s Experts
+                        </span>
+                    </span>
+                </span>
+            </h2>
+        </div>
+        <br>
+    </div>
+    <br>
+    <div ng-if="vm.viewOnly">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th data-translate="dorsalApp.expertGroup.name">
+                        Name
+                    </th>
+                    <th data-translate="dorsalApp.expertGroup.modal.login">
+                        Login
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="expert in vm.currentExperts track by $index">
+                    <td>
+                        {{expert.expertaccount.user.firstName}}
+                        {{expert.expertaccount.user.lastName}}
+                    </td>
+                    <td>
+                        {{expert.expertaccount.user.login}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div ng-if="!vm.viewOnly">
+        <label for="" data-translate="dorsalApp.expertGroup.modal.form.name">Name: </label>
+        <input type="text" ng-model="vm.newGroup.name" class="form-control" ng-change="vm.changesMade = true">
+        <label for="" data-translate="dorsalApp.expertGroup.modal.form.description">Description: </label>
+        <textarea name="name" rows="2" cols="40" ng-model="vm.newGroup.description" class="form-control" ng-change="vm.changesMade = true"></textarea>
+        <label for="" data-translate="dorsalApp.expertGroup.modal.form.selection">Selection: </label>
+        <select class="form-control" name="" ng-model="vm.newGroup.expertSelection" ng-change="vm.changesMade = true">
+            <option value="EXPERT_IN_POOL_FIRST" data-translate="dorsalApp.expertGroup.modal.form.expertsInPoolFirst">Experts in pool first</option>
+            <option value="EXPERT_IN_POOL_ONLY" data-translate="dorsalApp.expertGroup.modal.form.expertsInPoolOnly">Experts in pool only</option>
+        </select>
+        <!-- <div ng-repeat="attribute in ">
+        <label for=""></label>
+        <input type="checkbox">
+    </div> -->
+    <!-- <ol>
+    <li ng-repeat="expert in vm.expertsToAdd track by $index">
+    {{expert.user.firstName}} {{expert.user.lastName}}
+    <button type="button" name="button" class="btn btn-success" ng-click="vm.removeExpert(expert, $index)">X</button>
+</li>
+</ol> -->
+<h4 ng-show="vm.pending" data-translate="dorsalApp.expertGroup.modal.form.pending" translate-values="{expertsToAdd: '{{vm.expertsToAdd.length}}'}">You still have {{vm.expertsToAdd.length}} experts pending</h4>
+
+
+<h2 data-translate="dorsalApp.expertGroup.experts">Experts</h2>
+<!-- {{vm.queryString}} -->
+<div style="float: left;">
+    <span ng-if="vm.queryObject.attributes">
+        <label for="">Attributes:</label>
+        <div ng-repeat="attribute in vm.queryObject.attributes">
+            {{attribute}}
+        </div>
+    </span>
+    <span ng-if="vm.queryObject.products">
+        <label for="">Products:</label>
+        <div ng-repeat="product in vm.queryObject.products">
+            {{product}}
+        </div>
+    </span>
+    <span ng-if="vm.queryObject.score">
+        <label for="">Score:</label>
+        <div>
+            {{vm.queryObject.score}}
+        </div>
+    </span>
+</div>
+<div style="float: right;">
+    <select class="form-control" name="" ng-model="vm.addAttribute" ng-change="vm.enterAttribute()" style="">
+        <option value="">Select Attribute</option>
+        <option ng-repeat="attribute in vm.availableAttributes track by $index" value="{{attribute.name}}">{{attribute.name}}</option>
+    </select>
+    <select class="form-control" name="" ng-model="vm.addProduct" ng-change="vm.enterProduct()" style="">
+        <option value="">Select Product</option>
+        <option ng-repeat="product in vm.availableProducts track by $index" value="{{product.name}}">{{product.name}}</option>
+    </select>
+    <select class="form-control" name="" ng-model="vm.selectScore" ng-change="vm.updateQuerystring()" style="">
+        <option value="">Select Score</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select>
+    <br>
+    <button type="button" name="button" ng-click="vm.searchExperts()" class="btn btn-success">Search</button>
+    <button type="button" name="button" ng-click="vm.clearQuery()" class="btn btn-success">Clear</button>
+    <br>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th data-translate="dorsalApp.expertGroup.modal.current">Current</th>
+            <th data-translate="dorsalApp.expertGroup.modal.available">Available</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <table class="table table-striped">
+                    <tr ng-repeat="expert in vm.currentExperts track by $index">
+                        <td>{{expert.expertaccount.user.firstName}} {{expert.expertaccount.user.lastName}}</td>
+                        <td>
+                            <i class="fa fa-trash" aria-hidden="true" ng-click="vm.removeCurrentExpert(expert, $index)"></i>
+                        </td>
+                    </tr>
+
+                    <th>Staged</th>
+
+                    <tr ng-repeat="expert in vm.expertsToAdd track by $index">
+                        <td>{{expert.user.firstName}} {{expert.user.lastName}}</td>
+                        <td>
+                            <i class="fa fa-trash" aria-hidden="true" ng-click="vm.removeExpert(expert, $index)"></i>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <!-- <td>
+            <table class="table table-striped">
+
+        </table>
+    </td> -->
+    <td>
+        <table class="table table-striped">
+            <tr ng-repeat="expert in vm.availableExperts track by $index">
+                <td ng-if="!editing">{{expert.user.firstName}} {{expert.user.lastName}}</td>
+                <td ng-if="editing">{{expert.expertaccount.user.firstName}} {{expert.expertaccount.user.lastName}}</td>
+                <td><i class="fa fa-plus" aria-hidden="true" ng-click="vm.addExpert(expert, $index)"></i></td>
+
+            </tr>
+        </table>
+    </td>
+
+</tr>
+
+</tbody>
+</table>
+<div class="pull-right">
+    <button type="button" name="button" class="btn btn-success" ng-click="vm.saveGroup()" ng-disabled="!vm.changesMade" data-translate="dorsalApp.expertGroup.modal.form.save">Save Group</button>
+    <button type="button" name="button" class="btn btn-success" ng-click="vm.closeModal()" data-translate="dorsalApp.expertGroup.modal.form.cancel">Cancel</button>
+</div>
+<br>
+<br>
+</div>
+</div>
+</div>

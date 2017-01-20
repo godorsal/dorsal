@@ -76,7 +76,7 @@ public class SupportcaseResource {
     @RequestMapping(value = "/supportcases",
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
+    //@Timed
     public ResponseEntity<Supportcase> createSupportcase(@Valid @RequestBody Supportcase supportcase) throws URISyntaxException {
         log.debug("REST request to save Supportcase : {}", supportcase);
         if (supportcase.getId() != null) {
@@ -93,6 +93,7 @@ public class SupportcaseResource {
         // Set the Expert for this account
         // This is the placeholder for the matching algorithm
         //
+
         ExpertAccount expert = dorsalExpertMatchService.findExpertForSupportcase(supportcase);
         if (expert != null) {
             // Assign Expert to support case
@@ -110,16 +111,63 @@ public class SupportcaseResource {
         supportcase.setEstimateComment("");
 
         Supportcase result = supportcaseRepository.save(supportcase);
+        //Supportcase result = supportcaseRepository.saveAndFlush(supportcase);
+
+        /*
+            Notification -- moved to expert match routine
+         */
+        // notificationService.createSupportCaseNotifications(supportcase);
+
+        return ResponseEntity.created(new URI("/api/supportcases/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert("supportcase", result.getId().toString()))
+            .body(result);
+    }
+
+    /**
+     * PUT  /supportcases/expertmatch : Updates an existing supportcase with perfect expert match.
+     *
+     * @param supportcase the supportcase to update
+     * @return the ResponseEntity with status 200 (OK) and with body the updated supportcase,
+     * or with status 400 (Bad Request) if the supportcase is not valid,
+     * or with status 500 (Internal Server Error) if the supportcase couldnt be updated
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @RequestMapping(value = "/supportcases/expertmatch",
+        method = RequestMethod.PUT,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Supportcase> updateSupportcaseWithExpertMatch(@Valid @RequestBody Supportcase supportcase) throws URISyntaxException {
+        log.debug("REST request to update Supportcase with expert match : {}", supportcase);
+        if (supportcase.getId() == null) {
+            return createSupportcase(supportcase);
+        }
+
+        // Adjust time
+        supportcase.setDateLastUpdate(ZonedDateTime.now());
+
+        log.info("*********** v1.2 Expert lookup start **********");
+        long startTime = System.currentTimeMillis();
+
+        //result.setExpertaccount(dorsalExpertMatchService.findExpertByProfileMatch(result));
+        supportcase.setExpertaccount( dorsalExpertMatchService.findExpertByProfileMatch(supportcase));
+
+        log.info("Perfect match routine took " + (System.currentTimeMillis() - startTime) + " ms");
+        log.info("*********** v1.2 Expert lookup end **********");
+
+        // Persist update
+        Supportcase result = supportcaseRepository.save(supportcase);
 
         /*
             Notification
          */
         notificationService.createSupportCaseNotifications(supportcase);
 
-        return ResponseEntity.created(new URI("/api/supportcases/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert("supportcase", result.getId().toString()))
+
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert("supportcase", supportcase.getId().toString()))
             .body(result);
     }
+
 
     /**
      * PUT  /supportcases : Updates an existing supportcase.

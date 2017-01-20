@@ -1,0 +1,54 @@
+<div>
+    <h2 data-translate="dorsalApp.expertGroup.home.title">Expert Groups</h2>
+    <button class="btn btn-success drsl-expert-groups-button" ng-click="vm.openModal()" data-translate="dorsalApp.expertGroup.home.createLabel">Create Group</button>
+    <div class="table-responsive drsl-expert-groups-table">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th data-translate="dorsalApp.expertGroup.name">
+                        Name
+                    </th>
+                    <th data-translate="dorsalApp.expertGroup.description">
+                        Description
+                    </th>
+                    <th data-translate="dorsalApp.expertGroup.expertSelection">
+                        Expert Selection
+                    </th>
+                    <th data-translate="dorsalApp.expertGroup.experts">
+                        Experts
+                    </th>
+                    <th data-translate="dorsalApp.expertGroup.owner">
+                        Owner
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="group in vm.expertGroups track by $index">
+                    <td>
+                        {{group.name}}
+                    </td>
+                    <td>
+                        {{group.description}}
+                    </td>
+                    <td>
+                        {{group.expertSelection}}
+                    </td>
+                    <td ng-click="vm.openModal(group, true)">
+                        {{group.experts.length}}
+                    </td>
+                    <td>
+                        {{group.expertpoolowner.user.firstName}} {{group.expertpoolowner.user.lastName}}
+                    </td>
+                    <td ng-click="vm.openModal(group)">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </td>
+                    <td ng-click="vm.deleteGroup(group)">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

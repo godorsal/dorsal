@@ -3,7 +3,9 @@ package com.dorsal.web.rest;
 import com.dorsal.config.Constants;
 import com.codahale.metrics.annotation.Timed;
 import com.dorsal.domain.User;
+import com.dorsal.domain.Useraccount;
 import com.dorsal.repository.UserRepository;
+import com.dorsal.repository.UseraccountRepository;
 import com.dorsal.security.AuthoritiesConstants;
 import com.dorsal.service.MailService;
 import com.dorsal.service.UserService;
@@ -67,6 +69,9 @@ public class UserResource {
     @Inject
     private UserService userService;
 
+    @Inject
+    private UseraccountRepository useraccountRepository;
+
     /**
      * POST  /users  : Creates a new user.
      * <p>
@@ -99,6 +104,13 @@ public class UserResource {
                 .body(null);
         } else {
             User newUser = userService.createUser(managedUserVM);
+
+            // Create user account
+            Useraccount useraccount = new Useraccount();
+            useraccount.setUser(newUser);
+            useraccountRepository.saveAndFlush(useraccount);
+            log.warn("Useraccount created");
+
             String baseUrl = request.getScheme() + // "http"
             "://" +                                // "://"
             request.getServerName() +              // "myhost"
@@ -106,6 +118,7 @@ public class UserResource {
             request.getServerPort() +              // "80"
             request.getContextPath();              // "/myContextPath" or "" if deployed in root context
             mailService.sendCreationEmail(newUser, baseUrl);
+
             return ResponseEntity.created(new URI("/api/users/" + newUser.getLogin()))
                 .headers(HeaderUtil.createAlert( "userManagement.created", newUser.getLogin()))
                 .body(newUser);

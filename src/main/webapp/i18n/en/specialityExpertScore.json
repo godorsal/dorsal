@@ -1,0 +1,24 @@
+{
+    "dorsalApp": {
+        "specialityExpertScore" : {
+            "home": {
+                "title": "Speciality Expert Scores",
+                "createLabel": "Create a new Speciality Expert Score",
+                "createOrEditLabel": "Create or edit a Speciality Expert Score",
+                "search": "Search for Speciality Expert Score"
+            },
+            "created": "A new Speciality Expert Score is created with identifier {{ param }}",
+            "updated": "A Speciality Expert Score is updated with identifier {{ param }}",
+            "deleted": "A Speciality Expert Score is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Speciality Expert Score {{ id }}?"
+            },
+            "detail": {
+                "title": "Speciality Expert Score"
+            },
+            "score": "Score",
+            "expertaccount": "Expertaccount",
+            "speciality": "Speciality"
+        }
+    }
+}

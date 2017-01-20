@@ -57,4 +57,15 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying
     @Query("delete from SharedCase sc where owner.id = :userid OR user.id = :userid")
     int cleanupSharedCase(@Param("userid") long userID);
+
+    /**
+     * Extract Attributes that the master user has defined for all users that have been invited by the user
+     * @param userID  The ID of the user that creates the support case and needs to be used to lookup the master users attributes
+     * @return A comma separted string with all attributes that the master user has defined.
+     */
+    @Query("select ua.companyname from Useraccount ua, User user, Groupaccess ga where ua.user.id = user.id AND ga.authorizeduser.id = :userid AND user.id = ga.user.id")
+    String getAttributesForMasterUser(@Param("userid") long userID);
+
+    @Query("select ua.companyname from Useraccount ua, User user where ua.user.id = user.id AND user.login = ?#{principal.username}")
+    String getAttributesForUser();
 }

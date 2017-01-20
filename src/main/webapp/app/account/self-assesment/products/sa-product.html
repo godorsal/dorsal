@@ -1,0 +1,55 @@
+<div class="drsl-account-settings">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="drsl-settings-wrapper">
+                <!-- Header -->
+                <div class="drsl-sub-header">
+                    <h2>Products</h2>
+                </div>
+                <table class="table table-striped drsl-sa-table">
+                    <thead>
+                        <tr>
+                            <th>
+                            </th>
+                            <th>
+                                None
+                            </th>
+                            <th>
+                                Novice
+                            </th>
+                            <th>
+                                Intermediate
+                            </th>
+                            <th>
+                                Advanced
+                            </th>
+                            <th>
+                                Expert
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <form>
+                            <tr ng-repeat="product in vm.products track by $index">
+                                <!-- {{product.name}} -->
+                                <td class="drsl-sa-td">
+                                    {{product.product.name}}
+                                </td>
+                                <td ng-repeat="score in vm.scores">
+                                    <input type="radio" ng-model="product.score" value="{{score}}" ng-change="vm.changeScore(product)">
+                                </td>
+                            </tr>
+                        </form>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <div class="drsl-sa-button">
+                    <button ui-sref="settings" class="btn btn-default">Cancel</button>
+                    <!-- <button ui-sref="selfAssesmentSkills" class="btn btn-success">Back</button> -->
+                    <button ng-click="vm.submit()" class="btn btn-success">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <!--
+        Added the constraints for entity ExpertPoolToExpert.
+    -->
+    <changeSet id="20161227222409-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="expertaccount_id"
+                                 baseTableName="expert_pool_to_expert"
+                                 constraintName="fk_expert_pool_to_expert_expertaccount_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="expert_account"/>
+
+        <addForeignKeyConstraint baseColumnNames="expertpool_id"
+                                 baseTableName="expert_pool_to_expert"
+                                 constraintName="fk_expert_pool_to_expert_expertpool_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="expert_pool"/>
+
+    </changeSet>
+</databaseChangeLog>

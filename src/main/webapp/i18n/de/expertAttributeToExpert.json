@@ -1,0 +1,23 @@
+{
+    "dorsalApp": {
+        "expertAttributeToExpert" : {
+            "home": {
+                "title": "Expert Attribute To Experts",
+                "createLabel": "Expert Attribute To Expert erstellen",
+                "createOrEditLabel": "Expert Attribute To Expert erstellen oder bearbeiten",
+                "search": "Suche nach Expert Attribute To Expert"
+            },
+            "created": "Expert Attribute To Expert erstellt mit ID {{ param }}",
+            "updated": "Expert Attribute To Expert aktualisiert mit ID {{ param }}",
+            "deleted": "Expert Attribute To Expert gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Expert Attribute To Expert {{ id }} wirklich dauerhaft gelöscht werden?"
+            },
+            "detail": {
+                "title": "Expert Attribute To Expert"
+            },
+            "expertaccount": "Expertaccount",
+            "expertattribute": "Expertattribute"
+        }
+    }
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <!--
+        Added the constraints for entity ProductExpertScore.
+    -->
+    <changeSet id="20161227222459-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="expertaccount_id"
+                                 baseTableName="product_expert_score"
+                                 constraintName="fk_product_expert_score_expertaccount_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="expert_account"/>
+
+        <addForeignKeyConstraint baseColumnNames="product_id"
+                                 baseTableName="product_expert_score"
+                                 constraintName="fk_product_expert_score_product_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product"/>
+
+    </changeSet>
+</databaseChangeLog>

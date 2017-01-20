@@ -3,7 +3,9 @@ package com.dorsal.web.rest;
 import com.codahale.metrics.annotation.Timed;
 
 import com.dorsal.domain.User;
+import com.dorsal.domain.Useraccount;
 import com.dorsal.repository.UserRepository;
+import com.dorsal.repository.UseraccountRepository;
 import com.dorsal.security.SecurityUtils;
 import com.dorsal.service.MailService;
 import com.dorsal.service.UserService;
@@ -46,6 +48,9 @@ public class AccountResource {
     @Inject
     private MailService mailService;
 
+    @Inject
+    private UseraccountRepository useraccountRepository;
+
     /**
      * POST  /register : register the user.
      *
@@ -73,6 +78,12 @@ public class AccountResource {
                     User user = userService.createUser(managedUserVM.getLogin(), managedUserVM.getPassword(),
                     managedUserVM.getFirstName(), ""/*managedUserVM.getLastName()*/, managedUserVM.getEmail().toLowerCase(),
                     managedUserVM.getLangKey());
+
+                    // Create user account
+                    Useraccount useraccount = new Useraccount();
+                    useraccount.setUser(user);
+                    useraccountRepository.saveAndFlush(useraccount);
+                    log.error("Useraccount created");
 
                     // Read the server name from the configuration application-{dev|prod}.yml file
                     String serverURL = mailService.getDeploymentServerURL();

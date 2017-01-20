@@ -492,3 +492,53 @@ table.drsl-table-scroll thead > tr {
         }
     }
 }
+.drsl-sa-td {
+    width: 250px;
+}
+.drsl-sa-other-label {
+    display: block;
+}
+.drsl-sa-other-input {
+    width: 50%;
+    display: inline-block;
+}
+.drsl-sa-button {
+    float: right;
+}
+.drsl-expert-groups-button, .drsl-expert-groups-table {
+    position: relative;
+}
+.drsl-sa-table {
+    thead {
+        display: block;
+        tr {
+            width: 100%;
+            th {
+                width: 9%;
+                // padding-left: 20px;
+                // padding-right: 20px;
+            }
+        }
+    }
+    tbody {
+        display: block;
+        max-height: 400px;
+        overflow-y: scroll;
+        tr {
+            width: 100%;
+            td {
+                width: 7%;
+                // padding-left: 20px;
+                // padding-right: 20px;
+            }
+        }
+    }
+}
+// .editing-attributes {
+//     max-height: 527px;
+//     height: 1000px;
+// }
+.right-panel {
+    height: 527px;
+    position: relative;
+}

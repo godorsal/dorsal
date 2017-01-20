@@ -8,13 +8,12 @@
 	CaseController.$inject = ['$scope', '$window', '$interval', '$timeout', '$translate', 'CaseService', 'DrslRatingService',
 	'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', 'StatusModel',
 	'Rating', 'Expertbadge', 'DrslMetadata', 'Caseupdate', 'AttachmentModalService', 'DrslAttachFileService',
-	'DrslNewCaseService', '$filter', '_', 'DrslUserFlowService', 'DrslHipChatService', '$sce', 'paginationConstants', '$state', 'pagingParams', '$rootScope', 'SupportCaseReportRatingCommentModalService'];
+	'DrslNewCaseService', '$filter', '_', 'DrslUserFlowService', 'DrslHipChatService', '$sce', 'paginationConstants', '$state', 'pagingParams', '$rootScope', 'SupportCaseReportRatingCommentModalService', 'ExpertAccount'];
 
 	function CaseController($scope, $window, $interval, $timeout, $translate, CaseService, DrslRatingService, CaseDetailsService,
 		EscalationFormService, ShareCaseService, CaseAgreementService, StatusModel, Rating,
 		Expertbadge, DrslMetadata, Caseupdate, AttachmentModalService, DrslAttachFileService,
-		DrslNewCaseService, $filter, _, DrslUserFlowService, DrslHipChatService, $sce, paginationConstants, $state, pagingParams, $rootScope, SupportCaseReportRatingCommentModalService) {
-
+		DrslNewCaseService, $filter, _, DrslUserFlowService, DrslHipChatService, $sce, paginationConstants, $state, pagingParams, $rootScope, SupportCaseReportRatingCommentModalService, ExpertAccount) {
 			// Handle user flow redirects and messaging
 			DrslUserFlowService.handleUserFlow();
 
@@ -326,6 +325,7 @@
 
 				if(vm.currentCase.status.name === 'CLOSED'){
 					vm.maxResults = DrslHipChatService.maxResults;
+					calculateExpertScore();
 					getMessages();
 					Rating.get({
 						supportcase: "supportcase",
@@ -351,12 +351,7 @@
 						}
 					})
 				} else {
-					vm.maxResults = DrslHipChatService.maxResults;
-					if (vm.currentCase.expertaccount.numberOfCases > 0) {
-                        vm.currentCase.expertaccount.displayedExpertScore = Math.round(vm.currentCase.expertaccount.expertScore / vm.currentCase.expertaccount.numberOfCases);
-                    } else {
-                        vm.currentCase.expertaccount.displayedExpertScore = 0;
-                    }
+					calculateExpertScore();
 					if(!vm.schedulingMessages){
 						vm.schedulingMessages = true;
 						vm.messageScheduler = $interval(function () {
@@ -389,7 +384,17 @@
 					}, 1);
 				}
 			}
-
+			/**
+			* Calculates The Expert's Score
+			*/
+			function calculateExpertScore() {
+				vm.maxResults = DrslHipChatService.maxResults;
+				if (vm.currentCase.expertaccount.numberOfCases > 0) {
+					vm.currentCase.expertaccount.displayedExpertScore = Math.round(vm.currentCase.expertaccount.expertScore / vm.currentCase.expertaccount.numberOfCases);
+				} else {
+					vm.currentCase.expertaccount.displayedExpertScore = 0;
+				}
+			}
 			/**
 			* Opens the rating dialog.
 			*/
@@ -413,12 +418,7 @@
 
 						// Workflow: change the state/status of the current case to closed
 						vm.currentCase.status = StatusModel.getState('closed');
-						DrslHipChatService.getRoom(vm.currentCase.technology.name + vm.currentCase.id)
-						.then(function (res) {
-							DrslHipChatService.archiveRoom(res.data)
-						}, function errorHandler(error) {
-							console.error(error);
-						})
+
 						// Add/update expert badges and their counts
 						updateExpertBadges(data.selectedBadges);
 
@@ -427,6 +427,13 @@
 
 						// Update the current case
 						vm.currentCase.$update();
+
+						DrslHipChatService.getRoom(vm.currentCase.technology.name + vm.currentCase.id)
+						.then(function (res) {
+							DrslHipChatService.archiveRoom(res.data)
+						}, function errorHandler(error) {
+							console.error(error);
+						})
 					});
 
 					// Pause polling for case updates
@@ -638,11 +645,22 @@
 					DrslHipChatService.magicMessageParser(vm.messages);
 				}, function errorCallback(res) {
 					if(res.data.error ){
-						if(res.data.error.code != 429){
+						if(res.data.error.code === 404){
 							var roomObject = {
 								name: messagesID,
 								topic: vm.currentCase.summary,
-								expert: vm.currentCase.expertaccount.user.email
+								hasExpert: false
+							}
+							DrslHipChatService.makeRoom(roomObject)
+							.then(function () {
+								getMessages();
+							})
+						} else if(res.data.error.code != 429){
+							var roomObject = {
+								name: messagesID,
+								topic: vm.currentCase.summary,
+								expert: vm.currentCase.expertaccount.user.email,
+								hasExpert: true
 							}
 							DrslHipChatService.makeRoom(roomObject)
 							.then(function () {

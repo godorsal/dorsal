@@ -1,0 +1,31 @@
+
+<div>
+    <h2><span data-translate="dorsalApp.skillExpertScore.detail.title">Skill Expert Score</span> {{vm.skillExpertScore.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="dorsalApp.skillExpertScore.score">Score</span></dt>
+        <dd>
+            <span>{{vm.skillExpertScore.score}}</span>
+        </dd>
+        <dt><span data-translate="dorsalApp.skillExpertScore.expertaccount">Expertaccount</span></dt>
+        <dd>
+            <a ui-sref="expert-account-detail({id:vm.skillExpertScore.expertaccount.id})">{{vm.skillExpertScore.expertaccount.id}}</a>
+        </dd>
+        <dt><span data-translate="dorsalApp.skillExpertScore.skill">Skill</span></dt>
+        <dd>
+            <a ui-sref="skill-detail({id:vm.skillExpertScore.skill.id})">{{vm.skillExpertScore.skill.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="skill-expert-score-detail.edit({id:vm.skillExpertScore.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

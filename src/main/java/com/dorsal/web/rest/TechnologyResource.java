@@ -3,6 +3,8 @@ package com.dorsal.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.dorsal.domain.Technology;
 import com.dorsal.domain.User;
+import com.dorsal.repository.ExpertAccountRepository;
+import com.dorsal.repository.TechnologyRepository;
 import com.dorsal.repository.UserRepository;
 import com.dorsal.service.TechnologyService;
 import com.dorsal.web.rest.util.HeaderUtil;
@@ -10,6 +12,7 @@ import com.dorsal.web.rest.dto.TechnologyDTO;
 import com.dorsal.web.rest.mapper.TechnologyMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.expression.spel.SpelEvaluationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -44,6 +47,9 @@ public class TechnologyResource {
     // User repository functinality for finding currently logged in user
     @Inject
     private UserRepository userRepository;
+
+    @Inject
+    private ExpertAccountRepository expertAccountRepository;
 
     /**
      * POST  /technologies : Create a new technology.
@@ -117,7 +123,25 @@ public class TechnologyResource {
     @Transactional(readOnly = true)
     public List<TechnologyDTO> getAllTechnologies() {
         log.debug("REST request to get all Technologies");
-        return technologyService.findAll();
+        /**
+         * The entity is used to store the technologies for the intake (case create page) and for the expert profiles added
+         * with version 1.2
+         * To facilitate both functionality the lower range (id 1-9) is used for intake (regular user login) while
+         * id 10 and higher are for the expert profiles
+         */
+        try {
+            if (expertAccountRepository.findByUserIsCurrentUser().size() > 0) {
+                log.info("Technology query for Expert profiles ...");
+                return technologyService.findExpertProfileEntries();
+            } else {
+                log.info("Technology query for intake - case create page ...");
+                return technologyService.findUserIntakeList();
+            }
+        } catch (SpelEvaluationException evale) {
+            log.debug("User not logged in. restricted access to technology table. ");
+            log.debug("Technology query for intake - case create page ...");
+            return technologyService.findUserIntakeList();
+        }
     }
 
     /**

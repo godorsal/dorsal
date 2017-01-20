@@ -3,6 +3,7 @@ package com.dorsal.repository;
 import com.dorsal.domain.Useraccount;
 
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 

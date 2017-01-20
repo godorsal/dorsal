@@ -1,0 +1,23 @@
+{
+    "dorsalApp": {
+        "expertPoolToExpert" : {
+            "home": {
+                "title": "Expert Pool To Experts",
+                "createLabel": "Expert Pool To Expert erstellen",
+                "createOrEditLabel": "Expert Pool To Expert erstellen oder bearbeiten",
+                "search": "Suche nach Expert Pool To Expert"
+            },
+            "created": "Expert Pool To Expert erstellt mit ID {{ param }}",
+            "updated": "Expert Pool To Expert aktualisiert mit ID {{ param }}",
+            "deleted": "Expert Pool To Expert gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Expert Pool To Expert {{ id }} wirklich dauerhaft gelöscht werden?"
+            },
+            "detail": {
+                "title": "Expert Pool To Expert"
+            },
+            "expertaccount": "Expertaccount",
+            "expertpool": "Expertpool"
+        }
+    }
+}

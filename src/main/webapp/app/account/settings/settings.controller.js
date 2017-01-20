@@ -7,9 +7,9 @@
 
     SettingsController.$inject = ['$rootScope', 'Principal', 'Auth', 'JhiLanguageService', '$translate', 'Payment',
     'Groupaccess', 'User', 'Focus', 'Register', 'toastr', 'ExpertAccount', 'Issue', 'Technology', '_', '$state',
-    'DrslUserFlowService', 'ManageUser'];
+    'DrslUserFlowService', 'ManageUser', 'ExpertAttribute', 'ExpertAttributeToExpert', 'JobroleExpertScore', 'ProductExpertScore', 'SpecialityExpertScore', 'SkillExpertScore', 'TechnologyExpertScore', 'Useraccount', 'ExpertPoolToExpert'];
 
-    function SettingsController($rootScope, Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, User, focus, Register, toastr, ExpertAccount, Issue, Technology, _, $state, DrslUserFlowService, ManageUser) {
+    function SettingsController($rootScope, Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, User, focus, Register, toastr, ExpertAccount, Issue, Technology, _, $state, DrslUserFlowService, ManageUser, ExpertAttribute, ExpertAttributeToExpert, JobroleExpertScore, ProductExpertScore, SpecialityExpertScore, SkillExpertScore, TechnologyExpertScore, Useraccount, ExpertPoolToExpert) {
 
         // Handle user flow redirects and messaging
         DrslUserFlowService.handleUserFlow();
@@ -25,6 +25,7 @@
         vm.invitedUsers = [];
         vm.invitedUsersToRemove = [];
         vm.activatedUsersToRemove = [];
+        vm.userAttributes = [];
         vm.isAlreadyAuthorized = false;
         vm.authorizedUser = '';
         vm.number = 0;
@@ -46,7 +47,86 @@
         vm.removeInvitedUsers = removeInvitedUsers;
         vm.updateUser = updateUser;
         vm.checkInvalid = checkInvalid;
+        vm.editingAttributes = false;
+        vm.saveAttributes = saveAttributes;
+        vm.saveUserAttributes = saveUserAttributes;
+        vm.deleteAttribute = deleteAttribute;
+        vm.deleteUserAttribute = deleteUserAttribute;
 
+        ExpertAttributeToExpert.query(function (res) {
+            vm.expertAttributes = res;
+            calculateAttributes()
+        })
+        function calculateAttributes() {
+            ExpertAttribute.query(function (res) {
+                vm.presentAttributes = res;
+                vm.expertAttributes.forEach(function (attribute1, index1) {
+                    vm.presentAttributes.forEach(function (attribute2, index2) {
+                        if(attribute1.expertattribute.id === attribute2.id){
+                            vm.presentAttributes.splice(index2, 1);
+                        }
+                    })
+                })
+            })
+        }
+        function calculateUserAttributes() {
+            ExpertAttribute.query(function (res) {
+                vm.presentAttributes = res;
+                vm.userAttributes.forEach(function (attribute1, index1) {
+                    vm.presentAttributes.forEach(function (attribute2, index2) {
+                        if(attribute1 === attribute2.name){
+                            vm.presentAttributes.splice(index2, 1);
+                        }
+                    })
+                })
+            })
+        }
+
+        function saveAttributes() {
+            if(vm.atbInputString){
+                var inputArray = vm.atbInputString.split(',');
+                vm.atbInputString = '';
+                inputArray.forEach(function (atb) {
+                    ExpertAttribute.save({name: atb, description: ''}, attributeSaved)
+                })
+            } else if (vm.addAttribute) {
+                ExpertAttributeToExpert.save({expertattribute: JSON.parse(vm.addAttribute)}, addToArray);
+            }
+        }
+        function saveUserAttributes() {
+            if(vm.addAttribute){
+                vm.userAttributes.push(vm.addAttribute)
+                vm.presentAttributes.forEach(function (attribute, index) {
+                    if(attribute.name === vm.addAttribute){
+                        vm.presentAttributes.splice(index, 1)
+                    }
+                })
+                vm.currentUserAccount.companyname = vm.userAttributes.join(',');
+                vm.addAttribute = "";
+                vm.updatingUser = true;
+            }
+        }
+        function attributeSaved(res) {
+            ExpertAttributeToExpert.save({expertattribute: res}, addToArray);
+        }
+        function addToArray(res) {
+            vm.expertAttributes.push(res)
+            vm.presentAttributes.forEach(function (attribute, index) {
+                if(attribute.name === res.expertattribute.name){
+                    vm.presentAttributes.splice(index, 1)
+                }
+            })
+        }
+        function deleteAttribute(index) {
+            vm.presentAttributes.push(vm.expertAttributes[index].expertattribute)
+            ExpertAttributeToExpert.delete({id: vm.expertAttributes[index].id}, vm.expertAttributes.splice(index, 1));
+        }
+        function deleteUserAttribute(index) {
+            vm.presentAttributes.push({name:vm.userAttributes[index]})
+            vm.userAttributes.splice(index, 1)
+            vm.currentUserAccount.companyname = vm.userAttributes.join(',');
+            vm.updatingUser = true;
+        }
         /**
         * Initialize the controller's data.
         */
@@ -60,19 +140,61 @@
                     vm.currentExpert = data[0];
 
                     var othercommunication = vm.currentExpert.othercommunication.split(',');
-                    if(othercommunication[0]){
-                        vm.otherLink = othercommunication[0];
-                        vm.shownLink = vm.otherLink.substring(0, 19) + "...";
-                    }
-                    if(othercommunication[1]){
-                        vm.otherTitle = othercommunication[1];
+                    vm.otherLink = othercommunication[0];
+                    vm.otherTitle = othercommunication[1];
+                    if(vm.otherTitle){
                         vm.shownTitle = vm.otherTitle.substring(0, 19) + "...";
+                    } else {
+                        vm.shownTitle = "";
+                    }
+                    if(vm.otherLink){
+                        vm.shownLink = vm.otherLink.substring(0, 19) + "...";
+                    } else {
+                        vm.shownLink = "";
                     }
                     if (vm.currentExpert.numberOfCases > 0) {
                         vm.displayedExpertScore = Math.round(vm.currentExpert.expertScore / vm.currentExpert.numberOfCases);
                     } else {
                         vm.displayedExpertScore = 0;
                     }
+                    JobroleExpertScore.query(function (res) {
+                        vm.currentExpert.jobroles = res;
+                        jobroleCalculation();
+                    });
+                    ProductExpertScore.query(function (res) {
+                        vm.currentExpert.products = res;
+                        productCalculation();
+                    });
+                    SpecialityExpertScore.query(function (res) {
+                        vm.currentExpert.specialties = res;
+                        specialtiesCalculation();
+                    });
+                    SkillExpertScore.query(function (res) {
+                        vm.currentExpert.skills = res;
+                        skillsCalculation();
+                    });
+                    TechnologyExpertScore.query(function (res) {
+                        vm.currentExpert.technology = res;
+                        technologyCalculation();
+                    });
+                    ExpertPoolToExpert.query(function (res) {
+                        vm.currentExpert.groups = [];
+                        res.forEach(function (connection) {
+                            if(connection.expertaccount.id === vm.currentExpert.id){
+                                vm.currentExpert.groups.push(connection);
+                            }
+                        })
+                    })
+                } else {
+                    Useraccount.query(function (res) {
+                        vm.currentUserAccount = res[0];
+                        if(vm.currentUserAccount.companyname.length){
+                            vm.userAttributes = vm.currentUserAccount.companyname.split(',');
+                            calculateUserAttributes();
+                        } else {
+                            vm.userAttributes = [];
+                        }
+                    })
                 }
             });
 
@@ -103,6 +225,42 @@
             Principal.identity().then(function (account) {
                 vm.settingsAccount = copyAccount(account);
             });
+        }
+
+        function jobroleCalculation() {
+            vm.currentExpert.jobrolesScore = 0;
+            vm.currentExpert.jobroles.forEach(function (role) {
+                vm.currentExpert.jobrolesScore =  vm.currentExpert.jobrolesScore + role.score;
+                vm.jobrolesComplete = vm.currentExpert.jobrolesScore > vm.currentExpert.jobroles.length;
+            })
+        }
+        function productCalculation() {
+            vm.currentExpert.productsScore = 0;
+            vm.currentExpert.products.forEach(function (role) {
+                vm.currentExpert.productsScore =  vm.currentExpert.productsScore + role.score;
+                vm.productsComplete = vm.currentExpert.productsScore > vm.currentExpert.products.length;
+            })
+        }
+        function specialtiesCalculation() {
+            vm.currentExpert.specialtiesScore = 0;
+            vm.currentExpert.specialties.forEach(function (role) {
+                vm.currentExpert.specialtiesScore =  vm.currentExpert.specialtiesScore + role.score;
+                vm.specialtiesComplete = vm.currentExpert.specialtiesScore > vm.currentExpert.specialties.length;
+            })
+        }
+        function skillsCalculation() {
+            vm.currentExpert.skillsScore = 0;
+            vm.currentExpert.skills.forEach(function (role) {
+                vm.currentExpert.skillsScore =  vm.currentExpert.skillsScore + role.score;
+                vm.skillsComplete = vm.currentExpert.skillsScore > vm.currentExpert.skills.length;
+            })
+        }
+        function technologyCalculation() {
+            vm.currentExpert.technologyScore = 0;
+            vm.currentExpert.technology.forEach(function (role) {
+                vm.currentExpert.technologyScore =  vm.currentExpert.technologyScore + role.score;
+                vm.technologyComplete = vm.currentExpert.technologyScore > vm.currentExpert.technology.length;
+            })
         }
 
         /**
@@ -174,6 +332,11 @@
                         $translate.use(vm.settingsAccount.langKey);
                     }
                 });
+                // var newUserAccount = {
+                //     user: vm.settingsAccount,
+                //     companyname: vm.userAttributesString
+                // }
+                Useraccount.update(vm.currentUserAccount)
 
                 // Redirect to the case page
                 if (vm.isAlreadyAuthorized) {
