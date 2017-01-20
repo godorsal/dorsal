@@ -136,8 +136,12 @@ Account Settings
     }
 
     .drsl-update-card-button {
+        // float: right;
+        // margin-top: 55px;
+        position: absolute;
         float: right;
-        margin-top: 55px;
+        left: 490px;
+        bottom: 10px;
     }
 
     textarea {
