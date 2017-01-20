@@ -19,17 +19,26 @@ DECLARE
 	expertlastname varchar;
 	expertemail varchar;
 BEGIN
-    -- Expert ID is in the lower range from  of the user ID's 1-999
+    --
+    -- The default password used is mysql
+    --
+    -- Expert ID is in the lower range on the jhi_user table. Range is 1-999
+    -- Before running set expert ID to next available ID
+    --
     -- Next available ID = 33
 
     expertid = 33;
+
+    --
+    -- Replace placeholders for login, name and email with real values
+    --
     expertlogin = 'LOGIN';
 	expertfirstname ='FirstName';
 	expertlastname = 'LastName';
 	expertemail = 'EMAIL-ADDRESS';
 
     INSERT INTO jhi_user(id,login,password_hash,first_name,last_name,email,activated,lang_key,created_by,created_date)
-    VALUES (expertid,expertlogin,'$2a$10$uw9c.oTeUhHFTr5/gZkwU.oyRW.K/IC5mRuBBOlknEjMuto.oTXPO',expertfirstname,expertlastname,expertemail,true,'en','system',now());
+    VALUES (expertid,expertlogin,'$2a$10$poSz5Yk6X8peZkVlL6VjZOMn1SuVsTgaq.MD3gTo3xrkYYf5Izl4G',expertfirstname,expertlastname,expertemail,true,'en','system',now());
 
 
 -- create the user permissions
@@ -39,7 +48,7 @@ INSERT INTO jhi_user_authority(user_id,authority_name) VALUES
 -- create the expert
 
 INSERT INTO expert_account(id,phone,skype,othercommunication,location,expert_score,handle,languages,image_path,firsttechnology_id,secondtechnology_id,issueexpertise_id,user_id,is_available,expert_bio,number_of_cases,expert_since,welcome_message,profile_visibility,expert_availability) VALUES
-(expertid,'','','none','Bay Area',1,'','English','content/images/dynamic/formal_male.png',1,4,2,expertid,true,'',0,now(),'Welcome my name is First Last. Best way to get in touch with me is over email.','INTERN','FULL_TIME');
+(expertid,'','','none','Bay Area',1,'','English','content/images/dynamic/formal_male.png',1,4,2,expertid,true,'',0,now(),'Welcome! Best way to get in touch with me is over email.','INTERN','FULL_TIME');
 
 
     -- Go over all experts that have completed the self assessement
