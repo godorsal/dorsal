@@ -123,6 +123,9 @@ BEGIN
         SELECT t.id INTO technologyid FROM technology t WHERE name like 'PostgreSQL';
         INSERT INTO technologypropertyvalue(value, technology_id, technologyproperty_id) VALUES('Postgres-BDR',technologyid,technologypropertyid);
 
+        -- Concurrent user limit
+         INSERT INTO global_metadata (name, value, value_type) VALUES ('EXPERT_CASE_LIMIT','5','ISINTEGER');
+
 
 		currentSchemaVersion = '1.2.0';
 		UPDATE global_metadata set value = currentSchemaVersion where name = 'CurrentSchemaVersion';
