@@ -2,6 +2,7 @@ package com.dorsal.repository;
 
 import com.dorsal.domain.ExpertAccount;
 
+import com.dorsal.domain.GlobalMetadata;
 import com.dorsal.domain.Technology;
 import com.dorsal.domain.enumeration.Availability;
 import org.springframework.data.domain.PageRequest;
@@ -80,5 +81,12 @@ public interface ExpertAccountRepository extends JpaRepository<ExpertAccount,Lon
 
     @Query("select distinct ea from ExpertAccount ea, ProductExpertScore pes, ExpertPool ep, ExpertPoolToExpert epte where ea.id = pes.expertaccount.id AND ea.id IN(:expertidlist) AND lower(ep.name) like :expertpool AND ep.id = epte.expertpool.id AND epte.expertaccount.id = ea.id  ORDER BY ea.expertScore DESC")
     List<ExpertAccount> findExpertMatchExpertPoolMembers(@Param("expertidlist")List<Long> expertidlist, @Param("expertpool")String expertpool);
+
+    @Modifying
+    @Query("update ExpertAccount set isAvailable = false where id = :expertid" )
+    int setExpertAvailability(@Param("expertid") long expertid);
+
+    @Query ("select gm from GlobalMetadata gm where gm.name like 'EXPERT_CASE_LIMIT'")
+    GlobalMetadata getExpertCaseLimit();
 
 }

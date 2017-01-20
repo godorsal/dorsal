@@ -5,6 +5,7 @@ import com.dorsal.domain.Supportcase;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -45,4 +46,7 @@ public interface SupportcaseRepository extends JpaRepository<Supportcase,Long> {
 
     @Query("select count(supportcase.id) from Supportcase supportcase, Groupaccess groupaccess WHERE supportcase.user.id = groupaccess.authorizeduser.id AND groupaccess.user.login = ?#{principal.username}")
     int getCountOfGroupAccessbyUser();
+
+    @Query("select count(supportcase.id) from Supportcase supportcase where supportcase.expertaccount.id = :expertid AND supportcase.status.name IN ('CREATED', 'ESTIMATED', 'WORKING')")
+    int getCountOfActiveCasesByExpert(@Param("expertid") long expertid);
 }
