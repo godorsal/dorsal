@@ -192,7 +192,7 @@
                 topic: result.summary,
                 expert: result.expertaccount.user.email
             }
-            // DrslHipChatService.makeRoom(roomObject);
+            DrslHipChatService.makeRoom(roomObject);
 
             // emit a 'dorsalApp:supportcaseUpdate' so the app can be aware of the change
             $scope.$emit('dorsalApp:supportcaseUpdate', result);
