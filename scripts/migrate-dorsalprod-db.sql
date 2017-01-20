@@ -55,7 +55,7 @@ BEGIN
         INSERT INTO product(name,code) VALUES('Galera Cluster', 'galeracluster');
         INSERT INTO product(name,code) VALUES('PGCluster', 'pgcluster');
         INSERT INTO product(name,code) VALUES('PGPool', 'pgpool');
-        INSERT INTO product(name,code) VALUES('PostgreSQL-XL', 'postgresqlxl');
+        INSERT INTO product(name,code) VALUES('Postgres-XL', 'postgresqlxl');
         INSERT INTO product(name,code) VALUES('Postgres-BDR', 'postgresbdr');
         INSERT INTO product(name,code) VALUES('Xtra Backup', 'xtrabackup');
         INSERT INTO product(name,code) VALUES('Ansible', 'ansible');
