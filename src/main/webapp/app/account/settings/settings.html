@@ -110,7 +110,7 @@ Your e-mail cannot be longer than 100 characters.
 
 <!-- Language -->
 <div class="form-group" ng-if="!vm.currentExpert">
-    <select id="langKey" name="langKey" class="form-control" ng-model="vm.settingsAccount.langKey" ng-controller="JhiLanguageController as languageVm" ng-options="code as (code | findLanguageFromKey) for code in languageVm.languages">
+    <select id="langKey" name="langKey" class="form-control drsl-full-select" ng-model="vm.settingsAccount.langKey" ng-controller="JhiLanguageController as languageVm" ng-options="code as (code | findLanguageFromKey) for code in languageVm.languages">
         <option value="">Language(s)</option>
     </select>
 </div>
@@ -160,18 +160,18 @@ Your e-mail cannot be longer than 100 characters.
         <!-- Telephone (required) -->
         <div class="form-group">
             <div class="drsl-placeholder-label" type="text">
-                <input type="tel" class="form-control" id="telephone" name="telephone"
+                <input type="tel" class="form-control input-phone" id="telephone" name="telephone"
                 ng-model="vm.currentExpert.phone" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.telephone.$dirty && !vm.currentExpert.phone)}">
-                <span class="drsl-unit" translate="settings.form.phone">Telephone Number</span>
+                <span class="drsl-unit drsl-unit-two-input" translate="settings.form.phone">Telephone Number</span>
             </div>
         </div>
 
         <!-- Mobile (required) -->
         <div class="form-group">
             <div class="drsl-placeholder-label" type="text">
-                <input type="tel" class="form-control" id="mobile" name="mobile"
+                <input type="tel" class="form-control input-mobile" id="mobile" name="mobile"
                 ng-model="vm.currentExpert.mobile" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.mobile.$dirty && !vm.currentExpert.mobile)}">
-                <span class="drsl-unit" translate="settings.form.mobile">Mobile Number</span>
+                <span class="drsl-unit drsl-unit-two-input" translate="settings.form.mobile">Mobile Number</span>
             </div>
         </div>
     </div>
@@ -181,18 +181,18 @@ Your e-mail cannot be longer than 100 characters.
         <!-- Skype (required) -->
         <div class="form-group">
             <div class="drsl-placeholder-label" type="text">
-                <input type="text" class="form-control" id="skype" name="skype"
+                <input type="text" class="form-control input-skype" id="skype" name="skype"
                 ng-model="vm.currentExpert.skype" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.skype.$dirty && !vm.currentExpert.skype)}">
-                <span class="drsl-unit" translate="settings.form.skype">Skype</span>
+                <span class="drsl-unit drsl-unit-two-input" translate="settings.form.skype">Skype</span>
             </div>
         </div>
 
         <!-- Chat Handle (required) -->
         <div class="form-group">
             <div class="drsl-placeholder-label" type="text">
-                <input type="text" class="form-control" id="drslChatHandle" name="drslChatHandle"
+                <input type="text" class="form-control input-handle" id="drslChatHandle" name="drslChatHandle"
                 ng-model="vm.currentExpert.drslChatHandle" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.drslChatHandle.$dirty && !vm.currentExpert.drslChatHandle)}">
-                <span class="drsl-unit" translate="settings.form.drslChatHandle">Dorsal Chat Handle</span>
+                <span class="drsl-unit drsl-unit-two-input" translate="settings.form.drslChatHandle">Dorsal Chat Handle</span>
             </div>
         </div>
     </div>
@@ -202,24 +202,24 @@ Your e-mail cannot be longer than 100 characters.
         <!-- Preferred/Other Contact (required) -->
         <div class="form-group">
             <div class="drsl-placeholder-label" type="text"  uib-tooltip="name of other contact method">
-                <input type="text" class="form-control" id="preferred" name="preferred"
+                <input type="text" class="form-control input-other-method" id="preferred" name="preferred"
                 ng-model="vm.shownTitle" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.preferred.$dirty && !vm.otherTitle)}"
                 ng-focus="vm.hideTitleElipsis()"
                 ng-blur="vm.showTitleElipsis()"
                 >
-                <span class="drsl-unit" translate="settings.form.preferred">(Preffered Contact Method)</span>
+                <span class="drsl-unit drsl-unit-two-input" translate="settings.form.preferred">(Preffered Contact Method)</span>
             </div>
         </div>
 
         <!-- Other Communication Link (required) -->
         <div class="form-group">
             <div class="drsl-placeholder-label" type="text" uib-tooltip="link to other contact method">
-                <input type="text" class="form-control" id="othercommunication" name="othercommunication"
+                <input type="text" class="form-control input-other-link" id="othercommunication" name="othercommunication"
                 ng-model="vm.shownLink" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.othercommunication.$dirty && !vm.otherLink)}"
                 ng-focus="vm.hideLinkElipsis()"
                 ng-blur="vm.showLinkElipsis()"
                 >
-                <span class="drsl-unit" translate="settings.form.othercommunication">(Other Comms)</span>
+                <span class="drsl-unit drsl-unit-two-input" translate="settings.form.othercommunication">(Other Comms)</span>
             </div>
         </div>
     </div>
@@ -227,7 +227,7 @@ Your e-mail cannot be longer than 100 characters.
     <!-- Language -->
     <div class="form-group">
         <div class="drsl-placeholder-label" type="text">
-            <select id="langKeyExpert" name="langKey" class="form-control drsl-fullSelect" ng-model="vm.settingsAccount.langKey" ng-controller="JhiLanguageController as languageVm" ng-options="code as (code | findLanguageFromKey) for code in languageVm.languages" ng-change="vm.updatingExpert = true"></select>
+            <select id="langKeyExpert" name="langKey" class="form-control drsl-full-select" ng-model="vm.settingsAccount.langKey" ng-controller="JhiLanguageController as languageVm" ng-options="code as (code | findLanguageFromKey) for code in languageVm.languages" ng-change="vm.updatingExpert = true"></select>
             <span class="drsl-select drsl-unit" translate="settings.form.language">(Language)</span>
         </div>
     </div>
@@ -237,18 +237,18 @@ Your e-mail cannot be longer than 100 characters.
         <!-- Location (required) -->
         <div class="form-group">
             <div class="drsl-placeholder-label" type="text">
-                <input type="text" class="form-control" id="location" name="location"
+                <input type="text" class="form-control input-location" id="location" name="location"
                 ng-model="vm.currentExpert.location" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.location.$dirty && !vm.currentExpert.location)}">
-                <span class="drsl-unit" translate="settings.form.location">(Location)</span>
+                <span class="drsl-unit drsl-unit-two-input" translate="settings.form.location">(Location)</span>
             </div>
         </div>
 
         <!-- Timezone (required) -->
         <div class="form-group">
             <div class="drsl-placeholder-label" type="text">
-                <input type="text" class="form-control" id="timezone" name="timezone"
+                <input type="text" class="form-control input-time-zone" id="timezone" name="timezone"
                 ng-model="vm.currentExpert.timezone" ng-minlength=5 ng-maxlength=100 required maxlength="100" ng-change="vm.updatingExpert = true" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.timezone.$dirty && !vm.currentExpert.timezone)}">
-                <span class="drsl-unit" translate="settings.form.timezone">(Timezone)</span>
+                <span class="drsl-unit drsl-unit-two-input" translate="settings.form.timezone">(Timezone)</span>
             </div>
         </div>
     </div>

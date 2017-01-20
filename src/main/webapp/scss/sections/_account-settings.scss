@@ -27,7 +27,7 @@ Account Settings
         }
     }
     .drsl-full-select {
-        width: 531px;
+        width: 534px;
     }
 
     .drsl-placeholder-label {
@@ -37,14 +37,38 @@ Account Settings
         .drsl-already-activated-input {
             width: 1151px;
         }
-
+        input.input-mobile {
+            padding-right: 55px;
+        }
+        input.input-handle {
+            padding-right: 90px;
+        }
+        input.input-other-link {
+            padding-right: 75px;
+        }
+        input.input-other-method {
+            padding-right: 100px;
+        }
+        input.input-phone {
+            padding-right: 50px;
+        }
+        input.input-skype {
+            padding-right: 48px;
+        }
+        input.input-location {
+            padding-right: 65px;
+        }
+        input.input-time-zone {
+            padding-right: 73px;
+        }
         input {
             padding: 5px 105px 5px $default-half-padding;
             border: 1px solid $form-field-border-color;
             border-radius: 4px;
             height: 32px;
+            width: 534px;
             // width: 532px;
-            width: 540px;
+            // width: 540px;
             box-shadow: $custom-input-shadow;
         }
         input::-ms-clear {
@@ -53,14 +77,18 @@ Account Settings
         .drsl-unit {
             position: absolute;
             display: block;
-            right: 8px;
+            right: 15px;
+            // right: 8px;
             top: 7px;
             z-index: 1;
             color: $custom-input-unit-color;
         }
+        .drsl-unit-two-input{
+            right: 2px;
+        }
 
         .drsl-select {
-            padding-right: 30px;
+            padding-right: 12px;
         }
     }
 
