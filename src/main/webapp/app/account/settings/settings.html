@@ -135,7 +135,11 @@ Your e-mail cannot be longer than 100 characters.
     </span>
 
     <br>
-    <div style="border: 1px solid rgb(204, 204, 204); padding: 10px; border-radius: 10px;">
+    <div style="    border: 1px solid rgb(204, 204, 204);
+    padding: 10px;
+    border-radius: 10px;
+    max-height: 151px;
+    overflow-y: scroll;">
         <button type="button" name="button" ng-repeat="attribute in vm.userAttributes track by $index" class="btn" style="margin: 5px;">
             <span>
                 {{attribute}}
@@ -316,7 +320,7 @@ Your e-mail cannot be longer than 100 characters.
 <!-- Expert Panel Right (welcome message, bio, issue focus, tech and 2nd tech) -->
 <div class="drsl-expert-message-content" ng-if="vm.currentExpert">
     <div class="panel panel-default" style="height: 100%;">
-        <div class="panel-body">
+        <div class="panel-body" style="max-height: 762px;height: 1000px">
             <!-- Welcome Message -->
             <label for="welcome" translate="settings.form.welcome" class="drsl-expert-textarea-label">Welcome Message</label>
             <textarea id="welcome" name="welcome" rows="4" cols="20" class="form-control" ng-model="vm.currentExpert.welcomeMessage" ng-change="vm.updatingExpert = true" placeholder="{{'settings.form.welcome.placeholder' | translate}}"></textarea>
@@ -348,7 +352,7 @@ Your e-mail cannot be longer than 100 characters.
             </span>
 
             <br>
-            <div style="border: 1px solid rgb(204, 204, 204); padding: 10px; border-radius: 10px;">
+            <div style="border: 1px solid rgb(204, 204, 204); padding: 10px; border-radius: 10px; max-height: 151px; overflow-y: scroll;">
                 <button type="button" name="button" ng-repeat="attribute in vm.expertAttributes track by $index" class="btn" style="margin: 5px;">
                     <span>
                         {{attribute.expertattribute.name}}
@@ -432,28 +436,39 @@ Your e-mail cannot be longer than 100 characters.
             </div>
 
             <!-- Payment Form Container -->
-            <div class="panel-body right-panel">
-            <!-- <div class="panel-body right-panel" ng-class="{'editing-attributes': vm.editingAttributes}"> -->
+            <!-- <div class="panel-body right-panel"> -->
+            <div class="panel-body right-panel" ng-class="{'editing-attributes': vm.editingAttributes}">
                 <form ng-submit="vm.addCard()">
                     <!-- Name on Card (required) -->
                     <div class="form-group">
-                        <label class="control-label sr-only" for="ccName" translate="settings.form.ccNameOnCard">Name on Card</label>
-                        <input type="text" class="form-control drsl-inline" id="ccName" name="ccName" placeholder="{{'settings.form.ccNameOnCard.placeholder' | translate}}"
+                        <!-- <label class="control-label sr-only" for="ccName" translate="settings.form.ccNameOnCard">Name on Card</label> -->
+                        <label class="drsl-expert-textarea-label" for="ccName" translate="">Card Holder's Name</label>
+                        <input type="text" class="form-control drsl-inline" id="ccName" name="ccName"
                         ng-minlength=1  ng-model="vm.creditCard.name" required ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.ccName.$dirty && !vm.creditCard.name)}">
+                        <!-- <input type="text" class="form-control drsl-inline" id="ccName" name="ccName" placeholder="{{'settings.form.ccNameOnCard.placeholder' | translate}}"
+                        ng-minlength=1  ng-model="vm.creditCard.name" required ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.ccName.$dirty && !vm.creditCard.name)}"> -->
                         <span ng-if="vm.error && vm.creditCard.name === undefined" class="drsl-invalid" translate="settings.messages.error.ccInvalidName">Invalid Name</span>
                     </div>
 
                     <!-- Card Number (required) -->
+                    <label class="drsl-expert-textarea-label" for="ccName" translate="">Card Number</label>
                     <div class="form-group">
                         <label class="control-label sr-only" for="ccNumber1" translate="settings.form.ccCardNumber">Card Number</label>
-                        <input type="number" class="form-control drsl-card-number-quarter" id="ccNumber1" name="ccNumber" placeholder="{{'settings.form.ccCardNumber.field1.placeholder' | translate}}"
+
+                        <input type="number" class="form-control drsl-card-number-quarter" id="ccNumber1" name="ccNumber"
                         ng-model="vm.creditCard.number.one" required  ng-keypress="vm.numberTab($event)" maxlength="4" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.ccNumber.$dirty && !vm.creditCard.number.one)}">
+                        <!-- <input type="number" class="form-control drsl-card-number-quarter" id="ccNumber1" name="ccNumber" placeholder="{{'settings.form.ccCardNumber.field1.placeholder' | translate}}"
+                        ng-model="vm.creditCard.number.one" required  ng-keypress="vm.numberTab($event)" maxlength="4" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.ccNumber.$dirty && !vm.creditCard.number.one)}"> -->
                         -
-                        <input type="number" class="form-control drsl-card-number-quarter" id="ccNumber2" name="ccNumber" placeholder="{{'settings.form.ccCardNumber.field2.placeholder' | translate}}" ng-keypress="vm.numberTab($event)"
+                        <input type="number" class="form-control drsl-card-number-quarter" id="ccNumber2" name="ccNumber" ng-keypress="vm.numberTab($event)"
                         ng-model="vm.creditCard.number.two" required maxlength="4" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.ccNumber.$dirty && !vm.creditCard.number.two)}">
+                        <!-- <input type="number" class="form-control drsl-card-number-quarter" id="ccNumber2" name="ccNumber" placeholder="{{'settings.form.ccCardNumber.field2.placeholder' | translate}}" ng-keypress="vm.numberTab($event)"
+                        ng-model="vm.creditCard.number.two" required maxlength="4" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.ccNumber.$dirty && !vm.creditCard.number.two)}"> -->
                         -
-                        <input type="number" class="form-control drsl-card-number-quarter" id="ccNumber3" name="ccNumber" placeholder="{{'settings.form.ccCardNumber.field3.placeholder' | translate}}" ng-keypress="vm.numberTab($event)"
+                        <input type="number" class="form-control drsl-card-number-quarter" id="ccNumber3" name="ccNumber" ng-keypress="vm.numberTab($event)"
                         ng-model="vm.creditCard.number.three" required maxlength="4" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.ccNumber.$dirty && !vm.creditCard.number.three)}">
+                        <!-- <input type="number" class="form-control drsl-card-number-quarter" id="ccNumber3" name="ccNumber" placeholder="{{'settings.form.ccCardNumber.field3.placeholder' | translate}}" ng-keypress="vm.numberTab($event)"
+                        ng-model="vm.creditCard.number.three" required maxlength="4" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.ccNumber.$dirty && !vm.creditCard.number.three)}"> -->
                         -
                         <input type="number" class="form-control drsl-card-number-quarter" id="ccNumber4" name="ccNumber"  ng-keypress="vm.numberTab($event)"
                         ng-model="vm.creditCard.number.four" required maxlength="4" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.ccNumber.$dirty && !vm.creditCard.number.four)}">
@@ -463,6 +478,7 @@ Your e-mail cannot be longer than 100 characters.
                     <!-- Expiration Date -->
                     <div class="form-group">
                         <label class="control-label sr-only" for="ccName" translate="settings.form.ccExpirationDate">Expiration Date</label>
+                        <label class="drsl-expert-textarea-label" for="ccName" translate="">Expiration Date</label>
                         <div class="row">
                             <!-- Month (required) -->
                             <div class="col-sm-6">
@@ -505,6 +521,7 @@ Your e-mail cannot be longer than 100 characters.
 
                     <!-- CVV (required) -->
                     <div class="form-group">
+                        <label class="drsl-expert-textarea-label" for="ccName" translate="">CVV</label>
                         <div class="row">
                             <div class="col-sm-6">
                                 <label class="control-label sr-only" for="cvv" translate="settings.form.ccCVV">Card CVV</label>
