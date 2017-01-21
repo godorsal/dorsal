@@ -131,7 +131,7 @@ gulp.task('ngconstant:dev', function () {
         name: 'dorsalApp',
         constants: {
             VERSION: util.parseVersion(),
-            DEBUG_INFO_ENABLED: true
+            DEBUG_INFO_ENABLED: false
         },
         template: config.constantTemplate,
         stream: true
