@@ -62,14 +62,37 @@
                 vm.editingGroup = true;
                 vm.newGroup = $scope.$resolve.group;
                 vm.currentExperts = vm.newGroup.experts;
-                vm.availableExperts.forEach(function (aExpert, index) {
-                    vm.currentExperts.forEach(function (connection) {
-                        if(aExpert.id === connection.expertaccount.id){
-                            vm.availableExperts.splice(index, 1);
-                        }
-                    })
-                })
+                filterAvailableExperts();
+                filterStagedExperts();
+            } else {
+                filterAvailableExperts();
+                filterStagedExperts();
             }
+        }
+        function filterAvailableExperts() {
+            vm.availableExperts.forEach(function (aExpert, index) {
+                // vm.currentExperts.find(function (connection) {
+                    // if(aExpert.id === connection.expertaccount.id){
+                        // console.log("Already Have Remove", aExpert);
+                        // vm.availableExperts.splice(index, 1);
+                        // vm.availableExperts.shift();
+                //     }
+                // })
+                vm.currentExperts.forEach(function (connection) {
+                    if(aExpert.id === connection.expertaccount.id){
+                        vm.availableExperts.splice(index, 1);
+                    }
+                })
+            })
+        }
+        function filterStagedExperts() {
+            vm.availableExperts.forEach(function (aExpert, index) {
+                vm.expertsToAdd.forEach(function (expert) {
+                    if(aExpert.id === expert.id){
+                        vm.availableExperts.splice(index, 1);
+                    }
+                })
+            })
         }
         vm.addExpert = function (expert, index) {
             vm.expertsToAdd.push(expert);

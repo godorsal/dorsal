@@ -140,14 +140,13 @@ Your e-mail cannot be longer than 100 characters.
     border-radius: 10px;
     max-height: 151px;
     overflow-y: scroll;">
-        <button type="button" name="button" ng-repeat="attribute in vm.userAttributes track by $index" class="btn" style="margin: 5px;">
+        <div ng-repeat="attribute in vm.userAttributes track by $index" class="btn" style="margin: 5px; background: buttonface; border-radius: 5px;" ng-click="$event.stopPropagation()">
             <span>
                 {{attribute}}
             </span>
-            <span ng-if="vm.editingAttributes" ng-click="vm.deleteUserAttribute($index)">
-                <i class="fa fa-times-circle" aria-hidden="true"></i>
-            </span>
-        </button>
+            <i class="fa fa-times-circle" aria-hidden="true" ng-if="vm.editingAttributes" ng-click="vm.deleteUserAttribute($index)"></i>
+
+        </div>
     </div>
 </div>
 
@@ -350,17 +349,14 @@ Your e-mail cannot be longer than 100 characters.
                     <button class="btn btn-success" ng-click="vm.saveAttributes()" style="line-height: 1;">Add</button>
                 </div>
             </span>
-
             <br>
             <div style="border: 1px solid rgb(204, 204, 204); padding: 10px; border-radius: 10px; max-height: 151px; overflow-y: scroll;">
-                <button type="button" name="button" ng-repeat="attribute in vm.expertAttributes track by $index" class="btn" style="margin: 5px;">
+                <div ng-repeat="attribute in vm.expertAttributes  track by $index" class="btn" style="margin: 5px; background: buttonface; border-radius: 5px;" ng-click="$event.stopPropagation()">
                     <span>
                         {{attribute.expertattribute.name}}
                     </span>
-                    <span ng-if="vm.editingAttributes" ng-click="vm.deleteAttribute($index)">
-                        <i class="fa fa-times-circle" aria-hidden="true"></i>
-                    </span>
-                </button>
+                    <i class="fa fa-times-circle" aria-hidden="true" ng-if="vm.editingAttributes" ng-click="vm.deleteAttribute($index)"></i>
+                </div>
             </div>
             <br>
             <label for="bio" translate="settings.form.expertise" class="drsl-expert-textarea-label">Expertise</label>

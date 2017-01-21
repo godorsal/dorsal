@@ -117,6 +117,9 @@
                 }
             })
         }
+        vm.inform = function () {
+            alert("YES!")
+        }
         function deleteAttribute(index) {
             vm.presentAttributes.push(vm.expertAttributes[index].expertattribute)
             ExpertAttributeToExpert.delete({id: vm.expertAttributes[index].id}, vm.expertAttributes.splice(index, 1));
