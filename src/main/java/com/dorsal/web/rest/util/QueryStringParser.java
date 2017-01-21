@@ -154,10 +154,17 @@ public class QueryStringParser {
         String result = "";
 
         int startIn = tagArg.indexOf(tag);
+        int endIn   = -1;
 
         if (startIn != -1) {
-            // Extract the result
-            result = tagArg.substring(startIn + tag.length());
+            // Delimiter are spaces
+            endIn = tagArg.indexOf(' ', startIn + tag.length());
+            if (endIn == -1) {
+                // Extract the result
+                result = tagArg.substring(startIn + tag.length());
+            } else {
+                result = tagArg.substring(startIn + tag.length(), endIn);
+            }
         }
 
         return result;
