@@ -163,7 +163,7 @@ public class ExpertAccountResource {
     @Timed
     public List<ExpertAccount> getExpertsByQuery(@PathVariable String query) {
         log.debug("REST request to get ExpertAccounts by query");
-        log.warn("ExpertAccount query string: " + query);
+        log.info("ExpertAccount query string: " + query);
 
         // Check if logged-in user is expert.
         if (expertAccountRepository.findByUserIsCurrentUser() != null) {
