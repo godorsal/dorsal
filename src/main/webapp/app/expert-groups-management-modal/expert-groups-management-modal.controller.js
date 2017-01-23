@@ -34,7 +34,6 @@
         })
         vm.searchExperts = function () {
             ExpertAccount.query({param: "query", options: vm.queryString}, function (res) {
-                // console.log("REEEZ", res);
                 vm.availableExperts = res;
                 checkResolve();
                 if($scope.$resolve.viewOnly){
@@ -70,20 +69,14 @@
             }
         }
         function filterAvailableExperts() {
-            vm.availableExperts.forEach(function (aExpert, index) {
-                // vm.currentExperts.find(function (connection) {
-                    // if(aExpert.id === connection.expertaccount.id){
-                        // console.log("Already Have Remove", aExpert);
-                        // vm.availableExperts.splice(index, 1);
-                        // vm.availableExperts.shift();
-                //     }
-                // })
-                vm.currentExperts.forEach(function (connection) {
-                    if(aExpert.id === connection.expertaccount.id){
-                        vm.availableExperts.splice(index, 1);
-                    }
-                })
+            var currentExperts = [];
+
+            vm.currentExperts.forEach(function (connection) {
+                currentExperts.push(connection.expertaccount.id)
             })
+            vm.availableExperts = vm.availableExperts.filter(function(val) {
+                return currentExperts.indexOf(val.id) == -1;
+            });
         }
         function filterStagedExperts() {
             vm.availableExperts.forEach(function (aExpert, index) {
