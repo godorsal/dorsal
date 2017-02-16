@@ -4,9 +4,12 @@ import com.codahale.metrics.annotation.Timed;
 import com.dorsal.domain.ExpertAccount;
 import com.dorsal.repository.ExpertAccountRepository;
 import com.dorsal.web.rest.util.HeaderUtil;
+import com.dorsal.web.rest.util.PaginationUtil;
 import com.dorsal.web.rest.util.QueryStringParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -161,7 +164,7 @@ public class ExpertAccountResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public List<ExpertAccount> getExpertsByQuery(@PathVariable String query) {
+    public ResponseEntity <List<ExpertAccount>> getExpertsByQuery(@PathVariable String query, Pageable pageable) {
         log.debug("REST request to get ExpertAccounts by query");
         log.info("ExpertAccount query string: " + query);
 
@@ -173,23 +176,37 @@ public class ExpertAccountResource {
             List<String> productList = QueryStringParser.getProductListFromQuery(query);
             List<String> attributeList = QueryStringParser.getAttributeListFromQuery(query);
             int score = QueryStringParser.getScoreFromQuery(query);
+            Page<ExpertAccount> expertAccountPage = null;
 
-            if (attributeList == null && productList == null) {
+            if ((attributeList == null || attributeList.size() == 0) && (productList == null || productList.size() == 0) ) {
                 // invalid query return a null set
-                expertAccounts = null;
+                //expertAccounts = null;
+                return null;
             } else if (attributeList == null || attributeList.size() == 0) {
                 // No attributes defined search by products only
-                expertAccounts = expertAccountRepository.findExpertByProductsList(productList, score);
+                expertAccountPage = expertAccountRepository.findExpertByProductsList(productList, score, pageable);
+                expertAccounts = expertAccountPage.getContent();
             } else if (productList == null || productList.size() == 0) {
                 // no products defined search by attributes only
-                expertAccounts = expertAccountRepository.findExpertByAttribute(attributeList);
+                expertAccountPage = expertAccountRepository.findExpertByAttribute(attributeList, pageable);
+                expertAccounts = expertAccountPage.getContent();
             } else {
                 // Search by products and attributes
-                expertAccounts = expertAccountRepository.findExpertByProductsAndAttributeLists(productList,score,attributeList);
+                expertAccountPage = expertAccountRepository.findExpertByProductsAndAttributeLists(productList,score,attributeList, pageable);
+                expertAccounts = expertAccountPage.getContent();
             }
 
-            // Return result set
-            return expertAccounts;
+            try {
+                // Return result set
+                log.info("Pages [" + expertAccountPage.getTotalPages() + "] Total Elements EXPERT [" + expertAccountPage.getTotalElements() + "]");
+                HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(expertAccountPage, "/expert-accounts/query");
+                return new ResponseEntity<>(expertAccounts, headers, HttpStatus.OK);
+            } catch (URISyntaxException use) {
+                log.error(" API /expert-accounts/query/ threw an exception. Message " + use);
+                return null;
+            }
+            // Before pagination
+            //return expertAccounts;
         } else {
             log.error("Request for all expert accounts from an un-authorized user.");
             return null;

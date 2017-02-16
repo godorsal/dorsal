@@ -5,6 +5,7 @@ import com.dorsal.domain.ExpertAccount;
 import com.dorsal.domain.GlobalMetadata;
 import com.dorsal.domain.Technology;
 import com.dorsal.domain.enumeration.Availability;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
@@ -52,11 +53,13 @@ public interface ExpertAccountRepository extends JpaRepository<ExpertAccount,Lon
     List<ExpertAccount> findExpertByMainProduct(@Param("mainproduct")String mainProduct, @Param("score") int score);
 
 
-    @Query("select distinct ea from ExpertAccount ea, ProductExpertScore pes, Product p where ea.id = pes.expertaccount.id AND pes.product.id = p.id and p.name IN (:productlist) AND pes.score >= :score ORDER BY ea.expertScore DESC")
-    List<ExpertAccount> findExpertByProductsList(@Param("productlist")List<String> productlist, @Param("score") int score);
+    @Query(value = "select distinct ea from ExpertAccount ea, ProductExpertScore pes, Product p where ea.id = pes.expertaccount.id AND pes.product.id = p.id and p.name IN (:productlist) AND pes.score >= :score ORDER BY ea.expertScore DESC",
+    countQuery = "select distinct count(ea) from ExpertAccount ea, ProductExpertScore pes, Product p where ea.id = pes.expertaccount.id AND pes.product.id = p.id and p.name IN (:productlist) AND pes.score >= :score ")
+    Page<ExpertAccount> findExpertByProductsList(@Param("productlist")List<String> productlist, @Param("score") int score, Pageable pageable);
 
-    @Query("select distinct ea from ExpertAccount ea, ProductExpertScore pes, Product p, ExpertAttribute eatt, ExpertAttributeToExpert eate where ea.id = pes.expertaccount.id AND pes.product.id = p.id and p.name IN (:productlist) AND pes.score >= :score AND eatt.name IN(:attributelist) AND eatt.id = eate.expertattribute.id AND eate.expertaccount.id = ea.id ORDER BY ea.expertScore DESC")
-    List<ExpertAccount> findExpertByProductsAndAttributeLists(@Param("productlist")List<String> productlist, @Param("score") int score, @Param("attributelist")List<String> attributelist);
+    @Query(value = "select distinct ea from ExpertAccount ea, ProductExpertScore pes, Product p, ExpertAttribute eatt, ExpertAttributeToExpert eate where ea.id = pes.expertaccount.id AND pes.product.id = p.id and p.name IN (:productlist) AND pes.score >= :score AND eatt.name IN(:attributelist) AND eatt.id = eate.expertattribute.id AND eate.expertaccount.id = ea.id ORDER BY ea.expertScore DESC",
+        countQuery = "select distinct count(ea) from ExpertAccount ea,  ProductExpertScore pes, Product p, ExpertAttribute eatt, ExpertAttributeToExpert eate where ea.id = pes.expertaccount.id AND pes.product.id = p.id and p.name IN (:productlist) AND pes.score >= :score AND eatt.name IN(:attributelist) AND eatt.id = eate.expertattribute.id AND eate.expertaccount.id = ea.id")
+    Page<ExpertAccount> findExpertByProductsAndAttributeLists(@Param("productlist")List<String> productlist, @Param("score") int score, @Param("attributelist")List<String> attributelist, Pageable pageable);
 
     @Query("select distinct ea from ExpertAccount ea, ProductExpertScore pes, Product p, ExpertAttribute eatt, ExpertAttributeToExpert eate where ea.id = pes.expertaccount.id AND pes.product.id = p.id and p.name like :mainproduct AND pes.score >= :score AND eatt.name IN(:attributelist) AND eatt.id = eate.expertattribute.id AND eate.expertaccount.id = ea.id ORDER BY ea.expertScore DESC")
     List<ExpertAccount> findExpertByProductAndAttribute(@Param("mainproduct")String mainProduct, @Param("score") int score, @Param("attributelist")List<String> attributelist);
@@ -67,8 +70,9 @@ public interface ExpertAccountRepository extends JpaRepository<ExpertAccount,Lon
     @Query("select distinct ea from ExpertAccount ea, ProductExpertScore pes, Product p, ExpertPool ep, ExpertPoolToExpert epte, ExpertAttribute eatt, ExpertAttributeToExpert eate where ea.id = pes.expertaccount.id AND pes.product.id = p.id and p.name IN (:productlist) AND pes.score >= :score AND lower(ep.name) like :expertpool AND ep.id = epte.expertpool.id AND epte.expertaccount.id = ea.id AND eatt.name IN(:attributelist) AND eatt.id = eate.expertattribute.id AND eate.expertaccount.id = ea.id ORDER BY ea.expertScore DESC")
     List<ExpertAccount> findExpertByProductsAndAttributesAndExpertPool(@Param("productlist")List<String> productlist, @Param("score") int score, @Param("attributelist")List<String> attributelist, @Param("expertpool")String expertpool);
 
-    @Query("select distinct ea from ExpertAccount ea, ExpertAttribute eatt, ExpertAttributeToExpert eate where eatt.name IN(:attributelist) AND eatt.id = eate.expertattribute.id AND eate.expertaccount.id = ea.id ORDER BY ea.expertScore DESC")
-    List<ExpertAccount> findExpertByAttribute(@Param("attributelist")List<String> attributelist);
+    @Query(value ="select distinct ea from ExpertAccount ea, ExpertAttribute eatt, ExpertAttributeToExpert eate where eatt.name IN(:attributelist) AND eatt.id = eate.expertattribute.id AND eate.expertaccount.id = ea.id ORDER BY ea.expertScore DESC",
+    countQuery = "select distinct count(ea) from ExpertAccount ea, ExpertAttribute eatt, ExpertAttributeToExpert eate where eatt.name IN(:attributelist) AND eatt.id = eate.expertattribute.id AND eate.expertaccount.id = ea.id")
+    Page<ExpertAccount> findExpertByAttribute(@Param("attributelist")List<String> attributelist, Pageable pageable);
 
 //    @Query("select distinct ea from ExpertAccount ea, ProductExpertScore pes, Product p where ea.id = pes.expertaccount.id AND pes.product.id = p.id and p.name IN (:productlist) AND pes.score >= :score  ORDER BY ea.expertScore DESC")
 //    List<ExpertAccount> findExpertByProduct(@Param("productlist")List<String> productlist, @Param("score") int score);
