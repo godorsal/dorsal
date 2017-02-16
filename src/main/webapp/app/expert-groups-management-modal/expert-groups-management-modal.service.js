@@ -33,7 +33,18 @@
                 windowClass: 'drsl-rating-comment-modal',
                 resolve: {
                     group: function(){ return group; },
-                    viewOnly: function(){ return viewOnly; }
+                    viewOnly: function(){ return viewOnly; },
+                    pagingParams: ['PaginationUtil', function (PaginationUtil) {
+                        return {
+                            page: PaginationUtil.parsePage('1'),
+                            sort: {
+                                value: 'id,asc',
+                                squash: true
+                            },
+                            predicate: PaginationUtil.parsePredicate('id,asc'),
+                            ascending: PaginationUtil.parseAscending('id,asc')
+                        };
+                    }]
                 }
             });
             modalInstance.result.then(

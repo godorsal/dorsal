@@ -162,6 +162,10 @@
 
 </tbody>
 </table>
+<div class="text-center">
+    <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage" name-of-item="'experts'"></jhi-item-count>
+    <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+</div>
 <div class="pull-right">
     <button type="button" name="button" class="btn btn-success" ng-click="vm.saveGroup()" ng-disabled="!vm.changesMade" data-translate="dorsalApp.expertGroup.modal.form.save">Save Group</button>
     <button type="button" name="button" class="btn btn-success" ng-click="vm.closeModal()" data-translate="dorsalApp.expertGroup.modal.form.cancel">Cancel</button>

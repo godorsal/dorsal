@@ -5,36 +5,98 @@
     .module('dorsalApp')
     .controller('ExpertGroupsManagementModalController', ExpertGroupsManagementModalController);
 
-    ExpertGroupsManagementModalController.$inject = ['$scope', '$timeout', '$uibModalInstance', '$document', '$translate', 'ExpertAccount', 'ExpertPool', 'ExpertPoolToExpert', '$rootScope', 'ExpertAttribute', 'Product'];
+    ExpertGroupsManagementModalController.$inject = ['$scope', '$timeout', '$uibModalInstance', '$document', '$translate', 'ExpertAccount', 'ExpertPool', 'ExpertPoolToExpert', '$rootScope', 'ExpertAttribute',
+    'pagingParams', 'ParseLinks', 'paginationConstants', 'Product'];
 
-    function ExpertGroupsManagementModalController($scope, $timeout, $uibModalInstance, $document, $translate, ExpertAccount, ExpertPool, ExpertPoolToExpert, $rootScope, ExpertAttribute, Product) {
+    function ExpertGroupsManagementModalController($scope, $timeout, $uibModalInstance, $document, $translate, ExpertAccount, ExpertPool, ExpertPoolToExpert, $rootScope, ExpertAttribute, pagingParams, ParseLinks, paginationConstants, Product) {
         var vm = this;
+
         vm.expertsToAdd = [];
         vm.expertsToDelete = [];
         vm.currentExperts = [];
+
         vm.pending = false;
         vm.viewOnly = false;
         vm.changesMade = false;
+
         vm.queryString = "";
         vm.newGroup = {
             expertSelection: 'EXPERT_IN_POOL_FIRST'
         };
+        vm.page = 1;
+        vm.itemsPerPage = 1;
+        vm.loadPage = loadPage;
+        vm.predicate = pagingParams.predicate;
+        vm.reverse = pagingParams.ascending;
+        // paginationConstants.itemsPerPage = "20";
+        // vm.itemsPerPage = paginationConstants.itemsPerPage;
+        console.log(pagingParams);
         vm.queryProducts = [];
         vm.queryAttributes = [];
         vm.queryObject = {};
         vm.selectScore = "1";
 
-        // ExpertAccount.query(function (res) {
-        ExpertAccount.query({param: "experts"},function (res) {
-            vm.availableExperts = res;
-            checkResolve();
-            if($scope.$resolve.viewOnly){
-                vm.viewOnly = true;
+        vm.totalItems = null;
+        vm.loadAll = loadAll;
+
+        vm.loadAll();
+
+
+        function loadAll () {
+            ExpertAccount.query({
+                page: pagingParams.page - 1,
+                size: vm.itemsPerPage,
+                sort: sort(),
+                param: "experts"
+            }, onSuccess, onError);
+        }
+        function onSuccess(data, headers) {
+            //hide anonymous user from user management: it's a required user for Spring Security
+            for (var i in data) {
+                if (data[i]['login'] === 'anonymoususer') {
+                    data.splice(i, 1);
+                }
             }
-        })
+            // vm.links = ParseLinks.parse(headers('link'));
+            vm.totalItems = headers('X-Total-Count');
+            vm.queryCount = vm.totalItems;
+            vm.page = pagingParams.page;
+            vm.availableExperts = data;
+            console.log(data);
+        }
+        function onError(error) {
+            AlertService.error(error.data.message);
+        }
+        function loadPage (page) {
+            vm.page = page;
+            vm.transition();
+        }
+
+        function sort () {
+            var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
+            if (vm.predicate !== 'id') {
+                result.push('id');
+            }
+            return result;
+        }
+
+
+
+        // ExpertAccount.query(function (res) {
+        // ExpertAccount.query({param: "experts"},function (res, headers) {
+        //     vm.availableExperts = res;
+        //     vm.page = pagingParams.page;
+        //     vm.totalItems = headers('X-Total-Count');
+        //     vm.queryCount = vm.totalItems;
+        //     checkResolve();
+        //     if($scope.$resolve.viewOnly){
+        //         vm.viewOnly = true;
+        //     }
+        // })
         vm.searchExperts = function () {
             ExpertAccount.query({param: "query", options: vm.queryString}, function (res) {
                 vm.availableExperts = res;
+                vm.page = pagingParams.page;
                 checkResolve();
                 if($scope.$resolve.viewOnly){
                     vm.viewOnly = true;
