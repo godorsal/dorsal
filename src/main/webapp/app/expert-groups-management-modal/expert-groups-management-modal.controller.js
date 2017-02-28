@@ -6,9 +6,9 @@
     .controller('ExpertGroupsManagementModalController', ExpertGroupsManagementModalController);
 
     ExpertGroupsManagementModalController.$inject = ['$scope', '$timeout', '$uibModalInstance', '$document', '$translate', 'ExpertAccount', 'ExpertPool', 'ExpertPoolToExpert', '$rootScope', 'ExpertAttribute',
-    'pagingParams', 'ParseLinks', 'paginationConstants', 'Product'];
+    'pagingParams', 'ParseLinks', 'paginationConstants', 'Product', 'ProductExpertScore', 'AlertService', '$state'];
 
-    function ExpertGroupsManagementModalController($scope, $timeout, $uibModalInstance, $document, $translate, ExpertAccount, ExpertPool, ExpertPoolToExpert, $rootScope, ExpertAttribute, pagingParams, ParseLinks, paginationConstants, Product) {
+    function ExpertGroupsManagementModalController($scope, $timeout, $uibModalInstance, $document, $translate, ExpertAccount, ExpertPool, ExpertPoolToExpert, $rootScope, ExpertAttribute, pagingParams, ParseLinks, paginationConstants, Product, ProductExpertScore, AlertService, $state) {
         var vm = this;
 
         vm.expertsToAdd = [];
@@ -18,51 +18,51 @@
         vm.pending = false;
         vm.viewOnly = false;
         vm.changesMade = false;
+        vm.queryComplete = false;
 
         vm.queryString = "";
         vm.newGroup = {
             expertSelection: 'EXPERT_IN_POOL_FIRST'
         };
         vm.page = 1;
-        vm.itemsPerPage = 1;
+
         vm.loadPage = loadPage;
         vm.predicate = pagingParams.predicate;
         vm.reverse = pagingParams.ascending;
-        // paginationConstants.itemsPerPage = "20";
-        // vm.itemsPerPage = paginationConstants.itemsPerPage;
-        console.log(pagingParams);
+        // paginationConstants.itemsPerPage = "5";
+        vm.itemsPerPage = paginationConstants.itemsPerPage;
+
         vm.queryProducts = [];
         vm.queryAttributes = [];
         vm.queryObject = {};
-        vm.selectScore = "1";
+
+        vm.transition = transition;
 
         vm.totalItems = null;
         vm.loadAll = loadAll;
 
-        vm.loadAll();
-
 
         function loadAll () {
+            console.log("IPP", vm.itemsPerPage);
+            vm.pagingLoaded = true;
+            vm.queryString = "product:MySQL:attribute::score:1"
             ExpertAccount.query({
-                page: pagingParams.page - 1,
-                size: vm.itemsPerPage,
+                page: vm.page -1 ,
+                size:  vm.itemsPerPage,
+                // itemsPerPage:  vm.itemsPerPage,
+                // size: vm.itemsPerPage,
                 sort: sort(),
-                param: "experts"
+                param: "query",
+                options: vm.queryString
             }, onSuccess, onError);
         }
         function onSuccess(data, headers) {
-            //hide anonymous user from user management: it's a required user for Spring Security
-            for (var i in data) {
-                if (data[i]['login'] === 'anonymoususer') {
-                    data.splice(i, 1);
-                }
-            }
-            // vm.links = ParseLinks.parse(headers('link'));
+            vm.links = ParseLinks.parse(headers('link'));
             vm.totalItems = headers('X-Total-Count');
             vm.queryCount = vm.totalItems;
-            vm.page = pagingParams.page;
+            // vm.page = pagingParams.page;
             vm.availableExperts = data;
-            console.log(data);
+            console.log("LOAD ALL DATA", data);
         }
         function onError(error) {
             AlertService.error(error.data.message);
@@ -70,6 +70,11 @@
         function loadPage (page) {
             vm.page = page;
             vm.transition();
+        }
+
+        function transition () {
+            console.log(vm.page);
+            vm.searchExperts()
         }
 
         function sort () {
@@ -80,28 +85,28 @@
             return result;
         }
 
-
-
-        // ExpertAccount.query(function (res) {
-        // ExpertAccount.query({param: "experts"},function (res, headers) {
-        //     vm.availableExperts = res;
-        //     vm.page = pagingParams.page;
-        //     vm.totalItems = headers('X-Total-Count');
-        //     vm.queryCount = vm.totalItems;
-        //     checkResolve();
-        //     if($scope.$resolve.viewOnly){
-        //         vm.viewOnly = true;
-        //     }
-        // })
         vm.searchExperts = function () {
-            ExpertAccount.query({param: "query", options: vm.queryString}, function (res) {
-                vm.availableExperts = res;
-                vm.page = pagingParams.page;
-                checkResolve();
-                if($scope.$resolve.viewOnly){
-                    vm.viewOnly = true;
-                }
-            })
+            if(!vm.selectScore){
+                vm.selectScore = "2";
+            }
+            ExpertAccount.query({
+                page: vm.page-1,
+                // page: pagingParams.page - 1,
+                // size: 5,
+                size: vm.itemsPerPage,
+                sort: sort(),
+                param: "query",
+                options: vm.queryString
+            }, onSuccess, onError);
+            // }, function (res) {
+            //     vm.availableExperts = res;
+            //     // vm.page = pagingParams.page;
+            //     vm.queryComplete = true;
+            //     checkResolve();
+            //     if($scope.$resolve.viewOnly){
+            //         vm.viewOnly = true;
+            //     }
+            // }, onError);
         }
         vm.clearQuery = function () {
             vm.queryString = "";
@@ -111,6 +116,7 @@
             vm.addAttribute = "";
             vm.addProduct = "";
             vm.queryObject = {};
+            vm.loadAll();
         }
         ExpertAttribute.query(function (res) {
             vm.availableAttributes = res;
@@ -188,8 +194,14 @@
                 products: vm.queryProducts,
                 score: vm.selectScore
             }
+            vm.queryComplete = false;
         }
         vm.enterAttribute = function () {
+            if(vm.queryComplete){
+                vm.queryString = "";
+                vm.queryObject = {};
+                vm.queryAttributes = []
+            }
             if(vm.queryAttributes.length > 0){
                 var attIndex = vm.queryAttributes.indexOf(vm.addAttribute);
                 if(attIndex != -1){
@@ -203,6 +215,12 @@
             vm.updateQuerystring();
         }
         vm.enterProduct = function () {
+            if(vm.queryComplete){
+                vm.queryString = "";
+                vm.queryObject = {};
+                console.log("CLEAR QUERY ");
+                vm.queryProducts = []
+            }
             if(vm.queryProducts.length > 0){
                 var prodIndex = vm.queryProducts.indexOf(vm.addProduct);
                 if(prodIndex != -1){
@@ -257,5 +275,13 @@
                 $uibModalInstance.dismiss('cancel');
             }
         }
+        $timeout(function () {
+            // paginationConstants.itemsPerPage = "5";
+            vm.itemsPerPage = paginationConstants.itemsPerPage;
+            // if(vm.itemsPerPage == 5){
+                vm.loadAll()
+            // }
+        });
+
     }
 })();

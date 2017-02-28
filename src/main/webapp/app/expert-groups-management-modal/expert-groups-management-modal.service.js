@@ -37,10 +37,7 @@
                     pagingParams: ['PaginationUtil', function (PaginationUtil) {
                         return {
                             page: PaginationUtil.parsePage('1'),
-                            sort: {
-                                value: 'id,asc',
-                                squash: true
-                            },
+                            sort: 'id,asc',
                             predicate: PaginationUtil.parsePredicate('id,asc'),
                             ascending: PaginationUtil.parseAscending('id,asc')
                         };
