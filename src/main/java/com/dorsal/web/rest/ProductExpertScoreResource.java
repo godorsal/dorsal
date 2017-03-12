@@ -113,6 +113,24 @@ public class ProductExpertScoreResource {
     }
 
     /**
+     * GET /product-expert-scores/expert/{id}
+     *
+     * @param id the id of the expert  to retrieve a list of productExpertScore
+     * @return the ResponseEntity with status 200 (OK) and with body the productExpertScore, or with status 404 (Not Found)
+     */
+    @RequestMapping(value = "/product-expert-scores/expert/{id}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<ProductExpertScore> getAllProductExpertScoresByExpertId(@PathVariable Long id) {
+        log.debug("REST request to get all ProductExpertScores by ExpertId");
+        List<ProductExpertScore> productExpertScores = productExpertScoreRepository.findByExpertId(id);
+        return productExpertScores;
+    }
+
+
+
+    /**
      * DELETE  /product-expert-scores/:id : delete the "id" productExpertScore.
      *
      * @param id the id of the productExpertScore to delete
