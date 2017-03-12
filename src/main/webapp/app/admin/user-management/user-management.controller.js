@@ -26,6 +26,8 @@
         paginationConstants.itemsPerPage = "20";
         vm.itemsPerPage = paginationConstants.itemsPerPage;
         vm.transition = transition;
+        console.log("PARAMS", pagingParams);
+        console.log("CONSTANTS", paginationConstants);
 
         vm.loadAll();
 

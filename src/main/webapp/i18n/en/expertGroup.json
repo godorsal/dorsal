@@ -16,16 +16,17 @@
             "detail": {
                 "title": "Expert Group"
             },
-            "name": "Name",
-            "description": "Description",
-            "expertSelection": "Expert Selection",
+            "name": "Group Name",
+            "description": "Group Description",
+            "expertSelection": "Expert Matching",
             "expertgrouptoexpert": "Expertgrouptoexpert",
             "experts": "Experts",
+            "filterExperts": "Filter Experts",
             "expertgroupowner": "Expertgroupowner",
             "owner": "Owner",
             "modal": {
                 "header": {
-                    "newGroup": "New Expert Group",
+                    "newGroup": "Creating New Expert Group",
                     "editingGroup": "Editing {{groupname}}",
                     "viewing": "{{groupname}}'s Experts"
                 },
@@ -34,9 +35,9 @@
                 "available": "Available",
                 "staged": "Staged",
                 "form": {
-                    "name": "Name: ",
-                    "description": "Description: ",
-                    "selection": "Selection: ",
+                    "name": "Group Name: ",
+                    "description": "Grop Description: ",
+                    "selection": "Group Matching: ",
                     "expertsInPoolFirst": "Experts in pool first",
                     "expertsInPoolOnly": "Experts in pool only",
                     "pending": "You still have {{expertsToAdd}} experts pending",
