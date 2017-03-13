@@ -542,3 +542,69 @@ table.drsl-table-scroll thead > tr {
     height: 527px;
     position: relative;
 }
+.drsl-field-section {
+    width: 600px;
+    border-radius: 4px;
+    resize: none;
+}
+.drsl-step-one {
+    width: 800px;
+    padding-bottom: 20px;
+    > img, .drsl-field-section, .input-group-btn {
+        display: inline-block;
+        vertical-align: top;
+    }
+    > img {
+        width: 100px;
+    }
+    > .drsl-field-section {
+        width: 600px;
+    }
+}
+.drsl-step-two {
+    width: 800px;
+    > img, .drsl-field-section {
+        display: inline-block;
+        vertical-align: top;
+    }
+    > img {
+        width: 100px;
+    }
+    > .drsl-field-section {
+        width: 600px;
+    }
+}
+.drsl-step-three {
+    width: 800px;
+    > img, .drsl-field-section {
+        display: inline-block;
+        vertical-align: top;
+    }
+    > img {
+        width: 100px;
+    }
+    > .drsl-field-section {
+        width: 600px;
+    }
+}
+.drsl-tech-and-skill {
+    display: inline-block;
+    width: 50%;
+}
+.drsl-avialable-technology {
+    margin-bottom: 20px;
+    width: 50%;
+    height: 201.99px;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 4px;
+    border-color: rgb(204, 204, 204);
+}
+.drsl-tech-tag {
+    display: inline-block;
+    margin: 5px;
+    background: buttonface;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+}

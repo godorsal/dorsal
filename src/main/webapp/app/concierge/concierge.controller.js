@@ -73,7 +73,7 @@
             vm.conciergechaturl = null;
             vm.checkingMessages = false;
         })
-
+        
         /**
         * Creates (saves/updates) the case.
         * Called after the form is submitted and the user is authenticated.
