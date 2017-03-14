@@ -6,9 +6,9 @@
     .controller('ExpertGroupsManagementModalController', ExpertGroupsManagementModalController);
 
     ExpertGroupsManagementModalController.$inject = ['$scope', '$timeout', '$uibModalInstance', '$document', '$translate', 'ExpertAccount', 'ExpertPool', 'ExpertPoolToExpert', '$rootScope', 'ExpertAttribute',
-    'pagingParams', 'ParseLinks', 'paginationConstants', 'Product', 'ProductExpertScore', 'AlertService', '$state'];
+    'pagingParams', 'ParseLinks', 'paginationConstants', 'Product', 'ExpertAttributeToExpert', 'AlertService', '$state', 'ProductExpertScore'];
 
-    function ExpertGroupsManagementModalController($scope, $timeout, $uibModalInstance, $document, $translate, ExpertAccount, ExpertPool, ExpertPoolToExpert, $rootScope, ExpertAttribute, pagingParams, ParseLinks, paginationConstants, Product, ProductExpertScore, AlertService, $state) {
+    function ExpertGroupsManagementModalController($scope, $timeout, $uibModalInstance, $document, $translate, ExpertAccount, ExpertPool, ExpertPoolToExpert, $rootScope, ExpertAttribute, pagingParams, ParseLinks, paginationConstants, Product, ExpertAttributeToExpert, AlertService, $state, ProductExpertScore) {
         var vm = this;
 
         vm.expertsToAdd = [];
@@ -61,8 +61,28 @@
             vm.totalItems = headers('X-Total-Count');
             vm.queryCount = vm.totalItems;
             // vm.page = pagingParams.page;
-            vm.availableExperts = data;
-            console.log("LOAD ALL DATA", data);
+            // vm.availableExperts = data;
+            vm.availableExperts = [];
+            data.forEach(function (expert) {
+                ProductExpertScore.query({param: "expert", id: expert.id}, function (result) {
+                    expert.scoreArray = [];
+                    result.forEach(function (pes) {
+                        if(pes.score > 1){
+                            expert.scoreArray.push(pes)
+                        }
+                    })
+                })
+                ExpertAttributeToExpert.query({param: "expert", id: expert.id}, function (result) {
+                    console.log("ATR RESULT", result);
+                    expert.attributeArray = [];
+                    result.forEach(function (eat) {
+                        expert.attributeArray.push(eat.expertattribute)
+                            // expert.scoreArray.push(eat)
+                    })
+                })
+                vm.availableExperts.push(expert)
+            })
+            // console.log("LOAD ALL DATA", data);
         }
         function onError(error) {
             AlertService.error(error.data.message);
@@ -107,6 +127,11 @@
             //         vm.viewOnly = true;
             //     }
             // }, onError);
+        }
+        vm.selectExpert = function (expert) {
+            console.log("SELECT");
+            console.log(expert);
+            vm.selectedExpert = expert;
         }
         vm.clearQuery = function () {
             vm.queryString = "";

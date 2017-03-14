@@ -132,7 +132,7 @@
         <tr>
             <td>
                 <table class="table table-striped">
-                    <tr ng-repeat="expert in vm.availableExperts track by $index" ng-click="expert.dataShown = !expert.dataShown">
+                    <tr ng-repeat="expert in vm.availableExperts track by $index" ng-click="vm.selectExpert(expert)">
                         <td ng-if="!editing">{{expert.user.firstName}} {{expert.user.lastName}}</td>
                         <td ng-if="editing">{{expert.expertaccount.user.firstName}} {{expert.expertaccount.user.lastName}}</td>
                         <td><i class="fa fa-plus" aria-hidden="true" ng-click="vm.addExpert(expert, $index)"></i></td>
@@ -165,6 +165,21 @@
 <div class="text-center" ng-if="vm.pagingLoaded">
     <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage" name-of-item="'experts'"></jhi-item-count>
     <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+</div>
+<div>
+    <p>
+        {{vm.selectedExpert.user.firstName}}
+        {{vm.selectedExpert.user.lastName}}
+    </p>
+    <p>Products</p>
+    <p ng-repeat="product in vm.selectedExpert.scoreArray">
+        {{product.product.name}}
+        {{product.score}}
+    </p>
+    <p>Attributes</p>
+    <p ng-repeat="attribute in vm.selectedExpert.attributeArray">
+        {{attribute.name}}
+    </p>
 </div>
 <div class="pull-right">
     <button type="button" name="button" class="btn btn-success" ng-click="vm.saveGroup()" ng-disabled="!vm.changesMade" data-translate="dorsalApp.expertGroup.modal.form.save">Save Group</button>

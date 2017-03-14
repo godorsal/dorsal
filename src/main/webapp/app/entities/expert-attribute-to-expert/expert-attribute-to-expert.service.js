@@ -7,7 +7,8 @@
     ExpertAttributeToExpert.$inject = ['$resource'];
 
     function ExpertAttributeToExpert ($resource) {
-        var resourceUrl =  'api/expert-attribute-to-experts/:id';
+        var resourceUrl =  'api/expert-attribute-to-experts/:param/:id';
+        // var resourceUrl =  'api/expert-attribute-to-experts/:id';
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
