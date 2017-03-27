@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('ConciergeController', ConciergeController);
 
-    ConciergeController.$inject = ['$rootScope', '$scope', '$state', 'LoginService', 'Principal', 'ConciergeService', '$translate', '$http', 'Supportcase', 'Casetechnologyproperty', 'toastr', 'AttachmentModalService', 'DateUtils', 'CaseService', 'DrslNewCaseService', 'DrslMetadata', 'ExpertAccount', 'DrslUserFlowService', 'DrslHipChatService', '$window', '$sce'];
+    ConciergeController.$inject = ['$rootScope', '$scope', '$state', 'LoginService', 'Principal', 'ConciergeService', '$translate', '$http', 'Supportcase', 'Casetechnologyproperty', 'toastr', 'AttachmentModalService', 'DateUtils', 'CaseService', 'DrslNewCaseService', 'DrslMetadata', 'ExpertAccount', 'DrslUserFlowService', 'DrslHipChatService', '$window', '$sce', 'Product', 'Skill', 'ExpertAttribute'];
 
-    function ConciergeController($rootScope, $scope, $state, LoginService, Principal, ConciergeService, $translate, $http, Supportcase, Casetechnologyproperty, toastr, AttachmentModalService, DateUtils, CaseService, DrslNewCaseService, DrslMetadata, ExpertAccount, DrslUserFlowService, DrslHipChatService, $window, $sce) {
+    function ConciergeController($rootScope, $scope, $state, LoginService, Principal, ConciergeService, $translate, $http, Supportcase, Casetechnologyproperty, toastr, AttachmentModalService, DateUtils, CaseService, DrslNewCaseService, DrslMetadata, ExpertAccount, DrslUserFlowService, DrslHipChatService, $window, $sce, Product, Skill, ExpertAttribute) {
 
         DrslUserFlowService.handleUserFlow();
 
@@ -29,7 +29,79 @@
         vm.sendMessage = sendMessage;
         vm.checkMessages = checkMessages;
         vm.getMessages = getMessages;
+        vm.selectTech = selectTech;
+        vm.selectSkill = selectSkill;
+        vm.removeSkill = removeSkill;
+        vm.removeTechnology = removeTechnology;
+        vm.addCustomSkill = addCustomSkill;
+        vm.addCustomTechnology = addCustomTechnology;
+        vm.parseInput = parseInput;
+
         vm.maxResults = '5';
+        vm.selectedTechnologies = [];
+        vm.selectedSkills = [];
+
+        Product.query(function (result) {
+            vm.technologies = result;
+            vm.techBank = [];
+            result.forEach(function (tech) {
+                vm.techBank.push(tech.name.toLowerCase())
+            })
+        })
+        function parseInput() {
+            var parseArray = vm.techInput.split(" ");
+            parseArray.forEach(function (word) {
+                vm.techBank.forEach(function (tech, index) {
+                    if(tech === word){
+                        vm.selectTech(vm.technologies[index], index)
+                        // console.log("MATCHU!", vm.technologies[index]);
+                        vm.techBank.splice(index, 1)
+                    }
+                })
+            })
+        }
+        function selectTech(tech, index) {
+            vm.selectedTechnologies.push(tech);
+            vm.technologies.splice(index, 1);
+        }
+        function removeTechnology(tech, index) {
+            console.log("Remove", tech);
+            vm.selectedTechnologies.splice(index, 1);
+            if(tech.id){
+                vm.technologies.push(tech);
+            }
+        }
+
+        function selectSkill(skill, index) {
+            vm.selectedSkills.push(skill);
+            vm.skills.splice(index, 1);
+        }
+        function removeSkill(skill, index) {
+            vm.selectedSkills.splice(index, 1);
+            if(skill.id){
+                vm.skills.push(skill);
+            }
+        }
+        function addCustomSkill() {
+            vm.selectedSkills.push({name:vm.customSkillInput});
+            vm.customSkillInput = '';
+        }
+        function addCustomTechnology() {
+            vm.selectedTechnologies.push({name:vm.customTechnologyInput});
+            vm.customTechnologyInput = '';
+        }
+        Skill.query(function (result) {
+            vm.skills = result;
+        })
+        ExpertAttribute.query(function (result) {
+            vm.ExpertAttributes = [];
+            result.forEach(function (attribute) {
+                var attArr = attribute.name.split('-');
+                if(attArr[attArr.length-1] === "RESIDENT"){
+                    vm.ExpertAttributes.push(attribute)
+                }
+            })
+        })
 
         // ExpertAccount.query(function (res) {
         //     console.log(res);
@@ -73,21 +145,31 @@
             vm.conciergechaturl = null;
             vm.checkingMessages = false;
         })
-        
+
         /**
         * Creates (saves/updates) the case.
         * Called after the form is submitted and the user is authenticated.
         */
         function createCase() {
             // Exit/Return if we already know we have errors
-            if (hasErrors()) {
-                checkError();
-                return;
-            }
+            // if (hasErrors()) {
+            //     checkError();
+            //     return;
+            // }
 
             var brandNewCase = {};
-            brandNewCase.technology = vm.technology;
-            brandNewCase.issue = vm.issue;
+            brandNewCase.technology = vm.selectedTechnologies[0];
+            var namedTechs = [];
+            vm.selectedTechnologies.forEach(function functionName(tech) {
+                namedTechs.push(tech.name)
+            })
+
+            vm.technologyProperties = {
+                Other: "Product:" + namedTechs.join(",")
+            }
+
+            // brandNewCase.technology = vm.technology;
+
             brandNewCase.status = {code: "case_created_assigned_to-Expert", id: 1, name: "CREATED"};
             brandNewCase.statusmsg = 'Case Created';
             brandNewCase.expectedCompletionDate = DateUtils.convertDateTimeFromServer(vm.defaultDate);
@@ -169,13 +251,16 @@
             for (var key in vm.technologyProperties) {
                 if (vm.technologyProperties.hasOwnProperty(key)) {
                     var brandNewProperty = {};
-                    brandNewProperty.technology = vm.technology;
+                    brandNewProperty.technology = vm.selectedTechnologies[0];
+                    // brandNewProperty.technology = vm.technology;
                     brandNewProperty.supportcase = {};
                     brandNewProperty.supportcase.id = result.id;
                     brandNewProperty.propertyname = key;
                     brandNewProperty.propertyvalue = vm.technologyProperties[key];
-
-                    Casetechnologyproperty.save(brandNewProperty);
+                    console.log("PROPERTY", brandNewProperty);
+                    Casetechnologyproperty.save(brandNewProperty, function (result) {
+                        console.log("Result", result);
+                    });
                 }
             }
             Supportcase.update({id: "expertmatch"}, result, function(res) {
@@ -185,7 +270,7 @@
             // Reset view model properties
             vm.technologyProperties = null;
             vm.technology = null;
-            vm.issue = null;
+            // vm.issue = null;
 
             var roomObject = {
                 name: result.technology.name + result.id,
@@ -213,10 +298,15 @@
         * @returns {boolean}
         */
         function hasErrors() {
-            return (Object.keys(vm.technology).length === 0 ||
-            Object.keys(vm.issue).length === 0 ||
+            return (Object.keys(vm.selectedTechnologies).length === 0 ||
+            Object.keys(vm.selectedSkills).length === 0 ||
             vm.caseDetails.summary.length === 0);
         }
+        // function hasErrors() {
+        //     return (Object.keys(vm.technology).length === 0 ||
+        //     Object.keys(vm.issue).length === 0 ||
+        //     vm.caseDetails.summary.length === 0);
+        // }
 
         /**
         * Check to see why we may have gotten an error from the back-end.
@@ -260,9 +350,12 @@
                 vm.caseDetails = data;
 
                 // Store a shortcut reference to the product object
-                vm.product = vm.caseDetails.radios.filter(function (o) {
-                    return o.id === 'product';
-                })[0];
+                vm.product = vm.selectedTechnologies[0];
+
+                // vm.product = vm.caseDetails.radios.filter(function (o) {
+                //     return o.id === 'product';
+                // })[0];
+
             });
         }
 

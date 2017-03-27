@@ -91,28 +91,82 @@
 <div class="drsl-concierge-wrapper">
     <div>
         <div class="drsl-step-one">
-            <img src="content/images/global/easy_as_1.png" alt="">
-            <textarea name="name" rows="10" cols="20" class="form-control drsl-value drsl-field-section" placeholder="Describe your technical challenge or issue. Be sure to include any technologies that you are using; we will use this information to help match you with the right expert."></textarea>
+            <!-- <img src="content/images/global/easy_as_1.png" alt=""> -->
+            <h4 style="display: inline-block;
+            width: 200px;
+            padding: 40px;">1. Description</h4>
+            <div class="drsl-step-content" style="    position: relative;
+            left: 114px;">
+            <textarea name="name" rows="3" cols="20" class="form-control drsl-value drsl-field-section" placeholder="Outline your technical challenge or issue. Attach files relevant to the case such as images, error logs, or config files on the right." ng-model="vm.caseDetails.summary" style="width: 774px;" ></textarea>
             <div class="input-group-btn">
                 <drsl-attach-files></drsl-attach-files>
             </div>
         </div>
-        <div class="drsl-step-two">
-            <img src="content/images/global/easy_as_2.png" alt="">
+    </div>
+    <div class="drsl-step-two">
+        <!-- <img src="content/images/global/easy_as_2.png" alt="" style="margin-top: 65px; margin-bottom: 65px;"> -->
+        <div style="display: inline-block;">
+            <h4 style="display: inline-block;
+            padding: 50px 85px 50px 40px;">2. Select Technologies</h4>
+            <h4 style="padding: 45px 10px 10px 40px;">3. Select Skills</h4>
+        </div>
+        <div class="drsl-step-content">
             <div class="drsl-tech-and-skill">
-                <textarea name="name" rows="4" cols="20" class="form-control drsl-value drsl-field-section" placeholder="Select technologies by typing or choosing from the right. "></textarea>
-                <textarea name="name" rows="4" cols="20" class="form-control drsl-value drsl-field-section" placeholder="Select skills by typing or choosing from the right. "></textarea>
+                <div class="drsl-case-inputs">
+                    <div>
+                        <div class="drsl-avialable-technology">
+                            <div class="drsl-tech-tag" ng-repeat="technology in vm.selectedTechnologies track by $index" ng-click="vm.removeTechnology(technology, index)" style="background: #ff8600; color: white;">{{technology.name}}</div>
+                            <div class="drsl-tech-tag" ng-repeat="technology in vm.technologies track by $index" ng-click="vm.selectTech(technology, $index)">{{technology.name}}</div>
+                            <br>
+                        </div>
+                        <div style="    float: right;
+                        position: relative;
+                        bottom: 60px; left: 200px;">
+                            <div class="drsl-tech-tag" ng-click="showTechOther = !showTechOther">Other</div>
+                            <span ng-if="showTechOther">
+                            <input  type="text" name="name" value="" class="form-control" style="display: inline-block; width: 175px;"ng-model="vm.customTechnologyInput">
+                            <div class="drsl-tech-tag" ng-click="vm.addCustomTechnology()">Add</div>
+                        </span>
+
+                        </div>
+                    </div>
+                    <div class="drsl-avialable-technology">
+                        <div class="drsl-tech-tag" ng-repeat="skill in vm.selectedSkills" style="background: #ff8600; color: white;" ng-click="vm.removeSkill(skill, $index)">{{skill.name}}</div>
+                        <div class="drsl-tech-tag" ng-repeat="skill in vm.skills track by $index" ng-click="vm.selectSkill(skill, $index)">{{skill.name}}</div>
+                        <br>
+                    </div>
+                    <div style="    float: right;
+                    position: relative;
+                    bottom: 60px; left: 200px;">
+                        <div class="drsl-tech-tag" ng-click="showSkillOther = !showSkillOther" >Other</div>
+                        <span ng-if="showSkillOther">
+                        <input  type="text" name="name" value="" class="form-control" style="display: inline-block; width: 175px;" ng-model="vm.customSkillInput">
+                        <div class="drsl-tech-tag" ng-click="vm.addCustomSkill()">Add</div>
+                    </span>
+
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="drsl-step-three">
-            <img src="content/images/global/easy_as_3.png" alt="">
+    </div>
+    <div class="drsl-step-three">
+        <!-- <img src="content/images/global/easy_as_3.png" alt=""> -->
+        <h4 style="display: inline-block;
+        width: 200px;
+        padding: 40px;">4. Other</h4>
+        <div class="drsl-step-content">
             <div style="    display: inline-block;
-            width: 80%;
+            width: 830px;
             padding-top: 30px;
-            padding-bottom: 30px;">
+            padding-bottom: 30px;
+            position: relative;
+            left: 114px;
+            ">
             <select class="form-control" name="" style="display: inline-block;
             width: 25%">
-            <option value="">Response Time</option>
+            <option value="">Response Time: 4 hours</option>
+            <option value="">Response Time: 1 hour</option>
+            <option value="">Response Time: 30 minutes</option>
         </select>
         <div class="drsl-date-widget-wrapper" style="display: inline-block;">
             <span uib-datepicker-popup="{{format}}" ng-model="vm.defaultDate" is-open="vm.datePopup.opened" popup-placement="top-left" datepicker-options="vm.dateOptions" show-button-bar="false" ></span>
@@ -124,108 +178,17 @@
             </span>
         </div>
         <select class="form-control" name="" style="display: inline-block;
-        width: 25%">
-        <option value="">Expert Attribute</option>
+        width: 27%">
+        <option value="">Expert Location</option>
+        <option value="{{attribute}}" ng-repeat="attribute in vm.ExpertAttributes">Expert Location: {{attribute.name}}</option>
     </select>
 </div>
 </div>
-<div style="margin: auto; width: 20%;">
-    <img src="content/images/global/go.png" style="width: 150px;"/>
+</div>
+<div style="margin: auto; width: 10%;">
+    <img src="content/images/global/go.png" style="width: 150px;" ng-click="vm.createCase()"/>
 </div>
 </div>
-<div>
-    <div class="drsl-case-inputs">
-        <div class="drsl-avialable-technology">
-            <h4>Technologies</h4>
-            <div class="drsl-tech-tag">MySQL</div>
-            <div class="drsl-tech-tag">PostgreSQL</div>
-            <div class="drsl-tech-tag">MariaDB</div>
-            <div class="drsl-tech-tag">MongoDB</div>
-        </div>
-    </div>
-    <div class="drsl-avialable-technology">
-        <h4>Skills</h4>
-        <div class="drsl-tech-tag">Migration</div>
-        <div class="drsl-tech-tag">Tuning</div>
-        <div class="drsl-tech-tag">Installation</div>
-    </div>
-</div>
-<!-- <div>
-<div class="drsl-step-one">
-<img src="content/images/global/easy_as_1.png" alt="">
-<div class="drsl-field-seciton">
-<div class="input-group">
-<textarea name="name" rows="8" cols="40" class="form-control drsl-summary-field" ng-model="vm.caseDetails.summary" placeholder="{{'concierge.caseDetails.summary.placeholder' | translate}}"></textarea>
-<div class="input-group-btn">
-<drsl-attach-files></drsl-attach-files>
-</div>
-</div>
-</div>
-</div>
-<div class="drsl-step-one">
-<img src="content/images/global/easy_as_2.png" alt="" style="vertical-align: super;">
-<div class="drsl-field-seciton">
-<div class="input-group">
-<textarea name="name" rows="8" cols="40" class="form-control drsl-value" style="    width: 600px;
-border-radius: 4px;
-resize: none;" placeholder="Select technologies and skills by typing or choosing from the right. "></textarea>
-</div>
-</div>
-</div>
-<div class="drsl-step-one">
-<img src="content/images/global/easy_as_3.png" alt="" style="vertical-align: super;">
-<div class="" style="display: inline-block;
-vertical-align: top;
-position: relative;
-bottom: 50px;">
-<select class="form-control" name="" style="    display: inline-block;
-width: 250px;">
-<option value="">Response Time</option>
-</select>
-<div class="drsl-field-seciton" style="    width: 250px;">
-<div>
-<div class="drsl-date-widget-wrapper">
-<span uib-datepicker-popup="{{format}}" ng-model="vm.defaultDate" is-open="vm.datePopup.opened" popup-placement="top-left" datepicker-options="vm.dateOptions" show-button-bar="false" ></span>
-</div>
-<div class="form-control drsl-date-display-wrapper" ng-click="vm.openDatePopup()">
-<span class="drsl-date-display-label" translate="concierge.caseDetails.date.main">Requested delivery:</span><span>{{vm.defaultDate | date:'MMM dd, yyyy'}}</span>
-<span class="pull-right">
-<i class="fa fa-calendar"></i>
-</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="" style="width: 25%;
-margin: auto;">
-<button type="submit" class="drsl-custom-button" ng-click="vm.submitForm()" style="padding: 0px;">
-<img src="content/images/global/go.png" style="width: 150px;"/>
-</button>
-</div>
-<div class="drsl-one-two-three-lg">
-<div>
-</div>
-</div>
-</div>
-<div class="drsl-case-inputs">
-<div class="drsl-avialable-technology">
-<h4>Technologies</h4>
-<div class="drsl-tech-tag">MySQL</div>
-<div class="drsl-tech-tag">PostgreSQL</div>
-<div class="drsl-tech-tag">MariaDB</div>
-<div class="drsl-tech-tag">MongoDB</div>
-</div>
-<br>
-<div class="drsl-avialable-technology">
-<h4>Skills</h4>
-<div class="drsl-tech-tag">Migration</div>
-<div class="drsl-tech-tag">Tuning</div>
-<div class="drsl-tech-tag">Installation</div>
-</div>
-</div>
--->
-
 </div>
 
 </div>
