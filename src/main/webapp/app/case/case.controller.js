@@ -8,12 +8,12 @@
 	CaseController.$inject = ['$scope', '$window', '$interval', '$timeout', '$translate', 'CaseService', 'DrslRatingService',
 	'CaseDetailsService', 'EscalationFormService', 'ShareCaseService', 'CaseAgreementService', 'StatusModel',
 	'Rating', 'Expertbadge', 'DrslMetadata', 'Caseupdate', 'AttachmentModalService', 'DrslAttachFileService',
-	'DrslNewCaseService', '$filter', '_', 'DrslUserFlowService', 'DrslHipChatService', '$sce', 'paginationConstants', '$state', 'pagingParams', '$rootScope', 'SupportCaseReportRatingCommentModalService', 'ExpertAccount'];
+	'DrslNewCaseService', '$filter', '_', 'DrslUserFlowService', 'DrslHipChatService', '$sce', 'paginationConstants', '$state', 'pagingParams', '$rootScope', 'SupportCaseReportRatingCommentModalService', 'ExpertAccount', 'Casetechnologyproperty'];
 
 	function CaseController($scope, $window, $interval, $timeout, $translate, CaseService, DrslRatingService, CaseDetailsService,
 		EscalationFormService, ShareCaseService, CaseAgreementService, StatusModel, Rating,
 		Expertbadge, DrslMetadata, Caseupdate, AttachmentModalService, DrslAttachFileService,
-		DrslNewCaseService, $filter, _, DrslUserFlowService, DrslHipChatService, $sce, paginationConstants, $state, pagingParams, $rootScope, SupportCaseReportRatingCommentModalService, ExpertAccount) {
+		DrslNewCaseService, $filter, _, DrslUserFlowService, DrslHipChatService, $sce, paginationConstants, $state, pagingParams, $rootScope, SupportCaseReportRatingCommentModalService, ExpertAccount, Casetechnologyproperty) {
 			// Handle user flow redirects and messaging
 			DrslUserFlowService.handleUserFlow();
 
@@ -119,6 +119,26 @@
 					if(data.supportCase){
 						vm.supportcases = data.supportCase;
 						vm.totalItems = vm.supportcases.headers('X-Total-Count');
+
+						vm.supportcases.forEach(function (supportcase) {
+							if(!supportcase.technology)
+							Casetechnologyproperty.query(function (result) {
+								result.forEach(function (property) {
+									if (property.supportcase.id === supportcase.id) {
+										if(property.propertyname=== 'Other'){
+											var split1 = property.propertyvalue.split(':');
+											split1.splice(0,1)
+											var split2 = split1.join().split(',');
+											console.log(supportcase, split2[0]);
+											supportcase.technology ={
+												name: split2[0]
+											}
+										}
+									}
+								})
+							})
+							console.log(supportcase);
+						})
 						if(Number(vm.totalItems) > Number(vm.itemsPerPage)){
 							vm.pagination = true;
 						}

@@ -158,7 +158,7 @@
             // }
 
             var brandNewCase = {};
-            brandNewCase.technology = vm.selectedTechnologies[0];
+            // brandNewCase.technology = vm.selectedTechnologies[0];
             var namedTechs = [];
             vm.selectedTechnologies.forEach(function functionName(tech) {
                 namedTechs.push(tech.name)
@@ -337,6 +337,7 @@
 
             // If we have any messages display them in a toastr message
             if (messages.length) {
+                console.log("AHHHHHHh", messages);
                 toastr.warning(messages.join('<br/>'), {timeOut: 5000});
             }
         }
