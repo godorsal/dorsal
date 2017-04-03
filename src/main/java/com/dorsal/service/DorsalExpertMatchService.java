@@ -125,6 +125,7 @@ public class DorsalExpertMatchService {
             if (otherPropertyValue != null && otherPropertyValue.length() > 0) {
                 inputAttribute = QueryStringParser.getValueFromTag(otherPropertyValue, QueryStringParser.TAG_ATTRIBUTE);
                 inputProduct   = QueryStringParser.getValueFromTag(otherPropertyValue, QueryStringParser.TAG_PRODUCT);
+                log.info("Selected Product(s) in List : " + inputProduct);
                 inputSkill     = QueryStringParser.getValueFromTag(otherPropertyValue, QueryStringParser.TAG_SKILL);
                 inputGroup     = QueryStringParser.getValueFromTag(otherPropertyValue, QueryStringParser.TAG_GROUP);
 
@@ -143,8 +144,13 @@ public class DorsalExpertMatchService {
          */
 
         // Extract product List -- It's technology, configuration and other
-        String mainProduct = supportcase.getTechnology().getName();
+        String[] inputProductArray = inputProduct.split(" ");
+        log.info("Input Product Splice: " + inputProductArray[0]);
+
+        String mainProduct = inputProductArray[0];
+        // String mainProduct = supportcase.getTechnology().getName();
         log.info("Product property for technology: " + mainProduct);
+
 
         // Lookup expert for matching attributes if any defined
         if (attributeList != null && attributeList.length() > 0) {

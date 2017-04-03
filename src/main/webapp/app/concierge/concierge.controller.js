@@ -158,14 +158,16 @@
             // }
 
             var brandNewCase = {};
+
             // brandNewCase.technology = vm.selectedTechnologies[0];
+
             var namedTechs = [];
             vm.selectedTechnologies.forEach(function functionName(tech) {
                 namedTechs.push(tech.name)
             })
 
             vm.technologyProperties = {
-                Other: "Product:" + namedTechs.join(",")
+                Other: "Product:" + namedTechs.join(" ") + " " + "Attribute:" + vm.expertRegion
             }
 
             // brandNewCase.technology = vm.technology;
@@ -273,11 +275,11 @@
             // vm.issue = null;
 
             var roomObject = {
-                name: result.technology.name + result.id,
+                // name: result.technology.name + result.id,
                 topic: result.summary,
                 expert: result.expertaccount.user.email
             }
-            DrslHipChatService.makeRoom(roomObject);
+            // DrslHipChatService.makeRoom(roomObject);
 
             // emit a 'dorsalApp:supportcaseUpdate' so the app can be aware of the change
             $scope.$emit('dorsalApp:supportcaseUpdate', result);

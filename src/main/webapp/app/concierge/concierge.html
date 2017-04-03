@@ -178,9 +178,9 @@
             </span>
         </div>
         <select class="form-control" name="" style="display: inline-block;
-        width: 27%">
+        width: 27%" ng-model="vm.expertRegion">
         <option value="">Expert Location</option>
-        <option value="{{attribute}}" ng-repeat="attribute in vm.ExpertAttributes">Expert Location: {{attribute.name}}</option>
+        <option value="{{attribute.name}}" ng-repeat="attribute in vm.ExpertAttributes">Expert Location: {{attribute.name}}</option>
     </select>
 </div>
 </div>
