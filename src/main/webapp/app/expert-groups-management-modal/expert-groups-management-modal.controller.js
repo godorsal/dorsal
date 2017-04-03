@@ -63,6 +63,7 @@
             // vm.page = pagingParams.page;
             // vm.availableExperts = data;
             vm.availableExperts = [];
+            vm.selectedExpert = {};
             data.forEach(function (expert) {
                 ProductExpertScore.query({param: "expert", id: expert.id}, function (result) {
                     expert.scoreArray = [];
@@ -141,6 +142,7 @@
             vm.addAttribute = "";
             vm.addProduct = "";
             vm.queryObject = {};
+            vm.selectedExpert = {}
             vm.loadAll();
         }
         ExpertAttribute.query(function (res) {
