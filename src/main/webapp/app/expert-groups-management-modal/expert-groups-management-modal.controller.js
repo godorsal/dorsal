@@ -64,6 +64,8 @@
             // vm.availableExperts = data;
             vm.availableExperts = [];
             vm.selectedExpert = {};
+                vm.queryComplete = true;
+
             data.forEach(function (expert) {
                 ProductExpertScore.query({param: "expert", id: expert.id}, function (result) {
                     expert.scoreArray = [];
@@ -129,10 +131,9 @@
             //     }
             // }, onError);
         }
-        vm.selectExpert = function (expert) {
-            console.log("SELECT");
-            console.log(expert);
+        vm.selectExpert = function (expert, index) {
             vm.selectedExpert = expert;
+            vm.selectedExpert.index = index;
         }
         vm.clearQuery = function () {
             vm.queryString = "";
