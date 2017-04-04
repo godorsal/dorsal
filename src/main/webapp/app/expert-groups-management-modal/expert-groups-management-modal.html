@@ -90,7 +90,12 @@
             </tr>
         </tbody>
     </table>
-
+    <span>
+        <label for="">Attributes:</label>
+        <div ng-repeat="attribute in vm.queryObject.attributes">
+            {{attribute}}
+        </div>
+    </span>
     <br>
     <button type="button" name="button" ng-click="vm.searchExperts()" class="btn btn-success">Search</button>
     <button type="button" name="button" ng-click="vm.clearQuery()" class="btn btn-success">Clear</button>
@@ -149,7 +154,7 @@
                         <td ng-if="editing">{{expert.expertaccount.user.firstName}} {{expert.expertaccount.user.lastName}}</td>
 
                         <td>
-                            <i class="fa fa-plus" aria-hidden="true" ng-click="vm.addExpert(expert, $index)"></i>
+                            <i class="fa fa-plus" aria-hidden="true" ng-click="vm.addExpert(expert, $index); $event.stopPropagation();"></i>
                             <div ng-if="vm.selectedExpert.index === $index" rowspan="2">
                                 <strong>Attributes:</strong>
                                 <div ng-repeat="attribute in vm.selectedExpert.attributeArray">

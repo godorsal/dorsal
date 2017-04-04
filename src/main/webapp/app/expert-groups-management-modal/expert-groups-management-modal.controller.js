@@ -85,6 +85,8 @@
                 })
                 vm.availableExperts.push(expert)
             })
+            checkResolve();
+
             // console.log("LOAD ALL DATA", data);
         }
         function onError(error) {
@@ -125,7 +127,6 @@
             //     vm.availableExperts = res;
             //     // vm.page = pagingParams.page;
             //     vm.queryComplete = true;
-            //     checkResolve();
             //     if($scope.$resolve.viewOnly){
             //         vm.viewOnly = true;
             //     }
@@ -153,6 +154,9 @@
             vm.availableProducts = res;
         })
         function checkResolve() {
+            if($scope.$resolve.viewOnly){
+                    vm.viewOnly = true;
+            }
             if($scope.$resolve.group){
                 vm.editingGroup = true;
                 vm.newGroup = $scope.$resolve.group;
@@ -204,7 +208,7 @@
                 vm.expertsToAdd.splice(index, 1);
             } else {
                 vm.changesMade = true;
-                vm.expertsToAdd.splice(index, 1);    
+                vm.expertsToAdd.splice(index, 1);
             }
         }
         vm.removeCurrentExpert = function (expert, index) {
