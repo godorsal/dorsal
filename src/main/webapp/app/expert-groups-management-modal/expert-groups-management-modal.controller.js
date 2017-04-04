@@ -184,15 +184,28 @@
             })
         }
         vm.addExpert = function (expert, index) {
-            vm.expertsToAdd.push(expert);
-            vm.availableExperts.splice(index, 1);
-            vm.changesMade = true;
-
+            var canAdd = vm.expertsToAdd.find(function (inExpert, index) {
+                    console.log(canAdd);
+                    return inExpert.id === expert.id
+            })
+            if(!canAdd){
+                vm.expertsToAdd.push(expert);
+                vm.availableExperts.splice(index, 1);
+                vm.changesMade = true;
+            }
         }
         vm.removeExpert = function (expert, index) {
-            vm.changesMade = true;
-            vm.availableExperts.push(expert);
-            vm.expertsToAdd.splice(index, 1);
+            var canRemove = vm.availableExperts.find(function (inExpert, index) {
+                    return inExpert.id === expert.id
+            })
+            if(!canRemove){
+                vm.changesMade = true;
+                vm.availableExperts.push(expert);
+                vm.expertsToAdd.splice(index, 1);
+            } else {
+                vm.changesMade = true;
+                vm.expertsToAdd.splice(index, 1);    
+            }
         }
         vm.removeCurrentExpert = function (expert, index) {
             vm.expertsToDelete.push(expert);
