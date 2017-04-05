@@ -29,7 +29,7 @@
                 // backdrop: true,
                 // backdrop: viewOnly,
                 // backdrop: 'static',
-                size:'sm',
+                size:'md',
                 windowClass: 'drsl-rating-comment-modal',
                 resolve: {
                     group: function(){ return group; },

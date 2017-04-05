@@ -71,37 +71,8 @@
 
 <h2 data-translate="dorsalApp.expertGroup.filterExperts">Experts</h2>
 <!-- {{vm.queryString}} -->
-<div style="float: right;">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Product</th>
-                <th>Score</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="product in vm.queryObject.products">
-                <td>
-                    {{product}}
-                </td>
-                <td>
-                    {{vm.queryObject.score}}
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <span>
-        <label for="">Attributes:</label>
-        <div ng-repeat="attribute in vm.queryObject.attributes">
-            {{attribute}}
-        </div>
-    </span>
-    <br>
-    <button type="button" name="button" ng-click="vm.searchExperts()" class="btn btn-success">Search</button>
-    <button type="button" name="button" ng-click="vm.clearQuery()" class="btn btn-success">Clear</button>
-    <br>
-</div>
-<div style="float: left;">
+
+<div style="display: inline-block; padding: 20px;">
     <select class="form-control" name="" ng-model="vm.addAttribute" ng-change="vm.enterAttribute()" style="">
         <option value="">Select Attribute</option>
         <option ng-repeat="attribute in vm.availableAttributes track by $index" value="{{attribute.name}}">{{attribute.name}}</option>
@@ -120,7 +91,37 @@
         <option value="5">Expert</option>
     </select>
 </div>
-
+<div style="display: inline-block; padding: 20px;">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Skill Level</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="product in vm.queryObject.products">
+                <td>
+                    {{product}}
+                </td>
+                    <td style="display:inline-block; float: right;" ng-if="vm.queryObject.score === '2'">Novice</td>
+                    <td style="display:inline-block; float: right;" ng-if="vm.queryObject.score === '3'">Intermediate</td>
+                    <td style="display:inline-block; float: right;" ng-if="vm.queryObject.score === '4'">Advanced</td>
+                    <td style="display:inline-block; float: right;" ng-if="vm.queryObject.score === '5'">Expert</td>
+            </tr>
+        </tbody>
+    </table>
+    <span>
+        <label for="">Attributes:</label>
+        <div ng-repeat="attribute in vm.queryObject.attributes">
+            {{attribute}}
+        </div>
+    </span>
+    <br>
+    <button type="button" name="button" ng-click="vm.searchExperts()" class="btn btn-success">Search</button>
+    <button type="button" name="button" ng-click="vm.clearQuery()" class="btn btn-success">Clear</button>
+    <br>
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -136,7 +137,7 @@
                         <td  ng-if="!editing">{{expert.user.firstName}} {{expert.user.lastName}}
                             <div ng-if="vm.selectedExpert.index === $index" rowspan="2" style="width: 200px;">
                                 <Strong>Products:</Strong>
-                                <Strong style="float:right;">Score:</Strong>
+                                <Strong style="float:right;">Skill Level:</Strong>
                                 <div ng-repeat="product in vm.selectedExpert.scoreArray">
                                     <br>
                                     <div style="display:inline-block;">
