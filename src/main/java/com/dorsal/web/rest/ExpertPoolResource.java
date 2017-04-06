@@ -126,6 +126,15 @@ public class ExpertPoolResource {
         List<ExpertPool> expertPools = expertPoolRepository.findByUserIsCurrentUser();
         return expertPools;
     }
+    @RequestMapping(value = "/expert-pools/admin",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<ExpertPool> getAllExpertPoolsAdmin() {
+        log.debug("REST request to get all ExpertPools");
+        List<ExpertPool> expertPools = expertPoolRepository.findAllAdminIsCurrentUser();
+        return expertPools;
+    }
 
     /**
      * GET  /expert-pools/:id : get the "id" expertPool.

@@ -70,7 +70,7 @@
                     <!-- Chat -->
                     <a ng-show="vm.DrslMetadata.showCaseChat !== 0" ng-click="vm.openChat()" uib-tooltip="chat with expert" ng-class="{'drsl-link-disabled': !vm.passedStep(1)}" class="drsl-link-disabled" translate="case.details.chatRoom">chat</a>
                     <!-- New Case -->
-                    <a ng-show="(vm.currentCase && !vm.isCaseExpert())" ui-sref="concierge" uib-tooltip="create a new case" translate="case.details.newCase">new</a>
+                    <a ng-show="(vm.currentCase)" ui-sref="concierge" uib-tooltip="create a new case" translate="case.details.newCase">new</a>
                     <!-- Escalation -->
                     <a class="pull-right" ng-click="vm.openEscalation()" ng-class="{'drsl-link-disabled': (vm.passedStep(4) ||!vm.currentCase)}" translate="case.details.escalate">escalate or reassign this case</a>
                     <!-- Case Rating -->

@@ -5,11 +5,24 @@
     .module('dorsalApp')
     .controller('ConciergeController', ConciergeController);
 
-    ConciergeController.$inject = ['$rootScope', '$scope', '$state', 'LoginService', 'Principal', 'ConciergeService', '$translate', '$http', 'Supportcase', 'Casetechnologyproperty', 'toastr', 'AttachmentModalService', 'DateUtils', 'CaseService', 'DrslNewCaseService', 'DrslMetadata', 'ExpertAccount', 'DrslUserFlowService', 'DrslHipChatService', '$window', '$sce', 'Product', 'Skill', 'ExpertAttribute'];
+    ConciergeController.$inject = ['$rootScope', '$scope', '$state', 'LoginService', 'Principal', 'ConciergeService', '$translate', '$http', 'Supportcase', 'Casetechnologyproperty', 'toastr', 'AttachmentModalService', 'DateUtils', 'CaseService', 'DrslNewCaseService', 'DrslMetadata', 'ExpertAccount', 'DrslUserFlowService', 'DrslHipChatService', '$window', '$sce', 'Product', 'Skill', 'ExpertAttribute', 'ExpertPool', 'ExpertPoolToExpert', 'Useraccount'];
 
-    function ConciergeController($rootScope, $scope, $state, LoginService, Principal, ConciergeService, $translate, $http, Supportcase, Casetechnologyproperty, toastr, AttachmentModalService, DateUtils, CaseService, DrslNewCaseService, DrslMetadata, ExpertAccount, DrslUserFlowService, DrslHipChatService, $window, $sce, Product, Skill, ExpertAttribute) {
+    function ConciergeController($rootScope, $scope, $state, LoginService, Principal, ConciergeService, $translate, $http, Supportcase, Casetechnologyproperty, toastr, AttachmentModalService, DateUtils, CaseService, DrslNewCaseService, DrslMetadata, ExpertAccount, DrslUserFlowService, DrslHipChatService, $window, $sce, Product, Skill, ExpertAttribute, ExpertPool, ExpertPoolToExpert, Useraccount) {
 
         DrslUserFlowService.handleUserFlow();
+
+        ExpertPool.query(function (res) {
+            vm.expertGroups = res;
+            vm.expertGroups.forEach(function (group) {
+                group.experts = [];
+                ExpertPoolToExpert.query({type: "expertpool", id: group.id}, function (res){
+                    res.forEach(function (connection) {
+                        group.experts.push(connection)
+                    })
+                })
+            })
+        })
+
 
         // Set the view model and view model properties/methods
         var vm = this;
@@ -22,6 +35,7 @@
         vm.product = null;
         vm.errorMissingTech = $translate.instant('concierge.errors.missing.tech');
         vm.errorMissingIssue = $translate.instant('concierge.errors.missing.issue');
+        vm.expertGroups = [];
         vm.errorMissingDescription = $translate.instant('concierge.errors.missing.description');
         vm.errorMissingAll = $translate.instant('concierge.errors.missing.all');
         vm.DrslMetadata = DrslMetadata;
@@ -36,10 +50,13 @@
         vm.addCustomSkill = addCustomSkill;
         vm.addCustomTechnology = addCustomTechnology;
         vm.parseInput = parseInput;
-
         vm.maxResults = '5';
         vm.selectedTechnologies = [];
         vm.selectedSkills = [];
+
+        var productString = "";
+
+        var groupString = "";
 
         Product.query(function (result) {
             vm.technologies = result;
@@ -49,7 +66,7 @@
             })
         })
         function parseInput() {
-            var parseArray = vm.techInput.split(" ");
+            var parseArray = vm.techInput.split(",");
             parseArray.forEach(function (word) {
                 vm.techBank.forEach(function (tech, index) {
                     if(tech === word){
@@ -150,244 +167,284 @@
         * Creates (saves/updates) the case.
         * Called after the form is submitted and the user is authenticated.
         */
-        function createCase() {
-            // Exit/Return if we already know we have errors
-            // if (hasErrors()) {
-            //     checkError();
-            //     return;
-            // }
-
-            var brandNewCase = {};
-
-            // brandNewCase.technology = vm.selectedTechnologies[0];
-
-            var namedTechs = [];
-            vm.selectedTechnologies.forEach(function functionName(tech) {
-                namedTechs.push(tech.name)
+        Useraccount.query(function (res) {
+            vm.currentUserAccount = res[0];
+            if(vm.currentUserAccount.companyname.length){
+                vm.userAttributes = vm.currentUserAccount.companyname.split(',');
+                console.log(vm.userAttributes);
+                ExpertAccount.query({
+                    param: "query",
+                    options: "product:" + ":attribute:" + vm.userAttributes[0] + ":score:"
+                }, function (expertaccounts) {
+                    ExpertPool.query({
+                        id: "admin"}, function (res) {
+                            var allExpertGroups = res;
+                            allExpertGroups.forEach(function (expertGroup) {
+                                expertaccounts.forEach(function (expertAccount) {
+                                    if(expertGroup.expertpoolowner.id === expertAccount.id){
+                                        vm.expertGroups.push(expertGroup)
+                                    }
+                                })
+                            })
+                        })
+                    });
+                } else {
+                    vm.userAttributes = [];
+                }
             })
+            // vm.userAttributes = vm.currentUserAccount.companyname.split(',');
+            function createCase() {
+                // Exit/Return if we already know we have errors
+                // if (hasErrors()) {
+                //     checkError();
+                //     return;
+                // }
 
-            vm.technologyProperties = {
-                Other: "Product:" + namedTechs.join(" ") + " " + "Attribute:" + vm.expertRegion
+                var brandNewCase = {};
+
+                // brandNewCase.technology = vm.selectedTechnologies[0];
+
+                var namedTechs = [];
+                vm.selectedTechnologies.forEach(function functionName(tech) {
+                    namedTechs.push(tech.name)
+                })
+                if(namedTechs){
+                    var productString = "Product:" + namedTechs.join(",") + " ";
+                }
+                if(vm.expertRegion){
+                    var attributeString = "Attribute:" + vm.expertRegion + " ";
+                } else {
+                    var attributeString = "";
+                }
+                if(vm.expertGroup){
+                    var groupString = "Group:" + vm.expertGroup;
+                }
+
+
+
+
+                vm.technologyProperties = {
+                    Other: productString + attributeString + groupString
+                }
+
+                // brandNewCase.technology = vm.technology;
+
+                brandNewCase.status = {code: "case_created_assigned_to-Expert", id: 1, name: "CREATED"};
+                brandNewCase.statusmsg = 'Case Created';
+                brandNewCase.expectedCompletionDate = DateUtils.convertDateTimeFromServer(vm.defaultDate);
+                brandNewCase.summary = vm.caseDetails.summary;
+                Supportcase.save(brandNewCase, onSaveSuccess, onSaveError)
             }
 
-            // brandNewCase.technology = vm.technology;
-
-            brandNewCase.status = {code: "case_created_assigned_to-Expert", id: 1, name: "CREATED"};
-            brandNewCase.statusmsg = 'Case Created';
-            brandNewCase.expectedCompletionDate = DateUtils.convertDateTimeFromServer(vm.defaultDate);
-            brandNewCase.summary = vm.caseDetails.summary;
-            Supportcase.save(brandNewCase, onSaveSuccess, onSaveError)
-        }
-
-        function makeConciergeRoom(){
-            if(!DrslHipChatService.currentUsername){
-                DrslHipChatService.currentUsername = $window.prompt("Please Enter your Name")
-                DrslHipChatService.currentUsername ? makeConciergeRoom(): '';
-            } else {
-                DrslHipChatService.makeConciergeRoom()
-                .then(function(res){
-                    DrslHipChatService.getRoom(res.data.id)
+            function makeConciergeRoom(){
+                if(!DrslHipChatService.currentUsername){
+                    DrslHipChatService.currentUsername = $window.prompt("Please Enter your Name")
+                    DrslHipChatService.currentUsername ? makeConciergeRoom(): '';
+                } else {
+                    DrslHipChatService.makeConciergeRoom()
                     .then(function(res){
-                        vm.conciergechaturl = res.data.guest_access_url;
-                        vm.guestRoomID = res.data.id;
-                        vm.chatroom = res.data
-                        var messages = 0;
-                        DrslHipChatService.waitForMessage(res.data, messages);
-                        checkMessages();
+                        DrslHipChatService.getRoom(res.data.id)
+                        .then(function(res){
+                            vm.conciergechaturl = res.data.guest_access_url;
+                            vm.guestRoomID = res.data.id;
+                            vm.chatroom = res.data
+                            var messages = 0;
+                            DrslHipChatService.waitForMessage(res.data, messages);
+                            checkMessages();
+                        })
                     })
+                }
+            }
+            function sendMessage(){
+                var messageObject = {
+                    roomID: vm.guestRoomID,
+                    message: vm.messageToSend,
+                    from: DrslHipChatService.currentUsername,
+                    message_format: 'text'
+                }
+                DrslHipChatService.sendMessage(messageObject)
+                .then(function(res){
+                    getMessages();
+                    vm.messageToSend = '';
                 })
             }
-        }
-        function sendMessage(){
-            var messageObject = {
-                roomID: vm.guestRoomID,
-                message: vm.messageToSend,
-                from: DrslHipChatService.currentUsername,
-                message_format: 'text'
+            function checkMessages() {
+                if(DrslHipChatService.waitingOnRoom){
+                    setTimeout(function () {
+                        DrslHipChatService.getMessages(vm.guestRoomID, vm.maxResults)
+                        .then(function(res){
+                            vm.messages = res.data.items;
+                            DrslHipChatService.magicMessageParser(vm.messages);
+                            checkMessages();
+                        })
+                    }, 30 * 1000);
+                }
             }
-            DrslHipChatService.sendMessage(messageObject)
-            .then(function(res){
-                getMessages();
-                vm.messageToSend = '';
-            })
-        }
-        function checkMessages() {
-            if(DrslHipChatService.waitingOnRoom){
-                setTimeout(function () {
-                    DrslHipChatService.getMessages(vm.guestRoomID, vm.maxResults)
-                    .then(function(res){
-                        vm.messages = res.data.items;
-                        DrslHipChatService.magicMessageParser(vm.messages);
+            function getMessages() {
+                DrslHipChatService.getMessages(vm.guestRoomID, vm.maxResults)
+                .then(function(res){
+                    vm.messages = res.data.items;
+                    DrslHipChatService.magicMessageParser(vm.messages);
+                    if(vm.checkingMessages){
                         checkMessages();
+                    }
+                })
+            }
+
+            window.onbeforeunload = function (event) {
+                if(DrslHipChatService.waitingOnRoom){
+                    DrslHipChatService.deleteRoom(vm.guestRoomID)
+                }
+            }
+
+            /**
+            * The success callback for saving/updating a case.
+            * @param result
+            */
+            var onSaveSuccess = function (result) {
+                // DrslNewCaseService.setNewCase(result);
+
+                DrslNewCaseService.setNewCaseId(result.id);
+
+                // Loop through each tech property and save via an api call
+                for (var key in vm.technologyProperties) {
+                    if (vm.technologyProperties.hasOwnProperty(key)) {
+                        var brandNewProperty = {};
+                        brandNewProperty.technology = vm.selectedTechnologies[0];
+                        // brandNewProperty.technology = vm.technology;
+                        brandNewProperty.supportcase = {};
+                        brandNewProperty.supportcase.id = result.id;
+                        brandNewProperty.propertyname = key;
+                        brandNewProperty.propertyvalue = vm.technologyProperties[key];
+                        console.log("PROPERTY", brandNewProperty);
+                        Casetechnologyproperty.save(brandNewProperty, function (result) {
+                            console.log("Result", result);
+                        });
+                    }
+                }
+                Supportcase.update({id: "expertmatch"}, result, function(res) {
+                    console.log("REZULTS", res);
+                })
+
+                // Reset view model properties
+                vm.technologyProperties = null;
+                vm.technology = null;
+                // vm.issue = null;
+
+                var roomObject = {
+                    // name: result.technology.name + result.id,
+                    topic: result.summary,
+                    expert: result.expertaccount.user.email
+                }
+                // DrslHipChatService.makeRoom(roomObject);
+
+                // emit a 'dorsalApp:supportcaseUpdate' so the app can be aware of the change
+                $scope.$emit('dorsalApp:supportcaseUpdate', result);
+                // redirect to the case page
+                $state.go('case')
+            };
+
+            /**
+            * The error callback for saving/updating a case.
+            */
+            var onSaveError = function () {
+                checkError()
+            };
+
+            /**
+            * Checks to see if the user has provided all of the required bits of data.
+            * Called before data is sent to the back-end
+            * @returns {boolean}
+            */
+            function hasErrors() {
+                return (Object.keys(vm.selectedTechnologies).length === 0 ||
+                Object.keys(vm.selectedSkills).length === 0 ||
+                vm.caseDetails.summary.length === 0);
+            }
+            // function hasErrors() {
+            //     return (Object.keys(vm.technology).length === 0 ||
+            //     Object.keys(vm.issue).length === 0 ||
+            //     vm.caseDetails.summary.length === 0);
+            // }
+
+            /**
+            * Check to see why we may have gotten an error from the back-end.
+            * Display a toastr message if we were able to determine the missing data.
+            */
+            function checkError() {
+                var messages = [];
+
+                // If we don't have any of the required data, display a summary error message.
+                if (Object.keys(vm.technology).length === 0 && Object.keys(vm.issue).length === 0 && vm.caseDetails.summary.length === 0) {
+                    messages.push(vm.errorMissingAll);
+                } else {
+                    // No Issue message
+                    if (Object.keys(vm.issue).length === 0) {
+                        messages.push(vm.errorMissingIssue);
+                    }
+
+                    // No Tech message
+                    if (Object.keys(vm.technology).length === 0) {
+                        messages.push(vm.errorMissingTech);
+                    }
+
+                    // No Summary message
+                    if (vm.caseDetails.summary.length === 0) {
+                        messages.push(vm.errorMissingDescription);
+                    }
+                }
+
+                // If we have any messages display them in a toastr message
+                if (messages.length) {
+                    console.log("AHHHHHHh", messages);
+                    toastr.warning(messages.join('<br/>'), {timeOut: 5000});
+                }
+            }
+
+            /**
+            * Initialize the controller's data.
+            */
+            function init() {
+                // Make a call to get the initial data.
+                ConciergeService.getEntityData().then(function (data) {
+                    vm.caseDetails = data;
+
+                    // Store a shortcut reference to the product object
+                    vm.product = vm.selectedTechnologies[0];
+
+                    // vm.product = vm.caseDetails.radios.filter(function (o) {
+                    //     return o.id === 'product';
+                    // })[0];
+
+                });
+            }
+
+            /**
+            * Submits the form, or opens the login dialog if the user isn't logged in.
+            */
+            function submitForm() {
+                if (!vm.isAuthenticated()) {
+                    LoginService.open();
+                    $rootScope.$on('authenticationSuccess', function () {
+                        Principal.identity().then(function () {
+                            vm.createCase();
+                        })
                     })
-                }, 30 * 1000);
-            }
-        }
-        function getMessages() {
-            DrslHipChatService.getMessages(vm.guestRoomID, vm.maxResults)
-            .then(function(res){
-                vm.messages = res.data.items;
-                DrslHipChatService.magicMessageParser(vm.messages);
-                if(vm.checkingMessages){
-                    checkMessages();
-                }
-            })
-        }
-
-        window.onbeforeunload = function (event) {
-            if(DrslHipChatService.waitingOnRoom){
-                DrslHipChatService.deleteRoom(vm.guestRoomID)
-            }
-        }
-
-        /**
-        * The success callback for saving/updating a case.
-        * @param result
-        */
-        var onSaveSuccess = function (result) {
-            // DrslNewCaseService.setNewCase(result);
-
-            DrslNewCaseService.setNewCaseId(result.id);
-
-            // Loop through each tech property and save via an api call
-            for (var key in vm.technologyProperties) {
-                if (vm.technologyProperties.hasOwnProperty(key)) {
-                    var brandNewProperty = {};
-                    brandNewProperty.technology = vm.selectedTechnologies[0];
-                    // brandNewProperty.technology = vm.technology;
-                    brandNewProperty.supportcase = {};
-                    brandNewProperty.supportcase.id = result.id;
-                    brandNewProperty.propertyname = key;
-                    brandNewProperty.propertyvalue = vm.technologyProperties[key];
-                    console.log("PROPERTY", brandNewProperty);
-                    Casetechnologyproperty.save(brandNewProperty, function (result) {
-                        console.log("Result", result);
-                    });
-                }
-            }
-            Supportcase.update({id: "expertmatch"}, result, function(res) {
-                console.log("REZULTS", res);
-            })
-
-            // Reset view model properties
-            vm.technologyProperties = null;
-            vm.technology = null;
-            // vm.issue = null;
-
-            var roomObject = {
-                // name: result.technology.name + result.id,
-                topic: result.summary,
-                expert: result.expertaccount.user.email
-            }
-            // DrslHipChatService.makeRoom(roomObject);
-
-            // emit a 'dorsalApp:supportcaseUpdate' so the app can be aware of the change
-            $scope.$emit('dorsalApp:supportcaseUpdate', result);
-            // redirect to the case page
-            $state.go('case')
-        };
-
-        /**
-        * The error callback for saving/updating a case.
-        */
-        var onSaveError = function () {
-            checkError()
-        };
-
-        /**
-        * Checks to see if the user has provided all of the required bits of data.
-        * Called before data is sent to the back-end
-        * @returns {boolean}
-        */
-        function hasErrors() {
-            return (Object.keys(vm.selectedTechnologies).length === 0 ||
-            Object.keys(vm.selectedSkills).length === 0 ||
-            vm.caseDetails.summary.length === 0);
-        }
-        // function hasErrors() {
-        //     return (Object.keys(vm.technology).length === 0 ||
-        //     Object.keys(vm.issue).length === 0 ||
-        //     vm.caseDetails.summary.length === 0);
-        // }
-
-        /**
-        * Check to see why we may have gotten an error from the back-end.
-        * Display a toastr message if we were able to determine the missing data.
-        */
-        function checkError() {
-            var messages = [];
-
-            // If we don't have any of the required data, display a summary error message.
-            if (Object.keys(vm.technology).length === 0 && Object.keys(vm.issue).length === 0 && vm.caseDetails.summary.length === 0) {
-                messages.push(vm.errorMissingAll);
-            } else {
-                // No Issue message
-                if (Object.keys(vm.issue).length === 0) {
-                    messages.push(vm.errorMissingIssue);
-                }
-
-                // No Tech message
-                if (Object.keys(vm.technology).length === 0) {
-                    messages.push(vm.errorMissingTech);
-                }
-
-                // No Summary message
-                if (vm.caseDetails.summary.length === 0) {
-                    messages.push(vm.errorMissingDescription);
-                }
-            }
-
-            // If we have any messages display them in a toastr message
-            if (messages.length) {
-                console.log("AHHHHHHh", messages);
-                toastr.warning(messages.join('<br/>'), {timeOut: 5000});
-            }
-        }
-
-        /**
-        * Initialize the controller's data.
-        */
-        function init() {
-            // Make a call to get the initial data.
-            ConciergeService.getEntityData().then(function (data) {
-                vm.caseDetails = data;
-
-                // Store a shortcut reference to the product object
-                vm.product = vm.selectedTechnologies[0];
-
-                // vm.product = vm.caseDetails.radios.filter(function (o) {
-                //     return o.id === 'product';
-                // })[0];
-
-            });
-        }
-
-        /**
-        * Submits the form, or opens the login dialog if the user isn't logged in.
-        */
-        function submitForm() {
-            if (!vm.isAuthenticated()) {
-                LoginService.open();
-                $rootScope.$on('authenticationSuccess', function () {
+                } else {
                     Principal.identity().then(function () {
                         vm.createCase();
                     })
-                })
-            } else {
-                Principal.identity().then(function () {
-                    vm.createCase();
-                })
+                }
             }
-        }
 
-        /**
-        * Sets the vm.datePopup.opened boolean, which toggles the date popup display.
-        */
-        function openDatePopup() {
-            vm.datePopup.opened = true;
-        }
+            /**
+            * Sets the vm.datePopup.opened boolean, which toggles the date popup display.
+            */
+            function openDatePopup() {
+                vm.datePopup.opened = true;
+            }
 
-        // Call to initialize the controller.
-        vm.init();
-    }
-})();
+            // Call to initialize the controller.
+            vm.init();
+        }
+    })();

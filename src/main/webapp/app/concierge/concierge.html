@@ -122,66 +122,71 @@
                         <div style="    float: right;
                         position: relative;
                         bottom: 60px; left: 200px;">
-                            <div class="drsl-tech-tag" ng-click="showTechOther = !showTechOther">Other</div>
-                            <span ng-if="showTechOther">
+                        <div class="drsl-tech-tag" ng-click="showTechOther = !showTechOther">Other</div>
+                        <span ng-if="showTechOther">
                             <input  type="text" name="name" value="" class="form-control" style="display: inline-block; width: 175px;"ng-model="vm.customTechnologyInput">
                             <div class="drsl-tech-tag" ng-click="vm.addCustomTechnology()">Add</div>
                         </span>
 
-                        </div>
-                    </div>
-                    <div class="drsl-avialable-technology">
-                        <div class="drsl-tech-tag" ng-repeat="skill in vm.selectedSkills" style="background: #ff8600; color: white;" ng-click="vm.removeSkill(skill, $index)">{{skill.name}}</div>
-                        <div class="drsl-tech-tag" ng-repeat="skill in vm.skills track by $index" ng-click="vm.selectSkill(skill, $index)">{{skill.name}}</div>
-                        <br>
-                    </div>
-                    <div style="    float: right;
-                    position: relative;
-                    bottom: 60px; left: 200px;">
-                        <div class="drsl-tech-tag" ng-click="showSkillOther = !showSkillOther" >Other</div>
-                        <span ng-if="showSkillOther">
-                        <input  type="text" name="name" value="" class="form-control" style="display: inline-block; width: 175px;" ng-model="vm.customSkillInput">
-                        <div class="drsl-tech-tag" ng-click="vm.addCustomSkill()">Add</div>
-                    </span>
-
                     </div>
                 </div>
+                <div class="drsl-avialable-technology">
+                    <div class="drsl-tech-tag" ng-repeat="skill in vm.selectedSkills" style="background: #ff8600; color: white;" ng-click="vm.removeSkill(skill, $index)">{{skill.name}}</div>
+                    <div class="drsl-tech-tag" ng-repeat="skill in vm.skills track by $index" ng-click="vm.selectSkill(skill, $index)">{{skill.name}}</div>
+                    <br>
+                </div>
+                <div style="    float: right;
+                position: relative;
+                bottom: 60px; left: 200px;">
+                <div class="drsl-tech-tag" ng-click="showSkillOther = !showSkillOther" >Other</div>
+                <span ng-if="showSkillOther">
+                    <input  type="text" name="name" value="" class="form-control" style="display: inline-block; width: 175px;" ng-model="vm.customSkillInput">
+                    <div class="drsl-tech-tag" ng-click="vm.addCustomSkill()">Add</div>
+                </span>
+
             </div>
         </div>
     </div>
-    <div class="drsl-step-three">
-        <!-- <img src="content/images/global/easy_as_3.png" alt=""> -->
-        <h4 style="display: inline-block;
-        width: 200px;
-        padding: 40px;">4. Other</h4>
-        <div class="drsl-step-content">
-            <div style="    display: inline-block;
-            width: 830px;
-            padding-top: 30px;
-            padding-bottom: 30px;
-            position: relative;
-            left: 114px;
-            ">
-            <select class="form-control" name="" style="display: inline-block;
-            width: 25%">
-            <option value="">Response Time: 4 hours</option>
-            <option value="">Response Time: 1 hour</option>
-            <option value="">Response Time: 30 minutes</option>
-        </select>
-        <div class="drsl-date-widget-wrapper" style="display: inline-block;">
-            <span uib-datepicker-popup="{{format}}" ng-model="vm.defaultDate" is-open="vm.datePopup.opened" popup-placement="top-left" datepicker-options="vm.dateOptions" show-button-bar="false" ></span>
-        </div>
-        <div class="form-control drsl-date-display-wrapper" ng-click="vm.openDatePopup()" style="display: inline-block; width: 40%;">
-            <span class="drsl-date-display-label" translate="concierge.caseDetails.date.main">Requested delivery:</span><span>{{vm.defaultDate | date:'MMM dd, yyyy'}}</span>
-            <span class="pull-right">
-                <i class="fa fa-calendar"></i>
-            </span>
-        </div>
+</div>
+</div>
+<div class="drsl-step-three">
+    <!-- <img src="content/images/global/easy_as_3.png" alt=""> -->
+    <h4 style="display: inline-block;
+    width: 200px;
+    padding: 40px;">4. Other</h4>
+    <div class="drsl-step-content">
+        <div style="    display: inline-block;
+        width: 830px;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        position: relative;
+        left: 114px;
+        ">
         <select class="form-control" name="" style="display: inline-block;
-        width: 27%" ng-model="vm.expertRegion">
-        <option value="">Expert Location</option>
-        <option value="{{attribute.name}}" ng-repeat="attribute in vm.ExpertAttributes">Expert Location: {{attribute.name}}</option>
+        width: 25%">
+        <option value="">Response Time: 4 hours</option>
+        <option value="">Response Time: 1 hour</option>
+        <option value="">Response Time: 30 minutes</option>
     </select>
+    <div class="drsl-date-widget-wrapper" style="display: inline-block;">
+        <span uib-datepicker-popup="{{format}}" ng-model="vm.defaultDate" is-open="vm.datePopup.opened" popup-placement="top-left" datepicker-options="vm.dateOptions" show-button-bar="false" ></span>
+    </div>
+    <div class="form-control drsl-date-display-wrapper" ng-click="vm.openDatePopup()" style="display: inline-block; width: 30%;">
+        <span class="drsl-date-display-label" translate="concierge.caseDetails.date.main">Requested delivery:</span><span>{{vm.defaultDate | date:'MMM dd, yyyy'}}</span>
+        <span class="pull-right">
+            <i class="fa fa-calendar"></i>
+        </span>
+    </div>
+    <select class="form-control" name="" style="display: inline-block;
+    width: 27%" ng-model="vm.expertRegion">
+    <option value="">Expert Location</option>
+    <option value="{{attribute.name}}" ng-repeat="attribute in vm.ExpertAttributes">Expert Location: {{attribute.name}}</option>
+</select>
+    <select class="form-control" name="" style="display: inline-block;
+    width: 27%" ng-model="vm.expertGroup">
+    <option value="">Expert Group</option>
+    <option value="{{group.name}}" ng-repeat="group in vm.expertGroups">{{group.name}}</option>
+</select>
 </div>
 </div>
 </div>

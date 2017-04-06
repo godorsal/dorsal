@@ -161,7 +161,7 @@
                 case 'concierge':
                     // Send experts to the case page (they should never land on the concierge page)
                     if (service.user.isExpert) {
-                        toState = 'case';
+                        // toState = 'case';
                     }
                     break;
                 case 'case':

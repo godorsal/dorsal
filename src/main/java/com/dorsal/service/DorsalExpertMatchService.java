@@ -106,13 +106,13 @@ public class DorsalExpertMatchService {
             attributeList = "";
         }
 
-        String userAttribute = userRepository.getAttributesForUser();
-        if(userAttribute != null && userAttribute.length() > 0) {
-            if (attributeList.length() > 0)
-                attributeList = attributeList + "," + userAttribute;
-            else
-                attributeList = userAttribute;
-        }
+        // String userAttribute = userRepository.getAttributesForUser();
+        // if(userAttribute != null && userAttribute.length() > 0) {
+        //     if (attributeList.length() > 0)
+        //         attributeList = attributeList + " " + userAttribute;
+        //     else
+        //         attributeList = userAttribute;
+        // }
         log.info("Master and User attributes: "+ attributeList);
 
         // Get attributes from support case that are defined in the Other property. User can define Attribute, Product, Group and Skill
