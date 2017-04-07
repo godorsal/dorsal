@@ -146,6 +146,22 @@ public class ExpertAttributeToExpertResource {
     }
 
     /**
+     * GET  /expert-attribute-to-experts/expert/{id} : get all the expertAttributeToExperts for the expert identified by id.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of expertAttributeToExperts in body
+     */
+    @RequestMapping(value = "/expert-attribute-to-experts/expert/{id}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<ExpertAttributeToExpert> getAllExpertAttributeToExpertsByExpertId(@PathVariable Long id) {
+        log.debug("REST request to get all ExpertAttributeToExperts by expert id");
+        List<ExpertAttributeToExpert> expertAttributeToExperts = expertAttributeToExpertRepository.findByExpertId(id);
+        return expertAttributeToExperts;
+    }
+
+
+    /**
      * DELETE  /expert-attribute-to-experts/:id : delete the "id" expertAttributeToExpert.
      *
      * @param id the id of the expertAttributeToExpert to delete

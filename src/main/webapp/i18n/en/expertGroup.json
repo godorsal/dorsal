@@ -31,12 +31,12 @@
                     "viewing": "{{groupname}}'s Experts"
                 },
                 "login": "Login",
-                "current": "Current",
+                "current": "In Your Group",
                 "available": "Available",
                 "staged": "Staged",
                 "form": {
                     "name": "Group Name: ",
-                    "description": "Grop Description: ",
+                    "description": "Group Description: ",
                     "selection": "Group Matching: ",
                     "expertsInPoolFirst": "Experts in pool first",
                     "expertsInPoolOnly": "Experts in pool only",

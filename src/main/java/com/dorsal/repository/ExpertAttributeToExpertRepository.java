@@ -3,6 +3,7 @@ package com.dorsal.repository;
 import com.dorsal.domain.ExpertAttributeToExpert;
 
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -12,6 +13,11 @@ import java.util.List;
 @SuppressWarnings("unused")
 public interface ExpertAttributeToExpertRepository extends JpaRepository<ExpertAttributeToExpert,Long> {
 
-    @Query("select expertattrinutetoexpert from ExpertAttributeToExpert expertattrinutetoexpert where expertattrinutetoexpert.expertaccount.user.login = ?#{principal.username} ORDER BY expertattrinutetoexpert.expertattribute.name DESC")
+    @Query("select expertattributetoexpert from ExpertAttributeToExpert expertattributetoexpert where expertattributetoexpert.expertaccount.user.login = ?#{principal.username} ORDER BY expertattributetoexpert.expertattribute.name DESC")
     List<ExpertAttributeToExpert> findByUserIsCurrentUser();
+
+    @Query("select expertattributetoexpert from ExpertAttributeToExpert expertattributetoexpert where expertattributetoexpert.expertaccount.id = :expertid ORDER BY expertattributetoexpert.expertattribute.name DESC")
+    List<ExpertAttributeToExpert> findByExpertId(@Param("expertid") long expertid);
+
+
 }

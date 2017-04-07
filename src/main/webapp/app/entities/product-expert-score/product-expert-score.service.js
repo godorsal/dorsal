@@ -7,7 +7,8 @@
     ProductExpertScore.$inject = ['$resource'];
 
     function ProductExpertScore ($resource) {
-        var resourceUrl =  'api/product-expert-scores/:id';
+        var resourceUrl =  'api/product-expert-scores/:param/:id';
+        // var resourceUrl =  'api/product-expert-scores/:id';
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},

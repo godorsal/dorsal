@@ -47,27 +47,27 @@ BEGIN
         INSERT INTO product(name,code) VALUES('MariaDB', 'mariadb');
         INSERT INTO product(name,code) VALUES('PostgreSQL', 'postgresql');
         INSERT INTO product(name,code) VALUES('MongoDB', 'mongodb');
-        INSERT INTO product(name,code) VALUES('Oracle DB', 'oracledb');
-        INSERT INTO product(name,code) VALUES('MS SQL', 'mssql');
+        INSERT INTO product(name,code) VALUES('OracleDB', 'oracledb');
+        INSERT INTO product(name,code) VALUES('MSSQL', 'mssql');
         INSERT INTO product(name,code) VALUES('Hadoop', 'hadoop');
-        INSERT INTO product(name,code) VALUES('XtraDB Cluster', 'xtradbcluster');
-        INSERT INTO product(name,code) VALUES('Tungsten Cluster', 'tungstencluster');
-        INSERT INTO product(name,code) VALUES('Galera Cluster', 'galeracluster');
+        INSERT INTO product(name,code) VALUES('XtraDBCluster', 'xtradbcluster');
+        INSERT INTO product(name,code) VALUES('TungstenCluster', 'tungstencluster');
+        INSERT INTO product(name,code) VALUES('GaleraCluster', 'galeracluster');
         INSERT INTO product(name,code) VALUES('PGCluster', 'pgcluster');
         INSERT INTO product(name,code) VALUES('PGPool', 'pgpool');
         INSERT INTO product(name,code) VALUES('Postgres-XL', 'postgresqlxl');
         INSERT INTO product(name,code) VALUES('Postgres-BDR', 'postgresbdr');
-        INSERT INTO product(name,code) VALUES('Xtra Backup', 'xtrabackup');
+        INSERT INTO product(name,code) VALUES('XtraBackup', 'xtrabackup');
         INSERT INTO product(name,code) VALUES('Ansible', 'ansible');
         INSERT INTO product(name,code) VALUES('Puppet', 'puppet');
         INSERT INTO product(name,code) VALUES('Chef', 'chef');
         INSERT INTO product(name,code) VALUES('CFEngine', 'cfengine');
         INSERT INTO product(name,code) VALUES('Neo4J', 'neo4j');
-        INSERT INTO product(name,code) VALUES('Shell scripting', 'shellscripting');
-        INSERT INTO product(name,code) VALUES('PERL programming', 'perlprogramming');
+        INSERT INTO product(name,code) VALUES('Shellscripting', 'shellscripting');
+        INSERT INTO product(name,code) VALUES('PERLprogramming', 'perlprogramming');
         INSERT INTO product(name,code) VALUES('Druid', 'druid');
         INSERT INTO product(name,code) VALUES('MemSQL', 'memsql');
-        INSERT INTO product(name,code) VALUES('Oracle Cluster', 'oraclecluster');
+        INSERT INTO product(name,code) VALUES('OracleCluster', 'oraclecluster');
 
 -- Job Role --
         INSERT INTO job_role(name, code) VALUES('Administrator' , 'administrator');
@@ -93,7 +93,7 @@ BEGIN
         INSERT INTO speciality(name, code) VALUES('Oracle to MongoDB transitions', 'oracletomongodbtransitions');
         INSERT INTO speciality(name, code) VALUES('Oracle to PostgreSQL transitions', 'oracletopostgresqltransitions');
         INSERT INTO speciality(name, code) VALUES('Database Infrastructure', 'databaseinfrastructure');
-        INSERT INTO speciality(name, code) VALUES('MS SQL to FOSS transitions', 'mssqltofosstransitions');
+        INSERT INTO speciality(name, code) VALUES('MSSQL to FOSS transitions', 'mssqltofosstransitions');
 
         -- Technology table is used for version 1.0 & 1.1 intake page which will be still used
         -- New technology definition starting in v1.2 will use higher range of ID's
@@ -115,10 +115,10 @@ BEGIN
         SELECT t.id INTO technologyid FROM technology t WHERE name like 'MySQL';
 
         PERFORM setval('technologypropertyvalue_id_seq', 60);
-        INSERT INTO technologypropertyvalue(value, technology_id, technologyproperty_id) VALUES('Xtra Backup',technologyid,technologypropertyid);
+        INSERT INTO technologypropertyvalue(value, technology_id, technologyproperty_id) VALUES('XtraBackup',technologyid,technologypropertyid);
 
         SELECT t.id INTO technologyid FROM technology t WHERE name like 'MariaDB';
-        INSERT INTO technologypropertyvalue(value, technology_id, technologyproperty_id) VALUES('Xtra Backup',technologyid,technologypropertyid);
+        INSERT INTO technologypropertyvalue(value, technology_id, technologyproperty_id) VALUES('XtraBackup',technologyid,technologypropertyid);
 
         SELECT t.id INTO technologyid FROM technology t WHERE name like 'PostgreSQL';
         INSERT INTO technologypropertyvalue(value, technology_id, technologyproperty_id) VALUES('Postgres-BDR',technologyid,technologypropertyid);
