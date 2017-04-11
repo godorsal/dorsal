@@ -138,7 +138,7 @@
                             <div ng-if="vm.selectedExpert.index === $index" rowspan="2" style="width: 200px;">
                                 <Strong>Products:</Strong>
                                 <Strong style="float:right;">Skill Level:</Strong>
-                                <div ng-repeat="product in vm.selectedExpert.scoreArray">
+                                <div ng-repeat="product in vm.selectedCurrentExpert.scoreArray">
                                     <br>
                                     <div style="display:inline-block;">
                                         {{product.product.name}}
@@ -158,7 +158,7 @@
                             <i class="fa fa-plus" aria-hidden="true" ng-click="vm.addExpert(expert, $index); $event.stopPropagation();"></i>
                             <div ng-if="vm.selectedExpert.index === $index" rowspan="2">
                                 <strong>Attributes:</strong>
-                                <div ng-repeat="attribute in vm.selectedExpert.attributeArray">
+                                <div ng-repeat="attribute in vm.selectedCurrentExpert.attributeArray">
                                     <div>{{attribute.name}}</div>
                                 </div>
                             </div>

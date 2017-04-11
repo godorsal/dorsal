@@ -205,11 +205,16 @@
                 // brandNewCase.technology = vm.selectedTechnologies[0];
 
                 var namedTechs = [];
+                var namedSkills = [];
                 vm.selectedTechnologies.forEach(function functionName(tech) {
                     namedTechs.push(tech.name)
                 })
-                if(namedTechs){
-                    var productString = "Product:" + namedTechs.join(",") + " ";
+                vm.selectedSkills.forEach(function functionName(skill) {
+                    namedSkills.push(skill.name)
+                })
+
+                if(namedSkills.length > 0){
+                    var skillString = "Skill:" + namedSkills.join(" ") + " ";
                 }
                 if(vm.expertRegion){
                     var attributeString = "Attribute:" + vm.expertRegion + " ";
@@ -224,7 +229,7 @@
 
 
                 vm.technologyProperties = {
-                    Other: productString + attributeString + groupString
+                    Other: "Product:" + namedTechs.join(" ") + " " + skillString + " " + attributeString
                 }
 
                 // brandNewCase.technology = vm.technology;
