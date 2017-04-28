@@ -126,11 +126,13 @@
 								result.forEach(function (property) {
 									if (property.supportcase.id === supportcase.id) {
 										if(property.propertyname=== 'Other'){
-											var split1 = property.propertyvalue.split(':');
-											split1.splice(0,1)
-											var split2 = split1.join().split(' ');
+											var split1 = property.propertyvalue.split('|');
+											// console.log(split1);
+											var split2 = split1.join().split(':');
+											split2.splice(0,1)
+											console.log(split2);
 											supportcase.technology ={
-												name: split2[0]
+												name: split2[0].split(',')[0]
 											}
 										}
 									}

@@ -18,9 +18,9 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Encapsulate the match algorithms in a single service
- * Created by rogerrut on 8/7/16.
- */
+* Encapsulate the match algorithms in a single service
+* Created by rogerrut on 8/7/16.
+*/
 @Service
 public class DorsalExpertMatchService {
 
@@ -46,6 +46,7 @@ public class DorsalExpertMatchService {
     private SupportcaseRepository supportcaseRepository;
 
     private static String NO_EXPERT_FOR_ATTRIBUTES = "No expert found for the required attributes: ";
+    private static String NO_EXPERT_FOR_SKILLS = "No expert found for the required skills: ";
     private static String NO_EXPERT_FOR_ATTRIBUTES_PRODUCTS = "No expert found for the required attributes and products: ";
     private static String NO_EXPERT_FOR_PRODUCT = "No expert is available for products: ";
     private static String NO_EXPERT_FOR_EXPERT_POOL = "No matching experts in Expert Group found. Group: ";
@@ -60,27 +61,28 @@ public class DorsalExpertMatchService {
 
 
     /**
-     * Dorsal application v1.2
-     * This method is new for version 1.2 of the Dorsal application. The extended match algorithm takes into account the
-     * rich expert profiles and attributes to find the right expert.
-     *
-     * Matching algorithm:
-     * --> Lookup expert that matches master user attributes and case attributes. If no match return Concierge user
-     * --> Lookup expert for product and attributes. If no match return concierge user
-     * --> Select best available expert
-     *
-     * @param supportcase Incoming support case object that needs to have an expert assigned.
-     * @return  Expert account that does match the criteria from the incoming case. If no match is found the default Dorsal Concierge is returned.
-      */
+    * Dorsal application v1.2
+    * This method is new for version 1.2 of the Dorsal application. The extended match algorithm takes into account the
+    * rich expert profiles and attributes to find the right expert.
+    *
+    * Matching algorithm:
+    * --> Lookup expert that matches master user attributes and case attributes. If no match return Concierge user
+    * --> Lookup expert for product and attributes. If no match return concierge user
+    * --> Select best available expert
+    *
+    * @param supportcase Incoming support case object that needs to have an expert assigned.
+    * @return  Expert account that does match the criteria from the incoming case. If no match is found the default Dorsal Concierge is returned.
+    */
     public ExpertAccount findExpertByProfileMatch(Supportcase supportcase) {
         /*
-            Initialization
+        Initialization
         */
         List<ExpertAccount> experts = null;
         List <Casetechnologyproperty> casetechpropertiesList = null;
 
         List<String> attributeListArray = new ArrayList<String>();
         List<String> productListArray = new ArrayList<String>();
+        List<String> skillListArray = new ArrayList<String>();
         List<Long> expertIDListArray = new ArrayList<Long>();
 
         // Intake Other property value placeholders
@@ -94,10 +96,10 @@ public class DorsalExpertMatchService {
         ExpertAccount expert = expertAccountRepository.getDorsalConcierge(dorsalProperties.getSupport().getConcierge());
 
         /*
-            Extract attributes values from:
-            --> Master User, current user
-            --> TAG in Other property attached to support case
-         */
+        Extract attributes values from:
+        --> Master User, current user
+        --> TAG in Other property attached to support case
+        */
         String attributeList = userRepository.getAttributesForMasterUser(supportcase.getUser().getId());
         if (attributeList != null && attributeList.length() > 0) {
             log.info("Attributes [" + attributeList + "] for user " + supportcase.getUser().getLogin());
@@ -105,6 +107,7 @@ public class DorsalExpertMatchService {
             log.info("Master user has no attributes");
             attributeList = "";
         }
+
 
         // String userAttribute = userRepository.getAttributesForUser();
         // if(userAttribute != null && userAttribute.length() > 0) {
@@ -127,25 +130,28 @@ public class DorsalExpertMatchService {
                 inputProduct   = QueryStringParser.getValueFromTag(otherPropertyValue, QueryStringParser.TAG_PRODUCT);
                 log.info("Selected Product(s) in List : " + inputProduct);
                 inputSkill     = QueryStringParser.getValueFromTag(otherPropertyValue, QueryStringParser.TAG_SKILL);
+                log.info("INPUT SKILLLL" + inputSkill);
                 inputGroup     = QueryStringParser.getValueFromTag(otherPropertyValue, QueryStringParser.TAG_GROUP);
 
                 // Add attribute if it was defined as part of other properties
                 if (inputAttribute.length() > 0) {
                     if (attributeList != null && attributeList.length() > 0)
-                        attributeList = attributeList + "," + inputAttribute;
+                    attributeList = attributeList + "," + inputAttribute;
                     else
-                        attributeList = inputAttribute;
+                    attributeList = inputAttribute;
                 }
             }
         }
 
         /*
-            Lookup for the main product (Intake technology section)
-         */
+        Lookup for the main product (Intake technology section)
+        */
 
         // Extract product List -- It's technology, configuration and other
-        String[] inputProductArray = inputProduct.split(" ");
+        String[] inputProductArray = inputProduct.split(",");
         log.info("Input Product Splice: " + inputProductArray[0]);
+        String[] skilllist = inputSkill.split(",");
+        log.info("Input Skill Splice: " + skilllist[0]);
 
         String mainProduct = inputProductArray[0];
         // String mainProduct = supportcase.getTechnology().getName();
@@ -153,6 +159,27 @@ public class DorsalExpertMatchService {
 
 
         // Lookup expert for matching attributes if any defined
+        if (attributeList != null && attributeList.length() > 0 && skilllist != null && skilllist.length > 1) {
+            log.info("BUTTERFLY ");
+            log.info("Attribute list not empty " +attributeList);
+            attributeListArray = Arrays.asList(attributeList);
+            log.info("Skill list not empty " + skilllist);
+            skillListArray = Arrays.asList(skilllist);
+
+            log.info("Find Expert by attribute and product: " + mainProduct);
+            log.info("Find Expert by attribute and skill and product: " + mainProduct);
+            experts = expertAccountRepository.findExpertByProductAndAttributeAndSkill(mainProduct, DEFAULT_SCORE, attributeListArray, skillListArray);
+
+            // Check for no match
+            if (experts == null || experts.size() == 0) {
+                log.info("No expert match for attributes: " + attributeList);
+                // Set message
+                supportcase.setExpectedResult(NO_EXPERT_FOR_ATTRIBUTES + attributeList);
+
+                // return default Concierge expert
+                return expert;
+            }
+        }
         if (attributeList != null && attributeList.length() > 0) {
             log.info("Attribute list not empty " +attributeList);
             attributeListArray = Arrays.asList(attributeList);
@@ -170,17 +197,37 @@ public class DorsalExpertMatchService {
             }
         }
 
+        log.info("Skill list length! " + skilllist.length);
+        log.info("Skill list! " + skilllist);
+        if (skilllist != null && skilllist.length > 1) {
+            log.info("Skill list not zero " + skilllist.length);
+            skillListArray = Arrays.asList(skilllist);
+            log.info("Find Expert by skill and product: " + mainProduct);
+            experts = expertAccountRepository.findExpertByProductAndSkill(mainProduct, DEFAULT_SCORE, skillListArray);
+
+            // Check for no match
+            if (experts == null || experts.size() == 0) {
+                log.info("No expert match for skills: " + skilllist);
+                // Set message
+                supportcase.setExpectedResult(NO_EXPERT_FOR_SKILLS + skillListArray.toString());
+
+                // return default Concierge expert
+                return expert;
+            }
+        }
+
         /**
-         * At this point we might have an expert list that matches attributes and main product (MySQL, MariaDB,..)
-         *
-         * If we have experts match them against the properties
-         *
-         * If we have no properties match them against main product and product properties list
-         */
+        * At this point we might have an expert list that matches attributes and main product (MySQL, MariaDB,..)
+        *
+        * If we have experts match them against the properties
+        *
+        * If we have no properties match them against main product and product properties list
+        */
 
         // Extract properties -- Products are under configuration
         casetechpropertiesList = casetechnologypropertyRepository.findPropertiesByCaseAndName(supportcase.getId(), PROPERTY_CONFIGURATION);
         log.info("Get properties size[" +  casetechpropertiesList.size() + "] by case : " + supportcase.getId() + " and property: " + PROPERTY_CONFIGURATION);
+        log.info("CTL " + casetechpropertiesList.toString());
         if (casetechpropertiesList != null && casetechpropertiesList.size() > 0) {
             // Extract properties
             for (int i=0; i< casetechpropertiesList.size();i++ ) {
@@ -196,13 +243,13 @@ public class DorsalExpertMatchService {
         log.info("Following products defined for expert lookup: " + productListArray.toString());
 
         /**
-         * If experts list is empty:
-         * --> if properties is empty --> lookup expert by main product only (same result  as pre 1.2)
-         *
-         * if (experts list is not empty (product attribute lookup sucessfull)
-         * --> Create a list of expert ID's
-         * --> Lookup byExpertList ID's and Product properties
-         */
+        * If experts list is empty:
+        * --> if properties is empty --> lookup expert by main product only (same result  as pre 1.2)
+        *
+        * if (experts list is not empty (product attribute lookup sucessfull)
+        * --> Create a list of expert ID's
+        * --> Lookup byExpertList ID's and Product properties
+        */
 
         if(experts == null || experts.size() == 0) {
             log.info("No experts for product/attributes");
@@ -227,9 +274,9 @@ public class DorsalExpertMatchService {
         } else {
 
             /*
-                If no additional products are defined no need for additional lookup. Lookup is only necessary
-                for matching more product properties with existing experts.
-             */
+            If no additional products are defined no need for additional lookup. Lookup is only necessary
+            for matching more product properties with existing experts.
+            */
             if (productListArray != null && productListArray.size() > 0) {
                 // Extract the expert ID's so that it can be passed as arguments to product properties lookup
                 for (int iii=0; iii < experts.size();iii++) {
@@ -258,11 +305,11 @@ public class DorsalExpertMatchService {
 
 
         /*
-            If the user defines a group on the intake page the list of experts found will be matched against the members of
-            the defined group. Other properties format Group:{GroupName}
+        If the user defines a group on the intake page the list of experts found will be matched against the members of
+        the defined group. Other properties format Group:{GroupName}
 
-            Note: The group name lookup is case insensitive. All group name input needs to be set to lower case
-         */
+        Note: The group name lookup is case insensitive. All group name input needs to be set to lower case
+        */
 
         // Check if a Group was defined in the properties
         if (inputGroup != null && inputGroup.length() > 0) {
@@ -278,10 +325,10 @@ public class DorsalExpertMatchService {
                 }
 
                 /**
-                 * Depending on the Expert Selection settings the pool is exclusive EXPERT_IN_POOL_ONLY or preferred EXPERT_IN_POOL_FIRST
-                 */
+                * Depending on the Expert Selection settings the pool is exclusive EXPERT_IN_POOL_ONLY or preferred EXPERT_IN_POOL_FIRST
+                */
 
-                 /* Lower case group name because lookup is converted to lowercase to be case insensitive */
+                /* Lower case group name because lookup is converted to lowercase to be case insensitive */
                 List<ExpertAccount> expertsInPool = expertAccountRepository.findExpertMatchExpertPoolMembers(expertIDListArray, inputGroup.toLowerCase());
                 log.info("ExpertPool lookup. Input Experts [" + expertIDListArray.size() + "] Output experts [" + expertsInPool.size() + "]");
 
@@ -354,15 +401,15 @@ public class DorsalExpertMatchService {
 
 
         /**
-         * The expert isAvailable until a certain threshold defined in GlobalMetaData property (EXPERT_CASE_LIMIT)is passed
-         */
+        * The expert isAvailable until a certain threshold defined in GlobalMetaData property (EXPERT_CASE_LIMIT)is passed
+        */
         int activeCases = supportcaseRepository.getCountOfActiveCasesByExpert(expert.getId());
         log.info("Current Expert has " + activeCases + " active cases");
         GlobalMetadata caseLimit = expertAccountRepository.getExpertCaseLimit();
 
         if (caseLimit != null) {
-           int limit = Integer.parseInt(caseLimit.getValue());
-           if (limit < activeCases) {
+            int limit = Integer.parseInt(caseLimit.getValue());
+            if (limit < activeCases) {
                 expert.setIsAvailable(false);
                 expertAccountRepository.save(expert);
                 log.warn("Expert " + expert.getUser().getLogin() +" has reached EXPERT_CASE_LIMIT threashold. isAvailable flag will be set false");
@@ -376,30 +423,30 @@ public class DorsalExpertMatchService {
 
 
     /**
-     * Find an Expert for the incoming case.
-     * v1 uses the following algorithm to find a match. The order is:
-     * --> Match on First technology expertise with highest score and available (not already working on cases)
-     * --> Match on Second technology expertise with highest score and available (not already working on cases)
-     * --> Match on any expert that is available with the highest score
-     * --> Match on experts that are available Full Time or Monday through Friday, match the technology (1st and 2nd preference) with the highest score
-     * --> If none of the above match assign it to the dorsal concierge for future assignments
-     *
-     * @param supportcase Support Case that needs an expert assignment
-     * @return Expert record that matches the criteria above
-     */
+    * Find an Expert for the incoming case.
+    * v1 uses the following algorithm to find a match. The order is:
+    * --> Match on First technology expertise with highest score and available (not already working on cases)
+    * --> Match on Second technology expertise with highest score and available (not already working on cases)
+    * --> Match on any expert that is available with the highest score
+    * --> Match on experts that are available Full Time or Monday through Friday, match the technology (1st and 2nd preference) with the highest score
+    * --> If none of the above match assign it to the dorsal concierge for future assignments
+    *
+    * @param supportcase Support Case that needs an expert assignment
+    * @return Expert record that matches the criteria above
+    */
     public ExpertAccount findExpertForSupportcase(Supportcase supportcase) {
 
         ExpertAccount expert = null;
 
         if (true)
-            return expertAccountRepository.getDorsalConcierge(dorsalProperties.getSupport().getConcierge());
+        return expertAccountRepository.getDorsalConcierge(dorsalProperties.getSupport().getConcierge());
 
         try {
             // First technology preference, is available and ordered by score
             List experts = expertAccountRepository.findFirstTechnologyPreference(supportcase.getTechnology().getId(),new PageRequest(0,5));
             log.info("First Technology choice: Number of Experts: " + experts.size());
 
-           if (experts.size() > 0) {
+            if (experts.size() > 0) {
                 log.info("Expert Found for Technology [" + supportcase.getTechnology().getName() + "]");
                 expert = (ExpertAccount)experts.get(0);
             }
@@ -420,9 +467,9 @@ public class DorsalExpertMatchService {
                         expert = (ExpertAccount)experts.get(0);
                     } else {
                         /*
-                            All Experts are busy. Next step is to assign case to experts that work full time. They
-                            most likely have more bandwidth
-                         */
+                        All Experts are busy. Next step is to assign case to experts that work full time. They
+                        most likely have more bandwidth
+                        */
                         experts = expertAccountRepository.findExpertsThatWorkFullTime(supportcase.getTechnology().getId(), Availability.FULL_TIME, Availability.MON_FRI, new PageRequest(0,5));
                         if (experts.size() > 0) {
                             log.info("Any Expert available " +  Availability.FULL_TIME.name() + " and " + Availability.MON_FRI.name() +" Found Number of Experts: " + experts.size());
@@ -437,8 +484,8 @@ public class DorsalExpertMatchService {
             }
 
             /**
-             *  Mark an expert as busy when a case is assigned to the expert.
-             */
+            *  Mark an expert as busy when a case is assigned to the expert.
+            */
 
             if ( expert != null ) {
                 // Mark Expert as no longer available

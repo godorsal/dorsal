@@ -155,15 +155,19 @@ public class QueryStringParser {
 
         int startIn = tagArg.indexOf(tag);
         int endIn   = -1;
-
+        log.info("AARRGG" + tagArg);
         if (startIn != -1) {
             // Delimiter are spaces
-            endIn = tagArg.indexOf(' ', startIn + tag.length());
+            endIn = tagArg.indexOf('|', startIn + tag.length());
+            log.info("ENDIN" + endIn);
+
             if (endIn == -1) {
                 // Extract the result
                 result = tagArg.substring(startIn + tag.length());
+                log.info("REZULT1" + result);
             } else {
                 result = tagArg.substring(startIn + tag.length(), endIn);
+                log.info("REZULT2" + result);
             }
         }
 

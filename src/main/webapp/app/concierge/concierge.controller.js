@@ -80,6 +80,8 @@
         function selectTech(tech, index) {
             vm.selectedTechnologies.push(tech);
             vm.technologies.splice(index, 1);
+            console.log("TECH SELECTED", tech);
+
         }
         function removeTechnology(tech, index) {
             console.log("Remove", tech);
@@ -92,6 +94,7 @@
         function selectSkill(skill, index) {
             vm.selectedSkills.push(skill);
             vm.skills.splice(index, 1);
+            console.log("SKILL SELECTED", skill);
         }
         function removeSkill(skill, index) {
             vm.selectedSkills.splice(index, 1);
@@ -213,25 +216,27 @@
                     namedSkills.push(skill.name)
                 })
 
-                if(namedSkills.length > 0){
-                    var skillString = "Skill:" + namedSkills.join(" ") + " ";
-                }
-                if(vm.expertRegion){
-                    var attributeString = "Attribute:" + vm.expertRegion + " ";
-                } else {
-                    var attributeString = "";
-                }
+
                 if(vm.expertGroup){
                     var groupString = "Group:" + vm.expertGroup;
                 }
 
 
 
-
                 vm.technologyProperties = {
-                    Other: "Product:" + namedTechs.join(" ") + " " + skillString + " " + attributeString
+                    Other: "Product:" + namedTechs.join(",")
+                    // Other: "Product:" + namedTechs.join(" ") + " " + skillString + attributeString
                 }
-
+                if(namedSkills.length > 0){
+                    vm.technologyProperties.Other +=  "|Skill:" + namedSkills.join(",");
+                    // var skillString = "Skill:" + namedSkills.join(",");
+                }
+                if(vm.expertRegion){
+                    vm.technologyProperties.Other +=  "|Attribute:" + vm.expertRegion;
+                    // var attributeString = "Attribute:" + vm.expertRegion + " ";
+                } else {
+                    var attributeString = "";
+                }
                 // brandNewCase.technology = vm.technology;
 
                 brandNewCase.status = {code: "case_created_assigned_to-Expert", id: 1, name: "CREATED"};
@@ -315,7 +320,10 @@
                 for (var key in vm.technologyProperties) {
                     if (vm.technologyProperties.hasOwnProperty(key)) {
                         var brandNewProperty = {};
-                        brandNewProperty.technology = vm.selectedTechnologies[0];
+                        brandNewProperty.technology = {
+                            id: 1
+                        };
+                        // brandNewProperty.technology = vm.selectedTechnologies[0];
                         // brandNewProperty.technology = vm.technology;
                         brandNewProperty.supportcase = {};
                         brandNewProperty.supportcase.id = result.id;
