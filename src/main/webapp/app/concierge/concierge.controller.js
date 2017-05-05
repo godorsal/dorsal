@@ -230,12 +230,18 @@
                 if(namedSkills.length > 0){
                     vm.technologyProperties.Other +=  "|Skill:" + namedSkills.join(",");
                     // var skillString = "Skill:" + namedSkills.join(",");
+                } else {
+                    vm.technologyProperties.Other +=  "|Skill:" + "None";
+
                 }
                 if(vm.expertRegion){
                     vm.technologyProperties.Other +=  "|Attribute:" + vm.expertRegion;
                     // var attributeString = "Attribute:" + vm.expertRegion + " ";
                 } else {
                     var attributeString = "";
+                }
+                if(vm.expertGroup){
+                    vm.technologyProperties.Other +=  "|Group:" + vm.expertGroup;
                 }
                 // brandNewCase.technology = vm.technology;
 
@@ -436,16 +442,31 @@
             * Submits the form, or opens the login dialog if the user isn't logged in.
             */
             function submitForm() {
+                var messages = [];
+                if(!vm.caseDetails.summary){
+                    messages.push(vm.errorMissingDescription);
+                }
+                if(!vm.selectedTechnologies.length){
+                    messages.push(vm.errorMissingTech);
+                }
                 if (!vm.isAuthenticated()) {
                     LoginService.open();
                     $rootScope.$on('authenticationSuccess', function () {
                         Principal.identity().then(function () {
-                            vm.createCase();
+                            if(messages.length){
+                                toastr.warning(messages.join('<br/>'), {timeOut: 5000});
+                            } else {
+                                vm.createCase();
+                            }
                         })
                     })
                 } else {
                     Principal.identity().then(function () {
-                        vm.createCase();
+                        if(messages.length){
+                            toastr.warning(messages.join('<br/>'), {timeOut: 5000});
+                        } else {
+                            vm.createCase();
+                        }
                     })
                 }
             }

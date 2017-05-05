@@ -159,8 +159,8 @@ public class DorsalExpertMatchService {
 
 
         // Lookup expert for matching attributes if any defined
-        if (attributeList != null && attributeList.length() > 0 && skilllist != null && skilllist.length > 1) {
-            log.info("BUTTERFLY ");
+        if (attributeList != null && attributeList.length() > 0 && !skilllist[0].equals("None") && !skilllist[0].equals("") && skilllist.length > 0) {
+            log.info("BUTTERFLY");
             log.info("Attribute list not empty " +attributeList);
             attributeListArray = Arrays.asList(attributeList);
             log.info("Skill list not empty " + skilllist);
@@ -171,8 +171,16 @@ public class DorsalExpertMatchService {
             experts = expertAccountRepository.findExpertByProductAndAttributeAndSkill(mainProduct, DEFAULT_SCORE, attributeListArray, skillListArray);
 
             // Check for no match
-            if (experts == null || experts.size() == 0) {
-                log.info("No expert match for attributes: " + attributeList);
+            if (experts.size() > 0) {
+                expert = (ExpertAccount)experts.get(0);
+                log.info("Expert Found for SKILL ATTRIBUTE TECHNOLOGY " + expert.getUser().getLogin());
+                // log.info("Expert Found for Technology [" + supportcase.getTechnology().getName() + "]");
+
+                return expert;
+            } else {
+            // if (experts == null || experts.size() == 0) {
+                log.info("No expert match for SKILL ATTRIBUTE TECHNOLOGY");
+                // log.info("No expert match for attributes: " + attributeList);
                 // Set message
                 supportcase.setExpectedResult(NO_EXPERT_FOR_ATTRIBUTES + attributeList);
 
@@ -198,9 +206,10 @@ public class DorsalExpertMatchService {
         }
 
         log.info("Skill list length! " + skilllist.length);
-        log.info("Skill list! " + skilllist);
-        if (skilllist != null && skilllist.length > 1) {
+        log.info("Skill list[0]! " + skilllist[0]);
+        if (!skilllist[0].equals("None") && !skilllist[0].equals("") && skilllist.length > 0) {
             log.info("Skill list not zero " + skilllist.length);
+            log.info("Skill list not none " + skilllist[0]);
             skillListArray = Arrays.asList(skilllist);
             log.info("Find Expert by skill and product: " + mainProduct);
             experts = expertAccountRepository.findExpertByProductAndSkill(mainProduct, DEFAULT_SCORE, skillListArray);
@@ -369,11 +378,11 @@ public class DorsalExpertMatchService {
         ExpertAccount selectedExpert = null;
         for (int ii=0; ii < experts.size();ii++ ) {
             selectedExpert = experts.get(ii);
-            if (selectedExpert.isIsAvailable() == true && (selectedExpert.getExpertAvailability().compareTo(Availability.OFFLINE) != 0) ) {
+            // if (selectedExpert.isIsAvailable() == true && (selectedExpert.getExpertAvailability().compareTo(Availability.OFFLINE) != 0) ) {
                 expert = selectedExpert;
                 log.info("Found expert : " + expert.getUser().getLogin());
                 bFoundExpert = true;
-            }
+            // }
         }
 
         // If everybody is busy -- select the top expert that is not offline

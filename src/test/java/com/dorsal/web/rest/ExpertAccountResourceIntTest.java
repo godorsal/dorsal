@@ -199,9 +199,9 @@ public class ExpertAccountResourceIntTest {
         attributes = QueryStringParser.getValueFromTag("",QueryStringParser.TAG_ATTRIBUTE);
         assertEquals(attributes,"");
 
-        attributes = QueryStringParser.getValueFromTag("Attribute:US-RESIDENT Group:Verizon",QueryStringParser.TAG_ATTRIBUTE);
+        attributes = QueryStringParser.getValueFromTag("Attribute:US-RESIDENT|Group:Verizon",QueryStringParser.TAG_ATTRIBUTE);
         assertEquals(attributes,"US-RESIDENT");
-        attributes = QueryStringParser.getValueFromTag("Attribute:US-RESIDENT Group:Verizon",QueryStringParser.TAG_GROUP);
+        attributes = QueryStringParser.getValueFromTag("Attribute:US-RESIDENT|Group:Verizon",QueryStringParser.TAG_GROUP);
         assertEquals(attributes,"Verizon");
     }
 
