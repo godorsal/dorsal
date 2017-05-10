@@ -13,7 +13,7 @@
         vm.productExpertScore = entity;
         vm.clear = clear;
         vm.save = save;
-        vm.expertaccounts = ExpertAccount.query();
+        vm.expertaccounts = ExpertAccount.query({param: "experts"});
         vm.products = Product.query();
 
         $timeout(function (){
