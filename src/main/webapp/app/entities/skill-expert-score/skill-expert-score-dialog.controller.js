@@ -2,8 +2,8 @@
     'use strict';
 
     angular
-        .module('dorsalApp')
-        .controller('SkillExpertScoreDialogController', SkillExpertScoreDialogController);
+    .module('dorsalApp')
+    .controller('SkillExpertScoreDialogController', SkillExpertScoreDialogController);
 
     SkillExpertScoreDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'SkillExpertScore', 'ExpertAccount', 'Skill'];
 
@@ -34,7 +34,7 @@
         }
 
         function onSaveSuccess (result) {
-            $scope.$emit('dorsalApp:skillExpertScoreUpdate', result);
+            // $scope.$emit('dorsalApp:skillExpertScoreUpdate', result);
             $uibModalInstance.close(result);
             vm.isSaving = false;
         }

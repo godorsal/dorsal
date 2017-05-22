@@ -49,7 +49,7 @@ public class SkillExpertScoreResource {
         }
         SkillExpertScore result = skillExpertScoreRepository.save(skillExpertScore);
         return ResponseEntity.created(new URI("/api/skill-expert-scores/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert("skillExpertScore", result.getId().toString()))
+            // .headers(HeaderUtil.createEntityCreationAlert("skillExpertScore", result.getId().toString()))
             .body(result);
     }
 

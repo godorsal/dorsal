@@ -49,7 +49,7 @@ public class ProductExpertScoreResource {
         }
         ProductExpertScore result = productExpertScoreRepository.save(productExpertScore);
         return ResponseEntity.created(new URI("/api/product-expert-scores/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert("productExpertScore", result.getId().toString()))
+            // .headers(HeaderUtil.createEntityCreationAlert("productExpertScore", result.getId().toString()))
             .body(result);
     }
 
