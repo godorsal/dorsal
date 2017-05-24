@@ -191,7 +191,8 @@
                 } else {
                     Useraccount.query(function (res) {
                         vm.currentUserAccount = res[0];
-                        if(vm.currentUserAccount.companyname.length){
+                        console.log(vm.currentUserAccount);
+                        if(vm.currentUserAccount.companyname){
                             vm.userAttributes = vm.currentUserAccount.companyname.split(',');
                             calculateUserAttributes();
                         } else {
@@ -220,6 +221,15 @@
                             id: ccdata.id,
                             user: ccdata.user
                         }
+                    }
+                })
+            });
+            Payment.query(function (result) {
+                _.find(result, function (ccdata) {
+                    if (ccdata.user.login === vm.settingsAccount.login) {
+                        console.log("GOOD");
+                    } else {
+                        console.log("BAD");
                     }
                 })
             });
@@ -343,6 +353,7 @@
 
                 // Redirect to the case page
                 if (vm.isAlreadyAuthorized) {
+                    debugger;
                     $state.go('case');
                 }
             }).catch(function () {
@@ -379,7 +390,7 @@
                 toastr["error"]("Saving Error");
                 return;
             }
-
+            console.log("WHAT IS A USER, A MISERABLE LITTLE PILE OF SECURE INFORMATION!? ", vm.creditCard.user);
             // Create a temp cc object
             vm.tempCard = {
                 name: vm.creditCard.name,

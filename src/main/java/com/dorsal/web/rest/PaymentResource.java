@@ -6,6 +6,17 @@ import com.dorsal.repository.PaymentRepository;
 import com.dorsal.repository.UserRepository;
 import com.dorsal.service.TransformData;
 import com.dorsal.web.rest.util.HeaderUtil;
+
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.stripe.Stripe;
+import com.stripe.exception.StripeException;
+import com.stripe.model.Charge;
+import com.stripe.net.RequestOptions;
+import com.stripe.net.RequestOptions.RequestOptionsBuilder;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -55,6 +66,7 @@ public class PaymentResource {
     @Timed
     public ResponseEntity<Payment> createPayment(@Valid @RequestBody Payment payment) throws URISyntaxException {
         log.debug("REST request to save Payment : {}", payment);
+
         if (payment.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("payment", "idexists", "A new payment cannot already have an ID")).body(null);
         }
@@ -86,6 +98,25 @@ public class PaymentResource {
     @Timed
     public ResponseEntity<Payment> updatePayment(@Valid @RequestBody Payment payment) throws URISyntaxException {
         log.debug("REST request to update Payment : {}", payment);
+
+
+                RequestOptions requestOptions = (new RequestOptionsBuilder()).setApiKey("sk_test_ox4uF0WGmIM7aUQYMLOMnCC1").build();
+                Map<String, Object> chargeMap = new HashMap<String, Object>();
+                chargeMap.put("amount", 100);
+                chargeMap.put("currency", "usd");
+                Map<String, Object> cardMap = new HashMap<String, Object>();
+                cardMap.put("number", "4242424242424242");
+                cardMap.put("exp_month", 12);
+                cardMap.put("exp_year", 2020);
+                chargeMap.put("card", cardMap);
+                try {
+                    Charge charge = Charge.create(chargeMap, requestOptions);
+                    System.out.println(charge);
+                } catch (StripeException e) {
+                    e.printStackTrace();
+                }
+
+
         if (payment.getId() == null) {
             return createPayment(payment);
         }

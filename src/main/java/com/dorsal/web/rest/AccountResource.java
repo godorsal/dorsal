@@ -77,11 +77,13 @@ public class AccountResource {
 
                     User user = userService.createUser(managedUserVM.getLogin(), managedUserVM.getPassword(),
                     managedUserVM.getFirstName(), ""/*managedUserVM.getLastName()*/, managedUserVM.getEmail().toLowerCase(),
+                    // managedUserVM.getId(),
                     managedUserVM.getLangKey());
 
                     // Create user account
                     Useraccount useraccount = new Useraccount();
                     useraccount.setUser(user);
+                    log.debug("GIMME THE USER ", managedUserVM);
                     useraccountRepository.saveAndFlush(useraccount);
                     log.error("Useraccount created");
 

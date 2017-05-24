@@ -5,9 +5,9 @@
         .module('dorsalApp')
         .factory('DrslUserFlowService', DrslUserFlowService);
 
-    DrslUserFlowService.$inject = ['$state', '$rootScope', '$timeout', '$translate', 'Principal', 'ExpertAccount', 'Supportcase', 'toastr'];
+    DrslUserFlowService.$inject = ['$state', '$rootScope', '$timeout', '$translate', 'Principal', 'ExpertAccount', 'Supportcase', 'toastr', 'Payment', '_'];
 
-    function DrslUserFlowService($state, $rootScope, $timeout, $translate, Principal, ExpertAccount, Supportcase, toastr) {
+    function DrslUserFlowService($state, $rootScope, $timeout, $translate, Principal, ExpertAccount, Supportcase, toastr, Payment, _) {
         var service = {};
 
         // Used to determine if we can manage flows through the $stateChangeStart event
@@ -20,6 +20,7 @@
             hasFirstAndLastName: false,
             isExpert: false,
             hasCases: false,
+            hasCC: false,
             account: null,
             expert: null
         };
@@ -209,6 +210,26 @@
                 service.goToState(toState);
             }
         };
+
+        service.checkPaymentInformation = function () {
+            Payment.query(function (result) {
+                if(result[0]){
+                    service.user.hasCC = true;
+                } else {
+                    service.user.hasCC = false;
+                }
+                // _.find(result, function (ccdata) {
+                //     console.log(ccdata.user.login, service.user.account.login);
+                //     if (ccdata.user.login === service.user.account.login) {
+                //         console.log('GOOD TO GO');
+                //     } else {
+                //         console.log("NOPE");
+                //     }
+                // })
+            });
+        }
+
+
 
         /**
          * Go to (redirect to) the state with the provided name.

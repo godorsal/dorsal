@@ -11,6 +11,7 @@
 
         DrslUserFlowService.handleUserFlow();
 
+
         ExpertPool.query(function (res) {
             vm.expertGroups = res;
             vm.expertGroups.forEach(function (group) {
@@ -172,7 +173,7 @@
         */
         Useraccount.query(function (res) {
             vm.currentUserAccount = res[0];
-            if(vm.currentUserAccount.companyname.length){
+            if(vm.currentUserAccount.companyname){
                 vm.userAttributes = vm.currentUserAccount.companyname.split(',');
                 console.log(vm.userAttributes);
                 ExpertAccount.query({
@@ -442,16 +443,26 @@
             * Submits the form, or opens the login dialog if the user isn't logged in.
             */
             function submitForm() {
-                var messages = [];
-                if(!vm.caseDetails.summary){
-                    messages.push(vm.errorMissingDescription);
-                }
-                if(!vm.selectedTechnologies.length){
-                    messages.push(vm.errorMissingTech);
-                }
-                if (!vm.isAuthenticated()) {
-                    LoginService.open();
-                    $rootScope.$on('authenticationSuccess', function () {
+                if(DrslUserFlowService.user.hasCC){
+                    var messages = [];
+                    if(!vm.caseDetails.summary){
+                        messages.push(vm.errorMissingDescription);
+                    }
+                    if(!vm.selectedTechnologies.length){
+                        messages.push(vm.errorMissingTech);
+                    }
+                    if (!vm.isAuthenticated()) {
+                        LoginService.open();
+                        $rootScope.$on('authenticationSuccess', function () {
+                            Principal.identity().then(function () {
+                                if(messages.length){
+                                    toastr.warning(messages.join('<br/>'), {timeOut: 5000});
+                                } else {
+                                    vm.createCase();
+                                }
+                            })
+                        })
+                    } else {
                         Principal.identity().then(function () {
                             if(messages.length){
                                 toastr.warning(messages.join('<br/>'), {timeOut: 5000});
@@ -459,16 +470,14 @@
                                 vm.createCase();
                             }
                         })
-                    })
+                    }
                 } else {
-                    Principal.identity().then(function () {
-                        if(messages.length){
-                            toastr.warning(messages.join('<br/>'), {timeOut: 5000});
-                        } else {
-                            vm.createCase();
-                        }
-                    })
+                    toastr.success($translate.instant('global.messages.info.missingDetails'), {
+                        timeOut: 5000,
+                        toastClass: 'toast drsl-user-flow-toast'
+                    });
                 }
+
             }
 
             /**
