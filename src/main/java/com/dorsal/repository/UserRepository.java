@@ -57,6 +57,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying
     @Query("delete from SharedCase sc where owner.id = :userid OR user.id = :userid")
     int cleanupSharedCase(@Param("userid") long userID);
+    /* Cleanup Payment for the user */
+    @Modifying
+    @Query("delete from Payment pa where user = :userid OR user.id = :userid")
+    int cleanupPayment(@Param("userid") long userID);
 
     /**
      * Extract Attributes that the master user has defined for all users that have been invited by the user

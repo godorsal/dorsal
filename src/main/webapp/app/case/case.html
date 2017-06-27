@@ -151,50 +151,49 @@
                                         <span class="drsl-case-list-id">
                                             <a ng-click="vm.openRatingFromList(case); $event.stopPropagation();" ng-if="case.status.name === 'CLOSED' && vm.isCaseExpert()" translate="case.details.ratingDetailsList">View Rating Details</a>
                                         </span>
+                                        <span ng-if="case.numberOfUpdates" class="drsl-case-list-id">Updates: {{case.numberOfUpdates}}</span>
                                     </div>
-                                    <div ng-if="case.numberOfUpdates">
-                                        <div>Updates: {{case.numberOfUpdates}}</div>
-                                    </div>
-                                    <div>
-                                        <div>{{case.status.name}}</div>
-                                    </div>
+                                    <div >
+                                        <span style="float: left;"  ng-if="case.finalPayment">Paid: $ {{case.finalPayment}}</span>
+                                    <span>{{case.status.name}}</span>
                                 </div>
-                            </h4>
-                        </div>
-                    </div>
-                    <div class="text-center" ng-if="vm.pagination">
-                        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage" name-of-item="'cases'"></jhi-item-count>
-                        <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()" items-per-page="vm.itemsPerPage"></uib-pagination>
+                            </div>
+                        </h4>
                     </div>
                 </div>
+                <div class="text-center" ng-if="vm.pagination">
+                    <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage" name-of-item="'cases'"></jhi-item-count>
+                    <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()" items-per-page="vm.itemsPerPage"></uib-pagination>
+                </div>
             </div>
-            <div class="drsl-sub-header drsl-sub-sub-header" translate="case.history.sharedHeader" ng-if="vm.sharedcases.length > 0 && vm.currentUser.login != 'admin'">Shared Case History</div>
-            <div class="drsl-case-wrapper" ng-if="vm.sharedcases.length > 0 && vm.currentUser.login != 'admin'">
-                <div class="drsl-case-history-wrapper">
-                    <div class="panel panel-default" ng-repeat="case in vm.sharedcases track by $index">
-                        <div class="panel-heading" ng-class="{active: vm.currentCase == case}" ng-click="vm.setCurrentCase(case, $index);">
-                            <h4 class="panel-title">
-                                <div class="drsl-case-list">
-                                    <div>
-                                        <span class="drsl-case-list-id">{{case.technology.name}} {{case.id}}</span>
-                                        <span>{{case.dateCreated | date:'MMM dd, yyyy'}}</span>
-                                    </div>
-                                    <div ng-if="case.numberOfUpdates">
-                                        <div>Updates: {{case.numberOfUpdates}}</div>
-                                    </div>
-                                    <div>
-                                        <div>{{case.status.name}}</div>
-                                    </div>
+        </div>
+        <div class="drsl-sub-header drsl-sub-sub-header" translate="case.history.sharedHeader" ng-if="vm.sharedcases.length > 0 && vm.currentUser.login != 'admin'">Shared Case History</div>
+        <div class="drsl-case-wrapper" ng-if="vm.sharedcases.length > 0 && vm.currentUser.login != 'admin'">
+            <div class="drsl-case-history-wrapper">
+                <div class="panel panel-default" ng-repeat="case in vm.sharedcases track by $index">
+                    <div class="panel-heading" ng-class="{active: vm.currentCase == case}" ng-click="vm.setCurrentCase(case, $index);">
+                        <h4 class="panel-title">
+                            <div class="drsl-case-list">
+                                <div>
+                                    <span class="drsl-case-list-id">{{case.technology.name}} {{case.id}}</span>
+                                    <span>{{case.dateCreated | date:'MMM dd, yyyy'}}</span>
                                 </div>
-                            </h4>
-                        </div>
+                                <div ng-if="case.numberOfUpdates">
+                                    <div>Updates: {{case.numberOfUpdates}}</div>
+                                </div>
+                                <div>
+                                    <div>{{case.status.name}}</div>
+                                </div>
+                            </div>
+                        </h4>
                     </div>
-                    <div class="text-center" ng-if="vm.sharedPagination">
-                        <jhi-item-count page="vm.sharedPage" total="vm.sharedQueryCount" items-per-page="vm.sharedItemsPerPage" name-of-item="'cases'"></jhi-item-count>
-                        <uib-pagination class="pagination-sm" total-items="vm.sharedTotalItems" ng-model="vm.sharedPage" ng-change="vm.sharedTransition()" items-per-page="vm.sharedItemsPerPage"></uib-pagination>
-                    </div>
+                </div>
+                <div class="text-center" ng-if="vm.sharedPagination">
+                    <jhi-item-count page="vm.sharedPage" total="vm.sharedQueryCount" items-per-page="vm.sharedItemsPerPage" name-of-item="'cases'"></jhi-item-count>
+                    <uib-pagination class="pagination-sm" total-items="vm.sharedTotalItems" ng-model="vm.sharedPage" ng-change="vm.sharedTransition()" items-per-page="vm.sharedItemsPerPage"></uib-pagination>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>

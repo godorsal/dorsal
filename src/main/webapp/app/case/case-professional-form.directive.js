@@ -39,7 +39,12 @@
 
             scope.submit = function () {
                 var logDate = $filter('date')(new Date(), 'MMM dd, yyyy HH:mm');
-
+                scope.case.technology = {
+                    code: "mysql",
+                    id: 1,
+                    name: "MySQL"
+                }
+                // console.log(scope.case, "JESUS");
                 scope.case.estimateLog = (scope.case.estimateLog) ? scope.case.estimateLog : '';
 
                 if (StatusModel.checkCaseStatus(scope.case.status, 'created')) {

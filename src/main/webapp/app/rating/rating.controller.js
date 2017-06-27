@@ -2,14 +2,16 @@
     'use strict';
 
     angular
-        .module('dorsalApp')
-        .controller('DrslRatingController', DrslRatingController);
+    .module('dorsalApp')
+    .controller('DrslRatingController', DrslRatingController);
 
-    DrslRatingController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase', 'drslBadges', 'Caseupdate', 'toastr', '$document'];
+    DrslRatingController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'drslCase', 'drslBadges', 'Caseupdate', 'toastr', '$document', 'Payment', '$http', 'DrslFinalAmountService'];
 
-    function DrslRatingController($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase, drslBadges, Caseupdate, toastr, $document) {
+    function DrslRatingController($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, drslCase, drslBadges, Caseupdate, toastr, $document, Payment, $http, DrslFinalAmountService) {
         var vm = this;
         vm.case = drslCase;
+
+
         vm.badges = drslBadges;
         vm.technologyProperties = {};
         vm.detailedResolutions = '';
@@ -132,8 +134,8 @@
         ];
 
         $document.keyup(function(e) {
-             if (e.keyCode == 27) {
-                 cancel ()
+            if (e.keyCode == 27) {
+                cancel ()
             }
         });
 
@@ -142,41 +144,112 @@
         }
 
         function submit() {
-            var combinedTotal = 0, combinedAverage, csv = [], selectedBadges = [], i, badge;
-
-            vm.formSubmitted = true;
-
             if (!vm.ratingComments || vm.ratingComments.replace(/\s/g, '').length === 0) {
                 ratingForm.ratingComments.focus();
                 toastr.error(vm.ratingCommentsError, 'Error');
                 return;
             }
+            Payment.query(function (res) {
+                vm.paymentInProgress = true;
+                var splitter = res[0].ccdata.split("##");
+                var firstAmount = vm.case.timeOnCase * 125;
+                switch (vm.radios[0][0].selectedValue) {
+                    case "65":
+                    var firstPercentage = 0;
+                    break;
+                    case "75":
+                    var firstPercentage = 50;
+                    break;
+                    case "85":
+                    var firstPercentage = 90;
+                    break;
+                    case "100":
+                    var firstPercentage = 100;
+                    break;
+                    default:
 
-            for (i = 0; i < vm.radios.length; i++) {
-                var radio = vm.radios[i][0];
-                combinedTotal += Number(radio.selectedValue);
-                csv.push(radio.id + ' ' + radio.selectedValue);
-            }
-
-            combinedAverage = Math.round(combinedTotal / vm.radios.length);
-
-            for (i = 0; i < vm.badges.length; i++) {
-                badge = vm.badges[i];
-
-                if (badge.selected) {
-                    delete badge.selected;
-                    selectedBadges.push(badge);
                 }
-            }
+                var result = Math.floor((firstPercentage / 100) * firstAmount);
+                vm.superMagicString = (splitter[1] + "#" + splitter[2] + "," + splitter[3] + "#" + result);
+                if(result > 0){
+                    $http({
+                        url: 'api/payments/pay',
+                        method: 'PUT',
+                        data: vm.superMagicString,
+                        transformResponse: [function (data) {
+                            if(data === "PAYMENT SUCCESS"){
+                                toastr.success("Payment Successful");
+                                closeCase(result);
+                            } else if (data === "PAYMENT FAILURE") {
+                                vm.paymentInProgress = false;
+                                toastr.error("Payment failure, click to check payment settings", {
+                                    timeOut: 0,
+                                    toastClass: 'toast drsl-user-flow-toast',
+                                    onTap: function () {
+                                        $state.go('settings');
+                                    }
+                                });
+                                //     return;
+                            } else {
+                                vm.paymentInProgress = false;
+                                toastr.error("Payment failure, click to check payment settings", {
+                                    timeOut: 0,
+                                    toastClass: 'toast drsl-user-flow-toast',
+                                    onTap: function () {
+                                        $state.go('settings');
+                                    }
+                                });
+                            }
+                            return data;
+                        }]
+                    });
+                } else {
+                    closeCase(result);
+                }
+            })
 
-            $uibModalInstance.close({
-                "rated": true,
-                "score": combinedAverage,
-                "rateDetails": csv.join(','),
-                "ratingComments": vm.ratingComments,
-                "hasExpertExceeded": false,
-                "selectedBadges": selectedBadges
-            });
+        }
+        function showFinalAmount(amount) {
+            var modalInstance = DrslFinalAmountService.open(amount)
+        }
+        function closeCase(result) {
+            // var combinedTotal = 0, combinedAverage, csv = [], selectedBadges = [], i, badge;
+            //
+            // vm.formSubmitted = true;
+            //
+            // if (!vm.ratingComments || vm.ratingComments.replace(/\s/g, '').length === 0) {
+            //     ratingForm.ratingComments.focus();
+            //     toastr.error(vm.ratingCommentsError, 'Error');
+            //     return;
+            // }
+            //
+            // for (i = 0; i < vm.radios.length; i++) {
+            //     var radio = vm.radios[i][0];
+            //     combinedTotal += Number(radio.selectedValue);
+            //     csv.push(radio.id + ' ' + radio.selectedValue);
+            // }
+            //
+            // combinedAverage = Math.round(combinedTotal / vm.radios.length);
+            //
+            // for (i = 0; i < vm.badges.length; i++) {
+            //     badge = vm.badges[i];
+            //
+            //     if (badge.selected) {
+            //         delete badge.selected;
+            //         selectedBadges.push(badge);
+            //     }
+            // }
+            //
+            // $uibModalInstance.close({
+            //     "rated": true,
+            //     "score": combinedAverage,
+            //     "rateDetails": csv.join(','),
+            //     "ratingComments": vm.ratingComments,
+            //     "hasExpertExceeded": false,
+            //     "selectedBadges": selectedBadges
+            // });
+            // vm.paymentInProgress = false;
+            showFinalAmount(result);
         }
     }
 })();

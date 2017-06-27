@@ -10,7 +10,7 @@
     function ConciergeController($rootScope, $scope, $state, LoginService, Principal, ConciergeService, $translate, $http, Supportcase, Casetechnologyproperty, toastr, AttachmentModalService, DateUtils, CaseService, DrslNewCaseService, DrslMetadata, ExpertAccount, DrslUserFlowService, DrslHipChatService, $window, $sce, Product, Skill, ExpertAttribute, ExpertPool, ExpertPoolToExpert, Useraccount) {
 
         DrslUserFlowService.handleUserFlow();
-
+        DrslUserFlowService.checkPaymentInformation();
 
         ExpertPool.query(function (res) {
             vm.expertGroups = res;
@@ -443,7 +443,16 @@
             * Submits the form, or opens the login dialog if the user isn't logged in.
             */
             function submitForm() {
-                if(DrslUserFlowService.user.hasCC){
+                DrslUserFlowService.checkPaymentInformation();
+                if(DrslUserFlowService.user.hasCC === false){
+                    toastr.success($translate.instant('global.messages.info.missingDetailsWithLink'), {
+                        timeOut: 0,
+                        toastClass: 'toast drsl-user-flow-toast',
+                        onTap: function () {
+                            $state.go('settings');
+                        }
+                    });
+                } else if(DrslUserFlowService.user.hasCC === true){
                     var messages = [];
                     if(!vm.caseDetails.summary){
                         messages.push(vm.errorMissingDescription);
@@ -477,8 +486,8 @@
                         toastClass: 'toast drsl-user-flow-toast'
                     });
                 }
-
             }
+
 
             /**
             * Sets the vm.datePopup.opened boolean, which toggles the date popup display.

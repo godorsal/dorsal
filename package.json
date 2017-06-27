@@ -67,5 +67,8 @@
   },
   "scripts": {
     "test": "gulp test"
+  },
+  "dependencies": {
+    "angular-stripe": "^5.0.0"
   }
 }

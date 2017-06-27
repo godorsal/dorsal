@@ -7,12 +7,13 @@
 
     SettingsController.$inject = ['$rootScope', 'Principal', 'Auth', 'JhiLanguageService', '$translate', 'Payment',
     'Groupaccess', 'User', 'Focus', 'Register', 'toastr', 'ExpertAccount', 'Issue', 'Technology', '_', '$state',
-    'DrslUserFlowService', 'ManageUser', 'ExpertAttribute', 'ExpertAttributeToExpert', 'JobroleExpertScore', 'ProductExpertScore', 'SpecialityExpertScore', 'SkillExpertScore', 'TechnologyExpertScore', 'Useraccount', 'ExpertPoolToExpert'];
+    'DrslUserFlowService', 'ManageUser', 'ExpertAttribute', 'ExpertAttributeToExpert', 'JobroleExpertScore', 'ProductExpertScore', 'SpecialityExpertScore', 'SkillExpertScore', 'TechnologyExpertScore', 'Useraccount', 'ExpertPoolToExpert', '$http'];
 
-    function SettingsController($rootScope, Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, User, focus, Register, toastr, ExpertAccount, Issue, Technology, _, $state, DrslUserFlowService, ManageUser, ExpertAttribute, ExpertAttributeToExpert, JobroleExpertScore, ProductExpertScore, SpecialityExpertScore, SkillExpertScore, TechnologyExpertScore, Useraccount, ExpertPoolToExpert) {
+    function SettingsController($rootScope, Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, User, focus, Register, toastr, ExpertAccount, Issue, Technology, _, $state, DrslUserFlowService, ManageUser, ExpertAttribute, ExpertAttributeToExpert, JobroleExpertScore, ProductExpertScore, SpecialityExpertScore, SkillExpertScore, TechnologyExpertScore, Useraccount, ExpertPoolToExpert, $http) {
 
         // Handle user flow redirects and messaging
         DrslUserFlowService.handleUserFlow();
+        DrslUserFlowService.checkPaymentInformation();
 
         // Set the view model and view model properties/methods
         var vm = this;
@@ -30,6 +31,7 @@
         vm.authorizedUser = '';
         vm.number = 0;
         vm.isExpert = false;
+        vm.userCustomerInfo = null;
         vm.issues = Issue.query();
         vm.technologies = Technology.query();
         vm.hideTitleElipsis = hideTitleElipsis;
@@ -52,6 +54,130 @@
         vm.saveUserAttributes = saveUserAttributes;
         vm.deleteAttribute = deleteAttribute;
         vm.deleteUserAttribute = deleteUserAttribute;
+        vm.chargeCard = chargeCard;
+        vm.sendChargeRequest = sendChargeRequest;
+
+        // Create a Stripe client
+        // var stripe = Stripe('pk_live_o2SbJZ0bwfK1FtvqDvSO9b1e');
+        // var stripe = Stripe('pk_test_caldYLCj3qrhWSC9Uz1Aqgzb');
+
+        // Create an instance of Elements
+        // var elements = stripe.elements();
+
+        // Custom styling can be passed to options when creating an Element.
+        // (Note that this demo uses a wider set of styles than the guide below.)
+        var style = {
+            base: {
+                color: '#32325d',
+                lineHeight: '24px',
+                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                fontSmoothing: 'antialiased',
+                fontSize: '16px',
+                '::placeholder': {
+                    color: '#aab7c4'
+                }
+            },
+            invalid: {
+                color: '#fa755a',
+                iconColor: '#fa755a'
+            }
+        };
+
+
+        // Handle form submission
+        // var form = document.getElementById('payment-form');
+        function createStripeUI() {
+            // Create an instance of the card Element
+            vm.card = elements.create('card', {style: style});
+
+            // Add an instance of the card Element into the `card-element` <div>
+            vm.card.mount('#card-element');
+
+            // Handle real-time validation errors from the card Element.
+            vm.card.addEventListener('change', function(event) {
+                var displayError = document.getElementById('card-errors');
+                if (event.error) {
+                    displayError.textContent = event.error.message;
+                } else {
+                    displayError.textContent = '';
+                }
+            });
+
+            var form = vm.paymentform;
+
+        }
+        vm.submitStripeForm = submitStripeForm;
+        function submitStripeForm() {
+
+            stripe.createToken(vm.card).then(function(result) {
+                if (result.error) {
+                    // Inform the user if there was an error
+                    var errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
+                } else {
+                    console.log("TOKEN RESULT", result.token);
+                    // Send the token to your server
+                    stripeTokenHandler(result.token);
+                }
+            });
+        }
+        function stripeTokenHandler(token) {
+            $http({
+                url: 'api/payments/saveCustomer',
+                method: 'POST',
+                data: token.id + "#" + vm.currentUserAccount.user.email,
+                transformResponse: [function (data) {
+
+                    var payment = {
+                        ccdata: JSON.parse(data).sources.data[0].customer,
+                        user: vm.currentUserAccount
+                    };
+                    if (vm.userCustomerInfo !== null) {
+                        payment.id = vm.userCustomerInfo.id;
+                        Payment.update(payment, onSaveSuccess, onSaveError);
+                    } else {
+                        Payment.save(payment, onSaveSuccess, onSaveError);
+                    }
+                    // Payment.save(payment, onSaveSuccess, onSaveError);
+                    // if(data != "Customer NOT Created"){
+                    //     console.log("DORTA", data);
+                    // } else {
+                    //     console.log("INFO FAIL", data);
+                    // }
+                }]
+            });
+            // $http.post('api/payments/saveCustomer', , function (resp) {
+            //     console.log("RESP AAA", resp);
+            // })
+        }
+
+        function sendChargeRequest() {
+            // console.log(vm.overallCCData.ccdata);
+            // $http.put('api/payments/charge', vm.userCustomerInfo.ccdata, function (resp) {
+            var paymentString = vm.userCustomerInfo.ccdata + "#" + 51000
+
+
+            $http.put('api/payments/charge', paymentString, function (resp) {
+                console.log("Sent Charge", resp);
+            })
+        }
+        function chargeCard() {
+            console.log("CHARGING CARD");
+            // Payment.update(payment, onSaveSuccess, onSaveError);
+            console.log(vm.overallCCData);
+
+            var arr = Object.keys(vm.creditCard.number).map(function (k) {
+                return vm.creditCard.number[k]
+            });
+
+            var data = arr.slice(0, 5).join("");
+
+            $http.put('api/payments/pay', "4242424242424242#01,20#500", function (resp) {
+                // $http.put('api/payments/pay', vm.overallCCData, function (resp) {
+                console.log("RESP AAA", resp);
+
+            })
+        }
 
         ExpertAttributeToExpert.query(function (res) {
             vm.expertAttributes = res;
@@ -200,12 +326,17 @@
                         }
                     })
                 }
+                // createStripeUI();
+
             });
 
             // Query Payment (credit card info) and pull data where needed for the vm
             Payment.query(function (result) {
+                console.log("REZ", result);
                 _.find(result, function (ccdata) {
                     if (ccdata.user.login === vm.settingsAccount.login) {
+                        vm.overallCCData = ccdata;
+                        // console.log("userCustomerInfo", ccdata);
                         var data = ccdata.ccdata.split('##');
                         vm.creditCard = {
                             name: data[0],
@@ -436,6 +567,7 @@
             vm.tempCard.user = payment.user;
             vm.error = null;
             toastr["success"]("Saving Successful")
+            DrslUserFlowService.user.hasCC = true;
         }
 
         /**
@@ -591,6 +723,7 @@
             Groupaccess.query(function (result) {
                 _.find(result, function (user) {
                     if (user.authorizeduser.email === vm.settingsAccount.email) {
+                        console.log("SHARED CC");
                         vm.isAlreadyAuthorized = true;
                     } else if (user.user.login === vm.settingsAccount.login && user.authorizeduser.activated) {
                         vm.authorizedUsers.push(user);

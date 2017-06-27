@@ -7,6 +7,7 @@
     Payment.$inject = ['$resource'];
 
     function Payment ($resource) {
+        // var resourceUrl =  'api/payments/:parameter';
         var resourceUrl =  'api/payments/:id';
 
         return $resource(resourceUrl, {}, {

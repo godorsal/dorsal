@@ -15,7 +15,7 @@ dorsal:
         mail: support@godorsal.com
 
     application:
-        url: app.godorsal.com
+        url: demo.godorsal.com
         protocol: https
 
 spring:
@@ -26,7 +26,7 @@ spring:
             enabled: false
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:postgresql://dorsal-db-prod-1.cjigsiwzvxbf.us-west-1.rds.amazonaws.com:5432/dorsalprod
+        url: jdbc:postgresql://psqldb:5432/dorsalprod
         name:
         username: dorsal
         password: dorsal

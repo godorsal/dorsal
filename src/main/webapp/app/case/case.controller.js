@@ -138,7 +138,32 @@
 									}
 								})
 							})
-							console.log(supportcase);
+
+							Rating.query(function (ratings) {
+								console.log("RATINGS", ratings);
+
+								ratings.forEach(function (rat) {
+									if(rat.supportcase.id === supportcase.id){
+										switch (rat.rateDetails.split(',')[0].split(' ')[1]) {
+						                    case "65":
+supportcase.finalPayment = Math.floor((0 / 100) * (supportcase.estimateHours * 125));
+						                    break;
+						                    case "75":
+supportcase.finalPayment = Math.floor((50 / 100) * (supportcase.estimateHours * 125));
+						                    break;
+						                    case "85":
+supportcase.finalPayment = Math.floor((90 / 100) * (supportcase.estimateHours * 125));
+						                    break;
+						                    case "100":
+supportcase.finalPayment = Math.floor((100 / 100) * (supportcase.estimateHours * 125));
+						                    break;
+						                    default:
+									}
+								}
+
+
+							})
+							})
 						})
 						if(Number(vm.totalItems) > Number(vm.itemsPerPage)){
 							vm.pagination = true;
