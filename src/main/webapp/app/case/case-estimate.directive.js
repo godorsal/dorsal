@@ -24,7 +24,6 @@
 
         function linkFunc(scope) {
             scope.DrslMetadata = DrslMetadata;
-            console.log("EXPERT RATE", DrslMetadata.expertRate);
         }
     }
 })();

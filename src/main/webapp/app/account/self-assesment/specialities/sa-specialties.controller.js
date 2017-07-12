@@ -16,7 +16,7 @@
         vm.specialtiesToUpdate = [];
         vm.scores = [1, 2, 3, 4, 5];
         vm.specialties = SpecialityExpertScore.query();
-        console.log(vm.specialties);
+
         vm.changeScore = changeScore;
         vm.submit = submit;
 

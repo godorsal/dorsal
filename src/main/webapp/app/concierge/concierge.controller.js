@@ -72,7 +72,6 @@
                 vm.techBank.forEach(function (tech, index) {
                     if(tech === word){
                         vm.selectTech(vm.technologies[index], index)
-                        // console.log("MATCHU!", vm.technologies[index]);
                         vm.techBank.splice(index, 1)
                     }
                 })
@@ -81,21 +80,18 @@
         function selectTech(tech, index) {
             vm.selectedTechnologies.push(tech);
             vm.technologies.splice(index, 1);
-            console.log("TECH SELECTED", tech);
 
         }
         function removeTechnology(tech, index) {
-            console.log("Remove", tech);
             vm.selectedTechnologies.splice(index, 1);
             if(tech.id){
-                vm.technologies.push(tech);
+                vm.technologies.unshift(tech);
             }
         }
 
         function selectSkill(skill, index) {
             vm.selectedSkills.push(skill);
             vm.skills.splice(index, 1);
-            console.log("SKILL SELECTED", skill);
         }
         function removeSkill(skill, index) {
             vm.selectedSkills.splice(index, 1);
@@ -123,10 +119,6 @@
                 }
             })
         })
-
-        // ExpertAccount.query(function (res) {
-        //     console.log(res);
-        // })
 
         // DrslHipChatService.clearRooms();
         DrslHipChatService.getCurrentUser();
@@ -175,7 +167,6 @@
             vm.currentUserAccount = res[0];
             if(vm.currentUserAccount.companyname){
                 vm.userAttributes = vm.currentUserAccount.companyname.split(',');
-                console.log(vm.userAttributes);
                 ExpertAccount.query({
                     param: "query",
                     options: "product:" + ":attribute:" + vm.userAttributes[0] + ":score:"
@@ -336,7 +327,6 @@
                         brandNewProperty.supportcase.id = result.id;
                         brandNewProperty.propertyname = key;
                         brandNewProperty.propertyvalue = vm.technologyProperties[key];
-                        console.log("PROPERTY", brandNewProperty);
                         Casetechnologyproperty.save(brandNewProperty, function (result) {
                             console.log("Result", result);
                         });
@@ -416,7 +406,6 @@
 
                 // If we have any messages display them in a toastr message
                 if (messages.length) {
-                    console.log("AHHHHHHh", messages);
                     toastr.warning(messages.join('<br/>'), {timeOut: 5000});
                 }
             }

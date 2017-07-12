@@ -38,6 +38,8 @@
         vm.showTitleElipsis = showTitleElipsis;
         vm.hideLinkElipsis = hideLinkElipsis;
         vm.showLinkElipsis = showLinkElipsis;
+
+
         // vm methods
         vm.init = init;
         vm.save = save;
@@ -48,136 +50,13 @@
         vm.removeAuthorizedUsers = removeAuthorizedUsers;
         vm.removeInvitedUsers = removeInvitedUsers;
         vm.updateUser = updateUser;
+        vm.updateUser = updateUser;
         vm.checkInvalid = checkInvalid;
         vm.editingAttributes = false;
         vm.saveAttributes = saveAttributes;
         vm.saveUserAttributes = saveUserAttributes;
         vm.deleteAttribute = deleteAttribute;
         vm.deleteUserAttribute = deleteUserAttribute;
-        vm.chargeCard = chargeCard;
-        vm.sendChargeRequest = sendChargeRequest;
-
-        // Create a Stripe client
-        // var stripe = Stripe('pk_live_o2SbJZ0bwfK1FtvqDvSO9b1e');
-        // var stripe = Stripe('pk_test_caldYLCj3qrhWSC9Uz1Aqgzb');
-
-        // Create an instance of Elements
-        // var elements = stripe.elements();
-
-        // Custom styling can be passed to options when creating an Element.
-        // (Note that this demo uses a wider set of styles than the guide below.)
-        var style = {
-            base: {
-                color: '#32325d',
-                lineHeight: '24px',
-                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-                fontSmoothing: 'antialiased',
-                fontSize: '16px',
-                '::placeholder': {
-                    color: '#aab7c4'
-                }
-            },
-            invalid: {
-                color: '#fa755a',
-                iconColor: '#fa755a'
-            }
-        };
-
-
-        // Handle form submission
-        // var form = document.getElementById('payment-form');
-        function createStripeUI() {
-            // Create an instance of the card Element
-            vm.card = elements.create('card', {style: style});
-
-            // Add an instance of the card Element into the `card-element` <div>
-            vm.card.mount('#card-element');
-
-            // Handle real-time validation errors from the card Element.
-            vm.card.addEventListener('change', function(event) {
-                var displayError = document.getElementById('card-errors');
-                if (event.error) {
-                    displayError.textContent = event.error.message;
-                } else {
-                    displayError.textContent = '';
-                }
-            });
-
-            var form = vm.paymentform;
-
-        }
-        vm.submitStripeForm = submitStripeForm;
-        function submitStripeForm() {
-
-            stripe.createToken(vm.card).then(function(result) {
-                if (result.error) {
-                    // Inform the user if there was an error
-                    var errorElement = document.getElementById('card-errors');
-                    errorElement.textContent = result.error.message;
-                } else {
-                    console.log("TOKEN RESULT", result.token);
-                    // Send the token to your server
-                    stripeTokenHandler(result.token);
-                }
-            });
-        }
-        function stripeTokenHandler(token) {
-            $http({
-                url: 'api/payments/saveCustomer',
-                method: 'POST',
-                data: token.id + "#" + vm.currentUserAccount.user.email,
-                transformResponse: [function (data) {
-
-                    var payment = {
-                        ccdata: JSON.parse(data).sources.data[0].customer,
-                        user: vm.currentUserAccount
-                    };
-                    if (vm.userCustomerInfo !== null) {
-                        payment.id = vm.userCustomerInfo.id;
-                        Payment.update(payment, onSaveSuccess, onSaveError);
-                    } else {
-                        Payment.save(payment, onSaveSuccess, onSaveError);
-                    }
-                    // Payment.save(payment, onSaveSuccess, onSaveError);
-                    // if(data != "Customer NOT Created"){
-                    //     console.log("DORTA", data);
-                    // } else {
-                    //     console.log("INFO FAIL", data);
-                    // }
-                }]
-            });
-            // $http.post('api/payments/saveCustomer', , function (resp) {
-            //     console.log("RESP AAA", resp);
-            // })
-        }
-
-        function sendChargeRequest() {
-            // console.log(vm.overallCCData.ccdata);
-            // $http.put('api/payments/charge', vm.userCustomerInfo.ccdata, function (resp) {
-            var paymentString = vm.userCustomerInfo.ccdata + "#" + 51000
-
-
-            $http.put('api/payments/charge', paymentString, function (resp) {
-                console.log("Sent Charge", resp);
-            })
-        }
-        function chargeCard() {
-            console.log("CHARGING CARD");
-            // Payment.update(payment, onSaveSuccess, onSaveError);
-            console.log(vm.overallCCData);
-
-            var arr = Object.keys(vm.creditCard.number).map(function (k) {
-                return vm.creditCard.number[k]
-            });
-
-            var data = arr.slice(0, 5).join("");
-
-            $http.put('api/payments/pay', "4242424242424242#01,20#500", function (resp) {
-                // $http.put('api/payments/pay', vm.overallCCData, function (resp) {
-                console.log("RESP AAA", resp);
-
-            })
-        }
 
         ExpertAttributeToExpert.query(function (res) {
             vm.expertAttributes = res;
@@ -194,6 +73,11 @@
                     })
                 })
             })
+        }
+        function updateSettings() {
+            if(vm.updatingCard && vm.updatingUser){
+
+            }
         }
         function calculateUserAttributes() {
             ExpertAttribute.query(function (res) {
@@ -317,7 +201,6 @@
                 } else {
                     Useraccount.query(function (res) {
                         vm.currentUserAccount = res[0];
-                        console.log(vm.currentUserAccount);
                         if(vm.currentUserAccount.companyname){
                             vm.userAttributes = vm.currentUserAccount.companyname.split(',');
                             calculateUserAttributes();
@@ -332,11 +215,9 @@
 
             // Query Payment (credit card info) and pull data where needed for the vm
             Payment.query(function (result) {
-                console.log("REZ", result);
                 _.find(result, function (ccdata) {
                     if (ccdata.user.login === vm.settingsAccount.login) {
                         vm.overallCCData = ccdata;
-                        // console.log("userCustomerInfo", ccdata);
                         var data = ccdata.ccdata.split('##');
                         vm.creditCard = {
                             name: data[0],
@@ -352,15 +233,6 @@
                             id: ccdata.id,
                             user: ccdata.user
                         }
-                    }
-                })
-            });
-            Payment.query(function (result) {
-                _.find(result, function (ccdata) {
-                    if (ccdata.user.login === vm.settingsAccount.login) {
-                        console.log("GOOD");
-                    } else {
-                        console.log("BAD");
                     }
                 })
             });
@@ -440,6 +312,9 @@
         * Handles the form submit/save for the main settings form.
         */
         function save() {
+            if(vm.updatingCard){
+                addCard();
+            }
             if (vm.updatingUser && vm.updatingExpert) {
                 toastr["success"]("User and Expert Info Saved");
                 updateExpert();
@@ -521,7 +396,6 @@
                 toastr["error"]("Saving Error");
                 return;
             }
-            console.log("WHAT IS A USER, A MISERABLE LITTLE PILE OF SECURE INFORMATION!? ", vm.creditCard.user);
             // Create a temp cc object
             vm.tempCard = {
                 name: vm.creditCard.name,
@@ -546,14 +420,65 @@
                 ccdata: data,
                 user: vm.tempCard.user
             };
-
+            payment.user = vm.tempCard.user;
+            console.log(payment);
+            console.log(vm.number);
+            // console.log(vm.number.join('') + "#");
+            console.log(vm.number.join('') + '#' + vm.creditCard.month + ',' + vm.creditCard.year + '#50');
+            vm.superMagicString = vm.number.join('') + '#' + vm.creditCard.month + ',' + vm.creditCard.year + '#50';
+            // console.log("4242424242424242#02,20#12500");
             // Update or save the credit card data
-            if (payment.id !== null) {
-                Payment.update(payment, onSaveSuccess, onSaveError);
-            } else {
-                payment.user = vm.tempCard.user;
-                Payment.save(payment, onSaveSuccess, onSaveError);
-            }
+            $http({
+                url: 'api/payments/auth',
+                method: 'PUT',
+                data: vm.superMagicString,
+                transformResponse: [function (data) {
+                    console.log("DATA", data);
+                    var stripeResp = data.split(':')[1];
+                    console.log(stripeResp);
+                    if(data === "PAYMENT SUCCESS"){
+                        if (payment.id !== null) {
+                            payment.user = vm.tempCard.user;
+                            Payment.update(payment, onSaveSuccess, onSaveError);
+                        } else {
+                            payment.user = vm.tempCard.user;
+                            Payment.save(payment, onSaveSuccess, onSaveError);
+                        }
+                        // toastr.success("Case Estimate Agreed");
+                        // if (vm.agreeToEstimate) {
+                            // $uibModalInstance.close({"rated": true});
+                        // }
+                    } else if (stripeResp === " Your card has insufficient funds.; request-id" ) {
+                        vm.paymentInProgress = false;
+                        toastr.error("Insufficient Funds", {
+                            timeOut: 0,
+                            toastClass: 'toast drsl-user-flow-toast',
+                            onTap: function () {
+                                $state.go('settings');
+                            }
+                        });
+                    } else if(stripeResp ===  " Your card number is incorrect.; request-id") {
+                        vm.paymentInProgress = false;
+                        toastr.error("Invalid Card Number", {
+                            timeOut: 0,
+                            toastClass: 'toast drsl-user-flow-toast',
+                            onTap: function () {
+                                $state.go('settings');
+                            }
+                        });
+                    } else {
+                        vm.paymentInProgress = false;
+                        toastr.error("Invalid Card Number", {
+                            timeOut: 0,
+                            toastClass: 'toast drsl-user-flow-toast',
+                            onTap: function () {
+                                $state.go('settings');
+                            }
+                        });
+                    }
+                    return data;
+                }]
+            });
         }
         function checkInvalid() {
             vm.invitedUser = vm.invitedUser.replace(/;|"|!|\+|#|\$|%|\^|&|\*|\)|\(|:|\?|\/|<|>|{|}|\[|\]|-|_|=|\~|\`|\||\\|\/|\s/g, "");
@@ -723,7 +648,6 @@
             Groupaccess.query(function (result) {
                 _.find(result, function (user) {
                     if (user.authorizeduser.email === vm.settingsAccount.email) {
-                        console.log("SHARED CC");
                         vm.isAlreadyAuthorized = true;
                     } else if (user.user.login === vm.settingsAccount.login && user.authorizeduser.activated) {
                         vm.authorizedUsers.push(user);

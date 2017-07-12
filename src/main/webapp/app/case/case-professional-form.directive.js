@@ -44,7 +44,6 @@
                     id: 1,
                     name: "MySQL"
                 }
-                // console.log(scope.case, "JESUS");
                 scope.case.estimateLog = (scope.case.estimateLog) ? scope.case.estimateLog : '';
 
                 if (StatusModel.checkCaseStatus(scope.case.status, 'created')) {

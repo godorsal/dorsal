@@ -127,10 +127,8 @@
 									if (property.supportcase.id === supportcase.id) {
 										if(property.propertyname=== 'Other'){
 											var split1 = property.propertyvalue.split('|');
-											// console.log(split1);
 											var split2 = split1.join().split(':');
 											split2.splice(0,1)
-											console.log(split2);
 											supportcase.technology ={
 												name: split2[0].split(',')[0]
 											}
@@ -140,29 +138,28 @@
 							})
 
 							Rating.query(function (ratings) {
-								console.log("RATINGS", ratings);
-
 								ratings.forEach(function (rat) {
 									if(rat.supportcase.id === supportcase.id){
+										console.log(rat.rateDetails.split(',')[0].split(' ')[1]);
 										switch (rat.rateDetails.split(',')[0].split(' ')[1]) {
-						                    case "65":
-supportcase.finalPayment = Math.floor((0 / 100) * (supportcase.estimateHours * 125));
-						                    break;
-						                    case "75":
-supportcase.finalPayment = Math.floor((50 / 100) * (supportcase.estimateHours * 125));
-						                    break;
-						                    case "85":
-supportcase.finalPayment = Math.floor((90 / 100) * (supportcase.estimateHours * 125));
-						                    break;
-						                    case "100":
-supportcase.finalPayment = Math.floor((100 / 100) * (supportcase.estimateHours * 125));
-						                    break;
-						                    default:
+											case "65":
+											supportcase.finalPayment = Math.floor((0 / 100) * (supportcase.estimateHours * 125));
+											break;
+											case "75":
+											supportcase.finalPayment = Math.floor((50 / 100) * (supportcase.estimateHours * 125));
+											break;
+											case "85":
+											supportcase.finalPayment = Math.floor((90 / 100) * (supportcase.estimateHours * 125));
+											break;
+											case "100":
+											supportcase.finalPayment = Math.floor((100 / 100) * (supportcase.estimateHours * 125));
+											break;
+											default:
+										}
 									}
-								}
 
 
-							})
+								})
 							})
 						})
 						if(Number(vm.totalItems) > Number(vm.itemsPerPage)){
@@ -390,6 +387,8 @@ supportcase.finalPayment = Math.floor((100 / 100) * (supportcase.estimateHours *
 						data.rateDetails.split(',').forEach(function (rateDetail) {
 							var rateDetail = rateDetail.split(' ');
 							ratingObject.detailedReportObject[rateDetail[0]] = rateDetail[1]
+							console.log(rateDetail);
+							
 						})
 						vm.currentCase.report = {
 							rating: ratingObject,

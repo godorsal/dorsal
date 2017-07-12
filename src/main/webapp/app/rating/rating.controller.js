@@ -169,7 +169,10 @@
                     default:
 
                 }
-                var result = Math.floor((firstPercentage / 100) * firstAmount);
+                var result = ((firstPercentage / 100) * firstAmount) * 100;
+                var melp = (firstPercentage / 100) * firstAmount;
+                console.log(melp);
+                console.log(melp* 100);
                 vm.superMagicString = (splitter[1] + "#" + splitter[2] + "," + splitter[3] + "#" + result);
                 if(result > 0){
                     $http({
@@ -179,7 +182,7 @@
                         transformResponse: [function (data) {
                             if(data === "PAYMENT SUCCESS"){
                                 toastr.success("Payment Successful");
-                                closeCase(result);
+                                closeCase(melp);
                             } else if (data === "PAYMENT FAILURE") {
                                 vm.paymentInProgress = false;
                                 toastr.error("Payment failure, click to check payment settings", {
@@ -204,15 +207,15 @@
                         }]
                     });
                 } else {
-                    closeCase(result);
+                    closeCase(melp);
                 }
             })
 
         }
         function showFinalAmount(amount) {
-            var modalInstance = DrslFinalAmountService.open(amount)
+            var modalInstance = DrslFinalAmountService.open(amount, vm.case, vm.ratingComments)
         }
-        function closeCase(result) {
+        function closeCase(result, rating) {
             // var combinedTotal = 0, combinedAverage, csv = [], selectedBadges = [], i, badge;
             //
             // vm.formSubmitted = true;

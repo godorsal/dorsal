@@ -214,7 +214,7 @@ public class PaymentResource {
 
                 RequestOptions requestOptions = (new RequestOptionsBuilder()).setApiKey(stripeApiKey).build();
                 Map<String, Object> chargeMap = new HashMap<String, Object>();
-                chargeMap.put("amount", Integer.parseInt(splitCC[2]) * 100);
+                chargeMap.put("amount", Integer.parseInt(splitCC[2]));
                 chargeMap.put("currency", "usd");
                 Map<String, Object> cardMap = new HashMap<String, Object>();
                 cardMap.put("number", ccNumber);
@@ -265,21 +265,35 @@ public class PaymentResource {
 
                 RequestOptions requestOptions = (new RequestOptionsBuilder()).setApiKey(stripeApiKey).build();
                 Map<String, Object> chargeMap = new HashMap<String, Object>();
-                chargeMap.put("amount", Integer.parseInt(splitCC[2]) * 100);
+
+                chargeMap.put("amount", Integer.parseInt(splitCC[2]));
                 chargeMap.put("currency", "usd");
+
                 Map<String, Object> cardMap = new HashMap<String, Object>();
+
                 cardMap.put("number", ccNumber);
-                cardMap.put("capture", false);
+                // cardMap.put("capture", false);
                 cardMap.put("exp_month", ccMonth);
                 cardMap.put("exp_year", ccYear);
+
+                // String[] splitString = paymentString.split("#");
+                // String stripeUserToken = splitString[0];
+                // String amount = splitString[1];
+                Map<String, Object> chargeParams = new HashMap<String, Object>();
                 chargeMap.put("card", cardMap);
+                chargeParams.put("source", cardMap);
+                chargeParams.put("amount", Integer.parseInt(splitCC[2]));
+                chargeParams.put("currency", "usd");
+                chargeParams.put("capture", false);
+
                 try {
-                    Charge charge = Charge.create(chargeMap, requestOptions);
+                    Charge charge = Charge.create(chargeParams, requestOptions);
                     System.out.println(charge);
                     return new ResponseEntity<String>("PAYMENT SUCCESS", responseHeaders, HttpStatus.OK);
                 } catch (StripeException e) {
-                    e.printStackTrace();
-                    return new ResponseEntity<String>("PAYMENT FAILURE", responseHeaders, HttpStatus.BAD_REQUEST);
+                    // e.printStackTrace();
+                    System.out.println("EYO" + e.toString());
+                    return new ResponseEntity<String>(e.toString(), responseHeaders, HttpStatus.BAD_REQUEST);
                 }
 
 
@@ -321,8 +335,6 @@ public class PaymentResource {
 
 
                 try {
-                    Balance balance = Balance.retrieve();
-                    System.out.println(balance);
                     Charge charge = Charge.create(chargeParams);
                     System.out.println(charge);
                     return new ResponseEntity<String>("PAYMENT SUCCESS", responseHeaders, HttpStatus.OK);

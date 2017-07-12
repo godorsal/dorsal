@@ -422,13 +422,13 @@ Your e-mail cannot be longer than 100 characters.
                 </span>
                 <!-- Images -->
                 <span>
-                    <img src="https://www.braintreepayments.com/images/visa-logo-8ea8a4fc.svg" alt="">
-                    <img src="https://www.braintreepayments.com/images/mastercard-logo-09664196.svg" alt="">
+                    <img src="http://www.credit-card-logos.com/images/visa_credit-card-logos/new_visa.gif" alt="">
+                    <img src="http://www.credit-card-logos.com/images/mastercard_credit-card-logos/mastercard_logo_7.jpg" alt="">
                     <img src="https://www.braintreepayments.com/images/maestro-logo-db229f9d.svg" alt="">
                     <img src="https://www.braintreepayments.com/images/jcb-logo-62a7882e.svg" alt="">
-                    <img src="https://www.braintreepayments.com/images/discover-logo-57d59cd4.svg" alt="">
+                    <img src="http://www.credit-card-logos.com/images/discover_credit-card-logos/discover_network1.jpg" alt="">
                     <img src="https://www.braintreepayments.com/images/amex-logo-e238f7a3.svg" alt="">
-                    <img src="https://www.braintreepayments.com/images/diners-club-logo-c3edc4c2.svg" alt="">
+                    <img src="https://www.dinersclub.com/assets/images/diners-club-international-logo.png" alt="">
                 </span>
             </div>
 
@@ -447,7 +447,8 @@ Your e-mail cannot be longer than 100 characters.
 </form>
 <button type="button" name="button" ng-click="vm.sendChargeRequest()">CHARGE CARD</button> -->
 
-<form ng-submit="vm.addCard()">
+<!-- <form ng-submit="vm.updateSettings()"> -->
+<form ng-submit="vm.save()">
     <div class="form-group">
         <label class="drsl-expert-textarea-label" for="ccName" translate="">Card Holder's Name</label>
         <input type="text" class="form-control drsl-inline" id="ccName" name="ccName"
@@ -460,16 +461,16 @@ Your e-mail cannot be longer than 100 characters.
         <label class="control-label sr-only" for="ccNumber1" translate="settings.form.ccCardNumber">Card Number</label>
 
         <input type="number" class="form-control drsl-card-number-quarter" id="ccNumber1" name="ccNumber"
-        ng-model="vm.creditCard.number.one" required  ng-keypress="vm.numberTab($event)" maxlength="4" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.ccNumber.$dirty && !vm.creditCard.number.one)}">
+        ng-model="vm.creditCard.number.one" required  ng-keypress="vm.numberTab($event)" maxlength="4" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.ccNumber.$dirty && !vm.creditCard.number.one)}" ng-change="vm.updatingCard = true">
         -
         <input type="number" class="form-control drsl-card-number-quarter" id="ccNumber2" name="ccNumber" ng-keypress="vm.numberTab($event)"
-        ng-model="vm.creditCard.number.two" required maxlength="4" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.ccNumber.$dirty && !vm.creditCard.number.two)}">
+        ng-model="vm.creditCard.number.two" required maxlength="4" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.ccNumber.$dirty && !vm.creditCard.number.two)}" ng-change="vm.updatingCard = true">
         -
         <input type="number" class="form-control drsl-card-number-quarter" id="ccNumber3" name="ccNumber" ng-keypress="vm.numberTab($event)"
-        ng-model="vm.creditCard.number.three" required maxlength="4" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.ccNumber.$dirty && !vm.creditCard.number.three)}">
+        ng-model="vm.creditCard.number.three" required maxlength="4" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.ccNumber.$dirty && !vm.creditCard.number.three)}" ng-change="vm.updatingCard = true">
         -
         <input type="number" class="form-control drsl-card-number-quarter" id="ccNumber4" name="ccNumber"  ng-keypress="vm.numberTab($event)"
-        ng-model="vm.creditCard.number.four" required maxlength="4" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.ccNumber.$dirty && !vm.creditCard.number.four)}">
+        ng-model="vm.creditCard.number.four" required maxlength="4" ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.ccNumber.$dirty && !vm.creditCard.number.four)}" ng-change="vm.updatingCard = true">
         <span ng-if="vm.error && vm.number.join('').length != 16" class="drsl-invalid" translate="settings.messages.error.ccInvalidCardNumber">Invalid Card Number</span>
     </div>
 
@@ -478,7 +479,7 @@ Your e-mail cannot be longer than 100 characters.
         <label class="drsl-expert-textarea-label" for="ccName" translate="">Expiration Date</label>
         <div class="row">
             <div class="col-sm-6">
-                <select class="form-control" name="expiry-month" ng-model="vm.creditCard.month" required ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form['expiry-month'].$dirty && !vm.creditCard.month)}">
+                <select class="form-control" name="expiry-month" ng-model="vm.creditCard.month" required ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form['expiry-month'].$dirty && !vm.creditCard.month)}" ng-change="vm.updatingCard = true">
                     <option value="" translate="settings.form.ccMonth">Month</option>
                     <option value="01">Jan (01)</option>
                     <option value="02">Feb (02)</option>
@@ -496,7 +497,7 @@ Your e-mail cannot be longer than 100 characters.
             </div>
 
             <div class="col-sm-6">
-                <select class="form-control" name="expiry-year" ng-model="vm.creditCard.year" required ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form['expiry-year'].$dirty && !vm.creditCard.year)}">
+                <select class="form-control" name="expiry-year" ng-model="vm.creditCard.year" required ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form['expiry-year'].$dirty && !vm.creditCard.year)}" ng-change="vm.updatingCard = true">
                     <option value="" translate="settings.form.ccYear">Year</option>
                     <option value="13">2013</option>
                     <option value="14">2014</option>
@@ -520,13 +521,13 @@ Your e-mail cannot be longer than 100 characters.
             <div class="col-sm-6">
                 <label class="control-label sr-only" for="cvv" translate="settings.form.ccCVV">Card CVV</label>
                 <input ng-keypress="vm.numberTab($event)" type="number" class="form-control drsl-card-number-quarter" id="cvv" name="cvv" placeholder="{{'settings.form.ccCVV.placeholder' | translate}}"
-                ng-minlength=1 ng-maxlength=4  maxlength="3" ng-model="vm.creditCard.cvv" required ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.cvv.$dirty && !vm.creditCard.cvv)}">
+                ng-minlength=1 ng-maxlength=4  maxlength="3" ng-model="vm.creditCard.cvv" required ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.cvv.$dirty && !vm.creditCard.cvv)}" ng-change="vm.updatingCard = true">
                 <span ng-if="vm.error && vm.creditCard.cvv.toString().length != 3" class="drsl-invalid" translate="settings.messages.error.ccInvalidCVVNumber">Invalid CVV Number</span>
             </div>
         </div>
     </div>
 
-    <button type="submit" ng-disabled="form.$invalid" class="btn btn-success drsl-update-card-button" translate="settings.form.button"> Update</button>
+    <button type="submit" ng-disabled="form.$invalid" class="btn btn-success drsl-update-card-button" translate="settings.form.button"> Update </button>
 </form>
 </div>
 </div>

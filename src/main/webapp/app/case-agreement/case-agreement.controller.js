@@ -11,7 +11,6 @@
         var vm = this;
 
         vm.case = drslCase;
-        console.log("CASE!", drslCase.estimateHours * 125);
         vm.expert = expert;
         vm.cancel = cancel;
         vm.submit = submit;
@@ -30,32 +29,46 @@
 
         function submit() {
             Payment.query(function (res) {
-                // vm.paymentInProgress = true;
+                vm.paymentInProgress = true;
                 var splitter = res[0].ccdata.split("##");
                 var amount = drslCase.estimateHours * 125;
-                vm.superMagicString = (splitter[1] + "#" + splitter[2] + "," + splitter[3] + "#" + amount);
+                vm.superMagicString = (splitter[1] + "#" + splitter[2] + "," + splitter[3] + "#" + (amount * 100));
+                console.log(vm.superMagicString);
                 if(amount > 0){
                     $http({
                         url: 'api/payments/auth',
                         method: 'PUT',
                         data: vm.superMagicString,
                         transformResponse: [function (data) {
+                            console.log("DATA", data);
+                            var stripeResp = data.split(':')[1];
+                            console.log(stripeResp);
                             if(data === "PAYMENT SUCCESS"){
-                                toastr.success("Payment Successful");
-                                // closeCase(result);
-                            } else if (data === "PAYMENT FAILURE") {
+                                toastr.success("Case Estimate Agreed");
+                                if (vm.agreeToEstimate) {
+                                    // $uibModalInstance.close({"rated": true});
+                                }
+                            } else if (stripeResp === " Your card has insufficient funds.; request-id" ) {
                                 vm.paymentInProgress = false;
-                                toastr.error("Payment failure, click to check payment settings", {
+                                toastr.error("Insufficient Funds", {
                                     timeOut: 0,
                                     toastClass: 'toast drsl-user-flow-toast',
                                     onTap: function () {
                                         $state.go('settings');
                                     }
                                 });
-                                //     return;
+                            } else if(stripeResp ===  " Your card number is incorrect.; request-id") {
+                                vm.paymentInProgress = false;
+                                toastr.error("Invalid Card Number", {
+                                    timeOut: 0,
+                                    toastClass: 'toast drsl-user-flow-toast',
+                                    onTap: function () {
+                                        $state.go('settings');
+                                    }
+                                });
                             } else {
                                 vm.paymentInProgress = false;
-                                toastr.error("Payment failure, click to check payment settings", {
+                                toastr.error("Invalid Card Number", {
                                     timeOut: 0,
                                     toastClass: 'toast drsl-user-flow-toast',
                                     onTap: function () {
@@ -66,14 +79,8 @@
                             return data;
                         }]
                     });
-                } else {
-                    console.log('A');
-                    // closeCase(result);
                 }
             })
-            // if (vm.agreeToEstimate) {
-            //     $uibModalInstance.close({"rated": true});
-            // }
         }
     }
 })();
