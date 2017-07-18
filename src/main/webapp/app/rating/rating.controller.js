@@ -216,42 +216,42 @@
             var modalInstance = DrslFinalAmountService.open(amount, vm.case, vm.ratingComments)
         }
         function closeCase(result, rating) {
-            // var combinedTotal = 0, combinedAverage, csv = [], selectedBadges = [], i, badge;
-            //
-            // vm.formSubmitted = true;
-            //
-            // if (!vm.ratingComments || vm.ratingComments.replace(/\s/g, '').length === 0) {
-            //     ratingForm.ratingComments.focus();
-            //     toastr.error(vm.ratingCommentsError, 'Error');
-            //     return;
-            // }
-            //
-            // for (i = 0; i < vm.radios.length; i++) {
-            //     var radio = vm.radios[i][0];
-            //     combinedTotal += Number(radio.selectedValue);
-            //     csv.push(radio.id + ' ' + radio.selectedValue);
-            // }
-            //
-            // combinedAverage = Math.round(combinedTotal / vm.radios.length);
-            //
-            // for (i = 0; i < vm.badges.length; i++) {
-            //     badge = vm.badges[i];
-            //
-            //     if (badge.selected) {
-            //         delete badge.selected;
-            //         selectedBadges.push(badge);
-            //     }
-            // }
-            //
-            // $uibModalInstance.close({
-            //     "rated": true,
-            //     "score": combinedAverage,
-            //     "rateDetails": csv.join(','),
-            //     "ratingComments": vm.ratingComments,
-            //     "hasExpertExceeded": false,
-            //     "selectedBadges": selectedBadges
-            // });
-            // vm.paymentInProgress = false;
+            var combinedTotal = 0, combinedAverage, csv = [], selectedBadges = [], i, badge;
+
+            vm.formSubmitted = true;
+
+            if (!vm.ratingComments || vm.ratingComments.replace(/\s/g, '').length === 0) {
+                ratingForm.ratingComments.focus();
+                toastr.error(vm.ratingCommentsError, 'Error');
+                return;
+            }
+
+            for (i = 0; i < vm.radios.length; i++) {
+                var radio = vm.radios[i][0];
+                combinedTotal += Number(radio.selectedValue);
+                csv.push(radio.id + ' ' + radio.selectedValue);
+            }
+
+            combinedAverage = Math.round(combinedTotal / vm.radios.length);
+
+            for (i = 0; i < vm.badges.length; i++) {
+                badge = vm.badges[i];
+
+                if (badge.selected) {
+                    delete badge.selected;
+                    selectedBadges.push(badge);
+                }
+            }
+
+            $uibModalInstance.close({
+                "rated": true,
+                "score": combinedAverage,
+                "rateDetails": csv.join(','),
+                "ratingComments": vm.ratingComments,
+                "hasExpertExceeded": false,
+                "selectedBadges": selectedBadges
+            });
+            vm.paymentInProgress = false;
             showFinalAmount(result);
         }
     }

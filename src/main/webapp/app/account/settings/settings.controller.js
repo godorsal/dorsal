@@ -7,9 +7,9 @@
 
     SettingsController.$inject = ['$rootScope', 'Principal', 'Auth', 'JhiLanguageService', '$translate', 'Payment',
     'Groupaccess', 'User', 'Focus', 'Register', 'toastr', 'ExpertAccount', 'Issue', 'Technology', '_', '$state',
-    'DrslUserFlowService', 'ManageUser', 'ExpertAttribute', 'ExpertAttributeToExpert', 'JobroleExpertScore', 'ProductExpertScore', 'SpecialityExpertScore', 'SkillExpertScore', 'TechnologyExpertScore', 'Useraccount', 'ExpertPoolToExpert', '$http'];
+    'DrslUserFlowService', 'ManageUser', 'ExpertAttribute', 'ExpertAttributeToExpert', 'JobroleExpertScore', 'ProductExpertScore', 'SpecialityExpertScore', 'SkillExpertScore', 'TechnologyExpertScore', 'Useraccount', 'ExpertPoolToExpert', '$http', 'DrslMetadata'];
 
-    function SettingsController($rootScope, Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, User, focus, Register, toastr, ExpertAccount, Issue, Technology, _, $state, DrslUserFlowService, ManageUser, ExpertAttribute, ExpertAttributeToExpert, JobroleExpertScore, ProductExpertScore, SpecialityExpertScore, SkillExpertScore, TechnologyExpertScore, Useraccount, ExpertPoolToExpert, $http) {
+    function SettingsController($rootScope, Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, User, focus, Register, toastr, ExpertAccount, Issue, Technology, _, $state, DrslUserFlowService, ManageUser, ExpertAttribute, ExpertAttributeToExpert, JobroleExpertScore, ProductExpertScore, SpecialityExpertScore, SkillExpertScore, TechnologyExpertScore, Useraccount, ExpertPoolToExpert, $http, DrslMetadata) {
 
         // Handle user flow redirects and messaging
         DrslUserFlowService.handleUserFlow();
@@ -17,6 +17,10 @@
 
         // Set the view model and view model properties/methods
         var vm = this;
+
+        vm.metadata = DrslMetadata;
+        console.log(vm.metadata);
+
         vm.error = null;
         vm.save = save;
         vm.settingsAccount = null;
@@ -39,6 +43,7 @@
         vm.hideLinkElipsis = hideLinkElipsis;
         vm.showLinkElipsis = showLinkElipsis;
 
+        vm.canSaveCard = false;
 
         // vm methods
         vm.init = init;
@@ -233,6 +238,7 @@
                             id: ccdata.id,
                             user: ccdata.user
                         }
+                        vm.canSaveCard = true;
                     }
                 })
             });
@@ -312,7 +318,7 @@
         * Handles the form submit/save for the main settings form.
         */
         function save() {
-            if(vm.updatingCard){
+            if(vm.updatingCard && vm.canSaveCard){
                 addCard();
             }
             if (vm.updatingUser && vm.updatingExpert) {
@@ -356,7 +362,7 @@
                 //     companyname: vm.userAttributesString
                 // }
                 Useraccount.update(vm.currentUserAccount)
-
+                vm.updatingUser = false;
                 // Redirect to the case page
                 if (vm.isAlreadyAuthorized) {
                     debugger;

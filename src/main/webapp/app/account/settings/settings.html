@@ -526,8 +526,9 @@ Your e-mail cannot be longer than 100 characters.
             </div>
         </div>
     </div>
-
-    <button type="submit" ng-disabled="form.$invalid" class="btn btn-success drsl-update-card-button" translate="settings.form.button"> Update </button>
+    <input type="checkbox" name="name" value="" ng-model="vm.canSaveCard">
+    <span>By checking this box, you agree to our <a ng-href="{{vm.metadata.termsAndConditions}}" target="_blank">terms and conditions</a></span>
+    <button type="submit" ng-disabled="form.$invalid || !vm.canSaveCard" class="btn btn-success drsl-update-card-button" translate="settings.form.button"> Update </button>
 </form>
 </div>
 </div>
