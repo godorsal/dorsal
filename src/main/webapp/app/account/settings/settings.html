@@ -521,7 +521,7 @@ Your e-mail cannot be longer than 100 characters.
             <div class="col-sm-6">
                 <label class="control-label sr-only" for="cvv" translate="settings.form.ccCVV">Card CVV</label>
                 <input ng-keypress="vm.numberTab($event)" type="number" class="form-control drsl-card-number-quarter" id="cvv" name="cvv" placeholder="{{'settings.form.ccCVV.placeholder' | translate}}"
-                ng-minlength=1 ng-maxlength=4  maxlength="3" ng-model="vm.creditCard.cvv" required ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.cvv.$dirty && !vm.creditCard.cvv)}" ng-change="vm.updatingCard = true">
+                ng-minlength=1 ng-maxlength=4  maxlength="4" ng-model="vm.creditCard.cvv" required ng-class="{'drsl-highlight-field': (vm.settingsAccount.login && !form.cvv.$dirty && !vm.creditCard.cvv)}" ng-change="vm.updatingCard = true">
                 <span ng-if="vm.error && vm.creditCard.cvv.toString().length != 3" class="drsl-invalid" translate="settings.messages.error.ccInvalidCVVNumber">Invalid CVV Number</span>
             </div>
         </div>
