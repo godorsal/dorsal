@@ -28,6 +28,8 @@ public class JHipsterProperties {
     private final Metrics metrics = new Metrics();
 
     private final CorsConfiguration cors = new CorsConfiguration();
+    
+    private final Social social = new Social();
 
     private final Ribbon ribbon = new Ribbon();
 
@@ -61,6 +63,10 @@ public class JHipsterProperties {
 
     public CorsConfiguration getCors() {
         return cors;
+    }
+    
+    public Social getSocial() {
+        return social;
     }
 
     public Ribbon getRibbon() {
@@ -484,6 +490,19 @@ public class JHipsterProperties {
             public int getQueueSize() { return queueSize; }
 
             public void setQueueSize(int queueSize) { this.queueSize = queueSize; }
+        }
+    }
+    
+    public static class Social {
+
+        private String redirectAfterSignIn = "/#/home";
+
+        public String getRedirectAfterSignIn() {
+            return redirectAfterSignIn;
+        }
+
+        public void setRedirectAfterSignIn(String redirectAfterSignIn) {
+            this.redirectAfterSignIn = redirectAfterSignIn;
         }
     }
 

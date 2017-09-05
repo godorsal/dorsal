@@ -14,7 +14,7 @@
     "prodDatabaseType": "postgresql",
     "searchEngine": false,
     "buildTool": "maven",
-    "enableSocialSignIn": false,
+    "enableSocialSignIn": true,
     "jwtSecretKey": "332fb047a4208836503fe6f789b16513927de45f",
     "useSass": true,
     "applicationType": "monolith",
