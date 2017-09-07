@@ -65,6 +65,11 @@ spring:
         twitter:
             clientId: xxx
             clientSecret: xxx
+            
+        # see https://developer.github.com/apps/
+        github:
+            clientId: xxx
+            clientSecret: xxx
 
         # jhipster-needle-add-social-configuration
 

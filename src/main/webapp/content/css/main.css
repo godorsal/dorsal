@@ -4926,4 +4926,19 @@ Social Buttons
     border-color: rgba(0, 0, 0, 0.2);
     color: #fff;
 }
+
+.jh-btn-github {
+    background-color: #27e97b;
+    border-color: rgba(0, 0, 0, 0.2);
+    color: #fff;
+}
+
+.jh-btn-github:hover, .jh-btn-github:focus, .jh-btn-github:active, .jh-btn-github.active, .open > .dropdown-toggle.jh-btn-github {
+    background-color: #1fba62;
+    border-color: rgba(0, 0, 0, 0.2);
+    color: #fff;
+}
+
+
 /* jhipster-needle-css-add-main JHipster will add new css style */
+  

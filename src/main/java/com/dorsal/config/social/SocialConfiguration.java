@@ -22,6 +22,7 @@ import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.social.google.connect.GoogleConnectionFactory;
 import org.springframework.social.security.AuthenticationNameUserIdSource;
 import org.springframework.social.twitter.connect.TwitterConnectionFactory;
+import org.springframework.social.github.connect.GitHubConnectionFactory;
 // jhipster-needle-add-social-connection-factory-import-package
 
 import javax.inject.Inject;
@@ -79,6 +80,21 @@ public class SocialConfiguration implements SocialConfigurer {
             log.debug("Configuring TwitterConnectionFactory");
             connectionFactoryConfigurer.addConnectionFactory(
                 new TwitterConnectionFactory(
+                    twitterClientId,
+                    twitterClientSecret
+                )
+            );
+        } else {
+            log.error("Cannot configure TwitterConnectionFactory id or secret null");
+        }
+        
+     // github configuration
+        String githubClientId = environment.getProperty("spring.social.github.clientId");
+        String githubClientSecret = environment.getProperty("spring.social.github.clientSecret");
+        if (twitterClientId != null && twitterClientSecret != null) {
+            log.debug("Configuring GitHubConnectionFactory");
+            connectionFactoryConfigurer.addConnectionFactory(
+                new GitHubConnectionFactory(
                     twitterClientId,
                     twitterClientSecret
                 )
