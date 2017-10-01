@@ -38,7 +38,7 @@ spring:
         favicon:
             enabled: false
     thymeleaf:
-        mode: XHTML      
+        mode: XHTML
     social:
         # see https://developers.google.com/+/web/signin/server-side-flow#step_1_create_a_client_id_and_client_secret
         google:
@@ -54,11 +54,11 @@ spring:
         twitter:
             clientId: xxx
             clientSecret: xxx
-        
+
         # see https://developer.github.com/apps/
         github:
-            clientId: xxx
-            clientSecret: xxx
+            clientId: 09bf74b4259c793d4382
+            clientSecret: 0b4134920c81a8cb942440d94516f522c4d52a10
 
         # jhipster-needle-add-social-configuration
 

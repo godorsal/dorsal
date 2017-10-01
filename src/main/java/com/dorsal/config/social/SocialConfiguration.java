@@ -87,20 +87,20 @@ public class SocialConfiguration implements SocialConfigurer {
         } else {
             log.error("Cannot configure TwitterConnectionFactory id or secret null");
         }
-        
+
      // github configuration
         String githubClientId = environment.getProperty("spring.social.github.clientId");
         String githubClientSecret = environment.getProperty("spring.social.github.clientSecret");
-        if (twitterClientId != null && twitterClientSecret != null) {
+        if (githubClientId != null && githubClientSecret != null) {
             log.debug("Configuring GitHubConnectionFactory");
             connectionFactoryConfigurer.addConnectionFactory(
                 new GitHubConnectionFactory(
-                    twitterClientId,
-                    twitterClientSecret
+                    githubClientId,
+                    githubClientSecret
                 )
             );
         } else {
-            log.error("Cannot configure TwitterConnectionFactory id or secret null");
+            log.error("Cannot configure GithubConnectionFactory id or secret null");
         }
 
         // jhipster-needle-add-social-connection-factory

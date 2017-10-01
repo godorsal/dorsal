@@ -58,6 +58,7 @@ public class SocialService {
         UserProfile userProfile = connection.fetchUserProfile();
         String providerId = connection.getKey().getProviderId();
         User user = createUserIfNotExist(userProfile, langKey, providerId);
+        log.error("USER *** Email ", user.getEmail());
         createSocialConnection(user.getLogin(), connection);
         mailService.sendSocialRegistrationValidationEmail(user, providerId);
     }
@@ -108,6 +109,8 @@ public class SocialService {
     private String getLoginDependingOnProviderId(UserProfile userProfile, String providerId) {
         switch (providerId) {
             case "twitter":
+                return userProfile.getUsername().toLowerCase();
+            case "github":
                 return userProfile.getUsername().toLowerCase();
             default:
                 return userProfile.getEmail();
