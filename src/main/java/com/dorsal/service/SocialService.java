@@ -51,6 +51,7 @@ public class SocialService {
     }
 
     public void createSocialUser(Connection<?> connection, String langKey) {
+        log.error("Monika");
         if (connection == null) {
             log.error("Cannot create social user because connection is null");
             throw new IllegalArgumentException("Connection cannot be null");
