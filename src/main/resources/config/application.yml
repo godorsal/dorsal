@@ -15,7 +15,7 @@ management:
     context-path: /management
     health:
         mail:
-            enabled: false # When using the MailService, configure an SMTP server and set this to true
+            enabled: true # When using the MailService, configure an SMTP server and set this to true
 spring:
     application:
         name: dorsal
@@ -83,7 +83,7 @@ jhipster:
         #allow-credentials: true
         #max-age: 1800
     mail:
-        from: dorsal@localhost
+        from: support@dorsal.com
     swagger:
         title: dorsal API
         description: dorsal API documentation

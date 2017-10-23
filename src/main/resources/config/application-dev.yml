@@ -12,7 +12,8 @@
 
 dorsal:
     support:
-        mail: support@godorsal.com
+        mail: damon.kalaboukis@godorsal.com
+        # mail: support@godorsal.com
         concierge: dorsal-concierge
 
     application:
@@ -21,6 +22,7 @@ dorsal:
 spring:
     profiles:
         include: swagger
+        active: dev
     devtools:
         restart:
             enabled: true
@@ -44,7 +46,20 @@ spring:
             hibernate.generate_statistics: true
             hibernate.cache.region.factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
     mail:
-        host: localhost
+        host: email-smtp.us-west-2.amazonaws.com
+        port: 465
+        username: AKIAJROVZB3IZBAFM3VA
+        password: AqUatpIhSJ1CGctdhO/rEGbbH/W0bnC4rGuxTfuBULMK
+        protocol: smtps
+        debug: true
+        properties.mail.smtp:
+            starttls.enable: true
+            starttls.required: true
+            ssl.enable: true
+        properties.mail.smtps:
+            auth: true
+    # mail:
+    #     host: localhost
     messages:
         cache-seconds: 1
     thymeleaf:
@@ -95,7 +110,8 @@ jhipster:
                 # Token is valid 24 hours
                 tokenValidityInSeconds: 86400
     mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: dorsal@localhost
+        from: damon.kalaboukis@godorsal.com
+        # from: dorsal@localhost
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
         spark:

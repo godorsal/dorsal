@@ -17,7 +17,7 @@
         vm.technologiesToUpdate = [];
         vm.scores = [1, 2, 3, 4, 5];
         vm.technologies = TechnologyExpertScore.query();
-
+        console.log(vm.technologies);
         vm.changeScore = changeScore;
         vm.submit = submit;
 
