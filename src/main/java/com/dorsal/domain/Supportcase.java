@@ -88,7 +88,7 @@ public class Supportcase implements Serializable {
     @ManyToOne
     private Technology technology;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Status status;
 
     @ManyToOne
