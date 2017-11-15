@@ -5,10 +5,10 @@
         .module('dorsalApp')
         .directive('drslAttachFiles', drslAttachFiles);
 
-    drslAttachFiles.$inject = ['DrslAttachFileService', 'Principal', '$sce', '$translate', 'Attachment', 'DataUtils', 'DrslBrowserDetectService', '$document'];
+    drslAttachFiles.$inject = ['DrslAttachFileService', 'Principal', '$sce', '$translate', 'Attachment', 'DataUtils', 'DrslBrowserDetectService', '$document', '$window'];
 
 
-    function drslAttachFiles(DrslAttachFileService, Principal, $sce, $translate, Attachment, DataUtils, DrslBrowserDetectService, $document) {
+    function drslAttachFiles(DrslAttachFileService, Principal, $sce, $translate, Attachment, DataUtils, DrslBrowserDetectService, $document, $window) {
         var directive = {
             restrict: 'E',
             scope:  {
@@ -167,7 +167,11 @@
              * @param attachment
              */
             scope.viewAttachment = function(attachment){
-                DataUtils.openFile(attachment.dataStreamContentType, attachment.dataStream);
+                console.log("ATTACHAMENTO", attachment);
+                var win = $window.open("", attachment.name);
+                win.document.write("<img src=data:" + attachment.dataStreamContentType + ";base64," + attachment.dataStream + ">");
+                // win.document.body.innerHTML = "<img src=data:" + attachment.dataStreamContentType + ";base64," + attachment.dataStream + ">";
+                // DataUtils.openFile(attachment.dataStreamContentType, attachment.dataStream);
             };
 
             // If we have a case id, listen for events that may require another rest call
