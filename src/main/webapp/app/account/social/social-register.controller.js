@@ -9,7 +9,7 @@
 
     function SocialRegisterController ($filter, $stateParams) {
         var vm = this;
-
+console.log('social register controller');
         vm.success = $stateParams.success;
         vm.error = !vm.success;
         vm.provider = $stateParams.provider;

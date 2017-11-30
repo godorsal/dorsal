@@ -169,7 +169,13 @@
             scope.viewAttachment = function(attachment){
                 console.log("ATTACHAMENTO", attachment);
                 var win = $window.open("", attachment.name);
-                win.document.write("<img src=data:" + attachment.dataStreamContentType + ";base64," + attachment.dataStream + ">");
+                if(attachment.dataStreamContentType.split("/")[0] === "image"){
+                    win.document.write("<img src=data:" + attachment.dataStreamContentType + ";base64," + attachment.dataStream + ">");
+                } else if(attachment.dataStreamContentType.split("/")[0] === "application"){
+                    console.log("PDF");
+                    win.document.write("<embed src=" + ";base64," + attachment.dataStream + "type=" + attachment.dataStreamContentType + ">");
+                }
+
                 // win.document.body.innerHTML = "<img src=data:" + attachment.dataStreamContentType + ";base64," + attachment.dataStream + ">";
                 // DataUtils.openFile(attachment.dataStreamContentType, attachment.dataStream);
             };

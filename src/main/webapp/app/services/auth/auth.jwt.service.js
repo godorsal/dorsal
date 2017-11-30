@@ -43,7 +43,7 @@
 
         function loginWithToken(jwt, rememberMe) {
             var deferred = $q.defer();
-
+            console.log("LOGIN WITH TOKEN", jwt, rememberMe);
             if (angular.isDefined(jwt)) {
                 this.storeAuthenticationToken(jwt, rememberMe);
                 deferred.resolve(jwt);

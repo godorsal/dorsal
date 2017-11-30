@@ -155,6 +155,7 @@ public class CustomSocialConnectionRepository implements ConnectionRepository {
 
     private SocialUserConnection connectionToUserSocialConnection(Connection<?> connection, Long rank) {
         ConnectionData connectionData = connection.createData();
+        System.out.println("*************** Secret *********"+connectionData.getSecret());
         return new SocialUserConnection(
             userId,
             connection.getKey().getProviderId(),

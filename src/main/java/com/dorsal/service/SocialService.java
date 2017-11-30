@@ -26,8 +26,8 @@ import java.util.Set;
 public class SocialService {
     private final Logger log = LoggerFactory.getLogger(SocialService.class);
 
-    //@Inject
-    //private UsersConnectionRepository usersConnectionRepository;
+    @Inject
+    private UsersConnectionRepository usersConnectionRepository;
 
     @Inject
     private AuthorityRepository authorityRepository;
@@ -119,7 +119,7 @@ public class SocialService {
     }
 
     private void createSocialConnection(String login, Connection<?> connection) {
-//        ConnectionRepository connectionRepository = usersConnectionRepository.createConnectionRepository(login);
-//        connectionRepository.addConnection(connection);
+       ConnectionRepository connectionRepository = usersConnectionRepository.createConnectionRepository(login);
+       connectionRepository.addConnection(connection);
     }
 }

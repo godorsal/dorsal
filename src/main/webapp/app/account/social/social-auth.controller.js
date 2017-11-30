@@ -9,10 +9,11 @@
 
     function SocialAuthController($state, $cookies, Auth) {
         var token = $cookies.get('social-authentication');
-
+console.log("SOCAACIL AUTH CONTROLLLLER");
         Auth.loginWithToken(token, false).then(function () {
-            $cookies.remove('social-authentication');
-            Auth.authorize(true);
+            console.log("LOGGGIN WITH TOKENE");
+            // $cookies.remove('social-authentication');
+            // Auth.authorize(true);
         }, function () {
             $state.go('social-register', {'success': 'false'});
         });
