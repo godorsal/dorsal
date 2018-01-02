@@ -5,10 +5,40 @@
         .module('dorsalApp')
         .factory('DrslUserFlowService', DrslUserFlowService);
 
-    DrslUserFlowService.$inject = ['$state', '$rootScope', '$timeout', '$translate', 'Principal', 'ExpertAccount', 'Supportcase', 'toastr'];
+    DrslUserFlowService.$inject = ['$state', '$rootScope', '$timeout', '$translate', 'Principal', 'ExpertAccount', 'Supportcase', 'toastr', '$document'];
 
-    function DrslUserFlowService($state, $rootScope, $timeout, $translate, Principal, ExpertAccount, Supportcase, toastr) {
+    function DrslUserFlowService($state, $rootScope, $timeout, $translate, Principal, ExpertAccount, Supportcase, toastr, $document) {
         var service = {};
+        var value = "; " + document.cookie;
+        var parts = value.split("; " + "authenticationToken" + "=");
+        if (parts.length == 2) {
+            var cookieToken = '"' + parts.pop().split(";").shift() + '"';
+            if(!localStorage.getItem('jhi-authenticationToken')){
+                    localStorage.setItem('jhi-authenticationToken', cookieToken);
+                    location.reload();
+            }
+        }
+        // var cookies = document.cookie.split(";");
+        // cookies.forEach(function (cookie) {
+        //     console.log(cookie.split("=")[0], "authenticationToken");
+        //     if(cookie.split("=")[0] == "authenticationToken"){
+        //         console.log("SUTHH");
+        //     }
+        // })
+
+
+        // console.log(output.authenticationToken);
+        // var cookieToken = '"' + output.authenticationToken + '"';
+        //
+        // if(!localStorage.getItem('jhi-authenticationToken')){
+        //     console.log("No Tken");
+        //     if(cookieToken){
+        //         console.log("Setting Cookie Token");
+        //         localStorage.setItem('jhi-authenticationToken', cookieToken);
+        //         location.reload();
+        //     }
+        // }
+
 
         // Used to determine if we can manage flows through the $stateChangeStart event
         service.stateChangeDetected = false;
@@ -136,7 +166,7 @@
                 // Only redirect the user if they're not already on the concierge page
                 if ($state.current.name !== 'concierge') {
                     if (service.user.hasCases) {
-                        toState = 'case';
+                        // toState = 'case';
                     } else {
                         toState = 'concierge';
                     }
@@ -229,6 +259,7 @@
          */
         service.clearUserData = function () {
             service.user = angular.extend({}, service.userDefaults);
+            document.cookie = "authenticationToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
         };
 
         return service;

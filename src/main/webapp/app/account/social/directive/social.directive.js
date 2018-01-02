@@ -14,7 +14,6 @@
                 provider: '@ngProvider'
             },
             templateUrl: 'app/account/social/directive/social.html',
-            controller: 'SocialController',
             link: linkFunc
         };
 

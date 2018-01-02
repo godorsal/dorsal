@@ -6,6 +6,9 @@ import com.dorsal.web.rest.vm.LoginVM;
 
 import java.util.Collections;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.codahale.metrics.annotation.Timed;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +26,8 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api")
 public class UserJWTController {
+
+private final Logger log = LoggerFactory.getLogger(UserJWTController.class);
 
     @Inject
     private TokenProvider tokenProvider;
@@ -42,6 +47,8 @@ public class UserJWTController {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             boolean rememberMe = (loginVM.isRememberMe() == null) ? false : loginVM.isRememberMe();
             String jwt = tokenProvider.createToken(authentication, rememberMe);
+            log.error("WORKING JWT TOKEn: LOGIN EDITION " + jwt);
+
             response.addHeader(JWTConfigurer.AUTHORIZATION_HEADER, "Bearer " + jwt);
             return ResponseEntity.ok(new JWTToken(jwt));
         } catch (AuthenticationException exception) {

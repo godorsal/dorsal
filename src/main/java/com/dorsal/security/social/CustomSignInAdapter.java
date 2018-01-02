@@ -54,9 +54,9 @@ public class CustomSignInAdapter implements SignInAdapter {
     }
 
     private Cookie getSocialAuthenticationCookie(String token) {
-        Cookie socialAuthCookie = new Cookie("social-authentication", token);
+        Cookie socialAuthCookie = new Cookie("authenticationToken", token);
         socialAuthCookie.setPath("/");
-        socialAuthCookie.setMaxAge(10);
+        socialAuthCookie.setMaxAge(1000);
         return socialAuthCookie;
     }
 }
