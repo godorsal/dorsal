@@ -39,4 +39,13 @@ Login
             text-align: right;
         }
     }
+
+    .drsl-card-number-quarter {
+        width: 100px;
+        display: inline-block;
+    }
+
+    input.drsl-highlight-field, select.drsl-highlight-field, textarea.drsl-highlight-field {
+        border-color: $brand-color;
+    }
 }

@@ -47,6 +47,7 @@ public interface ExpertAccountRepository extends JpaRepository<ExpertAccount,Lon
 
     // Good Expert Match queries seraching across rich profiles. The expert list is always ordered by expert_score
     @Query("select distinct ea from ExpertAccount ea, ProductExpertScore pes, Product p where ea.id = pes.expertaccount.id AND pes.product.id = p.id and p.name IN (:productlist) AND pes.score >= :score ORDER BY ea.expertScore DESC")
+    // @Query("select distinct ea from ExpertAccount ea, ProductExpertScore pes, Product p where ea.id = pes.expertaccount_id AND pes.product_id = p.id and p.name IN (:productlist) AND pes.score >= :score ORDER BY ea.expertScore DESC")
     List<ExpertAccount> findExpertByProducts(@Param("productlist")List<String> productlist, @Param("score") int score);
 
     @Query("select distinct ea from ExpertAccount ea, ProductExpertScore pes, Product p where ea.id = pes.expertaccount.id AND pes.product.id = p.id and p.name like :mainproduct AND pes.score >= :score ORDER BY ea.expertScore DESC")

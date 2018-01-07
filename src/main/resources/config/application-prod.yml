@@ -15,7 +15,7 @@ dorsal:
         mail: support@godorsal.com
 
     application:
-        url: app.godorsal.com
+        url: demo.godorsal.com
         protocol: https
 
 spring:

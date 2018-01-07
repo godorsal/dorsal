@@ -3926,7 +3926,6 @@ Account Password
 Account Activation
 ========================================================================== */
 .drsl-account-activation-view .drsl-activate-page {
-  background-color: #ff8600;
   border-color: #DDDCDB;
   color: #fff;
   height: 100%;
@@ -3974,6 +3973,13 @@ Login
 
 .drsl-login .modal-body .drsl-login-submit {
   text-align: right; }
+
+.drsl-login .drsl-card-number-quarter {
+  width: 100px;
+  display: inline-block; }
+
+.drsl-login input.drsl-highlight-field, .drsl-login select.drsl-highlight-field, .drsl-login textarea.drsl-highlight-field {
+  border-color: #ff8600; }
 
 /* ==========================================================================
 Concierge

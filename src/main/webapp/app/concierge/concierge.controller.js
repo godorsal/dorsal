@@ -10,6 +10,7 @@
     function ConciergeController($rootScope, $scope, $state, LoginService, Principal, ConciergeService, $translate, $http, Supportcase, Casetechnologyproperty, toastr, AttachmentModalService, DateUtils, CaseService, DrslNewCaseService, DrslMetadata, ExpertAccount, DrslUserFlowService, DrslHipChatService, $window, $sce, Product, Skill, ExpertAttribute, ExpertPool, ExpertPoolToExpert, Useraccount) {
 
         DrslUserFlowService.handleUserFlow();
+        DrslUserFlowService.checkPaymentInformation();
 
         ExpertPool.query(function (res) {
             vm.expertGroups = res;
@@ -71,7 +72,6 @@
                 vm.techBank.forEach(function (tech, index) {
                     if(tech === word){
                         vm.selectTech(vm.technologies[index], index)
-                        // console.log("MATCHU!", vm.technologies[index]);
                         vm.techBank.splice(index, 1)
                     }
                 })
@@ -80,21 +80,18 @@
         function selectTech(tech, index) {
             vm.selectedTechnologies.push(tech);
             vm.technologies.splice(index, 1);
-            console.log("TECH SELECTED", tech);
 
         }
         function removeTechnology(tech, index) {
-            console.log("Remove", tech);
             vm.selectedTechnologies.splice(index, 1);
             if(tech.id){
-                vm.technologies.push(tech);
+                vm.technologies.unshift(tech);
             }
         }
 
         function selectSkill(skill, index) {
             vm.selectedSkills.push(skill);
             vm.skills.splice(index, 1);
-            console.log("SKILL SELECTED", skill);
         }
         function removeSkill(skill, index) {
             vm.selectedSkills.splice(index, 1);
@@ -122,10 +119,6 @@
                 }
             })
         })
-
-        // ExpertAccount.query(function (res) {
-        //     console.log(res);
-        // })
 
         // DrslHipChatService.clearRooms();
         DrslHipChatService.getCurrentUser();
@@ -172,9 +165,8 @@
         */
         Useraccount.query(function (res) {
             vm.currentUserAccount = res[0];
-            if(vm.currentUserAccount.companyname.length){
+            if(vm.currentUserAccount.companyname){
                 vm.userAttributes = vm.currentUserAccount.companyname.split(',');
-                console.log(vm.userAttributes);
                 ExpertAccount.query({
                     param: "query",
                     options: "product:" + ":attribute:" + vm.userAttributes[0] + ":score:"
@@ -335,7 +327,6 @@
                         brandNewProperty.supportcase.id = result.id;
                         brandNewProperty.propertyname = key;
                         brandNewProperty.propertyvalue = vm.technologyProperties[key];
-                        console.log("PROPERTY", brandNewProperty);
                         Casetechnologyproperty.save(brandNewProperty, function (result) {
                             console.log("Result", result);
                         });
@@ -415,7 +406,6 @@
 
                 // If we have any messages display them in a toastr message
                 if (messages.length) {
-                    console.log("AHHHHHHh", messages);
                     toastr.warning(messages.join('<br/>'), {timeOut: 5000});
                 }
             }
@@ -442,16 +432,35 @@
             * Submits the form, or opens the login dialog if the user isn't logged in.
             */
             function submitForm() {
-                var messages = [];
-                if(!vm.caseDetails.summary){
-                    messages.push(vm.errorMissingDescription);
-                }
-                if(!vm.selectedTechnologies.length){
-                    messages.push(vm.errorMissingTech);
-                }
-                if (!vm.isAuthenticated()) {
-                    LoginService.open();
-                    $rootScope.$on('authenticationSuccess', function () {
+                DrslUserFlowService.checkPaymentInformation();
+                if(DrslUserFlowService.user.hasCC === false){
+                    toastr.success($translate.instant('global.messages.info.missingDetailsWithLink'), {
+                        timeOut: 0,
+                        toastClass: 'toast drsl-user-flow-toast',
+                        onTap: function () {
+                            $state.go('settings');
+                        }
+                    });
+                } else if(DrslUserFlowService.user.hasCC === true){
+                    var messages = [];
+                    if(!vm.caseDetails.summary){
+                        messages.push(vm.errorMissingDescription);
+                    }
+                    if(!vm.selectedTechnologies.length){
+                        messages.push(vm.errorMissingTech);
+                    }
+                    if (!vm.isAuthenticated()) {
+                        LoginService.open();
+                        $rootScope.$on('authenticationSuccess', function () {
+                            Principal.identity().then(function () {
+                                if(messages.length){
+                                    toastr.warning(messages.join('<br/>'), {timeOut: 5000});
+                                } else {
+                                    vm.createCase();
+                                }
+                            })
+                        })
+                    } else {
                         Principal.identity().then(function () {
                             if(messages.length){
                                 toastr.warning(messages.join('<br/>'), {timeOut: 5000});
@@ -459,17 +468,15 @@
                                 vm.createCase();
                             }
                         })
-                    })
+                    }
                 } else {
-                    Principal.identity().then(function () {
-                        if(messages.length){
-                            toastr.warning(messages.join('<br/>'), {timeOut: 5000});
-                        } else {
-                            vm.createCase();
-                        }
-                    })
+                    toastr.success($translate.instant('global.messages.info.missingDetails'), {
+                        timeOut: 5000,
+                        toastClass: 'toast drsl-user-flow-toast'
+                    });
                 }
             }
+
 
             /**
             * Sets the vm.datePopup.opened boolean, which toggles the date popup display.

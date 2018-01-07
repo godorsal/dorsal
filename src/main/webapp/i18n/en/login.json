@@ -16,7 +16,7 @@
                 "userexists": "<strong>Login name already registered!</strong> Please choose another one.",
                 "emailexists": "<strong>E-mail is already in use!</strong> Please choose another one."
             },
-            "success": "<strong>Registration saved!</strong> Please check your email for confirmation.",
+            "success": "<strong>Your account has been created</strong> Please check your email for activation.",
             "validate": {
                 "login": {
                     "required": "Your username is required.",

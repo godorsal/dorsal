@@ -7,15 +7,20 @@
 
     SettingsController.$inject = ['$rootScope', 'Principal', 'Auth', 'JhiLanguageService', '$translate', 'Payment',
     'Groupaccess', 'User', 'Focus', 'Register', 'toastr', 'ExpertAccount', 'Issue', 'Technology', '_', '$state',
-    'DrslUserFlowService', 'ManageUser', 'ExpertAttribute', 'ExpertAttributeToExpert', 'JobroleExpertScore', 'ProductExpertScore', 'SpecialityExpertScore', 'SkillExpertScore', 'TechnologyExpertScore', 'Useraccount', 'ExpertPoolToExpert'];
+    'DrslUserFlowService', 'ManageUser', 'ExpertAttribute', 'ExpertAttributeToExpert', 'JobroleExpertScore', 'ProductExpertScore', 'SpecialityExpertScore', 'SkillExpertScore', 'TechnologyExpertScore', 'Useraccount', 'ExpertPoolToExpert', '$http', 'DrslMetadata'];
 
-    function SettingsController($rootScope, Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, User, focus, Register, toastr, ExpertAccount, Issue, Technology, _, $state, DrslUserFlowService, ManageUser, ExpertAttribute, ExpertAttributeToExpert, JobroleExpertScore, ProductExpertScore, SpecialityExpertScore, SkillExpertScore, TechnologyExpertScore, Useraccount, ExpertPoolToExpert) {
+    function SettingsController($rootScope, Principal, Auth, JhiLanguageService, $translate, Payment, Groupaccess, User, focus, Register, toastr, ExpertAccount, Issue, Technology, _, $state, DrslUserFlowService, ManageUser, ExpertAttribute, ExpertAttributeToExpert, JobroleExpertScore, ProductExpertScore, SpecialityExpertScore, SkillExpertScore, TechnologyExpertScore, Useraccount, ExpertPoolToExpert, $http, DrslMetadata) {
 
         // Handle user flow redirects and messaging
         DrslUserFlowService.handleUserFlow();
+        DrslUserFlowService.checkPaymentInformation();
 
         // Set the view model and view model properties/methods
         var vm = this;
+
+        vm.metadata = DrslMetadata;
+        console.log(vm.metadata);
+
         vm.error = null;
         vm.save = save;
         vm.settingsAccount = null;
@@ -30,12 +35,16 @@
         vm.authorizedUser = '';
         vm.number = 0;
         vm.isExpert = false;
+        vm.userCustomerInfo = null;
         vm.issues = Issue.query();
         vm.technologies = Technology.query();
         vm.hideTitleElipsis = hideTitleElipsis;
         vm.showTitleElipsis = showTitleElipsis;
         vm.hideLinkElipsis = hideLinkElipsis;
         vm.showLinkElipsis = showLinkElipsis;
+
+        vm.canSaveCard = false;
+
         // vm methods
         vm.init = init;
         vm.save = save;
@@ -45,6 +54,7 @@
         vm.addAuthorizedUser = addAuthorizedUser;
         vm.removeAuthorizedUsers = removeAuthorizedUsers;
         vm.removeInvitedUsers = removeInvitedUsers;
+        vm.updateUser = updateUser;
         vm.updateUser = updateUser;
         vm.checkInvalid = checkInvalid;
         vm.editingAttributes = false;
@@ -68,6 +78,11 @@
                     })
                 })
             })
+        }
+        function updateSettings() {
+            if(vm.updatingCard && vm.updatingUser){
+
+            }
         }
         function calculateUserAttributes() {
             ExpertAttribute.query(function (res) {
@@ -191,7 +206,7 @@
                 } else {
                     Useraccount.query(function (res) {
                         vm.currentUserAccount = res[0];
-                        if(vm.currentUserAccount.companyname.length){
+                        if(vm.currentUserAccount.companyname){
                             vm.userAttributes = vm.currentUserAccount.companyname.split(',');
                             calculateUserAttributes();
                         } else {
@@ -199,12 +214,15 @@
                         }
                     })
                 }
+                // createStripeUI();
+
             });
 
             // Query Payment (credit card info) and pull data where needed for the vm
             Payment.query(function (result) {
                 _.find(result, function (ccdata) {
                     if (ccdata.user.login === vm.settingsAccount.login) {
+                        vm.overallCCData = ccdata;
                         var data = ccdata.ccdata.split('##');
                         vm.creditCard = {
                             name: data[0],
@@ -220,6 +238,7 @@
                             id: ccdata.id,
                             user: ccdata.user
                         }
+                        vm.canSaveCard = true;
                     }
                 })
             });
@@ -299,6 +318,9 @@
         * Handles the form submit/save for the main settings form.
         */
         function save() {
+            if(vm.updatingCard && vm.canSaveCard){
+                addCard();
+            }
             if (vm.updatingUser && vm.updatingExpert) {
                 toastr["success"]("User and Expert Info Saved");
                 updateExpert();
@@ -340,9 +362,10 @@
                 //     companyname: vm.userAttributesString
                 // }
                 Useraccount.update(vm.currentUserAccount)
-
+                vm.updatingUser = false;
                 // Redirect to the case page
                 if (vm.isAlreadyAuthorized) {
+                    debugger;
                     $state.go('case');
                 }
             }).catch(function () {
@@ -379,7 +402,6 @@
                 toastr["error"]("Saving Error");
                 return;
             }
-
             // Create a temp cc object
             vm.tempCard = {
                 name: vm.creditCard.name,
@@ -404,14 +426,65 @@
                 ccdata: data,
                 user: vm.tempCard.user
             };
-
+            payment.user = vm.tempCard.user;
+            console.log(payment);
+            console.log(vm.number);
+            // console.log(vm.number.join('') + "#");
+            console.log(vm.number.join('') + '#' + vm.creditCard.month + ',' + vm.creditCard.year + '#50');
+            vm.superMagicString = vm.number.join('') + '#' + vm.creditCard.month + ',' + vm.creditCard.year + '#50';
+            // console.log("4242424242424242#02,20#12500");
             // Update or save the credit card data
-            if (payment.id !== null) {
-                Payment.update(payment, onSaveSuccess, onSaveError);
-            } else {
-                payment.user = vm.tempCard.user;
-                Payment.save(payment, onSaveSuccess, onSaveError);
-            }
+            $http({
+                url: 'api/payments/auth',
+                method: 'PUT',
+                data: vm.superMagicString,
+                transformResponse: [function (data) {
+                    console.log("DATA", data);
+                    var stripeResp = data.split(':')[1];
+                    console.log(stripeResp);
+                    if(data === "PAYMENT SUCCESS"){
+                        if (payment.id !== null) {
+                            payment.user = vm.tempCard.user;
+                            Payment.update(payment, onSaveSuccess, onSaveError);
+                        } else {
+                            payment.user = vm.tempCard.user;
+                            Payment.save(payment, onSaveSuccess, onSaveError);
+                        }
+                        // toastr.success("Case Estimate Agreed");
+                        // if (vm.agreeToEstimate) {
+                            // $uibModalInstance.close({"rated": true});
+                        // }
+                    } else if (stripeResp === " Your card has insufficient funds.; request-id" ) {
+                        vm.paymentInProgress = false;
+                        toastr.error("Insufficient Funds", {
+                            timeOut: 0,
+                            toastClass: 'toast drsl-user-flow-toast',
+                            onTap: function () {
+                                $state.go('settings');
+                            }
+                        });
+                    } else if(stripeResp ===  " Your card number is incorrect.; request-id") {
+                        vm.paymentInProgress = false;
+                        toastr.error("Invalid Card Number", {
+                            timeOut: 0,
+                            toastClass: 'toast drsl-user-flow-toast',
+                            onTap: function () {
+                                $state.go('settings');
+                            }
+                        });
+                    } else {
+                        vm.paymentInProgress = false;
+                        toastr.error("Invalid Card Number", {
+                            timeOut: 0,
+                            toastClass: 'toast drsl-user-flow-toast',
+                            onTap: function () {
+                                $state.go('settings');
+                            }
+                        });
+                    }
+                    return data;
+                }]
+            });
         }
         function checkInvalid() {
             vm.invitedUser = vm.invitedUser.replace(/;|"|!|\+|#|\$|%|\^|&|\*|\)|\(|:|\?|\/|<|>|{|}|\[|\]|-|_|=|\~|\`|\||\\|\/|\s/g, "");
@@ -425,6 +498,7 @@
             vm.tempCard.user = payment.user;
             vm.error = null;
             toastr["success"]("Saving Successful")
+            DrslUserFlowService.user.hasCC = true;
         }
 
         /**

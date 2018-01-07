@@ -28,7 +28,7 @@
             <enabled>false</enabled>
         </snapshots>
     </repository>
-        
+
     </repositories>
     <pluginRepositories>
         <pluginRepository>
@@ -99,6 +99,11 @@
 
 
     <dependencies>
+        <dependency>
+           <groupId>com.stripe</groupId>
+           <artifactId>stripe-java</artifactId>
+           <version>3.5.0</version>
+       </dependency>
         <dependency>
             <groupId>io.dropwizard.metrics</groupId>
             <artifactId>metrics-core</artifactId>

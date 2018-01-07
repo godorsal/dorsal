@@ -2,12 +2,12 @@
     'use strict';
 
     angular
-        .module('dorsalApp')
-        .factory('DrslUserFlowService', DrslUserFlowService);
+    .module('dorsalApp')
+    .factory('DrslUserFlowService', DrslUserFlowService);
 
-    DrslUserFlowService.$inject = ['$state', '$rootScope', '$timeout', '$translate', 'Principal', 'ExpertAccount', 'Supportcase', 'toastr', '$document'];
+    DrslUserFlowService.$inject = ['$state', '$rootScope', '$timeout', '$translate', 'Principal', 'ExpertAccount', 'Supportcase', 'toastr', 'Payment', '_', 'Groupaccess'];
 
-    function DrslUserFlowService($state, $rootScope, $timeout, $translate, Principal, ExpertAccount, Supportcase, toastr, $document) {
+    function DrslUserFlowService($state, $rootScope, $timeout, $translate, Principal, ExpertAccount, Supportcase, toastr, Payment, _, Groupaccess) {
         var service = {};
         var value = "; " + document.cookie;
         var parts = value.split("; " + "authenticationToken" + "=");
@@ -50,6 +50,7 @@
             hasFirstAndLastName: false,
             isExpert: false,
             hasCases: false,
+            hasCC: false,
             account: null,
             expert: null
         };
@@ -58,23 +59,23 @@
         service.user = angular.extend({}, service.userDefaults);
 
         /**
-         * Listen for $stateChangeStart events and redirect the user if necessary.
-         */
+        * Listen for $stateChangeStart events and redirect the user if necessary.
+        */
         $rootScope.$on('$stateChangeStart', function(event, toState) {
             service.stateChangeDetected = true;
             service.redirectUser({event: event, toState: toState});
         });
 
         /**
-         * Listen for new cases, so we can update the hasCases boolean
-         */
+        * Listen for new cases, so we can update the hasCases boolean
+        */
         $rootScope.$on('dorsalApp:supportcaseUpdate', function() {
             service.user.hasCases = true;
         });
 
         /**
-         * Listen for user account updates, so we can update the account data
-         */
+        * Listen for user account updates, so we can update the account data
+        */
         $rootScope.$on('userAccountUpdated', function() {
             Principal.identity().then(function (account) {
                 // Update the in-memory account data
@@ -84,14 +85,15 @@
         });
 
         /**
-         * Handle User Flow and redirect if necessary.
-         * This function is the first to called on all of our main pages and also after a user login.
-         * @param {string} [type] type An optional string type (eg 'login')
-         */
+        * Handle User Flow and redirect if necessary.
+        * This function is the first to called on all of our main pages and also after a user login.
+        * @param {string} [type] type An optional string type (eg 'login')
+        */
         service.handleUserFlow = function (type) {
             // If we already have a user in memory, don't bother to do the queries
             if (service.user.isAuthenticated && service.user.account && type !== 'login'){
                 // Pass the flow to the handoff function
+                console.log("USER FLOW HANDOFF TYPE", type);
                 service.userFlowHandoff(type);
             } else {
                 // Check the identity of the user
@@ -119,6 +121,7 @@
                                 Supportcase.query({size: 1}, function (data) {
                                     service.user.hasCases = (data.length > 0)? true: false;
                                     // Pass the flow to the handoff function
+                                    console.log("USER FLOW HANDOFF TYPE", type);
                                     service.userFlowHandoff(type);
                                 });
                             }
@@ -129,9 +132,9 @@
         };
 
         /**
-         * Passes the user flow to the correct redirect function.
-         * @param {string} type An optional string type (eg 'login')
-         */
+        * Passes the user flow to the correct redirect function.
+        * @param {string} type An optional string type (eg 'login')
+        */
         service.userFlowHandoff = function (type) {
             // When coming from login redirect the user differently
             if (type === 'login') {
@@ -146,11 +149,11 @@
         };
 
         /**
-         * Redirects the user after login, if necessary.
-         */
+        * Redirects the user after login, if necessary.
+        */
         service.redirectUserAfterLogin = function () {
             var toState = null;
-
+            console.log("REDIRECT AFTER LOGIN");
             // Reset isFirstView after login
             service.user.isFirstView = true;
 
@@ -161,14 +164,18 @@
                 } else {
                     toState = 'case';
                 }
-            // User redirect logic
+                // User redirect logic
             } else {
                 // Only redirect the user if they're not already on the concierge page
                 if ($state.current.name !== 'concierge') {
-                    if (service.user.hasCases) {
-                        // toState = 'case';
+                    if (service.user.hasFirstAndLastName) {
+                        if (service.user.hasCases) {
+                            toState = 'case';
+                        } else {
+                            toState = 'concierge';
+                        }
                     } else {
-                        toState = 'concierge';
+                        toState = 'settings';
                     }
                 }
             }
@@ -177,31 +184,31 @@
         };
 
         /**
-         * Redirects the user after page/state load or during the $stateChangeStart event.
-         * @param {Object} data An optional object containing useful $stateChangeStart event data
-         */
+        * Redirects the user after page/state load or during the $stateChangeStart event.
+        * @param {Object} data An optional object containing useful $stateChangeStart event data
+        */
         service.redirectUser = function (data) {
             var toState = null,
-                stateName = (data && data.toState) ? data.toState.name : $state.current.name;
+            stateName = (data && data.toState) ? data.toState.name : $state.current.name;
 
             // Handle redirects based on the current stateName or toState if coming from the $stateChangeStart event
             switch (stateName) {
                 case 'home':
-                    break;
+                break;
                 case 'concierge':
-                    // Send experts to the case page (they should never land on the concierge page)
-                    if (service.user.isExpert) {
-                        // toState = 'case';
-                    }
-                    break;
+                // Send experts to the case page (they should never land on the concierge page)
+                if (service.user.isExpert) {
+                    // toState = 'case';
+                }
+                break;
                 case 'case':
-                    // Send non-experts with no cases back to the concierge page
-                    if (!service.user.isExpert && !service.user.hasCases) {
-                        toState = 'concierge';
-                    }
-                    break;
+                // Send non-experts with no cases back to the concierge page
+                if (!service.user.isExpert && !service.user.hasCases) {
+                    toState = 'concierge';
+                }
+                break;
                 case 'settings':
-                    break;
+                break;
             }
 
             // Continue if we have a newly authenticated user without a first/last name
@@ -212,7 +219,7 @@
                         timeOut: 5000,
                         toastClass: 'toast drsl-user-flow-toast'
                     });
-                // If elsewhere show the messing details message with a click here message to go to settings
+                    // If elsewhere show the messing details message with a click here message to go to settings
                 } else if (service.user.isFirstView) {
                     toastr.success($translate.instant('global.messages.info.missingDetailsWithLink'), {
                         timeOut: 0,
@@ -240,10 +247,32 @@
             }
         };
 
+        service.checkPaymentInformation = function () {
+            Payment.query(function (result) {
+                if(result[0]){
+                    service.user.hasCC = true;
+                } else {
+                    Groupaccess.query(function (result) {
+                        if(result[0] && result[0].authorizeduser.email === service.user.account.email){
+                            service.user.hasCC = true;
+                            if(confirmation){
+                                $rootScope.$emit('paymentAuthSuccess');
+                                $state.go('case');
+                            }
+                        } else {
+                            service.user.hasCC = false;
+                        }
+                    })
+                }
+            });
+        }
+
+
+
         /**
-         * Go to (redirect to) the state with the provided name.
-         * @param {string} toState The name of state to go to.
-         */
+        * Go to (redirect to) the state with the provided name.
+        * @param {string} toState The name of state to go to.
+        */
         service.goToState = function (toState) {
             // Only continue if we have a state to go to.
             if (toState) {
@@ -255,8 +284,8 @@
         };
 
         /**
-         * Clears the service's user data by resetting to defaults.
-         */
+        * Clears the service's user data by resetting to defaults.
+        */
         service.clearUserData = function () {
             service.user = angular.extend({}, service.userDefaults);
             document.cookie = "authenticationToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"

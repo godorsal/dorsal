@@ -5,9 +5,9 @@
     .module('dorsalApp')
     .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'DrslMetadata', 'DrslUserFlowService', '$document', 'PasswordValidationService'];
+    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$translate', 'DrslMetadata', 'DrslUserFlowService', '$document', 'PasswordValidationService', 'Focus', 'User', 'Payment'];
 
-    function LoginController ($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, DrslMetadata, DrslUserFlowService, $document, PasswordValidationService) {
+    function LoginController ($rootScope, $state, $timeout, Auth, $uibModalInstance, $translate, DrslMetadata, DrslUserFlowService, $document, PasswordValidationService, Focus, User, Payment) {
         var vm = this;
 
         vm.authenticationError = false;
@@ -36,6 +36,12 @@
         vm.registerAccount = {};
         vm.success = null;
         vm.passwordValidity = [];
+
+        vm.addCard = addCard;
+        vm.creditCard = null;
+        vm.numberTab = numberTab;
+        vm.getUserByLoginTest = getUserByLoginTest;
+
 
         $timeout(function (){angular.element('#username').focus();});
 
@@ -95,7 +101,14 @@
                 vm.authenticationError = true;
             });
         }
-
+        function getUserByLoginTest() {
+            User.get({login: "g"
+            }, function (res) {
+                console.log("GOOD", res);
+            }, function (res) {
+                console.log("BAD", res);
+            });
+        }
         function register (event) {
             event.preventDefault();
 
@@ -107,8 +120,17 @@
                 vm.error = null;
                 vm.errorUserExists = null;
                 vm.errorEmailExists = null;
-                Auth.createAccount(vm.registerAccount).then(function () {
+                Auth.createAccount(vm.registerAccount).then(function (response) {
                     vm.success = 'OK';
+                    console.log("RESPONSE FROM REGISTRATION", response);
+                    User.get({login: response.login
+                    }, function (res) {
+                        addCard(res);
+
+
+                    }, function (res) {
+                        console.log("BAD", res);
+                    });
                 }).catch(function (response) {
                     vm.success = null;
                     if (response.status === 400 && response.data === 'login already in use') {
@@ -131,7 +153,80 @@
             $uibModalInstance.dismiss('cancel');
             $state.go('requestReset');
         }
+        //
+        //  Credit Card Input
+        //
 
+        /**
+        * Shifts focus to the next CC field as data is entered.
+        * @param event
+        */
+        function numberTab(event) {
+            if (event.target.value.length === event.target.maxLength) {
+                var currentNumber = event.target.id.match(/\d+/);
+                if (currentNumber && currentNumber[0] < 4) {
+                    var newNumber = parseInt(currentNumber[0]) + 1;
+                    angular.element('#ccNumber' + newNumber).focus();
+                    // focus('ccNumber' + newNumber);
+                }
+                event.preventDefault();
+            }
+        }
+
+        /**
+        * Updates or saves the credit card data.
+        */
+        function addCard(user) {
+            // Get the cc number
+            vm.number = Object.keys(vm.creditCard.number).map(function (k) {
+                return vm.creditCard.number[k]
+            });
+
+            // Display an error if their's an issue with the cc num or cvv
+            if (vm.number.join('').length != 16 || vm.creditCard.cvv.toString().length != 3) {
+                toastr["error"]("Saving Error");
+                return;
+            }
+
+            // Create a temp cc object
+            vm.tempCard = {
+                name: vm.creditCard.name,
+                number: vm.number.join(''),
+                month: vm.creditCard.month,
+                year: vm.creditCard.year,
+                cvv: vm.creditCard.cvv,
+                id: vm.creditCard.id,
+                user: user
+            };
+
+
+            var arr = Object.keys(vm.tempCard).map(function (k) {
+                return vm.tempCard[k]
+            });
+
+            var data = arr.slice(0, 5).join("##");
+
+            // Create a temp payment object
+            var payment = {
+                id: vm.tempCard.id,
+                ccdata: data,
+                user: user
+            };
+
+            // Update or save the credit card data
+            if (payment.id !== null) {
+                Payment.update(payment, onSaveSuccess, onSaveError);
+            } else {
+                payment.user = vm.tempCard.user;
+                Payment.save(payment, onSaveSuccess, onSaveError);
+            }
+        }
+function onSaveSuccess(resp) {
+    console.log("GOOD resp", resp);
+}
+function onSaveError(resp) {
+    console.log("BAD resp", resp);
+}
         function togglePath(e) {
             e.preventDefault();
 

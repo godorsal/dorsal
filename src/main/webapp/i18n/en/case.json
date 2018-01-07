@@ -113,6 +113,7 @@
         },
         "rating": {
             "header": "Rating for",
+            "final.amount": "Final Amount For",
             "badges": "Rating Badges",
             "badges.note": "select multiple badges to rate your expert’s technical and personal skills",
             "ratingComments.placeholder": "Please provide additional feedback on the case rating (required)",

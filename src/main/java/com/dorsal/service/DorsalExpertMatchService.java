@@ -121,10 +121,11 @@ public class DorsalExpertMatchService {
         // Get attributes from support case that are defined in the Other property. User can define Attribute, Product, Group and Skill
 
         casetechpropertiesList = casetechnologypropertyRepository.findPropertiesByCaseAndName(supportcase.getId(), PROPERTY_OTHER);
+        log.info("JESUS", casetechpropertiesList);
         log.info("Intake field OTHER extraction for ID: " + supportcase.getId());
         if (casetechpropertiesList != null && casetechpropertiesList.size() > 0) {
             otherPropertyValue = casetechpropertiesList.get(0).getPropertyvalue();
-
+            log.info("OTHER PROPERTYY VALUE " + otherPropertyValue);
             if (otherPropertyValue != null && otherPropertyValue.length() > 0) {
                 inputAttribute = QueryStringParser.getValueFromTag(otherPropertyValue, QueryStringParser.TAG_ATTRIBUTE);
                 inputProduct   = QueryStringParser.getValueFromTag(otherPropertyValue, QueryStringParser.TAG_PRODUCT);
@@ -245,6 +246,8 @@ public class DorsalExpertMatchService {
         }
 
         // Other property might include a Product:{values) definition
+        log.info("INPUT PRODUCT " + inputProduct);
+
         if (inputProduct != null && inputProduct.length() > 0) {
             productListArray.add(inputProduct);
         }

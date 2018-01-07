@@ -3,6 +3,7 @@
         "header": "Case Summary",
         "details": {
             "header": "Current Case",
+            "final.amount": "Final Amount For",
             "user": "User",
             "summary": "Summary",
             "responseTime": "Response Time",

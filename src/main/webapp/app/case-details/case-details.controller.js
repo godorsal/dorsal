@@ -79,7 +79,6 @@
                 // Update the vm's technologyProps array with the results
                 result.forEach(function (property) {
                     if (property.supportcase.id === vm.case.id) {
-                        console.log("PROPERTINO!", property);
                         switch (property.propertyname) {
                             case 'Version':
                             property.tagNO = 1;
