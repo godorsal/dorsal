@@ -3,6 +3,14 @@ package com.dorsal.security.social;
 import com.dorsal.config.JHipsterProperties;
 import com.dorsal.security.jwt.TokenProvider;
 
+import com.dorsal.domain.ExpertAccount;
+
+
+import com.dorsal.repository.UserRepository;
+import com.dorsal.repository.ExpertAccountRepository;
+import com.dorsal.domain.User;
+
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,6 +30,8 @@ import javax.inject.Inject;
 
 public class CustomSignInAdapter implements SignInAdapter {
 
+
+
     @SuppressWarnings("unused")
     private final Logger log = LoggerFactory.getLogger(CustomSignInAdapter.class);
 
@@ -33,11 +43,26 @@ public class CustomSignInAdapter implements SignInAdapter {
 
     @Inject
     private TokenProvider tokenProvider;
+    @Inject
+    private UserRepository userRepository;
+    @Inject
+    private ExpertAccountRepository expertRepository;
+
+    // @Inject
+    // private ExpertAccount expertAccount;
+
+    // @Inject
+    // private User user;
+
 
     @Override
     public String signIn(String userId, Connection<?> connection, NativeWebRequest request){
         try {
             UserDetails user = userDetailsService.loadUserByUsername(userId);
+
+                    if (user != null){
+                        createExpertAccount(user);
+                    }
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                 user,
                 null,
@@ -52,7 +77,20 @@ public class CustomSignInAdapter implements SignInAdapter {
         }
         return jHipsterProperties.getSocial().getRedirectAfterSignIn();
     }
+    private void createExpertAccount(UserDetails user) {
+        log.info("***********"+user+"*************");
+        // Optional<User> account = userRepository.findOneByLogin(user.getUsername());
+        User account=userRepository.findOneByLogin(user.getUsername()).get();
 
+        if(account != null){
+            ExpertAccount newExpert=new ExpertAccount();
+            newExpert.setUser(account);
+            // ExpertAccount newExpert = new ExpertAccount();
+            // newExpert.setUser(account);
+            expertRepository.save(newExpert);
+        }
+        return;
+    }
     private Cookie getSocialAuthenticationCookie(String token) {
         Cookie socialAuthCookie = new Cookie("authenticationToken", token);
         socialAuthCookie.setPath("/");

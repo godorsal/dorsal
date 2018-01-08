@@ -2,8 +2,13 @@ package com.dorsal.service;
 
 import com.dorsal.domain.Authority;
 import com.dorsal.domain.User;
+// import com.dorsal.domain.Expert;
+
+// import com.dorsal.domain.ExpertAccount;
+
 import com.dorsal.repository.AuthorityRepository;
 import com.dorsal.repository.UserRepository;
+// import com.dorsal.repository.ExpertRepository;
 
 //import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -108,6 +113,12 @@ public class SocialService {
      *         Because provider like Google or Facebook didn't provide login or login like "12099388847393"
      */
     private String getLoginDependingOnProviderId(UserProfile userProfile, String providerId) {
+        log.info("HIT THE LOGIN THINGY");
+        if (userProfile!=null){
+            log.info(userProfile.toString() + "**** INCICATOR))");
+        }
+
+
         switch (providerId) {
             case "twitter":
                 return userProfile.getUsername().toLowerCase();
