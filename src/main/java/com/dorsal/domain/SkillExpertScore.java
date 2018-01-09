@@ -25,10 +25,12 @@ public class SkillExpertScore implements Serializable {
     private Integer score;
 
     @ManyToOne
-    private ExpertAccount expertaccount;
+    public ExpertAccount expertaccount;
+    // private ExpertAccount expertaccount;
 
     @ManyToOne
-    private Skill skill;
+    public Skill skill;
+    // private Skill skill;
 
     public Long getId() {
         return id;

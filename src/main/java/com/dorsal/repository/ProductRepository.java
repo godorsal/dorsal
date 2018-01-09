@@ -11,5 +11,6 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 public interface ProductRepository extends JpaRepository<Product,Long> {
-
+    @Query("select product from Product product where product.id <= 25 ORDER BY product.id ASC")
+    List<Product> findExpertProfileEntries();
 }

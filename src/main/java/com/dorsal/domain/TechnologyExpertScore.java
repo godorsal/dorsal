@@ -25,10 +25,12 @@ public class TechnologyExpertScore implements Serializable {
     private Integer score;
 
     @ManyToOne
-    private ExpertAccount expertaccount;
+    public ExpertAccount expertaccount;
+    // private ExpertAccount expertaccount;
 
     @ManyToOne
-    private Technology technology;
+    public Technology technology;
+    // private Technology technology;
 
     public Long getId() {
         return id;

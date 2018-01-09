@@ -11,5 +11,6 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 public interface SkillRepository extends JpaRepository<Skill,Long> {
-
+    @Query("select skill from Skill skill where skill.id <= 10 ORDER BY skill.id ASC")
+    List<Skill> findExpertProfileEntries();
 }

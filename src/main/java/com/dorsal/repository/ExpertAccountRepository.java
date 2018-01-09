@@ -26,6 +26,9 @@ public interface ExpertAccountRepository extends JpaRepository<ExpertAccount,Lon
     @Query("select expert_account from ExpertAccount expert_account where expert_account.user.login = ?#{principal.username}")
     List<ExpertAccount> findByUserIsCurrentUser();
 
+    @Query("select expert_account from ExpertAccount expert_account where expert_account.user.login = :username")
+    ExpertAccount findOneByUserLogin(@Param("username") String username);
+
     /* Get Experts by technology, availability and by best score */
     @Query("select ea from ExpertAccount ea where ea.expertAvailability != 'OFFLINE' AND ea.isAvailable = true AND ea.firsttechnology.id = :technologyid ORDER BY ea.expertScore DESC")
     List<ExpertAccount> findFirstTechnologyPreference(@Param("technologyid") long technologyid, Pageable pageable);

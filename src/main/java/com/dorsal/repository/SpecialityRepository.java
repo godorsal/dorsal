@@ -11,5 +11,6 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 public interface SpecialityRepository extends JpaRepository<Speciality,Long> {
-
+    @Query("select speciality from Speciality speciality where speciality.id <= 5 ORDER BY speciality.id ASC")
+    List<Speciality> findExpertProfileEntries();
 }

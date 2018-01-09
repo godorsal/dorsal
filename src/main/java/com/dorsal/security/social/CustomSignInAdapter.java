@@ -8,7 +8,34 @@ import com.dorsal.domain.ExpertAccount;
 
 import com.dorsal.repository.UserRepository;
 import com.dorsal.repository.ExpertAccountRepository;
+import com.dorsal.repository.TechnologyRepository;
+import com.dorsal.repository.ProductRepository;
+import com.dorsal.repository.JobRoleRepository;
+import com.dorsal.repository.SkillRepository;
+import com.dorsal.repository.SpecialityRepository;
+
+import com.dorsal.repository.TechnologyExpertScoreRepository;
+import com.dorsal.domain.TechnologyExpertScore;
+
+import com.dorsal.repository.JobroleExpertScoreRepository;
+import com.dorsal.domain.JobroleExpertScore;
+
+import com.dorsal.repository.ProductExpertScoreRepository;
+import com.dorsal.domain.ProductExpertScore;
+
+import com.dorsal.repository.SkillExpertScoreRepository;
+import com.dorsal.domain.SkillExpertScore;
+
+import com.dorsal.repository.SpecialityExpertScoreRepository;
+import com.dorsal.domain.SpecialityExpertScore;
+
 import com.dorsal.domain.User;
+import com.dorsal.domain.Technology;
+import com.dorsal.domain.Product;
+import com.dorsal.domain.JobRole;
+import com.dorsal.domain.Skill;
+import com.dorsal.domain.Speciality;
+import java.util.List;
 
 
 import org.slf4j.Logger;
@@ -47,6 +74,26 @@ public class CustomSignInAdapter implements SignInAdapter {
     private UserRepository userRepository;
     @Inject
     private ExpertAccountRepository expertRepository;
+    @Inject
+    private TechnologyExpertScoreRepository technologyExpertScoreRepository;
+    @Inject
+    private TechnologyRepository technologyRepository;
+    @Inject
+    private ProductExpertScoreRepository productExpertScoreRepository;
+    @Inject
+    private ProductRepository productRepository;
+    @Inject
+    private JobroleExpertScoreRepository jobRoleExpertScoreRepository;
+    @Inject
+    private JobRoleRepository jobRoleRepository;
+    @Inject
+    private SkillExpertScoreRepository skillExpertScoreRepository;
+    @Inject
+    private SkillRepository skillRepository;
+    @Inject
+    private SpecialityExpertScoreRepository specialityExpertScoreRepository;
+    @Inject
+    private SpecialityRepository specialityRepository;
 
     // @Inject
     // private ExpertAccount expertAccount;
@@ -61,7 +108,13 @@ public class CustomSignInAdapter implements SignInAdapter {
             UserDetails user = userDetailsService.loadUserByUsername(userId);
 
                     if (user != null){
-                        createExpertAccount(user);
+                        ExpertAccount findExpert = expertRepository.findOneByUserLogin(user.getUsername());
+                        if(findExpert != null){
+                            // log.info("*********** NORPE   *************");
+                            createRichProfile(user);
+                        } else {
+                            createExpertAccount(user);
+                        }
                     }
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                 user,
@@ -80,15 +133,69 @@ public class CustomSignInAdapter implements SignInAdapter {
     private void createExpertAccount(UserDetails user) {
         log.info("***********"+user+"*************");
         // Optional<User> account = userRepository.findOneByLogin(user.getUsername());
-        User account=userRepository.findOneByLogin(user.getUsername()).get();
+        User account = userRepository.findOneByLogin(user.getUsername()).get();
 
         if(account != null){
-            ExpertAccount newExpert=new ExpertAccount();
-            newExpert.setUser(account);
-            // ExpertAccount newExpert = new ExpertAccount();
-            // newExpert.setUser(account);
-            expertRepository.save(newExpert);
+                ExpertAccount newExpert = new ExpertAccount();
+                newExpert.setUser(account);
+                expertRepository.save(newExpert);
         }
+        return;
+    }
+    private void createRichProfile(UserDetails user) {
+        User userAccount = userRepository.findOneByLogin(user.getUsername()).get();
+        ExpertAccount eAccount = expertRepository.findOneByUserLogin(user.getUsername());
+
+        // TechnologyExpertScore newExpertTechScore = new TechnologyExpertScore();
+
+        List<Speciality> specialitylist = specialityRepository.findExpertProfileEntries();
+        for (int i = 0; i < specialitylist.size(); i++) {
+            SpecialityExpertScore newExpertSpecialityScore = new SpecialityExpertScore();
+            newExpertSpecialityScore.speciality = specialitylist.get(i);
+            newExpertSpecialityScore.expertaccount = eAccount;
+            specialityExpertScoreRepository.save(newExpertSpecialityScore);
+		}
+        // List<Skill> skilllist = skillRepository.findExpertProfileEntries();
+        // for (int i = 0; i < skilllist.size(); i++) {
+        //     SkillExpertScore newExpertSkillScore = new SkillExpertScore();
+        //     newExpertSkillScore.skill = skilllist.get(i);
+        //     newExpertSkillScore.expertaccount = eAccount;
+        //     skillExpertScoreRepository.save(newExpertSkillScore);
+		// }
+        // List<JobRole> rolelist = jobRoleRepository.findExpertProfileEntries();
+        // for (int i = 0; i < rolelist.size(); i++) {
+        //     JobroleExpertScore newExpertJobRoleScore = new JobroleExpertScore();
+        //     newExpertJobRoleScore.jobrole = rolelist.get(i);
+        //     newExpertJobRoleScore.expertaccount = eAccount;
+        //     jobRoleExpertScoreRepository.save(newExpertJobRoleScore);
+		// }
+        // List<Product> productlist = productRepository.findExpertProfileEntries();
+        // for (int i = 0; i < productlist.size(); i++) {
+        //     ProductExpertScore newExpertProductScore = new ProductExpertScore();
+        //     newExpertProductScore.product = productlist.get(i);
+        //     newExpertProductScore.expertaccount = eAccount;
+        //     productExpertScoreRepository.save(newExpertProductScore);
+		// }
+        // List<Technology> techList = technologyRepository.findExpertProfileEntries();
+        // for (int i = 0; i < techList.size(); i++) {
+		// 	System.out.println(techList.get(i).getId());
+        //     TechnologyExpertScore newExpertTechScore = new TechnologyExpertScore();
+        //     newExpertTechScore.technology = techList.get(i);
+        //     newExpertTechScore.expertaccount = eAccount;
+        //     technologyExpertScoreRepository.save(newExpertTechScore);
+		// }
+
+        // newExpertTechScore.technology = 1;
+        // newExpertTechScore.expertaccount = eAccount.getId();
+
+        // technologyExpertScoreRepository.save(newExpertTechScore);
+
+        // if(account != null){
+        //         ExpertAccount newExpert = new ExpertAccount();
+        //         newExpert.setUser(account);
+        //         expertRepository.save(newExpert);
+        // }
+
         return;
     }
     private Cookie getSocialAuthenticationCookie(String token) {

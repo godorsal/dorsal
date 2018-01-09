@@ -11,5 +11,6 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 public interface JobRoleRepository extends JpaRepository<JobRole,Long> {
-
+    @Query("select role from JobRole role where role.id <= 5 ORDER BY role.id ASC")
+    List<JobRole> findExpertProfileEntries();
 }

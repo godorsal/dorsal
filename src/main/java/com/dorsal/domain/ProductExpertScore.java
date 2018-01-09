@@ -25,10 +25,12 @@ public class ProductExpertScore implements Serializable {
     private Integer score;
 
     @ManyToOne
-    private ExpertAccount expertaccount;
+    public ExpertAccount expertaccount;
+    // private ExpertAccount expertaccount;
 
     @ManyToOne
-    private Product product;
+    public Product product;
+    // private Product product;
 
     public Long getId() {
         return id;
