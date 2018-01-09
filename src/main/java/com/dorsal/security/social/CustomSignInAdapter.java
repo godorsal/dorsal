@@ -139,6 +139,7 @@ public class CustomSignInAdapter implements SignInAdapter {
                 ExpertAccount newExpert = new ExpertAccount();
                 newExpert.setUser(account);
                 expertRepository.save(newExpert);
+                createRichProfile(user);
         }
         return;
     }
@@ -152,38 +153,43 @@ public class CustomSignInAdapter implements SignInAdapter {
         for (int i = 0; i < specialitylist.size(); i++) {
             SpecialityExpertScore newExpertSpecialityScore = new SpecialityExpertScore();
             newExpertSpecialityScore.speciality = specialitylist.get(i);
+            newExpertSpecialityScore.score = 1;
             newExpertSpecialityScore.expertaccount = eAccount;
             specialityExpertScoreRepository.save(newExpertSpecialityScore);
 		}
-        // List<Skill> skilllist = skillRepository.findExpertProfileEntries();
-        // for (int i = 0; i < skilllist.size(); i++) {
-        //     SkillExpertScore newExpertSkillScore = new SkillExpertScore();
-        //     newExpertSkillScore.skill = skilllist.get(i);
-        //     newExpertSkillScore.expertaccount = eAccount;
-        //     skillExpertScoreRepository.save(newExpertSkillScore);
-		// }
-        // List<JobRole> rolelist = jobRoleRepository.findExpertProfileEntries();
-        // for (int i = 0; i < rolelist.size(); i++) {
-        //     JobroleExpertScore newExpertJobRoleScore = new JobroleExpertScore();
-        //     newExpertJobRoleScore.jobrole = rolelist.get(i);
-        //     newExpertJobRoleScore.expertaccount = eAccount;
-        //     jobRoleExpertScoreRepository.save(newExpertJobRoleScore);
-		// }
-        // List<Product> productlist = productRepository.findExpertProfileEntries();
-        // for (int i = 0; i < productlist.size(); i++) {
-        //     ProductExpertScore newExpertProductScore = new ProductExpertScore();
-        //     newExpertProductScore.product = productlist.get(i);
-        //     newExpertProductScore.expertaccount = eAccount;
-        //     productExpertScoreRepository.save(newExpertProductScore);
-		// }
-        // List<Technology> techList = technologyRepository.findExpertProfileEntries();
-        // for (int i = 0; i < techList.size(); i++) {
-		// 	System.out.println(techList.get(i).getId());
-        //     TechnologyExpertScore newExpertTechScore = new TechnologyExpertScore();
-        //     newExpertTechScore.technology = techList.get(i);
-        //     newExpertTechScore.expertaccount = eAccount;
-        //     technologyExpertScoreRepository.save(newExpertTechScore);
-		// }
+        List<Skill> skilllist = skillRepository.findExpertProfileEntries();
+        for (int i = 0; i < skilllist.size(); i++) {
+            SkillExpertScore newExpertSkillScore = new SkillExpertScore();
+            newExpertSkillScore.skill = skilllist.get(i);
+            newExpertSkillScore.score = 1;
+            newExpertSkillScore.expertaccount = eAccount;
+            skillExpertScoreRepository.save(newExpertSkillScore);
+		}
+        List<JobRole> rolelist = jobRoleRepository.findExpertProfileEntries();
+        for (int i = 0; i < rolelist.size(); i++) {
+            JobroleExpertScore newExpertJobRoleScore = new JobroleExpertScore();
+            newExpertJobRoleScore.jobrole = rolelist.get(i);
+            newExpertJobRoleScore.score = 1;
+            newExpertJobRoleScore.expertaccount = eAccount;
+            jobRoleExpertScoreRepository.save(newExpertJobRoleScore);
+		}
+        List<Product> productlist = productRepository.findExpertProfileEntries();
+        for (int i = 0; i < productlist.size(); i++) {
+            ProductExpertScore newExpertProductScore = new ProductExpertScore();
+            newExpertProductScore.product = productlist.get(i);
+            newExpertProductScore.score = 1;
+            newExpertProductScore.expertaccount = eAccount;
+            productExpertScoreRepository.save(newExpertProductScore);
+		}
+        List<Technology> techList = technologyRepository.findExpertProfileEntries();
+        for (int i = 0; i < techList.size(); i++) {
+			System.out.println(techList.get(i).getId());
+            TechnologyExpertScore newExpertTechScore = new TechnologyExpertScore();
+            newExpertTechScore.technology = techList.get(i);
+            newExpertTechScore.score = 1;
+            newExpertTechScore.expertaccount = eAccount;
+            technologyExpertScoreRepository.save(newExpertTechScore);
+		}
 
         // newExpertTechScore.technology = 1;
         // newExpertTechScore.expertaccount = eAccount.getId();

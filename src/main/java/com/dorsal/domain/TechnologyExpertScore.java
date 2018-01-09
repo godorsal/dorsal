@@ -22,7 +22,8 @@ public class TechnologyExpertScore implements Serializable {
     private Long id;
 
     @Column(name = "score")
-    private Integer score;
+    public Integer score;
+    // private Integer score;
 
     @ManyToOne
     public ExpertAccount expertaccount;
