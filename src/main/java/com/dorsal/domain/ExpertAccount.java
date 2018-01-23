@@ -58,6 +58,9 @@ public class ExpertAccount implements Serializable {
     @Column(name = "is_available")
     private Boolean isAvailable;
 
+    @Column(name = "authorized")
+    private Boolean authorized;
+
     @Size(max = 4096)
     @Column(name = "expert_bio", length = 4096)
     private String expertBio;

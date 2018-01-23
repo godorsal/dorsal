@@ -248,23 +248,24 @@
         };
 
         service.checkPaymentInformation = function () {
-            Payment.query(function (result) {
-                if(result[0]){
-                    service.user.hasCC = true;
-                } else {
-                    Groupaccess.query(function (result) {
-                        if(result[0] && result[0].authorizeduser.email === service.user.account.email){
-                            service.user.hasCC = true;
-                            if(confirmation){
-                                $rootScope.$emit('paymentAuthSuccess');
-                                $state.go('case');
-                            }
-                        } else {
-                            service.user.hasCC = false;
-                        }
-                    })
-                }
-            });
+            service.user.hasCC = true;
+            // Payment.query(function (result) {
+            //     if(result[0]){
+            //         service.user.hasCC = true;
+            //     } else {
+            //         Groupaccess.query(function (result) {
+            //             if(result[0] && result[0].authorizeduser.email === service.user.account.email){
+            //                 service.user.hasCC = true;
+            //                 if(confirmation){
+            //                     $rootScope.$emit('paymentAuthSuccess');
+            //                     $state.go('case');
+            //                 }
+            //             } else {
+            //                 service.user.hasCC = false;
+            //             }
+            //         })
+            //     }
+            // });
         }
 
 
