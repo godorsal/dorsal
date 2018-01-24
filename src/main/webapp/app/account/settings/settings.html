@@ -156,6 +156,10 @@ Your e-mail cannot be longer than 100 characters.
 <!-- Expert Fields -->
 <div ng-if="vm.currentExpert">
     <!-- Phone Numbers -->
+    <p>AUTHORIZATIOn</p>
+    <input type="checkbox" name="name" value="" ng-model="vm.currentExpert.authorized" ng-change="vm.updatingExpert = true">
+
+
     <div class="drsl-two-inputs">
         <!-- Telephone (required) -->
         <div class="form-group">

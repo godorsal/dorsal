@@ -156,7 +156,7 @@
             ExpertAccount.query(function (data) {
                 if (data[0]) {
                     vm.currentExpert = data[0];
-
+                    console.log(vm.currentExpert);
                     var othercommunication = vm.currentExpert.othercommunication.split(',');
                     vm.otherLink = othercommunication[0];
                     vm.otherTitle = othercommunication[1];
@@ -379,6 +379,7 @@
         * Updates the expert and displays a success messages.
         */
         function updateExpert() {
+            console.log(vm.currentExpert);
             vm.currentExpert.othercommunication = vm.otherLink + ',' + vm.otherTitle;
 
             ExpertAccount.update(vm.currentExpert, function () {
