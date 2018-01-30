@@ -125,8 +125,11 @@ public class ExpertAccountResource {
         // Debug*/
 
         log.debug("REST request to get all ExpertAccounts");
-        List<ExpertAccount> expertAccounts = expertAccountRepository.findByUserIsCurrentUser();
+        List<ExpertAccount> expertAccounts = expertAccountRepository.getUnAuthorizedExperts();
         return expertAccounts;
+        // log.debug("REST request to get all ExpertAccounts");
+        // List<ExpertAccount> expertAccounts = expertAccountRepository.findByUserIsCurrentUser();
+        // return expertAccounts;
     }
 
 

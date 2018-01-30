@@ -60,6 +60,7 @@
             "admin": {
                 "main": "Administration",
                 "userManagement": "User management",
+                "expertManagement": "Expert management",
                 "supportCaseReports": "Support Case Reports",
                 "tracker": "User tracker",
                 "metrics": "Metrics",

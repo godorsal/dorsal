@@ -42,6 +42,11 @@ public interface ExpertAccountRepository extends JpaRepository<ExpertAccount,Lon
     @Query("select ea from ExpertAccount ea where ea.expertAvailability != 'OFFLINE' AND (ea.expertAvailability = :FULLTIME OR ea.expertAvailability = :MONFRI) AND (ea.firsttechnology.id = :technologyid OR ea.secondtechnology.id = :technologyid) AND ea.authorized = true  ORDER BY ea.expertScore DESC")
     List<ExpertAccount> findExpertsThatWorkFullTime(@Param("technologyid") long tecnologyid, @Param("FULLTIME") Availability fulltime, @Param("MONFRI") Availability monfri, Pageable pageable);
 
+    @Query("select ea from ExpertAccount ea")
+    List<ExpertAccount> getUnAuthorizedExperts();
+    // @Query("select ea from ExpertAccount ea where ea.authorized = false")
+    // List<ExpertAccount> getUnAuthorizedExperts();
+
     @Query("select ea from ExpertAccount ea where ea.user.login = :concierge")
     ExpertAccount getDorsalConcierge(@Param("concierge") String conciergeLogin);
 
